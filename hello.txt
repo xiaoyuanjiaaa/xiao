@@ -1,0 +1,21 @@
+<html>
+
+<head>
+    <!-- Latest compiled and minified JS -->
+    <script src="D:\Downloads\bootstrap-4.0.0-dist\js\bootstrap.js"></script>
+    <link src="D:\Downloads\bootstrap-4.0.0-dist\css\bootstrap.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="form-group">
+        <label for="exampleFormControlSelect2">Example multiple select</label>
+        <select multiple class="form-control" id="exampleFormControlSelect2">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
+    </div>
+</body>
+< </html>
