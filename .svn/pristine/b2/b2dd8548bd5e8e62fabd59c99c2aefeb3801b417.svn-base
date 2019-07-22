@@ -1,0 +1,179 @@
+package com.fc.protocol.client.demo.controller;
+
+import com.fc.protocol.client.IProtocolClient;
+import com.fc.protocol.client.demo.config.ProtocolClientPool;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.common.utils.IntegerFactory;
+import com.fc.protocol.demo.request.pc.user.PcUserCarRequest;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**PC收银 - 车辆
+ * @Author: linpeng
+ * @Date: 2019/1/4 15:00
+ * @Version 1.0
+ */
+
+@Api(tags = "PcUserCarController", description = "pc收银车辆信息控制器")
+@RestController
+@RequestMapping("/service/pc/userCar")
+public class PcUserCarController {
+
+    private static Logger log = LoggerFactory.getLogger(PcUserCarController.class);
+
+    @Autowired
+    private ProtocolClientPool protocolClientPool;
+
+
+    @RequestMapping(value = "/get", method = { RequestMethod.POST, RequestMethod.GET })
+    @ApiOperation(value = "查询pc收银车辆信息", notes = "查询pc收银车辆信息")
+    @ResponseBody
+    public Object list(HttpServletRequest request,
+                       @ApiParam(name = "pc_user_id", value = "pc收银车主ID") @RequestParam(required = true) Integer pc_user_id,
+                       @ApiParam(name = "car_num", value = "车牌号") @RequestParam(required = true) String car_num,
+                       HttpServletResponse response) throws Exception {
+        PcUserCarRequest pcUserCarRequest = new PcUserCarRequest();
+        pcUserCarRequest.setReqCode("pcUserCarGetHandler");
+        pcUserCarRequest.setTraceId("tid_"+ IntegerFactory.getInstance().incrementAndGet());
+        pcUserCarRequest.setVersion("1.1");
+        pcUserCarRequest.setPcUserId(pc_user_id);
+        pcUserCarRequest.setCarNum(car_num);
+        log.info("member-request:{}", pcUserCarRequest);
+        log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+        IProtocolClient memberClient = protocolClientPool.memberClient();
+        log.info("memberClient==null?===>{}", (memberClient == null));
+        ProtocolResponse userResponse = protocolClientPool.memberClient().sendAndReceived(pcUserCarRequest);
+        log.info("member-response:{}", userResponse);
+        return userResponse;
+    }
+
+    @RequestMapping(value = "/list", method = { RequestMethod.POST, RequestMethod.GET })
+    @ApiOperation(value = "查询pc收银车辆信息列表", notes = "获取pc收银车辆信息列表")
+    @ResponseBody
+    public Object list(HttpServletRequest request,
+                       @ApiParam(name = "pc_user_id", value = "pc收银车主ID") @RequestParam(required = false) Integer pc_user_id,
+                       @ApiParam(name = "car_num", value = "车牌号") @RequestParam(required = false) String car_num,
+                       @ApiParam(name = "page", value = "page 当前页码") @RequestParam(required = true, value = "page") Integer page,
+                       @ApiParam(name = "pagesize", value = "pagesize 当前页记录数") @RequestParam(required = true, value = "pagesize") Integer pagesize,
+                       HttpServletResponse response) throws Exception {
+        PcUserCarRequest pcUserCarRequest = new PcUserCarRequest();
+        pcUserCarRequest.setReqCode("pcUserCarListHandler");
+        pcUserCarRequest.setTraceId("tid_"+IntegerFactory.getInstance().incrementAndGet());
+        pcUserCarRequest.setVersion("1.1");
+        pcUserCarRequest.setPcUserId(pc_user_id);
+        pcUserCarRequest.setCarNum(car_num);
+        pcUserCarRequest.setPage(page);
+        pcUserCarRequest.setPagesize(pagesize);
+        log.info("member-request:{}", pcUserCarRequest);
+        log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+        IProtocolClient memberClient = protocolClientPool.memberClient();
+        log.info("memberClient==null?===>{}", (memberClient == null));
+        ProtocolResponse userResponse = protocolClientPool.memberClient().sendAndReceived(pcUserCarRequest);
+        log.info("member-response:{}", userResponse);
+        return userResponse;
+    }
+
+    @RequestMapping(value = "/save", method = { RequestMethod.POST, RequestMethod.GET })
+    @ApiOperation(value = "新建pc收银车辆信息", notes = "新建pc收银车辆信息")
+    @ResponseBody
+    public Object save(HttpServletRequest request,
+                       @ApiParam(name = "pc_user_id", value = "pc收银车主ID") @RequestParam(required = false) Integer pc_user_id,
+                       @ApiParam(name = "car_num", value = "车牌号") @RequestParam(required = false) String car_num,
+                       @ApiParam(name = "vehicle_id", value = "精友车型id") @RequestParam(required = true) String vehicle_id,
+                       @ApiParam(name = "vehicle_name", value = "车型名称") @RequestParam(required = true) String vehicle_name,
+                       @ApiParam(name = "drive_mileage", value = "行驶公里数") @RequestParam(required = true) Integer drive_mileage,
+                       @ApiParam(name = "frame_number", value = "车架号") @RequestParam(required = true) String frame_number,
+                       @ApiParam(name = "engine_number", value = "发动机型号") @RequestParam(required = true) String engine_number,
+                       @ApiParam(name = "status", value = "是否起用(0:否 1:是)") @RequestParam(required = true) Integer status,
+                       @ApiParam(name = "is_default", value = "默认车型(0:不默认 1:默认)") @RequestParam(required = true) Integer is_default,
+                       HttpServletResponse response) throws Exception {
+        PcUserCarRequest pcUserCarRequest = new PcUserCarRequest();
+        pcUserCarRequest.setReqCode("pcUserCarSaveHandler");
+        pcUserCarRequest.setTraceId("tid_"+IntegerFactory.getInstance().incrementAndGet());
+        pcUserCarRequest.setPcUserId(pc_user_id);
+        pcUserCarRequest.setCarNum(car_num);
+        pcUserCarRequest.setVehicleId(vehicle_id);
+        pcUserCarRequest.setVehicleName(vehicle_name);
+        pcUserCarRequest .setDriveMileage(drive_mileage);
+        pcUserCarRequest.setFrameNumber(frame_number);
+        pcUserCarRequest.setEngineNumber(engine_number);
+        pcUserCarRequest.setStatus(status);
+        pcUserCarRequest.setIsDefault(is_default);
+        log.info("member-request:{}", pcUserCarRequest);
+        log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+        IProtocolClient memberClient = protocolClientPool.memberClient();
+        log.info("memberClient==null?===>{}", (memberClient == null));
+        ProtocolResponse userResponse = protocolClientPool.memberClient().sendAndReceived(pcUserCarRequest);
+        log.info("member-response:{}", userResponse);
+        return userResponse;
+    }
+
+    @RequestMapping(value = "/update", method = { RequestMethod.POST, RequestMethod.GET })
+    @ApiOperation(value = "修改pc收银车辆信息", notes = "修改pc收银车辆信息")
+    @ResponseBody
+    public Object update(HttpServletRequest request,
+                         @ApiParam(name = "pc_user_car_id", value = "pc收银车辆ID") @RequestParam(required = true) Integer pc_user_car_id,
+                         @ApiParam(name = "pc_user_id", value = "pc收银车主ID") @RequestParam(required = false) Integer pc_user_id,
+                         @ApiParam(name = "car_num", value = "车牌号") @RequestParam(required = false) String car_num,
+                         @ApiParam(name = "vehicle_id", value = "精友车型id") @RequestParam(required = false) String vehicle_id,
+                         @ApiParam(name = "vehicle_name", value = "车型名称") @RequestParam(required = false) String vehicle_name,
+                         @ApiParam(name = "drive_mileage", value = "行驶公里数") @RequestParam(required = false) Integer drive_mileage,
+                         @ApiParam(name = "frame_number", value = "车架号") @RequestParam(required = false) String frame_number,
+                         @ApiParam(name = "engine_number", value = "发动机型号") @RequestParam(required = false) String engine_number,
+                         @ApiParam(name = "status", value = "是否起用(0:否 1:是)") @RequestParam(required = false) Integer status,
+                         @ApiParam(name = "is_default", value = "默认车型(0:不默认 1:默认)") @RequestParam(required = false) Integer is_default,
+                         HttpServletResponse response) throws Exception {
+        PcUserCarRequest pcUserCarRequest = new PcUserCarRequest();
+        pcUserCarRequest.setReqCode("pcUserCarUpdateHandler");
+        pcUserCarRequest.setTraceId("tid_"+IntegerFactory.getInstance().incrementAndGet());
+        pcUserCarRequest.setVersion("1.1");
+        pcUserCarRequest.setPcUserCarId(pc_user_car_id);
+        pcUserCarRequest.setPcUserId(pc_user_id);
+        pcUserCarRequest.setCarNum(car_num);
+        pcUserCarRequest.setVehicleId(vehicle_id);
+        pcUserCarRequest.setVehicleName(vehicle_name);
+        pcUserCarRequest .setDriveMileage(drive_mileage);
+        pcUserCarRequest.setFrameNumber(frame_number);
+        pcUserCarRequest.setEngineNumber(engine_number);
+        pcUserCarRequest.setStatus(status);
+        pcUserCarRequest.setIsDefault(is_default);
+        log.info("member-request:{}", pcUserCarRequest);
+        log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+        IProtocolClient memberClient = protocolClientPool.memberClient();
+        log.info("memberClient==null?===>{}", (memberClient == null));
+        ProtocolResponse userResponse = protocolClientPool.memberClient().sendAndReceived(pcUserCarRequest);
+        log.info("member-response:{}", userResponse);
+        return userResponse;
+    }
+
+    @RequestMapping(value = "/delete", method = { RequestMethod.POST, RequestMethod.GET })
+    @ApiOperation(value = "删除pc收银车辆信息", notes = "删除pc收银车辆信息")
+    @ResponseBody
+    public Object delete(HttpServletRequest request,
+                         @ApiParam(name = "pc_user_car_id", value = "pc收银车辆ID") @RequestParam(required = true) Integer pc_user_car_id,
+                         @ApiParam(name = "pc_user_id", value = "pc收银车主ID") @RequestParam(required = false) Integer pc_user_id,
+                         @ApiParam(name = "car_num", value = "车牌号") @RequestParam(required = false) String car_num,
+                         HttpServletResponse response) throws Exception {
+        PcUserCarRequest pcUserCarRequest = new PcUserCarRequest();
+        pcUserCarRequest.setReqCode("pcUserCarDeleteHandler");
+        pcUserCarRequest.setTraceId("tid_"+IntegerFactory.getInstance().incrementAndGet());
+        pcUserCarRequest.setPcUserCarId(pc_user_car_id);
+        pcUserCarRequest.setPcUserId(pc_user_id);
+        pcUserCarRequest.setCarNum(car_num);
+        log.info("member-request:{}", pcUserCarRequest);
+        log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+        IProtocolClient memberClient = protocolClientPool.memberClient();
+        log.info("memberClient==null?===>{}", (memberClient == null));
+        ProtocolResponse userResponse = protocolClientPool.memberClient().sendAndReceived(pcUserCarRequest);
+        log.info("member-response:{}", userResponse);
+        return userResponse;
+    }
+}

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.store.user.dao.IStoreBossDao">
+	<resultMap id="StoreBossMap" type="com.fc.member.store.user.entity.StoreBoss">
+        <id property="storeBossId" column="store_boss_id"/>
+        <id property="storeId" column="store_id"/>
+        <id property="storeBossName" column="store_boss_name"/>
+        <id property="storeBossEmail" column="store_boss_email"/>
+        <id property="storeBossQq" column="store_boss_qq"/>
+        <id property="updateTime" column="update_time"/>
+        <id property="createTime" column="create_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="StoreBossMap" >
+		select * from store_boss where 
+	        store_boss_id = #{storeBossId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.store.user.entity.StoreBoss" useGeneratedKeys="true">
+		insert into store_boss(store_boss_id , store_id , store_boss_name , store_boss_email , store_boss_qq , update_time , create_time  )
+    	values(#{storeBossId} ,#{storeId} ,#{storeBossName} ,#{storeBossEmail} ,#{storeBossQq} ,#{updateTime} ,#{createTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.store.user.entity.StoreBoss" useGeneratedKeys="true">
+		insert into store_boss
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="storeBossId != null">store_boss_id,</if>
+					<if test="storeId != null">store_id,</if>
+					<if test="storeBossName != null">store_boss_name,</if>
+					<if test="storeBossEmail != null">store_boss_email,</if>
+					<if test="storeBossQq != null">store_boss_qq,</if>
+					<if test="updateTime != null">update_time,</if>
+					<if test="createTime != null">create_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="storeBossId != null">#{storeBossId},</if>
+					<if test="storeId != null">#{storeId},</if>
+					<if test="storeBossName != null">#{storeBossName},</if>
+					<if test="storeBossEmail != null">#{storeBossEmail},</if>
+					<if test="storeBossQq != null">#{storeBossQq},</if>
+					<if test="updateTime != null">#{updateTime},</if>
+					<if test="createTime != null">#{createTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.store.user.entity.StoreBoss">
+		update store_boss
+		<set>
+		    	<if test="storeId != null">store_id = #{storeId},</if>
+		    	<if test="storeBossName != null">store_boss_name = #{storeBossName},</if>
+		    	<if test="storeBossEmail != null">store_boss_email = #{storeBossEmail},</if>
+		    	<if test="storeBossQq != null">store_boss_qq = #{storeBossQq},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		</set>
+		where 
+	        store_boss_id = #{storeBossId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from store_boss where 
+	        store_boss_id = #{storeBossId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.store.user.entity.StoreBoss" resultMap="StoreBossMap" >
+		select * from store_boss 
+		<where>
+		       <if test="storeBossId != null">
+					AND store_boss_id = #{storeBossId}
+				</if>
+		       <if test="storeId != null">
+					AND store_id = #{storeId}
+				</if>
+		       <if test="storeBossName != null">
+					AND store_boss_name = #{storeBossName}
+				</if>
+		       <if test="storeBossEmail != null">
+					AND store_boss_email = #{storeBossEmail}
+				</if>
+		       <if test="storeBossQq != null">
+					AND store_boss_qq = #{storeBossQq}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="StoreBossMap" >
+		select * from store_boss  
+		<where>
+		       <if test="condition.storeBossId != null">
+					AND store_boss_id = #{condition.storeBossId}
+				</if>
+		       <if test="condition.storeId != null">
+					AND store_id = #{condition.storeId}
+				</if>
+		       <if test="condition.storeBossName != null">
+					AND store_boss_name = #{condition.storeBossName}
+				</if>
+		       <if test="condition.storeBossEmail != null">
+					AND store_boss_email = #{condition.storeBossEmail}
+				</if>
+		       <if test="condition.storeBossQq != null">
+					AND store_boss_qq = #{condition.storeBossQq}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

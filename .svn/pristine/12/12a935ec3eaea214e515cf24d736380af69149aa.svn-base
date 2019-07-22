@@ -1,0 +1,15 @@
+package com.fc.member.store.user.service;
+
+import com.fc.common.service.IService;
+import com.fc.member.store.user.entity.StoreWechat;
+/**
+ * <p>Title: StoreWechat</p>
+ * <p>Description:  Service 接口</p>
+ * @author yangd
+ * @date 2019-01-03 18:03:48
+ */
+public interface IStoreWechatService extends IService<StoreWechat>{
+	
+	// 插入数据
+	int insertSelective(StoreWechat obj);
+}

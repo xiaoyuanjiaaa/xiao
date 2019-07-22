@@ -1,0 +1,58 @@
+package com.fc.member.wechatplatform.user.entity;
+
+import java.io.Serializable;
+
+/**
+ * <p>Table: WechatPlatformUserFeedback</p>
+ * <p>Description: </p>
+ * @author yangd
+ * @date 2018-12-28 17:14:42
+ */
+public class WechatPlatformUserFeedback implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer feedbackId; // 自增id
+	private String openid; // 游客openid
+	private String feedbackContent; // 反馈内容
+	private Integer createTime; // 反馈时间
+
+	public void setFeedbackId(Integer feedbackId) {
+		this.feedbackId = feedbackId;
+	}
+	
+	public Integer getFeedbackId() {
+		return this.feedbackId;
+	}
+	public void setOpenid(String openid) {
+		this.openid = openid;
+	}
+	
+	public String getOpenid() {
+		return this.openid;
+	}
+	public void setFeedbackContent(String feedbackContent) {
+		this.feedbackContent = feedbackContent;
+	}
+	
+	public String getFeedbackContent() {
+		return this.feedbackContent;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+
+    @Override
+    public String toString () {
+    	return "WechatPlatformUserFeedback{" + 
+	    	"feedbackId=" + feedbackId + 
+	    	", openid=" + openid + 
+	    	", feedbackContent=" + feedbackContent + 
+	    	", createTime=" + createTime + 
+	    	"}";
+    }
+}

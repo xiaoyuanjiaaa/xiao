@@ -1,0 +1,137 @@
+package com.fc.member.pc.user.service.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.plugin.mybatis.PageQuery;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.pc.user.dao.IPcUserCarDao;
+import com.fc.member.pc.user.entity.PcUserCar;
+import com.fc.member.pc.user.service.IPcUserCarService;
+import com.fc.protocol.demo.request.pc.user.PcUserCarListRequest;
+import com.fc.protocol.demo.request.pc.user.PcUserCarSaveRequest;
+import com.fc.protocol.demo.request.pc.user.PcUserCarUpdateRequest;
+
+/**
+ * <p>Title: PcUserCar</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-29 10:11:38
+ */
+@Service("pcUserCarService")
+public class PcUserCarServiceImp extends ServiceImpl<PcUserCar> implements IPcUserCarService {
+
+	@Autowired
+	private IPcUserCarDao pcUserCarDao;
+
+	@Override
+	protected IMapper<PcUserCar> getDao() {
+		return pcUserCarDao;
+	}
+
+	/**
+	 * 根据pc_user_id、store_id和car_num查询PC收银车主-车辆信息详情
+	 * @param pc_user_id,store_id,car_num
+	 * @return
+	 */
+	@Override
+	public PcUserCar get(Integer pc_user_id, Integer store_id,String car_num) {
+		PcUserCar entity = new PcUserCar();
+		entity.setPcUserId(pc_user_id);
+		entity.setStoreId(store_id);
+		entity.setCarNum(car_num);
+		List<PcUserCar> list = pcUserCarDao.getRows(entity);
+		if (list.isEmpty()) {
+			return null;
+		}
+		return list.get(0);
+	}
+
+	/**
+	 * 查询PC收银车主-车辆信息List
+	 * @return
+	 */
+	@Override
+	public List<PcUserCar> getPcUserCarList(PcUserCarListRequest request, Page page) {
+		// 将不为空的属性set到对象中
+		PcUserCar entity = new PcUserCar();
+		entity.setPcUserId(request.getPcUserId());
+		entity.setStoreId(request.getStoreId());
+		entity.setCarNum(request.getCarNum());
+
+		PageQuery pageQuery;
+		pageQuery = new PageQuery();
+		pageQuery.setPage(page);
+		pageQuery.setCondition(entity);
+		return pcUserCarDao.getRowsPage(pageQuery);
+	}
+
+	/**
+	 * 新增PC收银车主-车辆信息
+	 */
+	@Override
+	public Map<String, Object> insertPcUserCar(PcUserCarSaveRequest request) {
+		Map<String, Object> resultMap = new HashMap<>();
+		// 将不为空的属性set到对象中
+		PcUserCar entity = new PcUserCar();
+		entity.setPcUserId(request.getPcUserId());
+		entity.setStoreId(request.getStoreId());
+		entity.setCarNum(request.getCarNum());
+		entity.setVehicleId(request.getVehicleId());
+		entity.setVehicleName(request.getVehicleName());
+		entity.setDriveMileage(request.getDriveMileage());
+		entity.setFrameNumber(request.getFrameNumber());
+		entity.setEngineNumber(request.getEngineNumber());
+		entity.setStatus(request.getStatus());
+		entity.setIsDefault(request.getIsDefault());
+		entity.setCreateTime(DateTimeUtils.getDateTimeInteger());
+		int result = pcUserCarDao.insertSelective(entity);
+		if (result <= 0) {
+			resultMap.put("error", "创建失败");
+			return resultMap;
+		}
+		return resultMap;
+	}
+
+	/**
+	 * 更新PC收银车主-车辆信息
+	 */
+	@Override
+	public Map<String, Object> updatePcUserCar(PcUserCarUpdateRequest request) throws Exception {
+		Map<String, Object> resultMap = new HashMap<>();
+		// 将不为空的属性set到对象中
+		PcUserCar entity = new PcUserCar();
+		entity.setPcUserCarId(request.getPcUserCarId());
+		entity.setPcUserId(request.getPcUserId());
+		entity.setStoreId(request.getStoreId());
+		entity.setCarNum(request.getCarNum());
+		entity.setVehicleId(request.getVehicleId());
+		entity.setVehicleName(request.getVehicleName());
+		entity.setDriveMileage(request.getDriveMileage());
+		entity.setFrameNumber(request.getFrameNumber());
+		entity.setEngineNumber(request.getEngineNumber());
+		entity.setStatus(request.getStatus());
+		entity.setIsDefault(request.getIsDefault());
+		entity.setUpdateTime(DateTimeUtils.getDateTimeInteger());
+		//int result = 0;
+		pcUserCarDao.update(entity);
+		return resultMap;
+	}
+
+	/**
+	 * 删除PC收银车主-车辆信息
+	 */
+	@Override
+	public Map<String, Object> deletePcUserCar(Integer pc_user_car_id) throws Exception {
+		Map<String, Object> resultMap = new HashMap<>();
+		pcUserCarDao.deleteByPK(pc_user_car_id);
+		return resultMap;
+	}
+}

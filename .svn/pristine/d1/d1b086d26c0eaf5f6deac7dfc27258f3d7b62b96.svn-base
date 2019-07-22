@@ -1,0 +1,25 @@
+package com.fc.member.fc.service;
+
+import java.util.Map;
+
+import com.fc.common.service.IService;
+import com.fc.member.fc.entity.FcUser;
+import com.fc.protocol.demo.request.fc.UserCreateUserRequest;
+
+/**
+ * <p>Title: FcUser</p>
+ * <p>Description:  Service 接口</p>
+ * @author yangd
+ * @date 2019-01-02 16:49:49
+ */
+public interface IFcUserService extends IService<FcUser> {
+
+	/**插入数据*/
+	int insertSelective(FcUser obj);
+
+	/**插入fc_user表和public_user表*/
+	Map<String, String> insertFcUserAndPublicUser(UserCreateUserRequest request);
+
+	/**修改电话号码 */
+	Map<String, String> updatePhoneBob(int fcUserId, String phoneMob) throws Exception;
+}

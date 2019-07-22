@@ -1,0 +1,26 @@
+package com.fc.member.store.user.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.member.store.user.dao.IStoreAddressDao;
+import com.fc.member.store.user.service.IStoreAddressService;
+import com.fc.member.store.user.entity.StoreAddress;
+/**
+ * <p>Title: StoreAddress</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:04
+ */
+@Service("storeAddressService")
+public class StoreAddressServiceImp extends ServiceImpl<StoreAddress> implements IStoreAddressService{
+
+	@Autowired
+	private IStoreAddressDao storeAddressDao;
+	
+	@Override
+	protected IMapper<StoreAddress> getDao() {
+		return storeAddressDao;
+	}
+}

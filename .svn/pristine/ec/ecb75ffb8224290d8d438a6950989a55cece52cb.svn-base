@@ -1,0 +1,19 @@
+package com.fc.member.wechatmaintain.user.service;
+
+import java.util.List;
+
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.service.IService;
+import com.fc.member.wechatmaintain.user.entity.WechatMaintainUser;
+
+/**
+ * <p>Title: WechatMaintainUser</p>
+ * <p>Description:  Service 接口</p>
+ * @author yangd
+ * @date 2018-12-28 17:13:47
+ */
+public interface IWechatMaintainUserService extends IService<WechatMaintainUser> {
+
+	// 查询所有用户-分页
+	List<WechatMaintainUser> getWechatMaintainUserListPage(Page page, WechatMaintainUser obj);
+}

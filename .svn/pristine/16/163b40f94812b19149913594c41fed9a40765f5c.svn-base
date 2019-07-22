@@ -1,0 +1,167 @@
+package com.fc.member.shop.user.entity;
+
+import java.io.Serializable;
+
+
+/**
+ * <p>Table: ShopBankinfo</p>
+ * <p>Description: 店铺银行信息表</p>
+ * @author yangd
+ * @date 2019-01-14 11:08:38
+ */
+public class ShopBankinfo implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer shopBankId; // 主键id
+	private Integer shopId; // 店铺id
+	private String bankAccountName; // 银行开户名
+	private String bankAccountCardno; // 银行开户卡号
+	private String depositBank; // 开户银行支行名称
+	private String remark; // 备注信息
+	private String bankName; // 开户银行(简称)
+	private String depositBankAddr; // 开户银行支行所在地
+	private String bankAccountOwnerIdcard; // 开户者身份证号
+	private String depositBankPermitImg; // 银行开户许可证电子版
+	private String bankUpdateStatus; // 银行卡修改状态 0:未审核,1:已审核,2:不通过,3:通过
+	private Integer applyUpdateTime; // 申请修改时间
+	private Integer revokeApplyTime; // 撤销申请时间
+	private Integer examineTime; // 审核时间
+	private Integer updateTime; // 修改时间
+	private Integer createTime; // 创建时间
+
+	public void setShopBankId(Integer shopBankId) {
+		this.shopBankId = shopBankId;
+	}
+	
+	public Integer getShopBankId() {
+		return this.shopBankId;
+	}
+	public void setShopId(Integer shopId) {
+		this.shopId = shopId;
+	}
+	
+	public Integer getShopId() {
+		return this.shopId;
+	}
+	public void setBankAccountName(String bankAccountName) {
+		this.bankAccountName = bankAccountName;
+	}
+	
+	public String getBankAccountName() {
+		return this.bankAccountName;
+	}
+	public void setBankAccountCardno(String bankAccountCardno) {
+		this.bankAccountCardno = bankAccountCardno;
+	}
+	
+	public String getBankAccountCardno() {
+		return this.bankAccountCardno;
+	}
+	public void setDepositBank(String depositBank) {
+		this.depositBank = depositBank;
+	}
+	
+	public String getDepositBank() {
+		return this.depositBank;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	
+	public String getRemark() {
+		return this.remark;
+	}
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
+	
+	public String getBankName() {
+		return this.bankName;
+	}
+	public void setDepositBankAddr(String depositBankAddr) {
+		this.depositBankAddr = depositBankAddr;
+	}
+	
+	public String getDepositBankAddr() {
+		return this.depositBankAddr;
+	}
+	public void setBankAccountOwnerIdcard(String bankAccountOwnerIdcard) {
+		this.bankAccountOwnerIdcard = bankAccountOwnerIdcard;
+	}
+	
+	public String getBankAccountOwnerIdcard() {
+		return this.bankAccountOwnerIdcard;
+	}
+	public void setDepositBankPermitImg(String depositBankPermitImg) {
+		this.depositBankPermitImg = depositBankPermitImg;
+	}
+	
+	public String getDepositBankPermitImg() {
+		return this.depositBankPermitImg;
+	}
+	public void setBankUpdateStatus(String bankUpdateStatus) {
+		this.bankUpdateStatus = bankUpdateStatus;
+	}
+	
+	public String getBankUpdateStatus() {
+		return this.bankUpdateStatus;
+	}
+	public void setApplyUpdateTime(Integer applyUpdateTime) {
+		this.applyUpdateTime = applyUpdateTime;
+	}
+	
+	public Integer getApplyUpdateTime() {
+		return this.applyUpdateTime;
+	}
+	public void setRevokeApplyTime(Integer revokeApplyTime) {
+		this.revokeApplyTime = revokeApplyTime;
+	}
+	
+	public Integer getRevokeApplyTime() {
+		return this.revokeApplyTime;
+	}
+	public void setExamineTime(Integer examineTime) {
+		this.examineTime = examineTime;
+	}
+	
+	public Integer getExamineTime() {
+		return this.examineTime;
+	}
+	public void setUpdateTime(Integer updateTime) {
+		this.updateTime = updateTime;
+	}
+	
+	public Integer getUpdateTime() {
+		return this.updateTime;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+
+    @Override
+    public String toString () {
+    	return "ShopBankinfo{" + 
+	    	"shopBankId=" + shopBankId + 
+	    	", shopId=" + shopId + 
+	    	", bankAccountName=" + bankAccountName + 
+	    	", bankAccountCardno=" + bankAccountCardno + 
+	    	", depositBank=" + depositBank + 
+	    	", remark=" + remark + 
+	    	", bankName=" + bankName + 
+	    	", depositBankAddr=" + depositBankAddr + 
+	    	", bankAccountOwnerIdcard=" + bankAccountOwnerIdcard + 
+	    	", depositBankPermitImg=" + depositBankPermitImg + 
+	    	", bankUpdateStatus=" + bankUpdateStatus + 
+	    	", applyUpdateTime=" + applyUpdateTime + 
+	    	", revokeApplyTime=" + revokeApplyTime + 
+	    	", examineTime=" + examineTime + 
+	    	", updateTime=" + updateTime + 
+	    	", createTime=" + createTime + 
+	    	"}";
+    }
+}

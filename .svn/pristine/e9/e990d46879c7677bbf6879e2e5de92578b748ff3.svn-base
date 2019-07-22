@@ -1,0 +1,117 @@
+package com.fc.protocol.demo.request.store.user;
+
+import java.math.BigDecimal;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+import io.swagger.annotations.ApiModelProperty;
+/**
+ * 商品收藏
+ * @author wangq
+ * @date 2019/1/3
+ */
+public class StoreCollectRequest extends ProtocolRequest{
+	
+	private static final long serialVersionUID = 1L;
+	
+	@ApiModelProperty(value = "商品收藏主键id",name = "storeCollectId", example = "1")
+    private Integer storeCollectId;//主键id
+	@ApiModelProperty(value = "门店id", name = "storeId", example = "1")
+	private Integer storeId;//门店id
+	@ApiModelProperty(value = "商品id", name = "itemId", example = "1")
+	private Integer itemId;//商品id
+	@ApiModelProperty(value = "收藏时，商品最低价", name = "goodsPrice", example = "1")
+    private BigDecimal goodsPrice;//收藏时，商品最低价
+	@ApiModelProperty(value = "创建时间" , name = "createTime")
+	private Integer createTime;//创建时间
+    @ApiModelProperty(value = "当前页码",name = "page_no")
+    private Integer page_no = 1;
+	@ApiModelProperty(value = "当前页记录数", name = "page_size")
+	private Integer page_size = 10;
+	public Integer getStoreCollectId() {
+		return storeCollectId;
+	}
+	public void setStoreCollectId(Integer storeCollectId) {
+		this.storeCollectId = storeCollectId;
+	}
+	public Integer getStoreId() {
+		return storeId;
+	}
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+	public Integer getItemId() {
+		return itemId;
+	}
+	public void setItemId(Integer itemId) {
+		this.itemId = itemId;
+	}
+	public Integer getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	public BigDecimal getGoodsPrice() {
+		return goodsPrice;
+	}
+	public void setGoodsPrice(BigDecimal goodsPrice) {
+		this.goodsPrice = goodsPrice;
+	}
+	public Integer getPage_no() {
+		return page_no;
+	}
+	public void setPage_no(Integer page_no) {
+		this.page_no = page_no;
+	}
+	public Integer getPage_size() {
+		return page_size;
+	}
+	public void setPage_size(Integer page_size) {
+		this.page_size = page_size;
+	}
+	
+	//查询商品收藏列表
+	public String paramValidate() {
+		if (StringUtils.isEmpty(storeId)) {
+			return "参数:storeId不能为空";
+		}
+		return null;
+	}
+	//新增收藏商品
+	public String paramValidateCreate() {
+		if (StringUtils.isEmpty(storeId)) {
+			return "参数:storeId不能为空！";
+		}
+		if (StringUtils.isEmpty(itemId)) {
+			return "参数:itemId不能为空！";
+		}
+		if (StringUtils.isEmpty(goodsPrice)) {
+			return "参数：goodsPrice不能为空！";
+		}
+		return null;
+	}
+	//删除收藏商品
+	public String paramValidateDelete() {
+		if (StringUtils.isEmpty(storeId)) {
+			return "参数:storeId不能为空！";
+		}
+		if (StringUtils.isEmpty(itemId)) {
+			return "参数:itemId不能为空！";
+		}
+		return null;
+	}
+	
+	@Override
+	public String toString() {
+		return "CreateStoreCollectRequest [storeCollectId=" + storeCollectId +", storeId=" + storeId + ", itemId="+ itemId + 
+			   ", createTime=" + createTime + ", goodsPrice=" + goodsPrice + ",getVersion()="+getVersion()+",getReqCode()="
+				+getReqCode()+ ",getTraceId()="+getTraceId()+"]";
+	}
+    
+    
+	
+    
+}

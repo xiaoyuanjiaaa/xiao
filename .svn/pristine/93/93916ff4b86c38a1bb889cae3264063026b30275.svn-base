@@ -1,0 +1,89 @@
+package com.fc.protocol.demo.request.store.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+import io.swagger.annotations.ApiModelProperty;
+import org.apache.commons.lang.StringUtils;
+
+/**
+ * @author zhuj
+ *@date 2018/12/28
+ * 门店金额交易明细请求参数实体类
+ *
+ * @param
+ */
+public class ChangeAmountTradingStatusRequest extends ProtocolRequest {
+    @ApiModelProperty(value = "门店金额交易详情页id", name = "storeMoneyDetailId", example = "1")
+    private Integer storeMoneyDetailId; // 主键ID
+    @ApiModelProperty(value = "门店id", name = "storeId", example = "1")
+    private Integer storeId; // 门店id
+    @ApiModelProperty(value = "门店金额交易订单号", name = "orderNo", example = "1")
+    private String orderNo; // 订单号
+    @ApiModelProperty(value = "提现结果", name = "isResultStatus", example = "提现结果0失败1成功")
+    private Integer isResultStatus; // 提现结果0失败1成功
+    public Integer getStoreMomeyDetailId() {
+        return storeMoneyDetailId;
+    }
+
+    public void setStoreMomeyDetailId(Integer storeMomeyDetailId) {
+        this.storeMoneyDetailId = storeMomeyDetailId;
+    }
+
+    public Integer getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Integer storeId) {
+        this.storeId = storeId;
+    }
+
+    public Integer getStoreMoneyDetailId() {
+        return storeMoneyDetailId;
+    }
+
+    public void setStoreMoneyDetailId(Integer storeMoneyDetailId) {
+        this.storeMoneyDetailId = storeMoneyDetailId;
+    }
+
+
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
+    }
+
+    public Integer getIsResultStatus() {
+        return isResultStatus;
+    }
+
+    public void setIsResultStatus(Integer isResultStatus) {
+        this.isResultStatus = isResultStatus;
+    }
+
+
+
+
+
+    /**@author zhuj
+     * 判断传人参数是否为空
+     *@date 2018/12/28
+     * @param
+     */
+    public String paramValidatecheckcardNoIdAndStatus() {
+        if (isResultStatus==null) {
+            return "参数：isResultStatus不能为空";
+        }
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        return "StoreMomeyRequest [storeId=" + storeId + ", " +
+                "storeMoneyDetailId=" + storeMoneyDetailId + ", " +
+                "orderNo=" + orderNo + ", " +
+                "isResultStatus=" + isResultStatus + ", " +
+                "getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode()
+                + ", getTraceId()=" + getTraceId() + "]";
+    }
+}

@@ -1,0 +1,19 @@
+package com.fc.member.store.user.service;
+
+import com.fc.common.service.IService;
+import com.fc.member.store.user.entity.StoreSetting;
+
+/**
+ * <p>Title: StoreSetting</p>
+ * <p>Description:  Service 接口</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:06
+ */
+public interface IStoreSettingService extends IService<StoreSetting> {
+
+	/** 更新对象*/
+	boolean updateByStoreId(StoreSetting t) throws Exception;
+
+	/**虚拟货架上下架*/
+	boolean updateSstoreVirtualShelves(StoreSetting t) throws Exception;
+}

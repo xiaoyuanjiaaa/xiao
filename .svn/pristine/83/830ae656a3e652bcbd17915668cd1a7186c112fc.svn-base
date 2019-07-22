@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.store.user.dao.IStoreAdvanceDetailDao">
+	<resultMap id="StoreAdvanceDetailMap" type="com.fc.member.store.user.entity.StoreAdvanceDetail">
+        <id property="storeAdvanceDetailId" column="store_advance_detail_id"/>
+        <id property="storeId" column="store_id"/>
+        <id property="advanceId" column="advance_id"/>
+        <id property="balanceSn" column="balance_sn"/>
+        <id property="repaidAmount" column="repaid_amount"/>
+        <id property="repaidType" column="repaid_type"/>
+        <id property="repaidTime" column="repaid_time"/>
+        <id property="remark" column="remark"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="StoreAdvanceDetailMap" >
+		select * from store_advance_detail where 
+	        store_advance_detail_id = #{storeAdvanceDetailId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.store.user.entity.StoreAdvanceDetail" useGeneratedKeys="true">
+		insert into store_advance_detail(store_advance_detail_id , store_id , advance_id , balance_sn , repaid_amount , repaid_type , repaid_time , remark  )
+    	values(#{storeAdvanceDetailId} ,#{storeId} ,#{advanceId} ,#{balanceSn} ,#{repaidAmount} ,#{repaidType} ,#{repaidTime} ,#{remark} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.store.user.entity.StoreAdvanceDetail" useGeneratedKeys="true">
+		insert into store_advance_detail
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="storeAdvanceDetailId != null">store_advance_detail_id,</if>
+					<if test="storeId != null">store_id,</if>
+					<if test="advanceId != null">advance_id,</if>
+					<if test="balanceSn != null">balance_sn,</if>
+					<if test="repaidAmount != null">repaid_amount,</if>
+					<if test="repaidType != null">repaid_type,</if>
+					<if test="repaidTime != null">repaid_time,</if>
+					<if test="remark != null">remark</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="storeAdvanceDetailId != null">#{storeAdvanceDetailId},</if>
+					<if test="storeId != null">#{storeId},</if>
+					<if test="advanceId != null">#{advanceId},</if>
+					<if test="balanceSn != null">#{balanceSn},</if>
+					<if test="repaidAmount != null">#{repaidAmount},</if>
+					<if test="repaidType != null">#{repaidType},</if>
+					<if test="repaidTime != null">#{repaidTime},</if>
+					<if test="remark != null">#{remark}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.store.user.entity.StoreAdvanceDetail">
+		update store_advance_detail
+		<set>
+		    	<if test="storeId != null">store_id = #{storeId},</if>
+		    	<if test="advanceId != null">advance_id = #{advanceId},</if>
+		    	<if test="balanceSn != null">balance_sn = #{balanceSn},</if>
+		    	<if test="repaidAmount != null">repaid_amount = #{repaidAmount},</if>
+		    	<if test="repaidType != null">repaid_type = #{repaidType},</if>
+		    	<if test="repaidTime != null">repaid_time = #{repaidTime},</if>
+		    	<if test="remark != null">remark = #{remark},</if>
+		</set>
+		where 
+	        store_advance_detail_id = #{storeAdvanceDetailId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from store_advance_detail where 
+	        store_advance_detail_id = #{storeAdvanceDetailId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.store.user.entity.StoreAdvanceDetail" resultMap="StoreAdvanceDetailMap" >
+		select * from store_advance_detail 
+		<where>
+		       <if test="storeAdvanceDetailId != null">
+					AND store_advance_detail_id = #{storeAdvanceDetailId}
+				</if>
+		       <if test="storeId != null">
+					AND store_id = #{storeId}
+				</if>
+		       <if test="advanceId != null">
+					AND advance_id = #{advanceId}
+				</if>
+		       <if test="balanceSn != null">
+					AND balance_sn = #{balanceSn}
+				</if>
+		       <if test="repaidAmount != null">
+					AND repaid_amount = #{repaidAmount}
+				</if>
+		       <if test="repaidType != null">
+					AND repaid_type = #{repaidType}
+				</if>
+		       <if test="repaidTime != null">
+					AND repaid_time = #{repaidTime}
+				</if>
+		       <if test="remark != null">
+					AND remark = #{remark}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="StoreAdvanceDetailMap" >
+		select * from store_advance_detail  
+		<where>
+		       <if test="condition.storeAdvanceDetailId != null">
+					AND store_advance_detail_id = #{condition.storeAdvanceDetailId}
+				</if>
+		       <if test="condition.storeId != null">
+					AND store_id = #{condition.storeId}
+				</if>
+		       <if test="condition.advanceId != null">
+					AND advance_id = #{condition.advanceId}
+				</if>
+		       <if test="condition.balanceSn != null">
+					AND balance_sn = #{condition.balanceSn}
+				</if>
+		       <if test="condition.repaidAmount != null">
+					AND repaid_amount = #{condition.repaidAmount}
+				</if>
+		       <if test="condition.repaidType != null">
+					AND repaid_type = #{condition.repaidType}
+				</if>
+		       <if test="condition.repaidTime != null">
+					AND repaid_time = #{condition.repaidTime}
+				</if>
+		       <if test="condition.remark != null">
+					AND remark = #{condition.remark}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

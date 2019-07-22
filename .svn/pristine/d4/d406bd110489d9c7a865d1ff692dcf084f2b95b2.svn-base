@@ -1,0 +1,88 @@
+package com.fc.protocol.demo.request.store.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+import io.swagger.annotations.ApiModelProperty;
+import org.apache.commons.lang.StringUtils;
+
+
+/**@author zhuj
+ *@date 2018/12/28
+ * 门店创建微养车信息请求参数实体类
+ *
+ * @param
+ */
+public class CreateStoreWechatRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+	@ApiModelProperty(value = "门店sstore_id", name = "storeId", example = "1")
+	private Integer storeId; // sstore_id
+	@ApiModelProperty(value = "状态0=待审核,1=上线,-1=下线", name = "status", example = "1")
+	private Integer status; // 状态0=待审核,1=上线,-1=下线
+	@ApiModelProperty(value = " 微信openid", name = "openid", example = "1")
+	private String openid; // 微信openid
+	@ApiModelProperty(value = " 微信unionid", name = "unionid", example = "1")
+	private String unionid; // 微信unionid
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+	
+	public Integer getStoreId() {
+		return this.storeId;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	
+	public Integer getStatus() {
+		return this.status;
+	}
+	public void setOpenid(String openid) {
+		this.openid = openid;
+	}
+	
+	public String getOpenid() {
+		return this.openid;
+	}
+	public void setUnionid(String unionid) {
+		this.unionid = unionid;
+	}
+	
+	public String getUnionid() {
+		return this.unionid;
+	}
+
+	/**@author zhuj
+	 * 判断传人参数是否为空
+	 *@date 2018/12/28
+	 * @param
+	 */
+	public String paramValidatecheck() {
+		if (storeId==null) {
+			return "参数：storeId不能为空";
+		}
+
+		if (storeId==null) {
+			return "参数：storeId不能为空";
+		}
+		if (StringUtils.isBlank(unionid)) {
+			return "参数：unionid不能为空";
+		}
+		if (StringUtils.isBlank(openid)) {
+			return "参数：openid不能为空";
+		}
+		return null;
+	}
+    @Override
+    public String toString () {
+    	return "CreateStoreWechatRequest{" +
+	    	", storeId=" + storeId +
+	    	", status=" + status +
+	    	", openid=" + openid + 
+	    	", unionid=" + unionid +
+	    	", getVersion()=" + getVersion() +
+	    	", getReqCode()=" + getReqCode() +
+	    	", getTraceId()=" + getTraceId() +
+	    	"}";
+    }
+}

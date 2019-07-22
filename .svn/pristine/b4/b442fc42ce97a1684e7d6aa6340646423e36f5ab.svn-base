@@ -1,0 +1,113 @@
+package com.fc.member.shop.user.entity;
+
+import java.io.Serializable;
+
+
+/**
+ * <p>Table: ShopWithdrawCashLog</p>
+ * <p>Description: 店铺结算日志表</p>
+ * @author yangd
+ * @date 2019-01-14 11:08:40
+ */
+public class ShopWithdrawCashLog implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer shopWithdrawCashLogId; // 自增id
+	private Integer shopWithdrawCashId; // 结算id
+	private String log; // 日志内容
+	private Integer userId; // 操作用户id
+	private String userName; // 用户名
+	private Integer dateline; // 添加类型
+	private Integer type; // 类型
+	private Integer typeIid; // 类型的来源id
+	private Integer createTime; // 创建时间
+	private Integer updateTime; // 修改时间
+
+	public void setShopWithdrawCashLogId(Integer shopWithdrawCashLogId) {
+		this.shopWithdrawCashLogId = shopWithdrawCashLogId;
+	}
+	
+	public Integer getShopWithdrawCashLogId() {
+		return this.shopWithdrawCashLogId;
+	}
+	public void setShopWithdrawCashId(Integer shopWithdrawCashId) {
+		this.shopWithdrawCashId = shopWithdrawCashId;
+	}
+	
+	public Integer getShopWithdrawCashId() {
+		return this.shopWithdrawCashId;
+	}
+	public void setLog(String log) {
+		this.log = log;
+	}
+	
+	public String getLog() {
+		return this.log;
+	}
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+	
+	public Integer getUserId() {
+		return this.userId;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	
+	public String getUserName() {
+		return this.userName;
+	}
+	public void setDateline(Integer dateline) {
+		this.dateline = dateline;
+	}
+	
+	public Integer getDateline() {
+		return this.dateline;
+	}
+	public void setType(Integer type) {
+		this.type = type;
+	}
+	
+	public Integer getType() {
+		return this.type;
+	}
+	public void setTypeIid(Integer typeIid) {
+		this.typeIid = typeIid;
+	}
+	
+	public Integer getTypeIid() {
+		return this.typeIid;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+	public void setUpdateTime(Integer updateTime) {
+		this.updateTime = updateTime;
+	}
+	
+	public Integer getUpdateTime() {
+		return this.updateTime;
+	}
+
+    @Override
+    public String toString () {
+    	return "ShopWithdrawCashLog{" + 
+	    	"shopWithdrawCashLogId=" + shopWithdrawCashLogId + 
+	    	", shopWithdrawCashId=" + shopWithdrawCashId + 
+	    	", log=" + log + 
+	    	", userId=" + userId + 
+	    	", userName=" + userName + 
+	    	", dateline=" + dateline + 
+	    	", type=" + type + 
+	    	", typeIid=" + typeIid + 
+	    	", createTime=" + createTime + 
+	    	", updateTime=" + updateTime + 
+	    	"}";
+    }
+}

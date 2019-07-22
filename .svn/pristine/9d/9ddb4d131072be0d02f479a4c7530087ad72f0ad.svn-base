@@ -1,0 +1,62 @@
+package com.fc.protocol.server.demo.service.impl;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.fc.protocol.server.demo.entity.Test;
+import com.fc.protocol.server.demo.mapper.TestMapper;
+import com.fc.protocol.server.demo.persistance.mybatis.IMapper;
+import com.fc.protocol.server.demo.persistance.mybatis.Page;
+import com.fc.protocol.server.demo.persistance.mybatis.PageQuery;
+import com.fc.protocol.server.demo.service.ITestService;
+
+@Service
+public class TestServiceImpl extends ServiceImpl<Test> implements ITestService {
+
+	@Autowired
+	private TestMapper testMapper;
+	
+	@Override
+	protected IMapper<Test> getDao() {
+		// TODO Auto-generated method stub
+		return testMapper;
+	}
+
+	@Override
+	public Test findTestById(int id) {
+		return testMapper.findTestById(id);
+	}
+
+	@Override
+	public int add(Test test) {
+		return testMapper.add(test);
+	}
+
+	@Override
+	public int deleteById(int id) {
+		return testMapper.deleteById(id);
+	}
+
+	@Override
+	public int updateByID(Test test) {
+		return testMapper.updateByID(test);
+	}
+
+	@Override
+	public List<Test> findByName(String name) {
+		// TODO Auto-generated method stub
+		return testMapper.findByName(name);
+	}
+
+	@Override
+	public List<Map<String, Object>> getTestOpListPage(Page page, Map<String, Object> params) {
+		PageQuery pageQuery = new PageQuery();
+		pageQuery.setCondition(params);
+		pageQuery.setPage(page);
+		return testMapper.getTestListPage(pageQuery);
+	}
+
+}

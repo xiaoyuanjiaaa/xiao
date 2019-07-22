@@ -1,0 +1,175 @@
+package com.fc.protocol.demo.request.wechatmaintain.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * 微养车 创建车档案信息参数
+ * @author yangd
+ * @date 2019年1月3日
+ */
+public class WmuCarCreateRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+
+	@ApiModelProperty(value = "微养车用户id", name = "wechatMaintainUserId")
+	private Integer wechatMaintainUserId; // 微养车用户id
+	@ApiModelProperty(value = "枫车用户ID", name = "fcUserId")
+	private Integer fcUserId; // 枫车用户ID
+	@ApiModelProperty(value = "车牌", name = "carNo")
+	private String carNo; // 车牌
+	@ApiModelProperty(value = "精友车型id", name = "vehicleId")
+	private String vehicleId; // 精友车型id
+	@ApiModelProperty(value = "车型库id", name = "modelId")
+	private Integer modelId; // 车型库id
+	@ApiModelProperty(value = "行驶公里数", name = "driveMileage")
+	private Integer driveMileage; // 行驶公里数
+	@ApiModelProperty(value = "车型名称", name = "modelName")
+	private String modelName; // 车型名称
+	@ApiModelProperty(value = "车架号", name = "frameNumber")
+	private String frameNumber; // 车架号
+	@ApiModelProperty(value = "发动机型号", name = "engineNumber")
+	private String engineNumber; // 发动机型号
+	@ApiModelProperty(value = "是否起用(0:否 1:是)", name = "status")
+	private Integer status; // 是否起用(0:否 1:是)
+	@ApiModelProperty(value = "默认车型(0:不默认 1:默认)", name = "isDefault")
+	private Integer isDefault; // 默认车型(0:不默认 1:默认)
+	@ApiModelProperty(value = "行驶公里数变动时间", name = "driveMileageTime")
+	private Integer driveMileageTime; // 行驶公里数变动时间
+
+	/**
+	 * 验证方法
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-08
+	 * @return
+	 */
+	public String paramValidate() {
+		if (StringUtils.isEmpty(wechatMaintainUserId)) {
+			return "参数wechatMaintainUserId不能为空";
+		}
+		if (StringUtils.isEmpty(carNo)) {
+			return "参数carNo不能为空";
+		}
+		if (!StringUtils.isEmpty(status)) {
+			if (status.intValue() != 0 && status.intValue() != 1) {
+				return "参数:status填写值不在范围内(0:否 1:是)";
+			}
+		}
+		if (!StringUtils.isEmpty(isDefault)) {
+			if (isDefault.intValue() != 0 && isDefault.intValue() != 1) {
+				return "参数:isDefault填写值不在范围内(0:不默认 1:默认)";
+			}
+		}
+		return null;
+	}
+
+	public Integer getWechatMaintainUserId() {
+		return wechatMaintainUserId;
+	}
+
+	public void setWechatMaintainUserId(Integer wechatMaintainUserId) {
+		this.wechatMaintainUserId = wechatMaintainUserId;
+	}
+
+	public Integer getFcUserId() {
+		return fcUserId;
+	}
+
+	public void setFcUserId(Integer fcUserId) {
+		this.fcUserId = fcUserId;
+	}
+
+	public String getCarNo() {
+		return carNo;
+	}
+
+	public void setCarNo(String carNo) {
+		this.carNo = carNo;
+	}
+
+	public String getVehicleId() {
+		return vehicleId;
+	}
+
+	public void setVehicleId(String vehicleId) {
+		this.vehicleId = vehicleId;
+	}
+
+	public Integer getModelId() {
+		return modelId;
+	}
+
+	public void setModelId(Integer modelId) {
+		this.modelId = modelId;
+	}
+
+	public Integer getDriveMileage() {
+		return driveMileage;
+	}
+
+	public void setDriveMileage(Integer driveMileage) {
+		this.driveMileage = driveMileage;
+	}
+
+	public String getModelName() {
+		return modelName;
+	}
+
+	public void setModelName(String modelName) {
+		this.modelName = modelName;
+	}
+
+	public String getFrameNumber() {
+		return frameNumber;
+	}
+
+	public void setFrameNumber(String frameNumber) {
+		this.frameNumber = frameNumber;
+	}
+
+	public String getEngineNumber() {
+		return engineNumber;
+	}
+
+	public void setEngineNumber(String engineNumber) {
+		this.engineNumber = engineNumber;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public Integer getIsDefault() {
+		return isDefault;
+	}
+
+	public void setIsDefault(Integer isDefault) {
+		this.isDefault = isDefault;
+	}
+
+	public Integer getDriveMileageTime() {
+		return driveMileageTime;
+	}
+
+	public void setDriveMileageTime(Integer driveMileageTime) {
+		this.driveMileageTime = driveMileageTime;
+	}
+
+	@Override
+	public String toString() {
+		return "WmuCarCreateRequest [wechatMaintainUserId=" + wechatMaintainUserId + ", fcUserId=" + fcUserId
+				+ ", carNo=" + carNo + ", vehicleId=" + vehicleId + ", modelId=" + modelId + ", driveMileage="
+				+ driveMileage + ", modelName=" + modelName + ", frameNumber=" + frameNumber + ", engineNumber="
+				+ engineNumber + ", status=" + status + ", isDefault=" + isDefault + ", driveMileageTime="
+				+ driveMileageTime + ", getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode()
+				+ ", getTraceId()=" + getTraceId() + "]";
+	}
+
+}

@@ -1,0 +1,95 @@
+package com.fc.member.shop.user.entity;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+
+/**
+ * <p>Table: ShopDepositChangeLog</p>
+ * <p>Description: 保证金缴纳或上限变动操作日志表</p>
+ * @author yangd
+ * @date 2019-01-14 11:08:39
+ */
+public class ShopDepositChangeLog implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer shopDepositChangeLogId; // 主键id
+	private Integer shopId; // 店铺id
+	private String shopName; // 店铺名称
+	private BigDecimal depositRate; // 保证金缴纳比例
+	private Integer depositCashLimit; // 保证金上限
+	private Integer operatorId; // 操作人id
+	private String operator; // 操作人
+	private Integer createTime; // 日志插入时间
+
+	public void setShopDepositChangeLogId(Integer shopDepositChangeLogId) {
+		this.shopDepositChangeLogId = shopDepositChangeLogId;
+	}
+	
+	public Integer getShopDepositChangeLogId() {
+		return this.shopDepositChangeLogId;
+	}
+	public void setShopId(Integer shopId) {
+		this.shopId = shopId;
+	}
+	
+	public Integer getShopId() {
+		return this.shopId;
+	}
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+	
+	public String getShopName() {
+		return this.shopName;
+	}
+	public void setDepositRate(BigDecimal depositRate) {
+		this.depositRate = depositRate;
+	}
+	
+	public BigDecimal getDepositRate() {
+		return this.depositRate;
+	}
+	public void setDepositCashLimit(Integer depositCashLimit) {
+		this.depositCashLimit = depositCashLimit;
+	}
+	
+	public Integer getDepositCashLimit() {
+		return this.depositCashLimit;
+	}
+	public void setOperatorId(Integer operatorId) {
+		this.operatorId = operatorId;
+	}
+	
+	public Integer getOperatorId() {
+		return this.operatorId;
+	}
+	public void setOperator(String operator) {
+		this.operator = operator;
+	}
+	
+	public String getOperator() {
+		return this.operator;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+
+    @Override
+    public String toString () {
+    	return "ShopDepositChangeLog{" + 
+	    	"shopDepositChangeLogId=" + shopDepositChangeLogId + 
+	    	", shopId=" + shopId + 
+	    	", shopName=" + shopName + 
+	    	", depositRate=" + depositRate + 
+	    	", depositCashLimit=" + depositCashLimit + 
+	    	", operatorId=" + operatorId + 
+	    	", operator=" + operator + 
+	    	", createTime=" + createTime + 
+	    	"}";
+    }
+}

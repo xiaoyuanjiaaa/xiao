@@ -1,0 +1,17 @@
+package com.fc.member.store.user.service;
+
+import com.fc.common.service.IService;
+import com.fc.member.store.user.entity.PublicUserLoginsLog;
+
+/**
+ * <p>Title: PublicUserLoginsLog</p>
+ * <p>Description:  Service 接口</p>
+ * @author yangd
+ * @date 2019-01-02 16:49:50
+ */
+public interface IPublicUserLoginsLogService extends IService<PublicUserLoginsLog> {
+
+	// 插入数据
+	int insertSelective(PublicUserLoginsLog obj);
+
+}

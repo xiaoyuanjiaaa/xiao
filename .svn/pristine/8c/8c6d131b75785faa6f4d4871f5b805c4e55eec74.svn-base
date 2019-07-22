@@ -1,0 +1,35 @@
+package com.fc.member.store.user.service;
+
+import java.util.Map;
+
+import com.fc.common.service.IService;
+import com.fc.member.store.user.entity.PublicUser;
+import com.fc.protocol.demo.request.fc.CreateUserRequest;
+import com.fc.protocol.demo.request.store.user.PublicUserLoginRequest;
+
+/**
+ * <p>Title: PublicUser</p>
+ * <p>Description:  Service 接口</p>
+ * @author yangd
+ * @date 2019-01-02 16:49:49
+ */
+public interface IPublicUserService extends IService<PublicUser> {
+
+	/**
+	 * 插入数据
+	 * @param obj
+	 */
+	int insertSelective(PublicUser obj);
+
+	/**插入public_user数据*/
+	Map<String, String> insertUser(CreateUserRequest request, Integer fcUserId);
+
+	/**根据id更改密码*/
+	Map<String, String> updatePasswordByUserId(Integer publicUserId, String password) throws Exception;
+
+	/**修改密码**/
+	int updatePassword(PublicUser publicUser) throws Exception;
+
+	/**查询用户**/
+	PublicUser getPublicUser(PublicUserLoginRequest request);
+}

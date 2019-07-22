@@ -1,0 +1,249 @@
+package com.fc.member.pc.user.handler;
+
+import com.fc.common.exception.ErrorCode;
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.member.pc.user.entity.PcUser;
+import com.fc.member.pc.user.service.IPcUserService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.pc.user.PcUserRequest;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+
+/**PC收银 - 车主信息
+ * @Author: linpeng
+ * @Date: 2019/1/4 14:58
+ * @Version 1.0
+ */
+@Component
+@Handler(module = "user")
+public class PcUserHandler {
+
+    private static Logger log = LoggerFactory.getLogger(PcUserHandler.class);
+
+    @Autowired
+    IPcUserService pcUserService;
+
+    /** 
+     * @Description: 查询PC收银车主信息
+     * @Param: [request] 
+     * @return: com.fc.protocol.common.message.body.ProtocolResponse 
+     * @Author: linpeng
+     * @CreateDate: 2019/1/5
+     * @Update: linpeng
+     * @UpdateDate: 2019/1/5
+     */ 
+    @ReqCodeMapping(requestClazz = PcUserRequest.class)
+    public ProtocolResponse pcUserGet(PcUserRequest request) {
+        log.info("获取PC收银车主信息------>request:{}", request);
+        ProtocolResponse response=null;
+        try {
+            //校验参数是否为空
+            String validResult = request.paramValidateGet();
+            if(validResult != null ) {
+               return response = ProtocolResponse.newInstance().error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+            }
+            log.info("查询PC收银车主信息，pc_user_id:{},mobile:{}",request.getPcUserId(),request.getMobile());
+            PcUser pcUser  = pcUserService.get(request.getPcUserId(),request.getMobile());
+            log.info("查询结果:{}", pcUser);
+
+            if ( pcUser != null){
+                response = ProtocolResponse.newInstance().success().addData("data",pcUser);
+            }
+            else {
+                response = ProtocolResponse.newInstance().error(1011).msg("该车主信息不存在");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.info("操作失败");
+            return ProtocolResponse.newInstance().error(10199).msg("操作失败");
+        }
+        log.info("获取PC收银车主信息------>response:{}", response);
+        return response;
+    }
+
+    /** 
+     * @Description: 查询PC收银车主信息列表
+     * @Param: [request] 
+     * @return: com.fc.protocol.common.message.body.ProtocolResponse 
+     * @Author: linpeng
+     * @CreateDate: 2019/1/5
+     * @Update: linpeng
+     * @UpdateDate: 2019/1/5
+     */ 
+    @ReqCodeMapping(requestClazz = PcUserRequest.class)
+    public ProtocolResponse pcUserList(PcUserRequest request) {
+        log.info("获取PC收银车主信息列表------>request:{}", request);
+        ProtocolResponse response=null;
+        try {
+            //校验参数是否为空
+            String validResult = request.paramValidateList();
+            if(validResult != null ) {
+               return response = ProtocolResponse.newInstance().error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+            }
+            Page page = new Page();
+            page.setPage(request.getPage());
+            page.setRows(request.getPagesize());
+            log.info("查询PC收银车主信息列表，page:{}",page);
+            List<PcUser> pcUser  = pcUserService.getPcUserList(new HashMap<>(),page);
+            log.info("查询结果 -----> count:{},data:{}", page.getTotalResult(),pcUser);
+            if ( pcUser != null & pcUser.size() != 0){
+                response = ProtocolResponse.newInstance().success().addData("data",pcUser).addData("count",page.getTotalResult());
+            }
+            else {
+                response = ProtocolResponse.newInstance().error(1012).msg("未查到相关的PC收银车主信息列表");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.info("操作失败");
+            return ProtocolResponse.newInstance().error(10199).msg("操作失败");
+        }
+        log.info("获取PC收银车主信息列表------>response:{}", response);
+        return response;
+    }
+
+
+    /** 
+     * @Description: 创建PC收银车主
+     * @Param: [request] 
+     * @return: com.fc.protocol.common.message.body.ProtocolResponse 
+     * @Author: linpeng
+     * @CreateDate: 2019/1/5
+     * @Update: linpeng
+     * @UpdateDate: 2019/1/5
+     */ 
+    @ReqCodeMapping(requestClazz = PcUserRequest.class)
+    public ProtocolResponse pcUserSave(PcUserRequest request) {
+        log.info("创建PC收银车主------>request:{}", request);
+        ProtocolResponse response=null;
+        try {
+            //校验参数是否为空
+            String validResult = request.paramValidateSave();
+            if(validResult != null ) {
+               return response = ProtocolResponse.newInstance().error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+            }
+            log.info("创建PC收银车主，fc_user_id:{},mobile:{},name:{}", request.getFcUserId(),request.getMobile(),request.getName());
+            PcUser pcUser = new PcUser();
+            pcUser.setFcUserId(request.getFcUserId());
+            pcUser.setMobile(request.getMobile());
+            pcUser.setName(request.getName());
+            pcUser.setCreateTime((int) (new Date().getTime() / 1000));
+            int result = pcUserService.insertPcUser(pcUser);
+            if (result != 0) {
+                log.info("创建车主成功");
+                response = ProtocolResponse.newInstance().success().msg("创建车主信息成功").addData("platform_user_id",pcUserService.get(null,request.getMobile()).getPcUserId());
+            }
+            else{
+                return ProtocolResponse.newInstance().error(1013).msg("创建车主信息失败");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.info("操作失败");
+            return ProtocolResponse.newInstance().error(10199).msg("操作失败");
+        }
+        log.info("创建PC收银车主信息------>response:{}", response);
+        return response;
+    }
+
+    /** 
+     * @Description: 修改PC收银车主信息
+     * @Param: [request] 
+     * @return: com.fc.protocol.common.message.body.ProtocolResponse 
+     * @Author: linpeng
+     * @CreateDate: 2019/1/5
+     * @Update: linpeng
+     * @UpdateDate: 2019/1/5
+     */ 
+    @ReqCodeMapping(requestClazz = PcUserRequest.class)
+    public ProtocolResponse pcUserUpdate(PcUserRequest request) {
+        log.info("修改PC收银车主信息------>request:{}", request);
+        ProtocolResponse response=null;
+        try {
+            //校验参数是否为空
+            String validResult = request.paramValidateUpdate();
+            if(validResult != null ) {
+               return response = ProtocolResponse.newInstance().error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+            }
+            log.info("修改PC收银车主信息，pc_user_id:{},fc_user_id:{},mobile:{},name:{}", request.getPcUserId(),request.getFcUserId(),request.getMobile(),request.getName());
+            //只通过pc_user_id查询该用户，
+            PcUser pcUser  = pcUserService.get(request.getPcUserId(),null);
+            //判断该用户是否存在
+            if (pcUser == null) {
+                return ProtocolResponse.newInstance().error(1011).msg("该车主信息不存在");
+            }
+            //用户存在，执行后续操作
+            log.info("修改前:{}", pcUser);
+            pcUser.setFcUserId(request.getFcUserId());
+            pcUser.setMobile(request.getMobile());
+            pcUser.setName(request.getName());
+            pcUser.setUpdateTime((int) (new Date().getTime() / 1000));
+            int result = pcUserService.updatePcUser(pcUser);
+            if (result != 0) {
+                log.info("修改PC收银车主信息成功");
+                log.info("修改后:{}", pcUser);
+                response = ProtocolResponse.newInstance().success().msg("修改车主信息成功");
+            }
+            else{
+                return ProtocolResponse.newInstance().error(1014).msg("修改车主信息失败");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.info("操作失败");
+            return ProtocolResponse.newInstance().error(10199).msg("操作失败");
+        }
+        log.info("修改PC收银车主信息------>response:{}", response);
+        return response;
+    }
+
+    /** 
+     * @Description: 删除PC收银车主信息
+     * @Param: [request] 
+     * @return: com.fc.protocol.common.message.body.ProtocolResponse 
+     * @Author: linpeng
+     * @CreateDate: 2019/1/5
+     * @Update: linpeng
+     * @UpdateDate: 2019/1/5
+     */ 
+    @ReqCodeMapping(requestClazz = PcUserRequest.class)
+    public ProtocolResponse pcUserDelete(PcUserRequest request) {
+        log.info("删除PC收银车主信息------>request:{}", request);
+        ProtocolResponse response=null;
+        try {
+            //校验参数是否为空
+            String validResult = request.paramValidateDelete();
+            if(validResult != null ) {
+               return response = ProtocolResponse.newInstance().error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+            }
+            log.info("删除PC收银车主信息，pc_user_id:{},fc_user_id:{},mobile:{}",request.getPcUserId(),request.getFcUserId(),request.getMobile());
+            PcUser pcUser  = pcUserService.get(request.getPcUserId(),request.getMobile());
+            //先查询该用户是否存在
+            if (pcUser == null) {
+                return ProtocolResponse.newInstance().error(1011).msg("该车主信息不存在");
+            }
+            //用户存在，执行后续操作
+            log.info("需要被删除的信息:{}", pcUser);
+            int result = pcUserService.deletePcUser(pcUser.getPcUserId());
+            if (result != 0) {
+                log.info("删除PC收银车主信息成功");
+                response = ProtocolResponse.newInstance().success().msg("删除PC收银车主信息成功");
+            }
+            else{
+                return ProtocolResponse.newInstance().error(1014).msg("删除PC收银车主信息失败");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.info("操作失败");
+            return ProtocolResponse.newInstance().error(10199).msg("操作失败");
+        }
+        log.info("删除PC收银车主信息------>response:{}", response);
+        return response;
+    }
+}

@@ -1,0 +1,33 @@
+package com.fc.protocol.server.demo.service;
+
+import java.util.List;
+import java.util.Map;
+
+import com.fc.protocol.server.demo.persistance.mybatis.IMapper;
+import com.fc.protocol.server.demo.persistance.mybatis.Page;
+
+/**
+ * <p>Title: IService</p>
+ * <p>Description: </p>
+ * <p>Company: </p> 
+ * @author wanghw
+ * @date 2016年3月21日
+ */
+public interface IService<T> extends IMapper<T> {
+
+	/**
+	 * 查询实体分页数据
+	 * @param page Page对象
+	 * @param condition 实体对象或map类型的查询条件
+	 * @return
+	 */
+	public List<T> getRowsPage(Page page, Object condition);
+
+	/**
+	 * 以map类型返回查询实体分页数据，包括分页信息。
+	 * @param page Page对象
+	 * @param condition 实体对象或map类型的查询条件
+	 * @return
+	 */
+	public Map<String, Object> getMapRowsPage(Page page, Object condition);
+}

@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.store.user.dao.IPublicUserDao">
+	<resultMap id="PublicUserMap" type="com.fc.member.store.user.entity.PublicUser">
+        <id property="publicUserId" column="public_user_id"/>
+        <id property="userName" column="user_name"/>
+        <id property="clientId" column="client_id"/>
+        <id property="fcUserId" column="fc_user_id"/>
+        <id property="email" column="email"/>
+        <id property="mailTime" column="mail_time"/>
+        <id property="phoneMob" column="phone_mob"/>
+        <id property="mobileValidTime" column="mobile_valid_time"/>
+        <id property="password" column="password"/>
+        <id property="passwordSalt" column="password_salt"/>
+        <id property="realName" column="real_name"/>
+        <id property="sex" column="sex"/>
+        <id property="birthday" column="birthday"/>
+        <id property="qq" column="qq"/>
+        <id property="isActivation" column="is_activation"/>
+        <id property="cashPassword" column="cash_password"/>
+        <id property="updateTime" column="update_time"/>
+        <id property="createTime" column="create_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getPublicUser" parameterType="com.fc.member.store.user.entity.PublicUser" resultMap="PublicUserMap" >
+		select * from public_user 
+		<where>
+		       <if test="publicUserId != null">
+					AND public_user_id = #{publicUserId}
+				</if>
+				<if test="userName != null">
+					AND user_name = #{userName}
+				</if>
+		       <if test="clientId != null">
+					AND client_id = #{clientId}
+				</if>
+		       <if test="fcUserId != null">
+					AND fc_user_id = #{fcUserId}
+				</if>
+		       <if test="email != null">
+					AND email = #{email}
+				</if>
+		       <if test="mailTime != null">
+					AND mail_time = #{mailTime}
+				</if>
+		       <if test="phoneMob != null">
+					AND phone_mob = #{phoneMob}
+				</if>
+		       <if test="mobileValidTime != null">
+					AND mobile_valid_time = #{mobileValidTime}
+				</if>
+		       <if test="password != null">
+					AND password = #{password}
+				</if>
+		       <if test="passwordSalt != null">
+					AND password_salt = #{passwordSalt}
+				</if>
+		       <if test="realName != null">
+					AND real_name = #{realName}
+				</if>
+		       <if test="sex != null">
+					AND sex = #{sex}
+				</if>
+		       <if test="birthday != null">
+					AND birthday = #{birthday}
+				</if>
+		       <if test="qq != null">
+					AND qq = #{qq}
+				</if>
+		       <if test="isActivation != null">
+					AND is_activation = #{isActivation}
+				</if>
+		       <if test="cashPassword != null">
+					AND cash_password = #{cashPassword}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		</where>
+	</select>
+	
+	<select id="getByPK" parameterType="com.fc.member.store.user.entity.PublicUser" resultMap="PublicUserMap" >
+		select * from public_user where 
+	        public_user_id = #{publicUserId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.store.user.entity.PublicUser" useGeneratedKeys="true">
+		insert into public_user(public_user_id , user_name , client_id , fc_user_id , email , mail_time , phone_mob , mobile_valid_time , password , password_salt , real_name , sex , birthday , qq , is_activation , cash_password , update_time , create_time  )
+    	values(#{publicUserId} ,#{userName} ,#{clientId} ,#{fcUserId} ,#{email} ,#{mailTime} ,#{phoneMob} ,#{mobileValidTime} ,#{password} ,#{passwordSalt} ,#{realName} ,#{sex} ,#{birthday} ,#{qq} ,#{isActivation} ,#{cashPassword} ,#{updateTime} ,#{createTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.store.user.entity.PublicUser" useGeneratedKeys="true" keyProperty="fcUserId">
+		insert into public_user
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="publicUserId != null">public_user_id,</if>
+					<if test="userName != null">user_name,</if>
+					<if test="clientId != null">client_id,</if>
+					<if test="fcUserId != null">fc_user_id,</if>
+					<if test="email != null">email,</if>
+					<if test="mailTime != null">mail_time,</if>
+					<if test="phoneMob != null">phone_mob,</if>
+					<if test="mobileValidTime != null">mobile_valid_time,</if>
+					<if test="password != null">password,</if>
+					<if test="passwordSalt != null">password_salt,</if>
+					<if test="realName != null">real_name,</if>
+					<if test="sex != null">sex,</if>
+					<if test="birthday != null">birthday,</if>
+					<if test="qq != null">qq,</if>
+					<if test="isActivation != null">is_activation,</if>
+					<if test="cashPassword != null">cash_password,</if>
+					<if test="updateTime != null">update_time,</if>
+					<if test="createTime != null">create_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="publicUserId != null">#{publicUserId},</if>
+					<if test="userName != null">#{userName},</if>
+					<if test="clientId != null">#{clientId},</if>
+					<if test="fcUserId != null">#{fcUserId},</if>
+					<if test="email != null">#{email},</if>
+					<if test="mailTime != null">#{mailTime},</if>
+					<if test="phoneMob != null">#{phoneMob},</if>
+					<if test="mobileValidTime != null">#{mobileValidTime},</if>
+					<if test="password != null">#{password},</if>
+					<if test="passwordSalt != null">#{passwordSalt},</if>
+					<if test="realName != null">#{realName},</if>
+					<if test="sex != null">#{sex},</if>
+					<if test="birthday != null">#{birthday},</if>
+					<if test="qq != null">#{qq},</if>
+					<if test="isActivation != null">#{isActivation},</if>
+					<if test="cashPassword != null">#{cashPassword},</if>
+					<if test="updateTime != null">#{updateTime},</if>
+					<if test="createTime != null">#{createTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="updatePassword" parameterType="com.fc.member.store.user.entity.PublicUser" useGeneratedKeys="true" keyProperty="publicUserId">
+		update public_user
+		<set>
+	    	<if test="password != null">password = #{password},</if>
+	    	<if test="updateTime != null">update_time = #{updateTime}</if>
+		</set>
+		where 
+	        public_user_id = #{publicUserId} 
+	</update>
+	
+	<update id="update" parameterType="com.fc.member.store.user.entity.PublicUser">
+		update public_user
+		<set>
+		    	<if test="userName != null">user_name = #{userName},</if>
+		    	<if test="clientId != null">client_id = #{clientId},</if>
+		    	<if test="fcUserId != null">fc_user_id = #{fcUserId},</if>
+		    	<if test="email != null">email = #{email},</if>
+		    	<if test="mailTime != null">mail_time = #{mailTime},</if>
+		    	<if test="phoneMob != null">phone_mob = #{phoneMob},</if>
+		    	<if test="mobileValidTime != null">mobile_valid_time = #{mobileValidTime},</if>
+		    	<if test="password != null">password = #{password},</if>
+		    	<if test="passwordSalt != null">password_salt = #{passwordSalt},</if>
+		    	<if test="realName != null">real_name = #{realName},</if>
+		    	<if test="sex != null">sex = #{sex},</if>
+		    	<if test="birthday != null">birthday = #{birthday},</if>
+		    	<if test="qq != null">qq = #{qq},</if>
+		    	<if test="isActivation != null">is_activation = #{isActivation},</if>
+		    	<if test="cashPassword != null">cash_password = #{cashPassword},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		</set>
+		where 
+	        public_user_id = #{publicUserId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from public_user where 
+	        public_user_id = #{publicUserId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.store.user.entity.PublicUser" resultMap="PublicUserMap" >
+		select * from public_user 
+		<where>
+		       <if test="publicUserId != null">
+					AND public_user_id = #{publicUserId}
+				</if>
+		       <if test="userName != null">
+					AND user_name = #{userName}
+				</if>
+		       <if test="clientId != null">
+					AND client_id = #{clientId}
+				</if>
+		       <if test="fcUserId != null">
+					AND fc_user_id = #{fcUserId}
+				</if>
+		       <if test="email != null">
+					AND email = #{email}
+				</if>
+		       <if test="mailTime != null">
+					AND mail_time = #{mailTime}
+				</if>
+		       <if test="phoneMob != null">
+					AND phone_mob = #{phoneMob}
+				</if>
+		       <if test="mobileValidTime != null">
+					AND mobile_valid_time = #{mobileValidTime}
+				</if>
+		       <if test="password != null">
+					AND password = #{password}
+				</if>
+		       <if test="passwordSalt != null">
+					AND password_salt = #{passwordSalt}
+				</if>
+		       <if test="realName != null">
+					AND real_name = #{realName}
+				</if>
+		       <if test="sex != null">
+					AND sex = #{sex}
+				</if>
+		       <if test="birthday != null">
+					AND birthday = #{birthday}
+				</if>
+		       <if test="qq != null">
+					AND qq = #{qq}
+				</if>
+		       <if test="isActivation != null">
+					AND is_activation = #{isActivation}
+				</if>
+		       <if test="cashPassword != null">
+					AND cash_password = #{cashPassword}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="PublicUserMap" >
+		select * from public_user  
+		<where>
+		       <if test="condition.publicUserId != null">
+					AND public_user_id = #{condition.publicUserId}
+				</if>
+		       <if test="condition.userName != null">
+					AND user_name = #{condition.userName}
+				</if>
+		       <if test="condition.clientId != null">
+					AND client_id = #{condition.clientId}
+				</if>
+		       <if test="condition.fcUserId != null">
+					AND fc_user_id = #{condition.fcUserId}
+				</if>
+		       <if test="condition.email != null">
+					AND email = #{condition.email}
+				</if>
+		       <if test="condition.mailTime != null">
+					AND mail_time = #{condition.mailTime}
+				</if>
+		       <if test="condition.phoneMob != null">
+					AND phone_mob = #{condition.phoneMob}
+				</if>
+		       <if test="condition.mobileValidTime != null">
+					AND mobile_valid_time = #{condition.mobileValidTime}
+				</if>
+		       <if test="condition.password != null">
+					AND password = #{condition.password}
+				</if>
+		       <if test="condition.passwordSalt != null">
+					AND password_salt = #{condition.passwordSalt}
+				</if>
+		       <if test="condition.realName != null">
+					AND real_name = #{condition.realName}
+				</if>
+		       <if test="condition.sex != null">
+					AND sex = #{condition.sex}
+				</if>
+		       <if test="condition.birthday != null">
+					AND birthday = #{condition.birthday}
+				</if>
+		       <if test="condition.qq != null">
+					AND qq = #{condition.qq}
+				</if>
+		       <if test="condition.isActivation != null">
+					AND is_activation = #{condition.isActivation}
+				</if>
+		       <if test="condition.cashPassword != null">
+					AND cash_password = #{condition.cashPassword}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

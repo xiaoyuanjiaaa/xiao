@@ -1,0 +1,49 @@
+package com.fc.protocol.demo.request.wechatmaintain.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * 微养车 查询爱车档案详情参数
+ * @author yangd
+ * @date 2019年1月3日
+ */
+public class WechatMaintainUserCarDetailsRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+
+	@ApiModelProperty(value = "车档案id", name = "wechatMaintainUserCarId")
+	private Integer wechatMaintainUserCarId; // 自增id
+
+	/**
+	 * 验证方法
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-08
+	 * @return
+	 */
+	public String paramValidate() {
+		if (StringUtils.isEmpty(wechatMaintainUserCarId)) {
+			return "参数wechatMaintainUserCarId不能为空";
+		}
+		return null;
+	}
+
+	public Integer getWechatMaintainUserCarId() {
+		return wechatMaintainUserCarId;
+	}
+
+	public void setWechatMaintainUserCarId(Integer wechatMaintainUserCarId) {
+		this.wechatMaintainUserCarId = wechatMaintainUserCarId;
+	}
+
+	@Override
+	public String toString() {
+		return "WechatMaintainUserCarDetailsRequest [wechatMaintainUserCarId=" + wechatMaintainUserCarId
+				+ ", getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode() + ", getTraceId()=" + getTraceId()
+				+ "]";
+	}
+
+}

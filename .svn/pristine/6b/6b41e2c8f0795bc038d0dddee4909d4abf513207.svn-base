@@ -1,0 +1,131 @@
+package com.fc.member.master.pickcar.entity;
+
+import java.io.Serializable;
+
+
+/**
+ * <p>Table: MasterPickcarUserCar</p>
+ * <p>Description: 师傅车主-车辆档案表(主表)</p>
+ * @author yangd
+ * @date 2019-01-15 11:56:03
+ */
+public class MasterPickcarUserCar implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer masterPickcarUserCarId; // 主键id
+	private String carNum; // 车牌
+	private String vehicleId; // 精友车型id
+	private String vehicleName; // 车型名称
+	private Integer driveMileage; // 行驶公里数
+	private String frameNumber; // 车架号
+	private String engineNumber; // 发动机型号
+	private Integer status; // 是否起用(0:否 1:是)
+	private Integer isDefault; // 默认车型(0:不默认 1:默认)
+	private Integer createTime; // 创建时间
+	private Integer updateTime; // 修改时间
+	private Integer driveMileageTime; // 行驶公里数变动时间
+
+	public void setMasterPickcarUserCarId(Integer masterPickcarUserCarId) {
+		this.masterPickcarUserCarId = masterPickcarUserCarId;
+	}
+	
+	public Integer getMasterPickcarUserCarId() {
+		return this.masterPickcarUserCarId;
+	}
+	public void setCarNum(String carNum) {
+		this.carNum = carNum;
+	}
+	
+	public String getCarNum() {
+		return this.carNum;
+	}
+	public void setVehicleId(String vehicleId) {
+		this.vehicleId = vehicleId;
+	}
+	
+	public String getVehicleId() {
+		return this.vehicleId;
+	}
+	public void setVehicleName(String vehicleName) {
+		this.vehicleName = vehicleName;
+	}
+	
+	public String getVehicleName() {
+		return this.vehicleName;
+	}
+	public void setDriveMileage(Integer driveMileage) {
+		this.driveMileage = driveMileage;
+	}
+	
+	public Integer getDriveMileage() {
+		return this.driveMileage;
+	}
+	public void setFrameNumber(String frameNumber) {
+		this.frameNumber = frameNumber;
+	}
+	
+	public String getFrameNumber() {
+		return this.frameNumber;
+	}
+	public void setEngineNumber(String engineNumber) {
+		this.engineNumber = engineNumber;
+	}
+	
+	public String getEngineNumber() {
+		return this.engineNumber;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	
+	public Integer getStatus() {
+		return this.status;
+	}
+	public void setIsDefault(Integer isDefault) {
+		this.isDefault = isDefault;
+	}
+	
+	public Integer getIsDefault() {
+		return this.isDefault;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+	public void setUpdateTime(Integer updateTime) {
+		this.updateTime = updateTime;
+	}
+	
+	public Integer getUpdateTime() {
+		return this.updateTime;
+	}
+	public void setDriveMileageTime(Integer driveMileageTime) {
+		this.driveMileageTime = driveMileageTime;
+	}
+	
+	public Integer getDriveMileageTime() {
+		return this.driveMileageTime;
+	}
+
+    @Override
+    public String toString () {
+    	return "MasterPickcarUserCar{" + 
+	    	"masterPickcarUserCarId=" + masterPickcarUserCarId + 
+	    	", carNum=" + carNum + 
+	    	", vehicleId=" + vehicleId + 
+	    	", vehicleName=" + vehicleName + 
+	    	", driveMileage=" + driveMileage + 
+	    	", frameNumber=" + frameNumber + 
+	    	", engineNumber=" + engineNumber + 
+	    	", status=" + status + 
+	    	", isDefault=" + isDefault + 
+	    	", createTime=" + createTime + 
+	    	", updateTime=" + updateTime + 
+	    	", driveMileageTime=" + driveMileageTime + 
+	    	"}";
+    }
+}

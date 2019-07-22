@@ -1,0 +1,133 @@
+package com.fc.member.wechatmaintain.user.entity;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainCouponSstoreUserRequest;
+
+/**
+ * <p>Table: WechatMaintainCouponSstoreUser</p>
+ * <p>Description: 微养车用户会员卡表</p>
+ * @author yangd
+ * @date 2018-12-28 17:13:47
+ */
+public class WechatMaintainCouponSstoreUser implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	private Integer wechatMaintainCouponSstoreUserId; // 主键id
+	private Integer wechatMaintainUserId; // 微养车用户id
+	private Integer storeId; // 门店id
+	private Integer integral; // 当前积分
+	private BigDecimal discount; // 当前享受的折扣
+	private Integer couponLevel; // 当前的会员级别
+	private String couponLevelName; // 会员等级名称
+	private Integer updateTime; // 更新时间
+	private Integer createTime; // 创建时间
+
+	/**
+	 * 将不为空的属性set到对象中
+	 * @param entity 实体对象
+	 * @param request 参数对象
+	 * @return
+	 */
+	public static WechatMaintainCouponSstoreUser isNotEmptySetObject(WechatMaintainCouponSstoreUserRequest request) {
+		WechatMaintainCouponSstoreUser entity = new WechatMaintainCouponSstoreUser();
+		entity.setWechatMaintainCouponSstoreUserId(request.getWechatMaintainCouponSstoreUserId());
+		entity.setWechatMaintainUserId(request.getWechatMaintainUserId());
+		entity.setStoreId(request.getStoreId());
+		entity.setIntegral(request.getIntegral());
+		entity.setDiscount(request.getDiscount());
+		entity.setCouponLevel(request.getCouponLevel());
+		entity.setCouponLevelName(request.getCouponLevelName());
+		if (StringUtils.isEmpty(request.getWechatMaintainCouponSstoreUserId())) {
+			entity.setCreateTime((int) (new Date().getTime() / 1000));
+		}
+		entity.setUpdateTime((int) (new Date().getTime() / 1000));
+		return entity;
+	}
+
+	public void setWechatMaintainCouponSstoreUserId(Integer wechatMaintainCouponSstoreUserId) {
+		this.wechatMaintainCouponSstoreUserId = wechatMaintainCouponSstoreUserId;
+	}
+
+	public Integer getWechatMaintainCouponSstoreUserId() {
+		return this.wechatMaintainCouponSstoreUserId;
+	}
+
+	public void setWechatMaintainUserId(Integer wechatMaintainUserId) {
+		this.wechatMaintainUserId = wechatMaintainUserId;
+	}
+
+	public Integer getWechatMaintainUserId() {
+		return this.wechatMaintainUserId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	public Integer getStoreId() {
+		return this.storeId;
+	}
+
+	public void setIntegral(Integer integral) {
+		this.integral = integral;
+	}
+
+	public Integer getIntegral() {
+		return this.integral;
+	}
+
+	public void setDiscount(BigDecimal discount) {
+		this.discount = discount;
+	}
+
+	public BigDecimal getDiscount() {
+		return this.discount;
+	}
+
+	public void setCouponLevel(Integer couponLevel) {
+		this.couponLevel = couponLevel;
+	}
+
+	public Integer getCouponLevel() {
+		return this.couponLevel;
+	}
+
+	public void setCouponLevelName(String couponLevelName) {
+		this.couponLevelName = couponLevelName;
+	}
+
+	public String getCouponLevelName() {
+		return this.couponLevelName;
+	}
+
+	public void setUpdateTime(Integer updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	public Integer getUpdateTime() {
+		return this.updateTime;
+	}
+
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+
+	@Override
+	public String toString() {
+		return "WechatMaintainCouponSstoreUser{" + "wechatMaintainCouponSstoreUserId="
+				+ wechatMaintainCouponSstoreUserId + ", wechatMaintainUserId=" + wechatMaintainUserId + ", storeId="
+				+ storeId + ", integral=" + integral + ", discount=" + discount + ", couponLevel=" + couponLevel
+				+ ", couponLevelName=" + couponLevelName + ", updateTime=" + updateTime + ", createTime=" + createTime
+				+ "}";
+	}
+}

@@ -1,0 +1,53 @@
+package com.fc.protocol.demo.request.store.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+/**
+ * 
+ * <p>提现密码修改请求request: </p>
+ * @author xiaozw
+ * @date 2018/01/09
+ */
+public class PublicUserUpdatecpRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+	/**public_user_id*/
+	private Integer publicUserId;
+	/**提现密码*/
+	private String cashPassword;
+
+	public Integer getPublicUserId() {
+		return publicUserId;
+	}
+
+	public void setPublicUserId(Integer publicUserId) {
+		this.publicUserId = publicUserId;
+	}
+
+	public String getCashPassword() {
+		return cashPassword;
+	}
+
+	public void setCashPassword(String cashPassword) {
+		this.cashPassword = cashPassword;
+	}
+
+	public String paramValidate() {
+		if (StringUtils.isEmpty(publicUserId)) {
+			return "参数:publicUserId不能为空";
+		}
+		if (StringUtils.isEmpty(cashPassword)) {
+			return "参数:cashPassword不能为空";
+		}
+		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "UpdateCashPasswordRequest [getPublicUserId()=" + getPublicUserId() + ", getCashPassword()="
+				+ getCashPassword() + ", getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode()
+				+ ", getTraceId()=" + getTraceId() + "]";
+	}
+}

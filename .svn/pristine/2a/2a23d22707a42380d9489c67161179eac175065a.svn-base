@@ -1,0 +1,39 @@
+package com.fc.member.wechatplatform.user.service;
+
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.service.IService;
+import com.fc.member.wechatplatform.user.entity.WechatPlatformServiceCount;
+import com.fc.protocol.demo.request.wechatplatform.user.WpServiceCountListRequest;
+import com.fc.protocol.demo.request.wechatplatform.user.WpServiceCountSaveRequest;
+import com.fc.protocol.demo.request.wechatplatform.user.WpServiceCountUpdateRequest;
+
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * <p>Title: WechatPlatformServiceCount</p>
+ * <p>Description:  Service 接口</p>
+ * @author yangd
+ * @date 2018-12-28 17:14:41
+ */
+public interface IWechatPlatformServiceCountService extends IService<WechatPlatformServiceCount>{
+
+    // 根据自增id查询服务统计信息详情
+    WechatPlatformServiceCount get(Integer id);
+
+    // 根据openid和serviceID查询服务统计信息详情
+    WechatPlatformServiceCount get(String openid,Integer service_id);
+
+    // 查询服务统计信息List
+    List<WechatPlatformServiceCount> getServiceCountList(WpServiceCountListRequest request, Page page);
+
+    // 新增服务统计信息
+    Map<String, Object> insertPlatformServiceCount(WpServiceCountSaveRequest request);
+
+    // 更新服务统计信息
+    Map<String, Object> updatePlatformServiceCount(WpServiceCountUpdateRequest request)throws Exception;
+
+    // 删除服务统计信息
+    Map<String, Object> deletePlatformServiceCount(Integer platformUserId)throws Exception;
+}

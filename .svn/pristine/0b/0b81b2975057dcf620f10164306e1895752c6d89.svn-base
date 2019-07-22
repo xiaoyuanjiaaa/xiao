@@ -1,0 +1,99 @@
+package com.fc.protocol.server.demo.entity;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+
+/**
+ * 储值卡充值
+ * @author yangd
+ * @date 2018年10月19日
+ */
+public class WechatRecharge implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Integer wechat_recharge_id;
+	private Integer wechat_user_id;
+	private Integer wechat_sstore_id;
+	private Integer wechat_sstore_package_id;
+	private BigDecimal real_account;
+	private BigDecimal discount;
+	private Integer creat_time;
+	private Integer status;
+	private String order_no;
+
+	public Integer getWechat_sstore_package_id() {
+		return wechat_sstore_package_id;
+	}
+
+	public void setWechat_sstore_package_id(Integer wechat_sstore_package_id) {
+		this.wechat_sstore_package_id = wechat_sstore_package_id;
+	}
+
+	public void setWechat_recharge_id(Integer wechat_recharge_id) {
+		this.wechat_recharge_id = wechat_recharge_id;
+	}
+
+	public Integer getWechat_recharge_id() {
+		return this.wechat_recharge_id;
+	}
+
+	public void setWechat_user_id(Integer wechat_user_id) {
+		this.wechat_user_id = wechat_user_id;
+	}
+
+	public Integer getWechat_user_id() {
+		return this.wechat_user_id;
+	}
+
+	public void setWechat_sstore_id(Integer wechat_sstore_id) {
+		this.wechat_sstore_id = wechat_sstore_id;
+	}
+
+	public Integer getWechat_sstore_id() {
+		return this.wechat_sstore_id;
+	}
+
+	public void setReal_account(BigDecimal real_account) {
+		this.real_account = real_account;
+	}
+
+	public BigDecimal getReal_account() {
+		return this.real_account;
+	}
+
+	public void setDiscount(BigDecimal discount) {
+		this.discount = discount;
+	}
+
+	public BigDecimal getDiscount() {
+		return this.discount;
+	}
+
+	public void setCreat_time(Integer creat_time) {
+		this.creat_time = creat_time;
+	}
+
+	public Integer getCreat_time() {
+		return this.creat_time;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public Integer getStatus() {
+		return this.status;
+	}
+
+	public void setOrder_no(String order_no) {
+		this.order_no = order_no;
+	}
+
+	public String getOrder_no() {
+		return this.order_no;
+	}
+
+}

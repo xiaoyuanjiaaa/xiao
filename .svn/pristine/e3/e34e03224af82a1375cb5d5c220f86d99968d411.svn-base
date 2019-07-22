@@ -1,0 +1,42 @@
+package com.fc.member.store.user.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.member.store.user.entity.StoreCollect;
+/**
+ * <p>Title: StoreCollect</p>
+ * <p>Description:  DAO层</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:06
+ */
+@Mapper
+public interface IStoreCollectDao extends IMapper<StoreCollect>{
+	
+	/**
+	 * 商品收藏列表
+	 * 按照收藏时间降序排序（desc）
+	 */
+    List<StoreCollect> getByPK(StoreCollect storeCollect);
+    
+    /**
+     * 新增商品收藏
+     */
+    int insertSelective(StoreCollect storeCollect);
+    
+    /**
+     * 删除商品收藏
+     */
+	int deleteSelective(StoreCollect storeCollect);
+
+	
+
+	
+
+	
+
+	
+    
+}

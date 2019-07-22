@@ -1,0 +1,18 @@
+package com.fc.member.master.pickcar.dao;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.fc.common.plugin.mybatis.IMapper;
+
+import com.fc.member.master.pickcar.entity.MasterPickcarUserCar;
+/**
+ * <p>Title: MasterPickcarUserCar</p>
+ * <p>Description: 师傅车主-车辆档案表(主表) DAO层</p>
+ * @author yangd
+ * @date 2019-01-15 11:56:03
+ */
+@Mapper
+public interface IMasterPickcarUserCarDao extends IMapper<MasterPickcarUserCar>{
+	// 插入数据
+	int insertSelective(MasterPickcarUserCar obj);
+}

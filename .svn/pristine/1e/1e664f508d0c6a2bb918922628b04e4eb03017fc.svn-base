@@ -1,0 +1,49 @@
+package com.fc.protocol.client.demo.utils;
+
+import com.fc.protocol.client.demo.controller.StoreBankCardController;
+import com.fc.protocol.demo.request.store.user.CreateStoreBankCardRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class StoreBankCardRequestUtil {
+    private static Logger log = LoggerFactory.getLogger(StoreBankCardController.class);
+    /**
+     * 验证门店是否绑定银行卡
+     * @param
+     */
+    public static CreateStoreBankCardRequest mockCheckStoreBankCardRequest(String sstore_id, int number
+    ) {
+        CreateStoreBankCardRequest request = new CreateStoreBankCardRequest();
+        request.setStoreId(Integer.parseInt(sstore_id));
+        request.setVersion("1.0");
+        request.setTraceId("tid_" + number);
+        request.setReqCode("checkStoreBankCardInfo");
+        log.info("StoreBankCardRequestUtil封装的实体", request);
+        return request;
+    }
+    /**
+     * 绑定银行卡信息
+     * @param
+     */
+    public static CreateStoreBankCardRequest mockStoreBankCardRequest(String sstore_id, String bank_hold_name, String bank_card_no, String card_bank_name,
+                                                                      String bank_branch,
+                                                                      String card_address,
+                                                                      String store_bank_card_id,
+                                                                      String region_id, int number,String reqCode
+    ) {
+        CreateStoreBankCardRequest request = new CreateStoreBankCardRequest();
+        request.setBankCardNo(bank_card_no);
+        request.setBankHoldName(bank_hold_name);
+        request.setCardAddress(card_address);
+        request.setCardBankName(card_bank_name);
+        request.setDepositBank(bank_branch);
+        request.setRegionId(Integer.parseInt(region_id));
+        request.setStoreBankCardId(Integer.parseInt(store_bank_card_id));
+        request.setStoreId(Integer.parseInt(sstore_id));
+        request.setVersion("1.0");
+        request.setTraceId("tid_" + number);
+        request.setReqCode(reqCode);
+        log.info("StoreBankCardRequestUtil封装的实体", request);
+        return request;
+    }
+}

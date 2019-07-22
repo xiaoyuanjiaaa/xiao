@@ -1,0 +1,125 @@
+package com.fc.member.store.user.handler;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.fc.common.exception.ErrorCode;
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.member.store.user.entity.StoreAdvanceDetail;
+import com.fc.member.store.user.service.IStoreAdvanceDetailService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.store.user.SadetailAddRequest;
+import com.fc.protocol.demo.request.store.user.SadetailPageRequest;
+import com.fc.protocol.demo.request.store.user.SadetailQueryIdRequest;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+
+/**
+ * 门店还款记录表基础操作Handler
+ * @author	xiaozw
+ * @data	2019-01-11
+ */
+@Component
+@Handler(module = "store")
+public class SadetailHandler {
+	private static Logger log = LoggerFactory.getLogger(SadetailHandler.class);
+
+	@Autowired
+	private IStoreAdvanceDetailService storeAdvanceDetailService;
+
+	/**
+	 * 根据主键id查询还款记录
+	 * @author	xiaozw
+	 * @update_name:xiaozw 
+	 * @update_time:2019-01-11 19:58
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = SadetailQueryIdRequest.class)
+	public ProtocolResponse sadetailQueryId(SadetailQueryIdRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			log.info("sadetailQueryId------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			}
+			StoreAdvanceDetail storeAdvanceDetail = storeAdvanceDetailService
+					.getByPK(request.getStoreAdvanceDetailId());
+			if (storeAdvanceDetail == null) {
+				return response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+			}
+			response.addData("store_advance_detail", storeAdvanceDetail);
+		} catch (Exception e) {
+			log.info("createUser:", e);
+			e.printStackTrace();
+			return response.error(ErrorCode.QUERY_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+		return response;
+	}
+
+	/**
+	 * 查询分页列表
+	 * @author	xiaozw
+	 * @update_name:xiaozw 
+	 * @update_time:2019-01-11 20:05
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = SadetailPageRequest.class)
+	public ProtocolResponse sadetailPage(SadetailPageRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			log.info("sadetailQueryId------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			} // 分页对象
+			Page page = new Page();
+			page.setPage(request.getPageNo());
+			page.setRows(request.getPageSize());
+			page.setShowTotal(true);
+			page.setSord("desc");
+			page.setSidx("repaid_time");
+			List<StoreAdvanceDetail> couponSstoreUserList = storeAdvanceDetailService.getSadListPage(page, request);
+			if (couponSstoreUserList == null || couponSstoreUserList.size() <= 0) {
+				return response.error(ErrorCode.DATE_NOR_DEFIND.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+			}
+			response.addData("coupon_sstore_user_list", couponSstoreUserList).addData("count", page.getTotalResult());
+		} catch (Exception e) {
+			log.info("sadetailQueryId:", e);
+			e.printStackTrace();
+			return response.error(ErrorCode.QUERY_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+		return response;
+	}
+
+	/**
+	 * 新增门店还款记录表
+	 * @author	xiaozw
+	 * @update_name:xiaozw 
+	 * @update_time:2019-01-11 20:07
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = SadetailAddRequest.class)
+	public ProtocolResponse sadetailAdd(SadetailAddRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			log.info("sadetailAdd------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			}
+			if (!storeAdvanceDetailService.createSad(request)) {
+				return response.error(ErrorCode.CREATE_ERROR.getValue()).msg(ErrorCode.CREATE_ERROR.getDesc());
+			}
+		} catch (Exception e) {
+			log.info("sadetailAdd:", e);
+			e.printStackTrace();
+			return response.error(ErrorCode.CREATE_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+		return response;
+	}
+}

@@ -1,0 +1,220 @@
+package com.fc.member.store.user.service.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.store.user.dao.IStoreBasicInfoDao;
+import com.fc.member.store.user.entity.PublicUser;
+import com.fc.member.store.user.entity.StoreBasicInfo;
+import com.fc.member.store.user.entity.StoreSetting;
+import com.fc.member.store.user.service.IPublicUserService;
+import com.fc.member.store.user.service.IStoreBasicInfoService;
+import com.fc.member.store.user.service.IStoreSettingService;
+import com.fc.protocol.demo.request.store.user.SbiCreateOneRequest;
+import com.fc.protocol.demo.request.store.user.SbiCreateThreeRequest;
+import com.fc.protocol.demo.request.store.user.SbiCreateTwoRequest;
+import com.fc.protocol.demo.request.store.user.StoreBossInfoRequest;
+import com.fc.protocol.demo.request.store.user.SbiUpdateRequest;
+
+/**
+ * <p>Title: StoreBasicInfo</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:05
+ */
+@Service("storeBasicInfoService")
+public class StoreBasicInfoServiceImp extends ServiceImpl<StoreBasicInfo> implements IStoreBasicInfoService {
+	private static Logger log = LoggerFactory.getLogger(StoreBasicInfoServiceImp.class);
+	@Autowired
+	private IStoreBasicInfoDao storeBasicInfoDao;
+	@Autowired
+	private IPublicUserService publicUserService;
+	@Autowired
+	private IStoreSettingService storeSettingService;
+
+	@Override
+	protected IMapper<StoreBasicInfo> getDao() {
+		return storeBasicInfoDao;
+	}
+
+	/***@author zhuj
+	 *@date 2018/12/28
+	 * @param id
+	 * @description 获取店主信息
+	 *
+	 */
+	@Override
+	public Map<String, Object> getStoreBossInfo(Integer id) {
+		//先验证信息是否存在
+		StoreBasicInfo storeBasicInfo = getByPK(id);
+		//组装返回数据
+		if (null != storeBasicInfo) {
+			PublicUser publicUser = publicUserService.getByPK(id);
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("storeId", storeBasicInfo.getStoreId());
+			map.put("storeBossName", storeBasicInfo.getBossName());
+			map.put("storeBossEmail", publicUser.getEmail());
+			map.put("storeBossqq", publicUser.getQq());
+			return map;
+		}
+		return null;
+	}
+
+	/***@author zhuj
+	 *@date 2018/12/28
+	 * @param request
+	 * @description 修改店主信息
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public boolean changeStoreBossInfo(StoreBossInfoRequest request) throws Exception {
+		//先验证是否存在店主信息
+		log.info("先验证是否存在店主信息", request);
+		StoreBasicInfo storeBasicInfo = getByPK(request.getStoreId());
+		if (null != storeBasicInfo) {
+			StoreBasicInfo storeBossInfo = new StoreBasicInfo();
+			storeBossInfo.setStoreId(request.getStoreId());
+			storeBossInfo.setUpdateTime(DateTimeUtils.getDateTimeInteger());
+			storeBossInfo.setBossName(request.getStoreBossName());
+			//修改店主信息
+			update(storeBossInfo);
+
+			PublicUser publicUser = new PublicUser();
+			publicUser.setPublicUserId(request.getStoreId());
+			publicUser.setEmail(request.getStoreBossEmail());
+			publicUser.setQq(Integer.parseInt(request.getStoreBossqq()));
+			publicUser.setUpdateTime(DateTimeUtils.getDateTimeInteger());
+			//修改店主信息插入主表
+			publicUserService.update(publicUser);
+		} else {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public StoreBasicInfo getBasicInfo(Integer publicUserId) {
+		log.info("publicUserId---------->:" + publicUserId);
+		StoreBasicInfo storeBasicInfo = null;
+		if (publicUserId == null) {
+			return storeBasicInfo;
+		}
+		StoreBasicInfo sbi = new StoreBasicInfo();
+		sbi.setPublicUserId(publicUserId);
+		List<StoreBasicInfo> storeBasicInfoList = this.getRows(sbi);
+		if (storeBasicInfoList != null && storeBasicInfoList.size() > 0) {
+			storeBasicInfo = storeBasicInfoList.get(0);
+			return storeBasicInfo;
+		}
+		return storeBasicInfo;
+	}
+
+	@Override
+	public Map<String, String> insertBasicInfoOne(SbiCreateOneRequest request) throws Exception {
+		log.info("request---------->:" + request);
+		Map<String, String> resultMap = new HashMap<>();
+		PublicUser pu = publicUserService.getByPK(request.getPublicUserId());
+		if (pu == null) {
+			resultMap.put("error", "public_user_id:" + request.getPublicUserId() + "数据不存在public_user表中");
+			return resultMap;
+		}
+		StoreBasicInfo storeBasicInfo = this.getBasicInfo(request.getPublicUserId());
+		StoreBasicInfo sbi = new StoreBasicInfo();
+		if (storeBasicInfo == null) { //新增
+			sbi.setStoreName(request.getStoreName());
+			sbi.setPublicUserId(request.getPublicUserId());
+			sbi.setBossName(request.getBossName());
+			sbi.setPhoneTel(request.getPhoneTel());
+			sbi.setPhoneMob(pu.getPhoneMob());
+			sbi.setBusinessLicenseCode(request.getBusinessLicenseCode());
+			sbi.setBusinessLicenseName(request.getBusinessLicenseName());
+			sbi.setCreateTime(DateTimeUtils.getDateTimeInteger());
+			sbi.setStatus(StoreBasicInfo.STATUS_NO_AUDITING);
+			sbi.setIsStop(StoreBasicInfo.STATUS_NO_STOP);
+			sbi.setIsDelete(StoreBasicInfo.STATUS_DELETE);
+			sbi.setUpdateTime(DateTimeUtils.getDateTimeInteger());
+			sbi.setCreateTime(DateTimeUtils.getDateTimeInteger());
+			storeBasicInfoDao.insertSelective(sbi);
+		} else { //修改
+			sbi.setStoreName(request.getStoreName());
+			sbi.setBossName(request.getBossName());
+			sbi.setPhoneTel(request.getPhoneTel());
+			sbi.setBusinessLicenseCode(request.getBusinessLicenseCode());
+			sbi.setBusinessLicenseName(request.getBusinessLicenseName());
+			this.update(sbi);
+		}
+		return resultMap;
+	}
+
+	@Override
+	public boolean insertBasicInfoTwo(SbiCreateTwoRequest request) throws Exception {
+		log.info("request---------->:" + request);
+		StoreBasicInfo sbi = new StoreBasicInfo();
+		sbi.setStoreId(request.getStoreId());
+		sbi.setBusinessLicenseId(request.getBusinessLicenseId());
+		sbi.setPositivePhotoId(request.getPositivePhotoId());
+		return this.update(sbi);
+	}
+
+	@Transactional(readOnly = false)
+	@Override
+	public boolean insertBasicInfoThree(SbiCreateThreeRequest request) throws Exception {
+		log.info("request---------->:" + request);
+		StoreBasicInfo sbi = new StoreBasicInfo();
+		sbi.setStoreId(request.getStoreId());
+		sbi.setRegionId(request.getRegionId());
+		sbi.setRegionName(request.getRegionName());
+		sbi.setAddress(request.getAddress());
+		int resultNum = storeBasicInfoDao.updateBasicInfo(sbi);
+		if (resultNum <= 0) {
+			return false;
+		}
+		StoreSetting storeSetting = new StoreSetting();
+		storeSetting.initialization(request.getStoreId());
+		storeSettingService.create(storeSetting);//需要确定是否会自动回滚
+		return true;
+	}
+
+	@Override
+	public boolean updateBasicInfo(SbiUpdateRequest request) throws Exception {
+		StoreBasicInfo sbi = new StoreBasicInfo();
+		sbi.setStoreId(request.getStoreId()); // sstore_id
+		sbi.setStoreName(request.getStoreName());// 门店名称
+		sbi.setStoreLogoId(request.getStoreLogoId());// 商家LOGOURL
+		sbi.setRegionId(request.getRegionId());// 所在地区ID
+		sbi.setRegionName(request.getRegionName()); // 所在地区
+		sbi.setAddress(request.getAddress()); // 详细地址
+		sbi.setLongitude(request.getLongitude()); // 经度
+		sbi.setLatitude(request.getLatitude()); // 纬度
+		sbi.setbTime(request.getbTime());// 营业起始时间
+		sbi.seteTime(request.geteTime());// 营业结束时间
+		sbi.setPhoneTel(request.getPhoneTel()); // 门店联系电话
+		sbi.setDescription(request.getDescription()); // 门店介绍
+		sbi.setStoreScoreValue(request.getStoreScoreValue()); // 技术,环境,态度,评价分的总平均分
+		sbi.setBusinessLicenseCode(request.getBusinessLicenseCode()); // 营业执照编号
+		sbi.setBusinessLicenseName(request.getBusinessLicenseName()); // 营业执照注册名称
+		sbi.setBusinessLicenseId(request.getBusinessLicenseId()); // 工商营业执照ID(逗号隔开)
+		sbi.setPositivePhotoId(request.getPositivePhotoId()); // 门店正面照ID(逗号隔开)
+		sbi.setBossName(request.getBossName()); // 店主名称
+		sbi.setIsStop(request.getIsStop()); // 是否停业 0不停业 1停业
+		sbi.setStopBTime(request.getStopBTime()); // 门店停业开始时间
+		sbi.setStopETime(request.getStopETime()); // 门店停业结束时间
+		return this.update(sbi);
+	}
+
+	@Override
+	public void updatePhoneMob(Map<String, String> param) {
+		storeBasicInfoDao.updatePhoneMob(param);
+	}
+
+}

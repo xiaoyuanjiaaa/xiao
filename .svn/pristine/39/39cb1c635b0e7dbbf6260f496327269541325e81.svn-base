@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.pc.user.dao.IPcUserCarDao">
+	<resultMap id="PcUserCarMap" type="com.fc.member.pc.user.entity.PcUserCar">
+        <id property="pcUserCarId" column="pc_user_car_id"/>
+        <id property="pcUserId" column="pc_user_id"/>
+        <id property="storeId" column="store_id"/>
+        <id property="carNum" column="car_num"/>
+        <id property="vehicleId" column="vehicle_id"/>
+        <id property="vehicleName" column="vehicle_name"/>
+        <id property="driveMileage" column="drive_mileage"/>
+        <id property="frameNumber" column="frame_number"/>
+        <id property="engineNumber" column="engine_number"/>
+        <id property="status" column="status"/>
+        <id property="isDefault" column="is_default"/>
+        <id property="createTime" column="create_time"/>
+        <id property="updateTime" column="update_time"/>
+        <id property="driveMileageTime" column="drive_mileage_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="PcUserCarMap" >
+		select * from pc_user_car where 
+	        pc_user_car_id = #{pcUserCarId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.pc.user.entity.PcUserCar" useGeneratedKeys="true" keyProperty="pcUserCarId">
+		insert into pc_user_car(pc_user_car_id , pc_user_id , store_id , car_num , vehicle_id , vehicle_name , drive_mileage , frame_number , engine_number , status , is_default , create_time , update_time , drive_mileage_time  )
+    	values(#{pcUserCarId} ,#{pcUserId} ,#{storeId} ,#{carNum} ,#{vehicleId} ,#{vehicleName} ,#{driveMileage} ,#{frameNumber} ,#{engineNumber} ,#{status} ,#{isDefault} ,#{createTime} ,#{updateTime} ,#{driveMileageTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.pc.user.entity.PcUserCar" useGeneratedKeys="true" keyProperty="pcUserCarId">
+		insert into pc_user_car
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="pcUserCarId != null">pc_user_car_id,</if>
+					<if test="pcUserId != null">pc_user_id,</if>
+					<if test="storeId != null">store_id,</if>
+					<if test="carNum != null">car_num,</if>
+					<if test="vehicleId != null">vehicle_id,</if>
+					<if test="vehicleName != null">vehicle_name,</if>
+					<if test="driveMileage != null">drive_mileage,</if>
+					<if test="frameNumber != null">frame_number,</if>
+					<if test="engineNumber != null">engine_number,</if>
+					<if test="status != null">status,</if>
+					<if test="isDefault != null">is_default,</if>
+					<if test="createTime != null">create_time,</if>
+					<if test="updateTime != null">update_time,</if>
+					<if test="driveMileageTime != null">drive_mileage_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="pcUserCarId != null">#{pcUserCarId},</if>
+					<if test="pcUserId != null">#{pcUserId},</if>
+					<if test="storeId != null">#{storeId},</if>
+					<if test="carNum != null">#{carNum},</if>
+					<if test="vehicleId != null">#{vehicleId},</if>
+					<if test="vehicleName != null">#{vehicleName},</if>
+					<if test="driveMileage != null">#{driveMileage},</if>
+					<if test="frameNumber != null">#{frameNumber},</if>
+					<if test="engineNumber != null">#{engineNumber},</if>
+					<if test="status != null">#{status},</if>
+					<if test="isDefault != null">#{isDefault},</if>
+					<if test="createTime != null">#{createTime},</if>
+					<if test="updateTime != null">#{updateTime},</if>
+					<if test="driveMileageTime != null">#{driveMileageTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.pc.user.entity.PcUserCar">
+		update pc_user_car
+		<set>
+		    	<if test="pcUserId != null">pc_user_id = #{pcUserId},</if>
+		    	<if test="storeId != null">store_id = #{storeId},</if>
+		    	<if test="carNum != null">car_num = #{carNum},</if>
+		    	<if test="vehicleId != null">vehicle_id = #{vehicleId},</if>
+		    	<if test="vehicleName != null">vehicle_name = #{vehicleName},</if>
+		    	<if test="driveMileage != null">drive_mileage = #{driveMileage},</if>
+		    	<if test="frameNumber != null">frame_number = #{frameNumber},</if>
+		    	<if test="engineNumber != null">engine_number = #{engineNumber},</if>
+		    	<if test="status != null">status = #{status},</if>
+		    	<if test="isDefault != null">is_default = #{isDefault},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		    	<if test="driveMileageTime != null">drive_mileage_time = #{driveMileageTime},</if>
+		</set>
+		where 
+	        pc_user_car_id = #{pcUserCarId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from pc_user_car where 
+	        pc_user_car_id = #{pcUserCarId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.pc.user.entity.PcUserCar" resultMap="PcUserCarMap" >
+		select * from pc_user_car 
+		<where>
+		       <if test="pcUserCarId != null">
+					AND pc_user_car_id = #{pcUserCarId}
+				</if>
+		       <if test="pcUserId != null">
+					AND pc_user_id = #{pcUserId}
+				</if>
+		       <if test="storeId != null">
+					AND store_id = #{storeId}
+				</if>
+		       <if test="carNum != null">
+					AND car_num = #{carNum}
+				</if>
+		       <if test="vehicleId != null">
+					AND vehicle_id = #{vehicleId}
+				</if>
+		       <if test="vehicleName != null">
+					AND vehicle_name = #{vehicleName}
+				</if>
+		       <if test="driveMileage != null">
+					AND drive_mileage = #{driveMileage}
+				</if>
+		       <if test="frameNumber != null">
+					AND frame_number = #{frameNumber}
+				</if>
+		       <if test="engineNumber != null">
+					AND engine_number = #{engineNumber}
+				</if>
+		       <if test="status != null">
+					AND status = #{status}
+				</if>
+		       <if test="isDefault != null">
+					AND is_default = #{isDefault}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		       <if test="driveMileageTime != null">
+					AND drive_mileage_time = #{driveMileageTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="PcUserCarMap" >
+		select * from pc_user_car  
+		<where>
+		       <if test="condition.pcUserCarId != null">
+					AND pc_user_car_id = #{condition.pcUserCarId}
+				</if>
+		       <if test="condition.pcUserId != null">
+					AND pc_user_id = #{condition.pcUserId}
+				</if>
+		       <if test="condition.storeId != null">
+					AND store_id = #{condition.storeId}
+				</if>
+		       <if test="condition.carNum != null">
+					AND car_num = #{condition.carNum}
+				</if>
+		       <if test="condition.vehicleId != null">
+					AND vehicle_id = #{condition.vehicleId}
+				</if>
+		       <if test="condition.vehicleName != null">
+					AND vehicle_name = #{condition.vehicleName}
+				</if>
+		       <if test="condition.driveMileage != null">
+					AND drive_mileage = #{condition.driveMileage}
+				</if>
+		       <if test="condition.frameNumber != null">
+					AND frame_number = #{condition.frameNumber}
+				</if>
+		       <if test="condition.engineNumber != null">
+					AND engine_number = #{condition.engineNumber}
+				</if>
+		       <if test="condition.status != null">
+					AND status = #{condition.status}
+				</if>
+		       <if test="condition.isDefault != null">
+					AND is_default = #{condition.isDefault}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		       <if test="condition.driveMileageTime != null">
+					AND drive_mileage_time = #{condition.driveMileageTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

@@ -1,0 +1,14 @@
+package com.fc.member.pc.user.service;
+
+import com.fc.common.service.IService;
+import com.fc.member.pc.user.entity.PcUser;
+/**
+ * <p>Title: PcUser</p>
+ * <p>Description:  Service 接口</p>
+ * @author yangd
+ * @date 2018-12-29 10:11:38
+ */
+public interface IPcUserService extends IService<PcUser>{
+	
+	
+}

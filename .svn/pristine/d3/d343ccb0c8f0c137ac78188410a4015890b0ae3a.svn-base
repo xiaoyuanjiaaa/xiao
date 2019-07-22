@@ -1,0 +1,64 @@
+package com.fc.protocol.demo.request.wechatmaintain.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+import io.swagger.annotations.ApiModelProperty;
+
+public class WechatMaintainUserListRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+
+	@ApiModelProperty(value = "openid参数", name = "openid", example = "1122")
+	private String openid;
+	private String name;
+	private String nickName;
+	private Integer page_no = 1;
+	private Integer page_size = 10;
+
+	public String getOpenid() {
+		return openid;
+	}
+
+	public void setOpenid(String openid) {
+		this.openid = openid;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
+	public Integer getPage_no() {
+		return page_no;
+	}
+
+	public void setPage_no(Integer page_no) {
+		this.page_no = page_no;
+	}
+
+	public Integer getPage_size() {
+		return page_size;
+	}
+
+	public void setPage_size(Integer page_size) {
+		this.page_size = page_size;
+	}
+
+	@Override
+	public String toString() {
+		return "WechatMaintainUserListRequest [openid=" + openid + ", name=" + name + ", page_no=" + page_no
+				+ ", page_size=" + page_size + ", getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode()
+				+ ", getTraceId()=" + getTraceId() + "]";
+	}
+}

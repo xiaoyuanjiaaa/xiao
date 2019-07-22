@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.shop.user.dao.IShopBusinessinfoDao">
+	<resultMap id="ShopBusinessinfoMap" type="com.fc.member.shop.user.entity.ShopBusinessinfo">
+        <id property="shopBusinessinfoId" column="shop_businessinfo_id"/>
+        <id property="shopId" column="shop_id"/>
+        <id property="companyName" column="company_name"/>
+        <id property="registerId" column="register_id"/>
+        <id property="legalRepresentative" column="legal_representative"/>
+        <id property="identityId" column="identity_id"/>
+        <id property="legalRepresentImg" column="legal_represent_img"/>
+        <id property="composingFormImg" column="composing_form_img"/>
+        <id property="businessLicenseAddr" column="business_license_addr"/>
+        <id property="enterpriseForm" column="enterprise_form"/>
+        <id property="businessType" column="business_type"/>
+        <id property="businessLicenseType" column="business_license_type"/>
+        <id property="registerDate" column="register_date"/>
+        <id property="shopOrdershopId" column="shop_ordershop_id"/>
+        <id property="operationPeriodFrom" column="operation_period_from"/>
+        <id property="operationPeriodEnd" column="operation_period_end"/>
+        <id property="businessLicensePicId" column="business_license_pic_id"/>
+        <id property="businessLicenseDeadline" column="business_license_deadline"/>
+        <id property="updateTime" column="update_time"/>
+        <id property="createTime" column="create_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="ShopBusinessinfoMap" >
+		select * from shop_businessinfo where 
+	        shop_businessinfo_id = #{shopBusinessinfoId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.shop.user.entity.ShopBusinessinfo" useGeneratedKeys="true" keyProperty="shopBusinessinfoId">
+		insert into shop_businessinfo(shop_businessinfo_id , shop_id , company_name , register_id , legal_representative , identity_id , legal_represent_img , composing_form_img , business_license_addr , enterprise_form , business_type , business_license_type , register_date , shop_ordershop_id , operation_period_from , operation_period_end , business_license_pic_id , business_license_deadline , update_time , create_time  )
+    	values(#{shopBusinessinfoId} ,#{shopId} ,#{companyName} ,#{registerId} ,#{legalRepresentative} ,#{identityId} ,#{legalRepresentImg} ,#{composingFormImg} ,#{businessLicenseAddr} ,#{enterpriseForm} ,#{businessType} ,#{businessLicenseType} ,#{registerDate} ,#{shopOrdershopId} ,#{operationPeriodFrom} ,#{operationPeriodEnd} ,#{businessLicensePicId} ,#{businessLicenseDeadline} ,#{updateTime} ,#{createTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.shop.user.entity.ShopBusinessinfo" useGeneratedKeys="true" keyProperty="shopBusinessinfoId">
+		insert into shop_businessinfo
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="shopBusinessinfoId != null">shop_businessinfo_id,</if>
+					<if test="shopId != null">shop_id,</if>
+					<if test="companyName != null">company_name,</if>
+					<if test="registerId != null">register_id,</if>
+					<if test="legalRepresentative != null">legal_representative,</if>
+					<if test="identityId != null">identity_id,</if>
+					<if test="legalRepresentImg != null">legal_represent_img,</if>
+					<if test="composingFormImg != null">composing_form_img,</if>
+					<if test="businessLicenseAddr != null">business_license_addr,</if>
+					<if test="enterpriseForm != null">enterprise_form,</if>
+					<if test="businessType != null">business_type,</if>
+					<if test="businessLicenseType != null">business_license_type,</if>
+					<if test="registerDate != null">register_date,</if>
+					<if test="shopOrdershopId != null">shop_ordershop_id,</if>
+					<if test="operationPeriodFrom != null">operation_period_from,</if>
+					<if test="operationPeriodEnd != null">operation_period_end,</if>
+					<if test="businessLicensePicId != null">business_license_pic_id,</if>
+					<if test="businessLicenseDeadline != null">business_license_deadline,</if>
+					<if test="updateTime != null">update_time,</if>
+					<if test="createTime != null">create_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="shopBusinessinfoId != null">#{shopBusinessinfoId},</if>
+					<if test="shopId != null">#{shopId},</if>
+					<if test="companyName != null">#{companyName},</if>
+					<if test="registerId != null">#{registerId},</if>
+					<if test="legalRepresentative != null">#{legalRepresentative},</if>
+					<if test="identityId != null">#{identityId},</if>
+					<if test="legalRepresentImg != null">#{legalRepresentImg},</if>
+					<if test="composingFormImg != null">#{composingFormImg},</if>
+					<if test="businessLicenseAddr != null">#{businessLicenseAddr},</if>
+					<if test="enterpriseForm != null">#{enterpriseForm},</if>
+					<if test="businessType != null">#{businessType},</if>
+					<if test="businessLicenseType != null">#{businessLicenseType},</if>
+					<if test="registerDate != null">#{registerDate},</if>
+					<if test="shopOrdershopId != null">#{shopOrdershopId},</if>
+					<if test="operationPeriodFrom != null">#{operationPeriodFrom},</if>
+					<if test="operationPeriodEnd != null">#{operationPeriodEnd},</if>
+					<if test="businessLicensePicId != null">#{businessLicensePicId},</if>
+					<if test="businessLicenseDeadline != null">#{businessLicenseDeadline},</if>
+					<if test="updateTime != null">#{updateTime},</if>
+					<if test="createTime != null">#{createTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.shop.user.entity.ShopBusinessinfo">
+		update shop_businessinfo
+		<set>
+		    	<if test="shopId != null">shop_id = #{shopId},</if>
+		    	<if test="companyName != null">company_name = #{companyName},</if>
+		    	<if test="registerId != null">register_id = #{registerId},</if>
+		    	<if test="legalRepresentative != null">legal_representative = #{legalRepresentative},</if>
+		    	<if test="identityId != null">identity_id = #{identityId},</if>
+		    	<if test="legalRepresentImg != null">legal_represent_img = #{legalRepresentImg},</if>
+		    	<if test="composingFormImg != null">composing_form_img = #{composingFormImg},</if>
+		    	<if test="businessLicenseAddr != null">business_license_addr = #{businessLicenseAddr},</if>
+		    	<if test="enterpriseForm != null">enterprise_form = #{enterpriseForm},</if>
+		    	<if test="businessType != null">business_type = #{businessType},</if>
+		    	<if test="businessLicenseType != null">business_license_type = #{businessLicenseType},</if>
+		    	<if test="registerDate != null">register_date = #{registerDate},</if>
+		    	<if test="shopOrdershopId != null">shop_ordershop_id = #{shopOrdershopId},</if>
+		    	<if test="operationPeriodFrom != null">operation_period_from = #{operationPeriodFrom},</if>
+		    	<if test="operationPeriodEnd != null">operation_period_end = #{operationPeriodEnd},</if>
+		    	<if test="businessLicensePicId != null">business_license_pic_id = #{businessLicensePicId},</if>
+		    	<if test="businessLicenseDeadline != null">business_license_deadline = #{businessLicenseDeadline},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		</set>
+		where 
+	        shop_businessinfo_id = #{shopBusinessinfoId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from shop_businessinfo where 
+	        shop_businessinfo_id = #{shopBusinessinfoId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.shop.user.entity.ShopBusinessinfo" resultMap="ShopBusinessinfoMap" >
+		select * from shop_businessinfo 
+		<where>
+		       <if test="shopBusinessinfoId != null">
+					AND shop_businessinfo_id = #{shopBusinessinfoId}
+				</if>
+		       <if test="shopId != null">
+					AND shop_id = #{shopId}
+				</if>
+		       <if test="companyName != null">
+					AND company_name = #{companyName}
+				</if>
+		       <if test="registerId != null">
+					AND register_id = #{registerId}
+				</if>
+		       <if test="legalRepresentative != null">
+					AND legal_representative = #{legalRepresentative}
+				</if>
+		       <if test="identityId != null">
+					AND identity_id = #{identityId}
+				</if>
+		       <if test="legalRepresentImg != null">
+					AND legal_represent_img = #{legalRepresentImg}
+				</if>
+		       <if test="composingFormImg != null">
+					AND composing_form_img = #{composingFormImg}
+				</if>
+		       <if test="businessLicenseAddr != null">
+					AND business_license_addr = #{businessLicenseAddr}
+				</if>
+		       <if test="enterpriseForm != null">
+					AND enterprise_form = #{enterpriseForm}
+				</if>
+		       <if test="businessType != null">
+					AND business_type = #{businessType}
+				</if>
+		       <if test="businessLicenseType != null">
+					AND business_license_type = #{businessLicenseType}
+				</if>
+		       <if test="registerDate != null">
+					AND register_date = #{registerDate}
+				</if>
+		       <if test="shopOrdershopId != null">
+					AND shop_ordershop_id = #{shopOrdershopId}
+				</if>
+		       <if test="operationPeriodFrom != null">
+					AND operation_period_from = #{operationPeriodFrom}
+				</if>
+		       <if test="operationPeriodEnd != null">
+					AND operation_period_end = #{operationPeriodEnd}
+				</if>
+		       <if test="businessLicensePicId != null">
+					AND business_license_pic_id = #{businessLicensePicId}
+				</if>
+		       <if test="businessLicenseDeadline != null">
+					AND business_license_deadline = #{businessLicenseDeadline}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="ShopBusinessinfoMap" >
+		select * from shop_businessinfo  
+		<where>
+		       <if test="condition.shopBusinessinfoId != null">
+					AND shop_businessinfo_id = #{condition.shopBusinessinfoId}
+				</if>
+		       <if test="condition.shopId != null">
+					AND shop_id = #{condition.shopId}
+				</if>
+		       <if test="condition.companyName != null">
+					AND company_name = #{condition.companyName}
+				</if>
+		       <if test="condition.registerId != null">
+					AND register_id = #{condition.registerId}
+				</if>
+		       <if test="condition.legalRepresentative != null">
+					AND legal_representative = #{condition.legalRepresentative}
+				</if>
+		       <if test="condition.identityId != null">
+					AND identity_id = #{condition.identityId}
+				</if>
+		       <if test="condition.legalRepresentImg != null">
+					AND legal_represent_img = #{condition.legalRepresentImg}
+				</if>
+		       <if test="condition.composingFormImg != null">
+					AND composing_form_img = #{condition.composingFormImg}
+				</if>
+		       <if test="condition.businessLicenseAddr != null">
+					AND business_license_addr = #{condition.businessLicenseAddr}
+				</if>
+		       <if test="condition.enterpriseForm != null">
+					AND enterprise_form = #{condition.enterpriseForm}
+				</if>
+		       <if test="condition.businessType != null">
+					AND business_type = #{condition.businessType}
+				</if>
+		       <if test="condition.businessLicenseType != null">
+					AND business_license_type = #{condition.businessLicenseType}
+				</if>
+		       <if test="condition.registerDate != null">
+					AND register_date = #{condition.registerDate}
+				</if>
+		       <if test="condition.shopOrdershopId != null">
+					AND shop_ordershop_id = #{condition.shopOrdershopId}
+				</if>
+		       <if test="condition.operationPeriodFrom != null">
+					AND operation_period_from = #{condition.operationPeriodFrom}
+				</if>
+		       <if test="condition.operationPeriodEnd != null">
+					AND operation_period_end = #{condition.operationPeriodEnd}
+				</if>
+		       <if test="condition.businessLicensePicId != null">
+					AND business_license_pic_id = #{condition.businessLicensePicId}
+				</if>
+		       <if test="condition.businessLicenseDeadline != null">
+					AND business_license_deadline = #{condition.businessLicenseDeadline}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

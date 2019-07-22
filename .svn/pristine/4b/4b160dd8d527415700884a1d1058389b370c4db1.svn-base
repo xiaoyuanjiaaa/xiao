@@ -1,0 +1,66 @@
+package com.fc.member.store.user.entity;
+
+import java.io.Serializable;
+
+/**
+ * <p>Table: PublicUserLoginsLog</p>
+ * <p>Description: </p>
+ * @author yangd
+ * @date 2019-01-02 16:49:50
+ */
+public class PublicUserLoginsLog implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	private Integer storeLoginsLogId; // 登陆日志id
+	private Integer memberId; // 用户id
+	private String loginIp; // 登录IP
+	private Integer loginTime; // 登录时间
+	private String remark; // 备注
+
+	public void setStoreLoginsLogId(Integer storeLoginsLogId) {
+		this.storeLoginsLogId = storeLoginsLogId;
+	}
+
+	public Integer getStoreLoginsLogId() {
+		return this.storeLoginsLogId;
+	}
+
+	public void setMemberId(Integer memberId) {
+		this.memberId = memberId;
+	}
+
+	public Integer getMemberId() {
+		return this.memberId;
+	}
+
+	public void setLoginIp(String loginIp) {
+		this.loginIp = loginIp;
+	}
+
+	public String getLoginIp() {
+		return this.loginIp;
+	}
+
+	public void setLoginTime(Integer loginTime) {
+		this.loginTime = loginTime;
+	}
+
+	public Integer getLoginTime() {
+		return this.loginTime;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public String getRemark() {
+		return this.remark;
+	}
+
+	@Override
+	public String toString() {
+		return "PublicUserLoginsLog{" + "storeLoginsLogId=" + storeLoginsLogId + ", memberId=" + memberId + ", loginIp="
+				+ loginIp + ", loginTime=" + loginTime + ", remark=" + remark + "}";
+	}
+}

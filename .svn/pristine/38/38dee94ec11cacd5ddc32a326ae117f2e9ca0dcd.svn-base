@@ -1,0 +1,35 @@
+package com.fc.member.master.user.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+
+import com.fc.member.master.user.dao.IMasterBankCardChangeLogDao;
+import com.fc.member.master.user.service.IMasterBankCardChangeLogService;
+import com.fc.member.master.user.entity.MasterBankCardChangeLog;
+/**
+ * <p>Title: MasterBankCardChangeLog</p>
+ * <p>Description: 用户银行帐号变更记录表 Service 层</p>
+ * @author yangd
+ * @date 2019-01-15 10:09:27
+ */
+@Service("masterBankCardChangeLogService")
+public class MasterBankCardChangeLogServiceImp extends ServiceImpl<MasterBankCardChangeLog> implements IMasterBankCardChangeLogService{
+
+	@Autowired
+	private IMasterBankCardChangeLogDao masterBankCardChangeLogDao;
+	
+	@Override
+	protected IMapper<MasterBankCardChangeLog> getDao() {
+		return masterBankCardChangeLogDao;
+	}
+	/**
+	 * 插入数据
+	 * @return
+	 */
+	@Override
+	public int insertSelective(MasterBankCardChangeLog obj) {
+		return masterBankCardChangeLogDao.insertSelective(obj);
+	}
+}

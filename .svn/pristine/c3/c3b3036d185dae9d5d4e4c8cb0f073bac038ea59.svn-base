@@ -1,0 +1,110 @@
+package com.fc.member.store.user.handler;
+
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.fc.common.exception.ErrorCode;
+import com.fc.member.store.user.entity.PublicUser;
+import com.fc.member.store.user.service.IPublicUserService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.store.user.QueryPublicUserByUserNameRequest;
+import com.fc.protocol.demo.request.store.user.UpdatePasswordRequest;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+
+/**
+ * 用户public_user表基础操作Handler
+ * @author	xiaozw
+ * @data	2019-1-4
+ */
+@Component
+@Handler(module = "publicuser")
+public class PublicUserHandler {
+	private static Logger log = LoggerFactory.getLogger(PublicUserHandler.class);
+
+	@Autowired
+	private IPublicUserService publicUserService;
+
+	/**
+	 * 修改用户密码接口
+	 * @author	xiaozw
+	 * @see update_name:xiaozw update_time:2019-1-4
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = UpdatePasswordRequest.class)
+	public ProtocolResponse updatePassword(UpdatePasswordRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance();
+		try {
+			log.info("StorePublicUserHandler------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			}
+			Map<String, String> resultStatus = publicUserService.updatePasswordByUserId(request.getPublicUserId(),
+					request.getPassword());
+			if (resultStatus.isEmpty()) {
+				return response.success();
+			} else {
+				return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg(resultStatus.get("error"));
+			}
+		} catch (Exception e) {
+			log.info("createUser:", e.getMessage());
+			e.printStackTrace();
+			return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+	}
+
+	/**
+	 * 根据用户名查询用户接口
+	 * @author	xiaozw
+	 * @see update_name:xiaozw update_time:2019-1-4
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = QueryPublicUserByUserNameRequest.class)
+	public ProtocolResponse queryPublicUserByUserName(QueryPublicUserByUserNameRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance();
+		try {
+			log.info("StorePublicUserHandler------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			}
+			PublicUser publicUser = publicUserService.getPublicUserByUserName(request);
+			response.success().addData("public_user", publicUser);
+		} catch (Exception e) {
+			log.info("createUser:", e.getMessage());
+			e.printStackTrace();
+			return response.error(ErrorCode.QUERY_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+		return response;
+	}
+
+	/**
+	 * 根据电话号码查询用户接口
+	 * @author	xiaozw
+	 * @see update_name:xiaozw update_time:2019-1-7
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = QueryPublicUserByUserNameRequest.class)
+	public ProtocolResponse queryPublicUserByPhone(QueryPublicUserByUserNameRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance();
+		try {
+			log.info("StorePublicUserHandler------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			}
+			PublicUser publicUser = publicUserService.getPublicUserByUserName(request);
+			response.success().addData("public_user", publicUser);
+		} catch (Exception e) {
+			log.info("createUser:", e.getMessage());
+			e.printStackTrace();
+			return response.error(ErrorCode.QUERY_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+		return response;
+	}
+}

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.wechatmaintain.user.dao.IWechatMaintainSstoreUserRelationDao">
+	<resultMap id="WechatMaintainSstoreUserRelationMap" type="com.fc.member.wechatmaintain.user.entity.WechatMaintainSstoreUserRelation">
+        <id property="wechatMaintainSstoreUserRelationId" column="wechat_maintain_sstore_user_relation_id"/>
+        <id property="wechatMaintainUserId" column="wechat_maintain_user_id"/>
+        <id property="fcUserId" column="fc_user_id"/>
+        <id property="openid" column="openid"/>
+        <id property="storeId" column="store_id"/>
+        <id property="createTime" column="create_time"/>
+        <id property="scanTime" column="scan_time"/>
+        <id property="source" column="source"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="WechatMaintainSstoreUserRelationMap" >
+		select * from wechat_maintain_sstore_user_relation where 
+	        wechat_maintain_sstore_user_relation_id = #{wechatMaintainSstoreUserRelationId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainSstoreUserRelation" useGeneratedKeys="true">
+		insert into wechat_maintain_sstore_user_relation(wechat_maintain_sstore_user_relation_id , wechat_maintain_user_id , fc_user_id , openid , store_id , create_time , scan_time , source  )
+    	values(#{wechatMaintainSstoreUserRelationId} ,#{wechatMaintainUserId} ,#{fcUserId} ,#{openid} ,#{storeId} ,#{createTime} ,#{scanTime} ,#{source} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainSstoreUserRelation" useGeneratedKeys="true">
+		insert into wechat_maintain_sstore_user_relation
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="wechatMaintainSstoreUserRelationId != null">wechat_maintain_sstore_user_relation_id,</if>
+					<if test="wechatMaintainUserId != null">wechat_maintain_user_id,</if>
+					<if test="fcUserId != null">fc_user_id,</if>
+					<if test="openid != null">openid,</if>
+					<if test="storeId != null">store_id,</if>
+					<if test="createTime != null">create_time,</if>
+					<if test="scanTime != null">scan_time,</if>
+					<if test="source != null">source</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="wechatMaintainSstoreUserRelationId != null">#{wechatMaintainSstoreUserRelationId},</if>
+					<if test="wechatMaintainUserId != null">#{wechatMaintainUserId},</if>
+					<if test="fcUserId != null">#{fcUserId},</if>
+					<if test="openid != null">#{openid},</if>
+					<if test="storeId != null">#{storeId},</if>
+					<if test="createTime != null">#{createTime},</if>
+					<if test="scanTime != null">#{scanTime},</if>
+					<if test="source != null">#{source}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainSstoreUserRelation">
+		update wechat_maintain_sstore_user_relation
+		<set>
+		    	<if test="wechatMaintainUserId != null">wechat_maintain_user_id = #{wechatMaintainUserId},</if>
+		    	<if test="fcUserId != null">fc_user_id = #{fcUserId},</if>
+		    	<if test="openid != null">openid = #{openid},</if>
+		    	<if test="storeId != null">store_id = #{storeId},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		    	<if test="scanTime != null">scan_time = #{scanTime},</if>
+		    	<if test="source != null">source = #{source},</if>
+		</set>
+		where 
+	        wechat_maintain_sstore_user_relation_id = #{wechatMaintainSstoreUserRelationId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from wechat_maintain_sstore_user_relation where 
+	        wechat_maintain_sstore_user_relation_id = #{wechatMaintainSstoreUserRelationId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainSstoreUserRelation" resultMap="WechatMaintainSstoreUserRelationMap" >
+		select * from wechat_maintain_sstore_user_relation 
+		<where>
+		       <if test="wechatMaintainSstoreUserRelationId != null">
+					AND wechat_maintain_sstore_user_relation_id = #{wechatMaintainSstoreUserRelationId}
+				</if>
+		       <if test="wechatMaintainUserId != null">
+					AND wechat_maintain_user_id = #{wechatMaintainUserId}
+				</if>
+		       <if test="fcUserId != null">
+					AND fc_user_id = #{fcUserId}
+				</if>
+		       <if test="openid != null">
+					AND openid = #{openid}
+				</if>
+		       <if test="storeId != null">
+					AND store_id = #{storeId}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		       <if test="scanTime != null">
+					AND scan_time = #{scanTime}
+				</if>
+		       <if test="source != null">
+					AND source = #{source}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="WechatMaintainSstoreUserRelationMap" >
+		select * from wechat_maintain_sstore_user_relation  
+		<where>
+		       <if test="condition.wechatMaintainSstoreUserRelationId != null">
+					AND wechat_maintain_sstore_user_relation_id = #{condition.wechatMaintainSstoreUserRelationId}
+				</if>
+		       <if test="condition.wechatMaintainUserId != null">
+					AND wechat_maintain_user_id = #{condition.wechatMaintainUserId}
+				</if>
+		       <if test="condition.fcUserId != null">
+					AND fc_user_id = #{condition.fcUserId}
+				</if>
+		       <if test="condition.openid != null">
+					AND openid = #{condition.openid}
+				</if>
+		       <if test="condition.storeId != null">
+					AND store_id = #{condition.storeId}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		       <if test="condition.scanTime != null">
+					AND scan_time = #{condition.scanTime}
+				</if>
+		       <if test="condition.source != null">
+					AND source = #{condition.source}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

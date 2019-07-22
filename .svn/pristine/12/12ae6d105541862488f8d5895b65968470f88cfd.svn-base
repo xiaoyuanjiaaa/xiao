@@ -1,0 +1,50 @@
+package com.fc.protocol.demo.request.store.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+import io.swagger.annotations.ApiModelProperty;
+
+public class StoreFollowCreateRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+
+	@ApiModelProperty(value = "门店id", name = "storeId", example = "1")
+	private Integer storeId;//门店id
+	@ApiModelProperty(value = "店铺关注id", name = "shopId", example = "1")
+	private Integer shopId;//店铺关注id
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	public Integer getShopId() {
+		return shopId;
+	}
+
+	public void setShopId(Integer shopId) {
+		this.shopId = shopId;
+	}
+
+	@Override
+	public String toString() {
+		return "StoreFollowCreateRequest [storeId=" + storeId + ", shopId=" + shopId + ", getVersion() = "
+				+ getVersion() + ", getReqCode()=" + getReqCode() + ", getTraceId() =" + getTraceId() + "]";
+	}
+
+	public String paramValidate() {
+		if (StringUtils.isEmpty(storeId)) {
+			return "参数:storeId不能为空!";
+		}
+		if (StringUtils.isEmpty(shopId)) {
+			return "参数:shopId不能为空!";
+		}
+		return null;
+	}
+
+}

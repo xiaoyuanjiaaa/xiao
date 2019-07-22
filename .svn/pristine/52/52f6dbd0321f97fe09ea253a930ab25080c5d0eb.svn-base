@@ -1,0 +1,219 @@
+package com.fc.member.wechatmaintain.user.handler;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.fc.common.exception.ErrorCode;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.wechatmaintain.user.entity.WechatMaintainUserCoupon;
+import com.fc.member.wechatmaintain.user.service.IWechatMaintainUserCouponService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainUserCouponBalanceTotleRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainUserCouponByUserIdListRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainUserCouponCreateRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainUserCouponDetailsRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainUserCouponEditSaveRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainUserCouponStoreUserIdDetailsRequest;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+
+/**
+ * 微养车用户储值卡
+ * @author yangd
+ * @date 2019年1月5日
+ */
+@Component
+@Handler(module = "wechatmaintain")
+public class WechatMaintainUserCouponHandler {
+
+	private static Logger log = LoggerFactory.getLogger(WechatMaintainUserCouponHandler.class);
+
+	@Autowired
+	IWechatMaintainUserCouponService wechatMaintainUserCouponService;
+
+	/**
+	 * 我的 - 储值卡列表
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-05
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WechatMaintainUserCouponByUserIdListRequest.class)
+	public ProtocolResponse wechatMaintainUserCouponByUserIdList(WechatMaintainUserCouponByUserIdListRequest request) {
+		log.info("时间:{} , wechatMaintainUserCouponByUserIdList------>request:{}", DateTimeUtils.getNow(), request);
+
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidate();
+			if (validResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+			response.addData("user_coupon_list", wechatMaintainUserCouponService.getUserCouponByUserIdList(request));
+		} catch (Exception e) {
+			log.error("wechatMaintainUserCouponByUserIdList系统异常！", e);
+			response.error(ErrorCode.QUERY_ERROR.getValue()).msg("代码异常，请联系开发人员！");
+		}
+		log.info("时间:{} , 返回结果 wechatMaintainUserCouponByUserIdList------>response:{}", DateTimeUtils.getNow(),
+				response);
+		return response;
+	}
+
+	/**
+	 * 我的 - 储值卡详情
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-05
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WechatMaintainUserCouponDetailsRequest.class)
+	public ProtocolResponse wechatMaintainUserCouponDetails(WechatMaintainUserCouponDetailsRequest request) {
+		log.info("时间:{} ,  wechatMaintainUserCouponDetails------>request:{}", DateTimeUtils.getNow(), request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidate();
+			if (validResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+			response.addData("user_coupon",
+					wechatMaintainUserCouponService.getByPK(request.getWechatMaintainUserCouponId()));
+		} catch (Exception e) {
+			log.error("wechatMaintainUserCouponDetails系统异常！", e);
+			response.error(ErrorCode.QUERY_ERROR.getValue()).msg("代码异常，请联系开发人员！");
+		}
+		log.info("时间:{} , 返回结果 wechatMaintainUserCouponDetails------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+
+	/**
+	 * 用户充值创建储值卡数据
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-05
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WechatMaintainUserCouponCreateRequest.class)
+	public ProtocolResponse wechatMaintainUserCouponCreate(WechatMaintainUserCouponCreateRequest request) {
+		log.info("时间:{} ,  wechatMaintainUserCouponCreate------>request:{}", DateTimeUtils.getNow(), request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidate();
+			if (validResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+
+			Map<String, Object> resultStatus = wechatMaintainUserCouponService.insertSelective(request);
+			log.info("resultStatus------>{}", resultStatus);
+			if (resultStatus.isEmpty()) {
+				response.msg("创建成功");
+			} else {
+				response.error(ErrorCode.CREATE_ERROR.getValue()).msg(resultStatus.get("error").toString());
+			}
+		} catch (Exception e) {
+			log.error("wechatMaintainUserCouponCreate系统异常！", e);
+			response.error(ErrorCode.CREATE_ERROR.getValue()).msg("代码异常，请联系开发人员！");
+		}
+		log.info("时间:{} , 返回结果 wechatMaintainUserCouponCreate------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+
+	/**
+	 * 更新用户储值卡余额
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-07
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WechatMaintainUserCouponEditSaveRequest.class)
+	public ProtocolResponse wechatMaintainUserCouponEditSave(WechatMaintainUserCouponEditSaveRequest request) {
+		log.info("时间:{} , 请求参数 wechatMaintainUserCouponEditSave------>request:{}", DateTimeUtils.getNow(), request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidate();
+			if (validResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+			Map<String, Object> resultStatus = wechatMaintainUserCouponService.updateWechatMaintainUserCoupon(request);
+			log.info("resultStatus------>{}", resultStatus);
+			if (resultStatus.isEmpty()) {
+				response.msg("修改成功");
+			} else {
+				response.error(ErrorCode.UPDATE_ERROR.getValue()).msg(resultStatus.get("error").toString());
+			}
+		} catch (Exception e) {
+			log.error("wechatMaintainUserCouponEditSave系统异常！", e);
+			response.error(ErrorCode.UPDATE_ERROR.getValue()).msg("代码异常，请联系开发人员！");
+		}
+		log.info("时间:{} , 返回结果 wechatMaintainUserCouponEditSave------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+
+	/**
+	 * 我的 - 显示用户所有可用储值卡余额(根据user_id查询用户可用总余额)
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-05
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WechatMaintainUserCouponBalanceTotleRequest.class)
+	public ProtocolResponse wechatMaintainUserCouponBalanceTotle(WechatMaintainUserCouponBalanceTotleRequest request) {
+		log.info("时间:{} ,  wechatMaintainUserCouponBalanceTotle------>request:{}", DateTimeUtils.getNow(), request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidate();
+			if (validResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+			WechatMaintainUserCoupon entity = wechatMaintainUserCouponService.getUserBalanceTotle(request);
+			Map<String, Object> resultMap = new HashMap<>();
+			resultMap.put("fcUserId", entity.getFcUserId());
+			resultMap.put("balance", entity.getBalance());
+			// 循环返回前端规定的json格式
+			response.addData("user_coupon", resultMap);
+		} catch (Exception e) {
+			log.error("wechatMaintainUserCouponBalanceTotle系统异常！", e);
+			response.error(ErrorCode.QUERY_ERROR.getValue()).msg("代码异常，请联系开发人员！");
+		}
+		log.info("时间:{} , 返回结果 wechatMaintainUserCouponBalanceTotle------>response:{}", DateTimeUtils.getNow(),
+				response);
+		return response;
+	}
+
+	/**
+	 * 根据 用户ID、门店ID 查询储值卡信息
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-09
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WechatMaintainUserCouponStoreUserIdDetailsRequest.class)
+	public ProtocolResponse wechatMaintainUserCouponStoreUserIdDetails(
+			WechatMaintainUserCouponStoreUserIdDetailsRequest request) {
+		log.info("时间:{} ,  WechatMaintainUserCouponStoreUserIdDetailsRequest------>request:{}", DateTimeUtils.getNow(),
+				request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidate();
+			if (validResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+			response.addData("user_coupon", wechatMaintainUserCouponService.getUserCouponByStoreIdUserId(request));
+		} catch (Exception e) {
+			log.error("wechatMaintainUserCouponStoreUserIdDetails系统异常！", e);
+			response.error(ErrorCode.QUERY_ERROR.getValue()).msg("代码异常，请联系开发人员！");
+		}
+		log.info("时间:{} , 返回结果 WechatMaintainUserCouponStoreUserIdDetailsRequest------>response:{}",
+				DateTimeUtils.getNow(), response);
+		return response;
+	}
+}

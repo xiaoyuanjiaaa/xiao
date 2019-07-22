@@ -1,0 +1,76 @@
+package com.fc.member.pc.user.entity;
+
+import java.io.Serializable;
+
+/**
+ * <p>Table: PcUser</p>
+ * <p>Description: </p>
+ * @author yangd
+ * @date 2018-12-29 10:11:38
+ */
+public class PcUser implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer pcUserId; // 主键id
+	private Integer fcUserId; // 枫车用户ID
+	private String mobile; // 手机号码
+	private String name; // 车主姓名
+	private Integer createTime; // 创建时间
+	private Integer updateTime; // 修改时间
+
+	public void setPcUserId(Integer pcUserId) {
+		this.pcUserId = pcUserId;
+	}
+	
+	public Integer getPcUserId() {
+		return this.pcUserId;
+	}
+	public void setFcUserId(Integer fcUserId) {
+		this.fcUserId = fcUserId;
+	}
+	
+	public Integer getFcUserId() {
+		return this.fcUserId;
+	}
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+	
+	public String getMobile() {
+		return this.mobile;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+	public void setUpdateTime(Integer updateTime) {
+		this.updateTime = updateTime;
+	}
+	
+	public Integer getUpdateTime() {
+		return this.updateTime;
+	}
+
+    @Override
+    public String toString () {
+    	return "PcUser{" + 
+	    	"pcUserId=" + pcUserId + 
+	    	", fcUserId=" + fcUserId + 
+	    	", mobile=" + mobile + 
+	    	", name=" + name + 
+	    	", createTime=" + createTime + 
+	    	", updateTime=" + updateTime + 
+	    	"}";
+    }
+}

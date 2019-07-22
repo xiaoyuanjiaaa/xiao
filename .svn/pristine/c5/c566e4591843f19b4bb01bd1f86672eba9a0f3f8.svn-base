@@ -1,0 +1,98 @@
+package com.fc.member.wechatmaintain.user.handler;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.util.DataConverHelper;
+import com.fc.common.util.DataConverHelper.DataConver;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.wechatmaintain.user.entity.WechatMaintainUser;
+import com.fc.member.wechatmaintain.user.service.IWechatMaintainUserService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainUserListRequest;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+
+@Component
+@Handler(module = "wechatMaintainUser")
+public class WechatMaintainUserHandler {
+
+	private static Logger log = LoggerFactory.getLogger(WechatMaintainUserHandler.class);
+
+	@Autowired
+	IWechatMaintainUserService wechatMaintainUserService;
+
+	/**
+	 * 查询微养车列表
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WechatMaintainUserListRequest.class)
+	public ProtocolResponse wechatMaintainUserList(WechatMaintainUserListRequest request) {
+		log.info("WechatMaintainUserHandler------>request:{}", request);
+
+		Page page = new Page();
+		page.setPage(request.getPage_no());
+		page.setRows(request.getPage_size());
+		page.setShowTotal(true);
+		List<Map<String, Object>> dataList = new ArrayList<Map<String, Object>>();
+		try {
+			//			System.out.println("===============" + testService.add(new Test(100, "肖肖", "来试试")));
+			//			System.out.println("===============" + testService.updateByID(new Test(100, "肖1肖", "来试试1")));
+			//			System.out.println("----------------------" + testService.getTestOpListPage(page, new HashMap<>()));
+			/*System.out.println((wechatRechargeMapper==null)+"=============");
+			List<WechatRecharge> dd = wechatRechargeMapper.getRowsPage(pageQuery);
+			System.out.println("================="+dd);*/
+			WechatMaintainUser entity = new WechatMaintainUser();
+			entity.setOpenid(request.getOpenid());
+			entity.setName(request.getName());
+			entity.setNickName(request.getNickName());
+			log.info("参数:{}", entity);
+			List<WechatMaintainUser> userList = wechatMaintainUserService.getWechatMaintainUserListPage(page, entity);
+
+			// 循环返回前端规定的json格式
+			dataList = DataConverHelper.forList(userList, new DataConver<WechatMaintainUser>() {
+				@Override
+				public void conver(Map<String, Object> target, WechatMaintainUser source) throws Exception {
+					target.put("wechatMaintainUserId", source.getWechatMaintainUserId());
+					target.put("fcUserId", source.getFcUserId());
+					target.put("nickName", source.getNickName());
+					target.put("openid", source.getOpenid());
+					target.put("unionid", source.getUnionid());
+					target.put("mobile", source.getMobile());
+					String birthday = source.getBirthday() == null ? "0" : source.getBirthday().toString();
+					target.put("birthday", Integer.valueOf(birthday) > 0
+							? DateTimeUtils.getStrFromTimestamp10(Integer.valueOf(birthday), DateTimeUtils.FORMAT_DATE)
+							: "");
+					String createTime = source.getCreateTime() == null ? "0" : source.getCreateTime().toString();
+					target.put("createTime", Integer.valueOf(createTime) > 0 ? DateTimeUtils.getStrFromTimestamp10(
+							Integer.valueOf(createTime), DateTimeUtils.FORMAT_DATE_TIME_24HOURS) : "");
+				}
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		//		int number = request.getNumber();
+		//
+		//		if (number % 5 == 0) {
+		//			log.info("休眠{}秒......", number);
+		//			try {
+		//				TimeUnit.SECONDS.sleep(number);
+		//			} catch (InterruptedException e) {
+		//				log.error("error:{}", e);
+		//			}
+		//		}
+
+		ProtocolResponse response = ProtocolResponse.newInstance().success().addData("", dataList);
+		log.info("WechatMaintainUserHandler------>response:{}", response);
+		return response;
+	}
+}

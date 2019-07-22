@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.master.user.dao.IMasterUserBalanceDao">
+	<resultMap id="MasterUserBalanceMap" type="com.fc.member.master.user.entity.MasterUserBalance">
+        <id property="masterUserBalanceId" column="master_user_balance_id"/>
+        <id property="masterMemberId" column="master_member_id"/>
+        <id property="balance" column="balance"/>
+        <id property="withdrawedCashAmount" column="withdrawed_cash_amount"/>
+        <id property="withdrawingCashAmount" column="withdrawing_cash_amount"/>
+        <id property="frozenAmount" column="frozen_amount"/>
+        <id property="status" column="status"/>
+        <id property="createTime" column="create_time"/>
+        <id property="updateTime" column="update_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="MasterUserBalanceMap" >
+		select * from master_user_balance where 
+	        master_user_balance_id = #{masterUserBalanceId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.master.user.entity.MasterUserBalance" useGeneratedKeys="true" keyProperty="masterUserBalanceId">
+		insert into master_user_balance(master_user_balance_id , master_member_id , balance , withdrawed_cash_amount , withdrawing_cash_amount , frozen_amount , status , create_time , update_time  )
+    	values(#{masterUserBalanceId} ,#{masterMemberId} ,#{balance} ,#{withdrawedCashAmount} ,#{withdrawingCashAmount} ,#{frozenAmount} ,#{status} ,#{createTime} ,#{updateTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.master.user.entity.MasterUserBalance" useGeneratedKeys="true" keyProperty="masterUserBalanceId">
+		insert into master_user_balance
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="masterUserBalanceId != null">master_user_balance_id,</if>
+					<if test="masterMemberId != null">master_member_id,</if>
+					<if test="balance != null">balance,</if>
+					<if test="withdrawedCashAmount != null">withdrawed_cash_amount,</if>
+					<if test="withdrawingCashAmount != null">withdrawing_cash_amount,</if>
+					<if test="frozenAmount != null">frozen_amount,</if>
+					<if test="status != null">status,</if>
+					<if test="createTime != null">create_time,</if>
+					<if test="updateTime != null">update_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="masterUserBalanceId != null">#{masterUserBalanceId},</if>
+					<if test="masterMemberId != null">#{masterMemberId},</if>
+					<if test="balance != null">#{balance},</if>
+					<if test="withdrawedCashAmount != null">#{withdrawedCashAmount},</if>
+					<if test="withdrawingCashAmount != null">#{withdrawingCashAmount},</if>
+					<if test="frozenAmount != null">#{frozenAmount},</if>
+					<if test="status != null">#{status},</if>
+					<if test="createTime != null">#{createTime},</if>
+					<if test="updateTime != null">#{updateTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.master.user.entity.MasterUserBalance">
+		update master_user_balance
+		<set>
+		    	<if test="masterMemberId != null">master_member_id = #{masterMemberId},</if>
+		    	<if test="balance != null">balance = #{balance},</if>
+		    	<if test="withdrawedCashAmount != null">withdrawed_cash_amount = #{withdrawedCashAmount},</if>
+		    	<if test="withdrawingCashAmount != null">withdrawing_cash_amount = #{withdrawingCashAmount},</if>
+		    	<if test="frozenAmount != null">frozen_amount = #{frozenAmount},</if>
+		    	<if test="status != null">status = #{status},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		</set>
+		where 
+	        master_user_balance_id = #{masterUserBalanceId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from master_user_balance where 
+	        master_user_balance_id = #{masterUserBalanceId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.master.user.entity.MasterUserBalance" resultMap="MasterUserBalanceMap" >
+		select * from master_user_balance 
+		<where>
+		       <if test="masterUserBalanceId != null">
+					AND master_user_balance_id = #{masterUserBalanceId}
+				</if>
+		       <if test="masterMemberId != null">
+					AND master_member_id = #{masterMemberId}
+				</if>
+		       <if test="balance != null">
+					AND balance = #{balance}
+				</if>
+		       <if test="withdrawedCashAmount != null">
+					AND withdrawed_cash_amount = #{withdrawedCashAmount}
+				</if>
+		       <if test="withdrawingCashAmount != null">
+					AND withdrawing_cash_amount = #{withdrawingCashAmount}
+				</if>
+		       <if test="frozenAmount != null">
+					AND frozen_amount = #{frozenAmount}
+				</if>
+		       <if test="status != null">
+					AND status = #{status}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="MasterUserBalanceMap" >
+		select * from master_user_balance  
+		<where>
+		       <if test="condition.masterUserBalanceId != null">
+					AND master_user_balance_id = #{condition.masterUserBalanceId}
+				</if>
+		       <if test="condition.masterMemberId != null">
+					AND master_member_id = #{condition.masterMemberId}
+				</if>
+		       <if test="condition.balance != null">
+					AND balance = #{condition.balance}
+				</if>
+		       <if test="condition.withdrawedCashAmount != null">
+					AND withdrawed_cash_amount = #{condition.withdrawedCashAmount}
+				</if>
+		       <if test="condition.withdrawingCashAmount != null">
+					AND withdrawing_cash_amount = #{condition.withdrawingCashAmount}
+				</if>
+		       <if test="condition.frozenAmount != null">
+					AND frozen_amount = #{condition.frozenAmount}
+				</if>
+		       <if test="condition.status != null">
+					AND status = #{condition.status}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

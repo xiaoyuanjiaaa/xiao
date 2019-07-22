@@ -1,0 +1,160 @@
+package com.fc.member.wechatmaintain.user.service.impl;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.plugin.mybatis.PageQuery;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.wechatmaintain.user.dao.IWechatMaintainCouponSstoreUserDao;
+import com.fc.member.wechatmaintain.user.entity.WechatMaintainCouponSstoreUser;
+import com.fc.member.wechatmaintain.user.service.IWechatMaintainCouponSstoreUserService;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmcsUserCreateRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmcsUserDetailsRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmcsUserListPageRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmcsUserStoreListRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmcsUserUpdateRequest;
+
+/**
+ * <p>Title: WechatMaintainCouponSstoreUser</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-28 17:13:47
+ */
+@Service("wechatMaintainCouponSstoreUserService")
+public class WechatMaintainCouponSstoreUserServiceImp extends ServiceImpl<WechatMaintainCouponSstoreUser>
+		implements IWechatMaintainCouponSstoreUserService {
+
+	private static Logger log = LoggerFactory.getLogger(WechatMaintainCouponSstoreUserServiceImp.class);
+
+	@Autowired
+	private IWechatMaintainCouponSstoreUserDao wechatMaintainCouponSstoreUserDao;
+
+	@Override
+	protected IMapper<WechatMaintainCouponSstoreUser> getDao() {
+		return wechatMaintainCouponSstoreUserDao;
+	}
+
+	/**
+	 * 插入数据
+	 */
+	@Override
+	public int insertSelective(WmcsUserCreateRequest request) {
+		log.info("insertSelective---------->:" + request);
+		// 将不为空的属性set到对象中
+		WechatMaintainCouponSstoreUser entity = isNotEmptySetObjectInsert(request);
+		log.info("WechatMaintainCouponSstoreUser---------->:" + entity);
+		return wechatMaintainCouponSstoreUserDao.insertSelective(entity);
+	}
+
+	/**
+	 * 更新数据
+	 */
+	@Override
+	public boolean updateWechatMaintainCouponSstoreUser(WmcsUserUpdateRequest request) throws Exception {
+		log.info("updateWechatMaintainCouponSstoreUser---------->:" + request);
+		// 将不为空的属性set到对象中
+		WechatMaintainCouponSstoreUser entity = isNotEmptySetObjectUpdate(request);
+		log.info("WechatMaintainCouponSstoreUser---------->:" + entity);
+		return wechatMaintainCouponSstoreUserDao.update(entity);
+	}
+
+	/**
+	 * 查询会员卡列表-分页
+	 */
+	@Override
+	public List<WechatMaintainCouponSstoreUser> getWechatMaintainCouponSstoreUserListPage(Page page,
+			WmcsUserListPageRequest request) {
+		log.info("getWechatMaintainCouponSstoreUserListPage---------->:" + request);
+		// set 对象属性值
+		WechatMaintainCouponSstoreUser entity = isNotEmptySetObjectListPage(request);
+		log.info("WechatMaintainCouponSstoreUser---------->{}", entity.toString());
+		// 设置分页，查询条件
+		PageQuery pageQuery = new PageQuery();
+		pageQuery.setPage(page);
+		pageQuery.setCondition(entity);
+		return wechatMaintainCouponSstoreUserDao.getRowsPage(pageQuery);
+	}
+
+	/**
+	 * 查询用户在此门店会员卡详细信息
+	 */
+	@Override
+	public WechatMaintainCouponSstoreUser getCouponStoreByUserIdAndStoreId(WmcsUserDetailsRequest request) {
+		log.info("getCouponStoreByUserIdAndStoreId---------->:" + request);
+		WechatMaintainCouponSstoreUser entity = new WechatMaintainCouponSstoreUser();
+		entity.setWechatMaintainUserId(request.getWechatMaintainUserId());
+		entity.setStoreId(request.getStoreId());
+		log.info("WechatMaintainCouponSstoreUser---------->{}", entity.toString());
+		return wechatMaintainCouponSstoreUserDao.getCouponStoreByUserIdAndStoreId(entity);
+	}
+
+	/**
+	 * 查询门店会员用户列表
+	 */
+	@Override
+	public List<WechatMaintainCouponSstoreUser> getWechatMaintainCouponSstoreUserByStoreIdList(
+			WmcsUserStoreListRequest request) {
+		// set 对象属性值
+		WechatMaintainCouponSstoreUser entity = new WechatMaintainCouponSstoreUser();
+		entity.setStoreId(request.getStoreId());
+		log.info("WechatMaintainCouponSstoreUser---------->{}", entity.toString());
+		return wechatMaintainCouponSstoreUserDao.getRows(entity);
+	}
+
+	/**
+	 * 将不为空的属性set到对象中
+	 * @param entity 实体对象
+	 * @param request 参数对象
+	 * @return
+	 */
+	public static WechatMaintainCouponSstoreUser isNotEmptySetObjectInsert(WmcsUserCreateRequest request) {
+		WechatMaintainCouponSstoreUser entity = new WechatMaintainCouponSstoreUser();
+		entity.setWechatMaintainUserId(request.getWechatMaintainUserId());
+		entity.setStoreId(request.getStoreId());
+		entity.setIntegral(request.getIntegral());
+		entity.setDiscount(request.getDiscount());
+		entity.setCouponLevel(request.getCouponLevel());
+		entity.setCouponLevelName(request.getCouponLevelName());
+		entity.setCreateTime(DateTimeUtils.getDateTimeInteger());
+		entity.setUpdateTime(DateTimeUtils.getDateTimeInteger());
+		return entity;
+	}
+
+	/**
+	 * 将不为空的属性set到对象中
+	 * @param entity 实体对象
+	 * @param request 参数对象
+	 * @return
+	 */
+	public static WechatMaintainCouponSstoreUser isNotEmptySetObjectUpdate(WmcsUserUpdateRequest request) {
+		WechatMaintainCouponSstoreUser entity = new WechatMaintainCouponSstoreUser();
+		entity.setWechatMaintainCouponSstoreUserId(request.getWechatMaintainCouponSstoreUserId());
+		entity.setIntegral(request.getIntegral());
+		entity.setDiscount(request.getDiscount());
+		entity.setCouponLevel(request.getCouponLevel());
+		entity.setCouponLevelName(request.getCouponLevelName());
+		entity.setUpdateTime(DateTimeUtils.getDateTimeInteger());
+		return entity;
+	}
+
+	/**
+	 * 将不为空的属性set到对象中
+	 * @param entity 实体对象
+	 * @param request 参数对象
+	 * @return
+	 */
+	public static WechatMaintainCouponSstoreUser isNotEmptySetObjectListPage(WmcsUserListPageRequest request) {
+		WechatMaintainCouponSstoreUser entity = new WechatMaintainCouponSstoreUser();
+		entity.setWechatMaintainUserId(request.getWechatMaintainUserId());
+		entity.setStoreId(request.getStoreId());
+		entity.setCreateTime(request.getCreateTime());
+		return entity;
+	}
+}

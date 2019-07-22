@@ -1,0 +1,94 @@
+package com.fc.protocol.demo.request.store.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+/**
+ * 门店还款记录表增加
+ * @author xiaozw
+ * @date 2019/01/12
+ */
+public class SadetailAddRequest extends ProtocolRequest {
+	private static final long serialVersionUID = 1L;
+	private Integer storeId; // 门店id
+	private Integer advanceId; // 借款id
+	private String balanceSn; // 结算编号
+	private int repaidAmount; // 偿还金额
+	private Integer repaidType; // 还款方式
+	private String remark; // 备注
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	public Integer getAdvanceId() {
+		return advanceId;
+	}
+
+	public void setAdvanceId(Integer advanceId) {
+		this.advanceId = advanceId;
+	}
+
+	public String getBalanceSn() {
+		return balanceSn;
+	}
+
+	public void setBalanceSn(String balanceSn) {
+		this.balanceSn = balanceSn;
+	}
+
+	public int getRepaidAmount() {
+		return repaidAmount;
+	}
+
+	public void setRepaidAmount(int repaidAmount) {
+		this.repaidAmount = repaidAmount;
+	}
+
+	public Integer getRepaidType() {
+		return repaidType;
+	}
+
+	public void setRepaidType(Integer repaidType) {
+		this.repaidType = repaidType;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public String paramValidate() {
+		if (StringUtils.isEmpty(storeId)) {
+			return "参数:storeId不能为空!";
+		}
+		if (StringUtils.isEmpty(advanceId)) {
+			return "参数:advanceId不能为空!";
+		}
+		if (StringUtils.isEmpty(balanceSn)) {
+			return "参数:balanceSn不能为空!";
+		}
+		if (StringUtils.isEmpty(repaidAmount)) {
+			return "参数:repaidAmount不能为空!";
+		}
+		if (StringUtils.isEmpty(repaidType)) {
+			return "参数:repaidType不能为空!";
+		}
+		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "SadetailAddRequest [getStoreId()=" + getStoreId() + ", getAdvanceId()=" + getAdvanceId()
+				+ ", getBalanceSn()=" + getBalanceSn() + ", getRepaidAmount()=" + getRepaidAmount()
+				+ ", getRepaidType()=" + getRepaidType() + ", getRemark()=" + getRemark() + "]";
+	}
+}

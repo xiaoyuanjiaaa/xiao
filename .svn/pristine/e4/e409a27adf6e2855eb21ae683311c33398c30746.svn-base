@@ -1,0 +1,286 @@
+package com.fc.member.wechatmaintain.user.service.impl;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.plugin.mybatis.PageQuery;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.wechatmaintain.user.dao.IWechatMaintainUserCarDao;
+import com.fc.member.wechatmaintain.user.dao.IWechatMaintainUserDao;
+import com.fc.member.wechatmaintain.user.entity.WechatMaintainUser;
+import com.fc.member.wechatmaintain.user.entity.WechatMaintainUserCar;
+import com.fc.member.wechatmaintain.user.service.IWechatMaintainUserCarService;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainUserCarRequest;
+
+/**
+ * <p>Title: WechatMaintainUserCar</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-28 17:13:47
+ */
+@Service("wechatMaintainUserCarService")
+public class WechatMaintainUserCarServiceImp extends ServiceImpl<WechatMaintainUserCar>
+		implements IWechatMaintainUserCarService {
+
+	private static Logger log = LoggerFactory.getLogger(WechatMaintainUserServiceImp.class);
+
+	@Autowired
+	private IWechatMaintainUserCarDao wechatMaintainUserCarDao;
+	@Autowired
+	private IWechatMaintainUserDao wechatMaintainUserDao;
+
+	@Override
+	protected IMapper<WechatMaintainUserCar> getDao() {
+		return wechatMaintainUserCarDao;
+	}
+
+	/**
+	 * 插入数据
+	 * @param obj 车档案对象参数
+	 */
+	@Override
+	public Map<String, Object> insertSelective(WechatMaintainUserCarRequest request) {
+		log.info("insertSelective---------->{}", request);
+		Map<String, Object> resultMap = new HashMap<>();
+		WechatMaintainUserCar entity = new WechatMaintainUserCar();
+		// 将不为空的属性set到对象中
+		isNotEmptySetObject(entity, request);
+		log.info("WechatMaintainUser---------->:" + entity);
+		int result = wechatMaintainUserCarDao.insertSelective(entity);
+		if (result <= 0) {
+			resultMap.put("error", "创建失败");
+			return resultMap;
+		}
+		return resultMap;
+	}
+
+	/**
+	 * 更新数据
+	 */
+	@Override
+	public Map<String, Object> updateWechatMaintainUserCar(WechatMaintainUserCarRequest request) throws Exception {
+		log.info("updateWechatMaintainUserCar---------->:" + request);
+		Map<String, Object> resultMap = new HashMap<>();
+		//校验参数是否为空
+		String validResult = request.paramValidateEdit();
+		if (validResult != null) {
+			resultMap.put("error", validResult);
+			return resultMap;
+		}
+		WechatMaintainUserCar entity = new WechatMaintainUserCar();
+		// 将不为空的属性set到对象中
+		isNotEmptySetObject(entity, request);
+		log.info("WechatMaintainUserCar---------->:" + entity);
+		wechatMaintainUserCarDao.update(entity);
+		return resultMap;
+	}
+
+	/**
+	 * 将不为空的属性set到对象中
+	 * @param entity 实体对象
+	 * @param request 参数对象
+	 * @return
+	 */
+	private WechatMaintainUserCar isNotEmptySetObject(WechatMaintainUserCar entity,
+			WechatMaintainUserCarRequest request) {
+
+		entity.setWechatMaintainUserCarId(request.getWechatMaintainUserCarId());
+		entity.setWechatMaintainUserId(request.getWechatMaintainUserId());
+		entity.setFcUserId(request.getFcUserId());
+		entity.setCarNo(request.getCarNo());
+		entity.setVehicleId(request.getVehicleId());
+		entity.setDriveMileage(request.getDriveMileage());
+		entity.setCreateTime(request.getCreateTime());
+		entity.setModelName(request.getModelName());
+		entity.setFrameNumber(request.getFrameNumber());
+		entity.setEngineNumber(request.getEngineNumber());
+		entity.setStatus(request.getStatus());
+		entity.setIsDefault(request.getIsDefault());
+		if (StringUtils.isEmpty(request.getWechatMaintainUserCarId())) {
+			entity.setCreateTime((int) (new Date().getTime() / 1000));
+		}
+		entity.setUpdateTime((int) (new Date().getTime() / 1000));
+		if (StringUtils.isEmpty(request.getDriveMileage())) {
+			entity.setDriveMileageTime((int) (new Date().getTime() / 1000));
+		}
+		return entity;
+	}
+
+	/**
+	 * 查询微养车 车主车辆档案列表-分页
+	 */
+	@Override
+	public List<WechatMaintainUserCar> getWechatMaintainUserCarListPage(WechatMaintainUserCarRequest request) {
+		log.info("getWechatMaintainUserCarListPage---------->{}", request);
+		// 分页对象
+		Page page = new Page();
+		page.setPage(request.getPage_no());
+		page.setRows(request.getPage_size());
+		page.setShowTotal(true);
+		// set 对象属性值
+		WechatMaintainUserCar entity = new WechatMaintainUserCar();
+		entity.setCarNo(request.getCarNo());
+		log.info("WechatMaintainUserCar{}---------->", entity.toString());
+		// 设置分页，查询条件
+		PageQuery pageQuery = new PageQuery();
+		pageQuery.setPage(page);
+		pageQuery.setCondition(entity);
+		return wechatMaintainUserCarDao.getRowsPage(pageQuery);
+	}
+
+	/**
+	 * 微养车 - 用户车辆档案列表
+	 */
+	@Override
+	public List<WechatMaintainUserCar> getUserCarListByUserId(WechatMaintainUserCarRequest request) {
+		log.info("getUserCarListByUserId---------->{}", request);
+		WechatMaintainUserCar obj = new WechatMaintainUserCar();
+		obj.setWechatMaintainUserId(request.getWechatMaintainUserId());
+		return wechatMaintainUserCarDao.getUserCarListByUserId(obj);
+	}
+
+	/**
+	 * 更新是否起用状态(删除操作)
+	 * @param obj 车档案对象参数
+	 */
+	@Override
+	public void updateStatus(WechatMaintainUserCarRequest request) throws Exception {
+		log.info("删除用户车辆信息开始：{}...", DateTimeUtils.getNow());
+		WechatMaintainUserCar obj = new WechatMaintainUserCar();
+		obj.setWechatMaintainUserCarId(request.getWechatMaintainUserCarId());
+		obj.setStatus(0);
+		obj.setUpdateTime((int) (new Date().getTime() / 1000));
+		log.info("删除用户车辆信息参数：{}...", obj.toString());
+		wechatMaintainUserCarDao.updateStatus(obj);
+		log.info("删除用户车辆信息结束：{}...", DateTimeUtils.getNow());
+	}
+
+	/**
+	 * 切换用户默认车辆
+	 * @param wechatUser 微养车用户对象
+	 * @param obj 车档案对象参数
+	 */
+	@Override
+	public Map<String, Object> switchingUserDefaultCar(WechatMaintainUserCarRequest request) throws Exception {
+		Map<String, Object> resultMap = new HashMap<>();
+		WechatMaintainUser wechatUser = wechatMaintainUserDao.getByPK(request.getWechatMaintainUserId());
+		if (wechatUser == null) {
+			resultMap.put("error", "用户不存在");
+			return resultMap;
+		}
+		// 设置参数进对象
+		WechatMaintainUserCar obj = new WechatMaintainUserCar();
+		obj.setWechatMaintainUserCarId(request.getWechatMaintainUserCarId());
+		obj.setWechatMaintainUserId(request.getWechatMaintainUserId());
+
+		// 更新该用户下车辆为不默认状态
+		log.info("查询该 '{}' 用户下默认车辆 - 时间:{}...", obj.getWechatMaintainUserId(), DateTimeUtils.getNow());
+		WechatMaintainUserCar wechatMaintainUserCar = new WechatMaintainUserCar();
+		wechatMaintainUserCar.setWechatMaintainUserId(obj.getWechatMaintainUserId());
+		wechatMaintainUserCar.setIsDefault(1);
+		wechatMaintainUserCar.setStatus(1);
+		List<WechatMaintainUserCar> list = wechatMaintainUserCarDao.getRows(wechatMaintainUserCar);
+		log.info("查询结果:list.size={} - 时间：{}", list.size(), DateTimeUtils.getNow());
+		if (list.size() > 0) {
+			log.debug("更新该用户下车辆为不默认状态开始-{}...", DateTimeUtils.getNow());
+			for (WechatMaintainUserCar userCar : list) {
+				// 当是默认车辆时才更新为不默认
+				if (userCar.getIsDefault() == 1) {
+					userCar.setIsDefault(0);
+					userCar.setUpdateTime((int) (new Date().getTime() / 1000));
+					log.debug("该用户下车辆为不默认状态参数-{}...", userCar.toString());
+					wechatMaintainUserCarDao.updateIsDefault(userCar);
+				}
+			}
+			log.debug("更新该用户下车辆为不默认状态结束-{}...", DateTimeUtils.getNow());
+		}
+
+		// 更新默认车辆
+		log.info("更新默认车辆开始-{}:", DateTimeUtils.getNow());
+		WechatMaintainUserCar updateParam = new WechatMaintainUserCar();
+		updateParam.setWechatMaintainUserCarId(obj.getWechatMaintainUserCarId());
+		updateParam.setIsDefault(1);
+		updateParam.setUpdateTime((int) (new Date().getTime() / 1000));
+		log.info("更新默认车辆参数-{}:" + updateParam.toString());
+		wechatMaintainUserCarDao.updateIsDefault(updateParam);
+		log.info("更新默认车辆结束-{}...", DateTimeUtils.getNow());
+
+		//		// 更新完后查询出数据返回
+		//		WechatMaintainUserCar wuc = wechatMaintainUserCarDao.getByPK(obj.getWechatMaintainUserCarId());
+		//
+		//		// 返回更新后数据
+		//		Map<String, Object> resultMap = new HashMap<String, Object>();
+		//		resultMap.put("drive_mileage", wuc.getDriveMileage());
+		//		resultMap.put("mobile", wechatUser.getMobile());
+		//		resultMap.put("model_name", wuc.getModelName());
+		//		resultMap.put("car_no", wuc.getCarNo());
+		//		resultMap.put("name", wechatUser.getName());
+		//		resultMap.put("vehicle_id", wuc.getVehicleId());
+		//		resultMap.put("car_id", wuc.getWechatMaintainUserCarId());
+		//
+		//		if (StringUtils.isEmpty(wuc.getCarNo())) {
+		//			resultMap.put("short_name", wuc.getCarNo().substring(0, 1));
+		//			resultMap.put("letter_name", wuc.getCarNo().substring(1, 2));
+		//			resultMap.put("cars_num", wuc.getCarNo().substring(2, wuc.getCarNo().length()));
+		//		} else {
+		//			resultMap.put("short_name", "");
+		//			resultMap.put("letter_name", "");
+		//			resultMap.put("cars_num", "");
+		//		}
+		return resultMap;
+	}
+
+	/**
+	 * 查询该用户下默认车辆；当查询不到默认车辆时，查询该用户最新车辆信息；并更新为默认车辆
+	 * @param obj 车档案对象参数
+	 */
+	@Override
+	public WechatMaintainUserCar getUserDefaultCar(WechatMaintainUserCarRequest request) throws Exception {
+		log.info("查询该用户下默认车辆，时间:{}", DateTimeUtils.getNow());
+		WechatMaintainUserCar obj = new WechatMaintainUserCar();
+		obj.setWechatMaintainUserId(request.getWechatMaintainUserId());
+		obj.setIsDefault(1);
+		// 查询该用户下默认车辆
+		WechatMaintainUserCar wechatMaintainUserCar = wechatMaintainUserCarDao.getUserDefaultCar(obj);
+		if (wechatMaintainUserCar != null) {
+			// 查询到默认车辆，直接返回
+			log.info("查询到默认车辆，直接返回，data:{} - 时间:{}", wechatMaintainUserCar, DateTimeUtils.getNow());
+			return wechatMaintainUserCar;
+		} else {
+			// 当查询不到默认车辆时，查询该用户最新车辆信息；并更新为默认车辆
+			List<WechatMaintainUserCar> list = wechatMaintainUserCarDao.getUserCarListByUserId(obj);
+			WechatMaintainUserCar userCar = new WechatMaintainUserCar();
+			if (list.size() > 0) {
+				userCar = list.get(0);
+			}
+			log.info("未查询到默认车辆，查询该用户最新车辆信息，data:{} - 时间:{}", userCar, DateTimeUtils.getNow());
+			return userCar;
+		}
+	}
+
+	/**
+	 * 查询该用户下默认车辆；当查询不到默认车辆时，不设置最新车辆为默认车辆
+	 * @param obj 车档案对象参数
+	 */
+	@Override
+	public WechatMaintainUserCar getUserNewCar(WechatMaintainUserCarRequest request) throws Exception {
+		log.info("查询该用户下默认车辆，时间:{}", DateTimeUtils.getNow());
+		WechatMaintainUserCar obj = new WechatMaintainUserCar();
+		obj.setWechatMaintainUserId(request.getWechatMaintainUserId());
+		obj.setIsDefault(1);
+		WechatMaintainUserCar wechatMaintainUserCar = wechatMaintainUserCarDao.getUserNewCar(obj);
+		log.info("查询到默认车辆，直接返回，data:{} - 时间:{}", wechatMaintainUserCar, DateTimeUtils.getNow());
+		return wechatMaintainUserCar;
+	}
+}

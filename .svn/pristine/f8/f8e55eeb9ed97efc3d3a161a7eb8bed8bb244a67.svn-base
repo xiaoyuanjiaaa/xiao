@@ -1,0 +1,92 @@
+package com.fc.member.wechatplatform.user.handler;
+
+import com.fc.member.wechatplatform.user.entity.WechatPlatformUser;
+import com.fc.member.wechatplatform.user.service.IWechatPlatformUserService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.WechatPlatformUserRequest;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
+import java.util.List;
+
+@Component
+@Handler(module = "user")
+public class WechatPlatformUserHandler {
+
+	private static Logger log = LoggerFactory.getLogger(WechatPlatformUserHandler.class);
+	
+	@Autowired
+	IWechatPlatformUserService wechatPlatformUserService;
+
+    @ReqCodeMapping(requestClazz = WechatPlatformUserRequest.class)
+	public ProtocolResponse wechatPlatformUserGetHandler(WechatPlatformUserRequest request) {
+		log.info("获取用户信息------>request:{}", request);
+		ProtocolResponse response=null;
+		try {
+			log.info("查询微养车找店用户，openID:{}",request.getOpenid());
+			WechatPlatformUser wechatPlatformUser  = wechatPlatformUserService.getByOpenid(request.getOpenid());
+			log.info("查询结果:{}", wechatPlatformUser);
+
+			if ( wechatPlatformUser != null)
+			response = ProtocolResponse.newInstance().success().addData("data",wechatPlatformUser);
+			else response = ProtocolResponse.newInstance().success().msg("该用户不存在");
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.info("查询微养车找店用户失败");
+			return ProtocolResponse.newInstance().error().msg("查询微养车找店用户失败");
+		}
+		log.info("获取用户信息------>response:{}", response);
+		return response;
+	}
+
+    @ReqCodeMapping(requestClazz = WechatPlatformUserRequest.class)
+    public ProtocolResponse wechatPlatformUserListHandler(WechatPlatformUserRequest request) {
+        log.info("获取用户管理列表------>request:{}", request);
+        ProtocolResponse response=null;
+        try {
+            //log.info("获取用户管理列表:{}",request.getOpenid());
+            List<WechatPlatformUser> wechatPlatformUser  = wechatPlatformUserService.getList();
+            log.info("查询结果:{}", wechatPlatformUser);
+
+            if ( wechatPlatformUser != null){
+                response = ProtocolResponse.newInstance().success().addData("data",wechatPlatformUser);
+            }
+            else {
+                response = ProtocolResponse.newInstance().success().msg("用户管理列表查询失败");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.info("用户管理列表查询失败");
+            return ProtocolResponse.newInstance().error().msg("用户管理列表查询失败");
+        }
+        log.info("获取用户管理列表------>response:{}", response);
+        return response;
+    }
+
+
+    @ReqCodeMapping(requestClazz = WechatPlatformUserRequest.class)
+	public ProtocolResponse wechatPlatformUserSaveHandler(WechatPlatformUserRequest request) {
+		log.info("创建用户------>request:{}", request);
+		ProtocolResponse response=null;
+		try {
+			log.info("创建微养车找店用户，openID:{}", request.getOpenid());
+			int result = wechatPlatformUserService.insertPlatformUser(""+request.getOpenid());
+			if (result != 0) {
+                log.info("创建用户成功");
+                response = ProtocolResponse.newInstance().success().msg("创建用户成功").addData("platform_user_id",wechatPlatformUserService.getByOpenid(request.getOpenid()).getPlatformUserId());
+
+            }
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.info("创建用户失败");
+			return ProtocolResponse.newInstance().error().msg("创建用户失败");
+		}
+		log.info("EchoHandler------>response:{}", response);
+		return response;
+	}
+}

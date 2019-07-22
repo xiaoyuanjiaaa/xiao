@@ -1,0 +1,114 @@
+package com.fc.member.store.user.handler;
+
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.fc.member.store.user.entity.StorePackage;
+import com.fc.member.store.user.service.IStorePackageService;
+import com.fc.member.store.user.service.IStoreWechatService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.store.user.StorePackageRequest;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+
+/**
+ * 储值卡套餐
+ * @author jiahx
+ * @date 2019/1/3
+ */
+@Component
+@Handler(module = "storepackage")
+public class StorePackageHandler {
+
+	private static Logger log = LoggerFactory.getLogger(StorePackageHandler.class);
+
+	@Autowired
+	IStorePackageService storePackageService;
+	@Autowired
+	IStoreWechatService storeWechatService;
+
+	/**
+	 * 查询门店储值卡套餐
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = StorePackageRequest.class)
+	public ProtocolResponse queryStorePackage(StorePackageRequest request) {
+		log.info("StorePackageHandler------>requestQueryStorePackage:{}", request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidateQuery();
+			if(validResult != null ) {
+				return response.error(99).msg(validResult);
+			}
+			//排序规则：按充值金额升序排列，充值金额相同时按赠送金额升序排列，未编辑状态的充值套餐排在最下。
+			List<Map<String,Object>> storePackageList =  storePackageService.getOrderBY(request);
+			log.info("查询结果" + storePackageList);
+			response.addData("data", storePackageList);
+		} catch (Exception e) {
+			response.error(99).msg("查询异常！");
+			e.printStackTrace();
+		}
+		log.info("StorePackageHandler------>responseQueryStorePackage:{}", response);
+		return response;
+	}
+	/**
+	 * 查询门店当前上架的套餐数,且后台状态为启用(在store_wechat判断)
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = StorePackageRequest.class)
+	public ProtocolResponse queryStorePackageStatus(StorePackageRequest request) {
+		log.info("StorePackageHandler------>requestQueryStorePackageStatus:{}", request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidateCheck();
+			if(validResult != null ) {
+				return response.error(99).msg(validResult);
+			}
+			//查询该门店已上架套餐
+			List<Map<String,Object>> storePackageList = storePackageService.getStatus(request);
+			response.addData("dataList", storePackageList);
+			response.code(0).msg("查询成功");
+			log.info("查询结果"+storePackageList);
+		} catch (Exception e) {
+			response.error(99).msg("查询异常！");
+			e.printStackTrace();
+		}
+		log.info("StorePackageHandler------>responseQueryStorePackageStatus:{}", response);
+		return response;
+	}
+	/**
+	 * 更新门店储值卡套餐
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = StorePackageRequest.class)
+	public ProtocolResponse updateStorePackage(StorePackageRequest request) {
+		log.info("StorePackageHandler------>requestUpdateStorePackage:{}", request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidateUpdate();
+			if(validResult != null ) {
+				return response.error(99).msg(validResult);
+			}
+			storePackageService.updateStorePackage(request);
+			response.code(0).msg("更新成功");
+		} catch (Exception e) {
+			response.error(99).msg("更新失败！");
+			e.printStackTrace();
+		}
+		log.info("StorePackageHandler------>responseUpdateStorePackage:{}", response);
+		return response;
+		
+	}
+
+}

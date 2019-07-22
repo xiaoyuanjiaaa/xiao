@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.store.user.dao.IStoreAptitudeDao">
+	<resultMap id="StoreAptitudeMap" type="com.fc.member.store.user.entity.StoreAptitude">
+        <id property="storeAptitudeId" column="store_aptitude_id"/>
+        <id property="storeId" column="store_id"/>
+        <id property="fieldArea" column="field_area"/>
+        <id property="staffNumber" column="staff_number"/>
+        <id property="dailyCar" column="daily_car"/>
+        <id property="decoration" column="decoration"/>
+        <id property="franchiseProjects" column="franchise_projects"/>
+        <id property="mergerProject" column="merger_project"/>
+        <id property="staffLicenseImgs" column="staff_license_imgs"/>
+        <id property="staffLicense" column="staff_license"/>
+        <id property="equipmentImgs" column="equipment_imgs"/>
+        <id property="equipment" column="equipment"/>
+        <id property="tools" column="tools"/>
+        <id property="workstationImgs" column="workstation_imgs"/>
+        <id property="restAreaImgs" column="rest_area_imgs"/>
+        <id property="updateTime" column="update_time"/>
+        <id property="createTime" column="create_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="StoreAptitudeMap" >
+		select * from store_aptitude where 
+	        store_aptitude_id = #{storeAptitudeId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.store.user.entity.StoreAptitude" useGeneratedKeys="true">
+		insert into store_aptitude(store_aptitude_id , store_id , field_area , staff_number , daily_car , decoration , franchise_projects , merger_project , staff_license_imgs , staff_license , equipment_imgs , equipment , tools , workstation_imgs , rest_area_imgs , update_time , create_time  )
+    	values(#{storeAptitudeId} ,#{storeId} ,#{fieldArea} ,#{staffNumber} ,#{dailyCar} ,#{decoration} ,#{franchiseProjects} ,#{mergerProject} ,#{staffLicenseImgs} ,#{staffLicense} ,#{equipmentImgs} ,#{equipment} ,#{tools} ,#{workstationImgs} ,#{restAreaImgs} ,#{updateTime} ,#{createTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.store.user.entity.StoreAptitude" useGeneratedKeys="true">
+		insert into store_aptitude
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="storeAptitudeId != null">store_aptitude_id,</if>
+					<if test="storeId != null">store_id,</if>
+					<if test="fieldArea != null">field_area,</if>
+					<if test="staffNumber != null">staff_number,</if>
+					<if test="dailyCar != null">daily_car,</if>
+					<if test="decoration != null">decoration,</if>
+					<if test="franchiseProjects != null">franchise_projects,</if>
+					<if test="mergerProject != null">merger_project,</if>
+					<if test="staffLicenseImgs != null">staff_license_imgs,</if>
+					<if test="staffLicense != null">staff_license,</if>
+					<if test="equipmentImgs != null">equipment_imgs,</if>
+					<if test="equipment != null">equipment,</if>
+					<if test="tools != null">tools,</if>
+					<if test="workstationImgs != null">workstation_imgs,</if>
+					<if test="restAreaImgs != null">rest_area_imgs,</if>
+					<if test="updateTime != null">update_time,</if>
+					<if test="createTime != null">create_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="storeAptitudeId != null">#{storeAptitudeId},</if>
+					<if test="storeId != null">#{storeId},</if>
+					<if test="fieldArea != null">#{fieldArea},</if>
+					<if test="staffNumber != null">#{staffNumber},</if>
+					<if test="dailyCar != null">#{dailyCar},</if>
+					<if test="decoration != null">#{decoration},</if>
+					<if test="franchiseProjects != null">#{franchiseProjects},</if>
+					<if test="mergerProject != null">#{mergerProject},</if>
+					<if test="staffLicenseImgs != null">#{staffLicenseImgs},</if>
+					<if test="staffLicense != null">#{staffLicense},</if>
+					<if test="equipmentImgs != null">#{equipmentImgs},</if>
+					<if test="equipment != null">#{equipment},</if>
+					<if test="tools != null">#{tools},</if>
+					<if test="workstationImgs != null">#{workstationImgs},</if>
+					<if test="restAreaImgs != null">#{restAreaImgs},</if>
+					<if test="updateTime != null">#{updateTime},</if>
+					<if test="createTime != null">#{createTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.store.user.entity.StoreAptitude">
+		update store_aptitude
+		<set>
+		    	<if test="storeId != null">store_id = #{storeId},</if>
+		    	<if test="fieldArea != null">field_area = #{fieldArea},</if>
+		    	<if test="staffNumber != null">staff_number = #{staffNumber},</if>
+		    	<if test="dailyCar != null">daily_car = #{dailyCar},</if>
+		    	<if test="decoration != null">decoration = #{decoration},</if>
+		    	<if test="franchiseProjects != null">franchise_projects = #{franchiseProjects},</if>
+		    	<if test="mergerProject != null">merger_project = #{mergerProject},</if>
+		    	<if test="staffLicenseImgs != null">staff_license_imgs = #{staffLicenseImgs},</if>
+		    	<if test="staffLicense != null">staff_license = #{staffLicense},</if>
+		    	<if test="equipmentImgs != null">equipment_imgs = #{equipmentImgs},</if>
+		    	<if test="equipment != null">equipment = #{equipment},</if>
+		    	<if test="tools != null">tools = #{tools},</if>
+		    	<if test="workstationImgs != null">workstation_imgs = #{workstationImgs},</if>
+		    	<if test="restAreaImgs != null">rest_area_imgs = #{restAreaImgs},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		</set>
+		where 
+	        store_aptitude_id = #{storeAptitudeId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from store_aptitude where 
+	        store_aptitude_id = #{storeAptitudeId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.store.user.entity.StoreAptitude" resultMap="StoreAptitudeMap" >
+		select * from store_aptitude 
+		<where>
+		       <if test="storeAptitudeId != null">
+					AND store_aptitude_id = #{storeAptitudeId}
+				</if>
+		       <if test="storeId != null">
+					AND store_id = #{storeId}
+				</if>
+		       <if test="fieldArea != null">
+					AND field_area = #{fieldArea}
+				</if>
+		       <if test="staffNumber != null">
+					AND staff_number = #{staffNumber}
+				</if>
+		       <if test="dailyCar != null">
+					AND daily_car = #{dailyCar}
+				</if>
+		       <if test="decoration != null">
+					AND decoration = #{decoration}
+				</if>
+		       <if test="franchiseProjects != null">
+					AND franchise_projects = #{franchiseProjects}
+				</if>
+		       <if test="mergerProject != null">
+					AND merger_project = #{mergerProject}
+				</if>
+		       <if test="staffLicenseImgs != null">
+					AND staff_license_imgs = #{staffLicenseImgs}
+				</if>
+		       <if test="staffLicense != null">
+					AND staff_license = #{staffLicense}
+				</if>
+		       <if test="equipmentImgs != null">
+					AND equipment_imgs = #{equipmentImgs}
+				</if>
+		       <if test="equipment != null">
+					AND equipment = #{equipment}
+				</if>
+		       <if test="tools != null">
+					AND tools = #{tools}
+				</if>
+		       <if test="workstationImgs != null">
+					AND workstation_imgs = #{workstationImgs}
+				</if>
+		       <if test="restAreaImgs != null">
+					AND rest_area_imgs = #{restAreaImgs}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="StoreAptitudeMap" >
+		select * from store_aptitude  
+		<where>
+		       <if test="condition.storeAptitudeId != null">
+					AND store_aptitude_id = #{condition.storeAptitudeId}
+				</if>
+		       <if test="condition.storeId != null">
+					AND store_id = #{condition.storeId}
+				</if>
+		       <if test="condition.fieldArea != null">
+					AND field_area = #{condition.fieldArea}
+				</if>
+		       <if test="condition.staffNumber != null">
+					AND staff_number = #{condition.staffNumber}
+				</if>
+		       <if test="condition.dailyCar != null">
+					AND daily_car = #{condition.dailyCar}
+				</if>
+		       <if test="condition.decoration != null">
+					AND decoration = #{condition.decoration}
+				</if>
+		       <if test="condition.franchiseProjects != null">
+					AND franchise_projects = #{condition.franchiseProjects}
+				</if>
+		       <if test="condition.mergerProject != null">
+					AND merger_project = #{condition.mergerProject}
+				</if>
+		       <if test="condition.staffLicenseImgs != null">
+					AND staff_license_imgs = #{condition.staffLicenseImgs}
+				</if>
+		       <if test="condition.staffLicense != null">
+					AND staff_license = #{condition.staffLicense}
+				</if>
+		       <if test="condition.equipmentImgs != null">
+					AND equipment_imgs = #{condition.equipmentImgs}
+				</if>
+		       <if test="condition.equipment != null">
+					AND equipment = #{condition.equipment}
+				</if>
+		       <if test="condition.tools != null">
+					AND tools = #{condition.tools}
+				</if>
+		       <if test="condition.workstationImgs != null">
+					AND workstation_imgs = #{condition.workstationImgs}
+				</if>
+		       <if test="condition.restAreaImgs != null">
+					AND rest_area_imgs = #{condition.restAreaImgs}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

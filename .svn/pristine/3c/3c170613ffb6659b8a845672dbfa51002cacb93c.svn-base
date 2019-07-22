@@ -1,0 +1,35 @@
+package com.fc.member.shop.user.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+
+import com.fc.member.shop.user.dao.IShopOrdershopDao;
+import com.fc.member.shop.user.service.IShopOrdershopService;
+import com.fc.member.shop.user.entity.ShopOrdershop;
+/**
+ * <p>Title: ShopOrdershop</p>
+ * <p>Description: 店铺订货呗基本信息表 Service 层</p>
+ * @author yangd
+ * @date 2019-01-14 11:08:40
+ */
+@Service("shopOrdershopService")
+public class ShopOrdershopServiceImp extends ServiceImpl<ShopOrdershop> implements IShopOrdershopService{
+
+	@Autowired
+	private IShopOrdershopDao shopOrdershopDao;
+	
+	@Override
+	protected IMapper<ShopOrdershop> getDao() {
+		return shopOrdershopDao;
+	}
+	/**
+	 * 插入数据
+	 * @return
+	 */
+	@Override
+	public int insertSelective(ShopOrdershop obj) {
+		return shopOrdershopDao.insertSelective(obj);
+	}
+}

@@ -1,0 +1,43 @@
+package com.fc.protocol.demo.request.pc.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+import io.swagger.annotations.ApiModelProperty;
+import org.springframework.util.StringUtils;
+
+/**
+ * @Author: linpeng
+ * @Date: 2019/1/4 15:41
+ * @Version 1.0
+ */
+public class PcUserDeleteRequest extends ProtocolRequest {
+
+
+	private static final long serialVersionUID = 1L;
+    @ApiModelProperty(value = "pc收银车主ID", name = "pc_user_id")
+	private Integer  pc_user_id;
+
+
+    public String paramValidate() {
+        if (StringUtils.isEmpty(pc_user_id)) {
+            return "参数:pc_user_id 不能为空";
+        }
+        return null;
+    }
+
+
+    public Integer getPcUserId() {
+        return pc_user_id;
+    }
+
+    public void setPcUserId(Integer pc_user_id) {
+        this.pc_user_id = pc_user_id;
+    }
+
+
+    @Override
+	public String toString() {
+		return "WpServiceCountRequest [getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode()
+                + ", getTraceId()=" + getTraceId() +", pc_user_id=" + getPcUserId() + "]";
+	}
+
+}

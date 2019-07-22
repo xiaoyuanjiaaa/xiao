@@ -1,0 +1,183 @@
+package com.fc.protocol.demo.request.store.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * 门店安装资质
+ * @author jiahx
+ * @date 2019/1/4
+ */
+public class UpdateStoreAptitudeRequest extends ProtocolRequest{
+
+	private static final long serialVersionUID = 1L;
+	@ApiModelProperty(value = "资质id", name = "storeAptitudeId")
+	private Integer storeAptitudeId; // 资质id
+//	@ApiModelProperty(value = "门店id", name = "storeId")
+//	private String storeId; // 门店id
+	@ApiModelProperty(value = "场地面积", name = "fieldArea")
+	private String fieldArea; // 场地面积
+	@ApiModelProperty(value = "员工人数", name = "staffNumber")
+	private String staffNumber; // 员工人数
+	@ApiModelProperty(value = "日均车辆", name = "dailyCar")
+	private String dailyCar; // 日均车辆
+	@ApiModelProperty(value = "装修情况", name = "decoration")
+	private String decoration; // 装修情况
+	@ApiModelProperty(value = "专营项目", name = "franchiseProjects")
+	private String franchiseProjects; // 专营项目
+	@ApiModelProperty(value = "兼并项目", name = "mergerProject")
+	private String mergerProject; // 兼并项目
+	@ApiModelProperty(value = "人员要求图片id，以，隔开", name = "staffLicenseImgs")
+	private String staffLicenseImgs; // 人员要求图片id，以，隔开
+	@ApiModelProperty(value = "人员要求资质，以，隔开", name = "staffLicense")
+	private String staffLicense; // 人员要求资质，以，隔开
+	@ApiModelProperty(value = "设备的图片id，以，隔开", name = "equipmentImgs")
+	private String equipmentImgs; // 设备的图片id，以，隔开
+	@ApiModelProperty(value = "选择的设备，以，隔开", name = "equipment")
+	private String equipment; // 选择的设备，以，隔开
+	@ApiModelProperty(value = "选择的工具，以，隔开", name = "tools")
+	private String tools; // 选择的工具，以，隔开
+	@ApiModelProperty(value = "工位图片id，以，隔开", name = "workstationImgs")
+	private String workstationImgs; // 工位图片id，以，隔开
+	@ApiModelProperty(value = "休息区图片id，以，隔开", name = "restAreaImgs")
+	private String restAreaImgs; // 休息区图片id，以，隔开
+	@ApiModelProperty(value = "修改时间", name = "updateTime")
+	private Integer updateTime; // 修改时间
+	@ApiModelProperty(value = "创建时间", name = "createTime")
+	private Integer createTime; // 创建时间
+
+	public void setStoreAptitudeId(Integer storeAptitudeId) {
+		this.storeAptitudeId = storeAptitudeId;
+	}
+	
+	public Integer getStoreAptitudeId() {
+		return this.storeAptitudeId;
+	}
+	public void setFieldArea(String fieldArea) {
+		this.fieldArea = fieldArea;
+	}
+	
+	public String getFieldArea() {
+		return this.fieldArea;
+	}
+	public void setStaffNumber(String staffNumber) {
+		this.staffNumber = staffNumber;
+	}
+	
+	public String getStaffNumber() {
+		return this.staffNumber;
+	}
+	public void setDailyCar(String dailyCar) {
+		this.dailyCar = dailyCar;
+	}
+	
+	public String getDailyCar() {
+		return this.dailyCar;
+	}
+	public void setDecoration(String decoration) {
+		this.decoration = decoration;
+	}
+	
+	public String getDecoration() {
+		return this.decoration;
+	}
+	public void setFranchiseProjects(String franchiseProjects) {
+		this.franchiseProjects = franchiseProjects;
+	}
+	
+	public String getFranchiseProjects() {
+		return this.franchiseProjects;
+	}
+	public void setMergerProject(String mergerProject) {
+		this.mergerProject = mergerProject;
+	}
+	
+	public String getMergerProject() {
+		return this.mergerProject;
+	}
+	public void setStaffLicenseImgs(String staffLicenseImgs) {
+		this.staffLicenseImgs = staffLicenseImgs;
+	}
+	
+	public String getStaffLicenseImgs() {
+		return this.staffLicenseImgs;
+	}
+	public void setStaffLicense(String staffLicense) {
+		this.staffLicense = staffLicense;
+	}
+	
+	public String getStaffLicense() {
+		return this.staffLicense;
+	}
+	public void setEquipmentImgs(String equipmentImgs) {
+		this.equipmentImgs = equipmentImgs;
+	}
+	
+	public String getEquipmentImgs() {
+		return this.equipmentImgs;
+	}
+	public void setEquipment(String equipment) {
+		this.equipment = equipment;
+	}
+	
+	public String getEquipment() {
+		return this.equipment;
+	}
+	public void setTools(String tools) {
+		this.tools = tools;
+	}
+	
+	public String getTools() {
+		return this.tools;
+	}
+	public void setWorkstationImgs(String workstationImgs) {
+		this.workstationImgs = workstationImgs;
+	}
+	
+	public String getWorkstationImgs() {
+		return this.workstationImgs;
+	}
+	public void setRestAreaImgs(String restAreaImgs) {
+		this.restAreaImgs = restAreaImgs;
+	}
+	
+	public String getRestAreaImgs() {
+		return this.restAreaImgs;
+	}
+	public void setUpdateTime(Integer updateTime) {
+		this.updateTime = updateTime;
+	}
+	
+	public Integer getUpdateTime() {
+		return this.updateTime;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+	public String paramValidate() {
+		if (StringUtils.isEmpty(storeAptitudeId)) {
+			return "参数:storeCouponId不能为空";
+		}
+		return null;
+	}
+	@Override
+	public String toString() {
+		return "StoreAptitudeRequest [storeAptitudeId=" + storeAptitudeId +", fieldArea="
+				+ fieldArea + ", staffNumber=" + staffNumber + ", dailyCar=" + dailyCar + ", decoration=" + decoration
+				+ ", franchiseProjects=" + franchiseProjects + ", mergerProject=" + mergerProject
+				+ ", staffLicenseImgs=" + staffLicenseImgs + ", staffLicense=" + staffLicense + ", equipmentImgs="
+				+ equipmentImgs + ", equipment=" + equipment + ", tools=" + tools + ", workstationImgs="
+				+ workstationImgs + ", restAreaImgs=" + restAreaImgs + ", updateTime=" + updateTime + ", createTime="
+				+ createTime + ", getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode() + ", getTraceId()="
+				+ getTraceId() + "]";
+	}
+
+    
+}

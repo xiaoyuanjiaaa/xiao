@@ -1,0 +1,144 @@
+package com.fc.member.store.user.handler;
+
+import com.fc.common.exception.ErrorCode;
+import com.fc.member.store.user.entity.StoreBankCard;
+import com.fc.member.store.user.service.IStoreBankCardChangeService;
+import com.fc.member.store.user.service.IStoreBankCardService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.store.user.CheckStoreBankCardInfoRequest;
+import com.fc.protocol.demo.request.store.user.CreateStoreBankCardRequest;
+import com.fc.protocol.demo.request.store.user.StoreBankCardChangeRequest;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.Map;
+
+
+/**
+ * 银行卡信息
+ *
+ * @author zhuj
+ * @date 2018/12/28
+ */
+@Component
+@Handler(module = "shop")
+public class StoreBankCardHandler {
+    private static Logger log = LoggerFactory.getLogger(StoreBankCardHandler.class);
+    @Autowired
+    private IStoreBankCardService storeBankCardService;
+    @Autowired
+    private IStoreBankCardChangeService storeBankCardChangeService;
+
+    /**
+     * @param request 获取银行卡信息
+     * @author zhuj
+     * @date 2018/12/28
+     */
+    @ReqCodeMapping(requestClazz = CheckStoreBankCardInfoRequest.class)
+    public ProtocolResponse checkStoreBankCardInfo(CheckStoreBankCardInfoRequest request) {
+        log.info("银行卡信息request", request);
+        ProtocolResponse response = ProtocolResponse.newInstance();
+        //验证参数是否为空
+        String validateResult = request.paramValidatecheck();
+        if (validateResult != null) {
+            return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+        }
+        try {
+            //获取门店绑定的银行卡信息
+            StoreBankCard storeBankCardinfo = storeBankCardService.getByPK(request.getStoreId());
+            if (null != storeBankCardinfo) {
+                response.addData("store_bank_cardinfo", storeBankCardinfo).success();
+            } else {
+                response.error(ErrorCode.DATE_NOR_DEFIND.getValue()).msg(ErrorCode.DATE_NOR_DEFIND.getDesc());
+            }
+        } catch (Exception e) {
+            response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    /**
+     * @param request 绑定银行卡信息
+     * @author zhuj
+     * @date 2018/12/28
+     */
+    @ReqCodeMapping(requestClazz = CreateStoreBankCardRequest.class)
+    public ProtocolResponse createStoreBankCardInfo(CreateStoreBankCardRequest request) {
+        log.info("绑定银行卡信息request", request);
+        ProtocolResponse response = ProtocolResponse.newInstance();
+        //验证参数是否为空
+        String validateResult = request.paramValidate();
+        if (validateResult != null) {
+            return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+        }
+        try {
+            if (storeBankCardService.inputStoreBankCardInfo(request)) {
+                response.success();
+            } else {
+                response.error(ErrorCode.CREATE_ERROR.getValue()).msg(ErrorCode.CREATE_ERROR.getDesc());
+            }
+
+        } catch (Exception e) {
+            response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    /**
+     * @param request 修改银行卡信息
+     * @author zhuj
+     * @date 2018/12/28
+     */
+    @ReqCodeMapping(requestClazz = CreateStoreBankCardRequest.class)
+    public ProtocolResponse changeStoreBankCardInfo(CreateStoreBankCardRequest request) {
+        log.info("修改银行卡信息request", request);
+        ProtocolResponse response = ProtocolResponse.newInstance();
+        //验证参数是否为空
+        String validateResult = request.paramValidate();
+        if (validateResult != null) {
+            return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+        }
+        try {
+            if (storeBankCardService.changeStoreBankCardInfo(request)) {
+                response.success();
+            } else {
+                response.error(ErrorCode.UPDATE_ERROR.getValue()).msg(ErrorCode.UPDATE_ERROR.getDesc());
+            }
+        } catch (Exception e) {
+            response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    /**
+     * @param request 获取门店银行卡修改记录
+     * @author zhuj
+     * @date 2018/12/28
+     */
+    @ReqCodeMapping(requestClazz = StoreBankCardChangeRequest.class)
+    public ProtocolResponse getStoreBankCardChange(StoreBankCardChangeRequest request) {
+        log.info("银行卡记录request", request);
+        ProtocolResponse response = ProtocolResponse.newInstance();
+        //验证参数是否为空
+        String validateResult = request.paramValidatecheck();
+        if (validateResult != null) {
+            return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+        }
+        try {
+            //获取门店绑定的银行卡信息修改记录表
+            Map<String, Object> storeBankCardinfo = storeBankCardChangeService.getStoreBankCardChangeList(request);
+            response.success().setData(storeBankCardinfo);
+        } catch (Exception e) {
+            response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+            e.printStackTrace();
+        }
+        return response;
+    }
+}

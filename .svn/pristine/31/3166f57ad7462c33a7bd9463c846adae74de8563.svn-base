@@ -1,0 +1,26 @@
+package com.fc.member.wechatplatform.user.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.member.wechatplatform.user.dao.IWechatPlatformServiceCountDao;
+import com.fc.member.wechatplatform.user.service.IWechatPlatformServiceCountService;
+import com.fc.member.wechatplatform.user.entity.WechatPlatformServiceCount;
+/**
+ * <p>Title: WechatPlatformServiceCount</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-28 17:14:41
+ */
+@Service("wechatPlatformServiceCountService")
+public class WechatPlatformServiceCountServiceImp extends ServiceImpl<WechatPlatformServiceCount> implements IWechatPlatformServiceCountService{
+
+	@Autowired
+	private IWechatPlatformServiceCountDao wechatPlatformServiceCountDao;
+	
+	@Override
+	protected IMapper<WechatPlatformServiceCount> getDao() {
+		return wechatPlatformServiceCountDao;
+	}
+}

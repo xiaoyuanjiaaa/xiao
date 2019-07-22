@@ -1,0 +1,77 @@
+package com.fc.protocol.demo.request.fc;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.commons.lang.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+/**
+ * @author	xiaozw
+ * @data	2019年1月2日	
+ */
+@SuppressWarnings("serial")
+public class CreateUserRequest extends ProtocolRequest {
+	/**电话号码*/
+	private String phoneMob;
+	/**密码*/
+	private String password;
+	/**注册来源(微养车：maintain，微养车找店：platform，门店：store，商家：shop，师傅：master，pc收银：pc，师傅接车用户：masterUser)*/
+	private String registerSource;
+
+	public Map<String, Object> requestConvertMap() {
+		Map<String, Object> resultMap = new HashMap<>();
+		String validateResult = this.paramValidate();
+		if (validateResult == null) {
+			resultMap.put("phoneMob", phoneMob);
+			resultMap.put("password", password);
+			resultMap.put("registerSource", registerSource);
+		}
+		return resultMap;
+	}
+
+	public String getRegisterSource() {
+		return registerSource;
+	}
+
+	public void setRegisterSource(String registerSource) {
+		this.registerSource = registerSource;
+	}
+
+	public String getPhoneMob() {
+		return phoneMob;
+	}
+
+	public void setPhoneMob(String phoneMob) {
+		this.phoneMob = phoneMob;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String paramValidate() {
+		if (phoneMob == null) {
+			return "参数:phoneMob不能为空";
+		}
+		if (StringUtils.isBlank(password)) {
+			return "参数:password不能为空";
+		}
+
+		if (StringUtils.isBlank(registerSource)) {
+			return "参数:registerSource不能为空";
+		}
+		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "CreateUserRequest[getPhoneMob():" + getPhoneMob() + "getPassword():" + getPassword()
+				+ "getRegisterSource():" + getRegisterSource() + "]";
+	}
+}

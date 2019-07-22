@@ -1,0 +1,149 @@
+package com.fc.member.master.user.entity;
+
+import java.io.Serializable;
+
+
+/**
+ * <p>Table: MasterUserSelfCert</p>
+ * <p>Description: 师傅自传证书表</p>
+ * @author yangd
+ * @date 2019-01-15 10:09:30
+ */
+public class MasterUserSelfCert implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer masterUserSelfCertId; // 主键id
+	private Integer masterMemberId; // 师傅ID
+	private Integer status; // 证书状态(0-待审，2-审核不通过， 4 - 审核通过)
+	private String certType; // 证书类型
+	private String certId; // 证书编号
+	private String certName; // 证书名称
+	private String skillLevel; // 证书等级
+	private Integer certTime; // 发证日期
+	private String certUnit; // 发证单位
+	private Integer certImgId; // 证书照片id
+	private String certContent; // 证书内容
+	private String remark; // 审核不通过原因
+	private Integer createTime; // 创建时间
+	private Integer updateTime; // 修改时间
+
+	public void setMasterUserSelfCertId(Integer masterUserSelfCertId) {
+		this.masterUserSelfCertId = masterUserSelfCertId;
+	}
+	
+	public Integer getMasterUserSelfCertId() {
+		return this.masterUserSelfCertId;
+	}
+	public void setMasterMemberId(Integer masterMemberId) {
+		this.masterMemberId = masterMemberId;
+	}
+	
+	public Integer getMasterMemberId() {
+		return this.masterMemberId;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	
+	public Integer getStatus() {
+		return this.status;
+	}
+	public void setCertType(String certType) {
+		this.certType = certType;
+	}
+	
+	public String getCertType() {
+		return this.certType;
+	}
+	public void setCertId(String certId) {
+		this.certId = certId;
+	}
+	
+	public String getCertId() {
+		return this.certId;
+	}
+	public void setCertName(String certName) {
+		this.certName = certName;
+	}
+	
+	public String getCertName() {
+		return this.certName;
+	}
+	public void setSkillLevel(String skillLevel) {
+		this.skillLevel = skillLevel;
+	}
+	
+	public String getSkillLevel() {
+		return this.skillLevel;
+	}
+	public void setCertTime(Integer certTime) {
+		this.certTime = certTime;
+	}
+	
+	public Integer getCertTime() {
+		return this.certTime;
+	}
+	public void setCertUnit(String certUnit) {
+		this.certUnit = certUnit;
+	}
+	
+	public String getCertUnit() {
+		return this.certUnit;
+	}
+	public void setCertImgId(Integer certImgId) {
+		this.certImgId = certImgId;
+	}
+	
+	public Integer getCertImgId() {
+		return this.certImgId;
+	}
+	public void setCertContent(String certContent) {
+		this.certContent = certContent;
+	}
+	
+	public String getCertContent() {
+		return this.certContent;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	
+	public String getRemark() {
+		return this.remark;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+	public void setUpdateTime(Integer updateTime) {
+		this.updateTime = updateTime;
+	}
+	
+	public Integer getUpdateTime() {
+		return this.updateTime;
+	}
+
+    @Override
+    public String toString () {
+    	return "MasterUserSelfCert{" + 
+	    	"masterUserSelfCertId=" + masterUserSelfCertId + 
+	    	", masterMemberId=" + masterMemberId + 
+	    	", status=" + status + 
+	    	", certType=" + certType + 
+	    	", certId=" + certId + 
+	    	", certName=" + certName + 
+	    	", skillLevel=" + skillLevel + 
+	    	", certTime=" + certTime + 
+	    	", certUnit=" + certUnit + 
+	    	", certImgId=" + certImgId + 
+	    	", certContent=" + certContent + 
+	    	", remark=" + remark + 
+	    	", createTime=" + createTime + 
+	    	", updateTime=" + updateTime + 
+	    	"}";
+    }
+}

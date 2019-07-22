@@ -1,0 +1,105 @@
+package com.fc.protocol.demo.request.store.user;
+
+import org.apache.commons.lang.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+/**
+ * 查询用户request
+ * @author	xiaozw
+ * @data	2019-01-08	
+ */
+@SuppressWarnings("serial")
+public class CreateBasicInfoOneRequest extends ProtocolRequest {
+
+	/**用户id*/
+	private Integer publicUserId;
+	/**门店名称*/
+	private String storeName;
+	/**店主名*/
+	private String BossName;
+	/**门店联系电话*/
+	private String phoneTel;
+	/**营业执照编号*/
+	private String businessLicenseCode;
+	/**营业执照注册名称*/
+	private String businessLicenseName;
+
+	public String paramValidate() {
+		if (publicUserId == null) {
+			return "参数：publicUserId不能为空";
+		}
+		if (StringUtils.isBlank(storeName)) {
+			return "参数：storeName不能为空";
+		}
+		if (StringUtils.isBlank(BossName)) {
+			return "参数：BossName不能为空";
+		}
+		if (StringUtils.isBlank(phoneTel)) {
+			return "参数：phoneTel不能为空";
+		}
+		if (StringUtils.isBlank(businessLicenseCode)) {
+			return "参数：businessLicenseCode不能为空";
+		}
+		if (StringUtils.isBlank(businessLicenseName)) {
+			return "参数：businessLicenseName不能为空";
+		}
+		return null;
+	}
+
+	public String getStoreName() {
+		return storeName;
+	}
+
+	public void setStoreName(String storeName) {
+		this.storeName = storeName;
+	}
+
+	public String getBossName() {
+		return BossName;
+	}
+
+	public void setBossName(String bossName) {
+		BossName = bossName;
+	}
+
+	public String getPhoneTel() {
+		return phoneTel;
+	}
+
+	public void setPhoneTel(String phoneTel) {
+		this.phoneTel = phoneTel;
+	}
+
+	public String getBusinessLicenseCode() {
+		return businessLicenseCode;
+	}
+
+	public void setBusinessLicenseCode(String businessLicenseCode) {
+		this.businessLicenseCode = businessLicenseCode;
+	}
+
+	public String getBusinessLicenseName() {
+		return businessLicenseName;
+	}
+
+	public void setBusinessLicenseName(String businessLicenseName) {
+		this.businessLicenseName = businessLicenseName;
+	}
+
+	public Integer getPublicUserId() {
+		return publicUserId;
+	}
+
+	public void setPublicUserId(Integer publicUserId) {
+		this.publicUserId = publicUserId;
+	}
+
+	@Override
+	public String toString() {
+		return "StoreBankCardRequest [storeName=" + storeName + ", " + "BossName=" + BossName + ", " + "phoneTel="
+				+ phoneTel + ", " + "businessLicenseCode=" + businessLicenseCode + ", " + "businessLicenseName="
+				+ businessLicenseName + "getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode()
+				+ ", getTraceId()=" + getTraceId() + "]";
+	}
+}

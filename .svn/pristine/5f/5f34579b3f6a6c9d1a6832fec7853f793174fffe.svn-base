@@ -1,0 +1,104 @@
+package com.fc.member.shop.user.entity;
+
+import java.io.Serializable;
+
+
+/**
+ * <p>Table: ShopWithdrawalinfo</p>
+ * <p>Description: 商家提现信息表</p>
+ * @author yangd
+ * @date 2019-01-14 11:08:41
+ */
+public class ShopWithdrawalinfo implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer shopWithdrawalinfoId; // 店铺id
+	private Integer shopId; // 店铺id
+	private Integer withdrawedCashAmount; // 已提现金额
+	private Integer withdrawingCashAmount; // 申请提现金额
+	private Integer accounts; // 账户余额
+	private Integer frozenAmount; // 冻结金额
+	private String withdrawalNum; // 提现次数
+	private Integer updateTime; // 修改时间
+	private Integer createTime; // 创建时间
+
+	public void setShopWithdrawalinfoId(Integer shopWithdrawalinfoId) {
+		this.shopWithdrawalinfoId = shopWithdrawalinfoId;
+	}
+	
+	public Integer getShopWithdrawalinfoId() {
+		return this.shopWithdrawalinfoId;
+	}
+	public void setShopId(Integer shopId) {
+		this.shopId = shopId;
+	}
+	
+	public Integer getShopId() {
+		return this.shopId;
+	}
+	public void setWithdrawedCashAmount(Integer withdrawedCashAmount) {
+		this.withdrawedCashAmount = withdrawedCashAmount;
+	}
+	
+	public Integer getWithdrawedCashAmount() {
+		return this.withdrawedCashAmount;
+	}
+	public void setWithdrawingCashAmount(Integer withdrawingCashAmount) {
+		this.withdrawingCashAmount = withdrawingCashAmount;
+	}
+	
+	public Integer getWithdrawingCashAmount() {
+		return this.withdrawingCashAmount;
+	}
+	public void setAccounts(Integer accounts) {
+		this.accounts = accounts;
+	}
+	
+	public Integer getAccounts() {
+		return this.accounts;
+	}
+	public void setFrozenAmount(Integer frozenAmount) {
+		this.frozenAmount = frozenAmount;
+	}
+	
+	public Integer getFrozenAmount() {
+		return this.frozenAmount;
+	}
+	public void setWithdrawalNum(String withdrawalNum) {
+		this.withdrawalNum = withdrawalNum;
+	}
+	
+	public String getWithdrawalNum() {
+		return this.withdrawalNum;
+	}
+	public void setUpdateTime(Integer updateTime) {
+		this.updateTime = updateTime;
+	}
+	
+	public Integer getUpdateTime() {
+		return this.updateTime;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+
+    @Override
+    public String toString () {
+    	return "ShopWithdrawalinfo{" + 
+	    	"shopWithdrawalinfoId=" + shopWithdrawalinfoId + 
+	    	", shopId=" + shopId + 
+	    	", withdrawedCashAmount=" + withdrawedCashAmount + 
+	    	", withdrawingCashAmount=" + withdrawingCashAmount + 
+	    	", accounts=" + accounts + 
+	    	", frozenAmount=" + frozenAmount + 
+	    	", withdrawalNum=" + withdrawalNum + 
+	    	", updateTime=" + updateTime + 
+	    	", createTime=" + createTime + 
+	    	"}";
+    }
+}

@@ -1,0 +1,95 @@
+package com.fc.member.store.user.service.impl;
+
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.store.user.entity.PublicUser;
+import com.fc.member.store.user.service.IPublicUserService;
+import com.fc.protocol.demo.request.store.user.StoreBossInfoRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.member.store.user.dao.IStoreBasicInfoDao;
+import com.fc.member.store.user.service.IStoreBasicInfoService;
+import com.fc.member.store.user.entity.StoreBasicInfo;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * <p>Title: StoreBasicInfo</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:05
+ */
+@Service("storeBasicInfoService")
+public class StoreBasicInfoServiceImp extends ServiceImpl<StoreBasicInfo> implements IStoreBasicInfoService{
+	private static Logger log = LoggerFactory.getLogger(StoreBasicInfoServiceImp.class);
+	@Autowired
+	private IStoreBasicInfoDao storeBasicInfoDao;
+	@Autowired
+	private IPublicUserService publicUserService;
+	@Override
+	protected IMapper<StoreBasicInfo> getDao() {
+		return storeBasicInfoDao;
+	}
+
+	/***@author zhuj
+	 *@date 2018/12/28
+	 * @param id
+	 * @description 获取店主信息
+	 *
+	 */
+	@Override
+	public Map<String, Object> getStoreBossInfo(Integer id) {
+		//先验证信息是否存在
+		StoreBasicInfo storeBasicInfo = getByPK(id);
+		//组装返回数据
+		if(null!=storeBasicInfo){
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("storeId", storeBasicInfo.getStoreId());
+			map.put("storeBossName", storeBasicInfo.getUserName());
+			map.put("storeBossEmail", storeBasicInfo.getStoreBossEmail());
+			map.put("storeBossqq", storeBasicInfo.getStoreBossqq());
+			return map;
+		}
+		return null;
+	}
+
+	/***@author zhuj
+	 *@date 2018/12/28
+	 * @param request
+	 * @description 修改店主信息
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public boolean changeStoreBossInfo(StoreBossInfoRequest request) throws Exception {
+		//先验证是否存在店主信息
+		log.info("先验证是否存在店主信息",  request);
+		StoreBasicInfo storeBasicInfo = getByPK(request.getStoreId());
+		if(null!=storeBasicInfo) {
+
+			StoreBasicInfo storeBossInfo = new StoreBasicInfo();
+			storeBossInfo.setStoreBossEmail(request.getStoreBossEmail());
+			storeBossInfo.setStoreId(request.getStoreId());
+			storeBossInfo.setStoreBossqq(request.getStoreBossqq());
+			storeBossInfo.setUpdateTime(DateTimeUtils.getDateTimeInteger());
+			//修改店主信息
+			update(storeBossInfo);
+
+			PublicUser publicUser = new PublicUser();
+			publicUser.setPublicUserId(request.getStoreId());
+			publicUser.setEmail(request.getStoreBossEmail());
+			publicUser.setQq(Integer.parseInt(request.getStoreBossqq()));
+			publicUser.setUpdateTime(DateTimeUtils.getDateTimeInteger());
+			//修改店主信息插入主表
+			publicUserService.update(publicUser);
+		}else{
+			return false;
+		}
+		return true;
+	}
+
+}

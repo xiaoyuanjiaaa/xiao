@@ -1,0 +1,89 @@
+package com.fc.member.wechatplatform.user.entity;
+
+
+import java.io.Serializable;
+
+
+/**
+ * <p>Table: WechatPlatformServiceCount</p>
+ * <p>Description: </p>
+ * @author yangd
+ * @date 2018-12-28 17:14:41
+ */
+public class WechatPlatformServiceCount implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer id; // 自增id
+	private String openid; // 游客openid
+	private Integer serviceId; // 一级服务分类ID
+	private String serviceTitle; // 一级服务分类名称
+	private Integer openNumber; // 打开次数统计
+	private Integer createTime; // 创建时间
+	private Integer recentTime; // 最近使用时间
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
+	public Integer getId() {
+		return this.id;
+	}
+	public void setOpenid(String openid) {
+		this.openid = openid;
+	}
+	
+	public String getOpenid() {
+		return this.openid;
+	}
+	public void setServiceId(Integer serviceId) {
+		this.serviceId = serviceId;
+	}
+	
+	public Integer getServiceId() {
+		return this.serviceId;
+	}
+	public void setServiceTitle(String serviceTitle) {
+		this.serviceTitle = serviceTitle;
+	}
+	
+	public String getServiceTitle() {
+		return this.serviceTitle;
+	}
+	public void setOpenNumber(Integer openNumber) {
+		this.openNumber = openNumber;
+	}
+	
+	public Integer getOpenNumber() {
+		return this.openNumber;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+	public void setRecentTime(Integer recentTime) {
+		this.recentTime = recentTime;
+	}
+	
+	public Integer getRecentTime() {
+		return this.recentTime;
+	}
+
+
+
+    @Override
+    public String toString () {
+    	return "WechatPlatformServiceCount{" + 
+	    	"id=" + id + 
+	    	", openid=" + openid + 
+	    	", serviceId=" + serviceId + 
+	    	", serviceTitle=" + serviceTitle + 
+	    	", openNumber=" + openNumber + 
+	    	", createTime=" + createTime + 
+	    	", recentTime=" + recentTime + 
+	    	"}";
+    }
+}

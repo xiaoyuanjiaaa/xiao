@@ -1,0 +1,85 @@
+package com.fc.member.store.user.entity;
+
+import java.io.Serializable;
+
+/**
+ * <p>Table: StoreBoss</p>
+ * <p>Description: </p>
+ * @author yangd
+ * @date 2018-12-27 16:31:05
+ */
+public class StoreBoss implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer storeBossId; // 门店店主id
+	private Integer storeId; // 所属用户ID
+	private String storeBossName; // 店主姓名
+	private String storeBossEmail; // 店主邮箱
+	private String storeBossQq; // 店主QQ
+	private Integer updateTime; // 更新时间
+	private Integer createTime; // 创建时间
+
+	public void setStoreBossId(Integer storeBossId) {
+		this.storeBossId = storeBossId;
+	}
+	
+	public Integer getStoreBossId() {
+		return this.storeBossId;
+	}
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+	
+	public Integer getStoreId() {
+		return this.storeId;
+	}
+	public void setStoreBossName(String storeBossName) {
+		this.storeBossName = storeBossName;
+	}
+	
+	public String getStoreBossName() {
+		return this.storeBossName;
+	}
+	public void setStoreBossEmail(String storeBossEmail) {
+		this.storeBossEmail = storeBossEmail;
+	}
+	
+	public String getStoreBossEmail() {
+		return this.storeBossEmail;
+	}
+	public void setStoreBossQq(String storeBossQq) {
+		this.storeBossQq = storeBossQq;
+	}
+	
+	public String getStoreBossQq() {
+		return this.storeBossQq;
+	}
+	public void setUpdateTime(Integer updateTime) {
+		this.updateTime = updateTime;
+	}
+	
+	public Integer getUpdateTime() {
+		return this.updateTime;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+
+    @Override
+    public String toString () {
+    	return "StoreBoss{" + 
+	    	"storeBossId=" + storeBossId + 
+	    	", storeId=" + storeId + 
+	    	", storeBossName=" + storeBossName + 
+	    	", storeBossEmail=" + storeBossEmail + 
+	    	", storeBossQq=" + storeBossQq + 
+	    	", updateTime=" + updateTime + 
+	    	", createTime=" + createTime + 
+	    	"}";
+    }
+}

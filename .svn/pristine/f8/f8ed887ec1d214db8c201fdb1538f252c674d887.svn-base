@@ -1,0 +1,22 @@
+package com.fc.member.store.user.dao;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.member.store.user.entity.StoreCoupon;
+/**
+ * <p>Title: StoreCoupon</p>
+ * <p>Description:  DAO层</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:06
+ */
+@Mapper
+public interface IStoreCouponDao extends IMapper<StoreCoupon>{
+	/**
+	 * 新增门店套餐使用范围
+	 * @param storeCoupon
+	 * @return
+	 * @throws Exception
+	 */
+	int insertSelective(StoreCoupon storeCoupon) throws Exception;
+}

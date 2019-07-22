@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.store.user.dao.IStoreDictionariesDao">
+	<resultMap id="StoreDictionariesMap" type="com.fc.member.store.user.entity.StoreDictionaries">
+        <id property="dictionariesId" column="dictionaries_id"/>
+        <id property="type" column="type"/>
+        <id property="parentId" column="parent_id"/>
+        <id property="dictionariesKey" column="dictionaries_key"/>
+        <id property="dictionariesValue" column="dictionaries_value"/>
+        <id property="sort" column="sort"/>
+        <id property="isFixed" column="is_fixed"/>
+        <id property="isDeleted" column="is_deleted"/>
+        <id property="updateName" column="update_name"/>
+        <id property="updateTime" column="update_time"/>
+        <id property="createName" column="create_name"/>
+        <id property="createTime" column="create_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="StoreDictionariesMap" >
+		select * from store_dictionaries where 
+	        dictionaries_id = #{dictionariesId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.store.user.entity.StoreDictionaries" useGeneratedKeys="true">
+		insert into store_dictionaries(dictionaries_id , type , parent_id , dictionaries_key , dictionaries_value , sort , is_fixed , is_deleted , update_name , update_time , create_name , create_time  )
+    	values(#{dictionariesId} ,#{type} ,#{parentId} ,#{dictionariesKey} ,#{dictionariesValue} ,#{sort} ,#{isFixed} ,#{isDeleted} ,#{updateName} ,#{updateTime} ,#{createName} ,#{createTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.store.user.entity.StoreDictionaries" useGeneratedKeys="true">
+		insert into store_dictionaries
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="dictionariesId != null">dictionaries_id,</if>
+					<if test="type != null">type,</if>
+					<if test="parentId != null">parent_id,</if>
+					<if test="dictionariesKey != null">dictionaries_key,</if>
+					<if test="dictionariesValue != null">dictionaries_value,</if>
+					<if test="sort != null">sort,</if>
+					<if test="isFixed != null">is_fixed,</if>
+					<if test="isDeleted != null">is_deleted,</if>
+					<if test="updateName != null">update_name,</if>
+					<if test="updateTime != null">update_time,</if>
+					<if test="createName != null">create_name,</if>
+					<if test="createTime != null">create_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="dictionariesId != null">#{dictionariesId},</if>
+					<if test="type != null">#{type},</if>
+					<if test="parentId != null">#{parentId},</if>
+					<if test="dictionariesKey != null">#{dictionariesKey},</if>
+					<if test="dictionariesValue != null">#{dictionariesValue},</if>
+					<if test="sort != null">#{sort},</if>
+					<if test="isFixed != null">#{isFixed},</if>
+					<if test="isDeleted != null">#{isDeleted},</if>
+					<if test="updateName != null">#{updateName},</if>
+					<if test="updateTime != null">#{updateTime},</if>
+					<if test="createName != null">#{createName},</if>
+					<if test="createTime != null">#{createTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.store.user.entity.StoreDictionaries">
+		update store_dictionaries
+		<set>
+		    	<if test="type != null">type = #{type},</if>
+		    	<if test="parentId != null">parent_id = #{parentId},</if>
+		    	<if test="dictionariesKey != null">dictionaries_key = #{dictionariesKey},</if>
+		    	<if test="dictionariesValue != null">dictionaries_value = #{dictionariesValue},</if>
+		    	<if test="sort != null">sort = #{sort},</if>
+		    	<if test="isFixed != null">is_fixed = #{isFixed},</if>
+		    	<if test="isDeleted != null">is_deleted = #{isDeleted},</if>
+		    	<if test="updateName != null">update_name = #{updateName},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		    	<if test="createName != null">create_name = #{createName},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		</set>
+		where 
+	        dictionaries_id = #{dictionariesId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from store_dictionaries where 
+	        dictionaries_id = #{dictionariesId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.store.user.entity.StoreDictionaries" resultMap="StoreDictionariesMap" >
+		select * from store_dictionaries 
+		<where>
+		       <if test="dictionariesId != null">
+					AND dictionaries_id = #{dictionariesId}
+				</if>
+		       <if test="type != null">
+					AND type = #{type}
+				</if>
+		       <if test="parentId != null">
+					AND parent_id = #{parentId}
+				</if>
+		       <if test="dictionariesKey != null">
+					AND dictionaries_key = #{dictionariesKey}
+				</if>
+		       <if test="dictionariesValue != null">
+					AND dictionaries_value = #{dictionariesValue}
+				</if>
+		       <if test="sort != null">
+					AND sort = #{sort}
+				</if>
+		       <if test="isFixed != null">
+					AND is_fixed = #{isFixed}
+				</if>
+		       <if test="isDeleted != null">
+					AND is_deleted = #{isDeleted}
+				</if>
+		       <if test="updateName != null">
+					AND update_name = #{updateName}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		       <if test="createName != null">
+					AND create_name = #{createName}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="StoreDictionariesMap" >
+		select * from store_dictionaries  
+		<where>
+		       <if test="condition.dictionariesId != null">
+					AND dictionaries_id = #{condition.dictionariesId}
+				</if>
+		       <if test="condition.type != null">
+					AND type = #{condition.type}
+				</if>
+		       <if test="condition.parentId != null">
+					AND parent_id = #{condition.parentId}
+				</if>
+		       <if test="condition.dictionariesKey != null">
+					AND dictionaries_key = #{condition.dictionariesKey}
+				</if>
+		       <if test="condition.dictionariesValue != null">
+					AND dictionaries_value = #{condition.dictionariesValue}
+				</if>
+		       <if test="condition.sort != null">
+					AND sort = #{condition.sort}
+				</if>
+		       <if test="condition.isFixed != null">
+					AND is_fixed = #{condition.isFixed}
+				</if>
+		       <if test="condition.isDeleted != null">
+					AND is_deleted = #{condition.isDeleted}
+				</if>
+		       <if test="condition.updateName != null">
+					AND update_name = #{condition.updateName}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		       <if test="condition.createName != null">
+					AND create_name = #{condition.createName}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

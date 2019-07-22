@@ -1,0 +1,18 @@
+package com.fc.protocol.server.demo.service;
+
+import java.util.List;
+import java.util.Map;
+
+import com.fc.protocol.server.demo.entity.WechatRecharge;
+import com.fc.protocol.server.demo.persistance.mybatis.Page;
+
+
+/**
+ * 储值卡充值 Service 接口
+ * @author yangd
+ * @date 2018年10月19日
+ */
+public interface IWechatRechargeService extends IService<WechatRecharge> {
+
+	List<Map<String, Object>> getRechargeOpListPage(Page page, Map<String, Object> params);
+}

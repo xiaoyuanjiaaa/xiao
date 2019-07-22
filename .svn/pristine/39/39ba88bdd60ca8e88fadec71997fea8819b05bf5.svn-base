@@ -1,0 +1,33 @@
+package com.fc.member.wechatplatform.user.service;
+
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.service.IService;
+import com.fc.member.wechatplatform.user.entity.WechatPlatformUser;
+import com.fc.member.wechatplatform.user.entity.WechatPlatformUserFeedback;
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * <p>Title: WechatPlatformUserFeedback</p>
+ * <p>Description:  Service 接口</p>
+ * @author yangd
+ * @date 2018-12-28 17:14:42
+ */
+public interface IWechatPlatformUserFeedbackService extends IService<WechatPlatformUserFeedback>{
+
+    // 根据feedback_id查询反馈信息
+    WechatPlatformUserFeedback getByFeedback_id(Integer openid);
+
+    // 查询反馈信息List
+    List<WechatPlatformUserFeedback> getFeedbackList(Map<String, Object> map, Page page);
+
+    // 新增反馈信息
+    int insertPlatformUserFeedback(WechatPlatformUserFeedback wechatPlatformUser);
+
+    // 更新反馈信息
+    int updatePlatformUserFeedback(WechatPlatformUserFeedback obj);
+
+    // 删除反馈信息
+    int deletePlatformUserFeedback(Integer platformUserId);
+}

@@ -1,0 +1,196 @@
+package com.fc.member.store.user.handler;
+
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.fc.common.exception.ErrorCode;
+import com.fc.member.store.user.entity.StoreBasicInfo;
+import com.fc.member.store.user.service.IStoreBasicInfoService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.store.user.SbiCreateOneRequest;
+import com.fc.protocol.demo.request.store.user.SbiCreateThreeRequest;
+import com.fc.protocol.demo.request.store.user.SbiCreateTwoRequest;
+import com.fc.protocol.demo.request.store.user.SbiQueryByStoreIdRequest;
+import com.fc.protocol.demo.request.store.user.SbiQueryInfoRequest;
+import com.fc.protocol.demo.request.store.user.SbiUpdateRequest;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+
+/**
+ * 门店基本信息
+ * @author xiaozw
+ * @date 2019-01-08
+ */
+@Component
+@Handler(module = "store")
+public class StoreBasicInfoHandler {
+
+	private static Logger log = LoggerFactory.getLogger(StoreBasicInfoHandler.class);
+
+	@Autowired
+	private IStoreBasicInfoService storeBasicInfoService;
+
+	/**
+	 * 根据publicUserId查询门店基本信息接口
+	 * @author	xiaozw
+	 * @see update_name:xiaozw update_time:2019-01-08 17:03
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = SbiQueryInfoRequest.class)
+	public ProtocolResponse sbiQueryInfo(SbiQueryInfoRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance();
+		try {
+			log.info("sbiQueryInfo------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			}
+			StoreBasicInfo storeBasicInfo = storeBasicInfoService.getBasicInfo(request.getPublicUserId());
+			if (storeBasicInfo == null) {
+				return response.error(ErrorCode.DATE_NOR_DEFIND.getValue()).msg("门店不存在");
+			}
+			return response.success().addData("store_basic_info", storeBasicInfo);
+		} catch (Exception e) {
+			log.info("sbiQueryInfo系统异常！:", e);
+			e.printStackTrace();
+			return response.error(ErrorCode.QUERY_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+	}
+
+	/**
+	 * 新增门店第一个接口	是否需要验证public_user_id?
+	 * @author	xiaozw
+	 * @see update_name:xiaozw update_time:2019-01-08 17:08
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = SbiCreateOneRequest.class)
+	public ProtocolResponse sbiCreateOne(SbiCreateOneRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			log.info("sbiCreateOne------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			}
+			Map<String, String> resultMap = storeBasicInfoService.insertBasicInfoOne(request);
+			if (!resultMap.isEmpty()) {
+				return response.error(ErrorCode.DATE_NOR_DEFIND.getValue()).msg(resultMap.get("error"));
+			}
+			return response;
+		} catch (Exception e) {
+			log.info("sbiCreateOne系统异常！:", e);
+			e.printStackTrace();
+			return response.error(ErrorCode.CREATE_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+	}
+
+	/**
+	 * 新增门店第二个接口
+	 * @author	xiaozw
+	 * @see update_name:xiaozw update_time:2019-01-08 20:29
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = SbiCreateTwoRequest.class)
+	public ProtocolResponse sbiCreateTwo(SbiCreateTwoRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			log.info("sbiCreateTwo------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			}
+			if (!storeBasicInfoService.insertBasicInfoTwo(request)) {
+				return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg(ErrorCode.UPDATE_ERROR.getDesc());
+			}
+			return response;
+		} catch (Exception e) {
+			log.info("sbiCreateTwo系统异常！:", e);
+			e.printStackTrace();
+			return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+	}
+
+	/**
+	 * 新增门店第三个接口
+	 * @author	xiaozw
+	 * @see update_name:xiaozw update_time:2019-01-08 20:58
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = SbiCreateThreeRequest.class)
+	public ProtocolResponse sbiCreateThree(SbiCreateThreeRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			log.info("sbiCreateThree------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			}
+			if (!storeBasicInfoService.insertBasicInfoThree(request)) {
+				return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg(ErrorCode.UPDATE_ERROR.getDesc());
+			}
+			return response;
+		} catch (Exception e) {
+			log.info("sbiCreateThree系统异常！:", e);
+			e.printStackTrace();
+			return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+	}
+
+	/**
+	 * 根据门店id查询门店信息
+	 * @author	xiaozw
+	 * @see update_name:xiaozw update_time:2019-01-09 01:09
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = SbiQueryByStoreIdRequest.class)
+	public ProtocolResponse sbiQueryByStoreId(SbiQueryByStoreIdRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			log.info("sbiQueryByStoreId------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			}
+			StoreBasicInfo storeBasicInfo = storeBasicInfoService.getByPK(request.getStoreId());
+			if (storeBasicInfo == null) {
+				return response.error(ErrorCode.DATE_NOR_DEFIND.getValue()).msg(ErrorCode.DATE_NOR_DEFIND.getDesc());
+			}
+			return response.addData("store_basic_info", storeBasicInfo);
+		} catch (Exception e) {
+			log.info("sbiQueryByStoreId系统异常！:", e);
+			e.printStackTrace();
+			return response.error(ErrorCode.QUERY_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+	}
+
+	/**
+	 * 公共字段修改门店信息
+	 * @author	xiaozw
+	 * @see update_name:xiaozw update_time:2019-01-09 18:23
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = SbiUpdateRequest.class)
+	public ProtocolResponse sbiUpdate(SbiUpdateRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			log.info("sbiUpdate------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			}
+			if (!storeBasicInfoService.updateBasicInfo(request)) {
+				return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg(ErrorCode.UPDATE_ERROR.getDesc());
+			}
+			return response;
+		} catch (Exception e) {
+			log.info("sbiUpdate系统异常！:", e);
+			e.printStackTrace();
+			return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+	}
+
+}

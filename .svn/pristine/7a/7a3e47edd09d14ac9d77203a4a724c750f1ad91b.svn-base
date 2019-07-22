@@ -1,0 +1,35 @@
+package com.fc.member.master.pickcar.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+
+import com.fc.member.master.pickcar.dao.IMasterPickcarUserCarDao;
+import com.fc.member.master.pickcar.service.IMasterPickcarUserCarService;
+import com.fc.member.master.pickcar.entity.MasterPickcarUserCar;
+/**
+ * <p>Title: MasterPickcarUserCar</p>
+ * <p>Description: 师傅车主-车辆档案表(主表) Service 层</p>
+ * @author yangd
+ * @date 2019-01-15 11:56:03
+ */
+@Service("masterPickcarUserCarService")
+public class MasterPickcarUserCarServiceImp extends ServiceImpl<MasterPickcarUserCar> implements IMasterPickcarUserCarService{
+
+	@Autowired
+	private IMasterPickcarUserCarDao masterPickcarUserCarDao;
+	
+	@Override
+	protected IMapper<MasterPickcarUserCar> getDao() {
+		return masterPickcarUserCarDao;
+	}
+	/**
+	 * 插入数据
+	 * @return
+	 */
+	@Override
+	public int insertSelective(MasterPickcarUserCar obj) {
+		return masterPickcarUserCarDao.insertSelective(obj);
+	}
+}

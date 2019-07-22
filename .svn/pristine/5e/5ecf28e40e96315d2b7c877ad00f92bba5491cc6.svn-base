@@ -1,0 +1,201 @@
+package com.fc.member.wechatmaintain.user.handler;
+
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.fc.common.exception.ErrorCode;
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.wechatmaintain.user.entity.WechatMaintainCouponSstoreUser;
+import com.fc.member.wechatmaintain.user.service.IWechatMaintainCouponSstoreUserService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainCouponSstoreUserByStoreIdRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainCouponSstoreUserCreateRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainCouponSstoreUserDetailsRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainCouponSstoreUserEditSaveRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainCouponSstoreUserListRequest;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+
+/**
+ * 微养车用户会员卡
+ * @author yangd
+ * @date 2019年1月4日
+ */
+@Component
+@Handler(module = "wechatmaintain")
+public class WechatMaintainCouponSstoreUserHandler {
+
+	private static Logger log = LoggerFactory.getLogger(WechatMaintainCouponSstoreUserHandler.class);
+
+	@Autowired
+	IWechatMaintainCouponSstoreUserService wechatMaintainCouponSstoreUserService;
+
+	/**
+	 * 微养车 - 查询会员卡列表
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-05
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WechatMaintainCouponSstoreUserListRequest.class)
+	public ProtocolResponse wechatMaintainCouponSstoreUserList(WechatMaintainCouponSstoreUserListRequest request) {
+		log.info("时间:{} , wechatMaintainCouponSstoreUserList------>request:{}", DateTimeUtils.getNow(), request);
+
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			// 分页对象
+			Page page = new Page();
+			page.setPage(request.getPage_no());
+			page.setRows(request.getPage_size());
+			page.setShowTotal(true);
+			List<WechatMaintainCouponSstoreUser> couponSstoreUserList = wechatMaintainCouponSstoreUserService
+					.getWechatMaintainCouponSstoreUserListPage(page, request);
+			response.addData("coupon_sstore_user_list", couponSstoreUserList).addData("page_count", page.getPage())
+					.addData("count", page.getTotalResult());
+		} catch (Exception e) {
+			log.error("wechatMaintainCouponSstoreUserList系统异常！", e);
+			response.error(ErrorCode.QUERY_ERROR.getValue()).msg("代码异常，请联系开发人员！");
+		}
+		log.info("时间:{} , 返回结果 wechatMaintainCouponSstoreUserList------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+
+	/**
+	 * 微养车 - 查询门店会员用户列表
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-05
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WechatMaintainCouponSstoreUserByStoreIdRequest.class)
+	public ProtocolResponse wechatMaintainCouponSstoreUserByStoreId(
+			WechatMaintainCouponSstoreUserByStoreIdRequest request) {
+		log.info("时间:{} , wechatMaintainCouponSstoreUserList------>request:{}", DateTimeUtils.getNow(), request);
+
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidate();
+			if (validResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+			List<WechatMaintainCouponSstoreUser> couponSstoreUserList = wechatMaintainCouponSstoreUserService
+					.getWechatMaintainCouponSstoreUserByStoreIdList(request);
+
+			response.addData("coupon_sstore_user_list", couponSstoreUserList);
+		} catch (Exception e) {
+			log.error("wechatMaintainCouponSstoreUserByStoreId系统异常！", e);
+			response.error(ErrorCode.QUERY_ERROR.getValue()).msg("代码异常，请联系开发人员！");
+		}
+		log.info("时间:{} , 返回结果 wechatMaintainCouponSstoreUserList------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+
+	/**
+	 * 微养车 - 查询用户在此门店会员卡详细信息
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-05
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WechatMaintainCouponSstoreUserDetailsRequest.class)
+	public ProtocolResponse wechatMaintainCouponSstoreUserDetails(
+			WechatMaintainCouponSstoreUserDetailsRequest request) {
+		log.info("时间:{} , wechatMaintainCouponSstoreUserDetails------>request:{}", DateTimeUtils.getNow(), request);
+
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidate();
+			if (validResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+
+			response.addData("coupon_sstore_user",
+					wechatMaintainCouponSstoreUserService.getCouponStoreByUserIdAndStoreId(request));
+		} catch (Exception e) {
+			log.error("wechatMaintainCouponSstoreUserDetails系统异常！", e);
+			response.error(ErrorCode.QUERY_ERROR.getValue()).msg("代码异常，请联系开发人员！");
+		}
+		log.info("时间:{} , 返回结果 wechatMaintainCouponSstoreUserDetails------>response:{}", DateTimeUtils.getNow(),
+				response);
+		return response;
+	}
+
+	/**
+	 * 微养车 - 创建用户会员卡
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-05
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WechatMaintainCouponSstoreUserCreateRequest.class)
+	public ProtocolResponse wechatMaintainCouponSstoreUserCreate(WechatMaintainCouponSstoreUserCreateRequest request) {
+		log.info("时间:{} , 请求参数 wechatMaintainCouponSstoreUserCreate------>request:{}", DateTimeUtils.getNow(), request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidate();
+			if (validResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+
+			Map<String, Object> resultStatus = wechatMaintainCouponSstoreUserService.insertSelective(request);
+			log.info("resultStatus------>{}", resultStatus);
+			if (resultStatus.isEmpty()) {
+				response.msg("创建成功");
+			} else {
+				response.error(ErrorCode.CREATE_ERROR.getValue()).msg(resultStatus.get("error").toString());
+			}
+		} catch (Exception e) {
+			log.error("wechatMaintainCouponSstoreUserCreate系统异常！", e);
+			response.error(ErrorCode.CREATE_ERROR.getValue()).msg("代码异常，请联系开发人员！");
+		}
+		log.info("时间:{} , 返回结果 wechatMaintainCouponSstoreUserCreate------>response:{}", DateTimeUtils.getNow(),
+				response);
+		return response;
+	}
+
+	/**
+	 * 微养车 - 更新用户会员卡信息
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-05
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WechatMaintainCouponSstoreUserEditSaveRequest.class)
+	public ProtocolResponse wechatMaintainCouponSstoreUserEditSave(
+			WechatMaintainCouponSstoreUserEditSaveRequest request) {
+		log.info("时间:{} , 请求参数 wechatMaintainCouponSstoreUserEditSave------>request:{}", DateTimeUtils.getNow(),
+				request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidate();
+			if (validResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+			Map<String, Object> resultStatus = wechatMaintainCouponSstoreUserService
+					.updateWechatMaintainCouponSstoreUser(request);
+			log.info("resultStatus------>{}", resultStatus);
+			if (resultStatus.isEmpty()) {
+				response.msg("修改成功");
+			} else {
+				response.error(ErrorCode.UPDATE_ERROR.getValue()).msg(resultStatus.get("error").toString());
+			}
+		} catch (Exception e) {
+			log.error("wechatMaintainCouponSstoreUserEditSave系统异常！", e);
+			response.error(ErrorCode.UPDATE_ERROR.getValue()).msg("代码异常，请联系开发人员！");
+		}
+		log.info("时间:{} , 返回结果 wechatMaintainCouponSstoreUserEditSave------>response:{}", DateTimeUtils.getNow(),
+				response);
+		return response;
+	}
+
+}

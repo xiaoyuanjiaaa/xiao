@@ -1,0 +1,58 @@
+package com.fc.protocol.demo.request.store.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+import io.swagger.annotations.ApiModelProperty;
+
+/**@author zhuj
+ *@date 2018/12/28
+ * 门店创建微养车信息请求参数实体类
+ *
+ * @param
+ */
+public class GetStoreWechatRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+	@ApiModelProperty(value = " 门店小程序id", name = "storeWechatId", example = "1")
+	private Integer storeWechatId; // 门店小程序id
+	@ApiModelProperty(value = " 门店sstore_id", name = "storeId", example = "1")
+	private Integer storeId; // sstore_id
+
+	public void setStoreWechatId(Integer storeWechatId) {
+		this.storeWechatId = storeWechatId;
+	}
+
+	public Integer getStoreWechatId() {
+		return this.storeWechatId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	public Integer getStoreId() {
+		return this.storeId;
+	}
+
+	/**@author zhuj
+	 * 判断传人参数是否为空
+	 *@date 2018/12/28
+	 * @param
+	 */
+	public String paramValidatecheck() {
+		if (storeWechatId == null) {
+			return "参数：storeWechatId不能为空";
+		}
+		if (storeId == null) {
+			return "参数：storeId不能为空";
+		}
+		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "CreateStoreWechatRequest{" + "storeWechatId=" + storeWechatId + ", storeId=" + storeId
+				+ ", getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode() + ", getTraceId()=" + getTraceId()
+				+ "}";
+	}
+}

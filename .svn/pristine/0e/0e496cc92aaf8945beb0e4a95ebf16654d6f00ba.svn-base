@@ -1,0 +1,34 @@
+package com.fc.member.wechatplatform.user.service;
+
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.service.IService;
+import com.fc.member.wechatplatform.user.entity.WechatPlatformUser;
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * <p>Title: WechatPlatformUser</p>
+ * <p>Description:  Service 接口</p>
+ * @author yangd
+ * @date 2018-12-28 17:14:42
+ */
+public interface IWechatPlatformUserService extends IService<WechatPlatformUser>{
+
+
+    // 根据openid查询游客信息
+    WechatPlatformUser getByOpenid(String openid);
+
+    // 查询游客信息List
+    List<WechatPlatformUser> getList(Map<String, Object> map, Page page);
+
+    // 新增游客
+    int insertPlatformUser(WechatPlatformUser wechatPlatformUser);
+
+    // 更新游客信息
+    int updatePlatformUser(WechatPlatformUser obj);
+
+    // 删除游客信息
+    int deletePlatformUser(Integer platformUserId);
+
+}

@@ -1,0 +1,35 @@
+package com.fc.member.shop.user.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+
+import com.fc.member.shop.user.dao.IShopWithdrawalinfoDao;
+import com.fc.member.shop.user.service.IShopWithdrawalinfoService;
+import com.fc.member.shop.user.entity.ShopWithdrawalinfo;
+/**
+ * <p>Title: ShopWithdrawalinfo</p>
+ * <p>Description: 商家提现信息表 Service 层</p>
+ * @author yangd
+ * @date 2019-01-14 11:08:41
+ */
+@Service("shopWithdrawalinfoService")
+public class ShopWithdrawalinfoServiceImp extends ServiceImpl<ShopWithdrawalinfo> implements IShopWithdrawalinfoService{
+
+	@Autowired
+	private IShopWithdrawalinfoDao shopWithdrawalinfoDao;
+	
+	@Override
+	protected IMapper<ShopWithdrawalinfo> getDao() {
+		return shopWithdrawalinfoDao;
+	}
+	/**
+	 * 插入数据
+	 * @return
+	 */
+	@Override
+	public int insertSelective(ShopWithdrawalinfo obj) {
+		return shopWithdrawalinfoDao.insertSelective(obj);
+	}
+}

@@ -1,0 +1,49 @@
+package com.fc.protocol.demo.request.wechatmaintain.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * 微养车 根据记录ID查询储值卡使用记录 - 收支详情  参数
+ * @author yangd
+ * @date 2019年1月8日
+ */
+public class WmcConsumeinfoDetailsRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+
+	@ApiModelProperty(value = "充值消费记录id", name = "wechatMaintainConponConsumeinfoId")
+	private Integer wechatMaintainConponConsumeinfoId; // 充值消费记录id
+
+	/**
+	 * 验证方法
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-09
+	 * @return
+	 */
+	public String paramValidate() {
+		if (StringUtils.isEmpty(wechatMaintainConponConsumeinfoId)) {
+			return "参数wechatMaintainConponConsumeinfoId不能为空";
+		}
+		return null;
+	}
+
+	public Integer getWechatMaintainConponConsumeinfoId() {
+		return wechatMaintainConponConsumeinfoId;
+	}
+
+	public void setWechatMaintainConponConsumeinfoId(Integer wechatMaintainConponConsumeinfoId) {
+		this.wechatMaintainConponConsumeinfoId = wechatMaintainConponConsumeinfoId;
+	}
+
+	@Override
+	public String toString() {
+		return "WmcConsumeinfoDetailsRequest [wechatMaintainConponConsumeinfoId=" + wechatMaintainConponConsumeinfoId
+				+ ", getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode() + ", getTraceId()=" + getTraceId()
+				+ "]";
+	}
+
+}

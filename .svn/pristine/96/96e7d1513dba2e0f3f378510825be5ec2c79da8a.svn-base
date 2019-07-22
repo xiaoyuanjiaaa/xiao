@@ -1,0 +1,81 @@
+package com.fc.member.store.user.service.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.plugin.mybatis.PageQuery;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.store.user.dao.IStoreFollowDao;
+import com.fc.member.store.user.entity.StoreFollow;
+import com.fc.member.store.user.service.IStoreFollowService;
+import com.fc.protocol.demo.request.store.user.StoreFollowCreateRequest;
+import com.fc.protocol.demo.request.store.user.StoreFollowListRequest;
+
+/**
+ * <p>Title: StoreFollow</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:06
+ */
+@Service("storeFollowService")
+public class StoreFollowServiceImp extends ServiceImpl<StoreFollow> implements IStoreFollowService {
+
+	private static Logger log = LoggerFactory.getLogger(StoreFollowServiceImp.class);
+
+	@Autowired
+	private IStoreFollowDao storeFollowDao;
+
+	@Override
+	protected IMapper<StoreFollow> getDao() {
+		return storeFollowDao;
+	}
+
+	@Override
+	public List<StoreFollow> getStoreFollowList(Page page, StoreFollowListRequest followRequest) {
+		log.info("分页查询所有关注门店--------》request:{}", followRequest);
+		//set对象属性
+		StoreFollow follow = new StoreFollow();
+		follow.setStoreId(followRequest.getStoreId());
+		log.info("分页查询所有关注门店--------》response:{}", follow.toString());
+		//设置分页，查询条件
+		PageQuery pageQuery = new PageQuery();
+		pageQuery.setPage(page);
+		pageQuery.setCondition(follow);
+		return storeFollowDao.getRowsPage(pageQuery);
+	}
+
+	@Override
+	public Map<String, Object> insertStoreFollow(StoreFollowCreateRequest followRequest) {
+		log.info("新增关注门店----->insertStoreFollow:request{}", followRequest);
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		//将不为空的属性set到对象中
+		StoreFollow storeFollow = new StoreFollow();
+		storeFollow.setStoreId(followRequest.getStoreId());
+		storeFollow.setShopId(followRequest.getShopId());
+		storeFollow.setCreateTime(DateTimeUtils.getDateTimeInteger());
+		log.info("新增关注门店----->insertStoreFollow:response{}", storeFollow);
+		int result = storeFollowDao.insertSelective(storeFollow);
+		if (result <= 0) {
+			resultMap.put("error", "新增门店关注失败！");
+			return resultMap;
+		}
+		return resultMap;
+	}
+
+	@Override
+	public int deleteSelective(Integer store_id, Integer shop_id) {
+		StoreFollow storeFollow = new StoreFollow();
+		storeFollow.setStoreId(store_id);
+		storeFollow.setShopId(shop_id);
+		return storeFollowDao.deleteSelective(storeFollow);
+	}
+}

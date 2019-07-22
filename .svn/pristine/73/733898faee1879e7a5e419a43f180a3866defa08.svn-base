@@ -1,0 +1,128 @@
+package com.fc.member.store.user.handler;
+
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.fc.common.exception.ErrorCode;
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.member.store.user.entity.StoreCollect;
+import com.fc.member.store.user.service.IStoreCollectService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.store.user.StoreCollectCreateRequest;
+import com.fc.protocol.demo.request.store.user.StoreCollectDeleteRequest;
+import com.fc.protocol.demo.request.store.user.StoreCollectListRequest;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+
+/**
+ * @author wangq
+ * @date 2019/1/3
+ */
+@Component
+@Handler(module = "store")
+public class StoreCollectHandler {
+
+	private static Logger log = LoggerFactory.getLogger(StoreCollectHandler.class);
+
+	@Autowired
+	IStoreCollectService storeCollectService;
+
+	/**
+	 * 商品收藏列表
+	 * @author	wangq
+	 * @see update_name:wangq update_time:2019-1-7
+	 * @param storeCollectRequest
+	 */
+	@ReqCodeMapping(requestClazz = StoreCollectListRequest.class)
+	public ProtocolResponse storeCollectList(StoreCollectListRequest CollectRequest) {
+		log.info("查看商品收藏列表-------> requestQueryStoreCollect:{}", CollectRequest);
+		ProtocolResponse response = ProtocolResponse.newInstance();
+		try {
+			//检验参数是否为空
+			String paramValidate = CollectRequest.paramValidate();
+			if (paramValidate != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(paramValidate);
+			}
+			//分页对象
+			Page page = new Page();
+			page.setPage(CollectRequest.getPage_no());
+			page.setRows(CollectRequest.getPage_size());
+			page.setShowTotal(true);
+			//排序规则，按收藏时间降序排序
+			List<StoreCollect> storeCollectList = storeCollectService.getStoreCollectList(page, CollectRequest);
+			response.success().addData("store_collect_list", storeCollectList).addData("count", page.getTotalResult());
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			e.printStackTrace();
+			response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+		}
+		log.info("----返回结果 requestQueryStoreCollect:{}", response);
+		return response;
+	}
+
+	/**
+	 * 添加收藏商品
+	 * @author	wangq
+	 * @see update_name:wangq update_time:2019-1-7
+	 * @param storeCollectRequest
+	 */
+	@ReqCodeMapping(requestClazz = StoreCollectCreateRequest.class)
+	public ProtocolResponse storeCollectCreate(StoreCollectCreateRequest request) {
+		log.info("新增商品收藏请求参数：-------> request--storeCollectCreate:{}", request);
+		ProtocolResponse response = ProtocolResponse.newInstance();
+		try {
+			//检验参数是否为空
+			String validateAdd = request.paramValidate();
+			if (validateAdd != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateAdd);
+			}
+			Map<String, Object> resultStatus = storeCollectService.insertStoreCollect(request);
+			if (resultStatus.isEmpty()) {
+				response.success().msg("商品收藏成功！");
+			} else {
+				response.error(ErrorCode.CREATE_ERROR.getValue()).msg(resultStatus.get("error").toString());
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			e.printStackTrace();
+			response.error(ErrorCode.CREATE_ERROR.getValue()).msg("新增商品收藏操作失败！");
+		}
+		log.info("返回结果storeCollectCreate------》response:{}", response);
+		return response;
+	}
+
+	/**
+	 * 删除商品收藏
+	 * @author	wangq
+	 * @see update_name:wangq update_time:2019-1-7
+	 * @param storeCollectRequest
+	 */
+	@ReqCodeMapping(requestClazz = StoreCollectDeleteRequest.class)
+	public ProtocolResponse storeCollectDelete(StoreCollectDeleteRequest deleteRequest) {
+		log.info("删除商品收藏-------> requestDeleteStoreCollect:{}", deleteRequest);
+		ProtocolResponse response = null;
+		try {
+			//检验参数是否为空
+			String validateDelete = deleteRequest.paramValidate();
+			if (validateDelete != null) {
+				return ProtocolResponse.newInstance().error(ErrorCode.PARAM_DATA.getValue()).msg(validateDelete);
+			}
+			//商品存在，执行下一步操作
+			log.info("需要被删除的信息：{}", deleteRequest.getStoreId(), deleteRequest.getItemId());
+			storeCollectService.deleteSelective(deleteRequest.getStoreId(), deleteRequest.getItemId());
+			return response;
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			e.printStackTrace();
+			log.info("删除商品收藏-------> response:{}", response);
+			response = ProtocolResponse.newInstance().error(ErrorCode.ILLEGAL_DATA.getValue()).msg("代码异常，请联系开发人员!");
+		}
+		log.info("删除商品收藏返回结果--------》requestDeleteStoreCollect:{}", response);
+		return response;
+	}
+}

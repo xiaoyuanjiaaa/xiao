@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.master.user.dao.IMasterUserMapleBeanDao">
+	<resultMap id="MasterUserMapleBeanMap" type="com.fc.member.master.user.entity.MasterUserMapleBean">
+        <id property="masterUserMapleBeanId" column="master_user_maple_bean_id"/>
+        <id property="masterMemberId" column="master_member_id"/>
+        <id property="mapleBeanBalance" column="maple_bean_balance"/>
+        <id property="frozenMapleBean" column="frozen_maple_bean"/>
+        <id property="status" column="status"/>
+        <id property="createTime" column="create_time"/>
+        <id property="updateTime" column="update_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="MasterUserMapleBeanMap" >
+		select * from master_user_maple_bean where 
+	        master_user_maple_bean_id = #{masterUserMapleBeanId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.master.user.entity.MasterUserMapleBean" useGeneratedKeys="true" keyProperty="masterUserMapleBeanId">
+		insert into master_user_maple_bean(master_user_maple_bean_id , master_member_id , maple_bean_balance , frozen_maple_bean , status , create_time , update_time  )
+    	values(#{masterUserMapleBeanId} ,#{masterMemberId} ,#{mapleBeanBalance} ,#{frozenMapleBean} ,#{status} ,#{createTime} ,#{updateTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.master.user.entity.MasterUserMapleBean" useGeneratedKeys="true" keyProperty="masterUserMapleBeanId">
+		insert into master_user_maple_bean
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="masterUserMapleBeanId != null">master_user_maple_bean_id,</if>
+					<if test="masterMemberId != null">master_member_id,</if>
+					<if test="mapleBeanBalance != null">maple_bean_balance,</if>
+					<if test="frozenMapleBean != null">frozen_maple_bean,</if>
+					<if test="status != null">status,</if>
+					<if test="createTime != null">create_time,</if>
+					<if test="updateTime != null">update_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="masterUserMapleBeanId != null">#{masterUserMapleBeanId},</if>
+					<if test="masterMemberId != null">#{masterMemberId},</if>
+					<if test="mapleBeanBalance != null">#{mapleBeanBalance},</if>
+					<if test="frozenMapleBean != null">#{frozenMapleBean},</if>
+					<if test="status != null">#{status},</if>
+					<if test="createTime != null">#{createTime},</if>
+					<if test="updateTime != null">#{updateTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.master.user.entity.MasterUserMapleBean">
+		update master_user_maple_bean
+		<set>
+		    	<if test="masterMemberId != null">master_member_id = #{masterMemberId},</if>
+		    	<if test="mapleBeanBalance != null">maple_bean_balance = #{mapleBeanBalance},</if>
+		    	<if test="frozenMapleBean != null">frozen_maple_bean = #{frozenMapleBean},</if>
+		    	<if test="status != null">status = #{status},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		</set>
+		where 
+	        master_user_maple_bean_id = #{masterUserMapleBeanId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from master_user_maple_bean where 
+	        master_user_maple_bean_id = #{masterUserMapleBeanId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.master.user.entity.MasterUserMapleBean" resultMap="MasterUserMapleBeanMap" >
+		select * from master_user_maple_bean 
+		<where>
+		       <if test="masterUserMapleBeanId != null">
+					AND master_user_maple_bean_id = #{masterUserMapleBeanId}
+				</if>
+		       <if test="masterMemberId != null">
+					AND master_member_id = #{masterMemberId}
+				</if>
+		       <if test="mapleBeanBalance != null">
+					AND maple_bean_balance = #{mapleBeanBalance}
+				</if>
+		       <if test="frozenMapleBean != null">
+					AND frozen_maple_bean = #{frozenMapleBean}
+				</if>
+		       <if test="status != null">
+					AND status = #{status}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="MasterUserMapleBeanMap" >
+		select * from master_user_maple_bean  
+		<where>
+		       <if test="condition.masterUserMapleBeanId != null">
+					AND master_user_maple_bean_id = #{condition.masterUserMapleBeanId}
+				</if>
+		       <if test="condition.masterMemberId != null">
+					AND master_member_id = #{condition.masterMemberId}
+				</if>
+		       <if test="condition.mapleBeanBalance != null">
+					AND maple_bean_balance = #{condition.mapleBeanBalance}
+				</if>
+		       <if test="condition.frozenMapleBean != null">
+					AND frozen_maple_bean = #{condition.frozenMapleBean}
+				</if>
+		       <if test="condition.status != null">
+					AND status = #{condition.status}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

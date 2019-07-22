@@ -1,0 +1,15 @@
+package com.fc.member.master.pickcar.service;
+
+import com.fc.common.service.IService;
+import com.fc.member.master.pickcar.entity.MasterPickcarUserCar;
+/**
+ * <p>Title: MasterPickcarUserCar</p>
+ * <p>Description: 师傅车主-车辆档案表(主表) Service 接口</p>
+ * @author yangd
+ * @date 2019-01-15 11:56:03
+ */
+public interface IMasterPickcarUserCarService extends IService<MasterPickcarUserCar>{
+	
+	// 插入数据
+	int insertSelective(MasterPickcarUserCar obj);
+}

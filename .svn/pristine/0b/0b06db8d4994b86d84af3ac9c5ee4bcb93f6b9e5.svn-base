@@ -1,0 +1,79 @@
+package com.fc.protocol.demo.request.wechatmaintain.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * 微养车 储值卡总览表  参数
+ * @author yangd
+ * @date 2019年1月8日
+ */
+public class WmcConsumeinfoOverviewListPageRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+	//	TODO 门店ID、门店名称、门店APP手机号、总计开始时间、总计结束时间、当前页数、每页记录数
+	@ApiModelProperty(value = "门店id", name = "storeId")
+	private Integer storeId; // 门店id
+	@ApiModelProperty(value = "消费时间", name = "createTime")
+	private Integer createTime; // 消费时间
+	@ApiModelProperty(value = "当前页码", name = "page_no")
+	private Integer page_no = 1;
+	@ApiModelProperty(value = "当前页记录数", name = "page_size")
+	private Integer page_size = 10;
+
+	/**
+	 * 验证方法
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-09
+	 * @return
+	 */
+	public String paramValidate() {
+		if (StringUtils.isEmpty(storeId)) {
+			return "参数storeId不能为空";
+		}
+		return null;
+	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	public Integer getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+
+	public Integer getPage_no() {
+		return page_no;
+	}
+
+	public void setPage_no(Integer page_no) {
+		this.page_no = page_no;
+	}
+
+	public Integer getPage_size() {
+		return page_size;
+	}
+
+	public void setPage_size(Integer page_size) {
+		this.page_size = page_size;
+	}
+
+	@Override
+	public String toString() {
+		return "WmcConsumeinfoOverviewListPageRequest [storeId=" + storeId + ", createTime=" + createTime + ", page_no="
+				+ page_no + ", page_size=" + page_size + ", getVersion()=" + getVersion() + ", getReqCode()="
+				+ getReqCode() + ", getTraceId()=" + getTraceId() + "]";
+	}
+
+}

@@ -1,0 +1,18 @@
+package com.fc.member.master.user.dao;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.fc.common.plugin.mybatis.IMapper;
+
+import com.fc.member.master.user.entity.MasterStoreWorkerLog;
+/**
+ * <p>Title: MasterStoreWorkerLog</p>
+ * <p>Description: 师傅绑定门店记录表 DAO层</p>
+ * @author yangd
+ * @date 2019-01-15 10:09:29
+ */
+@Mapper
+public interface IMasterStoreWorkerLogDao extends IMapper<MasterStoreWorkerLog>{
+	// 插入数据
+	int insertSelective(MasterStoreWorkerLog obj);
+}

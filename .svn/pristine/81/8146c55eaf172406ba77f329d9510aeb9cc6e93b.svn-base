@@ -1,0 +1,57 @@
+package com.fc.protocol.demo.request.wechatplatform.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+import io.swagger.annotations.ApiModelProperty;
+import org.springframework.util.StringUtils;
+
+/**
+ * @Author: linpeng
+ * @Date: 2019/1/3 18:41
+ * @Version 1.0
+ */
+public class WpUserDeleteRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+    @ApiModelProperty(value = "微养车找店用户ID", name = "platform_user_id")
+	private Integer  platform_user_id;
+    @ApiModelProperty(value = "openid", name = "openid")
+    private String  openid;
+
+
+
+    public String paramValidate() {
+        if (StringUtils.isEmpty(platform_user_id)) {
+            return "参数:platform_user_id 不能为空";
+        }
+        if (StringUtils.isEmpty(openid)) {
+            return "参数:openid 不能为空";
+        }
+        return null;
+    }
+
+
+	public String getOpenid() {
+		return openid;
+	}
+
+	public void setOpenid(String openid) {
+		this.openid = openid;
+	}
+
+    public Integer getPlatformUserId() {
+        return platform_user_id;
+    }
+
+    public void setPlatformUserId(Integer platform_user_id) {
+        this.platform_user_id = platform_user_id;
+    }
+
+
+	@Override
+	public String toString() {
+		return "WpUserDeleteRequest [getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode()
+                + ", getTraceId()=" + getTraceId() + ", platformUserId=" + getPlatformUserId()
+                + ", openid=" + getOpenid() + "]";
+	}
+
+}

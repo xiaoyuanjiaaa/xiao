@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.store.user.dao.IStorePackageDao">
+	<resultMap id="StorePackageMap" type="com.fc.member.store.user.entity.StorePackage">
+        <id property="storePackageId" column="store_package_id"/>
+        <id property="storeId" column="store_id"/>
+        <id property="type" column="type"/>
+        <id property="realAccount" column="real_account"/>
+        <id property="discount" column="discount"/>
+        <id property="status" column="status"/>
+        <id property="content" column="content"/>
+        <id property="createTime" column="create_time"/>
+        <id property="updateTime" column="update_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="StorePackageMap" >
+		select * from store_package where 
+	        store_package_id = #{storePackageId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.store.user.entity.StorePackage" useGeneratedKeys="true">
+		insert into store_package(store_package_id , store_id , type , real_account , discount , status , content , create_time , update_time  )
+    	values(#{storePackageId} ,#{storeId} ,#{type} ,#{realAccount} ,#{discount} ,#{status} ,#{content} ,#{createTime} ,#{updateTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.store.user.entity.StorePackage" useGeneratedKeys="true">
+		insert into store_package
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="storePackageId != null">store_package_id,</if>
+					<if test="storeId != null">store_id,</if>
+					<if test="type != null">type,</if>
+					<if test="realAccount != null">real_account,</if>
+					<if test="discount != null">discount,</if>
+					<if test="status != null">status,</if>
+					<if test="content != null">content,</if>
+					<if test="createTime != null">create_time,</if>
+					<if test="updateTime != null">update_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="storePackageId != null">#{storePackageId},</if>
+					<if test="storeId != null">#{storeId},</if>
+					<if test="type != null">#{type},</if>
+					<if test="realAccount != null">#{realAccount},</if>
+					<if test="discount != null">#{discount},</if>
+					<if test="status != null">#{status},</if>
+					<if test="content != null">#{content},</if>
+					<if test="createTime != null">#{createTime},</if>
+					<if test="updateTime != null">#{updateTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.store.user.entity.StorePackage">
+		update store_package
+		<set>
+		    	<if test="storeId != null">store_id = #{storeId},</if>
+		    	<if test="type != null">type = #{type},</if>
+		    	<if test="realAccount != null">real_account = #{realAccount},</if>
+		    	<if test="discount != null">discount = #{discount},</if>
+		    	<if test="status != null">status = #{status},</if>
+		    	<if test="content != null">content = #{content},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		</set>
+		where 
+	        store_package_id = #{storePackageId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from store_package where 
+	        store_package_id = #{storePackageId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.store.user.entity.StorePackage" resultMap="StorePackageMap" >
+		select * from store_package 
+		<where>
+		       <if test="storePackageId != null">
+					AND store_package_id = #{storePackageId}
+				</if>
+		       <if test="storeId != null">
+					AND store_id = #{storeId}
+				</if>
+		       <if test="type != null">
+					AND type = #{type}
+				</if>
+		       <if test="realAccount != null">
+					AND real_account = #{realAccount}
+				</if>
+		       <if test="discount != null">
+					AND discount = #{discount}
+				</if>
+		       <if test="status != null">
+					AND status = #{status}
+				</if>
+		       <if test="content != null">
+					AND content = #{content}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="StorePackageMap" >
+		select * from store_package  
+		<where>
+		       <if test="condition.storePackageId != null">
+					AND store_package_id = #{condition.storePackageId}
+				</if>
+		       <if test="condition.storeId != null">
+					AND store_id = #{condition.storeId}
+				</if>
+		       <if test="condition.type != null">
+					AND type = #{condition.type}
+				</if>
+		       <if test="condition.realAccount != null">
+					AND real_account = #{condition.realAccount}
+				</if>
+		       <if test="condition.discount != null">
+					AND discount = #{condition.discount}
+				</if>
+		       <if test="condition.status != null">
+					AND status = #{condition.status}
+				</if>
+		       <if test="condition.content != null">
+					AND content = #{condition.content}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

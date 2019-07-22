@@ -1,0 +1,32 @@
+package com.fc.member.store.user.service;
+
+import java.util.List;
+import java.util.Map;
+
+import com.fc.common.service.IService;
+import com.fc.member.store.user.entity.StoreCoupon;
+import com.fc.protocol.demo.request.store.user.StoreCouponRequest;
+/**
+ * <p>Title: StoreCoupon</p>
+ * <p>Description:  Service 接口</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:06
+ */
+public interface IStoreCouponService extends IService<StoreCoupon>{
+	
+	List<Map<String, Object>> getQuery(StoreCouponRequest request) throws Exception;
+	/**
+	 * 新增门店套餐使用范围
+	 * @param storeCoupon
+	 * @return
+	 * @throws Exception
+	 */
+	int insertStoreCoupon(StoreCouponRequest request) throws Exception;
+	/**
+	 * 更新门店套餐使用范围
+	 * @param storeCoupon
+	 * @return
+	 * @throws Exception
+	 */
+	void updateStoreCoupon(StoreCouponRequest request) throws Exception;
+}

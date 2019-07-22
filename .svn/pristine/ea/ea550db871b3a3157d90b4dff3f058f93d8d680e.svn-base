@@ -1,0 +1,54 @@
+package com.fc.protocol.server.demo.handler;
+
+import java.util.concurrent.TimeUnit;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.EchoRequest;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+
+@Component
+@Handler(module = "demo")
+public class DemoHandler {
+
+	private static Logger log = LoggerFactory.getLogger(DemoHandler.class);
+
+	@ReqCodeMapping(requestClazz = EchoRequest.class)
+	public ProtocolResponse echo(EchoRequest request) {
+		log.info("EchoHandler------>request:{}", request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success().msg("ECHO测试成功").addData("number",
+				request.getNumber());
+		int number = request.getNumber();
+
+		if (number % 5 == 0) {
+			log.info("休眠{}秒......", number);
+			try {
+				TimeUnit.SECONDS.sleep(number);
+			} catch (InterruptedException e) {
+				log.error("error:{}", e);
+			}
+		}
+
+		/**
+		log.info("休眠{}秒......", number);
+		try {
+			TimeUnit.SECONDS.sleep(number);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		*/
+		//		log.info("休眠10秒......");
+		//		try {
+		//			TimeUnit.SECONDS.sleep(4);
+		//		} catch (InterruptedException e) {
+		//			e.printStackTrace();
+		//		}
+		log.info("EchoHandler------>response:{}", response);
+		return response;
+	}
+
+}

@@ -1,0 +1,27 @@
+package com.fc.member.store.user.service;
+
+import com.fc.common.service.IService;
+import com.fc.member.store.user.entity.StoreCoupon;
+import com.fc.protocol.demo.request.store.user.StoreCouponCreateRequest;
+import com.fc.protocol.demo.request.store.user.StoreCouponQueryRequest;
+import com.fc.protocol.demo.request.store.user.StoreCouponUpdateRequest;
+/**
+ * <p>Title: StoreCoupon</p>
+ * <p>Description:  Service 接口</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:06
+ */
+public interface IStoreCouponService extends IService<StoreCoupon>{
+	/**
+	 * 查询门店储值卡套餐使用范围
+	 */
+	StoreCoupon getQuery(StoreCouponQueryRequest request) throws Exception;
+	/**
+	 * 新增门店套餐使用范围
+	 */
+	int insertStoreCoupon(StoreCouponCreateRequest request) throws Exception;
+	/**
+	 * 更新门店套餐使用范围
+	 */
+	boolean updateStoreCoupon(StoreCouponUpdateRequest request) throws Exception;
+}

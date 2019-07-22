@@ -1,0 +1,195 @@
+package com.fc.member.wechatmaintain.user.entity;
+
+import java.io.Serializable;
+import java.util.Date;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainUserCarRequest;
+
+/**
+ * <p>Table: WechatMaintainUserCar</p>
+ * <p>Description: 微养车用户车辆表</p>
+ * @author yangd
+ * @date 2018-12-28 17:13:47
+ */
+public class WechatMaintainUserCar implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	private Integer wechatMaintainUserCarId; // 自增id
+	private Integer wechatMaintainUserId; // 微养车用户id
+	private Integer fcUserId; // 枫车用户ID
+	private String carNo; // 车牌
+	private String vehicleId; // 精友车型id
+	private Integer modelId; // 车型库id
+	private Integer driveMileage; // 行驶公里数
+	private String modelName; // 车型名称
+	private String frameNumber; // 车架号
+	private String engineNumber; // 发动机型号
+	private Integer status; // 是否起用(0:否 1:是)
+	private Integer isDefault; // 默认车型(0:不默认 1:默认)
+	private Integer createTime; // 创建时间
+	private Integer updateTime; // 修改时间
+	private Integer driveMileageTime; // 行驶公里数变动时间
+
+	/**
+	 * 将不为空的属性set到对象中
+	 * @param entity 实体对象
+	 * @param request 参数对象
+	 * @return
+	 */
+	public static WechatMaintainUserCar isNotEmptySetObject(WechatMaintainUserCarRequest request) {
+		WechatMaintainUserCar entity = new WechatMaintainUserCar();
+		entity.setWechatMaintainUserCarId(request.getWechatMaintainUserCarId());
+		entity.setWechatMaintainUserId(request.getWechatMaintainUserId());
+		entity.setFcUserId(request.getFcUserId());
+		entity.setCarNo(request.getCarNo());
+		entity.setVehicleId(request.getVehicleId());
+		entity.setDriveMileage(request.getDriveMileage());
+		entity.setCreateTime(request.getCreateTime());
+		entity.setModelName(request.getModelName());
+		entity.setFrameNumber(request.getFrameNumber());
+		entity.setEngineNumber(request.getEngineNumber());
+		entity.setStatus(request.getStatus());
+		entity.setIsDefault(request.getIsDefault());
+		if (StringUtils.isEmpty(request.getWechatMaintainUserCarId())) {
+			entity.setCreateTime((int) (new Date().getTime() / 1000));
+		}
+		entity.setUpdateTime((int) (new Date().getTime() / 1000));
+		if (StringUtils.isEmpty(request.getDriveMileage())) {
+			entity.setDriveMileageTime((int) (new Date().getTime() / 1000));
+		}
+		return entity;
+	}
+
+	public void setWechatMaintainUserCarId(Integer wechatMaintainUserCarId) {
+		this.wechatMaintainUserCarId = wechatMaintainUserCarId;
+	}
+
+	public Integer getWechatMaintainUserCarId() {
+		return this.wechatMaintainUserCarId;
+	}
+
+	public void setWechatMaintainUserId(Integer wechatMaintainUserId) {
+		this.wechatMaintainUserId = wechatMaintainUserId;
+	}
+
+	public Integer getWechatMaintainUserId() {
+		return this.wechatMaintainUserId;
+	}
+
+	public void setFcUserId(Integer fcUserId) {
+		this.fcUserId = fcUserId;
+	}
+
+	public Integer getFcUserId() {
+		return this.fcUserId;
+	}
+
+	public void setCarNo(String carNo) {
+		this.carNo = carNo;
+	}
+
+	public String getCarNo() {
+		return this.carNo;
+	}
+
+	public void setVehicleId(String vehicleId) {
+		this.vehicleId = vehicleId;
+	}
+
+	public String getVehicleId() {
+		return this.vehicleId;
+	}
+
+	public void setModelId(Integer modelId) {
+		this.modelId = modelId;
+	}
+
+	public Integer getModelId() {
+		return this.modelId;
+	}
+
+	public void setDriveMileage(Integer driveMileage) {
+		this.driveMileage = driveMileage;
+	}
+
+	public Integer getDriveMileage() {
+		return this.driveMileage;
+	}
+
+	public void setModelName(String modelName) {
+		this.modelName = modelName;
+	}
+
+	public String getModelName() {
+		return this.modelName;
+	}
+
+	public void setFrameNumber(String frameNumber) {
+		this.frameNumber = frameNumber;
+	}
+
+	public String getFrameNumber() {
+		return this.frameNumber;
+	}
+
+	public void setEngineNumber(String engineNumber) {
+		this.engineNumber = engineNumber;
+	}
+
+	public String getEngineNumber() {
+		return this.engineNumber;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public Integer getStatus() {
+		return this.status;
+	}
+
+	public void setIsDefault(Integer isDefault) {
+		this.isDefault = isDefault;
+	}
+
+	public Integer getIsDefault() {
+		return this.isDefault;
+	}
+
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+
+	public void setUpdateTime(Integer updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	public Integer getUpdateTime() {
+		return this.updateTime;
+	}
+
+	public void setDriveMileageTime(Integer driveMileageTime) {
+		this.driveMileageTime = driveMileageTime;
+	}
+
+	public Integer getDriveMileageTime() {
+		return this.driveMileageTime;
+	}
+
+	@Override
+	public String toString() {
+		return "WechatMaintainUserCar{" + "wechatMaintainUserCarId=" + wechatMaintainUserCarId
+				+ ", wechatMaintainUserId=" + wechatMaintainUserId + ", fcUserId=" + fcUserId + ", carNo=" + carNo
+				+ ", vehicleId=" + vehicleId + ", modelId=" + modelId + ", driveMileage=" + driveMileage
+				+ ", modelName=" + modelName + ", frameNumber=" + frameNumber + ", engineNumber=" + engineNumber
+				+ ", status=" + status + ", isDefault=" + isDefault + ", createTime=" + createTime + ", updateTime="
+				+ updateTime + ", driveMileageTime=" + driveMileageTime + "}";
+	}
+}

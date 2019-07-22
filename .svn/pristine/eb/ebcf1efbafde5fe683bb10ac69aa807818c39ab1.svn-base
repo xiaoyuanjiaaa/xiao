@@ -1,0 +1,66 @@
+package com.fc.member.store.user.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.plugin.mybatis.PageQuery;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.store.user.dao.IStoreCoinDetailDao;
+import com.fc.member.store.user.entity.StoreCoinDetail;
+import com.fc.member.store.user.service.IStoreCoinDetailService;
+import com.fc.protocol.demo.request.store.user.CreateStoreCoinDetailRequest;
+import com.fc.protocol.demo.request.store.user.QueryStoreCoinDetailRequest;
+import com.fc.protocol.demo.request.store.user.QueryStoreCoinDetailRowsRequest;
+/**
+ * <p>Title: StoreCoinDetail</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:05
+ */
+@Service("storeCoinDetailService")
+public class StoreCoinDetailServiceImp extends ServiceImpl<StoreCoinDetail> implements IStoreCoinDetailService{
+
+	@Autowired
+	private IStoreCoinDetailDao storeCoinDetailDao;
+	
+	@Override
+	protected IMapper<StoreCoinDetail> getDao() {
+		return storeCoinDetailDao;
+	}
+
+	@Override
+	public List<StoreCoinDetail> queryStoreStoreCoinDetailRows(QueryStoreCoinDetailRowsRequest request,Page page) throws Exception {
+		StoreCoinDetail storeCoinDetail = new StoreCoinDetail();
+		storeCoinDetail.setStoreId(request.getStoreId());
+		PageQuery pageQuery = new PageQuery();
+		pageQuery.setCondition(storeCoinDetail);
+		pageQuery.setPage(page);
+		return storeCoinDetailDao.getRowsPage(pageQuery);
+	}
+
+	@Override
+	public StoreCoinDetail queryStoreCoinDetail(QueryStoreCoinDetailRequest request) throws Exception {
+		StoreCoinDetail storeCoinDetail = storeCoinDetailDao.getByPK(request.getStoreCoinDetailId());
+		return storeCoinDetail;
+	}
+
+	@Override
+	public int insertSelective(CreateStoreCoinDetailRequest request) throws Exception {
+		StoreCoinDetail storeCoinDetail = new StoreCoinDetail();
+		storeCoinDetail.setStoreId(request.getStoreId());
+		storeCoinDetail.setAfterCoin(request.getAfterCoin());
+		storeCoinDetail.setChangeCoin(request.getChangeCoin());
+		storeCoinDetail.setChangeTime(DateTimeUtils.getDateTimeInteger());//获取当前修改时间
+		storeCoinDetail.setChangeType(request.getChangeType());
+		storeCoinDetail.setOrderNo(request.getOrderNo());
+//		storeCoinDetail.setRemark(request.getRemark());
+		storeCoinDetail.setSource(request.getSource());
+		storeCoinDetailDao.insertSelective(storeCoinDetail);
+		return 1;
+	}
+}

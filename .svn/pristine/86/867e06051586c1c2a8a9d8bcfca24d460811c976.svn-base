@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.wechatmaintain.user.dao.IWechatMaintainCouponSstoreUserDao">
+	<resultMap id="WechatMaintainCouponSstoreUserMap" type="com.fc.member.wechatmaintain.user.entity.WechatMaintainCouponSstoreUser">
+        <id property="wechatMaintainCouponSstoreUserId" column="wechat_maintain_coupon_sstore_user_id"/>
+        <id property="wechatMaintainUserId" column="wechat_maintain_user_id"/>
+        <id property="storeId" column="store_id"/>
+        <id property="integral" column="integral"/>
+        <id property="discount" column="discount"/>
+        <id property="couponLevel" column="coupon_level"/>
+        <id property="couponLevelName" column="coupon_level_name"/>
+        <id property="updateTime" column="update_time"/>
+        <id property="createTime" column="create_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="WechatMaintainCouponSstoreUserMap" >
+		select * from wechat_maintain_coupon_sstore_user where 
+	        wechat_maintain_coupon_sstore_user_id = #{wechatMaintainCouponSstoreUserId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainCouponSstoreUser" useGeneratedKeys="true">
+		insert into wechat_maintain_coupon_sstore_user(wechat_maintain_coupon_sstore_user_id , wechat_maintain_user_id , store_id , integral , discount , coupon_level , coupon_level_name , update_time , create_time  )
+    	values(#{wechatMaintainCouponSstoreUserId} ,#{wechatMaintainUserId} ,#{storeId} ,#{integral} ,#{discount} ,#{couponLevel} ,#{couponLevelName} ,#{updateTime} ,#{createTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainCouponSstoreUser" useGeneratedKeys="true">
+		insert into wechat_maintain_coupon_sstore_user
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="wechatMaintainCouponSstoreUserId != null">wechat_maintain_coupon_sstore_user_id,</if>
+					<if test="wechatMaintainUserId != null">wechat_maintain_user_id,</if>
+					<if test="storeId != null">store_id,</if>
+					<if test="integral != null">integral,</if>
+					<if test="discount != null">discount,</if>
+					<if test="couponLevel != null">coupon_level,</if>
+					<if test="couponLevelName != null">coupon_level_name,</if>
+					<if test="updateTime != null">update_time,</if>
+					<if test="createTime != null">create_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="wechatMaintainCouponSstoreUserId != null">#{wechatMaintainCouponSstoreUserId},</if>
+					<if test="wechatMaintainUserId != null">#{wechatMaintainUserId},</if>
+					<if test="storeId != null">#{storeId},</if>
+					<if test="integral != null">#{integral},</if>
+					<if test="discount != null">#{discount},</if>
+					<if test="couponLevel != null">#{couponLevel},</if>
+					<if test="couponLevelName != null">#{couponLevelName},</if>
+					<if test="updateTime != null">#{updateTime},</if>
+					<if test="createTime != null">#{createTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainCouponSstoreUser">
+		update wechat_maintain_coupon_sstore_user
+		<set>
+		    	<if test="wechatMaintainUserId != null">wechat_maintain_user_id = #{wechatMaintainUserId},</if>
+		    	<if test="storeId != null">store_id = #{storeId},</if>
+		    	<if test="integral != null">integral = #{integral},</if>
+		    	<if test="discount != null">discount = #{discount},</if>
+		    	<if test="couponLevel != null">coupon_level = #{couponLevel},</if>
+		    	<if test="couponLevelName != null">coupon_level_name = #{couponLevelName},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		</set>
+		where 
+	        wechat_maintain_coupon_sstore_user_id = #{wechatMaintainCouponSstoreUserId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from wechat_maintain_coupon_sstore_user where 
+	        wechat_maintain_coupon_sstore_user_id = #{wechatMaintainCouponSstoreUserId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainCouponSstoreUser" resultMap="WechatMaintainCouponSstoreUserMap" >
+		select * from wechat_maintain_coupon_sstore_user 
+		<where>
+		       <if test="wechatMaintainCouponSstoreUserId != null">
+					AND wechat_maintain_coupon_sstore_user_id = #{wechatMaintainCouponSstoreUserId}
+				</if>
+		       <if test="wechatMaintainUserId != null">
+					AND wechat_maintain_user_id = #{wechatMaintainUserId}
+				</if>
+		       <if test="storeId != null">
+					AND store_id = #{storeId}
+				</if>
+		       <if test="integral != null">
+					AND integral = #{integral}
+				</if>
+		       <if test="discount != null">
+					AND discount = #{discount}
+				</if>
+		       <if test="couponLevel != null">
+					AND coupon_level = #{couponLevel}
+				</if>
+		       <if test="couponLevelName != null">
+					AND coupon_level_name = #{couponLevelName}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="WechatMaintainCouponSstoreUserMap" >
+		select * from wechat_maintain_coupon_sstore_user  
+		<where>
+		       <if test="condition.wechatMaintainCouponSstoreUserId != null">
+					AND wechat_maintain_coupon_sstore_user_id = #{condition.wechatMaintainCouponSstoreUserId}
+				</if>
+		       <if test="condition.wechatMaintainUserId != null">
+					AND wechat_maintain_user_id = #{condition.wechatMaintainUserId}
+				</if>
+		       <if test="condition.storeId != null">
+					AND store_id = #{condition.storeId}
+				</if>
+		       <if test="condition.integral != null">
+					AND integral = #{condition.integral}
+				</if>
+		       <if test="condition.discount != null">
+					AND discount = #{condition.discount}
+				</if>
+		       <if test="condition.couponLevel != null">
+					AND coupon_level = #{condition.couponLevel}
+				</if>
+		       <if test="condition.couponLevelName != null">
+					AND coupon_level_name = #{condition.couponLevelName}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

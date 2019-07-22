@@ -1,0 +1,76 @@
+package com.fc.member.store.user.entity;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+/**
+ * <p>Table: StoreCollect</p>
+ * <p>Description: </p>
+ * @author yangd
+ * @date 2018-12-27 16:31:06
+ */
+public class StoreCollect implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer storeCollectId; // 主键id
+	private Integer storeId; // 门店id
+	private Integer itemId; // 商品收藏id
+	private Integer createTime; // 创建时间
+	private Integer updateTime; // 更新时间
+	private BigDecimal goodsPrice; // 收藏时商品最低价
+
+	public void setStoreCollectId(Integer storeCollectId) {
+		this.storeCollectId = storeCollectId;
+	}
+	
+	public Integer getStoreCollectId() {
+		return this.storeCollectId;
+	}
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+	
+	public Integer getStoreId() {
+		return this.storeId;
+	}
+	public void setItemId(Integer itemId) {
+		this.itemId = itemId;
+	}
+	
+	public Integer getItemId() {
+		return this.itemId;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+	public void setUpdateTime(Integer updateTime) {
+		this.updateTime = updateTime;
+	}
+	
+	public Integer getUpdateTime() {
+		return this.updateTime;
+	}
+	public void setGoodsPrice(BigDecimal goodsPrice) {
+		this.goodsPrice = goodsPrice;
+	}
+	
+	public BigDecimal getGoodsPrice() {
+		return this.goodsPrice;
+	}
+
+    @Override
+    public String toString () {
+    	return "StoreCollect{" + 
+	    	"storeCollectId=" + storeCollectId + 
+	    	", storeId=" + storeId + 
+	    	", itemId=" + itemId + 
+	    	", createTime=" + createTime + 
+	    	", updateTime=" + updateTime + 
+	    	", goodsPrice=" + goodsPrice + 
+	    	"}";
+    }
+}

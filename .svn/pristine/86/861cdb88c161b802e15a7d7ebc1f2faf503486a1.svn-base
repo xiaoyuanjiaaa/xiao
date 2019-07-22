@@ -1,0 +1,51 @@
+package com.fc.member.wechatmaintain.user.service.impl;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.plugin.mybatis.PageQuery;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.member.wechatmaintain.user.dao.IWechatMaintainUserDao;
+import com.fc.member.wechatmaintain.user.entity.WechatMaintainUser;
+import com.fc.member.wechatmaintain.user.service.IWechatMaintainUserService;
+
+/**
+ * <p>Title: WechatMaintainUser</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-28 17:13:47
+ */
+@Service("wechatMaintainUserService")
+public class WechatMaintainUserServiceImp extends ServiceImpl<WechatMaintainUser>
+		implements IWechatMaintainUserService {
+
+	private static Logger log = LoggerFactory.getLogger(WechatMaintainUserServiceImp.class);
+
+	@Autowired
+	private IWechatMaintainUserDao wechatMaintainUserDao;
+
+	@Override
+	protected IMapper<WechatMaintainUser> getDao() {
+		return wechatMaintainUserDao;
+	}
+
+	/**
+	 * 查询所有用户-分页
+	 */
+	@Override
+	public List<WechatMaintainUser> getWechatMaintainUserListPage(Page page, WechatMaintainUser obj) {
+		log.info("查询所有用户-分页");
+		PageQuery pageQuery = new PageQuery();
+
+		pageQuery.setPage(page);
+
+		pageQuery.setCondition(obj);
+		return wechatMaintainUserDao.getRowsPage(pageQuery);
+	}
+}

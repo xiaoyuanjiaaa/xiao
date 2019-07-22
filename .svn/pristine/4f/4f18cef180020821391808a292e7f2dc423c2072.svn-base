@@ -1,0 +1,104 @@
+package com.fc.member.store.user.entity;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+
+/**
+ * <p>Table: StorePackage</p>
+ * <p>Description: </p>
+ * @author yangd
+ * @date 2018-12-27 16:31:06
+ */
+public class StorePackage implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	private Integer storePackageId; // 门店储值卡套餐id
+	private Integer storeId; // 门店id
+	private Integer type; // 1=赠送金额，2=赠送商品，3=赠送服务
+	private BigDecimal realAccount; // 充值金额
+	private BigDecimal discount; // 赠送金额
+	private Integer status; // 0=已上架，1=未上架，2=已删除
+	private String content; // 充值描述
+	private Integer createTime; // 创建时间
+	private Integer updateTime; // 更新时间
+
+	public void setStorePackageId(Integer storePackageId) {
+		this.storePackageId = storePackageId;
+	}
+
+	public Integer getStorePackageId() {
+		return this.storePackageId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	public Integer getStoreId() {
+		return this.storeId;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	public Integer getType() {
+		return this.type;
+	}
+
+	public void setRealAccount(BigDecimal realAccount) {
+		this.realAccount = realAccount;
+	}
+
+	public BigDecimal getRealAccount() {
+		return this.realAccount;
+	}
+
+	public void setDiscount(BigDecimal discount) {
+		this.discount = discount;
+	}
+
+	public BigDecimal getDiscount() {
+		return this.discount;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public Integer getStatus() {
+		return this.status;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getContent() {
+		return this.content;
+	}
+
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+
+	public void setUpdateTime(Integer updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	public Integer getUpdateTime() {
+		return this.updateTime;
+	}
+
+	@Override
+	public String toString() {
+		return "StorePackage{" + "storePackageId=" + storePackageId + ", storeId=" + storeId + ", type=" + type
+				+ ", realAccount=" + realAccount + ", discount=" + discount + ", status=" + status + ", content="
+				+ content + ", createTime=" + createTime + ", updateTime=" + updateTime + "}";
+	}
+}

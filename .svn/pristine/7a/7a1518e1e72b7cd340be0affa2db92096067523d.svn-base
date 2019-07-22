@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.wechatmaintain.user.dao.IWechatMaintainRechargeDao">
+	<resultMap id="WechatMaintainRechargeMap" type="com.fc.member.wechatmaintain.user.entity.WechatMaintainRecharge">
+        <id property="wechatMaintainRechargeId" column="wechat_maintain_recharge_id"/>
+        <id property="fcUserId" column="fc_user_id"/>
+        <id property="storeId" column="store_id"/>
+        <id property="wechatSstorePackageId" column="wechat_sstore_package_id"/>
+        <id property="realAccount" column="real_account"/>
+        <id property="discount" column="discount"/>
+        <id property="createTime" column="create_time"/>
+        <id property="status" column="status"/>
+        <id property="orderNo" column="order_no"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="WechatMaintainRechargeMap" >
+		select * from wechat_maintain_recharge where 
+	        wechat_maintain_recharge_id = #{wechatMaintainRechargeId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainRecharge" useGeneratedKeys="true">
+		insert into wechat_maintain_recharge(wechat_maintain_recharge_id , fc_user_id , store_id , wechat_sstore_package_id , real_account , discount , create_time , status , order_no  )
+    	values(#{wechatMaintainRechargeId} ,#{fcUserId} ,#{storeId} ,#{wechatSstorePackageId} ,#{realAccount} ,#{discount} ,#{createTime} ,#{status} ,#{orderNo} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainRecharge" useGeneratedKeys="true">
+		insert into wechat_maintain_recharge
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="wechatMaintainRechargeId != null">wechat_maintain_recharge_id,</if>
+					<if test="fcUserId != null">fc_user_id,</if>
+					<if test="storeId != null">store_id,</if>
+					<if test="wechatSstorePackageId != null">wechat_sstore_package_id,</if>
+					<if test="realAccount != null">real_account,</if>
+					<if test="discount != null">discount,</if>
+					<if test="createTime != null">create_time,</if>
+					<if test="status != null">status,</if>
+					<if test="orderNo != null">order_no</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="wechatMaintainRechargeId != null">#{wechatMaintainRechargeId},</if>
+					<if test="fcUserId != null">#{fcUserId},</if>
+					<if test="storeId != null">#{storeId},</if>
+					<if test="wechatSstorePackageId != null">#{wechatSstorePackageId},</if>
+					<if test="realAccount != null">#{realAccount},</if>
+					<if test="discount != null">#{discount},</if>
+					<if test="createTime != null">#{createTime},</if>
+					<if test="status != null">#{status},</if>
+					<if test="orderNo != null">#{orderNo}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainRecharge">
+		update wechat_maintain_recharge
+		<set>
+		    	<if test="fcUserId != null">fc_user_id = #{fcUserId},</if>
+		    	<if test="storeId != null">store_id = #{storeId},</if>
+		    	<if test="wechatSstorePackageId != null">wechat_sstore_package_id = #{wechatSstorePackageId},</if>
+		    	<if test="realAccount != null">real_account = #{realAccount},</if>
+		    	<if test="discount != null">discount = #{discount},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		    	<if test="status != null">status = #{status},</if>
+		    	<if test="orderNo != null">order_no = #{orderNo},</if>
+		</set>
+		where 
+	        wechat_maintain_recharge_id = #{wechatMaintainRechargeId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from wechat_maintain_recharge where 
+	        wechat_maintain_recharge_id = #{wechatMaintainRechargeId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainRecharge" resultMap="WechatMaintainRechargeMap" >
+		select * from wechat_maintain_recharge 
+		<where>
+		       <if test="wechatMaintainRechargeId != null">
+					AND wechat_maintain_recharge_id = #{wechatMaintainRechargeId}
+				</if>
+		       <if test="fcUserId != null">
+					AND fc_user_id = #{fcUserId}
+				</if>
+		       <if test="storeId != null">
+					AND store_id = #{storeId}
+				</if>
+		       <if test="wechatSstorePackageId != null">
+					AND wechat_sstore_package_id = #{wechatSstorePackageId}
+				</if>
+		       <if test="realAccount != null">
+					AND real_account = #{realAccount}
+				</if>
+		       <if test="discount != null">
+					AND discount = #{discount}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		       <if test="status != null">
+					AND status = #{status}
+				</if>
+		       <if test="orderNo != null">
+					AND order_no = #{orderNo}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="WechatMaintainRechargeMap" >
+		select * from wechat_maintain_recharge  
+		<where>
+		       <if test="condition.wechatMaintainRechargeId != null">
+					AND wechat_maintain_recharge_id = #{condition.wechatMaintainRechargeId}
+				</if>
+		       <if test="condition.fcUserId != null">
+					AND fc_user_id = #{condition.fcUserId}
+				</if>
+		       <if test="condition.storeId != null">
+					AND store_id = #{condition.storeId}
+				</if>
+		       <if test="condition.wechatSstorePackageId != null">
+					AND wechat_sstore_package_id = #{condition.wechatSstorePackageId}
+				</if>
+		       <if test="condition.realAccount != null">
+					AND real_account = #{condition.realAccount}
+				</if>
+		       <if test="condition.discount != null">
+					AND discount = #{condition.discount}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		       <if test="condition.status != null">
+					AND status = #{condition.status}
+				</if>
+		       <if test="condition.orderNo != null">
+					AND order_no = #{condition.orderNo}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

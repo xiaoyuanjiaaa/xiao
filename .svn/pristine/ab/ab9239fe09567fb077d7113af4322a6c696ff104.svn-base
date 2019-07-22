@@ -1,0 +1,106 @@
+package com.fc.member.store.user.handler;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.fc.common.exception.ErrorCode;
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.store.user.entity.PublicUserLoginsLog;
+import com.fc.member.store.user.service.IPublicUserLoginsLogService;
+import com.fc.member.store.user.service.IPublicUserService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.store.user.PullCreateRequest;
+import com.fc.protocol.demo.request.store.user.PullPageRequest;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+
+/**
+ * 登陆日志基础操作Handler
+ * @author	xiaozw
+ * @data	2019-01-11
+ */
+@Component
+@Handler(module = "store")
+public class PublicUserLoginsLogHandler {
+	private static Logger log = LoggerFactory.getLogger(PublicUserLoginsLogHandler.class);
+
+	@Autowired
+	private IPublicUserLoginsLogService publicUserLoginsLogService;
+	@Autowired
+	private IPublicUserService publicUserService;
+
+	/**
+	 * 插入日志接口
+	 * @author	xiaozw
+	 * @update_name:xiaozw 
+	 * @update_time:2019-01-14 15:03
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = PullCreateRequest.class)
+	public ProtocolResponse pullCreate(PullCreateRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			log.info("pullCreate------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			}
+			if (publicUserService.getByPK(request.getPublicUserId()) == null) {
+				return response.error(ErrorCode.DATE_NOR_DEFIND.getValue()).msg("该用户ID不存在");
+			}
+			PublicUserLoginsLog pull = new PublicUserLoginsLog();
+			pull.setMemberId(request.getPublicUserId());
+			pull.setLoginIp(request.getIp());
+			pull.setLoginTime(DateTimeUtils.getDateTimeInteger());
+			if (!publicUserLoginsLogService.insertSelective(pull)) {
+				return response.error(ErrorCode.CREATE_ERROR.getValue()).msg(ErrorCode.CREATE_ERROR.getDesc());
+			}
+		} catch (Exception e) {
+			log.info("pullCreate:", e);
+			e.printStackTrace();
+			return response.error(ErrorCode.CREATE_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+		return response;
+	}
+
+	/**
+	 * 查询分页列表
+	 * @author	xiaozw
+	 * @update_name:xiaozw 
+	 * @update_time:2019-01-14 17:33
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = PullPageRequest.class)
+	public ProtocolResponse pullPage(PullPageRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			log.info("pullPage------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			} // 分页对象
+			Page page = new Page();
+			page.setPage(request.getPageNo());
+			page.setRows(request.getPageSize());
+			page.setShowTotal(true);
+			page.setSord("desc");
+			page.setSidx("login_time");
+			List<PublicUserLoginsLog> PublicUserLoginsLogList = publicUserLoginsLogService.getPullPage(page, request);
+			if (PublicUserLoginsLogList == null || PublicUserLoginsLogList.size() <= 0) {
+				return response.error(ErrorCode.DATE_NOR_DEFIND.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+			}
+			response.addData("public_user_logins_log_list", PublicUserLoginsLogList).addData("count",
+					page.getTotalResult());
+		} catch (Exception e) {
+			log.info("pullPage:", e);
+			e.printStackTrace();
+			return response.error(ErrorCode.QUERY_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+		return response;
+	}
+}

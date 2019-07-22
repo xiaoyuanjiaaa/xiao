@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.shop.user.dao.IShopOrdershopDao">
+	<resultMap id="ShopOrdershopMap" type="com.fc.member.shop.user.entity.ShopOrdershop">
+        <id property="shopOrdershopId" column="shop_ordershop_id"/>
+        <id property="shopId" column="shop_id"/>
+        <id property="wdContactPerson" column="wd_contact_person"/>
+        <id property="wdContactPhone" column="wd_contact_phone"/>
+        <id property="createTime" column="create_time"/>
+        <id property="updateTime" column="update_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="ShopOrdershopMap" >
+		select * from shop_ordershop where 
+	        shop_ordershop_id = #{shopOrdershopId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.shop.user.entity.ShopOrdershop" useGeneratedKeys="true" keyProperty="shopOrdershopId">
+		insert into shop_ordershop(shop_ordershop_id , shop_id , wd_contact_person , wd_contact_phone , create_time , update_time  )
+    	values(#{shopOrdershopId} ,#{shopId} ,#{wdContactPerson} ,#{wdContactPhone} ,#{createTime} ,#{updateTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.shop.user.entity.ShopOrdershop" useGeneratedKeys="true" keyProperty="shopOrdershopId">
+		insert into shop_ordershop
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="shopOrdershopId != null">shop_ordershop_id,</if>
+					<if test="shopId != null">shop_id,</if>
+					<if test="wdContactPerson != null">wd_contact_person,</if>
+					<if test="wdContactPhone != null">wd_contact_phone,</if>
+					<if test="createTime != null">create_time,</if>
+					<if test="updateTime != null">update_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="shopOrdershopId != null">#{shopOrdershopId},</if>
+					<if test="shopId != null">#{shopId},</if>
+					<if test="wdContactPerson != null">#{wdContactPerson},</if>
+					<if test="wdContactPhone != null">#{wdContactPhone},</if>
+					<if test="createTime != null">#{createTime},</if>
+					<if test="updateTime != null">#{updateTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.shop.user.entity.ShopOrdershop">
+		update shop_ordershop
+		<set>
+		    	<if test="shopId != null">shop_id = #{shopId},</if>
+		    	<if test="wdContactPerson != null">wd_contact_person = #{wdContactPerson},</if>
+		    	<if test="wdContactPhone != null">wd_contact_phone = #{wdContactPhone},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		</set>
+		where 
+	        shop_ordershop_id = #{shopOrdershopId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from shop_ordershop where 
+	        shop_ordershop_id = #{shopOrdershopId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.shop.user.entity.ShopOrdershop" resultMap="ShopOrdershopMap" >
+		select * from shop_ordershop 
+		<where>
+		       <if test="shopOrdershopId != null">
+					AND shop_ordershop_id = #{shopOrdershopId}
+				</if>
+		       <if test="shopId != null">
+					AND shop_id = #{shopId}
+				</if>
+		       <if test="wdContactPerson != null">
+					AND wd_contact_person = #{wdContactPerson}
+				</if>
+		       <if test="wdContactPhone != null">
+					AND wd_contact_phone = #{wdContactPhone}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="ShopOrdershopMap" >
+		select * from shop_ordershop  
+		<where>
+		       <if test="condition.shopOrdershopId != null">
+					AND shop_ordershop_id = #{condition.shopOrdershopId}
+				</if>
+		       <if test="condition.shopId != null">
+					AND shop_id = #{condition.shopId}
+				</if>
+		       <if test="condition.wdContactPerson != null">
+					AND wd_contact_person = #{condition.wdContactPerson}
+				</if>
+		       <if test="condition.wdContactPhone != null">
+					AND wd_contact_phone = #{condition.wdContactPhone}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

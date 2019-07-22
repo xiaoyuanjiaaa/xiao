@@ -1,0 +1,230 @@
+package com.fc.protocol.demo.request.store.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+import io.swagger.annotations.ApiModelProperty;
+import org.apache.commons.lang.StringUtils;
+
+
+/**@author zhuj
+ *@date 2018/12/28
+ * 门店创建微养车信息请求参数实体类
+ *
+ * @param
+ */
+public class CreateStoreWechatRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+	@ApiModelProperty(value = "门店小程序id", name = "storeWechatId", example = "1")
+	private Integer storeWechatId; // 门店小程序id
+	@ApiModelProperty(value = "门店sstore_id", name = "storeId", example = "1")
+	private Integer storeId; // sstore_id
+	@ApiModelProperty(value = "门店小程序首页图片", name = "appIndexUrl", example = "1")
+	private String appIndexUrl; // 门店小程序首页图片
+	@ApiModelProperty(value = "二维码url", name = "qrCodeUrl", example = "1")
+	private String qrCodeUrl; // 二维码url
+	@ApiModelProperty(value = "状态0=待审核,1=上线,-1=下线", name = "status", example = "1")
+	private Integer status; // 状态0=待审核,1=上线,-1=下线
+	@ApiModelProperty(value = "是否开启会员卡业务", name = "isCouponOn", example = "1")
+	private Integer isCouponOn; // 是否开启会员卡业务
+	@ApiModelProperty(value = "是否支付时使用会员卡折扣", name = "isPayWithCouponOn", example = "1")
+	private Integer isPayWithCouponOn; // 是否支付时使用会员卡折扣
+	@ApiModelProperty(value = " 微信openid", name = "openid", example = "1")
+	private String openid; // 微信openid
+	@ApiModelProperty(value = " 微信unionid", name = "unionid", example = "1")
+	private String unionid; // 微信unionid
+	@ApiModelProperty(value = " 是否开启该门店核销爱车卡功能0:闭关 1:开启", name = "isStoreWriteoffCard", example = "1")
+	private Integer isStoreWriteoffCard; // 是否开启该门店核销爱车卡功能0:闭关 1:开启
+	@ApiModelProperty(value = " 支付二维码url", name = "payQrCodeUrl", example = "1")
+	private String payQrCodeUrl; // 支付二维码url
+	@ApiModelProperty(value = " 爱车卡列表二维码url", name = "cardListQrCodeUrl", example = "1")
+	private String cardListQrCodeUrl; // 爱车卡列表二维码url
+	@ApiModelProperty(value = " 是否开启该门店核销套餐功能0:闭关 1:开启", name = "isStoreWriteoffPlan", example = "1")
+	private Integer isStoreWriteoffPlan; // 是否开启该门店核销套餐功能0:闭关 1:开启
+	@ApiModelProperty(value = " 本店商城小程序码url", name = "storeMallQrCodeUrl", example = "1")
+	private String storeMallQrCodeUrl; // 本店商城小程序码url
+	@ApiModelProperty(value = " 本店商城小程序码url", name = "storeMallQrCodeUrl", example = "1")
+	private Integer isSstorePackage; // 是否开启销售储值卡套餐功能0:闭关 1:开启
+	@ApiModelProperty(value = " 是否开启服务预约功能0:关闭 1:开启", name = "isSstoreServiceAppoint", example = "1")
+	private Integer isSstoreServiceAppoint; // 是否开启服务预约功能0:关闭 1:开启
+	@ApiModelProperty(value = " 储值卡充值二维码", name = "storecardQrCodeUrl", example = "1")
+	private String storecardQrCodeUrl; // 储值卡充值二维码
+	@ApiModelProperty(value = " 本店服务预约小程序码url", name = "storeAppointmentQrCodeUrl", example = "1")
+	private String storeAppointmentQrCodeUrl; // 本店服务预约小程序码url
+
+	public void setStoreWechatId(Integer storeWechatId) {
+		this.storeWechatId = storeWechatId;
+	}
+	
+	public Integer getStoreWechatId() {
+		return this.storeWechatId;
+	}
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+	
+	public Integer getStoreId() {
+		return this.storeId;
+	}
+	public void setAppIndexUrl(String appIndexUrl) {
+		this.appIndexUrl = appIndexUrl;
+	}
+	
+	public String getAppIndexUrl() {
+		return this.appIndexUrl;
+	}
+	public void setQrCodeUrl(String qrCodeUrl) {
+		this.qrCodeUrl = qrCodeUrl;
+	}
+	
+	public String getQrCodeUrl() {
+		return this.qrCodeUrl;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	
+	public Integer getStatus() {
+		return this.status;
+	}
+	public void setIsCouponOn(Integer isCouponOn) {
+		this.isCouponOn = isCouponOn;
+	}
+	
+	public Integer getIsCouponOn() {
+		return this.isCouponOn;
+	}
+	public void setIsPayWithCouponOn(Integer isPayWithCouponOn) {
+		this.isPayWithCouponOn = isPayWithCouponOn;
+	}
+	
+	public Integer getIsPayWithCouponOn() {
+		return this.isPayWithCouponOn;
+	}
+	public void setOpenid(String openid) {
+		this.openid = openid;
+	}
+	
+	public String getOpenid() {
+		return this.openid;
+	}
+	public void setUnionid(String unionid) {
+		this.unionid = unionid;
+	}
+	
+	public String getUnionid() {
+		return this.unionid;
+	}
+	public void setIsStoreWriteoffCard(Integer isStoreWriteoffCard) {
+		this.isStoreWriteoffCard = isStoreWriteoffCard;
+	}
+	
+	public Integer getIsStoreWriteoffCard() {
+		return this.isStoreWriteoffCard;
+	}
+	public void setPayQrCodeUrl(String payQrCodeUrl) {
+		this.payQrCodeUrl = payQrCodeUrl;
+	}
+	
+	public String getPayQrCodeUrl() {
+		return this.payQrCodeUrl;
+	}
+	public void setCardListQrCodeUrl(String cardListQrCodeUrl) {
+		this.cardListQrCodeUrl = cardListQrCodeUrl;
+	}
+	
+	public String getCardListQrCodeUrl() {
+		return this.cardListQrCodeUrl;
+	}
+	public void setIsStoreWriteoffPlan(Integer isStoreWriteoffPlan) {
+		this.isStoreWriteoffPlan = isStoreWriteoffPlan;
+	}
+	
+	public Integer getIsStoreWriteoffPlan() {
+		return this.isStoreWriteoffPlan;
+	}
+	public void setStoreMallQrCodeUrl(String storeMallQrCodeUrl) {
+		this.storeMallQrCodeUrl = storeMallQrCodeUrl;
+	}
+	
+	public String getStoreMallQrCodeUrl() {
+		return this.storeMallQrCodeUrl;
+	}
+	public void setIsSstorePackage(Integer isSstorePackage) {
+		this.isSstorePackage = isSstorePackage;
+	}
+	
+	public Integer getIsSstorePackage() {
+		return this.isSstorePackage;
+	}
+	public void setIsSstoreServiceAppoint(Integer isSstoreServiceAppoint) {
+		this.isSstoreServiceAppoint = isSstoreServiceAppoint;
+	}
+	
+	public Integer getIsSstoreServiceAppoint() {
+		return this.isSstoreServiceAppoint;
+	}
+	public void setStorecardQrCodeUrl(String storecardQrCodeUrl) {
+		this.storecardQrCodeUrl = storecardQrCodeUrl;
+	}
+	
+	public String getStorecardQrCodeUrl() {
+		return this.storecardQrCodeUrl;
+	}
+	public void setStoreAppointmentQrCodeUrl(String storeAppointmentQrCodeUrl) {
+		this.storeAppointmentQrCodeUrl = storeAppointmentQrCodeUrl;
+	}
+	
+	public String getStoreAppointmentQrCodeUrl() {
+		return this.storeAppointmentQrCodeUrl;
+	}
+	/**@author zhuj
+	 * 判断传人参数是否为空
+	 *@date 2018/12/28
+	 * @param
+	 */
+	public String paramValidatecheck() {
+		if (storeWechatId==null) {
+			return "参数：storeWechatId不能为空";
+		}
+		if (storeId==null) {
+			return "参数：storeId不能为空";
+		}
+
+		if (storeId==null) {
+			return "参数：storeId不能为空";
+		}
+		if (StringUtils.isBlank(unionid)) {
+			return "参数：unionid不能为空";
+		}
+		if (StringUtils.isBlank(openid)) {
+			return "参数：openid不能为空";
+		}
+		return null;
+	}
+    @Override
+    public String toString () {
+    	return "CreateStoreWechatRequest{" +
+	    	"storeWechatId=" + storeWechatId + 
+	    	", storeId=" + storeId + 
+	    	", appIndexUrl=" + appIndexUrl + 
+	    	", qrCodeUrl=" + qrCodeUrl + 
+	    	", status=" + status + 
+	    	", isCouponOn=" + isCouponOn + 
+	    	", isPayWithCouponOn=" + isPayWithCouponOn + 
+	    	", openid=" + openid + 
+	    	", unionid=" + unionid + 
+	    	", isStoreWriteoffCard=" + isStoreWriteoffCard + 
+	    	", payQrCodeUrl=" + payQrCodeUrl + 
+	    	", cardListQrCodeUrl=" + cardListQrCodeUrl + 
+	    	", isStoreWriteoffPlan=" + isStoreWriteoffPlan + 
+	    	", storeMallQrCodeUrl=" + storeMallQrCodeUrl + 
+	    	", isSstorePackage=" + isSstorePackage + 
+	    	", isSstoreServiceAppoint=" + isSstoreServiceAppoint + 
+	    	", storecardQrCodeUrl=" + storecardQrCodeUrl + 
+	    	", storeAppointmentQrCodeUrl=" + storeAppointmentQrCodeUrl + 
+	    	", getVersion()=" + getVersion() +
+	    	", getReqCode()=" + getReqCode() +
+	    	", getTraceId()=" + getTraceId() +
+	    	"}";
+    }
+}

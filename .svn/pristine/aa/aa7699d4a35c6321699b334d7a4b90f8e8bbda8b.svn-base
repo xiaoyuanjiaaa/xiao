@@ -1,0 +1,130 @@
+package com.fc.protocol.demo.request.wechatmaintain.user;
+
+import java.math.BigDecimal;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * 微养车 更新用户会员卡信息参数
+ * @author yangd
+ * @date 2019年1月4日
+ */
+public class WmcsUserUpdateRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+	@ApiModelProperty(value = "主键id", name = "wechatMaintainCouponSstoreUserId")
+	private Integer wechatMaintainCouponSstoreUserId; // 主键id
+	@ApiModelProperty(value = "微养车用户id", name = "wechatMaintainUserId")
+	private Integer wechatMaintainUserId; // 微养车用户id
+	@ApiModelProperty(value = "门店id", name = "storeId")
+	private Integer storeId; // 门店id
+	@ApiModelProperty(value = "当前积分", name = "integral")
+	private Integer integral; // 当前积分
+	@ApiModelProperty(value = "当前享受的折扣", name = "discount")
+	private BigDecimal discount; // 当前享受的折扣
+	@ApiModelProperty(value = "当前的会员级别", name = "couponLevel")
+	private Integer couponLevel; // 当前的会员级别
+	@ApiModelProperty(value = "会员等级名称", name = "couponLevelName")
+	private String couponLevelName; // 会员等级名称
+	@ApiModelProperty(value = "更新时间", name = "updateTime")
+	private Integer updateTime; // 更新时间
+
+	/**
+	 * 验证方法
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-09
+	 * @return
+	 */
+	public String paramValidate() {
+		if (StringUtils.isEmpty(wechatMaintainCouponSstoreUserId)) {
+			return "参数wechatMaintainCouponSstoreUserId不能为空";
+		}
+		if (StringUtils.isEmpty(wechatMaintainUserId)) {
+			return "参数wechatMaintainUserId不能为空";
+		}
+		if (StringUtils.isEmpty(storeId)) {
+			return "参数storeId不能为空";
+		}
+		if (StringUtils.isEmpty(integral)) {
+			return "参数integral不能为空";
+		}
+		return null;
+	}
+
+	public Integer getWechatMaintainCouponSstoreUserId() {
+		return wechatMaintainCouponSstoreUserId;
+	}
+
+	public void setWechatMaintainCouponSstoreUserId(Integer wechatMaintainCouponSstoreUserId) {
+		this.wechatMaintainCouponSstoreUserId = wechatMaintainCouponSstoreUserId;
+	}
+
+	public Integer getWechatMaintainUserId() {
+		return wechatMaintainUserId;
+	}
+
+	public void setWechatMaintainUserId(Integer wechatMaintainUserId) {
+		this.wechatMaintainUserId = wechatMaintainUserId;
+	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	public Integer getIntegral() {
+		return integral;
+	}
+
+	public void setIntegral(Integer integral) {
+		this.integral = integral;
+	}
+
+	public BigDecimal getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(BigDecimal discount) {
+		this.discount = discount;
+	}
+
+	public Integer getCouponLevel() {
+		return couponLevel;
+	}
+
+	public void setCouponLevel(Integer couponLevel) {
+		this.couponLevel = couponLevel;
+	}
+
+	public String getCouponLevelName() {
+		return couponLevelName;
+	}
+
+	public void setCouponLevelName(String couponLevelName) {
+		this.couponLevelName = couponLevelName;
+	}
+
+	public Integer getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Integer updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	@Override
+	public String toString() {
+		return "WmcsUserUpdateRequest [wechatMaintainCouponSstoreUserId=" + wechatMaintainCouponSstoreUserId
+				+ ", wechatMaintainUserId=" + wechatMaintainUserId + ", storeId=" + storeId + ", integral=" + integral
+				+ ", discount=" + discount + ", couponLevel=" + couponLevel + ", couponLevelName=" + couponLevelName
+				+ ", updateTime=" + updateTime + ", getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode()
+				+ ", getTraceId()=" + getTraceId() + "]";
+	}
+}

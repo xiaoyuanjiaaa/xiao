@@ -1,0 +1,370 @@
+package com.fc.member.store.user.handler;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.fc.common.exception.ErrorCode;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.store.user.entity.StoreSetting;
+import com.fc.member.store.user.service.IStoreSettingService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.store.user.StoreSetingSetOpenBellRequest;
+import com.fc.protocol.demo.request.store.user.StoreSetingSetOpenPcRequest;
+import com.fc.protocol.demo.request.store.user.StoreSetingSetPickCarRequest;
+import com.fc.protocol.demo.request.store.user.StoreSetingSetPushRequest;
+import com.fc.protocol.demo.request.store.user.StoreSetingSetSelfOrderRequest;
+import com.fc.protocol.demo.request.store.user.StoreSetingSetccpRequest;
+import com.fc.protocol.demo.request.store.user.StoreSetingSetfcsRequest;
+import com.fc.protocol.demo.request.store.user.StoreSetingSetfjcRequest;
+import com.fc.protocol.demo.request.store.user.StoreSetingSetscRequest;
+import com.fc.protocol.demo.request.store.user.StoreSetingSetsvShelvesRequest;
+import com.fc.protocol.demo.request.store.user.StoreSetingSetsvsRequest;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+
+/**
+ * 用户store_setting表基础操作Handler
+ * @author	xiaozw
+ * @data	2019-1-12
+ */
+@Component
+@Handler(module = "store")
+public class StoreSettingHandler {
+	private static Logger log = LoggerFactory.getLogger(StoreSettingHandler.class);
+
+	@Autowired
+	private IStoreSettingService storeSettingService;
+
+	/**
+	 * 门店是否禁售联名卡，0禁售，1正常销售
+	 * @author	xiaozw
+	 * @see update_name:xiaozw update_time:2019-1-12 17:20
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = StoreSetingSetfjcRequest.class)
+	public ProtocolResponse storeSetingSetfjc(StoreSetingSetfjcRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			log.info("storeSetingSetfjc------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			}
+			StoreSetting storeSetting = new StoreSetting();
+			storeSetting.setStoreId(request.getStoreId());
+			storeSetting.setUpdateTime(DateTimeUtils.getDateTimeInteger());
+			storeSetting.setIsForbidJointCard(request.getIsForbidJointCard());
+			if (!storeSettingService.updateByStoreId(storeSetting)) {
+				return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg(ErrorCode.UPDATE_ERROR.getDesc());
+			}
+		} catch (Exception e) {
+			log.info("storeSetingSetfjc:", e);
+			e.printStackTrace();
+			return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+		return response;
+	}
+
+	/**
+	 *门店是否接收订单推送,0:不开,1:开启
+	 * @author	xiaozw
+	 * @see update_name:xiaozw update_time:2019-1-12 17:20
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = StoreSetingSetPushRequest.class)
+	public ProtocolResponse storeSetingSetPush(StoreSetingSetPushRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			log.info("storeSetingSetPush------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			}
+			StoreSetting storeSetting = new StoreSetting();
+			storeSetting.setStoreId(request.getStoreId());
+			storeSetting.setUpdateTime(DateTimeUtils.getDateTimeInteger());
+			storeSetting.setIsPush(request.getIsPush());
+			if (!storeSettingService.updateByStoreId(storeSetting)) {
+				return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg(ErrorCode.UPDATE_ERROR.getDesc());
+			}
+		} catch (Exception e) {
+			log.info("storeSetingSetPush:", e);
+			e.printStackTrace();
+			return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+		return response;
+	}
+
+	/**
+	 *  门店是否开启订单推送铃声,0:不开,1:开启
+	 * @author	xiaozw
+	 * @see update_name:xiaozw update_time:2019-1-12 17:20
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = StoreSetingSetOpenBellRequest.class)
+	public ProtocolResponse storeSetingSetOpenBell(StoreSetingSetOpenBellRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			log.info("storeSetingSetOpenBell------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			}
+			StoreSetting storeSetting = new StoreSetting();
+			storeSetting.setStoreId(request.getStoreId());
+			storeSetting.setUpdateTime(DateTimeUtils.getDateTimeInteger());
+			storeSetting.setIsOpenBell(request.getIsOpenBell());
+			if (!storeSettingService.updateByStoreId(storeSetting)) {
+				return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg(ErrorCode.UPDATE_ERROR.getDesc());
+			}
+		} catch (Exception e) {
+			log.info("storeSetingSetOpenBell:", e);
+			e.printStackTrace();
+			return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+		return response;
+	}
+
+	/**
+	 * 门店虚拟货架权限, 0:未操作,1:开启,2:关闭
+	 * @author	xiaozw
+	 * @see update_name:xiaozw update_time:2019-1-12 17:20
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = StoreSetingSetsvShelvesRequest.class)
+	public ProtocolResponse storeSetingSetsvShelves(StoreSetingSetsvShelvesRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			log.info("storeSetingSetsvShelves------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			}
+			StoreSetting storeSetting = new StoreSetting();
+			storeSetting.setStoreId(request.getStoreId());
+			storeSetting.setUpdateTime(DateTimeUtils.getDateTimeInteger());
+			storeSetting.setIsSystemVirtualShelves(request.getIsSystemVirtualShelves());
+			if (!storeSettingService.updateByStoreId(storeSetting)) {
+				return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg(ErrorCode.UPDATE_ERROR.getDesc());
+			}
+		} catch (Exception e) {
+			log.info("storeSetingSetsvShelves:", e);
+			e.printStackTrace();
+			return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+		return response;
+	}
+
+	/**
+	 * 门店虚拟货架状态,0:未开通,1:已开通
+	 * @author	xiaozw
+	 * @see update_name:xiaozw update_time:2019-1-12 17:20
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = StoreSetingSetsvsRequest.class)
+	public ProtocolResponse storeSetingSetsvs(StoreSetingSetsvsRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			log.info("storeSetingSetsvs------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			}
+			StoreSetting storeSetting = new StoreSetting();
+			storeSetting.setStoreId(request.getStoreId());
+			storeSetting.setUpdateTime(DateTimeUtils.getDateTimeInteger());
+			storeSetting.setIsSstoreVirtualShelves(request.getIsSstoreVirtualShelves());
+			if (!storeSettingService.updateSstoreVirtualShelves(storeSetting)) {
+				return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg(ErrorCode.UPDATE_ERROR.getDesc());
+			}
+		} catch (Exception e) {
+			log.info("storeSetingSetsvs:", e);
+			e.printStackTrace();
+			return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+		return response;
+	}
+
+	/**
+	 * 门店是否自能下单 1是 0否
+	 * @author	xiaozw
+	 * @see update_name:xiaozw update_time:2019-1-12 17:20
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = StoreSetingSetSelfOrderRequest.class)
+	public ProtocolResponse storeSetingSetSelfOrder(StoreSetingSetSelfOrderRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			log.info("storeSetingSetSelfOrder------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			}
+			StoreSetting storeSetting = new StoreSetting();
+			storeSetting.setStoreId(request.getStoreId());
+			storeSetting.setUpdateTime(DateTimeUtils.getDateTimeInteger());
+			storeSetting.setIsSelfOrder(request.getIsSelfOrder());
+			if (!storeSettingService.updateByStoreId(storeSetting)) {
+				return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg(ErrorCode.UPDATE_ERROR.getDesc());
+			}
+		} catch (Exception e) {
+			log.info("storeSetingSetSelfOrder:", e);
+			e.printStackTrace();
+			return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+		return response;
+	}
+
+	/**
+	 * 门店是否开启信用卡支付：1是，0否
+	 * @author	xiaozw
+	 * @see update_name:xiaozw update_time:2019-1-12 17:20
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = StoreSetingSetccpRequest.class)
+	public ProtocolResponse storeSetingSetccp(StoreSetingSetccpRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			log.info("storeSetingSetccp------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			}
+			StoreSetting storeSetting = new StoreSetting();
+			storeSetting.setStoreId(request.getStoreId());
+			storeSetting.setUpdateTime(DateTimeUtils.getDateTimeInteger());
+			storeSetting.setIsCreditCardPay(request.getIsCreditCardPay());
+			if (!storeSettingService.updateByStoreId(storeSetting)) {
+				return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg(ErrorCode.UPDATE_ERROR.getDesc());
+			}
+		} catch (Exception e) {
+			log.info("storeSetingSetccp:", e);
+			e.printStackTrace();
+			return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+		return response;
+	}
+
+	/**
+	 * 门店是否开启接车功能 0 是关闭 1是开启 
+	 * @author	xiaozw
+	 * @see update_name:xiaozw update_time:2019-1-12 17:20
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = StoreSetingSetPickCarRequest.class)
+	public ProtocolResponse storeSetingSetPickCar(StoreSetingSetPickCarRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			log.info("storeSetingSetPickCar------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			}
+			StoreSetting storeSetting = new StoreSetting();
+			storeSetting.setStoreId(request.getStoreId());
+			storeSetting.setUpdateTime(DateTimeUtils.getDateTimeInteger());
+			storeSetting.setIsPickCar(request.getIsPickCar());
+			if (!storeSettingService.updateByStoreId(storeSetting)) {
+				return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg(ErrorCode.UPDATE_ERROR.getDesc());
+			}
+		} catch (Exception e) {
+			log.info("storeSetingSetPickCar:", e);
+			e.printStackTrace();
+			return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+		return response;
+	}
+
+	/**
+	 * 门店是否开启门店核销，0:不是；1:是
+	 * @author	xiaozw
+	 * @see update_name:xiaozw update_time:2019-1-12 17:20
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = StoreSetingSetscRequest.class)
+	public ProtocolResponse storeSetingSetsc(StoreSetingSetscRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			log.info("storeSetingSetsc------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			}
+			StoreSetting storeSetting = new StoreSetting();
+			storeSetting.setStoreId(request.getStoreId());
+			storeSetting.setUpdateTime(DateTimeUtils.getDateTimeInteger());
+			storeSetting.setIsSstoreCancellation(request.getIsSstoreCancellation());
+			if (!storeSettingService.updateByStoreId(storeSetting)) {
+				return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg(ErrorCode.UPDATE_ERROR.getDesc());
+			}
+		} catch (Exception e) {
+			log.info("storeSetingSetsc:", e);
+			e.printStackTrace();
+			return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+		return response;
+	}
+
+	/**
+	 * 微养车找店状态，0：禁用，1：启用
+	 * @author	xiaozw
+	 * @see update_name:xiaozw update_time:2019-1-12 17:20
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = StoreSetingSetfcsRequest.class)
+	public ProtocolResponse storeSetingSetfcs(StoreSetingSetfcsRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			log.info("storeSetingSetfcs------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			}
+			StoreSetting storeSetting = new StoreSetting();
+			storeSetting.setStoreId(request.getStoreId());
+			storeSetting.setUpdateTime(DateTimeUtils.getDateTimeInteger());
+			storeSetting.setIsFindcardStatus(request.getIsFindcardStatus());
+			if (!storeSettingService.updateByStoreId(storeSetting)) {
+				return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg(ErrorCode.UPDATE_ERROR.getDesc());
+			}
+		} catch (Exception e) {
+			log.info("storeSetingSetfcs:", e);
+			e.printStackTrace();
+			return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+		return response;
+	}
+
+	/**
+	 *  是否开启pc收银，0：禁用，1：启用
+	 * @author	xiaozw
+	 * @see update_name:xiaozw update_time:2019-1-12 17:20
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = StoreSetingSetOpenPcRequest.class)
+	public ProtocolResponse storeSetingSetOpenPc(StoreSetingSetOpenPcRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			log.info("storeSetingSetOpenPc------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			}
+			StoreSetting storeSetting = new StoreSetting();
+			storeSetting.setStoreId(request.getStoreId());
+			storeSetting.setUpdateTime(DateTimeUtils.getDateTimeInteger());
+			storeSetting.setIsOpenPc(request.getIsOpenPc());
+			if (!storeSettingService.updateByStoreId(storeSetting)) {
+				return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg(ErrorCode.UPDATE_ERROR.getDesc());
+			}
+		} catch (Exception e) {
+			log.info("storeSetingSetOpenPc:", e);
+			e.printStackTrace();
+			return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+		return response;
+	}
+
+}

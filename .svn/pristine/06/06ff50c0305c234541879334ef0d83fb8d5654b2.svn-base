@@ -1,0 +1,56 @@
+package com.fc.member.store.user.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.plugin.mybatis.PageQuery;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.member.store.user.dao.IPublicUserLoginsLogDao;
+import com.fc.member.store.user.entity.PublicUserLoginsLog;
+import com.fc.member.store.user.service.IPublicUserLoginsLogService;
+import com.fc.protocol.demo.request.store.user.PullPageRequest;
+
+/**
+ * <p>Title: PublicUserLoginsLog</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2019-01-02 16:49:50
+ */
+@Service("publicUserLoginsLogService")
+public class PublicUserLoginsLogServiceImp extends ServiceImpl<PublicUserLoginsLog>
+		implements IPublicUserLoginsLogService {
+
+	@Autowired
+	private IPublicUserLoginsLogDao publicUserLoginsLogDao;
+
+	@Override
+	protected IMapper<PublicUserLoginsLog> getDao() {
+		return publicUserLoginsLogDao;
+	}
+
+	/**
+	 * 插入数据
+	 * @return
+	 */
+	@Override
+	public boolean insertSelective(PublicUserLoginsLog obj) {
+		return publicUserLoginsLogDao.insertSelective(obj);
+	}
+
+	@Override
+	public List<PublicUserLoginsLog> getPullPage(Page page, PullPageRequest request) {
+		//log.info("getSadListPage---------->:" + request);
+		PublicUserLoginsLog pull = new PublicUserLoginsLog();
+		pull.setMemberId(request.getPublicUserId());
+		//log.info("WechatMaintainCouponSstoreUser---------->{}", sad.toString());
+		// 设置分页，查询条件
+		PageQuery pageQuery = new PageQuery();
+		pageQuery.setPage(page);
+		pageQuery.setCondition(pull);
+		return publicUserLoginsLogDao.getRowsPage(pageQuery);
+	}
+}

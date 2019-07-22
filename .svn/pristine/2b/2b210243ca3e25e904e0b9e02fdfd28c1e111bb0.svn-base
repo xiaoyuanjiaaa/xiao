@@ -1,0 +1,90 @@
+package com.fc.member.wechatplatform.user.service.impl;
+
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.plugin.mybatis.PageQuery;
+import com.fc.member.wechatplatform.user.entity.WechatPlatformServiceCount;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.member.wechatplatform.user.dao.IWechatPlatformServiceCountDao;
+import com.fc.member.wechatplatform.user.service.IWechatPlatformServiceCountService;
+import com.fc.member.wechatplatform.user.entity.WechatPlatformServiceCount;
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * <p>Title: WechatPlatformServiceCount</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-28 17:14:41
+ */
+@Service("wechatPlatformServiceCountService")
+public class WechatPlatformServiceCountServiceImp extends ServiceImpl<WechatPlatformServiceCount> implements IWechatPlatformServiceCountService{
+
+	@Autowired
+	private IWechatPlatformServiceCountDao wechatPlatformServiceCountDao;
+	
+	@Override
+	protected IMapper<WechatPlatformServiceCount> getDao() {
+		return wechatPlatformServiceCountDao;
+	}
+
+	/**
+	 * 根据openid查询服务统计信息
+	 * @param openid,service_id
+	 * @return
+	 */
+	@Override
+	public WechatPlatformServiceCount get(String  openid, Integer service_id) {
+		WechatPlatformServiceCount entity = new WechatPlatformServiceCount();
+		entity.setOpenid(openid);
+		entity.setServiceId(service_id);
+		List<WechatPlatformServiceCount> list = wechatPlatformServiceCountDao.getRows(entity);
+		if (list.isEmpty()) {
+			return null;
+		}
+		return list.get(0);
+	}
+
+	/**
+	 * 反馈信息列表
+	 * @return
+	 */
+	@Override
+	public List<WechatPlatformServiceCount> getServiceCountList(Map<String, Object> map, Page page) {
+		PageQuery pageQuery = new PageQuery();
+		pageQuery.setPage(page);
+		pageQuery.setCondition(map);
+		return wechatPlatformServiceCountDao.getRowsPage(pageQuery);
+	}
+
+	/**
+	 * 新增游客
+	 */
+	@Override
+	public int insertPlatformServiceCount(WechatPlatformServiceCount wechatPlatformServiceCount) {
+		return wechatPlatformServiceCountDao.insertSelective(wechatPlatformServiceCount);
+	}
+
+	/**
+	 * 更新用户信息
+	 */
+	@Override
+	public int updatePlatformServiceCount(WechatPlatformServiceCount obj) {
+		int result = 0;
+		wechatPlatformServiceCountDao.update(obj);
+		return result = 1;
+	}
+
+	/**
+	 * 删除用户信息
+	 */
+	@Override
+	public int deletePlatformServiceCount(Integer id) {
+		int result = 0;
+		wechatPlatformServiceCountDao.deleteByPK(id);
+		return result = 1;
+	}
+}

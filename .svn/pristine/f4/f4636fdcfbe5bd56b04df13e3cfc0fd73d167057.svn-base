@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.master.user.dao.IMasterUserMapleBeanDetailDao">
+	<resultMap id="MasterUserMapleBeanDetailMap" type="com.fc.member.master.user.entity.MasterUserMapleBeanDetail">
+        <id property="mapleBeanDetailId" column="maple_bean_detail_id"/>
+        <id property="masterMemberId" column="master_member_id"/>
+        <id property="storeId" column="store_id"/>
+        <id property="orderNo" column="order_no"/>
+        <id property="detailType" column="detail_type"/>
+        <id property="changeCoin" column="change_coin"/>
+        <id property="afterCoin" column="after_coin"/>
+        <id property="sourceType" column="source_type"/>
+        <id property="createTime" column="create_time"/>
+        <id property="changeReason" column="change_reason"/>
+        <id property="changeDesc" column="change_desc"/>
+        <id property="updateTime" column="update_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="MasterUserMapleBeanDetailMap" >
+		select * from master_user_maple_bean_detail where 
+	        maple_bean_detail_id = #{mapleBeanDetailId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.master.user.entity.MasterUserMapleBeanDetail" useGeneratedKeys="true" keyProperty="mapleBeanDetailId">
+		insert into master_user_maple_bean_detail(maple_bean_detail_id , master_member_id , store_id , order_no , detail_type , change_coin , after_coin , source_type , create_time , change_reason , change_desc , update_time  )
+    	values(#{mapleBeanDetailId} ,#{masterMemberId} ,#{storeId} ,#{orderNo} ,#{detailType} ,#{changeCoin} ,#{afterCoin} ,#{sourceType} ,#{createTime} ,#{changeReason} ,#{changeDesc} ,#{updateTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.master.user.entity.MasterUserMapleBeanDetail" useGeneratedKeys="true" keyProperty="mapleBeanDetailId">
+		insert into master_user_maple_bean_detail
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="mapleBeanDetailId != null">maple_bean_detail_id,</if>
+					<if test="masterMemberId != null">master_member_id,</if>
+					<if test="storeId != null">store_id,</if>
+					<if test="orderNo != null">order_no,</if>
+					<if test="detailType != null">detail_type,</if>
+					<if test="changeCoin != null">change_coin,</if>
+					<if test="afterCoin != null">after_coin,</if>
+					<if test="sourceType != null">source_type,</if>
+					<if test="createTime != null">create_time,</if>
+					<if test="changeReason != null">change_reason,</if>
+					<if test="changeDesc != null">change_desc,</if>
+					<if test="updateTime != null">update_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="mapleBeanDetailId != null">#{mapleBeanDetailId},</if>
+					<if test="masterMemberId != null">#{masterMemberId},</if>
+					<if test="storeId != null">#{storeId},</if>
+					<if test="orderNo != null">#{orderNo},</if>
+					<if test="detailType != null">#{detailType},</if>
+					<if test="changeCoin != null">#{changeCoin},</if>
+					<if test="afterCoin != null">#{afterCoin},</if>
+					<if test="sourceType != null">#{sourceType},</if>
+					<if test="createTime != null">#{createTime},</if>
+					<if test="changeReason != null">#{changeReason},</if>
+					<if test="changeDesc != null">#{changeDesc},</if>
+					<if test="updateTime != null">#{updateTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.master.user.entity.MasterUserMapleBeanDetail">
+		update master_user_maple_bean_detail
+		<set>
+		    	<if test="masterMemberId != null">master_member_id = #{masterMemberId},</if>
+		    	<if test="storeId != null">store_id = #{storeId},</if>
+		    	<if test="orderNo != null">order_no = #{orderNo},</if>
+		    	<if test="detailType != null">detail_type = #{detailType},</if>
+		    	<if test="changeCoin != null">change_coin = #{changeCoin},</if>
+		    	<if test="afterCoin != null">after_coin = #{afterCoin},</if>
+		    	<if test="sourceType != null">source_type = #{sourceType},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		    	<if test="changeReason != null">change_reason = #{changeReason},</if>
+		    	<if test="changeDesc != null">change_desc = #{changeDesc},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		</set>
+		where 
+	        maple_bean_detail_id = #{mapleBeanDetailId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from master_user_maple_bean_detail where 
+	        maple_bean_detail_id = #{mapleBeanDetailId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.master.user.entity.MasterUserMapleBeanDetail" resultMap="MasterUserMapleBeanDetailMap" >
+		select * from master_user_maple_bean_detail 
+		<where>
+		       <if test="mapleBeanDetailId != null">
+					AND maple_bean_detail_id = #{mapleBeanDetailId}
+				</if>
+		       <if test="masterMemberId != null">
+					AND master_member_id = #{masterMemberId}
+				</if>
+		       <if test="storeId != null">
+					AND store_id = #{storeId}
+				</if>
+		       <if test="orderNo != null">
+					AND order_no = #{orderNo}
+				</if>
+		       <if test="detailType != null">
+					AND detail_type = #{detailType}
+				</if>
+		       <if test="changeCoin != null">
+					AND change_coin = #{changeCoin}
+				</if>
+		       <if test="afterCoin != null">
+					AND after_coin = #{afterCoin}
+				</if>
+		       <if test="sourceType != null">
+					AND source_type = #{sourceType}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		       <if test="changeReason != null">
+					AND change_reason = #{changeReason}
+				</if>
+		       <if test="changeDesc != null">
+					AND change_desc = #{changeDesc}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="MasterUserMapleBeanDetailMap" >
+		select * from master_user_maple_bean_detail  
+		<where>
+		       <if test="condition.mapleBeanDetailId != null">
+					AND maple_bean_detail_id = #{condition.mapleBeanDetailId}
+				</if>
+		       <if test="condition.masterMemberId != null">
+					AND master_member_id = #{condition.masterMemberId}
+				</if>
+		       <if test="condition.storeId != null">
+					AND store_id = #{condition.storeId}
+				</if>
+		       <if test="condition.orderNo != null">
+					AND order_no = #{condition.orderNo}
+				</if>
+		       <if test="condition.detailType != null">
+					AND detail_type = #{condition.detailType}
+				</if>
+		       <if test="condition.changeCoin != null">
+					AND change_coin = #{condition.changeCoin}
+				</if>
+		       <if test="condition.afterCoin != null">
+					AND after_coin = #{condition.afterCoin}
+				</if>
+		       <if test="condition.sourceType != null">
+					AND source_type = #{condition.sourceType}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		       <if test="condition.changeReason != null">
+					AND change_reason = #{condition.changeReason}
+				</if>
+		       <if test="condition.changeDesc != null">
+					AND change_desc = #{condition.changeDesc}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

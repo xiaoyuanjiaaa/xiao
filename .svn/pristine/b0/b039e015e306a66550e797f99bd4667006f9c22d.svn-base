@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.wechatplatform.user.dao.IWechatPlatformUserDao">
+	<resultMap id="WechatPlatformUserMap" type="com.fc.member.wechatplatform.user.entity.WechatPlatformUser">
+        <id property="platformUserId" column="platform_user_id"/>
+        <id property="fcUserId" column="fc_user_id"/>
+        <id property="mobile" column="mobile"/>
+        <id property="openid" column="openid"/>
+        <id property="createTime" column="create_time"/>
+        <id property="recentTime" column="recent_time"/>
+        <id property="openNumber" column="open_number"/>
+        <id property="unionid" column="unionid"/>
+        <id property="wechatAccount" column="wechat_account"/>
+        <id property="wechatAvatar" column="wechat_avatar"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="WechatPlatformUserMap" >
+		select * from wechat_platform_user where 
+	        platform_user_id = #{platformUserId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.wechatplatform.user.entity.WechatPlatformUser" useGeneratedKeys="true">
+		insert into wechat_platform_user(platform_user_id , fc_user_id , mobile , openid , create_time , recent_time , open_number , unionid , wechat_account , wechat_avatar  )
+    	values(#{platformUserId} ,#{fcUserId} ,#{mobile} ,#{openid} ,#{createTime} ,#{recentTime} ,#{openNumber} ,#{unionid} ,#{wechatAccount} ,#{wechatAvatar} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.wechatplatform.user.entity.WechatPlatformUser" useGeneratedKeys="true">
+		insert into wechat_platform_user
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="platformUserId != null">platform_user_id,</if>
+					<if test="fcUserId != null">fc_user_id,</if>
+					<if test="mobile != null">mobile,</if>
+					<if test="openid != null">openid,</if>
+					<if test="createTime != null">create_time,</if>
+					<if test="recentTime != null">recent_time,</if>
+					<if test="openNumber != null">open_number,</if>
+					<if test="unionid != null">unionid,</if>
+					<if test="wechatAccount != null">wechat_account,</if>
+					<if test="wechatAvatar != null">wechat_avatar</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="platformUserId != null">#{platformUserId},</if>
+					<if test="fcUserId != null">#{fcUserId},</if>
+					<if test="mobile != null">#{mobile},</if>
+					<if test="openid != null">#{openid},</if>
+					<if test="createTime != null">#{createTime},</if>
+					<if test="recentTime != null">#{recentTime},</if>
+					<if test="openNumber != null">#{openNumber},</if>
+					<if test="unionid != null">#{unionid},</if>
+					<if test="wechatAccount != null">#{wechatAccount},</if>
+					<if test="wechatAvatar != null">#{wechatAvatar}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.wechatplatform.user.entity.WechatPlatformUser">
+		update wechat_platform_user
+		<set>
+		    	<if test="fcUserId != null">fc_user_id = #{fcUserId},</if>
+		    	<if test="mobile != null">mobile = #{mobile},</if>
+		    	<if test="openid != null">openid = #{openid},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		    	<if test="recentTime != null">recent_time = #{recentTime},</if>
+		    	<if test="openNumber != null">open_number = #{openNumber},</if>
+		    	<if test="unionid != null">unionid = #{unionid},</if>
+		    	<if test="wechatAccount != null">wechat_account = #{wechatAccount},</if>
+		    	<if test="wechatAvatar != null">wechat_avatar = #{wechatAvatar},</if>
+		</set>
+		where 
+	        platform_user_id = #{platformUserId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from wechat_platform_user where 
+	        platform_user_id = #{platformUserId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.wechatplatform.user.entity.WechatPlatformUser" resultMap="WechatPlatformUserMap" >
+		select * from wechat_platform_user 
+		<where>
+		       <if test="platformUserId != null">
+					AND platform_user_id = #{platformUserId}
+				</if>
+		       <if test="fcUserId != null">
+					AND fc_user_id = #{fcUserId}
+				</if>
+		       <if test="mobile != null">
+					AND mobile = #{mobile}
+				</if>
+		       <if test="openid != null">
+					AND openid = #{openid}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		       <if test="recentTime != null">
+					AND recent_time = #{recentTime}
+				</if>
+		       <if test="openNumber != null">
+					AND open_number = #{openNumber}
+				</if>
+		       <if test="unionid != null">
+					AND unionid = #{unionid}
+				</if>
+		       <if test="wechatAccount != null">
+					AND wechat_account = #{wechatAccount}
+				</if>
+		       <if test="wechatAvatar != null">
+					AND wechat_avatar = #{wechatAvatar}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="WechatPlatformUserMap" >
+		select * from wechat_platform_user  
+		<where>
+		       <if test="condition.platformUserId != null">
+					AND platform_user_id = #{condition.platformUserId}
+				</if>
+		       <if test="condition.fcUserId != null">
+					AND fc_user_id = #{condition.fcUserId}
+				</if>
+		       <if test="condition.mobile != null">
+					AND mobile = #{condition.mobile}
+				</if>
+		       <if test="condition.openid != null">
+					AND openid = #{condition.openid}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		       <if test="condition.recentTime != null">
+					AND recent_time = #{condition.recentTime}
+				</if>
+		       <if test="condition.openNumber != null">
+					AND open_number = #{condition.openNumber}
+				</if>
+		       <if test="condition.unionid != null">
+					AND unionid = #{condition.unionid}
+				</if>
+		       <if test="condition.wechatAccount != null">
+					AND wechat_account = #{condition.wechatAccount}
+				</if>
+		       <if test="condition.wechatAvatar != null">
+					AND wechat_avatar = #{condition.wechatAvatar}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

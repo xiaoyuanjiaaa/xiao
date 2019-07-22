@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.shop.user.dao.IShopDepositinfoDao">
+	<resultMap id="ShopDepositinfoMap" type="com.fc.member.shop.user.entity.ShopDepositinfo">
+        <id property="shopDepositinfoId" column="shop_depositinfo_id"/>
+        <id property="shopId" column="shop_id"/>
+        <id property="bondMoney" column="bond_money"/>
+        <id property="onlineMoney" column="online_money"/>
+        <id property="paymentRatio" column="payment_ratio"/>
+        <id property="paymentSchedule" column="payment_schedule"/>
+        <id property="changeType" column="change_type"/>
+        <id property="deductionBase" column="deduction_base"/>
+        <id property="updateType" column="update_type"/>
+        <id property="updateReson" column="update_reson"/>
+        <id property="picture" column="picture"/>
+        <id property="thawTime" column="thaw_time"/>
+        <id property="changeMoney" column="change_money"/>
+        <id property="updateTime" column="update_time"/>
+        <id property="createTime" column="create_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="ShopDepositinfoMap" >
+		select * from shop_depositinfo where 
+	        shop_depositinfo_id = #{shopDepositinfoId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.shop.user.entity.ShopDepositinfo" useGeneratedKeys="true" keyProperty="shopDepositinfoId">
+		insert into shop_depositinfo(shop_depositinfo_id , shop_id , bond_money , online_money , payment_ratio , payment_schedule , change_type , deduction_base , update_type , update_reson , picture , thaw_time , change_money , update_time , create_time  )
+    	values(#{shopDepositinfoId} ,#{shopId} ,#{bondMoney} ,#{onlineMoney} ,#{paymentRatio} ,#{paymentSchedule} ,#{changeType} ,#{deductionBase} ,#{updateType} ,#{updateReson} ,#{picture} ,#{thawTime} ,#{changeMoney} ,#{updateTime} ,#{createTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.shop.user.entity.ShopDepositinfo" useGeneratedKeys="true" keyProperty="shopDepositinfoId">
+		insert into shop_depositinfo
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="shopDepositinfoId != null">shop_depositinfo_id,</if>
+					<if test="shopId != null">shop_id,</if>
+					<if test="bondMoney != null">bond_money,</if>
+					<if test="onlineMoney != null">online_money,</if>
+					<if test="paymentRatio != null">payment_ratio,</if>
+					<if test="paymentSchedule != null">payment_schedule,</if>
+					<if test="changeType != null">change_type,</if>
+					<if test="deductionBase != null">deduction_base,</if>
+					<if test="updateType != null">update_type,</if>
+					<if test="updateReson != null">update_reson,</if>
+					<if test="picture != null">picture,</if>
+					<if test="thawTime != null">thaw_time,</if>
+					<if test="changeMoney != null">change_money,</if>
+					<if test="updateTime != null">update_time,</if>
+					<if test="createTime != null">create_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="shopDepositinfoId != null">#{shopDepositinfoId},</if>
+					<if test="shopId != null">#{shopId},</if>
+					<if test="bondMoney != null">#{bondMoney},</if>
+					<if test="onlineMoney != null">#{onlineMoney},</if>
+					<if test="paymentRatio != null">#{paymentRatio},</if>
+					<if test="paymentSchedule != null">#{paymentSchedule},</if>
+					<if test="changeType != null">#{changeType},</if>
+					<if test="deductionBase != null">#{deductionBase},</if>
+					<if test="updateType != null">#{updateType},</if>
+					<if test="updateReson != null">#{updateReson},</if>
+					<if test="picture != null">#{picture},</if>
+					<if test="thawTime != null">#{thawTime},</if>
+					<if test="changeMoney != null">#{changeMoney},</if>
+					<if test="updateTime != null">#{updateTime},</if>
+					<if test="createTime != null">#{createTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.shop.user.entity.ShopDepositinfo">
+		update shop_depositinfo
+		<set>
+		    	<if test="shopId != null">shop_id = #{shopId},</if>
+		    	<if test="bondMoney != null">bond_money = #{bondMoney},</if>
+		    	<if test="onlineMoney != null">online_money = #{onlineMoney},</if>
+		    	<if test="paymentRatio != null">payment_ratio = #{paymentRatio},</if>
+		    	<if test="paymentSchedule != null">payment_schedule = #{paymentSchedule},</if>
+		    	<if test="changeType != null">change_type = #{changeType},</if>
+		    	<if test="deductionBase != null">deduction_base = #{deductionBase},</if>
+		    	<if test="updateType != null">update_type = #{updateType},</if>
+		    	<if test="updateReson != null">update_reson = #{updateReson},</if>
+		    	<if test="picture != null">picture = #{picture},</if>
+		    	<if test="thawTime != null">thaw_time = #{thawTime},</if>
+		    	<if test="changeMoney != null">change_money = #{changeMoney},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		</set>
+		where 
+	        shop_depositinfo_id = #{shopDepositinfoId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from shop_depositinfo where 
+	        shop_depositinfo_id = #{shopDepositinfoId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.shop.user.entity.ShopDepositinfo" resultMap="ShopDepositinfoMap" >
+		select * from shop_depositinfo 
+		<where>
+		       <if test="shopDepositinfoId != null">
+					AND shop_depositinfo_id = #{shopDepositinfoId}
+				</if>
+		       <if test="shopId != null">
+					AND shop_id = #{shopId}
+				</if>
+		       <if test="bondMoney != null">
+					AND bond_money = #{bondMoney}
+				</if>
+		       <if test="onlineMoney != null">
+					AND online_money = #{onlineMoney}
+				</if>
+		       <if test="paymentRatio != null">
+					AND payment_ratio = #{paymentRatio}
+				</if>
+		       <if test="paymentSchedule != null">
+					AND payment_schedule = #{paymentSchedule}
+				</if>
+		       <if test="changeType != null">
+					AND change_type = #{changeType}
+				</if>
+		       <if test="deductionBase != null">
+					AND deduction_base = #{deductionBase}
+				</if>
+		       <if test="updateType != null">
+					AND update_type = #{updateType}
+				</if>
+		       <if test="updateReson != null">
+					AND update_reson = #{updateReson}
+				</if>
+		       <if test="picture != null">
+					AND picture = #{picture}
+				</if>
+		       <if test="thawTime != null">
+					AND thaw_time = #{thawTime}
+				</if>
+		       <if test="changeMoney != null">
+					AND change_money = #{changeMoney}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="ShopDepositinfoMap" >
+		select * from shop_depositinfo  
+		<where>
+		       <if test="condition.shopDepositinfoId != null">
+					AND shop_depositinfo_id = #{condition.shopDepositinfoId}
+				</if>
+		       <if test="condition.shopId != null">
+					AND shop_id = #{condition.shopId}
+				</if>
+		       <if test="condition.bondMoney != null">
+					AND bond_money = #{condition.bondMoney}
+				</if>
+		       <if test="condition.onlineMoney != null">
+					AND online_money = #{condition.onlineMoney}
+				</if>
+		       <if test="condition.paymentRatio != null">
+					AND payment_ratio = #{condition.paymentRatio}
+				</if>
+		       <if test="condition.paymentSchedule != null">
+					AND payment_schedule = #{condition.paymentSchedule}
+				</if>
+		       <if test="condition.changeType != null">
+					AND change_type = #{condition.changeType}
+				</if>
+		       <if test="condition.deductionBase != null">
+					AND deduction_base = #{condition.deductionBase}
+				</if>
+		       <if test="condition.updateType != null">
+					AND update_type = #{condition.updateType}
+				</if>
+		       <if test="condition.updateReson != null">
+					AND update_reson = #{condition.updateReson}
+				</if>
+		       <if test="condition.picture != null">
+					AND picture = #{condition.picture}
+				</if>
+		       <if test="condition.thawTime != null">
+					AND thaw_time = #{condition.thawTime}
+				</if>
+		       <if test="condition.changeMoney != null">
+					AND change_money = #{condition.changeMoney}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

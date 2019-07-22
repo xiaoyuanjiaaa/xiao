@@ -1,0 +1,63 @@
+package com.fc.protocol.demo.request.wechatplatform.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+import io.swagger.annotations.ApiModelProperty;
+import org.springframework.util.StringUtils;
+
+/**
+ * @Author: linpeng
+ * @Date: 2019/1/3 18:41
+ * @Version 1.0
+ */
+public class WpServiceCountDeleteRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+	@ApiModelProperty(value = "服务统计信息id", name = "id")
+	private Integer id;
+	@ApiModelProperty(value = "openid", name = "openid")
+	private String openid;
+	@ApiModelProperty(value = "一级服务分类ID", name = "service_id")
+	private Integer service_id;
+
+	public String paramValidate() {
+		if (StringUtils.isEmpty(openid)) {
+			return "参数:openid 不能为空";
+		}
+		if (StringUtils.isEmpty(service_id)) {
+			return "参数:service_id 不能为空";
+		}
+		return null;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getOpenid() {
+		return openid;
+	}
+
+	public void setOpenid(String openid) {
+		this.openid = openid;
+	}
+
+	public Integer getServiceId() {
+		return service_id;
+	}
+
+	public void setServiceId(Integer service_id) {
+		this.service_id = service_id;
+	}
+
+	@Override
+	public String toString() {
+		return "WpServiceCountDeleteRequest [getVersion()=" + getVersion() + ", getReqCode()="
+				+ getReqCode() + ", getTraceId()=" + getTraceId() + ", id=" + getId() + ", openid=" + getOpenid()
+				+ ", service_id=" + getServiceId() + "]";
+	}
+
+}

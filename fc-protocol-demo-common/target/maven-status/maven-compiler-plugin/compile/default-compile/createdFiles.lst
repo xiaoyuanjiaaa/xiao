@@ -1,0 +1,5 @@
+com\fc\protocol\demo\request\WechatPlatformUserRequest.class
+com\fc\protocol\demo\request\EchoRequest.class
+com\fc\protocol\demo\config\ReqCodeConstants.class
+com\fc\protocol\demo\request\store\user\CreateStoreBankCardRequest.class
+com\fc\protocol\demo\request\wechatmaintain\user\WechatMaintainUserListRequest.class

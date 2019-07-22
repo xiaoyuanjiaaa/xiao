@@ -1,0 +1,15 @@
+package com.fc.member.shop.user.service;
+
+import com.fc.common.service.IService;
+import com.fc.member.shop.user.entity.ShopBankinfo;
+/**
+ * <p>Title: ShopBankinfo</p>
+ * <p>Description: 店铺银行信息表 Service 接口</p>
+ * @author yangd
+ * @date 2019-01-14 11:08:38
+ */
+public interface IShopBankinfoService extends IService<ShopBankinfo>{
+	
+	// 插入数据
+	int insertSelective(ShopBankinfo obj);
+}

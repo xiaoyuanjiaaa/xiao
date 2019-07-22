@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.shop.user.dao.IShopWithdrawCashLogDao">
+	<resultMap id="ShopWithdrawCashLogMap" type="com.fc.member.shop.user.entity.ShopWithdrawCashLog">
+        <id property="shopWithdrawCashLogId" column="shop_withdraw_cash_log_id"/>
+        <id property="shopWithdrawCashId" column="shop_withdraw_cash_id"/>
+        <id property="log" column="log"/>
+        <id property="userId" column="user_id"/>
+        <id property="userName" column="user_name"/>
+        <id property="dateline" column="dateline"/>
+        <id property="type" column="type"/>
+        <id property="typeIid" column="type_iid"/>
+        <id property="createTime" column="create_time"/>
+        <id property="updateTime" column="update_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="ShopWithdrawCashLogMap" >
+		select * from shop_withdraw_cash_log where 
+	        shop_withdraw_cash_log_id = #{shopWithdrawCashLogId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.shop.user.entity.ShopWithdrawCashLog" useGeneratedKeys="true" keyProperty="shopWithdrawCashLogId">
+		insert into shop_withdraw_cash_log(shop_withdraw_cash_log_id , shop_withdraw_cash_id , log , user_id , user_name , dateline , type , type_iid , create_time , update_time  )
+    	values(#{shopWithdrawCashLogId} ,#{shopWithdrawCashId} ,#{log} ,#{userId} ,#{userName} ,#{dateline} ,#{type} ,#{typeIid} ,#{createTime} ,#{updateTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.shop.user.entity.ShopWithdrawCashLog" useGeneratedKeys="true" keyProperty="shopWithdrawCashLogId">
+		insert into shop_withdraw_cash_log
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="shopWithdrawCashLogId != null">shop_withdraw_cash_log_id,</if>
+					<if test="shopWithdrawCashId != null">shop_withdraw_cash_id,</if>
+					<if test="log != null">log,</if>
+					<if test="userId != null">user_id,</if>
+					<if test="userName != null">user_name,</if>
+					<if test="dateline != null">dateline,</if>
+					<if test="type != null">type,</if>
+					<if test="typeIid != null">type_iid,</if>
+					<if test="createTime != null">create_time,</if>
+					<if test="updateTime != null">update_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="shopWithdrawCashLogId != null">#{shopWithdrawCashLogId},</if>
+					<if test="shopWithdrawCashId != null">#{shopWithdrawCashId},</if>
+					<if test="log != null">#{log},</if>
+					<if test="userId != null">#{userId},</if>
+					<if test="userName != null">#{userName},</if>
+					<if test="dateline != null">#{dateline},</if>
+					<if test="type != null">#{type},</if>
+					<if test="typeIid != null">#{typeIid},</if>
+					<if test="createTime != null">#{createTime},</if>
+					<if test="updateTime != null">#{updateTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.shop.user.entity.ShopWithdrawCashLog">
+		update shop_withdraw_cash_log
+		<set>
+		    	<if test="shopWithdrawCashId != null">shop_withdraw_cash_id = #{shopWithdrawCashId},</if>
+		    	<if test="log != null">log = #{log},</if>
+		    	<if test="userId != null">user_id = #{userId},</if>
+		    	<if test="userName != null">user_name = #{userName},</if>
+		    	<if test="dateline != null">dateline = #{dateline},</if>
+		    	<if test="type != null">type = #{type},</if>
+		    	<if test="typeIid != null">type_iid = #{typeIid},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		</set>
+		where 
+	        shop_withdraw_cash_log_id = #{shopWithdrawCashLogId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from shop_withdraw_cash_log where 
+	        shop_withdraw_cash_log_id = #{shopWithdrawCashLogId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.shop.user.entity.ShopWithdrawCashLog" resultMap="ShopWithdrawCashLogMap" >
+		select * from shop_withdraw_cash_log 
+		<where>
+		       <if test="shopWithdrawCashLogId != null">
+					AND shop_withdraw_cash_log_id = #{shopWithdrawCashLogId}
+				</if>
+		       <if test="shopWithdrawCashId != null">
+					AND shop_withdraw_cash_id = #{shopWithdrawCashId}
+				</if>
+		       <if test="log != null">
+					AND log = #{log}
+				</if>
+		       <if test="userId != null">
+					AND user_id = #{userId}
+				</if>
+		       <if test="userName != null">
+					AND user_name = #{userName}
+				</if>
+		       <if test="dateline != null">
+					AND dateline = #{dateline}
+				</if>
+		       <if test="type != null">
+					AND type = #{type}
+				</if>
+		       <if test="typeIid != null">
+					AND type_iid = #{typeIid}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="ShopWithdrawCashLogMap" >
+		select * from shop_withdraw_cash_log  
+		<where>
+		       <if test="condition.shopWithdrawCashLogId != null">
+					AND shop_withdraw_cash_log_id = #{condition.shopWithdrawCashLogId}
+				</if>
+		       <if test="condition.shopWithdrawCashId != null">
+					AND shop_withdraw_cash_id = #{condition.shopWithdrawCashId}
+				</if>
+		       <if test="condition.log != null">
+					AND log = #{condition.log}
+				</if>
+		       <if test="condition.userId != null">
+					AND user_id = #{condition.userId}
+				</if>
+		       <if test="condition.userName != null">
+					AND user_name = #{condition.userName}
+				</if>
+		       <if test="condition.dateline != null">
+					AND dateline = #{condition.dateline}
+				</if>
+		       <if test="condition.type != null">
+					AND type = #{condition.type}
+				</if>
+		       <if test="condition.typeIid != null">
+					AND type_iid = #{condition.typeIid}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

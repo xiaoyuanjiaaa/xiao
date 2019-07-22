@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.store.user.dao.IStoreAddressDao">
+	<resultMap id="StoreAddressMap" type="com.fc.member.store.user.entity.StoreAddress">
+        <id property="addressId" column="address_id"/>
+        <id property="storeId" column="store_id"/>
+        <id property="consignee" column="consignee"/>
+        <id property="regionId" column="region_id"/>
+        <id property="regionName" column="region_name"/>
+        <id property="address" column="address"/>
+        <id property="zipcode" column="zipcode"/>
+        <id property="phoneMob" column="phone_mob"/>
+        <id property="defaultAddress" column="default_address"/>
+        <id property="addressType" column="address_type"/>
+        <id property="updateTime" column="update_time"/>
+        <id property="createTime" column="create_time"/>
+        <id property="isDeleted" column="is_deleted"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="StoreAddressMap" >
+		select * from store_address where 
+	        address_id = #{addressId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.store.user.entity.StoreAddress" useGeneratedKeys="true">
+		insert into store_address(address_id , store_id , consignee , region_id , region_name , address , zipcode , phone_mob , default_address , address_type , update_time , create_time , is_deleted  )
+    	values(#{addressId} ,#{storeId} ,#{consignee} ,#{regionId} ,#{regionName} ,#{address} ,#{zipcode} ,#{phoneMob} ,#{defaultAddress} ,#{addressType} ,#{updateTime} ,#{createTime} ,#{isDeleted} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.store.user.entity.StoreAddress" useGeneratedKeys="true">
+		insert into store_address
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="addressId != null">address_id,</if>
+					<if test="storeId != null">store_id,</if>
+					<if test="consignee != null">consignee,</if>
+					<if test="regionId != null">region_id,</if>
+					<if test="regionName != null">region_name,</if>
+					<if test="address != null">address,</if>
+					<if test="zipcode != null">zipcode,</if>
+					<if test="phoneMob != null">phone_mob,</if>
+					<if test="defaultAddress != null">default_address,</if>
+					<if test="addressType != null">address_type,</if>
+					<if test="updateTime != null">update_time,</if>
+					<if test="createTime != null">create_time,</if>
+					<if test="isDeleted != null">is_deleted</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="addressId != null">#{addressId},</if>
+					<if test="storeId != null">#{storeId},</if>
+					<if test="consignee != null">#{consignee},</if>
+					<if test="regionId != null">#{regionId},</if>
+					<if test="regionName != null">#{regionName},</if>
+					<if test="address != null">#{address},</if>
+					<if test="zipcode != null">#{zipcode},</if>
+					<if test="phoneMob != null">#{phoneMob},</if>
+					<if test="defaultAddress != null">#{defaultAddress},</if>
+					<if test="addressType != null">#{addressType},</if>
+					<if test="updateTime != null">#{updateTime},</if>
+					<if test="createTime != null">#{createTime},</if>
+					<if test="isDeleted != null">#{isDeleted}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.store.user.entity.StoreAddress">
+		update store_address
+		<set>
+		    	<if test="storeId != null">store_id = #{storeId},</if>
+		    	<if test="consignee != null">consignee = #{consignee},</if>
+		    	<if test="regionId != null">region_id = #{regionId},</if>
+		    	<if test="regionName != null">region_name = #{regionName},</if>
+		    	<if test="address != null">address = #{address},</if>
+		    	<if test="zipcode != null">zipcode = #{zipcode},</if>
+		    	<if test="phoneMob != null">phone_mob = #{phoneMob},</if>
+		    	<if test="defaultAddress != null">default_address = #{defaultAddress},</if>
+		    	<if test="addressType != null">address_type = #{addressType},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		    	<if test="isDeleted != null">is_deleted = #{isDeleted},</if>
+		</set>
+		where 
+	        address_id = #{addressId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from store_address where 
+	        address_id = #{addressId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.store.user.entity.StoreAddress" resultMap="StoreAddressMap" >
+		select * from store_address 
+		<where>
+		       <if test="addressId != null">
+					AND address_id = #{addressId}
+				</if>
+		       <if test="storeId != null">
+					AND store_id = #{storeId}
+				</if>
+		       <if test="consignee != null">
+					AND consignee = #{consignee}
+				</if>
+		       <if test="regionId != null">
+					AND region_id = #{regionId}
+				</if>
+		       <if test="regionName != null">
+					AND region_name = #{regionName}
+				</if>
+		       <if test="address != null">
+					AND address = #{address}
+				</if>
+		       <if test="zipcode != null">
+					AND zipcode = #{zipcode}
+				</if>
+		       <if test="phoneMob != null">
+					AND phone_mob = #{phoneMob}
+				</if>
+		       <if test="defaultAddress != null">
+					AND default_address = #{defaultAddress}
+				</if>
+		       <if test="addressType != null">
+					AND address_type = #{addressType}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		       <if test="isDeleted != null">
+					AND is_deleted = #{isDeleted}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="StoreAddressMap" >
+		select * from store_address  
+		<where>
+		       <if test="condition.addressId != null">
+					AND address_id = #{condition.addressId}
+				</if>
+		       <if test="condition.storeId != null">
+					AND store_id = #{condition.storeId}
+				</if>
+		       <if test="condition.consignee != null">
+					AND consignee = #{condition.consignee}
+				</if>
+		       <if test="condition.regionId != null">
+					AND region_id = #{condition.regionId}
+				</if>
+		       <if test="condition.regionName != null">
+					AND region_name = #{condition.regionName}
+				</if>
+		       <if test="condition.address != null">
+					AND address = #{condition.address}
+				</if>
+		       <if test="condition.zipcode != null">
+					AND zipcode = #{condition.zipcode}
+				</if>
+		       <if test="condition.phoneMob != null">
+					AND phone_mob = #{condition.phoneMob}
+				</if>
+		       <if test="condition.defaultAddress != null">
+					AND default_address = #{condition.defaultAddress}
+				</if>
+		       <if test="condition.addressType != null">
+					AND address_type = #{condition.addressType}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		       <if test="condition.isDeleted != null">
+					AND is_deleted = #{condition.isDeleted}
+				</if>
+		</where> 
+	</select>
+	
+	<update id="updateSave" parameterType="com.fc.member.store.user.entity.StoreAddress">
+		update store_address
+		<set>
+		    	default_address = 0
+		</set>
+		where 
+	        default_address = #{defaultAddress} AND store_id = #{storeId};
+	</update>
+	
+	<select id="getAddress" parameterType="Integer" resultMap="StoreAddressMap" >
+		select * from store_address where 
+	        store_id = #{storeId} AND default_address = 0 ORDER BY create_time DESC; 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

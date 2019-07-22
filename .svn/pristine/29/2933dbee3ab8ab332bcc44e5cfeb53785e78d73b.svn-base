@@ -1,0 +1,104 @@
+package com.fc.member.wechatmaintain.user.entity;
+
+import java.io.Serializable;
+
+/**
+ * <p>Table: WechatMaintainRecharge</p>
+ * <p>Description: 微养车用户储值卡充值记录</p>
+ * @author yangd
+ * @date 2018-12-28 17:13:47
+ */
+public class WechatMaintainRecharge implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	private Integer wechatMaintainRechargeId; // 充值id
+	private Integer fcUserId; // 枫车用户id
+	private Integer storeId; // 门店id
+	private Integer wechatSstorePackageId; // 门店储值卡套餐id
+	private Integer realAccount; // 充值金额
+	private Integer discount; // 赠送金额
+	private Integer createTime; // 充值时间
+	private Integer status; // 0=充值中，1=充值成功，2=充值失败
+	private String orderNo; // 充值订单号
+
+	public void setWechatMaintainRechargeId(Integer wechatMaintainRechargeId) {
+		this.wechatMaintainRechargeId = wechatMaintainRechargeId;
+	}
+
+	public Integer getWechatMaintainRechargeId() {
+		return this.wechatMaintainRechargeId;
+	}
+
+	public void setFcUserId(Integer fcUserId) {
+		this.fcUserId = fcUserId;
+	}
+
+	public Integer getFcUserId() {
+		return this.fcUserId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	public Integer getStoreId() {
+		return this.storeId;
+	}
+
+	public void setWechatSstorePackageId(Integer wechatSstorePackageId) {
+		this.wechatSstorePackageId = wechatSstorePackageId;
+	}
+
+	public Integer getWechatSstorePackageId() {
+		return this.wechatSstorePackageId;
+	}
+
+	public void setRealAccount(Integer realAccount) {
+		this.realAccount = realAccount;
+	}
+
+	public Integer getRealAccount() {
+		return this.realAccount;
+	}
+
+	public void setDiscount(Integer discount) {
+		this.discount = discount;
+	}
+
+	public Integer getDiscount() {
+		return this.discount;
+	}
+
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public Integer getStatus() {
+		return this.status;
+	}
+
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
+	}
+
+	public String getOrderNo() {
+		return this.orderNo;
+	}
+
+	@Override
+	public String toString() {
+		return "WechatMaintainRecharge{" + "wechatMaintainRechargeId=" + wechatMaintainRechargeId + ", fcUserId="
+				+ fcUserId + ", storeId=" + storeId + ", wechatSstorePackageId=" + wechatSstorePackageId
+				+ ", realAccount=" + realAccount + ", discount=" + discount + ", createTime=" + createTime + ", status="
+				+ status + ", orderNo=" + orderNo + "}";
+	}
+}

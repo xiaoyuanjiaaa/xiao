@@ -1,0 +1,26 @@
+package com.fc.member.pc.user.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.member.pc.user.dao.IPcUserCarDao;
+import com.fc.member.pc.user.service.IPcUserCarService;
+import com.fc.member.pc.user.entity.PcUserCar;
+/**
+ * <p>Title: PcUserCar</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-29 10:11:38
+ */
+@Service("pcUserCarService")
+public class PcUserCarServiceImp extends ServiceImpl<PcUserCar> implements IPcUserCarService{
+
+	@Autowired
+	private IPcUserCarDao pcUserCarDao;
+	
+	@Override
+	protected IMapper<PcUserCar> getDao() {
+		return pcUserCarDao;
+	}
+}

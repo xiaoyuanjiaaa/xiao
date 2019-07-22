@@ -1,0 +1,30 @@
+package com.fc.member.shop.dao;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.plugin.mybatis.PageQuery;
+import com.fc.member.shop.entity.Test;
+ 
+/**
+ * Created by jack on 2017/7/20.
+ * 接口，对Test表进行操作
+ */
+@Mapper
+public interface ITestDao extends IMapper<Test> {
+    Test findTestById(int id);
+ 
+    int add(Test test);
+ 
+    int deleteById(int id);
+ 
+    int updateByID(Test test);
+ 
+    List<Test> findByName(String name);
+    
+    public List<Map<String, Object>> getTestListPage(PageQuery pageQuery);
+    
+}

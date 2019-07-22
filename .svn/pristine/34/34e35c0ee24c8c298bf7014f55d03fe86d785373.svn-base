@@ -1,0 +1,145 @@
+package com.fc.protocol.demo.request.pc.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+import io.swagger.annotations.ApiModelProperty;
+import org.springframework.util.StringUtils;
+
+/**
+ * @Author: linpeng
+ * @Date: 2019/1/4 15:41
+ * @Version 1.0
+ */
+public class PcUserCarUpdateRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+    @ApiModelProperty(value = "pc收银车辆档案ID", name = "pc_user_car_id")
+	private Integer  pc_user_car_id;
+    @ApiModelProperty(value = "pc收银车主ID", name = "pc_user_id")
+    private Integer  pc_user_id;
+    @ApiModelProperty(value = "门店ID", name = "store_id")
+    private Integer  store_id;
+    @ApiModelProperty(value = "车牌", name = "car_num")
+	private String  car_num;
+    @ApiModelProperty(value = "精友车型id", name = "vehicle_id")
+    private String vehicle_id;
+    @ApiModelProperty(value = "车型名称", name = "vehicle_name")
+    private String vehicle_name;
+    @ApiModelProperty(value = "行驶公里数", name = "drive_mileage")
+    private Integer drive_mileage;
+    @ApiModelProperty(value = "车架号", name = "frame_number")
+    private String frame_number;
+    @ApiModelProperty(value = "发动机型号", name = "engine_number")
+    private String engine_number;
+    @ApiModelProperty(value = "是否起用(0:否 1:是)", name = "status")
+    private Integer status;
+    @ApiModelProperty(value = "默认车型(0:不默认 1:默认)", name = "is_default")
+    private Integer is_default;
+
+
+    public String paramValidate() {
+        if (StringUtils.isEmpty(pc_user_car_id)) {
+            return "参数:pc_user_car_id 不能为空";
+        }
+        return null;
+    }
+
+
+    public Integer getPcUserCarId() {
+        return pc_user_car_id;
+    }
+
+    public void setPcUserCarId(Integer pc_user_car_id) {
+        this.pc_user_car_id = pc_user_car_id;
+    }
+
+    public Integer getPcUserId() {
+        return pc_user_id;
+    }
+
+    public void setPcUserId(Integer pc_user_id) {
+        this.pc_user_id = pc_user_id;
+    }
+
+    public Integer getStoreId() {
+        return store_id;
+    }
+
+    public void setStoreId(Integer store_id) {
+        this.store_id = store_id;
+    }
+
+    public String getCarNum() {
+        return car_num;
+    }
+
+    public void setCarNum(String car_num) {
+        this.car_num = car_num;
+    }
+
+    public String getVehicleId() {
+        return vehicle_id;
+    }
+
+    public void setVehicleId(String vehicle_id) {
+        this.vehicle_id = vehicle_id;
+    }
+
+    public String getVehicleName() {
+        return vehicle_name;
+    }
+
+    public void setVehicleName(String vehicle_name) {
+        this.vehicle_name = vehicle_name;
+    }
+
+    public Integer getDriveMileage() {
+        return drive_mileage;
+    }
+
+    public void setDriveMileage(Integer drive_mileage) {
+        this.drive_mileage = drive_mileage;
+    }
+
+    public String getFrameNumber() {
+        return frame_number;
+    }
+
+    public void setFrameNumber(String frame_number) {
+        this.frame_number = frame_number;
+    }
+
+    public String getEngineNumber() {
+        return engine_number;
+    }
+
+    public void setEngineNumber(String engine_number) {
+        this.engine_number = engine_number;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Integer getIsDefault() {
+        return is_default;
+    }
+
+    public void setIsDefault(Integer is_default) {
+        this.is_default = is_default;
+    }
+
+    @Override
+	public String toString() {
+		return "WpServiceCountRequest [getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode()
+                + ", getTraceId()=" + getTraceId() +", pc_user_car_id=" + getPcUserCarId() +", pc_user_id=" + getPcUserId()
+                +", store_id=" + getStoreId() +", car_num=" + getCarNum()
+                +", vehicle_id=" + getVehicleId() +", vehicle_name=" + getVehicleName() +", drive_mileage=" + getDriveMileage()
+                +", frame_number=" + getFrameNumber() +", engine_numner=" + getEngineNumber() +", status=" + getStatus()
+                +", is_default=" + getIsDefault() + "]";
+	}
+
+}

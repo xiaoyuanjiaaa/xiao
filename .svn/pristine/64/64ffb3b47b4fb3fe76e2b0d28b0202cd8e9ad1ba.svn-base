@@ -1,0 +1,31 @@
+package com.fc.member.pc.user.service;
+
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.service.IService;
+import com.fc.member.pc.user.entity.PcUserCar;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * <p>Title: PcUserCar</p>
+ * <p>Description:  Service 接口</p>
+ * @author yangd
+ * @date 2018-12-29 10:11:38
+ */
+public interface IPcUserCarService extends IService<PcUserCar>{
+
+    // 根据pc_user_id和car_num查询PC收银车主-车辆信息
+    PcUserCar get(Integer pc_user_id, String car_num);
+
+    // 查询PC收银车主-车辆信息List
+    List<PcUserCar> getPcUserCarList(Map<String, Object> map, Page page);
+
+    // 新增PC收银车主-车辆信息
+    int insertPcUserCar(PcUserCar PcUserCarUser);
+
+    // 更新PC收银车主-车辆信息
+    int updatePcUserCar(PcUserCar obj);
+
+    // 删除PC收银车主-车辆信息
+    int deletePcUserCar(Integer pc_user_car_id);
+}

@@ -1,0 +1,117 @@
+package com.fc.member.store.user.service.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.member.store.user.dao.IStoreAptitudeDao;
+import com.fc.member.store.user.entity.StoreAptitude;
+import com.fc.member.store.user.service.IStoreAptitudeService;
+import com.fc.protocol.demo.request.store.user.StoreAptitudeRequest;
+/**
+ * <p>Title: StoreAptitude</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:05
+ */
+@Service("storeAptitudeService")
+public class StoreAptitudeServiceImp extends ServiceImpl<StoreAptitude> implements IStoreAptitudeService{
+
+	@Autowired
+	private IStoreAptitudeDao storeAptitudeDao;
+	
+	@Override
+	protected IMapper<StoreAptitude> getDao() {
+		return storeAptitudeDao;
+	}
+	@Override
+	public List<StoreAptitude> queryStoreAptitude(StoreAptitudeRequest request) throws Exception {
+		StoreAptitude storeAptitude = new StoreAptitude();
+		storeAptitude.setStoreId(request.getStoreId());
+		List<StoreAptitude> storeAptitudeList =  storeAptitudeDao.getRows(storeAptitude);
+		return storeAptitudeList;
+	}
+	@Override
+	public int insertSelective(StoreAptitudeRequest request) throws Exception {
+		StoreAptitude storeAptitude = new StoreAptitude();
+		storeAptitude.setStoreId(request.getStoreId());
+		storeAptitude.setDailyCar(request.getDailyCar());
+		storeAptitude.setEquipment(request.getEquipment());
+		storeAptitude.setEquipmentImgs(request.getEquipmentImgs());
+		storeAptitude.setFieldArea(request.getFieldArea());
+		storeAptitude.setFranchiseProjects(request.getFranchiseProjects());
+		storeAptitude.setMergerProject(request.getMergerProject());
+		storeAptitude.setRestAreaImgs(request.getRestAreaImgs());
+		storeAptitude.setStaffLicense(request.getStaffLicense());
+		storeAptitude.setStaffLicenseImgs(request.getStaffLicenseImgs());
+		storeAptitude.setStaffNumber(request.getStaffNumber());
+		storeAptitude.setCreateTime(request.getCreateTime());
+		storeAptitude.setUpdateTime(request.getUpdateTime());
+		storeAptitude.setDecoration(request.getDecoration());
+		storeAptitude.setTools(request.getTools());
+		storeAptitude.setWorkstationImgs(request.getWorkstationImgs());
+		return storeAptitudeDao.insertSelective(storeAptitude);
+	}
+	@Override
+	public Map<String,Object> checkAptitude(StoreAptitudeRequest request) throws Exception {
+		StoreAptitude storeAptitude = new StoreAptitude();
+		storeAptitude.setStoreId(request.getStoreId());
+		Map<String,Object> map = new HashMap<>();
+		List<StoreAptitude> storeAptitudeList =  storeAptitudeDao.getRows(storeAptitude);
+		if(storeAptitudeList.size()>0) {
+			for (StoreAptitude storeAptitudeTem : storeAptitudeList) {
+				//基本信息校验是否完善
+				if(StringUtils.isEmpty(storeAptitudeTem.getFieldArea())||
+						StringUtils.isEmpty(storeAptitudeTem.getStaffNumber())||
+						StringUtils.isEmpty(storeAptitudeTem.getDailyCar())||
+						StringUtils.isEmpty(storeAptitudeTem.getDecoration())) {
+					map.put("baseData", "资料未完善");
+				}else {
+					map.put("baseData", "已完善");
+				}
+				//人员要求是否完善
+				if(StringUtils.isEmpty(storeAptitudeTem.getStaffLicense())) {
+					map.put("staffData", "资料未完善");
+				}else {
+					map.put("staffData", "已完善");
+				}
+				//设备要求是否完善
+				if(StringUtils.isEmpty(storeAptitudeTem.getEquipment())||
+						StringUtils.isEmpty(storeAptitudeTem.getTools())) {
+					map.put("equipmentData", "资料未完善");
+				}else {
+					map.put("equipmentData", "已完善");
+				}
+			}
+			return map;
+		}
+		return map;
+	}
+	@Override
+	public void updateStoreAptitude(StoreAptitudeRequest request) throws Exception {
+		StoreAptitude storeAptitude = new StoreAptitude();
+		storeAptitude.setStoreAptitudeId(request.getStoreAptitudeId());
+		storeAptitude.setDailyCar(request.getDailyCar());
+		storeAptitude.setEquipment(request.getEquipment());
+		storeAptitude.setEquipmentImgs(request.getEquipmentImgs());
+		storeAptitude.setFieldArea(request.getFieldArea());
+		storeAptitude.setFranchiseProjects(request.getFranchiseProjects());
+		storeAptitude.setMergerProject(request.getMergerProject());
+		storeAptitude.setRestAreaImgs(request.getRestAreaImgs());
+		storeAptitude.setStaffLicense(request.getStaffLicense());
+		storeAptitude.setStaffLicenseImgs(request.getStaffLicenseImgs());
+		storeAptitude.setStaffNumber(request.getStaffNumber());
+		storeAptitude.setCreateTime(request.getCreateTime());
+		storeAptitude.setUpdateTime(request.getUpdateTime());
+		storeAptitude.setDecoration(request.getDecoration());
+		storeAptitude.setTools(request.getTools());
+		storeAptitudeDao.update(storeAptitude);
+	}
+
+}

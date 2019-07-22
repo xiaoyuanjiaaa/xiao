@@ -1,0 +1,86 @@
+package com.fc.member.master.user.entity;
+
+import java.io.Serializable;
+
+
+/**
+ * <p>Table: MasterStoreWorkerLog</p>
+ * <p>Description: 师傅绑定门店记录表</p>
+ * @author yangd
+ * @date 2019-01-15 10:09:29
+ */
+public class MasterStoreWorkerLog implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer masterStoreWorkerLogId; // 主键id
+	private Integer yid; // 员工id
+	private Integer storeId; // 门店id
+	private String storeName; // 商家名称
+	private Integer regionId; // 商家地区id
+	private Integer status; // 状态(0:解绑 1:申请中 2:绑定)
+	private Integer createTime; // 聘请时间
+
+	public void setMasterStoreWorkerLogId(Integer masterStoreWorkerLogId) {
+		this.masterStoreWorkerLogId = masterStoreWorkerLogId;
+	}
+	
+	public Integer getMasterStoreWorkerLogId() {
+		return this.masterStoreWorkerLogId;
+	}
+	public void setYid(Integer yid) {
+		this.yid = yid;
+	}
+	
+	public Integer getYid() {
+		return this.yid;
+	}
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+	
+	public Integer getStoreId() {
+		return this.storeId;
+	}
+	public void setStoreName(String storeName) {
+		this.storeName = storeName;
+	}
+	
+	public String getStoreName() {
+		return this.storeName;
+	}
+	public void setRegionId(Integer regionId) {
+		this.regionId = regionId;
+	}
+	
+	public Integer getRegionId() {
+		return this.regionId;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	
+	public Integer getStatus() {
+		return this.status;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+
+    @Override
+    public String toString () {
+    	return "MasterStoreWorkerLog{" + 
+	    	"masterStoreWorkerLogId=" + masterStoreWorkerLogId + 
+	    	", yid=" + yid + 
+	    	", storeId=" + storeId + 
+	    	", storeName=" + storeName + 
+	    	", regionId=" + regionId + 
+	    	", status=" + status + 
+	    	", createTime=" + createTime + 
+	    	"}";
+    }
+}

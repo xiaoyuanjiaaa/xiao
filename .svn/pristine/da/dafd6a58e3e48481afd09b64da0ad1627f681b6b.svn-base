@@ -1,0 +1,95 @@
+package com.fc.member.master.pickcar.entity;
+
+import java.io.Serializable;
+
+
+/**
+ * <p>Table: MasterPickcarUser</p>
+ * <p>Description: 师傅车主表(子表)</p>
+ * @author yangd
+ * @date 2019-01-15 11:56:02
+ */
+public class MasterPickcarUser implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer masterPickcarUserId; // 主键id
+	private Integer storeId; // 门店id
+	private Integer masterPickcarUserCarId; // 车辆档案id
+	private String name; // 车主姓名
+	private Integer sex; // 车主性别，1:先生 2:女士
+	private String mobile; // 车主手机
+	private Integer createTime; // 创建时间
+	private Integer updateTime; // 修改时间
+
+	public void setMasterPickcarUserId(Integer masterPickcarUserId) {
+		this.masterPickcarUserId = masterPickcarUserId;
+	}
+	
+	public Integer getMasterPickcarUserId() {
+		return this.masterPickcarUserId;
+	}
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+	
+	public Integer getStoreId() {
+		return this.storeId;
+	}
+	public void setMasterPickcarUserCarId(Integer masterPickcarUserCarId) {
+		this.masterPickcarUserCarId = masterPickcarUserCarId;
+	}
+	
+	public Integer getMasterPickcarUserCarId() {
+		return this.masterPickcarUserCarId;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	public void setSex(Integer sex) {
+		this.sex = sex;
+	}
+	
+	public Integer getSex() {
+		return this.sex;
+	}
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+	
+	public String getMobile() {
+		return this.mobile;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+	public void setUpdateTime(Integer updateTime) {
+		this.updateTime = updateTime;
+	}
+	
+	public Integer getUpdateTime() {
+		return this.updateTime;
+	}
+
+    @Override
+    public String toString () {
+    	return "MasterPickcarUser{" + 
+	    	"masterPickcarUserId=" + masterPickcarUserId + 
+	    	", storeId=" + storeId + 
+	    	", masterPickcarUserCarId=" + masterPickcarUserCarId + 
+	    	", name=" + name + 
+	    	", sex=" + sex + 
+	    	", mobile=" + mobile + 
+	    	", createTime=" + createTime + 
+	    	", updateTime=" + updateTime + 
+	    	"}";
+    }
+}

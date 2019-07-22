@@ -1,0 +1,250 @@
+package com.fc.member.wechatplatform.user.handler;
+
+import com.fc.common.exception.ErrorCode;
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.member.wechatplatform.user.entity.WechatPlatformUserFeedback;
+import com.fc.member.wechatplatform.user.service.IWechatPlatformUserFeedbackService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.wechatplatform.user.WechatPlatformUserFeedbackRequest;
+
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**微养车找店 - 用户反馈
+ * @Author: linpeng
+ * @Date: 2019/1/2 15:01
+ * @Version 1.0
+ */
+@Component
+@Handler(module = "feedback")
+public class WechatPlatformFeedbackHandler {
+
+	private static Logger log = LoggerFactory.getLogger(WechatPlatformFeedbackHandler.class);
+
+	@Autowired
+    IWechatPlatformUserFeedbackService wechatPlatformUserFeedbackService;
+
+	/**
+	 * @Description: 查询单条反馈信息
+	 * @Param: [request]
+	 * @return: com.fc.protocol.common.message.body.ProtocolResponse
+	 * @Author: linpeng
+	 * @CreateDate: 2019/1/5
+	 * @Update: linpeng
+	 * @UpdateDate: 2019/1/5
+	 */
+    @ReqCodeMapping(requestClazz = WechatPlatformUserFeedbackRequest.class)
+	public ProtocolResponse wechatPlatformFeedbackGet(WechatPlatformUserFeedbackRequest request) {
+		log.info("获取反馈信息------>request:{}", request);
+		ProtocolResponse response=null;
+		try {
+            //校验参数是否为空
+            String validResult = request.paramValidateGet();
+            if(validResult != null ) {
+               return response = ProtocolResponse.newInstance().error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+            }
+			log.info("查询反馈信息，feedback_id:{}",request.getOpenid());
+			WechatPlatformUserFeedback wechatPlatformUserFeedback  = wechatPlatformUserFeedbackService.getByFeedback_id(request.getFeedback_id());
+			log.info("查询结果:{}", wechatPlatformUserFeedback);
+
+			if ( wechatPlatformUserFeedback != null){
+			    response = ProtocolResponse.newInstance().success().addData("data",wechatPlatformUserFeedback);
+			}
+			else {
+			    response = ProtocolResponse.newInstance().error(1011).msg("该反馈信息不存在");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.info("操作失败");
+			return ProtocolResponse.newInstance().error(10199).msg("操作失败");
+		}
+		log.info("获取反馈信息------>response:{}", response);
+		return response;
+	}
+
+	/**
+	 * @Description: 查询用户反馈信息列表
+	 * @Param: [request]
+	 * @return: com.fc.protocol.common.message.body.ProtocolResponse
+	 * @Author: linpeng
+	 * @CreateDate: 2019/1/5
+	 * @Update: linpeng
+	 * @UpdateDate: 2019/1/5
+	 */
+    @ReqCodeMapping(requestClazz = WechatPlatformUserFeedbackRequest.class)
+    public ProtocolResponse wechatPlatformFeedbackList(WechatPlatformUserFeedbackRequest request) {
+        log.info("获取用户反馈信息列表------>request:{}", request);
+        ProtocolResponse response=null;
+        try {
+            //校验参数是否为空
+            String validResult = request.paramValidateList();
+            if(validResult != null ) {
+               return response = ProtocolResponse.newInstance().error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+            }
+            Page page = new Page();
+            page.setPage(request.getPage());
+            page.setRows(request.getPagesize());
+            Map<String, Object> param = new HashMap<>();
+            param.put("openid",request.getOpenid());
+            param.put("feedbackContent",request.getFeedback_content());
+            log.info("查询用户反馈信息列表，page:{},param:{}",page,param);
+            List<WechatPlatformUserFeedback> wechatPlatformUserFeedback  = wechatPlatformUserFeedbackService.getFeedbackList(param,page);
+            log.info("查询结果 -----> count:{},data:{}", page.getTotalResult(),wechatPlatformUserFeedback);
+            if ( wechatPlatformUserFeedback != null & wechatPlatformUserFeedback.size() != 0){
+                response = ProtocolResponse.newInstance().success().addData("data",wechatPlatformUserFeedback).addData("count",page.getTotalResult());
+            }
+            else {
+                response = ProtocolResponse.newInstance().error(1012).msg("未查到相关的用户反馈信息列表");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.info("操作失败");
+            return ProtocolResponse.newInstance().error(10199).msg("操作失败");
+        }
+        log.info("获取用户反馈信息列表------>response:{}", response);
+        return response;
+    }
+
+
+    /**
+     * @Description: 创建用户反馈信息
+     * @Param: [request]
+     * @return: com.fc.protocol.common.message.body.ProtocolResponse
+     * @Author: linpeng
+     * @CreateDate: 2019/1/5
+     * @Update: linpeng
+     * @UpdateDate: 2019/1/5
+     */
+    @ReqCodeMapping(requestClazz = WechatPlatformUserFeedbackRequest.class)
+	public ProtocolResponse wechatPlatformFeedbackSave(WechatPlatformUserFeedbackRequest request) {
+		log.info("创建用户------>request:{}", request);
+		ProtocolResponse response=null;
+		try {
+            //校验参数是否为空
+            String validResult = request.paramValidateSave();
+            if(validResult != null ) {
+               return response = ProtocolResponse.newInstance().error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+            }
+			log.info("创建用户反馈信息，openid:{}", request.getOpenid());
+			WechatPlatformUserFeedback wechatPlatformUserFeedback = new WechatPlatformUserFeedback();
+			wechatPlatformUserFeedback.setOpenid(request.getOpenid());
+			wechatPlatformUserFeedback.setFeedbackContent(request.getFeedback_content());
+			wechatPlatformUserFeedback.setCreateTime((int) (new Date().getTime() / 1000));
+			int result = wechatPlatformUserFeedbackService.insertPlatformUserFeedback(wechatPlatformUserFeedback);
+			if (result != 0) {
+                log.info("创建用户反馈信息成功");
+                response = ProtocolResponse.newInstance().success().msg("创建用户反馈信息成功");
+            }
+            else{
+                return ProtocolResponse.newInstance().error(1013).msg("创建用户反馈信息失败");
+            }
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.info("操作失败");
+			return ProtocolResponse.newInstance().error(10199).msg("操作失败");
+		}
+		log.info("创建用户反馈信息------>response:{}", response);
+		return response;
+	}
+
+	/**
+	 * @Description: 修改反馈信息
+	 * @Param: [request]
+	 * @return: com.fc.protocol.common.message.body.ProtocolResponse
+	 * @Author: linpeng
+	 * @CreateDate: 2019/1/5
+	 * @Update: linpeng
+	 * @UpdateDate: 2019/1/5
+	 */
+    @ReqCodeMapping(requestClazz = WechatPlatformUserFeedbackRequest.class)
+    public ProtocolResponse wechatPlatformFeedbackUpdate(WechatPlatformUserFeedbackRequest request) {
+        log.info("修改反馈信息------>request:{}", request);
+        ProtocolResponse response=null;
+        try {
+            //校验参数是否为空
+            String validResult = request.paramValidateUpdate();
+            if(validResult != null ) {
+               return response = ProtocolResponse.newInstance().error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+            }
+            log.info("修改反馈信息，openid:{}", request.getOpenid());
+            WechatPlatformUserFeedback wechatPlatformUserFeedback  = wechatPlatformUserFeedbackService.getByFeedback_id(request.getFeedback_id());
+            //先查询该用户是否存在
+            if (wechatPlatformUserFeedback == null) {
+                return ProtocolResponse.newInstance().error(1011).msg("该反馈信息不存在");
+            }
+            //用户存在，执行后续操作
+            log.info("修改前:{}", wechatPlatformUserFeedback);
+            wechatPlatformUserFeedback.setOpenid(request.getOpenid());
+            wechatPlatformUserFeedback.setFeedbackContent(request.getFeedback_content());
+            int result = wechatPlatformUserFeedbackService.updatePlatformUserFeedback(wechatPlatformUserFeedback);
+            if (result != 0) {
+                log.info("修改反馈信息成功");
+                log.info("修改后:{}", wechatPlatformUserFeedback);
+                response = ProtocolResponse.newInstance().success().msg("修改反馈信息成功").addData("data", wechatPlatformUserFeedbackService.getByFeedback_id(request.getFeedback_id()));
+            }
+            else{
+                return ProtocolResponse.newInstance().error(1014).msg("修改反馈信息失败");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.info("操作失败");
+            return ProtocolResponse.newInstance().error(10199).msg("操作失败");
+        }
+        log.info("修改反馈信息------>response:{}", response);
+        return response;
+    }
+
+    /**
+     * @Description: 删除微养车找店用户反馈信息
+     * @Param: [request]
+     * @return: com.fc.protocol.common.message.body.ProtocolResponse
+     * @Author: linpeng
+     * @CreateDate: 2019/1/5
+     * @Update: linpeng
+     * @UpdateDate: 2019/1/5
+     */
+    @ReqCodeMapping(requestClazz = WechatPlatformUserFeedbackRequest.class)
+    public ProtocolResponse wechatPlatformFeedbackDelete(WechatPlatformUserFeedbackRequest request) {
+        log.info("删除用户反馈信息------>request:{}", request);
+        ProtocolResponse response = null;
+        try {
+            //校验参数是否为空
+            String validResult = request.paramValidateDelete();
+            if(validResult != null ) {
+               return response = ProtocolResponse.newInstance().error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+            }
+            log.info("删除用户反馈信息，openid:{}", request.getOpenid());
+            WechatPlatformUserFeedback wechatPlatformUserFeedback  = wechatPlatformUserFeedbackService.getByFeedback_id(request.getFeedback_id());
+            //先查询该用户是否存在
+            if (wechatPlatformUserFeedback == null) {
+                return ProtocolResponse.newInstance().error(1011).msg("该用户不存在");
+            }
+            //用户存在，执行后续操作
+            log.info("需要被删除的信息:{}", wechatPlatformUserFeedback);
+            int result = wechatPlatformUserFeedbackService.deletePlatformUserFeedback(wechatPlatformUserFeedback.getFeedbackId());
+            if (result != 0) {
+                log.info("删除用户反馈信息成功");
+                response = ProtocolResponse.newInstance().success().msg("删除用户反馈信息成功");
+            }
+            else{
+                return ProtocolResponse.newInstance().error(1014).msg("删除用户反馈信息失败");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.info("操作失败");
+            return ProtocolResponse.newInstance().error(10199).msg("操作失败");
+        }
+        log.info("删除用户反馈信息------>response:{}", response);
+        return response;
+    }
+}

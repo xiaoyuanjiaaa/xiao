@@ -1,0 +1,162 @@
+package com.fc.member.store.user.handler;
+
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.member.store.user.entity.StoreMomeyDetail;
+import com.fc.member.store.user.service.IStoreMomeyDetailService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.store.user.*;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.Map;
+
+import static com.fc.common.exception.ErrorCode.PARAM_DATA;
+import static com.fc.common.exception.ErrorCode.QUERY_ERROR;
+import static com.fc.common.exception.ErrorCode.UPDATE_ERROR;
+
+/**
+ * 门店金额交易明细信息
+ * @author zhuj
+ * @date 2018/12/28
+ */
+@Component
+@Handler(module = "storeBankCard")
+public class StoreMoneyHandler {
+    private static Logger log = LoggerFactory.getLogger(StoreMoneyHandler.class);
+    @Autowired
+    private IStoreMomeyDetailService storeMomeyDetailService;
+    /**
+     * @param request
+     * @author zhuj
+     * 添加门店金额操作记录
+     * @date 2018/12/28
+     *
+     */
+    @ReqCodeMapping(requestClazz = CreateAmountTradingInfoRequest.class)
+    public ProtocolResponse createAmountTradingInfo(CreateAmountTradingInfoRequest request) {
+        log.info("添加门店金额操作记录request", request);
+        ProtocolResponse response = ProtocolResponse.newInstance();
+        //验证参数是否为空
+        String validateResult = request.paramValidatecheck();
+        if (validateResult != null) {
+            return response.error(PARAM_DATA.getValue()).msg(validateResult);
+        }
+        StoreMomeyDetail storeMomeyDetail = new StoreMomeyDetail();
+        storeMomeyDetail.setStoreId(request.getStoreId());
+        storeMomeyDetail.setAfterCoin(request.getAfterCoin());
+        storeMomeyDetail.setCardNoId(request.getCardNoId());
+        storeMomeyDetail.setChangeCoin(request.getChangeCoin());
+        storeMomeyDetail.setChangeTime(request.getChangeTime());
+        storeMomeyDetail.setChangeType(request.getChangeType());
+        storeMomeyDetail.setIsResultStatus(request.getIsResultStatus());
+        storeMomeyDetail.setOrderNo(request.getOrderNo());
+        storeMomeyDetail.setRemark(request.getRemark());
+        storeMomeyDetail.setSourceType(request.getSourceType());
+        storeMomeyDetail.setStoreMomeyDetailId(request.getStoreMomeyDetailId());
+        try {
+
+            if (storeMomeyDetailService.inputAmountTradingInfo(storeMomeyDetail)) {
+                response.success();
+            }
+        } catch (Exception e) {
+            response.code(QUERY_ERROR.getValue()).msg(QUERY_ERROR.getDesc());
+            e.printStackTrace();
+        }
+        return response;
+    }
+    /**
+     * @param request
+     * @author zhuj
+     * 更新门店提现状态
+     * @date 2018/12/28
+     */
+    @ReqCodeMapping(requestClazz = ChangeAmountTradingStatusRequest.class)
+    public ProtocolResponse changeAmountTradingStatus(ChangeAmountTradingStatusRequest request) {
+        log.info("更新门店提现记录状态request", request);
+        ProtocolResponse response = ProtocolResponse.newInstance();
+        //验证参数是否为空
+        String validateResult = request.paramValidatecheckcardNoIdAndStatus();
+        if (validateResult != null) {
+            return response.error(PARAM_DATA.getValue()).msg(validateResult);
+        }
+        StoreMomeyDetail storeMomeyDetail = new StoreMomeyDetail();
+        storeMomeyDetail.setStoreId(request.getStoreId());
+        storeMomeyDetail.setChangeTime(request.getChangeTime());
+        storeMomeyDetail.setIsResultStatus(request.getIsResultStatus());
+        storeMomeyDetail.setOrderNo(request.getOrderNo());
+        storeMomeyDetail.setStoreMomeyDetailId(request.getStoreMomeyDetailId());
+        try {
+            if (storeMomeyDetailService.changeAmountTradingStatus(storeMomeyDetail)) {
+                response.success();
+            } else {
+                response.code(UPDATE_ERROR.getValue()).msg(UPDATE_ERROR.getDesc());
+            }
+        } catch (Exception e) {
+            response.code(QUERY_ERROR.getValue()).msg(QUERY_ERROR.getDesc());
+            e.printStackTrace();
+        }
+        return response;
+    }
+    /**
+     * @param request
+     * @author zhuj
+     * 获取门店金额交易列表
+     * @date 2018/12/28
+     */
+    @ReqCodeMapping(requestClazz = GetAmountTradingListRequest.class)
+    public ProtocolResponse getAmountTradingList(GetAmountTradingListRequest request) {
+        log.info("获取门店金额交易列表request", request);
+        ProtocolResponse response = ProtocolResponse.newInstance();
+        //验证参数是否为空
+        String validateResult = request.paramValidatecheckid();
+        if (validateResult != null) {
+            return response.error(PARAM_DATA.getValue()).msg(validateResult);
+        }
+        //设置分页参数
+        Page page = new Page();
+        page.setPage(request.getPage());
+        page.setRows(request.getPagesize());
+        page.setShowTotal(true);
+        //设置查询条件
+        StoreMomeyDetail storeMomeyDetail = new StoreMomeyDetail();
+        storeMomeyDetail.setStoreId(request.getStoreId());
+        try {
+            //获取门店金额交易列表
+            Map<String, Object> storeBankCardinfo = storeMomeyDetailService.getAmountTradingList(page,storeMomeyDetail);
+            response.success().setData(storeBankCardinfo);
+        } catch (Exception e) {
+            response.code(QUERY_ERROR.getValue()).msg(QUERY_ERROR.getDesc());
+            e.printStackTrace();
+        }
+        return response;
+    }
+    /**
+     * @param request
+     * @author zhuj
+     * 获取门店金额交易信息详情
+     * @date 2018/12/28
+     */
+    @ReqCodeMapping(requestClazz = GetAmountTradingDetialRequest.class)
+    public ProtocolResponse getAmountTradingDetial(GetAmountTradingDetialRequest request) {
+        log.info("更新门店提现状态request", request);
+        ProtocolResponse response = ProtocolResponse.newInstance();
+        //验证参数是否为空
+        String validateResult = request.paramValidatecheckid();
+        if (validateResult != null) {
+            return response.error(PARAM_DATA.getValue()).msg(validateResult);
+        }
+        try {
+            StoreMomeyDetail storeMomeyDetail = storeMomeyDetailService.getByPK(request.getStoreMomeyDetailId());
+            response.success().addData("store_momey_detail",storeMomeyDetail);
+        } catch (Exception e) {
+            response.code(QUERY_ERROR.getValue()).msg(QUERY_ERROR.getDesc());
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+}

@@ -1,0 +1,62 @@
+package com.fc.protocol.demo.request.store.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * <p>字典表</p>
+ * @author jiahx
+ * @date 2019/1/5
+ */
+public class StoreDictionariesQueryRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+//	@ApiModelProperty(value = "dictionaries_id", name = "dictionariesId", example = "1")
+//	private Integer dictionariesId; // dictionaries_id
+//	@ApiModelProperty(value = "类型", name = "type", example = "1")
+//	private String type; // 类型
+//	@ApiModelProperty(value = "父ID", name = "parentId", example = "1")
+//	private Integer parentId; // 父ID
+	@ApiModelProperty(value = "key名称", name = "dictionariesKey", example = "1")
+	private String dictionariesKey; // key名称
+	@ApiModelProperty(value = "value值", name = "dictionariesValue", example = "1")
+//	private String dictionariesValue; // value值
+//	@ApiModelProperty(value = "排序", name = "sort", example = "1")
+//	private Integer sort; // 排序
+//	@ApiModelProperty(value = "是否可读,0不可读1可读", name = "isFixed", example = "1")
+//	private Integer isFixed; // 是否可读,0不可读1可读
+//	@ApiModelProperty(value = "是否删除,0删除", name = "isDeleted", example = "1")
+//	private Integer isDeleted; // 是否删除,0删除
+//	@ApiModelProperty(value = "修改人", name = "updateName", example = "1")
+//	private String updateName; // 修改人
+//	@ApiModelProperty(value = "修改时间", name = "updateTime", example = "1")
+//	private Integer updateTime; // 修改时间
+//	@ApiModelProperty(value = "创建人", name = "createName", example = "1")
+//	private String createName; // 创建人
+//	@ApiModelProperty(value = "创建时间", name = "createTime", example = "1")
+//	private Integer createTime; // 创建时间
+
+	public void setDictionariesKey(String dictionariesKey) {
+		this.dictionariesKey = dictionariesKey;
+	}
+	
+	public String getDictionariesKey() {
+		return this.dictionariesKey;
+	}
+	
+	public String paramValidate() {
+		if (StringUtils.isEmpty(dictionariesKey)) {
+			return "参数:dictionariesKey不能为空";
+		}
+		return null;
+	}
+	@Override
+	public String toString() {
+		return "QueryStoreDictionariesRequest [dictionariesKey=" + dictionariesKey + ", getVersion()=" + getVersion()
+				+ ", getReqCode()=" + getReqCode() + ", getTraceId()=" + getTraceId() + "]";
+	}
+
+}

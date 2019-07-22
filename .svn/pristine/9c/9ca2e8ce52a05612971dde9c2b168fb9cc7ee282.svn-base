@@ -1,0 +1,126 @@
+package com.fc.member.store.user.handler;
+
+import com.fc.common.exception.ErrorCode;
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.member.store.user.entity.StoreBorrowDetail;
+import com.fc.member.store.user.service.IStoreBorrowDetailService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.store.user.*;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.Map;
+
+
+/**
+ * 门店借款记录
+ *
+ * @author zhuj
+ * @date 2018/12/28
+ */
+@Component
+@Handler(module = "shop")
+public class StoreBorrowHandler {
+    private static Logger log = LoggerFactory.getLogger(StoreBorrowHandler.class);
+    @Autowired
+    private IStoreBorrowDetailService storeBorrowDetailService;
+
+    /**
+     * @param request
+     * @author zhuj
+     * 添加门店借款记录
+     * @date 2018/12/28
+     */
+    @ReqCodeMapping(requestClazz = CreateStoreBorrowInfoRequest.class)
+    public ProtocolResponse createStoreBorrowInfo(CreateStoreBorrowInfoRequest request) {
+        log.info("添加门店借款记录request", request);
+        ProtocolResponse response = ProtocolResponse.newInstance();
+        //验证参数是否为空
+        String validateResult = request.paramValidatecheck();
+        if (validateResult != null) {
+            return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+        }
+        StoreBorrowDetail storeBorrowDetail = new StoreBorrowDetail();
+        storeBorrowDetail.setBorrowMoney(request.getBorrowMoney());
+        storeBorrowDetail.setBorrowNo(request.getBorrowNo());
+        storeBorrowDetail.setBorrowTime(request.getBorrowTime());
+        storeBorrowDetail.setOrderNo(request.getOrderNo());
+        storeBorrowDetail.setPurpose(request.getPurpose());
+        storeBorrowDetail.setRemark(request.getRemark());
+        storeBorrowDetail.setStoreId(request.getStoreId());
+
+        try {
+            if (storeBorrowDetailService.inputStoreBorrowInfo(storeBorrowDetail)) {
+                response.success();
+            }
+        } catch (Exception e) {
+            response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    /**
+     * @param request
+     * @author zhuj
+     * 获取门店借款记录列表
+     * @date 2018/12/28
+     */
+    @ReqCodeMapping(requestClazz = GetStoreBorrowListRequest.class)
+    public ProtocolResponse getStoreBorrowList(GetStoreBorrowListRequest request) {
+        log.info("获取门店借款记录列表request", request);
+        ProtocolResponse response = ProtocolResponse.newInstance();
+        //验证参数是否为空
+        String validateResult = request.paramValidatecheckid();
+        if (validateResult != null) {
+            return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+        }
+        //设置分页参数
+        Page page = new Page();
+        page.setPage(request.getPage());
+        page.setRows(request.getPagesize());
+        page.setShowTotal(true);
+        //设置查询条件
+        StoreBorrowDetail storeBorrowDetail = new StoreBorrowDetail();
+        storeBorrowDetail.setStoreId(request.getStoreId());
+        try {
+            //获取门店借款记录列表
+            Map<String, Object> storeBankCardinfo = storeBorrowDetailService.getStoreBorrowList(page, storeBorrowDetail);
+            response.success().setData(storeBankCardinfo);
+        } catch (Exception e) {
+            response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    /**
+     * @param request
+     * @author zhuj
+     * 获取门店借款记录详情
+     * @date 2018/12/28
+     */
+    @ReqCodeMapping(requestClazz = GetStoreBorrowInfoRequest.class)
+    public ProtocolResponse getStoreBorrowInfo(GetStoreBorrowInfoRequest request) {
+        log.info("获取门店借款记录详情request", request);
+        ProtocolResponse response = ProtocolResponse.newInstance();
+        //验证参数是否为空
+        String validateResult = request.paramValidatecheck();
+        if (validateResult != null) {
+            return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+        }
+        try {
+            StoreBorrowDetail storeBorrowDetail = storeBorrowDetailService.getByPK(request.getStoreBorrowDetailId());
+            response.success().addData("store_borrow_detail", storeBorrowDetail);
+        } catch (Exception e) {
+            response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+}

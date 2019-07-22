@@ -1,0 +1,78 @@
+package com.fc.member.store.user.handler;
+
+import com.fc.member.shop.entity.Test;
+import com.fc.member.store.user.entity.StoreBankCard;
+import com.fc.member.store.user.service.IStoreBankCardService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.EchoRequest;
+import com.fc.protocol.demo.request.StoreBankCardRequest;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Arrays;
+import java.util.Map;
+
+/**
+ * 银行卡信息
+ *
+ * @author zhuj
+ * @date 2018/12/28
+ */
+@Component
+@Handler(module = "storebankcard")
+public class StoreBankCardHandler {
+//    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    private static Logger log = LoggerFactory.getLogger(StoreBankCardHandler.class);
+    @Autowired
+    private IStoreBankCardService iStoreBankCardService;
+
+    /**
+     * 保存银行卡信息
+     * @param
+     */
+    @ReqCodeMapping(requestClazz = StoreBankCardRequest.class)
+    public ProtocolResponse setStoreBankCardInfo(StoreBankCardRequest request) {
+        log.info("银行卡信息request", request+"字段"+request.getBankCardNo());
+        ProtocolResponse response = ProtocolResponse.newInstance().success();
+        //验证参数是否为空
+        String validateResult = request.paramValidate();
+        if (validateResult == null){
+            return response.error(99).msg(validateResult);
+        }
+        StoreBankCard storeBankCard = new StoreBankCard();
+        storeBankCard.setStoreId(request.getStoreId());
+        storeBankCard.setBankHoldName(request.getBankHoldName());
+        storeBankCard.setBankCardNo(request.getBankCardNo());
+        storeBankCard.setCardBankName(request.getCardBankName());
+        storeBankCard.setDepositBank(request.getDepositBank());
+        storeBankCard.setCardAddress(request.getCardAddress());
+        storeBankCard.setAddress("地址");
+        storeBankCard.setRegionId(request.getRegionId());
+        storeBankCard.setBankCode("123");
+        storeBankCard.setBankCode("12");
+        storeBankCard.setRemark("修改银行卡");
+        storeBankCard.setStatus(0);
+        storeBankCard.setCheckTime(1212);
+        storeBankCard.setCreateTime(1212);
+        storeBankCard.setUpdateTime(9999);
+        log.info("插入银行卡信息", storeBankCard);
+        try {
+            iStoreBankCardService.create(storeBankCard);
+            response.code(0).msg("保存成功");
+        } catch (Exception e) {
+            response.code(99).msg("插入异常");
+            e.printStackTrace();
+        }
+        log.info("返回请求结果", storeBankCard);
+        return response;
+    }
+}

@@ -1,0 +1,43 @@
+package com.fc.member.store.user.service;
+
+import java.util.List;
+import java.util.Map;
+
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.service.IService;
+import com.fc.member.store.user.entity.StoreFollow;
+import com.fc.protocol.demo.request.store.user.StoreFollowCreateRequest;
+import com.fc.protocol.demo.request.store.user.StoreFollowListRequest;
+
+/**
+ * <p>Title: StoreFollow</p>
+ * <p>Description:  Service 接口</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:06
+ */
+public interface IStoreFollowService extends IService<StoreFollow> {
+
+	/**
+	 * 门店关注列表/按关注时间降序排序
+	 * @param page
+	 * @param followRequest
+	 * @return
+	 */
+	List<StoreFollow> getStoreFollowList(Page page, StoreFollowListRequest followRequest);
+
+	/**
+	 * 新增门店关注
+	 * @param followRequest
+	 * @return
+	 */
+	Map<String, Object> insertStoreFollow(StoreFollowCreateRequest followRequest);
+
+	/**
+	 * 取消门店关注
+	 * @param storeId
+	 * @param shopId
+	 * @return
+	 */
+	int deleteSelective(Integer store_id, Integer shop_id);
+
+}

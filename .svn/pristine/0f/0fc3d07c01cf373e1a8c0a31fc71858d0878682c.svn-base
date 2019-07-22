@@ -1,0 +1,150 @@
+package com.fc.protocol.demo.request.wechatmaintain.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * 微养车用户列表 参数
+ * @author yangd
+ * @date 2019年1月8日
+ */
+public class WechatMaintainUserListRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+
+	@ApiModelProperty(value = "微养车用户id", name = "wechatMaintainUserId")
+	private Integer wechatMaintainUserId; // 微养车用户id
+	@ApiModelProperty(value = "枫车用户ID", name = "fcUserId")
+	private Integer fcUserId; // 枫车用户ID
+	@ApiModelProperty(value = "微信昵称", name = "nickName")
+	private String nickName; // 微信昵称
+	@ApiModelProperty(value = "openid", name = "openid")
+	private String openid; // 微信openid
+	@ApiModelProperty(value = "unionid", name = "unionid")
+	private String unionid; // 微信unionid
+	@ApiModelProperty(value = "创建时间", name = "createTime")
+	private Integer createTime; // 创建时间
+	@ApiModelProperty(value = "姓名", name = "name")
+	private String name; // 姓名
+	@ApiModelProperty(value = "电话", name = "mobile")
+	private String mobile; // 电话
+	private Integer sex; // 性别 1:女士 2:先生
+	@ApiModelProperty(value = "当前页码", name = "page_no")
+	private Integer page_no = 1;
+	@ApiModelProperty(value = "当前页记录数", name = "page_size")
+	private Integer page_size = 10;
+
+	/**
+	 * 验证方法
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-08
+	 * @return
+	 */
+	public String paramValidate() {
+		if (StringUtils.isEmpty(wechatMaintainUserId)) {
+			return "参数wechatMaintainUserId不能为空";
+		}
+		return null;
+	}
+
+	public Integer getWechatMaintainUserId() {
+		return wechatMaintainUserId;
+	}
+
+	public void setWechatMaintainUserId(Integer wechatMaintainUserId) {
+		this.wechatMaintainUserId = wechatMaintainUserId;
+	}
+
+	public Integer getFcUserId() {
+		return fcUserId;
+	}
+
+	public void setFcUserId(Integer fcUserId) {
+		this.fcUserId = fcUserId;
+	}
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
+	public String getOpenid() {
+		return openid;
+	}
+
+	public void setOpenid(String openid) {
+		this.openid = openid;
+	}
+
+	public String getUnionid() {
+		return unionid;
+	}
+
+	public void setUnionid(String unionid) {
+		this.unionid = unionid;
+	}
+
+	public Integer getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public Integer getSex() {
+		return sex;
+	}
+
+	public void setSex(Integer sex) {
+		this.sex = sex;
+	}
+
+	public Integer getPage_no() {
+		return page_no;
+	}
+
+	public void setPage_no(Integer page_no) {
+		this.page_no = page_no;
+	}
+
+	public Integer getPage_size() {
+		return page_size;
+	}
+
+	public void setPage_size(Integer page_size) {
+		this.page_size = page_size;
+	}
+
+	@Override
+	public String toString() {
+		return "wechatMaintainUserListRequest [wechatMaintainUserId=" + wechatMaintainUserId + ", fcUserId=" + fcUserId
+				+ ", nickName=" + nickName + ", openid=" + openid + ", unionid=" + unionid + ", createTime="
+				+ createTime + ", name=" + name + ", mobile=" + mobile + ", sex=" + sex + ", page_no=" + page_no
+				+ ", page_size=" + page_size + ", getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode()
+				+ ", getTraceId()=" + getTraceId() + "]";
+	}
+
+}

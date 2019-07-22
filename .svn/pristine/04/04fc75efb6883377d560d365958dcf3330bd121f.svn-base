@@ -1,0 +1,48 @@
+package com.fc.protocol.demo.request.wechatmaintain.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * 微养车用户 根据手机号查询用户参数
+ * @author yangd
+ * @date 2019年1月8日
+ */
+public class WechatMaintainUserByMobileRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+
+	@ApiModelProperty(value = "电话", name = "mobile")
+	private String mobile; // 电话
+
+	/**
+	 * 验证方法
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-08
+	 * @return
+	 */
+	public String paramValidate() {
+		if (StringUtils.isEmpty(mobile)) {
+			return "参数mobile不能为空";
+		}
+		return null;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	@Override
+	public String toString() {
+		return "wechatMaintainUserByMobileRequest [mobile=" + mobile + ", getVersion()=" + getVersion()
+				+ ", getReqCode()=" + getReqCode() + ", getTraceId()=" + getTraceId() + "]";
+	}
+
+}

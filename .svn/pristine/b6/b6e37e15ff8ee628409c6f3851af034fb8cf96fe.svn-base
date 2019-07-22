@@ -1,0 +1,30 @@
+package com.fc.protocol.demo.request.store.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+@SuppressWarnings("serial")
+public class QueryBasicInfoRequest extends ProtocolRequest {
+	/**public_user的id*/
+	private Integer publicUserId;
+
+	public String paramValidate() {
+		if (publicUserId == null) {
+			return "参数:publicUserId不能为空";
+		}
+		return null;
+	}
+
+	public Integer getPublicUserId() {
+		return publicUserId;
+	}
+
+	public void setPublicUserId(Integer publicUserId) {
+		this.publicUserId = publicUserId;
+	}
+
+	@Override
+	public String toString() {
+		return "CreateUserRequest[publicUserId():" + getPublicUserId() + "getVersion()=" + getVersion()
+				+ ", getReqCode()=" + getReqCode() + ", getTraceId()=" + getTraceId() + "]";
+	}
+}

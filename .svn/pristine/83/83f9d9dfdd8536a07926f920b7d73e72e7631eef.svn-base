@@ -1,0 +1,53 @@
+package com.fc.member.store.user.service;
+
+import java.util.Map;
+
+import com.fc.common.service.IService;
+import com.fc.member.store.user.entity.StoreBasicInfo;
+import com.fc.protocol.demo.request.store.user.SbiCreateOneRequest;
+import com.fc.protocol.demo.request.store.user.SbiCreateThreeRequest;
+import com.fc.protocol.demo.request.store.user.SbiCreateTwoRequest;
+import com.fc.protocol.demo.request.store.user.StoreBossInfoRequest;
+import com.fc.protocol.demo.request.store.user.SbiUpdateRequest;
+
+/**
+ * <p>Title: StoreBasicInfo</p>
+ * <p>Description:  Service 接口</p>
+ *
+ * @author yangd
+ * @date 2018-12-27 16:31:05
+ */
+public interface IStoreBasicInfoService extends IService<StoreBasicInfo> {
+
+	/***@author zhuj
+	 *@date 2018/12/28
+	 * @param id
+	 * @description 获取店主信息
+	 */
+	Map<String, Object> getStoreBossInfo(Integer id);
+
+	/***@author zhuj
+	 *@date 2018/12/28
+	 * @param request
+	 * @description 修改店主信息
+	 */
+	boolean changeStoreBossInfo(StoreBossInfoRequest request) throws Exception;
+
+	/**新增门店第一个接口**/
+	Map<String, String> insertBasicInfoOne(SbiCreateOneRequest createBasicInfoOneRequest) throws Exception;
+
+	/**查询门店对象**/
+	StoreBasicInfo getBasicInfo(Integer publicUserId);
+
+	/**新增门店第二个接口**/
+	boolean insertBasicInfoTwo(SbiCreateTwoRequest request) throws Exception;
+
+	/**新增门店第三个接口**/
+	boolean insertBasicInfoThree(SbiCreateThreeRequest request) throws Exception;
+
+	/**门店修改接口**/
+	boolean updateBasicInfo(SbiUpdateRequest request) throws Exception;
+
+	/**修改手机号码*/
+	void updatePhoneMob(Map<String, String> param);
+}

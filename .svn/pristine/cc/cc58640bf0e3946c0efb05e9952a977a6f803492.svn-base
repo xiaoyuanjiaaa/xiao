@@ -1,0 +1,190 @@
+package com.fc.member.store.user.entity;
+
+import java.io.Serializable;
+
+/**
+ * <p>Table: StoreSetting</p>
+ * <p>Description: </p>
+ * @author yangd
+ * @date 2018-12-27 16:31:06
+ */
+public class StoreSetting implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	private static final Integer DEFAULT_FALSE = 0; //默认0
+	private static final Integer DEFAULT_TRUE = 1; //默认1
+
+	private Integer storeSettingId; // 主键ID
+	private Integer storeId; // 门店ID
+	private Integer isForbidJointCard; // 门店是否禁售联名卡，0禁售，1正常销售
+	private Integer isPush; // 门店是否接收订单推送,0:不开,1:开启
+	private Integer isOpenBell; // 门店是否开启订单推送铃声,0:不开,1:开启
+	private Integer isSystemVirtualShelves; // 门店虚拟货架权限, 0:未操作,1:开启,2:关闭
+	private Integer isSstoreVirtualShelves; // 门店虚拟货架状态,0:未开通,1:已开通
+	private Integer virtualShelvesPassTime; // 门店虚拟货架审核通过时间
+	private Integer isSelfOrder; // 门店是否自能下单 1是 0否
+	private Integer isCreditCardPay; // 门店是否开启信用卡支付：1是，0否
+	private Integer isPickCar; // 门店是否开启接车功能 0 是关闭 1是开启 
+	private Integer isSstoreCancellation; // 门店是否开启门店核销，0:不是；1:是
+	private Integer isFindcardStatus; // 微养车找店状态，0：禁用，1：启用
+	private Integer isOpenPc; // 是否开启pc收银，0：禁用，1：启用
+	private Integer updateTime; // 修改时间
+	private Integer createTime; // 创建时间
+
+	/**初始化实体*/
+	public void initialization(Integer storeId) {
+		this.storeId = storeId;
+		this.isForbidJointCard = DEFAULT_FALSE; // 门店是否禁售联名卡，0禁售，1正常销售
+		this.isPush = DEFAULT_TRUE; // 门店是否接收订单推送,0:不开,1:开启
+		this.isOpenBell = DEFAULT_TRUE; // 门店是否开启订单推送铃声,0:不开,1:开启
+		this.isSystemVirtualShelves = DEFAULT_FALSE; //门店虚拟货架权限, 0:未操作,1:开启,2:关闭
+		this.isSstoreVirtualShelves = DEFAULT_FALSE; //门店虚拟货架状态,0:未开通,1:已开通
+		this.isSelfOrder = DEFAULT_TRUE; //门店是否自能下单 1是 0否
+		this.isCreditCardPay = DEFAULT_FALSE; //门店是否开启信用卡支付：1是，0否
+		this.isPickCar = DEFAULT_FALSE; //门店是否开启接车功能 0 是关闭 1是开启 
+		this.isSstoreCancellation = DEFAULT_TRUE; //门店是否开启门店核销，0:不是；1:是
+		this.isFindcardStatus = DEFAULT_TRUE; //微养车找店状态，0：禁用，1：启用
+		this.isOpenPc = DEFAULT_FALSE; //是否开启pc收银，0：禁用，1：启用
+
+	}
+
+	public void setStoreSettingId(Integer storeSettingId) {
+		this.storeSettingId = storeSettingId;
+	}
+
+	public Integer getStoreSettingId() {
+		return this.storeSettingId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	public Integer getStoreId() {
+		return this.storeId;
+	}
+
+	public void setIsForbidJointCard(Integer isForbidJointCard) {
+		this.isForbidJointCard = isForbidJointCard;
+	}
+
+	public Integer getIsForbidJointCard() {
+		return this.isForbidJointCard;
+	}
+
+	public void setIsPush(Integer isPush) {
+		this.isPush = isPush;
+	}
+
+	public Integer getIsPush() {
+		return this.isPush;
+	}
+
+	public void setIsOpenBell(Integer isOpenBell) {
+		this.isOpenBell = isOpenBell;
+	}
+
+	public Integer getIsOpenBell() {
+		return this.isOpenBell;
+	}
+
+	public void setIsSystemVirtualShelves(Integer isSystemVirtualShelves) {
+		this.isSystemVirtualShelves = isSystemVirtualShelves;
+	}
+
+	public Integer getIsSystemVirtualShelves() {
+		return this.isSystemVirtualShelves;
+	}
+
+	public void setIsSstoreVirtualShelves(Integer isSstoreVirtualShelves) {
+		this.isSstoreVirtualShelves = isSstoreVirtualShelves;
+	}
+
+	public Integer getIsSstoreVirtualShelves() {
+		return this.isSstoreVirtualShelves;
+	}
+
+	public void setVirtualShelvesPassTime(Integer virtualShelvesPassTime) {
+		this.virtualShelvesPassTime = virtualShelvesPassTime;
+	}
+
+	public Integer getVirtualShelvesPassTime() {
+		return this.virtualShelvesPassTime;
+	}
+
+	public void setIsSelfOrder(Integer isSelfOrder) {
+		this.isSelfOrder = isSelfOrder;
+	}
+
+	public Integer getIsSelfOrder() {
+		return this.isSelfOrder;
+	}
+
+	public void setIsCreditCardPay(Integer isCreditCardPay) {
+		this.isCreditCardPay = isCreditCardPay;
+	}
+
+	public Integer getIsCreditCardPay() {
+		return this.isCreditCardPay;
+	}
+
+	public void setIsPickCar(Integer isPickCar) {
+		this.isPickCar = isPickCar;
+	}
+
+	public Integer getIsPickCar() {
+		return this.isPickCar;
+	}
+
+	public void setIsSstoreCancellation(Integer isSstoreCancellation) {
+		this.isSstoreCancellation = isSstoreCancellation;
+	}
+
+	public Integer getIsSstoreCancellation() {
+		return this.isSstoreCancellation;
+	}
+
+	public void setIsFindcardStatus(Integer isFindcardStatus) {
+		this.isFindcardStatus = isFindcardStatus;
+	}
+
+	public Integer getIsFindcardStatus() {
+		return this.isFindcardStatus;
+	}
+
+	public void setIsOpenPc(Integer isOpenPc) {
+		this.isOpenPc = isOpenPc;
+	}
+
+	public Integer getIsOpenPc() {
+		return this.isOpenPc;
+	}
+
+	public void setUpdateTime(Integer updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	public Integer getUpdateTime() {
+		return this.updateTime;
+	}
+
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+
+	@Override
+	public String toString() {
+		return "StoreSetting{" + "storeSettingId=" + storeSettingId + ", storeId=" + storeId + ", isForbidJointCard="
+				+ isForbidJointCard + ", isPush=" + isPush + ", isOpenBell=" + isOpenBell + ", isSystemVirtualShelves="
+				+ isSystemVirtualShelves + ", isSstoreVirtualShelves=" + isSstoreVirtualShelves
+				+ ", virtualShelvesPassTime=" + virtualShelvesPassTime + ", isSelfOrder=" + isSelfOrder
+				+ ", isCreditCardPay=" + isCreditCardPay + ", isPickCar=" + isPickCar + ", isSstoreCancellation="
+				+ isSstoreCancellation + ", isFindcardStatus=" + isFindcardStatus + ", isOpenPc=" + isOpenPc
+				+ ", updateTime=" + updateTime + ", createTime=" + createTime + "}";
+	}
+}

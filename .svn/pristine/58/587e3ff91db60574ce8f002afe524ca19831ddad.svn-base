@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.shop.user.dao.IShopBankinfoDao">
+	<resultMap id="ShopBankinfoMap" type="com.fc.member.shop.user.entity.ShopBankinfo">
+        <id property="shopBankId" column="shop_bank_id"/>
+        <id property="shopId" column="shop_id"/>
+        <id property="bankAccountName" column="bank_account_name"/>
+        <id property="bankAccountCardno" column="bank_account_cardno"/>
+        <id property="depositBank" column="deposit_bank"/>
+        <id property="remark" column="remark"/>
+        <id property="bankName" column="bank_name"/>
+        <id property="depositBankAddr" column="deposit_bank_addr"/>
+        <id property="bankAccountOwnerIdcard" column="bank_account_owner_Idcard"/>
+        <id property="depositBankPermitImg" column="deposit_bank_permit_img"/>
+        <id property="bankUpdateStatus" column="bank_update_status"/>
+        <id property="applyUpdateTime" column="apply_update_time"/>
+        <id property="revokeApplyTime" column="revoke_apply_time"/>
+        <id property="examineTime" column="examine_time"/>
+        <id property="updateTime" column="update_time"/>
+        <id property="createTime" column="create_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="ShopBankinfoMap" >
+		select * from shop_bankinfo where 
+	        shop_bank_id = #{shopBankId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.shop.user.entity.ShopBankinfo" useGeneratedKeys="true" keyProperty="shopBankId">
+		insert into shop_bankinfo(shop_bank_id , shop_id , bank_account_name , bank_account_cardno , deposit_bank , remark , bank_name , deposit_bank_addr , bank_account_owner_Idcard , deposit_bank_permit_img , bank_update_status , apply_update_time , revoke_apply_time , examine_time , update_time , create_time  )
+    	values(#{shopBankId} ,#{shopId} ,#{bankAccountName} ,#{bankAccountCardno} ,#{depositBank} ,#{remark} ,#{bankName} ,#{depositBankAddr} ,#{bankAccountOwnerIdcard} ,#{depositBankPermitImg} ,#{bankUpdateStatus} ,#{applyUpdateTime} ,#{revokeApplyTime} ,#{examineTime} ,#{updateTime} ,#{createTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.shop.user.entity.ShopBankinfo" useGeneratedKeys="true" keyProperty="shopBankId">
+		insert into shop_bankinfo
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="shopBankId != null">shop_bank_id,</if>
+					<if test="shopId != null">shop_id,</if>
+					<if test="bankAccountName != null">bank_account_name,</if>
+					<if test="bankAccountCardno != null">bank_account_cardno,</if>
+					<if test="depositBank != null">deposit_bank,</if>
+					<if test="remark != null">remark,</if>
+					<if test="bankName != null">bank_name,</if>
+					<if test="depositBankAddr != null">deposit_bank_addr,</if>
+					<if test="bankAccountOwnerIdcard != null">bank_account_owner_Idcard,</if>
+					<if test="depositBankPermitImg != null">deposit_bank_permit_img,</if>
+					<if test="bankUpdateStatus != null">bank_update_status,</if>
+					<if test="applyUpdateTime != null">apply_update_time,</if>
+					<if test="revokeApplyTime != null">revoke_apply_time,</if>
+					<if test="examineTime != null">examine_time,</if>
+					<if test="updateTime != null">update_time,</if>
+					<if test="createTime != null">create_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="shopBankId != null">#{shopBankId},</if>
+					<if test="shopId != null">#{shopId},</if>
+					<if test="bankAccountName != null">#{bankAccountName},</if>
+					<if test="bankAccountCardno != null">#{bankAccountCardno},</if>
+					<if test="depositBank != null">#{depositBank},</if>
+					<if test="remark != null">#{remark},</if>
+					<if test="bankName != null">#{bankName},</if>
+					<if test="depositBankAddr != null">#{depositBankAddr},</if>
+					<if test="bankAccountOwnerIdcard != null">#{bankAccountOwnerIdcard},</if>
+					<if test="depositBankPermitImg != null">#{depositBankPermitImg},</if>
+					<if test="bankUpdateStatus != null">#{bankUpdateStatus},</if>
+					<if test="applyUpdateTime != null">#{applyUpdateTime},</if>
+					<if test="revokeApplyTime != null">#{revokeApplyTime},</if>
+					<if test="examineTime != null">#{examineTime},</if>
+					<if test="updateTime != null">#{updateTime},</if>
+					<if test="createTime != null">#{createTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.shop.user.entity.ShopBankinfo">
+		update shop_bankinfo
+		<set>
+		    	<if test="shopId != null">shop_id = #{shopId},</if>
+		    	<if test="bankAccountName != null">bank_account_name = #{bankAccountName},</if>
+		    	<if test="bankAccountCardno != null">bank_account_cardno = #{bankAccountCardno},</if>
+		    	<if test="depositBank != null">deposit_bank = #{depositBank},</if>
+		    	<if test="remark != null">remark = #{remark},</if>
+		    	<if test="bankName != null">bank_name = #{bankName},</if>
+		    	<if test="depositBankAddr != null">deposit_bank_addr = #{depositBankAddr},</if>
+		    	<if test="bankAccountOwnerIdcard != null">bank_account_owner_Idcard = #{bankAccountOwnerIdcard},</if>
+		    	<if test="depositBankPermitImg != null">deposit_bank_permit_img = #{depositBankPermitImg},</if>
+		    	<if test="bankUpdateStatus != null">bank_update_status = #{bankUpdateStatus},</if>
+		    	<if test="applyUpdateTime != null">apply_update_time = #{applyUpdateTime},</if>
+		    	<if test="revokeApplyTime != null">revoke_apply_time = #{revokeApplyTime},</if>
+		    	<if test="examineTime != null">examine_time = #{examineTime},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		</set>
+		where 
+	        shop_bank_id = #{shopBankId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from shop_bankinfo where 
+	        shop_bank_id = #{shopBankId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.shop.user.entity.ShopBankinfo" resultMap="ShopBankinfoMap" >
+		select * from shop_bankinfo 
+		<where>
+		       <if test="shopBankId != null">
+					AND shop_bank_id = #{shopBankId}
+				</if>
+		       <if test="shopId != null">
+					AND shop_id = #{shopId}
+				</if>
+		       <if test="bankAccountName != null">
+					AND bank_account_name = #{bankAccountName}
+				</if>
+		       <if test="bankAccountCardno != null">
+					AND bank_account_cardno = #{bankAccountCardno}
+				</if>
+		       <if test="depositBank != null">
+					AND deposit_bank = #{depositBank}
+				</if>
+		       <if test="remark != null">
+					AND remark = #{remark}
+				</if>
+		       <if test="bankName != null">
+					AND bank_name = #{bankName}
+				</if>
+		       <if test="depositBankAddr != null">
+					AND deposit_bank_addr = #{depositBankAddr}
+				</if>
+		       <if test="bankAccountOwnerIdcard != null">
+					AND bank_account_owner_Idcard = #{bankAccountOwnerIdcard}
+				</if>
+		       <if test="depositBankPermitImg != null">
+					AND deposit_bank_permit_img = #{depositBankPermitImg}
+				</if>
+		       <if test="bankUpdateStatus != null">
+					AND bank_update_status = #{bankUpdateStatus}
+				</if>
+		       <if test="applyUpdateTime != null">
+					AND apply_update_time = #{applyUpdateTime}
+				</if>
+		       <if test="revokeApplyTime != null">
+					AND revoke_apply_time = #{revokeApplyTime}
+				</if>
+		       <if test="examineTime != null">
+					AND examine_time = #{examineTime}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="ShopBankinfoMap" >
+		select * from shop_bankinfo  
+		<where>
+		       <if test="condition.shopBankId != null">
+					AND shop_bank_id = #{condition.shopBankId}
+				</if>
+		       <if test="condition.shopId != null">
+					AND shop_id = #{condition.shopId}
+				</if>
+		       <if test="condition.bankAccountName != null">
+					AND bank_account_name = #{condition.bankAccountName}
+				</if>
+		       <if test="condition.bankAccountCardno != null">
+					AND bank_account_cardno = #{condition.bankAccountCardno}
+				</if>
+		       <if test="condition.depositBank != null">
+					AND deposit_bank = #{condition.depositBank}
+				</if>
+		       <if test="condition.remark != null">
+					AND remark = #{condition.remark}
+				</if>
+		       <if test="condition.bankName != null">
+					AND bank_name = #{condition.bankName}
+				</if>
+		       <if test="condition.depositBankAddr != null">
+					AND deposit_bank_addr = #{condition.depositBankAddr}
+				</if>
+		       <if test="condition.bankAccountOwnerIdcard != null">
+					AND bank_account_owner_Idcard = #{condition.bankAccountOwnerIdcard}
+				</if>
+		       <if test="condition.depositBankPermitImg != null">
+					AND deposit_bank_permit_img = #{condition.depositBankPermitImg}
+				</if>
+		       <if test="condition.bankUpdateStatus != null">
+					AND bank_update_status = #{condition.bankUpdateStatus}
+				</if>
+		       <if test="condition.applyUpdateTime != null">
+					AND apply_update_time = #{condition.applyUpdateTime}
+				</if>
+		       <if test="condition.revokeApplyTime != null">
+					AND revoke_apply_time = #{condition.revokeApplyTime}
+				</if>
+		       <if test="condition.examineTime != null">
+					AND examine_time = #{condition.examineTime}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

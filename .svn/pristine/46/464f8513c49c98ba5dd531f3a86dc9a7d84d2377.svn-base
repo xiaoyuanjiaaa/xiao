@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.fc.dao.IFcUserDao">
+	<resultMap id="FcUserMap" type="com.fc.member.fc.entity.FcUser">
+        <id property="fcUserId" column="fc_user_id"/>
+        <id property="phoneMob" column="phone_mob"/>
+        <id property="registerSource" column="register_source"/>
+        <id property="createTime" column="create_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="FcUserMap" >
+		select * from fc_user where 
+	        fc_user_id = #{fcUserId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.fc.entity.FcUser" useGeneratedKeys="true">
+		insert into fc_user(fc_user_id , phone_mob , register_source , create_time  )
+    	values(#{fcUserId} ,#{phoneMob} ,#{registerSource} ,#{createTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.fc.entity.FcUser" useGeneratedKeys="true" keyProperty="fcUserId">
+		insert into fc_user
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="fcUserId != null">fc_user_id,</if>
+					<if test="phoneMob != null">phone_mob,</if>
+					<if test="registerSource != null">register_source,</if>
+					<if test="createTime != null">create_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="fcUserId != null">#{fcUserId},</if>
+					<if test="phoneMob != null">#{phoneMob},</if>
+					<if test="registerSource != null">#{registerSource},</if>
+					<if test="createTime != null">#{createTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.fc.entity.FcUser">
+		update fc_user
+		<set>
+		    	<if test="phoneMob != null">phone_mob = #{phoneMob},</if>
+		    	<if test="registerSource != null">register_source = #{registerSource},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		</set>
+		where 
+	        fc_user_id = #{fcUserId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from fc_user where 
+	        fc_user_id = #{fcUserId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.fc.entity.FcUser" resultMap="FcUserMap" >
+		select * from fc_user 
+		<where>
+		       <if test="fcUserId != null">
+					AND fc_user_id = #{fcUserId}
+				</if>
+		       <if test="phoneMob != null">
+					AND phone_mob = #{phoneMob}
+				</if>
+		       <if test="registerSource != null">
+					AND register_source = #{registerSource}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="FcUserMap" >
+		select * from fc_user  
+		<where>
+		       <if test="condition.fcUserId != null">
+					AND fc_user_id = #{condition.fcUserId}
+				</if>
+		       <if test="condition.phoneMob != null">
+					AND phone_mob = #{condition.phoneMob}
+				</if>
+		       <if test="condition.registerSource != null">
+					AND register_source = #{condition.registerSource}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

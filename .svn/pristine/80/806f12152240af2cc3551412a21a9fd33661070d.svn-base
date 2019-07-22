@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.store.user.dao.IStoreBasicInfoDao">
+	<resultMap id="StoreBasicInfoMap" type="com.fc.member.store.user.entity.StoreBasicInfo">
+        <id property="storeId" column="store_id"/>
+        <id property="publicUserId" column="public_user_id"/>
+        <id property="userName" column="user_name"/>
+        <id property="storeName" column="store_name"/>
+        <id property="status" column="status"/>
+        <id property="storeLogoId" column="store_logo_id"/>
+        <id property="regionId" column="region_id"/>
+        <id property="regionName" column="region_name"/>
+        <id property="address" column="address"/>
+        <id property="longitude" column="longitude"/>
+        <id property="latitude" column="latitude"/>
+        <id property="bTime" column="b_time"/>
+        <id property="eTime" column="e_time"/>
+        <id property="phoneTel" column="phone_tel"/>
+        <id property="storeContactPhone" column="store_contact_phone"/>
+        <id property="description" column="description"/>
+        <id property="storeScoreValue" column="store_score_value"/>
+        <id property="businessLicenseCode" column="business_license_code"/>
+        <id property="businessLicenseName" column="business_license_name"/>
+        <id property="businessLicenseId" column="business_license_id"/>
+        <id property="positivePhotoId" column="positive_photo_id"/>
+        <id property="isDelete" column="is_delete"/>
+        <id property="updateTime" column="update_time"/>
+        <id property="createTime" column="create_time"/>
+		<id property="storeBossEmail" column="store_boss_email"/>
+		<id property="storeBossqq" column="store_boss_qq"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="StoreBasicInfoMap" >
+		select * from store_basic_info where 
+	        store_id = #{storeId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.store.user.entity.StoreBasicInfo" useGeneratedKeys="true">
+		insert into store_basic_info(store_id , public_user_id , user_name , store_name , status , store_logo_id , region_id , region_name , address , longitude , latitude , b_time , e_time , phone_tel , store_contact_phone , description , store_score_value , business_license_code , business_license_name , business_license_id , positive_photo_id , is_delete , update_time , create_time, store_boss_email, store_boss_qq  )
+    	values(#{storeId} ,#{publicUserId} ,#{userName} ,#{storeName} ,#{status} ,#{storeLogoId} ,#{regionId} ,#{regionName} ,#{address} ,#{longitude} ,#{latitude} ,#{bTime} ,#{eTime} ,#{phoneTel} ,#{storeContactPhone} ,#{description} ,#{storeScoreValue} ,#{businessLicenseCode} ,#{businessLicenseName} ,#{businessLicenseId} ,#{positivePhotoId} ,#{isDelete} ,#{updateTime} ,#{createTime},#{storeBossEmail},#{storeBossqq} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.store.user.entity.StoreBasicInfo" useGeneratedKeys="true">
+		insert into store_basic_info
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="storeId != null">store_id,</if>
+					<if test="publicUserId != null">public_user_id,</if>
+					<if test="userName != null">user_name,</if>
+					<if test="storeName != null">store_name,</if>
+					<if test="status != null">status,</if>
+					<if test="storeLogoId != null">store_logo_id,</if>
+					<if test="regionId != null">region_id,</if>
+					<if test="regionName != null">region_name,</if>
+					<if test="address != null">address,</if>
+					<if test="longitude != null">longitude,</if>
+					<if test="latitude != null">latitude,</if>
+					<if test="bTime != null">b_time,</if>
+					<if test="eTime != null">e_time,</if>
+					<if test="phoneTel != null">phone_tel,</if>
+					<if test="storeContactPhone != null">store_contact_phone,</if>
+					<if test="description != null">description,</if>
+					<if test="storeScoreValue != null">store_score_value,</if>
+					<if test="businessLicenseCode != null">business_license_code,</if>
+					<if test="businessLicenseName != null">business_license_name,</if>
+					<if test="businessLicenseId != null">business_license_id,</if>
+					<if test="positivePhotoId != null">positive_photo_id,</if>
+					<if test="isDelete != null">is_delete,</if>
+					<if test="updateTime != null">update_time,</if>
+					<if test="createTime != null">create_time</if>
+				<if test="storeBossEmail != null">store_boss_email</if>
+				<if test="storeBossqq != null">store_boss_qq</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="storeId != null">#{storeId},</if>
+					<if test="publicUserId != null">#{publicUserId},</if>
+					<if test="userName != null">#{userName},</if>
+					<if test="storeName != null">#{storeName},</if>
+					<if test="status != null">#{status},</if>
+					<if test="storeLogoId != null">#{storeLogoId},</if>
+					<if test="regionId != null">#{regionId},</if>
+					<if test="regionName != null">#{regionName},</if>
+					<if test="address != null">#{address},</if>
+					<if test="longitude != null">#{longitude},</if>
+					<if test="latitude != null">#{latitude},</if>
+					<if test="bTime != null">#{bTime},</if>
+					<if test="eTime != null">#{eTime},</if>
+					<if test="phoneTel != null">#{phoneTel},</if>
+					<if test="storeContactPhone != null">#{storeContactPhone},</if>
+					<if test="description != null">#{description},</if>
+					<if test="storeScoreValue != null">#{storeScoreValue},</if>
+					<if test="businessLicenseCode != null">#{businessLicenseCode},</if>
+					<if test="businessLicenseName != null">#{businessLicenseName},</if>
+					<if test="businessLicenseId != null">#{businessLicenseId},</if>
+					<if test="positivePhotoId != null">#{positivePhotoId},</if>
+					<if test="isDelete != null">#{isDelete},</if>
+					<if test="updateTime != null">#{updateTime},</if>
+					<if test="createTime != null">#{createTime}</if>
+				<if test="storeBossEmail != null">#{storeBossEmail},</if>
+				<if test="storeBossqq != null">#{storeBossqq}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.store.user.entity.StoreBasicInfo">
+		update store_basic_info
+		<set>
+		    	<if test="publicUserId != null">public_user_id = #{publicUserId},</if>
+		    	<if test="userName != null">user_name = #{userName},</if>
+		    	<if test="storeName != null">store_name = #{storeName},</if>
+		    	<if test="status != null">status = #{status},</if>
+		    	<if test="storeLogoId != null">store_logo_id = #{storeLogoId},</if>
+		    	<if test="regionId != null">region_id = #{regionId},</if>
+		    	<if test="regionName != null">region_name = #{regionName},</if>
+		    	<if test="address != null">address = #{address},</if>
+		    	<if test="longitude != null">longitude = #{longitude},</if>
+		    	<if test="latitude != null">latitude = #{latitude},</if>
+		    	<if test="bTime != null">b_time = #{bTime},</if>
+		    	<if test="eTime != null">e_time = #{eTime},</if>
+		    	<if test="phoneTel != null">phone_tel = #{phoneTel},</if>
+		    	<if test="storeContactPhone != null">store_contact_phone = #{storeContactPhone},</if>
+		    	<if test="description != null">description = #{description},</if>
+		    	<if test="storeScoreValue != null">store_score_value = #{storeScoreValue},</if>
+		    	<if test="businessLicenseCode != null">business_license_code = #{businessLicenseCode},</if>
+		    	<if test="businessLicenseName != null">business_license_name = #{businessLicenseName},</if>
+		    	<if test="businessLicenseId != null">business_license_id = #{businessLicenseId},</if>
+		    	<if test="positivePhotoId != null">positive_photo_id = #{positivePhotoId},</if>
+		    	<if test="isDelete != null">is_delete = #{isDelete},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+			<if test="storeBossEmail != null">store_boss_email = #{storeBossEmail},</if>
+			<if test="storeBossqq != null">store_boss_qq = #{storeBossqq},</if>
+		</set>
+		where 
+	        store_id = #{storeId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from store_basic_info where 
+	        store_id = #{storeId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.store.user.entity.StoreBasicInfo" resultMap="StoreBasicInfoMap" >
+		select * from store_basic_info 
+		<where>
+		       <if test="storeId != null">
+					AND store_id = #{storeId}
+				</if>
+		       <if test="publicUserId != null">
+					AND public_user_id = #{publicUserId}
+				</if>
+		       <if test="userName != null">
+					AND user_name = #{userName}
+				</if>
+		       <if test="storeName != null">
+					AND store_name = #{storeName}
+				</if>
+		       <if test="status != null">
+					AND status = #{status}
+				</if>
+		       <if test="storeLogoId != null">
+					AND store_logo_id = #{storeLogoId}
+				</if>
+		       <if test="regionId != null">
+					AND region_id = #{regionId}
+				</if>
+		       <if test="regionName != null">
+					AND region_name = #{regionName}
+				</if>
+		       <if test="address != null">
+					AND address = #{address}
+				</if>
+		       <if test="longitude != null">
+					AND longitude = #{longitude}
+				</if>
+		       <if test="latitude != null">
+					AND latitude = #{latitude}
+				</if>
+		       <if test="bTime != null">
+					AND b_time = #{bTime}
+				</if>
+		       <if test="eTime != null">
+					AND e_time = #{eTime}
+				</if>
+		       <if test="phoneTel != null">
+					AND phone_tel = #{phoneTel}
+				</if>
+		       <if test="storeContactPhone != null">
+					AND store_contact_phone = #{storeContactPhone}
+				</if>
+		       <if test="description != null">
+					AND description = #{description}
+				</if>
+		       <if test="storeScoreValue != null">
+					AND store_score_value = #{storeScoreValue}
+				</if>
+		       <if test="businessLicenseCode != null">
+					AND business_license_code = #{businessLicenseCode}
+				</if>
+		       <if test="businessLicenseName != null">
+					AND business_license_name = #{businessLicenseName}
+				</if>
+		       <if test="businessLicenseId != null">
+					AND business_license_id = #{businessLicenseId}
+				</if>
+		       <if test="positivePhotoId != null">
+					AND positive_photo_id = #{positivePhotoId}
+				</if>
+		       <if test="isDelete != null">
+					AND is_delete = #{isDelete}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+			<if test="storeBossEmail != null">
+				AND store_boss_email = #{storeBossEmail}
+			</if>
+			<if test="storeBossqq != null">
+				AND store_boss_qq = #{storeBossqq}
+			</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="StoreBasicInfoMap" >
+		select * from store_basic_info  
+		<where>
+		       <if test="condition.storeId != null">
+					AND store_id = #{condition.storeId}
+				</if>
+		       <if test="condition.publicUserId != null">
+					AND public_user_id = #{condition.publicUserId}
+				</if>
+		       <if test="condition.userName != null">
+					AND user_name = #{condition.userName}
+				</if>
+		       <if test="condition.storeName != null">
+					AND store_name = #{condition.storeName}
+				</if>
+		       <if test="condition.status != null">
+					AND status = #{condition.status}
+				</if>
+		       <if test="condition.storeLogoId != null">
+					AND store_logo_id = #{condition.storeLogoId}
+				</if>
+		       <if test="condition.regionId != null">
+					AND region_id = #{condition.regionId}
+				</if>
+		       <if test="condition.regionName != null">
+					AND region_name = #{condition.regionName}
+				</if>
+		       <if test="condition.address != null">
+					AND address = #{condition.address}
+				</if>
+		       <if test="condition.longitude != null">
+					AND longitude = #{condition.longitude}
+				</if>
+		       <if test="condition.latitude != null">
+					AND latitude = #{condition.latitude}
+				</if>
+		       <if test="condition.bTime != null">
+					AND b_time = #{condition.bTime}
+				</if>
+		       <if test="condition.eTime != null">
+					AND e_time = #{condition.eTime}
+				</if>
+		       <if test="condition.phoneTel != null">
+					AND phone_tel = #{condition.phoneTel}
+				</if>
+		       <if test="condition.storeContactPhone != null">
+					AND store_contact_phone = #{condition.storeContactPhone}
+				</if>
+		       <if test="condition.description != null">
+					AND description = #{condition.description}
+				</if>
+		       <if test="condition.storeScoreValue != null">
+					AND store_score_value = #{condition.storeScoreValue}
+				</if>
+		       <if test="condition.businessLicenseCode != null">
+					AND business_license_code = #{condition.businessLicenseCode}
+				</if>
+		       <if test="condition.businessLicenseName != null">
+					AND business_license_name = #{condition.businessLicenseName}
+				</if>
+		       <if test="condition.businessLicenseId != null">
+					AND business_license_id = #{condition.businessLicenseId}
+				</if>
+		       <if test="condition.positivePhotoId != null">
+					AND positive_photo_id = #{condition.positivePhotoId}
+				</if>
+		       <if test="condition.isDelete != null">
+					AND is_delete = #{condition.isDelete}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+			<if test="storeBossEmail != null">
+				AND store_boss_email = #{storeBossEmail}
+			</if>
+			<if test="storeBossqq != null">
+				AND store_boss_qq = #{storeBossqq}
+			</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

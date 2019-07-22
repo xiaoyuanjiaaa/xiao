@@ -1,0 +1,120 @@
+package com.fc.member.store.user.handler;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.fc.common.exception.ErrorCode;
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.member.store.user.entity.StoreCoinDetail;
+import com.fc.member.store.user.service.IStoreCoinDetailService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.store.user.CreateStoreCoinDetailRequest;
+import com.fc.protocol.demo.request.store.user.QueryStoreCoinDetailRequest;
+import com.fc.protocol.demo.request.store.user.QueryStoreCoinDetailRowsRequest;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+
+/**
+ * 门店安装资质
+ * @author jiahx
+ * @date 2019-1-7
+ */
+@Component
+@Handler(module = "store")
+public class StoreCoinDetailHandler {
+
+	private static Logger log = LoggerFactory.getLogger(StoreCoinDetailHandler.class);
+
+	@Autowired
+	IStoreCoinDetailService storeCoinDetailService;
+
+	/**
+	 * 查询门店枫币交易明细列表
+	 * @author	jiahx
+	 * @see update_name:jiahx update_time:2019-1-7
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = QueryStoreCoinDetailRowsRequest.class)
+	public ProtocolResponse queryStoreCoinDetailRows(QueryStoreCoinDetailRowsRequest request) {
+		log.info("StoreCoinDetailHandler------>requestQueryStoreCoinDetail:{}",  request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidate();
+			if(validResult != null ) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+			Page page = new Page();
+			page.setPage(request.getPage());
+			page.setRows(request.getPagesize());
+			page.setShowTotal(true);
+			/*page.setSidx("xxx");
+			page.setSord("asc");*/
+			List<StoreCoinDetail> storeList =	storeCoinDetailService.queryStoreStoreCoinDetailRows(request, page);
+			response.addData("store_coin_detail_list",  storeList);
+			log.info("查询结果storeCoinDetailList" +storeList );
+		} catch (Exception e) {
+			response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+			log.error("queryStoreCoinDetailRows系统异常", e);
+		}
+		log.info("StoreCoinDetailHandler------>responseQueryStoreCoinDetail:{}", response);
+		return response;
+	}
+	/**
+	 * 新增门店枫币交易明细
+	 * @author	jiahx
+	 * @see update_name:jiahx update_time:2019-1-7
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = CreateStoreCoinDetailRequest.class)
+	public ProtocolResponse createStoreCoinDetail(CreateStoreCoinDetailRequest request) {
+		log.info("StoreCoinDetailHandler------>requestCreateStoreCoinDetail:{}", request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidate();
+			if(validResult != null ) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+		int result = storeCoinDetailService.insertSelective(request);
+		if(result==0) {
+			response.code(ErrorCode.CREATE_ERROR.getValue()).msg(ErrorCode.CREATE_ERROR.getDesc());
+		}
+		log.info("createStoreCoinDetail=====>"+result);
+		} catch (Exception e) {
+			response.code(ErrorCode.CREATE_ERROR.getValue()).msg(ErrorCode.CREATE_ERROR.getDesc());
+			log.error("createStoreCoinDetail系统异常", e);
+		}
+		log.info("StoreCoinDetailHandler------>responseCreateStoreCoinDetail:{}", response);
+		return response;
+	}
+	/**
+	 * 查询门店枫币交易明细详情
+	 * @author	jiahx
+	 * @see update_name:jiahx update_time:2019-1-7
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = QueryStoreCoinDetailRequest.class)
+	public ProtocolResponse queryStoreCoinDetail(QueryStoreCoinDetailRequest request) {
+		log.info("StoreCoinDetailHandler------>requestQueryStoreCoinDetail:{}", request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidate();
+			if(validResult != null ) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+			StoreCoinDetail storeCoinDetail =	storeCoinDetailService.queryStoreCoinDetail(request);
+			response.addData("store_coin_detail",  storeCoinDetail);
+		} catch (Exception e) {
+			response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+			log.error("queryStoreCoinDetail系统异常", e);
+		}
+		log.info("StoreCoinDetailHandler------>responseQueryStoreCoinDetail:{}", response);
+		return response;
+	}
+}

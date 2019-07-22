@@ -1,0 +1,57 @@
+package com.fc.protocol.demo.request.store.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * 
+ * 门店储值卡使用范围
+ * @author jiahx
+ * @date 2019/1/2
+ */
+public class StoreCouponQueryRequest extends ProtocolRequest{
+
+	private static final long serialVersionUID = 1L;
+//	@ApiModelProperty(value = "门店储值卡使用范围id", name = "storeCouponId", example = "1")
+//	private Integer storeCouponId; // 门店储值卡使用范围id
+	@ApiModelProperty(value = "门店id", name = "storeId", example = "1")
+	private Integer storeId; // 门店id
+//	@ApiModelProperty(value = "是否支持快捷支付0:是 1:否", name = "isQuickPay", example = "1")
+//	private Integer isQuickPay; // 是否支持快捷支付0:是 1:否
+//	@ApiModelProperty(value = "是否支持自营商品付款0:是 1:否", name = "isSelfGoods", example = "1")
+//	private Integer isSelfGoods; // 是否支持自营商品付款0:是 1:否
+//	@ApiModelProperty(value = "是否支持爱车卡付款0:是 1:否", name = "isCards", example = "1")
+//	private Integer isCards; // 是否支持爱车卡付款0:是 1:否
+//	@ApiModelProperty(value = "是否支持师傅接车0:是 1:否", name = "isMaster", example = "1")
+//	private Integer isMaster; // 是否支持师傅接车0:是 1:否
+//	@ApiModelProperty(value = "是否支持服务套餐0:是 1:否", name = "isPlan", example = "1")
+//	private Integer isPlan; // 是否支持服务套餐0:是 1:否
+//	@ApiModelProperty(value = "修改时间", name = "updateTime")
+//	private Integer updateTime; // 修改时间
+//	@ApiModelProperty(value = "创建时间", name = "createTime")
+//	private Integer createTime; // 创建时间
+//	@ApiModelProperty(value = "修改次数，一年后清空次数，修改创建时间", name = "updateNumber")
+//	private Integer updateNumber; // 修改次数，一年后清空次数，修改创建时间
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	public String paramValidate() {
+		if (StringUtils.isEmpty(storeId)) {
+			return "参数:storeId不能为空";
+		}
+		return null;
+	}
+	@Override
+	public String toString() {
+		return "QueryStoreCouponRequest [storeId=" + storeId + ", getVersion()=" + getVersion() + ", getReqCode()="
+				+ getReqCode() + ", getTraceId()=" + getTraceId() + "]";
+	}
+}

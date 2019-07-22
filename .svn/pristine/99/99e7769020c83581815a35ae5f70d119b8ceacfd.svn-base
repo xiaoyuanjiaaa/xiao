@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.store.user.dao.IStoreBankCardChangeDao">
+	<resultMap id="StoreBankCardChangeMap" type="com.fc.member.store.user.entity.StoreBankCardChange">
+        <id property="storeBankCardId" column="store_bank_card_id"/>
+        <id property="storeId" column="store_id"/>
+        <id property="cardBankName" column="card_bank_name"/>
+        <id property="bankCode" column="bank_code"/>
+        <id property="bankCardNo" column="bank_card_no"/>
+        <id property="bankHoldName" column="bank_hold_name"/>
+        <id property="depositBank" column="deposit_bank"/>
+        <id property="regionId" column="region_id"/>
+        <id property="cardAddress" column="card_address"/>
+        <id property="address" column="address"/>
+        <id property="status" column="status"/>
+        <id property="checkTime" column="check_time"/>
+        <id property="createTime" column="create_time"/>
+        <id property="remark" column="remark"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="StoreBankCardChangeMap" >
+		select * from store_bank_card_change where 
+	        store_bank_card_id = #{storeBankCardId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.store.user.entity.StoreBankCardChange" useGeneratedKeys="true">
+		insert into store_bank_card_change(store_bank_card_id , store_id , card_bank_name , bank_code , bank_card_no , bank_hold_name , deposit_bank , region_id , card_address , address , status , check_time , create_time , remark  )
+    	values(#{storeBankCardId} ,#{storeId} ,#{cardBankName} ,#{bankCode} ,#{bankCardNo} ,#{bankHoldName} ,#{depositBank} ,#{regionId} ,#{cardAddress} ,#{address} ,#{status} ,#{checkTime} ,#{createTime} ,#{remark} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.store.user.entity.StoreBankCardChange" useGeneratedKeys="true">
+		insert into store_bank_card_change
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="storeBankCardId != null">store_bank_card_id,</if>
+					<if test="storeId != null">store_id,</if>
+					<if test="cardBankName != null">card_bank_name,</if>
+					<if test="bankCode != null">bank_code,</if>
+					<if test="bankCardNo != null">bank_card_no,</if>
+					<if test="bankHoldName != null">bank_hold_name,</if>
+					<if test="depositBank != null">deposit_bank,</if>
+					<if test="regionId != null">region_id,</if>
+					<if test="cardAddress != null">card_address,</if>
+					<if test="address != null">address,</if>
+					<if test="status != null">status,</if>
+					<if test="checkTime != null">check_time,</if>
+					<if test="createTime != null">create_time,</if>
+					<if test="remark != null">remark</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="storeBankCardId != null">#{storeBankCardId},</if>
+					<if test="storeId != null">#{storeId},</if>
+					<if test="cardBankName != null">#{cardBankName},</if>
+					<if test="bankCode != null">#{bankCode},</if>
+					<if test="bankCardNo != null">#{bankCardNo},</if>
+					<if test="bankHoldName != null">#{bankHoldName},</if>
+					<if test="depositBank != null">#{depositBank},</if>
+					<if test="regionId != null">#{regionId},</if>
+					<if test="cardAddress != null">#{cardAddress},</if>
+					<if test="address != null">#{address},</if>
+					<if test="status != null">#{status},</if>
+					<if test="checkTime != null">#{checkTime},</if>
+					<if test="createTime != null">#{createTime},</if>
+					<if test="remark != null">#{remark}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.store.user.entity.StoreBankCardChange">
+		update store_bank_card_change
+		<set>
+		    	<if test="storeId != null">store_id = #{storeId},</if>
+		    	<if test="cardBankName != null">card_bank_name = #{cardBankName},</if>
+		    	<if test="bankCode != null">bank_code = #{bankCode},</if>
+		    	<if test="bankCardNo != null">bank_card_no = #{bankCardNo},</if>
+		    	<if test="bankHoldName != null">bank_hold_name = #{bankHoldName},</if>
+		    	<if test="depositBank != null">deposit_bank = #{depositBank},</if>
+		    	<if test="regionId != null">region_id = #{regionId},</if>
+		    	<if test="cardAddress != null">card_address = #{cardAddress},</if>
+		    	<if test="address != null">address = #{address},</if>
+		    	<if test="status != null">status = #{status},</if>
+		    	<if test="checkTime != null">check_time = #{checkTime},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		    	<if test="remark != null">remark = #{remark},</if>
+		</set>
+		where 
+	        store_bank_card_id = #{storeBankCardId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from store_bank_card_change where 
+	        store_bank_card_id = #{storeBankCardId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.store.user.entity.StoreBankCardChange" resultMap="StoreBankCardChangeMap" >
+		select * from store_bank_card_change 
+		<where>
+		       <if test="storeBankCardId != null">
+					AND store_bank_card_id = #{storeBankCardId}
+				</if>
+		       <if test="storeId != null">
+					AND store_id = #{storeId}
+				</if>
+		       <if test="cardBankName != null">
+					AND card_bank_name = #{cardBankName}
+				</if>
+		       <if test="bankCode != null">
+					AND bank_code = #{bankCode}
+				</if>
+		       <if test="bankCardNo != null">
+					AND bank_card_no = #{bankCardNo}
+				</if>
+		       <if test="bankHoldName != null">
+					AND bank_hold_name = #{bankHoldName}
+				</if>
+		       <if test="depositBank != null">
+					AND deposit_bank = #{depositBank}
+				</if>
+		       <if test="regionId != null">
+					AND region_id = #{regionId}
+				</if>
+		       <if test="cardAddress != null">
+					AND card_address = #{cardAddress}
+				</if>
+		       <if test="address != null">
+					AND address = #{address}
+				</if>
+		       <if test="status != null">
+					AND status = #{status}
+				</if>
+		       <if test="checkTime != null">
+					AND check_time = #{checkTime}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		       <if test="remark != null">
+					AND remark = #{remark}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="StoreBankCardChangeMap" >
+		select * from store_bank_card_change  
+		<where>
+		       <if test="condition.storeBankCardId != null">
+					AND store_bank_card_id = #{condition.storeBankCardId}
+				</if>
+		       <if test="condition.storeId != null">
+					AND store_id = #{condition.storeId}
+				</if>
+		       <if test="condition.cardBankName != null">
+					AND card_bank_name = #{condition.cardBankName}
+				</if>
+		       <if test="condition.bankCode != null">
+					AND bank_code = #{condition.bankCode}
+				</if>
+		       <if test="condition.bankCardNo != null">
+					AND bank_card_no = #{condition.bankCardNo}
+				</if>
+		       <if test="condition.bankHoldName != null">
+					AND bank_hold_name = #{condition.bankHoldName}
+				</if>
+		       <if test="condition.depositBank != null">
+					AND deposit_bank = #{condition.depositBank}
+				</if>
+		       <if test="condition.regionId != null">
+					AND region_id = #{condition.regionId}
+				</if>
+		       <if test="condition.cardAddress != null">
+					AND card_address = #{condition.cardAddress}
+				</if>
+		       <if test="condition.address != null">
+					AND address = #{condition.address}
+				</if>
+		       <if test="condition.status != null">
+					AND status = #{condition.status}
+				</if>
+		       <if test="condition.checkTime != null">
+					AND check_time = #{condition.checkTime}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		       <if test="condition.remark != null">
+					AND remark = #{condition.remark}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

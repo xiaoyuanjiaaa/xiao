@@ -1,0 +1,295 @@
+package com.fc.member.wechatmaintain.user.handler;
+
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.fc.common.exception.ErrorCode;
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.wechatmaintain.user.entity.WechatMaintainConponConsumeinfo;
+import com.fc.member.wechatmaintain.user.service.IWechatMaintainConponConsumeinfoService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmcConsumeinfoConsumptionCountAndBalanceRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmcConsumeinfoCreateRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmcConsumeinfoDetailsListRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmcConsumeinfoDetailsRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmcConsumeinfoListPageRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmcConsumeinfoOverviewListPageRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmcConsumeinfoStoreTotalAmountBalanceRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmcConsumeinfoStoreTotalAmountRequest;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+
+/**
+ * 微养车用户储值卡充值消费记录表
+ * @author yangd
+ * @date 2019年1月7日
+ */
+@Component
+@Handler(module = "wechatmaintain")
+public class WechatMaintainConponConsumeinfoHandler {
+
+	private static Logger log = LoggerFactory.getLogger(WechatMaintainConponConsumeinfoHandler.class);
+
+	@Autowired
+	IWechatMaintainConponConsumeinfoService wechatMaintainConponConsumeinfoService;
+
+	/**
+	 * 储值卡消费记录总表(运营后台-分页,关联门店、微养车用户表查询)
+	 * 门店ID、门店名称、订单号、车主用户名、车主手机、消费种类、消费开始时间、消费结束时间、当前页数、每页记录数
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-08
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WmcConsumeinfoListPageRequest.class)
+	public ProtocolResponse wmcConsumeinfoListPage(WmcConsumeinfoListPageRequest request) {
+		log.info("时间:{} , wmcConsumeinfoListPage------>request:{}", DateTimeUtils.getNow(), request);
+
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			// 分页对象
+			Page page = new Page();
+			page.setPage(request.getPage_no());
+			page.setRows(request.getPage_size());
+			page.setShowTotal(true);
+
+			List<WechatMaintainConponConsumeinfo> list = wechatMaintainConponConsumeinfoService
+					.getConponConsumeinfoListPage(page, request);
+
+			response.addData("consumeinfo_list", list).addData("page_count", page.getTotalPage()).addData("count",
+					page.getTotalResult());
+		} catch (Exception e) {
+			log.error("wmcConsumeinfoListPage系统异常！", e);
+			response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+		}
+		log.info("时间:{} , 返回结果 wmcConsumeinfoListPage------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+
+	/**
+	 * 储值卡总览表(运营后台-分页,关联门店表查询)
+	 * 门店ID、门店名称、门店APP手机号、总计开始时间、总计结束时间、当前页数、每页记录数
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-09
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WmcConsumeinfoOverviewListPageRequest.class)
+	public ProtocolResponse wmcConsumeinfoOverviewListPage(WmcConsumeinfoOverviewListPageRequest request) {
+		log.info("时间:{} , wmcConsumeinfoOverviewListPage------>request:{}", DateTimeUtils.getNow(), request);
+
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			// 分页对象
+			Page page = new Page();
+			page.setPage(request.getPage_no());
+			page.setRows(request.getPage_size());
+			page.setShowTotal(true);
+
+			List<WechatMaintainConponConsumeinfo> list = wechatMaintainConponConsumeinfoService
+					.getConponConsumeinfoOverviewListPage(page, request);
+
+			response.addData("consumeinfo_overview_list", list).addData("page_count", page.getTotalPage())
+					.addData("count", page.getTotalResult());
+		} catch (Exception e) {
+			log.error("wmcConsumeinfoOverviewListPage系统异常！", e);
+			response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+		}
+		log.info("时间:{} , 返回结果 wmcConsumeinfoOverviewListPage------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+
+	/**
+	 * 我的 - 储值卡收支详情(查询储值卡使用记录)
+	 * 用户id、门店id
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-09
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WmcConsumeinfoDetailsListRequest.class)
+	public ProtocolResponse wmcConsumeinfoDetailsList(WmcConsumeinfoDetailsListRequest request) {
+		log.info("时间:{} , wmcConsumeinfoDetailsList------>request:{}", DateTimeUtils.getNow(), request);
+
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidate();
+			if (validResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+
+			List<WechatMaintainConponConsumeinfo> list = wechatMaintainConponConsumeinfoService
+					.getConponConsumeinfoDetailsList(request);
+
+			response.addData("consumeinfo_details_list", list);
+		} catch (Exception e) {
+			log.error("wmcConsumeinfoDetailsList系统异常！", e);
+			response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+		}
+		log.info("时间:{} , 返回结果 wmcConsumeinfoDetailsList------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+
+	/**
+	 * 根据记录ID查询储值卡使用记录 - 收支详情
+	 * 记录id
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-09
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WmcConsumeinfoDetailsRequest.class)
+	public ProtocolResponse wmcConsumeinfoDetails(WmcConsumeinfoDetailsRequest request) {
+		log.info("时间:{} , wmcConsumeinfoDetails------>request:{}", DateTimeUtils.getNow(), request);
+
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidate();
+			if (validResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+			WechatMaintainConponConsumeinfo entity = wechatMaintainConponConsumeinfoService
+					.getByPK(request.getWechatMaintainConponConsumeinfoId());
+
+			response.addData("consumeinfo_details", entity);
+		} catch (Exception e) {
+			log.error("wmcConsumeinfoDetails系统异常！", e);
+			response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+		}
+		log.info("时间:{} , 返回结果 wmcConsumeinfoDetails------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+
+	/**
+	 * 根据store_id查询门店所售储值卡金额
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-09
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WmcConsumeinfoStoreTotalAmountRequest.class)
+	public ProtocolResponse wmcConsumeinfoStoreTotalAmount(WmcConsumeinfoStoreTotalAmountRequest request) {
+		log.info("时间:{} , wmcConsumeinfoStoreTotalAmount------>request:{}", DateTimeUtils.getNow(), request);
+
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidate();
+			if (validResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+			Map<String, Object> resultMap = wechatMaintainConponConsumeinfoService.getStoreTotalAmount(request);
+			response.addData("store_total_amount", resultMap);
+		} catch (Exception e) {
+			log.error("wmcConsumeinfoStoreTotalAmount系统异常！", e);
+			response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+		}
+		log.info("时间:{} , 返回结果 wmcConsumeinfoStoreTotalAmount------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+
+	/**
+	 * 门店APP储值卡设置显示充值总额、当前总余额
+	 * 门店id
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-09
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WmcConsumeinfoStoreTotalAmountBalanceRequest.class)
+	public ProtocolResponse wmcConsumeinfoStoreTotalAmountBalance(
+			WmcConsumeinfoStoreTotalAmountBalanceRequest request) {
+		log.info("时间:{} , wmcConsumeinfoStoreTotalAmountBalance------>request:{}", DateTimeUtils.getNow(), request);
+
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidate();
+			if (validResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+			Map<String, Object> resultMap = wechatMaintainConponConsumeinfoService.getStoreTotalAmountBalance(request);
+			response.addData("store_total_amount_balance", resultMap);
+		} catch (Exception e) {
+			log.error("wmcConsumeinfoStoreTotalAmountBalance系统异常！", e);
+			response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+		}
+		log.info("时间:{} , 返回结果 wmcConsumeinfoStoreTotalAmountBalance------>response:{}", DateTimeUtils.getNow(),
+				response);
+		return response;
+	}
+
+	/**
+	 * TODO 暂时未写SQL，门店APP客户管理(查询储值卡消费次数、余额)
+	 * 门店id
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-09
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WmcConsumeinfoConsumptionCountAndBalanceRequest.class)
+	public ProtocolResponse wmcConsumeinfoConsumptionCountAndBalance(
+			WmcConsumeinfoConsumptionCountAndBalanceRequest request) {
+		log.info("时间:{} , wmcConsumeinfoConsumptionCountAndBalance------>request:{}", DateTimeUtils.getNow(), request);
+
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidate();
+			if (validResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+			Map<String, Object> resultMap = wechatMaintainConponConsumeinfoService
+					.getConsumptionCountAndBalance(request);
+			response.addData("store_total_amount_balance", resultMap);
+		} catch (Exception e) {
+			log.error("wmcConsumeinfoConsumptionCountAndBalance系统异常！", e);
+			response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+		}
+		log.info("时间:{} , 返回结果 wmcConsumeinfoConsumptionCountAndBalance------>response:{}", DateTimeUtils.getNow(),
+				response);
+		return response;
+	}
+
+	/**
+	 * 创建储值卡充值消费记录
+	 * 订单号、用户id、门店id、门店储值卡套餐id、记录类型、记录金额、赠送金额、当前余额、消费描述、消费种类、消费时间
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-09
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WmcConsumeinfoCreateRequest.class)
+	public ProtocolResponse wmcConsumeinfoCreate(WmcConsumeinfoCreateRequest request) {
+		log.info("时间:{} ,  wmcConsumeinfoCreate------>request:{}", DateTimeUtils.getNow(), request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidate();
+			if (validResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+
+			int resultStatus = wechatMaintainConponConsumeinfoService.insertSelective(request);
+			log.info("resultStatus------>{}", resultStatus);
+			if (resultStatus > 0) {
+				response.msg("创建成功");
+			} else {
+				response.error(ErrorCode.CREATE_ERROR.getValue()).msg(ErrorCode.CREATE_ERROR.getDesc());
+			}
+		} catch (Exception e) {
+			log.error("wmcConsumeinfoCreate系统异常！", e);
+			response.error(ErrorCode.CREATE_ERROR.getValue()).msg(ErrorCode.CREATE_ERROR.getDesc());
+		}
+		log.info("时间:{} , 返回结果 wmcConsumeinfoCreate------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+}

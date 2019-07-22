@@ -1,0 +1,71 @@
+package com.fc.member.fc.entity;
+
+import java.io.Serializable;
+
+/**
+ * <p>Table: FcUser</p>
+ * <p>Description: </p>
+ * @author yangd
+ * @date 2019-01-02 16:49:49
+ */
+public class FcUser implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	/**微养车：maintain*/
+	public final static String REGISTER_SOURCE_MAINTAIN = "maintain";
+	/**微养车找店：platform*/
+	public final static String REGISTER_SOURCE_PLATFORM = "platform";
+	/**门店：store*/
+	public final static String REGISTER_SOURCE_STORE = "store";
+	/**商家：shop*/
+	public final static String REGISTER_SOURCE_SHOP = "shop";
+	/**师傅：master*/
+	public final static String REGISTER_SOURCE_MASTER = "master";
+	/**pc收银：pc*/
+	public final static String REGISTER_SOURCE_PC = "pc";
+	/**师傅接车用户：masterUser*/
+	public final static String REGISTER_SOURCE_MASTERUSER = "masterUser";
+
+	private Integer fcUserId; // 枫车用户ID
+	private String phoneMob; // 电话
+	private String registerSource; // 注册来源(微养车：maintain，微养车找店：platform，门店：store，商家：shop，师傅：master，pc收银：pc，师傅接车用户：masterUser)
+	private Integer createTime; // 创建时间
+
+	public void setFcUserId(Integer fcUserId) {
+		this.fcUserId = fcUserId;
+	}
+
+	public Integer getFcUserId() {
+		return this.fcUserId;
+	}
+
+	public String getPhoneMob() {
+		return phoneMob;
+	}
+
+	public void setPhoneMob(String phoneMob) {
+		this.phoneMob = phoneMob;
+	}
+
+	public void setRegisterSource(String registerSource) {
+		this.registerSource = registerSource;
+	}
+
+	public String getRegisterSource() {
+		return this.registerSource;
+	}
+
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+
+	@Override
+	public String toString() {
+		return "FcUser{" + "fcUserId=" + fcUserId + ", phoneMob=" + phoneMob + ", registerSource=" + registerSource
+				+ ", createTime=" + createTime + "}";
+	}
+}

@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.master.user.dao.IMasterMemberDao">
+	<resultMap id="MasterMemberMap" type="com.fc.member.master.user.entity.MasterMember">
+        <id property="masterMemberId" column="master_member_id"/>
+        <id property="fcUserId" column="fc_user_id"/>
+        <id property="userName" column="user_name"/>
+        <id property="mobile" column="mobile"/>
+        <id property="mobileMobVerifyTime" column="mobile_mob_verify_time"/>
+        <id property="password" column="password"/>
+        <id property="cashPassword" column="cash_password"/>
+        <id property="sex" column="sex"/>
+        <id property="avatarId" column="avatar_id"/>
+        <id property="nickName" column="nick_name"/>
+        <id property="unionid" column="unionid"/>
+        <id property="openid" column="openid"/>
+        <id property="regionId" column="region_id"/>
+        <id property="masterGrade" column="master_grade"/>
+        <id property="status" column="status"/>
+        <id property="authStatus" column="auth_status"/>
+        <id property="workAge" column="work_age"/>
+        <id property="workType" column="work_type"/>
+        <id property="isFreeze" column="is_freeze"/>
+        <id property="freezeReason" column="freeze_reason"/>
+        <id property="clothesSize" column="clothes_size"/>
+        <id property="shoeSize" column="shoe_size"/>
+        <id property="updateTime" column="update_time"/>
+        <id property="createTime" column="create_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="MasterMemberMap" >
+		select * from master_member where 
+	        master_member_id = #{masterMemberId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.master.user.entity.MasterMember" useGeneratedKeys="true" keyProperty="masterMemberId">
+		insert into master_member(master_member_id , fc_user_id , user_name , mobile , mobile_mob_verify_time , password , cash_password , sex , avatar_id , nick_name , unionid , openid , region_id , master_grade , status , auth_status , work_age , work_type , is_freeze , freeze_reason , clothes_size , shoe_size , update_time , create_time  )
+    	values(#{masterMemberId} ,#{fcUserId} ,#{userName} ,#{mobile} ,#{mobileMobVerifyTime} ,#{password} ,#{cashPassword} ,#{sex} ,#{avatarId} ,#{nickName} ,#{unionid} ,#{openid} ,#{regionId} ,#{masterGrade} ,#{status} ,#{authStatus} ,#{workAge} ,#{workType} ,#{isFreeze} ,#{freezeReason} ,#{clothesSize} ,#{shoeSize} ,#{updateTime} ,#{createTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.master.user.entity.MasterMember" useGeneratedKeys="true" keyProperty="masterMemberId">
+		insert into master_member
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="masterMemberId != null">master_member_id,</if>
+					<if test="fcUserId != null">fc_user_id,</if>
+					<if test="userName != null">user_name,</if>
+					<if test="mobile != null">mobile,</if>
+					<if test="mobileMobVerifyTime != null">mobile_mob_verify_time,</if>
+					<if test="password != null">password,</if>
+					<if test="cashPassword != null">cash_password,</if>
+					<if test="sex != null">sex,</if>
+					<if test="avatarId != null">avatar_id,</if>
+					<if test="nickName != null">nick_name,</if>
+					<if test="unionid != null">unionid,</if>
+					<if test="openid != null">openid,</if>
+					<if test="regionId != null">region_id,</if>
+					<if test="masterGrade != null">master_grade,</if>
+					<if test="status != null">status,</if>
+					<if test="authStatus != null">auth_status,</if>
+					<if test="workAge != null">work_age,</if>
+					<if test="workType != null">work_type,</if>
+					<if test="isFreeze != null">is_freeze,</if>
+					<if test="freezeReason != null">freeze_reason,</if>
+					<if test="clothesSize != null">clothes_size,</if>
+					<if test="shoeSize != null">shoe_size,</if>
+					<if test="updateTime != null">update_time,</if>
+					<if test="createTime != null">create_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="masterMemberId != null">#{masterMemberId},</if>
+					<if test="fcUserId != null">#{fcUserId},</if>
+					<if test="userName != null">#{userName},</if>
+					<if test="mobile != null">#{mobile},</if>
+					<if test="mobileMobVerifyTime != null">#{mobileMobVerifyTime},</if>
+					<if test="password != null">#{password},</if>
+					<if test="cashPassword != null">#{cashPassword},</if>
+					<if test="sex != null">#{sex},</if>
+					<if test="avatarId != null">#{avatarId},</if>
+					<if test="nickName != null">#{nickName},</if>
+					<if test="unionid != null">#{unionid},</if>
+					<if test="openid != null">#{openid},</if>
+					<if test="regionId != null">#{regionId},</if>
+					<if test="masterGrade != null">#{masterGrade},</if>
+					<if test="status != null">#{status},</if>
+					<if test="authStatus != null">#{authStatus},</if>
+					<if test="workAge != null">#{workAge},</if>
+					<if test="workType != null">#{workType},</if>
+					<if test="isFreeze != null">#{isFreeze},</if>
+					<if test="freezeReason != null">#{freezeReason},</if>
+					<if test="clothesSize != null">#{clothesSize},</if>
+					<if test="shoeSize != null">#{shoeSize},</if>
+					<if test="updateTime != null">#{updateTime},</if>
+					<if test="createTime != null">#{createTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.master.user.entity.MasterMember">
+		update master_member
+		<set>
+		    	<if test="fcUserId != null">fc_user_id = #{fcUserId},</if>
+		    	<if test="userName != null">user_name = #{userName},</if>
+		    	<if test="mobile != null">mobile = #{mobile},</if>
+		    	<if test="mobileMobVerifyTime != null">mobile_mob_verify_time = #{mobileMobVerifyTime},</if>
+		    	<if test="password != null">password = #{password},</if>
+		    	<if test="cashPassword != null">cash_password = #{cashPassword},</if>
+		    	<if test="sex != null">sex = #{sex},</if>
+		    	<if test="avatarId != null">avatar_id = #{avatarId},</if>
+		    	<if test="nickName != null">nick_name = #{nickName},</if>
+		    	<if test="unionid != null">unionid = #{unionid},</if>
+		    	<if test="openid != null">openid = #{openid},</if>
+		    	<if test="regionId != null">region_id = #{regionId},</if>
+		    	<if test="masterGrade != null">master_grade = #{masterGrade},</if>
+		    	<if test="status != null">status = #{status},</if>
+		    	<if test="authStatus != null">auth_status = #{authStatus},</if>
+		    	<if test="workAge != null">work_age = #{workAge},</if>
+		    	<if test="workType != null">work_type = #{workType},</if>
+		    	<if test="isFreeze != null">is_freeze = #{isFreeze},</if>
+		    	<if test="freezeReason != null">freeze_reason = #{freezeReason},</if>
+		    	<if test="clothesSize != null">clothes_size = #{clothesSize},</if>
+		    	<if test="shoeSize != null">shoe_size = #{shoeSize},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		</set>
+		where 
+	        master_member_id = #{masterMemberId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from master_member where 
+	        master_member_id = #{masterMemberId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.master.user.entity.MasterMember" resultMap="MasterMemberMap" >
+		select * from master_member 
+		<where>
+		       <if test="masterMemberId != null">
+					AND master_member_id = #{masterMemberId}
+				</if>
+		       <if test="fcUserId != null">
+					AND fc_user_id = #{fcUserId}
+				</if>
+		       <if test="userName != null">
+					AND user_name = #{userName}
+				</if>
+		       <if test="mobile != null">
+					AND mobile = #{mobile}
+				</if>
+		       <if test="mobileMobVerifyTime != null">
+					AND mobile_mob_verify_time = #{mobileMobVerifyTime}
+				</if>
+		       <if test="password != null">
+					AND password = #{password}
+				</if>
+		       <if test="cashPassword != null">
+					AND cash_password = #{cashPassword}
+				</if>
+		       <if test="sex != null">
+					AND sex = #{sex}
+				</if>
+		       <if test="avatarId != null">
+					AND avatar_id = #{avatarId}
+				</if>
+		       <if test="nickName != null">
+					AND nick_name = #{nickName}
+				</if>
+		       <if test="unionid != null">
+					AND unionid = #{unionid}
+				</if>
+		       <if test="openid != null">
+					AND openid = #{openid}
+				</if>
+		       <if test="regionId != null">
+					AND region_id = #{regionId}
+				</if>
+		       <if test="masterGrade != null">
+					AND master_grade = #{masterGrade}
+				</if>
+		       <if test="status != null">
+					AND status = #{status}
+				</if>
+		       <if test="authStatus != null">
+					AND auth_status = #{authStatus}
+				</if>
+		       <if test="workAge != null">
+					AND work_age = #{workAge}
+				</if>
+		       <if test="workType != null">
+					AND work_type = #{workType}
+				</if>
+		       <if test="isFreeze != null">
+					AND is_freeze = #{isFreeze}
+				</if>
+		       <if test="freezeReason != null">
+					AND freeze_reason = #{freezeReason}
+				</if>
+		       <if test="clothesSize != null">
+					AND clothes_size = #{clothesSize}
+				</if>
+		       <if test="shoeSize != null">
+					AND shoe_size = #{shoeSize}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="MasterMemberMap" >
+		select * from master_member  
+		<where>
+		       <if test="condition.masterMemberId != null">
+					AND master_member_id = #{condition.masterMemberId}
+				</if>
+		       <if test="condition.fcUserId != null">
+					AND fc_user_id = #{condition.fcUserId}
+				</if>
+		       <if test="condition.userName != null">
+					AND user_name = #{condition.userName}
+				</if>
+		       <if test="condition.mobile != null">
+					AND mobile = #{condition.mobile}
+				</if>
+		       <if test="condition.mobileMobVerifyTime != null">
+					AND mobile_mob_verify_time = #{condition.mobileMobVerifyTime}
+				</if>
+		       <if test="condition.password != null">
+					AND password = #{condition.password}
+				</if>
+		       <if test="condition.cashPassword != null">
+					AND cash_password = #{condition.cashPassword}
+				</if>
+		       <if test="condition.sex != null">
+					AND sex = #{condition.sex}
+				</if>
+		       <if test="condition.avatarId != null">
+					AND avatar_id = #{condition.avatarId}
+				</if>
+		       <if test="condition.nickName != null">
+					AND nick_name = #{condition.nickName}
+				</if>
+		       <if test="condition.unionid != null">
+					AND unionid = #{condition.unionid}
+				</if>
+		       <if test="condition.openid != null">
+					AND openid = #{condition.openid}
+				</if>
+		       <if test="condition.regionId != null">
+					AND region_id = #{condition.regionId}
+				</if>
+		       <if test="condition.masterGrade != null">
+					AND master_grade = #{condition.masterGrade}
+				</if>
+		       <if test="condition.status != null">
+					AND status = #{condition.status}
+				</if>
+		       <if test="condition.authStatus != null">
+					AND auth_status = #{condition.authStatus}
+				</if>
+		       <if test="condition.workAge != null">
+					AND work_age = #{condition.workAge}
+				</if>
+		       <if test="condition.workType != null">
+					AND work_type = #{condition.workType}
+				</if>
+		       <if test="condition.isFreeze != null">
+					AND is_freeze = #{condition.isFreeze}
+				</if>
+		       <if test="condition.freezeReason != null">
+					AND freeze_reason = #{condition.freezeReason}
+				</if>
+		       <if test="condition.clothesSize != null">
+					AND clothes_size = #{condition.clothesSize}
+				</if>
+		       <if test="condition.shoeSize != null">
+					AND shoe_size = #{condition.shoeSize}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

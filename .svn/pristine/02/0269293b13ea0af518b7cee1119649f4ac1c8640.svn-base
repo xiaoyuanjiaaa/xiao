@@ -1,0 +1,41 @@
+package com.fc.protocol.demo.request.store.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * 门店安装资质
+ * @author jiahx
+ * @date 2019/1/4
+ */
+public class CheckStoreAptitudeRequest extends ProtocolRequest{
+
+	private static final long serialVersionUID = 1L;
+	@ApiModelProperty(value = "门店id", name = "storeId")
+	private Integer storeId; // 门店id
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	public String paramValidate() {
+		if (StringUtils.isEmpty(storeId)) {
+			return "参数:storeId不能为空";
+		}
+		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "CheckStoreAptitudeRequest [storeId=" + storeId + ", getVersion()=" + getVersion() + ", getReqCode()="
+				+ getReqCode() + ", getTraceId()=" + getTraceId() + "]";
+	}
+    
+}

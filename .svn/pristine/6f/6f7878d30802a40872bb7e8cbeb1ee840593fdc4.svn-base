@@ -1,0 +1,112 @@
+package com.fc.member.store.user.entity;
+
+import java.io.Serializable;
+
+/**
+ * <p>Table: StoreCoupon</p>
+ * <p>Description: </p>
+ * @author yangd
+ * @date 2018-12-27 16:31:06
+ */
+public class StoreCoupon implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer storeCouponId; // 门店储值卡使用范围id
+	private Integer storeId; // 门店id
+	private Integer isQuickPay; // 是否支持快捷支付0:是 1:否
+	private Integer isSelfGoods; // 是否支持自营商品付款0:是 1:否
+	private Integer isCards; // 是否支持爱车卡付款0:是 1:否
+	private Integer isMaster; // 是否支持师傅接车0:是 1:否
+	private Integer isPlan; // 是否支持服务套餐0:是 1:否
+	private Integer updateTime; // 修改时间
+	private Integer createTime; // 创建时间
+	private Integer updateNumber; // 修改次数，一年后清空次数，修改创建时间
+
+	public void setStoreCouponId(Integer storeCouponId) {
+		this.storeCouponId = storeCouponId;
+	}
+	
+	public Integer getStoreCouponId() {
+		return this.storeCouponId;
+	}
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+	
+	public Integer getStoreId() {
+		return this.storeId;
+	}
+	public void setIsQuickPay(Integer isQuickPay) {
+		this.isQuickPay = isQuickPay;
+	}
+	
+	public Integer getIsQuickPay() {
+		return this.isQuickPay;
+	}
+	public void setIsSelfGoods(Integer isSelfGoods) {
+		this.isSelfGoods = isSelfGoods;
+	}
+	
+	public Integer getIsSelfGoods() {
+		return this.isSelfGoods;
+	}
+	public void setIsCards(Integer isCards) {
+		this.isCards = isCards;
+	}
+	
+	public Integer getIsCards() {
+		return this.isCards;
+	}
+	public void setIsMaster(Integer isMaster) {
+		this.isMaster = isMaster;
+	}
+	
+	public Integer getIsMaster() {
+		return this.isMaster;
+	}
+	public void setIsPlan(Integer isPlan) {
+		this.isPlan = isPlan;
+	}
+	
+	public Integer getIsPlan() {
+		return this.isPlan;
+	}
+	public void setUpdateTime(Integer updateTime) {
+		this.updateTime = updateTime;
+	}
+	
+	public Integer getUpdateTime() {
+		return this.updateTime;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+	public void setUpdateNumber(Integer updateNumber) {
+		this.updateNumber = updateNumber;
+	}
+	
+	public Integer getUpdateNumber() {
+		return this.updateNumber;
+	}
+
+    @Override
+    public String toString () {
+    	return "StoreCoupon{" + 
+	    	"storeCouponId=" + storeCouponId + 
+	    	", storeId=" + storeId + 
+	    	", isQuickPay=" + isQuickPay + 
+	    	", isSelfGoods=" + isSelfGoods + 
+	    	", isCards=" + isCards + 
+	    	", isMaster=" + isMaster + 
+	    	", isPlan=" + isPlan + 
+	    	", updateTime=" + updateTime + 
+	    	", createTime=" + createTime + 
+	    	", updateNumber=" + updateNumber + 
+	    	"}";
+    }
+}

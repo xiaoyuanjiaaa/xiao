@@ -1,0 +1,15 @@
+package com.fc.member.master.user.service;
+
+import com.fc.common.service.IService;
+import com.fc.member.master.user.entity.MasterUserSelfCert;
+/**
+ * <p>Title: MasterUserSelfCert</p>
+ * <p>Description: 师傅自传证书表 Service 接口</p>
+ * @author yangd
+ * @date 2019-01-15 10:09:30
+ */
+public interface IMasterUserSelfCertService extends IService<MasterUserSelfCert>{
+	
+	// 插入数据
+	int insertSelective(MasterUserSelfCert obj);
+}

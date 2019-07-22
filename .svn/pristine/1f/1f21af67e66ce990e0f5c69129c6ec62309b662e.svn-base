@@ -1,0 +1,124 @@
+package com.fc.member.wechatmaintain.user.service.impl;
+
+import com.fc.common.exception.ErrorCode;
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.plugin.mybatis.PageQuery;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.wechatmaintain.user.entity.WechatMaintainUser;
+import com.fc.protocol.demo.request.wechatmaintain.user.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.member.wechatmaintain.user.dao.IWechatMaintainSstoreUserRelationDao;
+import com.fc.member.wechatmaintain.user.service.IWechatMaintainSstoreUserRelationService;
+import com.fc.member.wechatmaintain.user.entity.WechatMaintainSstoreUserRelation;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * <p>Title: WechatMaintainSstoreUserRelation</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-28 17:13:47
+ */
+@Service("wechatMaintainSstoreUserRelationService")
+public class WechatMaintainSstoreUserRelationServiceImp extends ServiceImpl<WechatMaintainSstoreUserRelation> implements IWechatMaintainSstoreUserRelationService{
+
+	private static Logger log = LoggerFactory.getLogger(WechatMaintainSstoreUserRelationServiceImp.class);
+
+	@Autowired
+	private IWechatMaintainSstoreUserRelationDao wechatMaintainSstoreUserRelationDao;
+	
+	@Override
+	protected IMapper<WechatMaintainSstoreUserRelation> getDao() {
+		return wechatMaintainSstoreUserRelationDao;
+	}
+
+
+    /**
+     * 查询微养车用户门店扫码记录详情
+     */
+    @Override
+    public WechatMaintainSstoreUserRelation getWechatMaintainSstoreUserRelationInfo(Long wechatMaintainSstoreUserRelationId) {
+        log.info("getWechatMaintainSstoreUserRelationInfo---------->:" + wechatMaintainSstoreUserRelationId);
+        // set 对象属性值
+        WechatMaintainSstoreUserRelation entity = new WechatMaintainSstoreUserRelation();
+        entity.setWechatMaintainSstoreUserRelationId(wechatMaintainSstoreUserRelationId);
+        log.info("WechatMaintainSstoreUserRelation---------->{}", entity.toString());
+        List<WechatMaintainSstoreUserRelation> list = wechatMaintainSstoreUserRelationDao.getRows(entity);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
+
+
+	/**
+	 * 插入数据
+	 */
+	@Override
+	public Map<String, Object> insertSelective(WechatMaintainSstoreUserRelationCreateRequest request) {
+		log.info("insertSelective---------->:" + request);
+		Map<String, Object> resultMap = new HashMap<>();
+		// 将不为空的属性set到对象中
+        WechatMaintainSstoreUserRelation entity = new WechatMaintainSstoreUserRelation();
+        entity.setWechatMaintainUserId(request.getWechatMaintainUserId());
+        entity.setFcUserId(request.getFcUserId());
+        entity.setOpenid(request.getOpenid());
+        entity.setStoreId(request.getStoreId());
+        entity.setCreateTime(DateTimeUtils.getDateTimeInteger());
+        entity.setScanTime(request.getScanTime());
+        entity.setSource(request.getSource());
+		log.info("WechatMaintainSstoreUserRelation---------->:" + entity);
+		int result = wechatMaintainSstoreUserRelationDao.insertSelective(entity);
+		if (result <= 0) {
+			resultMap.put("error", ErrorCode.CREATE_ERROR.getDesc());
+			return resultMap;
+		}
+		return resultMap;
+	}
+
+	/**
+	 * 更新数据
+	 */
+	@Override
+	public Map<String, Object> updateWechatMaintainSstoreUserRelation(WechatMaintainSstoreUserRelationUpdateRequest request) throws Exception {
+		log.info("updateWechatMaintainSstoreUserRelation---------->:" + request);
+		Map<String, Object> resultMap = new HashMap<>();
+		// 将不为空的属性set到对象中
+        WechatMaintainSstoreUserRelation entity = new WechatMaintainSstoreUserRelation();
+        entity.setWechatMaintainSstoreUserRelationId(request.getWechatMaintainSstoreUserRelationId());
+        entity.setWechatMaintainUserId(request.getWechatMaintainUserId());
+        entity.setFcUserId(request.getFcUserId());
+        entity.setOpenid(request.getOpenid());
+        entity.setStoreId(request.getStoreId());
+        entity.setCreateTime(DateTimeUtils.getDateTimeInteger());
+        entity.setScanTime(request.getScanTime());
+        entity.setSource(request.getSource());
+		log.info("WechatMaintainSstoreUserRelation---------->:" + entity);
+        wechatMaintainSstoreUserRelationDao.update(entity);
+		return resultMap;
+	}
+
+	/**
+	 * 查询微养车用户门店扫码记录-分页
+	 */
+	@Override
+	public List<WechatMaintainSstoreUserRelation> getWechatMaintainSstoreUserRelationListPage(Page page,
+                                                                          WechatMaintainSstoreUserRelationListRequest request) {
+		log.info("getWechatMaintainSstoreUserRelationListPage---------->:" + request);
+		// set 对象属性值
+        WechatMaintainSstoreUserRelation entity = new WechatMaintainSstoreUserRelation();
+		log.info("WechatMaintainSstoreUserRelation---------->{}", entity.toString());
+		// 设置分页，查询条件
+		PageQuery pageQuery = new PageQuery();
+		pageQuery.setPage(page);
+		pageQuery.setCondition(entity);
+		return wechatMaintainSstoreUserRelationDao.getRowsPage(pageQuery);
+	}
+}

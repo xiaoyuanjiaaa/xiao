@@ -1,0 +1,22 @@
+package com.fc.member.wechatmaintain.user.dao;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.member.wechatmaintain.user.entity.WechatMaintainUserCoupon;
+
+/**
+ * <p>Title: WechatMaintainUserCoupon</p>
+ * <p>Description: 微养车用户储值卡表 DAO层</p>
+ * @author yangd
+ * @date 2018-12-28 17:13:48
+ */
+@Mapper
+public interface IWechatMaintainUserCouponDao extends IMapper<WechatMaintainUserCoupon> {
+
+	/**插入数据*/
+	int insertSelective(WechatMaintainUserCoupon obj);
+
+	/**查询用户所有可用储值卡余额*/
+	WechatMaintainUserCoupon getUserBalanceTotle(WechatMaintainUserCoupon obj);
+}

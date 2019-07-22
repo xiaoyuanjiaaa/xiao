@@ -1,0 +1,30 @@
+package com.fc.member.wechatmaintain.user.dao;
+
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.member.wechatmaintain.user.entity.WechatMaintainConponConsumeinfo;
+
+/**
+ * <p>Title: WechatMaintainConponConsumeinfo</p>
+ * <p>Description: 微养车用户储值卡充值消费记录 DAO层</p>
+ * @author yangd
+ * @date 2018-12-28 17:13:46
+ */
+@Mapper
+public interface IWechatMaintainConponConsumeinfoDao extends IMapper<WechatMaintainConponConsumeinfo> {
+
+	/**插入数据*/
+	int insertSelective(WechatMaintainConponConsumeinfo obj);
+
+	/**根据store_id查询门店所售储值卡金额*/
+	WechatMaintainConponConsumeinfo getStoreTotalAmount(WechatMaintainConponConsumeinfo obj);
+
+	/**门店APP储值卡设置显示充值总额、当前总余额*/
+	Map<String, Object> getStoreTotalAmountBalance(WechatMaintainConponConsumeinfo obj);
+
+	/**门店APP客户管理(查询储值卡消费次数、余额)*/
+	Map<String, Object> getConsumptionCountAndBalance(WechatMaintainConponConsumeinfo obj);
+}

@@ -1,0 +1,62 @@
+package com.fc.member.shop.service.impl;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.plugin.mybatis.PageQuery;
+import com.fc.member.shop.dao.ITestDao;
+import com.fc.member.shop.entity.Test;
+import com.fc.member.shop.service.ITestService;
+
+@Service
+public class TestServiceImpl extends ServiceImpl<Test> implements ITestService {
+
+	@Autowired
+	private ITestDao testDao;
+	
+	@Override
+	protected IMapper<Test> getDao() {
+		// TODO Auto-generated method stub
+		return testDao;
+	}
+
+	@Override
+	public Test findTestById(int id) {
+		return testDao.findTestById(id);
+	}
+
+	@Override
+	public int add(Test test) {
+		return testDao.add(test);
+	}
+
+	@Override
+	public int deleteById(int id) {
+		return testDao.deleteById(id);
+	}
+
+	@Override
+	public int updateByID(Test test) {
+		return testDao.updateByID(test);
+	}
+
+	@Override
+	public List<Test> findByName(String name) {
+		// TODO Auto-generated method stub
+		return testDao.findByName(name);
+	}
+
+	@Override
+	public List<Map<String, Object>> getTestOpListPage(Page page, Map<String, Object> params) {
+		PageQuery pageQuery = new PageQuery();
+		pageQuery.setCondition(params);
+		pageQuery.setPage(page);
+		return testDao.getTestListPage(pageQuery);
+	}
+
+}

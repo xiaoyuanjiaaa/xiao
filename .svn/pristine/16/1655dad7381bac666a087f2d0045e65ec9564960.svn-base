@@ -1,0 +1,131 @@
+package com.fc.member.master.user.entity;
+
+import java.io.Serializable;
+
+
+/**
+ * <p>Table: MasterUserMapleBeanDetail</p>
+ * <p>Description: 枫豆转入转出明细表</p>
+ * @author yangd
+ * @date 2019-01-15 10:09:29
+ */
+public class MasterUserMapleBeanDetail implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer mapleBeanDetailId; // 主键ID
+	private Integer masterMemberId; // 师傅ID
+	private Integer storeId; // 门店id
+	private String orderNo; // 订单号
+	private Integer detailType; // 操作类型(0:转出 1:转入)
+	private Integer changeCoin; // 本次操作金额
+	private Integer afterCoin; // 操作后余额
+	private String sourceType; // 来源类型
+	private Integer createTime; // 操作发生的时间
+	private String changeReason; // 操作原因
+	private String changeDesc; // 操作备注
+	private Integer updateTime; // 更新时间
+
+	public void setMapleBeanDetailId(Integer mapleBeanDetailId) {
+		this.mapleBeanDetailId = mapleBeanDetailId;
+	}
+	
+	public Integer getMapleBeanDetailId() {
+		return this.mapleBeanDetailId;
+	}
+	public void setMasterMemberId(Integer masterMemberId) {
+		this.masterMemberId = masterMemberId;
+	}
+	
+	public Integer getMasterMemberId() {
+		return this.masterMemberId;
+	}
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+	
+	public Integer getStoreId() {
+		return this.storeId;
+	}
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
+	}
+	
+	public String getOrderNo() {
+		return this.orderNo;
+	}
+	public void setDetailType(Integer detailType) {
+		this.detailType = detailType;
+	}
+	
+	public Integer getDetailType() {
+		return this.detailType;
+	}
+	public void setChangeCoin(Integer changeCoin) {
+		this.changeCoin = changeCoin;
+	}
+	
+	public Integer getChangeCoin() {
+		return this.changeCoin;
+	}
+	public void setAfterCoin(Integer afterCoin) {
+		this.afterCoin = afterCoin;
+	}
+	
+	public Integer getAfterCoin() {
+		return this.afterCoin;
+	}
+	public void setSourceType(String sourceType) {
+		this.sourceType = sourceType;
+	}
+	
+	public String getSourceType() {
+		return this.sourceType;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+	public void setChangeReason(String changeReason) {
+		this.changeReason = changeReason;
+	}
+	
+	public String getChangeReason() {
+		return this.changeReason;
+	}
+	public void setChangeDesc(String changeDesc) {
+		this.changeDesc = changeDesc;
+	}
+	
+	public String getChangeDesc() {
+		return this.changeDesc;
+	}
+	public void setUpdateTime(Integer updateTime) {
+		this.updateTime = updateTime;
+	}
+	
+	public Integer getUpdateTime() {
+		return this.updateTime;
+	}
+
+    @Override
+    public String toString () {
+    	return "MasterUserMapleBeanDetail{" + 
+	    	"mapleBeanDetailId=" + mapleBeanDetailId + 
+	    	", masterMemberId=" + masterMemberId + 
+	    	", storeId=" + storeId + 
+	    	", orderNo=" + orderNo + 
+	    	", detailType=" + detailType + 
+	    	", changeCoin=" + changeCoin + 
+	    	", afterCoin=" + afterCoin + 
+	    	", sourceType=" + sourceType + 
+	    	", createTime=" + createTime + 
+	    	", changeReason=" + changeReason + 
+	    	", changeDesc=" + changeDesc + 
+	    	", updateTime=" + updateTime + 
+	    	"}";
+    }
+}

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.master.user.dao.IMasterBankCardChangeLogDao">
+	<resultMap id="MasterBankCardChangeLogMap" type="com.fc.member.master.user.entity.MasterBankCardChangeLog">
+        <id property="masterBankCardChangeLogId" column="master_bank_card_change_log_id"/>
+        <id property="masterMemberId" column="master_member_id"/>
+        <id property="userName" column="user_name"/>
+        <id property="bankCode" column="bank_code"/>
+        <id property="bankName" column="bank_name"/>
+        <id property="bankAccountName" column="bank_account_name"/>
+        <id property="bankCardNo" column="bank_card_no"/>
+        <id property="bankRegionId" column="bank_region_id"/>
+        <id property="bankRegionName" column="bank_region_name"/>
+        <id property="remark" column="remark"/>
+        <id property="createTime" column="create_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="MasterBankCardChangeLogMap" >
+		select * from master_bank_card_change_log where 
+	        master_bank_card_change_log_id = #{masterBankCardChangeLogId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.master.user.entity.MasterBankCardChangeLog" useGeneratedKeys="true" keyProperty="masterBankCardChangeLogId">
+		insert into master_bank_card_change_log(master_bank_card_change_log_id , master_member_id , user_name , bank_code , bank_name , bank_account_name , bank_card_no , bank_region_id , bank_region_name , remark , create_time  )
+    	values(#{masterBankCardChangeLogId} ,#{masterMemberId} ,#{userName} ,#{bankCode} ,#{bankName} ,#{bankAccountName} ,#{bankCardNo} ,#{bankRegionId} ,#{bankRegionName} ,#{remark} ,#{createTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.master.user.entity.MasterBankCardChangeLog" useGeneratedKeys="true" keyProperty="masterBankCardChangeLogId">
+		insert into master_bank_card_change_log
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="masterBankCardChangeLogId != null">master_bank_card_change_log_id,</if>
+					<if test="masterMemberId != null">master_member_id,</if>
+					<if test="userName != null">user_name,</if>
+					<if test="bankCode != null">bank_code,</if>
+					<if test="bankName != null">bank_name,</if>
+					<if test="bankAccountName != null">bank_account_name,</if>
+					<if test="bankCardNo != null">bank_card_no,</if>
+					<if test="bankRegionId != null">bank_region_id,</if>
+					<if test="bankRegionName != null">bank_region_name,</if>
+					<if test="remark != null">remark,</if>
+					<if test="createTime != null">create_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="masterBankCardChangeLogId != null">#{masterBankCardChangeLogId},</if>
+					<if test="masterMemberId != null">#{masterMemberId},</if>
+					<if test="userName != null">#{userName},</if>
+					<if test="bankCode != null">#{bankCode},</if>
+					<if test="bankName != null">#{bankName},</if>
+					<if test="bankAccountName != null">#{bankAccountName},</if>
+					<if test="bankCardNo != null">#{bankCardNo},</if>
+					<if test="bankRegionId != null">#{bankRegionId},</if>
+					<if test="bankRegionName != null">#{bankRegionName},</if>
+					<if test="remark != null">#{remark},</if>
+					<if test="createTime != null">#{createTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.master.user.entity.MasterBankCardChangeLog">
+		update master_bank_card_change_log
+		<set>
+		    	<if test="masterMemberId != null">master_member_id = #{masterMemberId},</if>
+		    	<if test="userName != null">user_name = #{userName},</if>
+		    	<if test="bankCode != null">bank_code = #{bankCode},</if>
+		    	<if test="bankName != null">bank_name = #{bankName},</if>
+		    	<if test="bankAccountName != null">bank_account_name = #{bankAccountName},</if>
+		    	<if test="bankCardNo != null">bank_card_no = #{bankCardNo},</if>
+		    	<if test="bankRegionId != null">bank_region_id = #{bankRegionId},</if>
+		    	<if test="bankRegionName != null">bank_region_name = #{bankRegionName},</if>
+		    	<if test="remark != null">remark = #{remark},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		</set>
+		where 
+	        master_bank_card_change_log_id = #{masterBankCardChangeLogId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from master_bank_card_change_log where 
+	        master_bank_card_change_log_id = #{masterBankCardChangeLogId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.master.user.entity.MasterBankCardChangeLog" resultMap="MasterBankCardChangeLogMap" >
+		select * from master_bank_card_change_log 
+		<where>
+		       <if test="masterBankCardChangeLogId != null">
+					AND master_bank_card_change_log_id = #{masterBankCardChangeLogId}
+				</if>
+		       <if test="masterMemberId != null">
+					AND master_member_id = #{masterMemberId}
+				</if>
+		       <if test="userName != null">
+					AND user_name = #{userName}
+				</if>
+		       <if test="bankCode != null">
+					AND bank_code = #{bankCode}
+				</if>
+		       <if test="bankName != null">
+					AND bank_name = #{bankName}
+				</if>
+		       <if test="bankAccountName != null">
+					AND bank_account_name = #{bankAccountName}
+				</if>
+		       <if test="bankCardNo != null">
+					AND bank_card_no = #{bankCardNo}
+				</if>
+		       <if test="bankRegionId != null">
+					AND bank_region_id = #{bankRegionId}
+				</if>
+		       <if test="bankRegionName != null">
+					AND bank_region_name = #{bankRegionName}
+				</if>
+		       <if test="remark != null">
+					AND remark = #{remark}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="MasterBankCardChangeLogMap" >
+		select * from master_bank_card_change_log  
+		<where>
+		       <if test="condition.masterBankCardChangeLogId != null">
+					AND master_bank_card_change_log_id = #{condition.masterBankCardChangeLogId}
+				</if>
+		       <if test="condition.masterMemberId != null">
+					AND master_member_id = #{condition.masterMemberId}
+				</if>
+		       <if test="condition.userName != null">
+					AND user_name = #{condition.userName}
+				</if>
+		       <if test="condition.bankCode != null">
+					AND bank_code = #{condition.bankCode}
+				</if>
+		       <if test="condition.bankName != null">
+					AND bank_name = #{condition.bankName}
+				</if>
+		       <if test="condition.bankAccountName != null">
+					AND bank_account_name = #{condition.bankAccountName}
+				</if>
+		       <if test="condition.bankCardNo != null">
+					AND bank_card_no = #{condition.bankCardNo}
+				</if>
+		       <if test="condition.bankRegionId != null">
+					AND bank_region_id = #{condition.bankRegionId}
+				</if>
+		       <if test="condition.bankRegionName != null">
+					AND bank_region_name = #{condition.bankRegionName}
+				</if>
+		       <if test="condition.remark != null">
+					AND remark = #{condition.remark}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

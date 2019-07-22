@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.master.user.dao.IMasterUserSelfCertDao">
+	<resultMap id="MasterUserSelfCertMap" type="com.fc.member.master.user.entity.MasterUserSelfCert">
+        <id property="masterUserSelfCertId" column="master_user_self_cert_id"/>
+        <id property="masterMemberId" column="master_member_id"/>
+        <id property="status" column="status"/>
+        <id property="certType" column="cert_type"/>
+        <id property="certId" column="cert_id"/>
+        <id property="certName" column="cert_name"/>
+        <id property="skillLevel" column="skill_level"/>
+        <id property="certTime" column="cert_time"/>
+        <id property="certUnit" column="cert_unit"/>
+        <id property="certImgId" column="cert_img_id"/>
+        <id property="certContent" column="cert_content"/>
+        <id property="remark" column="remark"/>
+        <id property="createTime" column="create_time"/>
+        <id property="updateTime" column="update_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="MasterUserSelfCertMap" >
+		select * from master_user_self_cert where 
+	        master_user_self_cert_id = #{masterUserSelfCertId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.master.user.entity.MasterUserSelfCert" useGeneratedKeys="true" keyProperty="masterUserSelfCertId">
+		insert into master_user_self_cert(master_user_self_cert_id , master_member_id , status , cert_type , cert_id , cert_name , skill_level , cert_time , cert_unit , cert_img_id , cert_content , remark , create_time , update_time  )
+    	values(#{masterUserSelfCertId} ,#{masterMemberId} ,#{status} ,#{certType} ,#{certId} ,#{certName} ,#{skillLevel} ,#{certTime} ,#{certUnit} ,#{certImgId} ,#{certContent} ,#{remark} ,#{createTime} ,#{updateTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.master.user.entity.MasterUserSelfCert" useGeneratedKeys="true" keyProperty="masterUserSelfCertId">
+		insert into master_user_self_cert
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="masterUserSelfCertId != null">master_user_self_cert_id,</if>
+					<if test="masterMemberId != null">master_member_id,</if>
+					<if test="status != null">status,</if>
+					<if test="certType != null">cert_type,</if>
+					<if test="certId != null">cert_id,</if>
+					<if test="certName != null">cert_name,</if>
+					<if test="skillLevel != null">skill_level,</if>
+					<if test="certTime != null">cert_time,</if>
+					<if test="certUnit != null">cert_unit,</if>
+					<if test="certImgId != null">cert_img_id,</if>
+					<if test="certContent != null">cert_content,</if>
+					<if test="remark != null">remark,</if>
+					<if test="createTime != null">create_time,</if>
+					<if test="updateTime != null">update_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="masterUserSelfCertId != null">#{masterUserSelfCertId},</if>
+					<if test="masterMemberId != null">#{masterMemberId},</if>
+					<if test="status != null">#{status},</if>
+					<if test="certType != null">#{certType},</if>
+					<if test="certId != null">#{certId},</if>
+					<if test="certName != null">#{certName},</if>
+					<if test="skillLevel != null">#{skillLevel},</if>
+					<if test="certTime != null">#{certTime},</if>
+					<if test="certUnit != null">#{certUnit},</if>
+					<if test="certImgId != null">#{certImgId},</if>
+					<if test="certContent != null">#{certContent},</if>
+					<if test="remark != null">#{remark},</if>
+					<if test="createTime != null">#{createTime},</if>
+					<if test="updateTime != null">#{updateTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.master.user.entity.MasterUserSelfCert">
+		update master_user_self_cert
+		<set>
+		    	<if test="masterMemberId != null">master_member_id = #{masterMemberId},</if>
+		    	<if test="status != null">status = #{status},</if>
+		    	<if test="certType != null">cert_type = #{certType},</if>
+		    	<if test="certId != null">cert_id = #{certId},</if>
+		    	<if test="certName != null">cert_name = #{certName},</if>
+		    	<if test="skillLevel != null">skill_level = #{skillLevel},</if>
+		    	<if test="certTime != null">cert_time = #{certTime},</if>
+		    	<if test="certUnit != null">cert_unit = #{certUnit},</if>
+		    	<if test="certImgId != null">cert_img_id = #{certImgId},</if>
+		    	<if test="certContent != null">cert_content = #{certContent},</if>
+		    	<if test="remark != null">remark = #{remark},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		</set>
+		where 
+	        master_user_self_cert_id = #{masterUserSelfCertId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from master_user_self_cert where 
+	        master_user_self_cert_id = #{masterUserSelfCertId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.master.user.entity.MasterUserSelfCert" resultMap="MasterUserSelfCertMap" >
+		select * from master_user_self_cert 
+		<where>
+		       <if test="masterUserSelfCertId != null">
+					AND master_user_self_cert_id = #{masterUserSelfCertId}
+				</if>
+		       <if test="masterMemberId != null">
+					AND master_member_id = #{masterMemberId}
+				</if>
+		       <if test="status != null">
+					AND status = #{status}
+				</if>
+		       <if test="certType != null">
+					AND cert_type = #{certType}
+				</if>
+		       <if test="certId != null">
+					AND cert_id = #{certId}
+				</if>
+		       <if test="certName != null">
+					AND cert_name = #{certName}
+				</if>
+		       <if test="skillLevel != null">
+					AND skill_level = #{skillLevel}
+				</if>
+		       <if test="certTime != null">
+					AND cert_time = #{certTime}
+				</if>
+		       <if test="certUnit != null">
+					AND cert_unit = #{certUnit}
+				</if>
+		       <if test="certImgId != null">
+					AND cert_img_id = #{certImgId}
+				</if>
+		       <if test="certContent != null">
+					AND cert_content = #{certContent}
+				</if>
+		       <if test="remark != null">
+					AND remark = #{remark}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="MasterUserSelfCertMap" >
+		select * from master_user_self_cert  
+		<where>
+		       <if test="condition.masterUserSelfCertId != null">
+					AND master_user_self_cert_id = #{condition.masterUserSelfCertId}
+				</if>
+		       <if test="condition.masterMemberId != null">
+					AND master_member_id = #{condition.masterMemberId}
+				</if>
+		       <if test="condition.status != null">
+					AND status = #{condition.status}
+				</if>
+		       <if test="condition.certType != null">
+					AND cert_type = #{condition.certType}
+				</if>
+		       <if test="condition.certId != null">
+					AND cert_id = #{condition.certId}
+				</if>
+		       <if test="condition.certName != null">
+					AND cert_name = #{condition.certName}
+				</if>
+		       <if test="condition.skillLevel != null">
+					AND skill_level = #{condition.skillLevel}
+				</if>
+		       <if test="condition.certTime != null">
+					AND cert_time = #{condition.certTime}
+				</if>
+		       <if test="condition.certUnit != null">
+					AND cert_unit = #{condition.certUnit}
+				</if>
+		       <if test="condition.certImgId != null">
+					AND cert_img_id = #{condition.certImgId}
+				</if>
+		       <if test="condition.certContent != null">
+					AND cert_content = #{condition.certContent}
+				</if>
+		       <if test="condition.remark != null">
+					AND remark = #{condition.remark}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

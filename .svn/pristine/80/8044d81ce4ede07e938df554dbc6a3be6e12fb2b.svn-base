@@ -1,0 +1,15 @@
+package com.fc.member.shop.user.service;
+
+import com.fc.common.service.IService;
+import com.fc.member.shop.user.entity.ShopDepositChangeLog;
+/**
+ * <p>Title: ShopDepositChangeLog</p>
+ * <p>Description: 保证金缴纳或上限变动操作日志表 Service 接口</p>
+ * @author yangd
+ * @date 2019-01-14 11:08:39
+ */
+public interface IShopDepositChangeLogService extends IService<ShopDepositChangeLog>{
+	
+	// 插入数据
+	int insertSelective(ShopDepositChangeLog obj);
+}

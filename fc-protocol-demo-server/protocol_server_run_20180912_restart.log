@@ -1,0 +1,198 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v2.0.4.RELEASE)
+
+18:12:17.627 [main] INFO  c.f.p.s.d.ProtocolServerDemoApplication - Starting ProtocolServerDemoApplication on PC201512161252 with PID 11172 (E:\Springboot\workspace\fc-protocol-demo\fc-protocol-demo-server\target\protocol-demo-server.jar started by Administrator in E:\Springboot\workspace\fc-protocol-demo\fc-protocol-demo-server\target)
+18:12:17.630 [main] INFO  c.f.p.s.d.ProtocolServerDemoApplication - No active profile set, falling back to default profiles: default
+18:12:17.676 [main] INFO  o.s.c.a.AnnotationConfigApplicationContext - Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@7cdbc5d3: startup date [Wed Sep 12 18:12:17 CST 2018]; root of context hierarchy
+18:12:17.944 [main] INFO  o.s.b.f.s.DefaultListableBeanFactory - Overriding bean definition for bean 'protocolServer' with a different definition: replacing [Generic bean: class [com.fc.protocol.server.ProtocolServer]; scope=singleton; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in URL [jar:file:/E:/Springboot/workspace/fc-protocol-demo/fc-protocol-demo-server/target/protocol-demo-server.jar!/BOOT-INF/lib/fc-protocol-server-0.0.1-SNAPSHOT.jar!/com/fc/protocol/server/ProtocolServer.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=protocolServerAutoConfiguration; factoryMethodName=protocolServer; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [com/fc/protocol/server/ProtocolServerAutoConfiguration.class]]
+18:12:18.445 [main] INFO  c.f.p.s.h.ProtocolHandlerManager - 完成业务处理器方法注册:echo
+18:12:18.586 [main] INFO  o.s.j.e.a.AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+18:12:18.599 [main] INFO  c.f.p.s.d.ProtocolServerDemoApplication - Started ProtocolServerDemoApplication in 1.233 seconds (JVM running for 1.894)
+18:12:18.600 [main] INFO  c.f.p.s.d.ProtocolServerDemoApplication - 服务端demo应用启动......
+18:13:52.078 [nioEventLoopGroup-3-2] INFO  c.f.p.s.ProtocolServerChannelManagerHandler - Active:00e04c8e0b530000-2ba4-00000002-5e059a83377ddacb-65b3d354
+18:13:52.078 [nioEventLoopGroup-3-1] INFO  c.f.p.s.ProtocolServerChannelManagerHandler - Active:00e04c8e0b530000-2ba4-00000001-fab20a03377ddab9-d72cfbbf
+18:13:52.079 [nioEventLoopGroup-3-1] INFO  c.f.p.s.ProtocolServerChannelManagerHandler - 当前连接数量:2
+18:13:52.079 [nioEventLoopGroup-3-2] INFO  c.f.p.s.ProtocolServerChannelManagerHandler - 当前连接数量:2
+18:13:52.079 [nioEventLoopGroup-3-1] INFO  c.f.p.s.ProtocolServerChannelManagerHandler - 连接[[id: 0xd72cfbbf, /127.0.0.1:15739 => /127.0.0.1:8080]]
+18:13:52.079 [nioEventLoopGroup-3-2] INFO  c.f.p.s.ProtocolServerChannelManagerHandler - 连接[[id: 0xd72cfbbf, /127.0.0.1:15739 => /127.0.0.1:8080]]
+18:13:52.079 [nioEventLoopGroup-3-1] INFO  c.f.p.s.ProtocolServerChannelManagerHandler - 连接[[id: 0x65b3d354, /127.0.0.1:15740 => /127.0.0.1:8080]]
+18:13:52.079 [nioEventLoopGroup-3-2] INFO  c.f.p.s.ProtocolServerChannelManagerHandler - 连接[[id: 0x65b3d354, /127.0.0.1:15740 => /127.0.0.1:8080]]
+18:13:52.090 [nioEventLoopGroup-3-2] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000045550000097b2274726163654964223a227469645f3133222c2276657273696f6e223a22312e30222c22726571436f6465223a226563686f222c226e756d626572223a31337d
+18:13:52.110 [nioEventLoopGroup-3-2] INFO  c.f.p.s.ProtocolServerMessageHandler - 请求码(reqCode):echo
+18:13:52.110 [nioEventLoopGroup-3-2] INFO  c.f.p.s.ProtocolServerMessageHandler - traceId:tid_13
+18:13:52.110 [nioEventLoopGroup-3-2] INFO  c.f.p.s.h.ProtocolHandlerManager - 业务处理器：com.fc.protocol.server.demo.handler.DemoHandler
+18:13:52.114 [protocol-worker-server-1] INFO  c.f.p.s.h.e.ProtocolServerTask - $start$module:demo|controller:DemoHandler|operate:echo|request_get_paras:{"traceId":"tid_13","version":"1.0","reqCode":"echo","number":13}|ip:127.0.0.1
+18:13:52.117 [protocol-worker-server-1] INFO  c.f.p.s.h.e.ProtocolServerTask - 开始业务处理任务:com.fc.protocol.server.demo.handler.DemoHandler@58f8538c
+18:13:52.158 [protocol-worker-server-1] INFO  c.f.p.s.h.e.ProtocolServerTask - 入口参数:EchoRequest [number=13, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_13]
+18:13:52.159 [protocol-worker-server-1] INFO  c.f.p.s.demo.handler.DemoHandler - EchoHandler------>request:EchoRequest [number=13, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_13]
+18:13:52.159 [protocol-worker-server-1] INFO  c.f.p.s.demo.handler.DemoHandler - EchoHandler------>response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=13}, getTraceId()=null]
+18:13:52.159 [protocol-worker-server-1] INFO  c.f.p.s.h.e.ProtocolServerTask - 出口参数:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=13}, getTraceId()=tid_13]
+18:13:52.183 [protocol-worker-server-1] INFO  c.f.p.s.h.e.ProtocolServerTask - 完成业务处理任务:com.fc.protocol.server.demo.handler.DemoHandler@58f8538c
+18:13:52.183 [protocol-worker-server-1] INFO  c.f.p.s.h.e.ProtocolServerTask - $end$
+18:14:09.500 [nioEventLoopGroup-3-2] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000045550000097b2274726163654964223a227469645f3134222c2276657273696f6e223a22312e30222c22726571436f6465223a226563686f222c226e756d626572223a31347d
+18:14:09.500 [nioEventLoopGroup-3-3] INFO  c.f.p.s.ProtocolServerChannelManagerHandler - Active:00e04c8e0b530000-2ba4-00000003-beaefedb0b7e1f5a-b64ff819
+18:14:09.500 [nioEventLoopGroup-3-3] INFO  c.f.p.s.ProtocolServerChannelManagerHandler - 当前连接数量:3
+18:14:09.500 [nioEventLoopGroup-3-3] INFO  c.f.p.s.ProtocolServerChannelManagerHandler - 连接[[id: 0xb64ff819, /127.0.0.1:15756 => /127.0.0.1:8080]]
+18:14:09.500 [nioEventLoopGroup-3-3] INFO  c.f.p.s.ProtocolServerChannelManagerHandler - 连接[[id: 0xd72cfbbf, /127.0.0.1:15739 => /127.0.0.1:8080]]
+18:14:09.500 [nioEventLoopGroup-3-3] INFO  c.f.p.s.ProtocolServerChannelManagerHandler - 连接[[id: 0x65b3d354, /127.0.0.1:15740 => /127.0.0.1:8080]]
+18:14:09.500 [nioEventLoopGroup-3-2] INFO  c.f.p.s.ProtocolServerMessageHandler - 请求码(reqCode):echo
+18:14:09.500 [nioEventLoopGroup-3-2] INFO  c.f.p.s.ProtocolServerMessageHandler - traceId:tid_14
+18:14:09.500 [nioEventLoopGroup-3-2] INFO  c.f.p.s.h.ProtocolHandlerManager - 业务处理器：com.fc.protocol.server.demo.handler.DemoHandler
+18:14:09.502 [protocol-worker-server-2] INFO  c.f.p.s.h.e.ProtocolServerTask - $start$module:demo|controller:DemoHandler|operate:echo|request_get_paras:{"traceId":"tid_14","version":"1.0","reqCode":"echo","number":14}|ip:127.0.0.1
+18:14:09.503 [protocol-worker-server-2] INFO  c.f.p.s.h.e.ProtocolServerTask - 开始业务处理任务:com.fc.protocol.server.demo.handler.DemoHandler@58f8538c
+18:14:09.503 [protocol-worker-server-2] INFO  c.f.p.s.h.e.ProtocolServerTask - 入口参数:EchoRequest [number=14, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_14]
+18:14:09.503 [protocol-worker-server-2] INFO  c.f.p.s.demo.handler.DemoHandler - EchoHandler------>request:EchoRequest [number=14, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_14]
+18:14:09.503 [protocol-worker-server-2] INFO  c.f.p.s.demo.handler.DemoHandler - EchoHandler------>response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=14}, getTraceId()=null]
+18:14:09.503 [protocol-worker-server-2] INFO  c.f.p.s.h.e.ProtocolServerTask - 出口参数:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=14}, getTraceId()=tid_14]
+18:14:09.504 [protocol-worker-server-2] INFO  c.f.p.s.h.e.ProtocolServerTask - 完成业务处理任务:com.fc.protocol.server.demo.handler.DemoHandler@58f8538c
+18:14:09.504 [protocol-worker-server-2] INFO  c.f.p.s.h.e.ProtocolServerTask - $end$
+18:14:22.662 [nioEventLoopGroup-3-2] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000045550000097b2274726163654964223a227469645f3135222c2276657273696f6e223a22312e30222c22726571436f6465223a226563686f222c226e756d626572223a31357d
+18:14:22.662 [nioEventLoopGroup-3-2] INFO  c.f.p.s.ProtocolServerMessageHandler - 请求码(reqCode):echo
+18:14:22.662 [nioEventLoopGroup-3-2] INFO  c.f.p.s.ProtocolServerMessageHandler - traceId:tid_15
+18:14:22.662 [nioEventLoopGroup-3-2] INFO  c.f.p.s.h.ProtocolHandlerManager - 业务处理器：com.fc.protocol.server.demo.handler.DemoHandler
+18:14:22.663 [protocol-worker-server-3] INFO  c.f.p.s.h.e.ProtocolServerTask - $start$module:demo|controller:DemoHandler|operate:echo|request_get_paras:{"traceId":"tid_15","version":"1.0","reqCode":"echo","number":15}|ip:127.0.0.1
+18:14:22.664 [protocol-worker-server-3] INFO  c.f.p.s.h.e.ProtocolServerTask - 开始业务处理任务:com.fc.protocol.server.demo.handler.DemoHandler@58f8538c
+18:14:22.664 [protocol-worker-server-3] INFO  c.f.p.s.h.e.ProtocolServerTask - 入口参数:EchoRequest [number=15, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_15]
+18:14:22.664 [protocol-worker-server-3] INFO  c.f.p.s.demo.handler.DemoHandler - EchoHandler------>request:EchoRequest [number=15, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_15]
+18:14:22.664 [protocol-worker-server-3] INFO  c.f.p.s.demo.handler.DemoHandler - 休眠15秒......
+18:14:35.643 [nioEventLoopGroup-3-3] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000045550000097b2274726163654964223a227469645f3136222c2276657273696f6e223a22312e30222c22726571436f6465223a226563686f222c226e756d626572223a31367d
+18:14:35.644 [nioEventLoopGroup-3-3] INFO  c.f.p.s.ProtocolServerMessageHandler - 请求码(reqCode):echo
+18:14:35.644 [nioEventLoopGroup-3-3] INFO  c.f.p.s.ProtocolServerMessageHandler - traceId:tid_16
+18:14:35.644 [nioEventLoopGroup-3-3] INFO  c.f.p.s.h.ProtocolHandlerManager - 业务处理器：com.fc.protocol.server.demo.handler.DemoHandler
+18:14:35.644 [protocol-worker-server-4] INFO  c.f.p.s.h.e.ProtocolServerTask - $start$module:demo|controller:DemoHandler|operate:echo|request_get_paras:{"traceId":"tid_16","version":"1.0","reqCode":"echo","number":16}|ip:127.0.0.1
+18:14:35.646 [protocol-worker-server-4] INFO  c.f.p.s.h.e.ProtocolServerTask - 开始业务处理任务:com.fc.protocol.server.demo.handler.DemoHandler@58f8538c
+18:14:35.646 [protocol-worker-server-4] INFO  c.f.p.s.h.e.ProtocolServerTask - 入口参数:EchoRequest [number=16, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_16]
+18:14:35.646 [protocol-worker-server-4] INFO  c.f.p.s.demo.handler.DemoHandler - EchoHandler------>request:EchoRequest [number=16, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_16]
+18:14:35.646 [protocol-worker-server-4] INFO  c.f.p.s.demo.handler.DemoHandler - EchoHandler------>response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=16}, getTraceId()=null]
+18:14:35.646 [protocol-worker-server-4] INFO  c.f.p.s.h.e.ProtocolServerTask - 出口参数:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=16}, getTraceId()=tid_16]
+18:14:35.647 [protocol-worker-server-4] INFO  c.f.p.s.h.e.ProtocolServerTask - 完成业务处理任务:com.fc.protocol.server.demo.handler.DemoHandler@58f8538c
+18:14:35.647 [protocol-worker-server-4] INFO  c.f.p.s.h.e.ProtocolServerTask - $end$
+18:14:37.665 [protocol-worker-server-3] INFO  c.f.p.s.demo.handler.DemoHandler - EchoHandler------>response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=15}, getTraceId()=null]
+18:14:37.665 [protocol-worker-server-3] INFO  c.f.p.s.h.e.ProtocolServerTask - 出口参数:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=15}, getTraceId()=tid_15]
+18:14:37.665 [protocol-worker-server-3] INFO  c.f.p.s.h.e.ProtocolServerTask - 完成业务处理任务:com.fc.protocol.server.demo.handler.DemoHandler@58f8538c
+18:14:37.665 [protocol-worker-server-3] INFO  c.f.p.s.h.e.ProtocolServerTask - $end$
+18:14:42.400 [nioEventLoopGroup-3-3] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000045550000097b2274726163654964223a227469645f3137222c2276657273696f6e223a22312e30222c22726571436f6465223a226563686f222c226e756d626572223a31377d
+18:14:42.400 [nioEventLoopGroup-3-3] INFO  c.f.p.s.ProtocolServerMessageHandler - 请求码(reqCode):echo
+18:14:42.400 [nioEventLoopGroup-3-3] INFO  c.f.p.s.ProtocolServerMessageHandler - traceId:tid_17
+18:14:42.400 [nioEventLoopGroup-3-3] INFO  c.f.p.s.h.ProtocolHandlerManager - 业务处理器：com.fc.protocol.server.demo.handler.DemoHandler
+18:14:42.400 [protocol-worker-server-1] INFO  c.f.p.s.h.e.ProtocolServerTask - $start$module:demo|controller:DemoHandler|operate:echo|request_get_paras:{"traceId":"tid_17","version":"1.0","reqCode":"echo","number":17}|ip:127.0.0.1
+18:14:42.401 [protocol-worker-server-1] INFO  c.f.p.s.h.e.ProtocolServerTask - 开始业务处理任务:com.fc.protocol.server.demo.handler.DemoHandler@58f8538c
+18:14:42.401 [protocol-worker-server-1] INFO  c.f.p.s.h.e.ProtocolServerTask - 入口参数:EchoRequest [number=17, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_17]
+18:14:42.401 [protocol-worker-server-1] INFO  c.f.p.s.demo.handler.DemoHandler - EchoHandler------>request:EchoRequest [number=17, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_17]
+18:14:42.401 [protocol-worker-server-1] INFO  c.f.p.s.demo.handler.DemoHandler - EchoHandler------>response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=17}, getTraceId()=null]
+18:14:42.401 [protocol-worker-server-1] INFO  c.f.p.s.h.e.ProtocolServerTask - 出口参数:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=17}, getTraceId()=tid_17]
+18:14:42.402 [protocol-worker-server-1] INFO  c.f.p.s.h.e.ProtocolServerTask - 完成业务处理任务:com.fc.protocol.server.demo.handler.DemoHandler@58f8538c
+18:14:42.402 [protocol-worker-server-1] INFO  c.f.p.s.h.e.ProtocolServerTask - $end$
+18:14:55.158 [nioEventLoopGroup-3-3] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000045550000097b2274726163654964223a227469645f3138222c2276657273696f6e223a22312e30222c22726571436f6465223a226563686f222c226e756d626572223a31387d
+18:14:55.158 [nioEventLoopGroup-3-3] INFO  c.f.p.s.ProtocolServerMessageHandler - 请求码(reqCode):echo
+18:14:55.158 [nioEventLoopGroup-3-3] INFO  c.f.p.s.ProtocolServerMessageHandler - traceId:tid_18
+18:14:55.159 [nioEventLoopGroup-3-3] INFO  c.f.p.s.h.ProtocolHandlerManager - 业务处理器：com.fc.protocol.server.demo.handler.DemoHandler
+18:14:55.159 [protocol-worker-server-2] INFO  c.f.p.s.h.e.ProtocolServerTask - $start$module:demo|controller:DemoHandler|operate:echo|request_get_paras:{"traceId":"tid_18","version":"1.0","reqCode":"echo","number":18}|ip:127.0.0.1
+18:14:55.160 [protocol-worker-server-2] INFO  c.f.p.s.h.e.ProtocolServerTask - 开始业务处理任务:com.fc.protocol.server.demo.handler.DemoHandler@58f8538c
+18:14:55.160 [protocol-worker-server-2] INFO  c.f.p.s.h.e.ProtocolServerTask - 入口参数:EchoRequest [number=18, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_18]
+18:14:55.160 [protocol-worker-server-2] INFO  c.f.p.s.demo.handler.DemoHandler - EchoHandler------>request:EchoRequest [number=18, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_18]
+18:14:55.160 [protocol-worker-server-2] INFO  c.f.p.s.demo.handler.DemoHandler - EchoHandler------>response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=18}, getTraceId()=null]
+18:14:55.160 [protocol-worker-server-2] INFO  c.f.p.s.h.e.ProtocolServerTask - 出口参数:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=18}, getTraceId()=tid_18]
+18:14:55.160 [protocol-worker-server-2] INFO  c.f.p.s.h.e.ProtocolServerTask - 完成业务处理任务:com.fc.protocol.server.demo.handler.DemoHandler@58f8538c
+18:14:55.160 [protocol-worker-server-2] INFO  c.f.p.s.h.e.ProtocolServerTask - $end$
+18:15:01.015 [nioEventLoopGroup-3-2] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000045550000097b2274726163654964223a227469645f3139222c2276657273696f6e223a22312e30222c22726571436f6465223a226563686f222c226e756d626572223a31397d
+18:15:01.015 [nioEventLoopGroup-3-2] INFO  c.f.p.s.ProtocolServerMessageHandler - 请求码(reqCode):echo
+18:15:01.015 [nioEventLoopGroup-3-2] INFO  c.f.p.s.ProtocolServerMessageHandler - traceId:tid_19
+18:15:01.015 [nioEventLoopGroup-3-2] INFO  c.f.p.s.h.ProtocolHandlerManager - 业务处理器：com.fc.protocol.server.demo.handler.DemoHandler
+18:15:01.015 [protocol-worker-server-4] INFO  c.f.p.s.h.e.ProtocolServerTask - $start$module:demo|controller:DemoHandler|operate:echo|request_get_paras:{"traceId":"tid_19","version":"1.0","reqCode":"echo","number":19}|ip:127.0.0.1
+18:15:01.017 [protocol-worker-server-4] INFO  c.f.p.s.h.e.ProtocolServerTask - 开始业务处理任务:com.fc.protocol.server.demo.handler.DemoHandler@58f8538c
+18:15:01.017 [protocol-worker-server-4] INFO  c.f.p.s.h.e.ProtocolServerTask - 入口参数:EchoRequest [number=19, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_19]
+18:15:01.017 [protocol-worker-server-4] INFO  c.f.p.s.demo.handler.DemoHandler - EchoHandler------>request:EchoRequest [number=19, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_19]
+18:15:01.017 [protocol-worker-server-4] INFO  c.f.p.s.demo.handler.DemoHandler - EchoHandler------>response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=19}, getTraceId()=null]
+18:15:01.017 [protocol-worker-server-4] INFO  c.f.p.s.h.e.ProtocolServerTask - 出口参数:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=19}, getTraceId()=tid_19]
+18:15:01.017 [protocol-worker-server-4] INFO  c.f.p.s.h.e.ProtocolServerTask - 完成业务处理任务:com.fc.protocol.server.demo.handler.DemoHandler@58f8538c
+18:15:01.017 [protocol-worker-server-4] INFO  c.f.p.s.h.e.ProtocolServerTask - $end$
+18:15:07.001 [nioEventLoopGroup-3-3] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000045550000097b2274726163654964223a227469645f3230222c2276657273696f6e223a22312e30222c22726571436f6465223a226563686f222c226e756d626572223a32307d
+18:15:07.001 [nioEventLoopGroup-3-3] INFO  c.f.p.s.ProtocolServerMessageHandler - 请求码(reqCode):echo
+18:15:07.001 [nioEventLoopGroup-3-3] INFO  c.f.p.s.ProtocolServerMessageHandler - traceId:tid_20
+18:15:07.001 [nioEventLoopGroup-3-3] INFO  c.f.p.s.h.ProtocolHandlerManager - 业务处理器：com.fc.protocol.server.demo.handler.DemoHandler
+18:15:07.001 [protocol-worker-server-3] INFO  c.f.p.s.h.e.ProtocolServerTask - $start$module:demo|controller:DemoHandler|operate:echo|request_get_paras:{"traceId":"tid_20","version":"1.0","reqCode":"echo","number":20}|ip:127.0.0.1
+18:15:07.002 [protocol-worker-server-3] INFO  c.f.p.s.h.e.ProtocolServerTask - 开始业务处理任务:com.fc.protocol.server.demo.handler.DemoHandler@58f8538c
+18:15:07.002 [protocol-worker-server-3] INFO  c.f.p.s.h.e.ProtocolServerTask - 入口参数:EchoRequest [number=20, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_20]
+18:15:07.002 [protocol-worker-server-3] INFO  c.f.p.s.demo.handler.DemoHandler - EchoHandler------>request:EchoRequest [number=20, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_20]
+18:15:07.002 [protocol-worker-server-3] INFO  c.f.p.s.demo.handler.DemoHandler - 休眠20秒......
+18:15:22.448 [nioEventLoopGroup-3-1] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000045550000097b2274726163654964223a227469645f3231222c2276657273696f6e223a22312e30222c22726571436f6465223a226563686f222c226e756d626572223a32317d
+18:15:22.449 [nioEventLoopGroup-3-1] INFO  c.f.p.s.ProtocolServerMessageHandler - 请求码(reqCode):echo
+18:15:22.449 [nioEventLoopGroup-3-1] INFO  c.f.p.s.ProtocolServerMessageHandler - traceId:tid_21
+18:15:22.449 [nioEventLoopGroup-3-1] INFO  c.f.p.s.h.ProtocolHandlerManager - 业务处理器：com.fc.protocol.server.demo.handler.DemoHandler
+18:15:22.449 [protocol-worker-server-1] INFO  c.f.p.s.h.e.ProtocolServerTask - $start$module:demo|controller:DemoHandler|operate:echo|request_get_paras:{"traceId":"tid_21","version":"1.0","reqCode":"echo","number":21}|ip:127.0.0.1
+18:15:22.450 [protocol-worker-server-1] INFO  c.f.p.s.h.e.ProtocolServerTask - 开始业务处理任务:com.fc.protocol.server.demo.handler.DemoHandler@58f8538c
+18:15:22.450 [protocol-worker-server-1] INFO  c.f.p.s.h.e.ProtocolServerTask - 入口参数:EchoRequest [number=21, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_21]
+18:15:22.450 [protocol-worker-server-1] INFO  c.f.p.s.demo.handler.DemoHandler - EchoHandler------>request:EchoRequest [number=21, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_21]
+18:15:22.450 [protocol-worker-server-1] INFO  c.f.p.s.demo.handler.DemoHandler - EchoHandler------>response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=21}, getTraceId()=null]
+18:15:22.450 [protocol-worker-server-1] INFO  c.f.p.s.h.e.ProtocolServerTask - 出口参数:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=21}, getTraceId()=tid_21]
+18:15:22.450 [protocol-worker-server-1] INFO  c.f.p.s.h.e.ProtocolServerTask - 完成业务处理任务:com.fc.protocol.server.demo.handler.DemoHandler@58f8538c
+18:15:22.451 [protocol-worker-server-1] INFO  c.f.p.s.h.e.ProtocolServerTask - $end$
+18:15:27.003 [protocol-worker-server-3] INFO  c.f.p.s.demo.handler.DemoHandler - EchoHandler------>response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=20}, getTraceId()=null]
+18:15:27.003 [protocol-worker-server-3] INFO  c.f.p.s.h.e.ProtocolServerTask - 出口参数:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=20}, getTraceId()=tid_20]
+18:15:27.003 [protocol-worker-server-3] INFO  c.f.p.s.h.e.ProtocolServerTask - 完成业务处理任务:com.fc.protocol.server.demo.handler.DemoHandler@58f8538c
+18:15:27.003 [protocol-worker-server-3] INFO  c.f.p.s.h.e.ProtocolServerTask - $end$
+18:15:37.105 [nioEventLoopGroup-3-3] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000045550000097b2274726163654964223a227469645f3232222c2276657273696f6e223a22312e30222c22726571436f6465223a226563686f222c226e756d626572223a32327d
+18:15:37.105 [nioEventLoopGroup-3-3] INFO  c.f.p.s.ProtocolServerMessageHandler - 请求码(reqCode):echo
+18:15:37.105 [nioEventLoopGroup-3-3] INFO  c.f.p.s.ProtocolServerMessageHandler - traceId:tid_22
+18:15:37.105 [nioEventLoopGroup-3-3] INFO  c.f.p.s.h.ProtocolHandlerManager - 业务处理器：com.fc.protocol.server.demo.handler.DemoHandler
+18:15:37.105 [protocol-worker-server-2] INFO  c.f.p.s.h.e.ProtocolServerTask - $start$module:demo|controller:DemoHandler|operate:echo|request_get_paras:{"traceId":"tid_22","version":"1.0","reqCode":"echo","number":22}|ip:127.0.0.1
+18:15:37.106 [protocol-worker-server-2] INFO  c.f.p.s.h.e.ProtocolServerTask - 开始业务处理任务:com.fc.protocol.server.demo.handler.DemoHandler@58f8538c
+18:15:37.106 [protocol-worker-server-2] INFO  c.f.p.s.h.e.ProtocolServerTask - 入口参数:EchoRequest [number=22, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_22]
+18:15:37.107 [protocol-worker-server-2] INFO  c.f.p.s.demo.handler.DemoHandler - EchoHandler------>request:EchoRequest [number=22, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_22]
+18:15:37.107 [protocol-worker-server-2] INFO  c.f.p.s.demo.handler.DemoHandler - EchoHandler------>response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=22}, getTraceId()=null]
+18:15:37.107 [protocol-worker-server-2] INFO  c.f.p.s.h.e.ProtocolServerTask - 出口参数:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=22}, getTraceId()=tid_22]
+18:15:37.108 [protocol-worker-server-2] INFO  c.f.p.s.h.e.ProtocolServerTask - 完成业务处理任务:com.fc.protocol.server.demo.handler.DemoHandler@58f8538c
+18:15:37.108 [protocol-worker-server-2] INFO  c.f.p.s.h.e.ProtocolServerTask - $end$
+18:19:02.449 [nioEventLoopGroup-3-2] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000045550000097b2274726163654964223a227469645f3233222c2276657273696f6e223a22312e30222c22726571436f6465223a226563686f222c226e756d626572223a32337d
+18:19:02.449 [nioEventLoopGroup-3-2] INFO  c.f.p.s.ProtocolServerMessageHandler - 请求码(reqCode):echo
+18:19:02.449 [nioEventLoopGroup-3-2] INFO  c.f.p.s.ProtocolServerMessageHandler - traceId:tid_23
+18:19:02.449 [nioEventLoopGroup-3-2] INFO  c.f.p.s.h.ProtocolHandlerManager - 业务处理器：com.fc.protocol.server.demo.handler.DemoHandler
+18:19:02.449 [protocol-worker-server-4] INFO  c.f.p.s.h.e.ProtocolServerTask - $start$module:demo|controller:DemoHandler|operate:echo|request_get_paras:{"traceId":"tid_23","version":"1.0","reqCode":"echo","number":23}|ip:127.0.0.1
+18:19:02.450 [protocol-worker-server-4] INFO  c.f.p.s.h.e.ProtocolServerTask - 开始业务处理任务:com.fc.protocol.server.demo.handler.DemoHandler@58f8538c
+18:19:02.451 [protocol-worker-server-4] INFO  c.f.p.s.h.e.ProtocolServerTask - 入口参数:EchoRequest [number=23, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_23]
+18:19:02.451 [protocol-worker-server-4] INFO  c.f.p.s.demo.handler.DemoHandler - EchoHandler------>request:EchoRequest [number=23, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_23]
+18:19:02.451 [protocol-worker-server-4] INFO  c.f.p.s.demo.handler.DemoHandler - EchoHandler------>response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=23}, getTraceId()=null]
+18:19:02.451 [protocol-worker-server-4] INFO  c.f.p.s.h.e.ProtocolServerTask - 出口参数:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=23}, getTraceId()=tid_23]
+18:19:02.451 [protocol-worker-server-4] INFO  c.f.p.s.h.e.ProtocolServerTask - 完成业务处理任务:com.fc.protocol.server.demo.handler.DemoHandler@58f8538c
+18:19:02.451 [protocol-worker-server-4] INFO  c.f.p.s.h.e.ProtocolServerTask - $end$
+18:19:12.377 [nioEventLoopGroup-3-3] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000045550000097b2274726163654964223a227469645f3234222c2276657273696f6e223a22312e30222c22726571436f6465223a226563686f222c226e756d626572223a32347d
+18:19:12.377 [nioEventLoopGroup-3-3] INFO  c.f.p.s.ProtocolServerMessageHandler - 请求码(reqCode):echo
+18:19:12.377 [nioEventLoopGroup-3-3] INFO  c.f.p.s.ProtocolServerMessageHandler - traceId:tid_24
+18:19:12.377 [nioEventLoopGroup-3-3] INFO  c.f.p.s.h.ProtocolHandlerManager - 业务处理器：com.fc.protocol.server.demo.handler.DemoHandler
+18:19:12.377 [protocol-worker-server-1] INFO  c.f.p.s.h.e.ProtocolServerTask - $start$module:demo|controller:DemoHandler|operate:echo|request_get_paras:{"traceId":"tid_24","version":"1.0","reqCode":"echo","number":24}|ip:127.0.0.1
+18:19:12.378 [protocol-worker-server-1] INFO  c.f.p.s.h.e.ProtocolServerTask - 开始业务处理任务:com.fc.protocol.server.demo.handler.DemoHandler@58f8538c
+18:19:12.378 [protocol-worker-server-1] INFO  c.f.p.s.h.e.ProtocolServerTask - 入口参数:EchoRequest [number=24, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_24]
+18:19:12.378 [protocol-worker-server-1] INFO  c.f.p.s.demo.handler.DemoHandler - EchoHandler------>request:EchoRequest [number=24, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_24]
+18:19:12.378 [protocol-worker-server-1] INFO  c.f.p.s.demo.handler.DemoHandler - EchoHandler------>response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=24}, getTraceId()=null]
+18:19:12.378 [protocol-worker-server-1] INFO  c.f.p.s.h.e.ProtocolServerTask - 出口参数:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=24}, getTraceId()=tid_24]
+18:19:12.379 [protocol-worker-server-1] INFO  c.f.p.s.h.e.ProtocolServerTask - 完成业务处理任务:com.fc.protocol.server.demo.handler.DemoHandler@58f8538c
+18:19:12.379 [protocol-worker-server-1] INFO  c.f.p.s.h.e.ProtocolServerTask - $end$
+18:19:37.540 [nioEventLoopGroup-3-3] INFO  c.f.p.s.ProtocolServerChannelManagerHandler - 异常Throwable:远程主机强迫关闭了一个现有的连接。
+18:19:37.540 [nioEventLoopGroup-3-2] INFO  c.f.p.s.ProtocolServerChannelManagerHandler - 异常Throwable:远程主机强迫关闭了一个现有的连接。
+18:19:37.540 [nioEventLoopGroup-3-1] INFO  c.f.p.s.ProtocolServerChannelManagerHandler - 异常Throwable:远程主机强迫关闭了一个现有的连接。
+18:19:37.542 [nioEventLoopGroup-3-3] INFO  c.f.p.s.ProtocolServerChannelManagerHandler - channel.id().asLongText():00e04c8e0b530000-2ba4-00000003-beaefedb0b7e1f5a-b64ff819
+18:19:37.542 [nioEventLoopGroup-3-2] INFO  c.f.p.s.ProtocolServerChannelManagerHandler - channel.id().asLongText():00e04c8e0b530000-2ba4-00000002-5e059a83377ddacb-65b3d354
+18:19:37.542 [nioEventLoopGroup-3-1] INFO  c.f.p.s.ProtocolServerChannelManagerHandler - channel.id().asLongText():00e04c8e0b530000-2ba4-00000001-fab20a03377ddab9-d72cfbbf
+18:19:37.542 [nioEventLoopGroup-3-2] INFO  c.f.p.s.ProtocolServerChannelManagerHandler - Inactive:00e04c8e0b530000-2ba4-00000002-5e059a83377ddacb-65b3d354
+18:19:37.542 [nioEventLoopGroup-3-3] INFO  c.f.p.s.ProtocolServerChannelManagerHandler - Inactive:00e04c8e0b530000-2ba4-00000003-beaefedb0b7e1f5a-b64ff819
+18:19:37.542 [nioEventLoopGroup-3-1] INFO  c.f.p.s.ProtocolServerChannelManagerHandler - Inactive:00e04c8e0b530000-2ba4-00000001-fab20a03377ddab9-d72cfbbf
+18:19:37.542 [nioEventLoopGroup-3-2] INFO  c.f.p.s.ProtocolServerChannelManagerHandler - 当前连接数量:0
+18:19:37.542 [nioEventLoopGroup-3-3] INFO  c.f.p.s.ProtocolServerChannelManagerHandler - 当前连接数量:0
+18:19:37.542 [nioEventLoopGroup-3-1] INFO  c.f.p.s.ProtocolServerChannelManagerHandler - 当前连接数量:0
+18:19:41.944 [Thread-3] INFO  c.fc.protocol.server.ProtocolServer - Thread-3-->ShutdownHook
+18:19:41.944 [Thread-2] INFO  o.s.c.a.AnnotationConfigApplicationContext - Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@7cdbc5d3: startup date [Wed Sep 12 18:12:17 CST 2018]; root of context hierarchy
+18:19:41.944 [Thread-3] INFO  c.fc.protocol.server.ProtocolServer - Thread-3-->关闭业务线程池......
+18:19:41.944 [Thread-3] INFO  c.f.p.s.h.e.ProtocolServerTaskThreadPool - 关闭业务线程池......
+18:19:41.944 [Thread-3] INFO  c.fc.protocol.server.ProtocolServer - .
+18:19:41.946 [Thread-2] INFO  o.s.j.e.a.AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+18:19:41.946 [Thread-2] INFO  c.fc.protocol.server.ProtocolServer - Thread-2-->关闭业务线程池......
+18:19:41.946 [Thread-2] INFO  c.f.p.s.h.e.ProtocolServerTaskThreadPool - 关闭业务线程池......
+18:19:41.946 [Thread-2] INFO  c.fc.protocol.server.ProtocolServer - Thread-2-->优雅关闭protocol服务......
+18:19:42.944 [Thread-3] INFO  c.fc.protocol.server.ProtocolServer - Thread-3-->优雅关闭protocol服务......

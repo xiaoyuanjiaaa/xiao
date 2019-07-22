@@ -1,0 +1,5 @@
+#cluster example => s1:2181,s2:2181,s3:2181
+zookeeper.connect.string=127.0.0.1:2181
+zookeeper.session.timeout=10000
+#zookeeper.path.root=/fcsn
+zookeeper.path.service=/demo

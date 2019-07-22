@@ -1,0 +1,27 @@
+package com.fc.member.store.user.service;
+
+import com.fc.common.service.IService;
+import com.fc.member.store.user.entity.StoreBasicInfo;
+import com.fc.protocol.demo.request.store.user.CreateStoreBankCardRequest;
+import com.fc.protocol.demo.request.store.user.StoreBossInfoRequest;
+
+import java.util.Map;
+
+/**
+ * <p>Title: StoreBasicInfo</p>
+ * <p>Description:  Service 接口</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:05
+ */
+public interface IStoreBasicInfoService extends IService<StoreBasicInfo>{
+
+    /**@param id
+     * @description 获取店主信息
+     * @author zhuj
+     */
+    Map<String, Object> getStoreBossInfo(Integer id);
+    /**@param request
+     * @description 修改店主信息
+     */
+    boolean changeStoreBossInfo(StoreBossInfoRequest request) throws Exception;
+}

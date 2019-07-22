@@ -1,0 +1,170 @@
+package com.fc.protocol.demo.request.wechatplatform.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+import io.swagger.annotations.ApiModelProperty;
+import org.springframework.util.StringUtils;
+
+/**
+ * @Author: linpeng
+ * @Date: 2019/1/3 18:41
+ * @Version 1.0
+ */
+public class WechatPlatformUserRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+    @ApiModelProperty(value = "当前页码", name = "page")
+    private Integer page = 1;
+    @ApiModelProperty(value = "当前页记录数", name = "pagesize")
+    private Integer pagesize = 10;
+    @ApiModelProperty(value = "微养车找店用户ID", name = "platform_user_id")
+	private Integer  platform_user_id;
+    @ApiModelProperty(value = "枫车用户ID", name = "page_no")
+    private Integer  fc_user_id;
+    @ApiModelProperty(value = "openid", name = "openid")
+    private String  openid;
+    @ApiModelProperty(value = "手机号码", name = "mobile")
+	private String  mobile;
+    @ApiModelProperty(value = "打开次数", name = "open_number")
+    private int  open_number;
+    @ApiModelProperty(value = "unionid", name = "unionid")
+    private String  unionid;
+    @ApiModelProperty(value = "微信号", name = "wechat_account")
+    private String wechat_account;
+    @ApiModelProperty(value = "微信头像", name = "wechat_avatar")
+    private String wechat_avatar;
+
+
+    public String paramValidateGet() {
+        if (StringUtils.isEmpty(openid)) {
+            return "参数:openid 不能为空";
+        }
+        return null;
+    }
+
+    public String paramValidateList() {
+        if (StringUtils.isEmpty(page)) {
+            return "参数:page 不能为空";
+        }
+        if (StringUtils.isEmpty(pagesize)) {
+            return "参数:pagesize 不能为空";
+        }
+        return null;
+    }
+
+    public String paramValidateSave() {
+        if (StringUtils.isEmpty(openid)) {
+            return "参数:openid 不能为空";
+        }
+        return null;
+    }
+
+    public String paramValidateUpdate() {
+        if (StringUtils.isEmpty(platform_user_id)) {
+            return "参数:platform_user_id 不能为空";
+        }
+        if (StringUtils.isEmpty(openid)) {
+            return "参数:openid 不能为空";
+        }
+        return null;
+    }
+
+    public String paramValidateDelete() {
+        if (StringUtils.isEmpty(platform_user_id)) {
+            return "参数:platform_user_id 不能为空";
+        }
+        if (StringUtils.isEmpty(openid)) {
+            return "参数:openid 不能为空";
+        }
+        return null;
+    }
+
+    public String getWechatAvatar() {
+        return wechat_avatar;
+    }
+
+    public void setWechatAvatar(String wechat_avatar) {
+        this.wechat_avatar = wechat_avatar;
+    }
+
+    public String getWechatAccount() {
+        return wechat_account;
+    }
+
+    public void setWechatAccount(String wechat_account) {
+        this.wechat_account = wechat_account;
+    }
+
+    public String getUnionid() {
+        return unionid;
+    }
+
+    public void setUnionid(String unionid) {
+        this.unionid = unionid;
+    }
+
+    public int getOpenNumber() {
+        return open_number;
+    }
+
+    public void setOpenNumber(int open_number) {
+        this.open_number = open_number;
+    }
+
+	public String getOpenid() {
+		return openid;
+	}
+
+	public void setOpenid(String openid) {
+		this.openid = openid;
+	}
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+    public Integer getPlatformUserId() {
+        return platform_user_id;
+    }
+
+    public void setPlatformUserId(Integer platform_user_id) {
+        this.platform_user_id = platform_user_id;
+    }
+
+    public Integer getFcUserId() {
+        return fc_user_id;
+    }
+
+    public void setFcUserId(Integer fc_user_id) {
+        this.fc_user_id = fc_user_id;
+    }
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getPagesize() {
+        return pagesize;
+    }
+
+    public void setPagesize(Integer pagesize) {
+        this.pagesize = pagesize;
+    }
+
+	@Override
+	public String toString() {
+		return "WechatPlatformUserRequest [getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode()
+                + ", getTraceId()=" + getTraceId() + ", page=" + getPage() + ", pagesize=" + getPagesize()
+                + ", platformUserId=" + getPlatformUserId() + ", fcUserId=" + getFcUserId()
+                + ", openid=" + getOpenid() + ", mobile=" + getMobile() + ", openNumber=" + getOpenNumber()
+                + ", unionid=" + getUnionid() + ", wechatAccount=" + getWechatAccount()
+                + ", wechatAvatar=" + getWechatAvatar()+ "]";
+	}
+
+}

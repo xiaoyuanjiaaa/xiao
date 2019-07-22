@@ -1,0 +1,64 @@
+package com.fc.member.store.user.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.store.user.dao.IStorePackageDao;
+import com.fc.member.store.user.entity.StorePackage;
+import com.fc.member.store.user.service.IStorePackageService;
+import com.fc.protocol.demo.request.store.user.QueryStorePackageRequest;
+import com.fc.protocol.demo.request.store.user.QueryStorePackageStatusRequest;
+import com.fc.protocol.demo.request.store.user.UpdateStorePackageRequest;
+/**
+ * <p>Title: StorePackage</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:06
+ */
+@Service("storePackageService")
+public class StorePackageServiceImp extends ServiceImpl<StorePackage> implements IStorePackageService{
+
+	@Autowired
+	private IStorePackageDao storePackageDao;
+	
+	@Override
+	protected IMapper<StorePackage> getDao() {
+		return storePackageDao;
+	}
+	
+	@Override
+	public List<StorePackage> getOrderBY(QueryStorePackageRequest request) throws Exception {
+		StorePackage storePackage = new StorePackage();
+		storePackage.setStoreId(request.getStoreId());
+		List<StorePackage> storePackageList =  storePackageDao.getOrderBY(storePackage);
+		return storePackageList;
+	}
+
+	@Override
+	public List<StorePackage> getStatus(QueryStorePackageStatusRequest request)throws Exception {
+		StorePackage storePackage = new StorePackage();
+		storePackage.setStoreId(request.getStoreId());
+		storePackage.setStatus(request.getStatus());
+		List<StorePackage> storePackageList =  storePackageDao.getStatus(storePackage);
+		return storePackageList;
+	}
+
+	@Override
+	public void updateStorePackage(UpdateStorePackageRequest request) throws Exception {
+		StorePackage storePackage = new StorePackage();
+		storePackage.setStorePackageId(request.getStorePackageId());
+//		storePackage.setStoreId(request.getStoreId());
+		storePackage.setContent(request.getContent());
+		storePackage.setRealAccount(request.getRealAccount());
+		storePackage.setDiscount(request.getDiscount());
+		storePackage.setStatus(request.getStatus());
+		storePackage.setType(request.getType());
+		storePackage.setUpdateTime(DateTimeUtils.getDateTimeInteger());//获取当前修改时间
+		storePackageDao.update(storePackage);
+	}
+}

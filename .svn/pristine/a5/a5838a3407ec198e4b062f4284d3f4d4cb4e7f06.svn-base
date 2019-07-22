@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.shop.user.dao.IShopWithdrawalinfoDao">
+	<resultMap id="ShopWithdrawalinfoMap" type="com.fc.member.shop.user.entity.ShopWithdrawalinfo">
+        <id property="shopWithdrawalinfoId" column="shop_withdrawalinfo_id"/>
+        <id property="shopId" column="shop_id"/>
+        <id property="withdrawedCashAmount" column="withdrawed_cash_amount"/>
+        <id property="withdrawingCashAmount" column="withdrawing_cash_amount"/>
+        <id property="accounts" column="accounts"/>
+        <id property="frozenAmount" column="frozen_amount"/>
+        <id property="withdrawalNum" column="withdrawal_num"/>
+        <id property="updateTime" column="update_time"/>
+        <id property="createTime" column="create_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="ShopWithdrawalinfoMap" >
+		select * from shop_withdrawalinfo where 
+	        shop_withdrawalinfo_id = #{shopWithdrawalinfoId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.shop.user.entity.ShopWithdrawalinfo" useGeneratedKeys="true" keyProperty="shopWithdrawalinfoId">
+		insert into shop_withdrawalinfo(shop_withdrawalinfo_id , shop_id , withdrawed_cash_amount , withdrawing_cash_amount , accounts , frozen_amount , withdrawal_num , update_time , create_time  )
+    	values(#{shopWithdrawalinfoId} ,#{shopId} ,#{withdrawedCashAmount} ,#{withdrawingCashAmount} ,#{accounts} ,#{frozenAmount} ,#{withdrawalNum} ,#{updateTime} ,#{createTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.shop.user.entity.ShopWithdrawalinfo" useGeneratedKeys="true" keyProperty="shopWithdrawalinfoId">
+		insert into shop_withdrawalinfo
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="shopWithdrawalinfoId != null">shop_withdrawalinfo_id,</if>
+					<if test="shopId != null">shop_id,</if>
+					<if test="withdrawedCashAmount != null">withdrawed_cash_amount,</if>
+					<if test="withdrawingCashAmount != null">withdrawing_cash_amount,</if>
+					<if test="accounts != null">accounts,</if>
+					<if test="frozenAmount != null">frozen_amount,</if>
+					<if test="withdrawalNum != null">withdrawal_num,</if>
+					<if test="updateTime != null">update_time,</if>
+					<if test="createTime != null">create_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="shopWithdrawalinfoId != null">#{shopWithdrawalinfoId},</if>
+					<if test="shopId != null">#{shopId},</if>
+					<if test="withdrawedCashAmount != null">#{withdrawedCashAmount},</if>
+					<if test="withdrawingCashAmount != null">#{withdrawingCashAmount},</if>
+					<if test="accounts != null">#{accounts},</if>
+					<if test="frozenAmount != null">#{frozenAmount},</if>
+					<if test="withdrawalNum != null">#{withdrawalNum},</if>
+					<if test="updateTime != null">#{updateTime},</if>
+					<if test="createTime != null">#{createTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.shop.user.entity.ShopWithdrawalinfo">
+		update shop_withdrawalinfo
+		<set>
+		    	<if test="shopId != null">shop_id = #{shopId},</if>
+		    	<if test="withdrawedCashAmount != null">withdrawed_cash_amount = #{withdrawedCashAmount},</if>
+		    	<if test="withdrawingCashAmount != null">withdrawing_cash_amount = #{withdrawingCashAmount},</if>
+		    	<if test="accounts != null">accounts = #{accounts},</if>
+		    	<if test="frozenAmount != null">frozen_amount = #{frozenAmount},</if>
+		    	<if test="withdrawalNum != null">withdrawal_num = #{withdrawalNum},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		</set>
+		where 
+	        shop_withdrawalinfo_id = #{shopWithdrawalinfoId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from shop_withdrawalinfo where 
+	        shop_withdrawalinfo_id = #{shopWithdrawalinfoId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.shop.user.entity.ShopWithdrawalinfo" resultMap="ShopWithdrawalinfoMap" >
+		select * from shop_withdrawalinfo 
+		<where>
+		       <if test="shopWithdrawalinfoId != null">
+					AND shop_withdrawalinfo_id = #{shopWithdrawalinfoId}
+				</if>
+		       <if test="shopId != null">
+					AND shop_id = #{shopId}
+				</if>
+		       <if test="withdrawedCashAmount != null">
+					AND withdrawed_cash_amount = #{withdrawedCashAmount}
+				</if>
+		       <if test="withdrawingCashAmount != null">
+					AND withdrawing_cash_amount = #{withdrawingCashAmount}
+				</if>
+		       <if test="accounts != null">
+					AND accounts = #{accounts}
+				</if>
+		       <if test="frozenAmount != null">
+					AND frozen_amount = #{frozenAmount}
+				</if>
+		       <if test="withdrawalNum != null">
+					AND withdrawal_num = #{withdrawalNum}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="ShopWithdrawalinfoMap" >
+		select * from shop_withdrawalinfo  
+		<where>
+		       <if test="condition.shopWithdrawalinfoId != null">
+					AND shop_withdrawalinfo_id = #{condition.shopWithdrawalinfoId}
+				</if>
+		       <if test="condition.shopId != null">
+					AND shop_id = #{condition.shopId}
+				</if>
+		       <if test="condition.withdrawedCashAmount != null">
+					AND withdrawed_cash_amount = #{condition.withdrawedCashAmount}
+				</if>
+		       <if test="condition.withdrawingCashAmount != null">
+					AND withdrawing_cash_amount = #{condition.withdrawingCashAmount}
+				</if>
+		       <if test="condition.accounts != null">
+					AND accounts = #{condition.accounts}
+				</if>
+		       <if test="condition.frozenAmount != null">
+					AND frozen_amount = #{condition.frozenAmount}
+				</if>
+		       <if test="condition.withdrawalNum != null">
+					AND withdrawal_num = #{condition.withdrawalNum}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

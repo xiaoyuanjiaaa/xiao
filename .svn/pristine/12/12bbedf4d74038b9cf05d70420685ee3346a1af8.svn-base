@@ -1,0 +1,129 @@
+package com.fc.protocol.client.demo.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fc.protocol.client.IProtocolClient;
+import com.fc.protocol.client.demo.config.ProtocolClientPool;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.store.user.CheckStoreAptitudeRequest;
+import com.fc.protocol.demo.request.store.user.CreateStoreAptitudeRequest;
+import com.fc.protocol.demo.request.store.user.QueryStoreAptitudeRequest;
+import com.fc.protocol.demo.request.store.user.UpdateStoreAptitudeRequest;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+/**
+ * 门店安装资质
+ * @author jiahx
+ * @date 2019-1-4
+ */
+@Api(tags = "StoreAptitudeController", description = "门店安装资质")
+@RestController
+@RequestMapping("/store/storeaptitude")
+public class StoreAptitudeController {
+
+	private static Logger log = LoggerFactory.getLogger(StoreAptitudeController.class);
+
+	@Autowired
+	private ProtocolClientPool protocolClientPool;
+
+	/**
+	 * 查询门店安装资质
+	 * @author	jiahx
+	 * @see update_name:jiahx update_time:2019-1-7
+	 * @param request
+	 * @param response
+	 * @param storeAptitudeRequest
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/querystoreaptitude", method = { RequestMethod.POST, RequestMethod.GET })
+	@ApiOperation(value = "查询门店安装资质", notes = "查询门店安装资质")
+	@ResponseBody
+	public Object queryStoreAptitude(HttpServletRequest request, HttpServletResponse response,QueryStoreAptitudeRequest storeAptitudeRequest) throws Exception {
+		log.info("echo-request:{}", storeAptitudeRequest);
+		log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+		IProtocolClient userClient = protocolClientPool.userClient();
+		log.info("userClient==null?===>{}", (userClient == null));
+		ProtocolResponse echoResponse = protocolClientPool.userClient().sendAndReceived(storeAptitudeRequest);
+		log.info("echo-response:{}", echoResponse);
+		return echoResponse;
+	}
+	/**
+	 *新增安装资质
+	 * @author	jiahx
+	 * @see update_name:jiahx update_time:2019-1-7
+	 * @param request
+	 * @param response
+	 * @param storeAptitudeRequest
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/createstoreaptitude", method = { RequestMethod.POST, RequestMethod.GET })
+	@ApiOperation(value = "新增门店安装资质", notes = "新增门店安装资质")
+	@ResponseBody
+	public Object createStoreAptitude(HttpServletRequest request, HttpServletResponse response ,CreateStoreAptitudeRequest storeAptitudeRequest) throws Exception {
+		log.info("echo-request:{}", storeAptitudeRequest);
+		log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+		IProtocolClient userClient = protocolClientPool.userClient();
+		log.info("userClient==null?===>{}", (userClient == null));
+		ProtocolResponse echoResponse = protocolClientPool.userClient().sendAndReceived(storeAptitudeRequest);
+		log.info("echo-response:{}", echoResponse);
+		return echoResponse;
+	}
+
+	/**
+	 * 更新安装资质
+	 * @author	jiahx
+	 * @see update_name:jiahx update_time:2019-1-7
+	 * @param request
+	 * @param response
+	 * @param storeAptitudeRequest
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/updatestoreaptitude", method = { RequestMethod.POST, RequestMethod.GET })
+	@ApiOperation(value = "更新门店安装资质", notes = "更新门店安装资质")
+	@ResponseBody
+	public Object updateStoreAptitude(HttpServletRequest request, HttpServletResponse response,UpdateStoreAptitudeRequest storeAptitudeRequest) throws Exception {
+		log.info("echo-request:{}", storeAptitudeRequest);
+		log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+		IProtocolClient userClient = protocolClientPool.userClient();
+		log.info("userClient==null?===>{}", (userClient == null));
+		ProtocolResponse echoResponse = protocolClientPool.userClient().sendAndReceived(storeAptitudeRequest);
+		log.info("echo-response:{}", echoResponse);
+		return echoResponse;
+	}
+	/**
+	 * 校验安装资质资料是否完善
+	 * @author	jiahx
+	 * @see update_name:jiahx update_time:2019-1-7
+	 * @param request
+	 * @param response
+	 * @param storeAptitudeRequest
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/checkstoreaptitude", method = { RequestMethod.POST, RequestMethod.GET })
+	@ApiOperation(value = "校验安装资质资料是否完善", notes = "校验安装资质资料是否完善")
+	@ResponseBody
+	public Object checkStoreAptitude(HttpServletRequest request, HttpServletResponse response,CheckStoreAptitudeRequest storeAptitudeRequest) throws Exception {
+		log.info("echo-request:{}", storeAptitudeRequest);
+		log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+		IProtocolClient userClient = protocolClientPool.userClient();
+		log.info("userClient==null?===>{}", (userClient == null));
+		ProtocolResponse echoResponse = protocolClientPool.userClient().sendAndReceived(storeAptitudeRequest);
+		log.info("echo-response:{}", echoResponse);
+		return echoResponse;
+	}
+}

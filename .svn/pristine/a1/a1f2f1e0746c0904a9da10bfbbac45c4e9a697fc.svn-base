@@ -1,0 +1,192 @@
+package com.fc.member.wechatmaintain.user.handler;
+
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.fc.common.exception.ErrorCode;
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.wechatmaintain.user.service.IWechatMaintainRechargeService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainRechargeByStoreIdRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainRechargeByUserIdRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainRechargeCreateRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainRechargeEditSaveRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainRechargeListRequest;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+
+/**
+ * 微养车用户储值卡充值记录
+ * @author yangd
+ * @date 2019年1月7日
+ */
+@Component
+@Handler(module = "wechatmaintain")
+public class WechatMaintainRechargeHandler {
+
+	private static Logger log = LoggerFactory.getLogger(WechatMaintainRechargeHandler.class);
+
+	@Autowired
+	IWechatMaintainRechargeService wechatMaintainRechargeService;
+
+	/**
+	 * 查询微养车用户储值卡充值记录列表
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-05
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WechatMaintainRechargeListRequest.class)
+	public ProtocolResponse wechatMaintainRechargeList(WechatMaintainRechargeListRequest request) {
+		log.info("时间:{} , wechatMaintainRechargeList------>request:{}", DateTimeUtils.getNow(), request);
+
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			// 分页对象
+			Page page = new Page();
+			page.setPage(request.getPage_no());
+			page.setRows(request.getPage_size());
+			page.setShowTotal(true);
+			response.addData("recharge_list",
+					wechatMaintainRechargeService.getWechatMaintainRechargeListPage(page, request))
+					.addData("page_count", page.getPage()).addData("count", page.getTotalResult());
+		} catch (Exception e) {
+			log.error("wechatMaintainRechargeList系统异常！", e);
+			response.error(ErrorCode.QUERY_ERROR.getValue()).msg("代码异常，请联系开发人员！");
+		}
+		log.info("时间:{} , 返回结果 wechatMaintainRechargeList------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+
+	/**
+	 * 创建微养车用户储值卡充值记录
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-05
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WechatMaintainRechargeCreateRequest.class)
+	public ProtocolResponse wechatMaintainRechargeCreate(WechatMaintainRechargeCreateRequest request) {
+		log.info("时间:{} ,  wechatMaintainRechargeCreate------>request:{}", DateTimeUtils.getNow(), request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidate();
+			if (validResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+
+			Map<String, Object> resultStatus = wechatMaintainRechargeService.insertSelective(request);
+			log.info("resultStatus------>{}", resultStatus);
+			if (resultStatus.isEmpty()) {
+				response.msg("创建成功");
+			} else {
+				response.error(ErrorCode.CREATE_ERROR.getValue()).msg(resultStatus.get("error").toString());
+			}
+		} catch (Exception e) {
+			log.error("wechatMaintainRechargeCreate系统异常！", e);
+			response.error(ErrorCode.CREATE_ERROR.getValue()).msg("代码异常，请联系开发人员！");
+		}
+		log.info("时间:{} , 返回结果 wechatMaintainRechargeCreate------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+
+	/**
+	 * 修改微养车用户储值卡充值记录
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WechatMaintainRechargeEditSaveRequest.class)
+	public ProtocolResponse wechatMaintainRechargeEditSave(WechatMaintainRechargeEditSaveRequest request) {
+		log.info("时间:{} , wechatMaintainRechargeEditSave------>request:{}", DateTimeUtils.getNow(), request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidate();
+			if (validResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+			Map<String, Object> resultStatus = wechatMaintainRechargeService.updateWechatMaintainRecharge(request);
+			log.info("resultStatus------>{}", resultStatus);
+			if (resultStatus.isEmpty()) {
+				response.msg("修改成功");
+			} else {
+				response.error(ErrorCode.UPDATE_ERROR.getValue()).msg(resultStatus.get("error").toString());
+			}
+		} catch (Exception e) {
+			log.error("wechatMaintainRechargeEditSave系统异常！", e);
+			response.error(ErrorCode.UPDATE_ERROR.getValue()).msg("代码异常，请联系开发人员！");
+		}
+		log.info("时间:{} , 返回结果 wechatMaintainRechargeEditSave------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+
+	/**
+	 * 门店APP储值卡充值记录
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-07
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WechatMaintainRechargeByStoreIdRequest.class)
+	public ProtocolResponse wechatMaintainRechargeByStoreId(WechatMaintainRechargeByStoreIdRequest request) {
+		log.info("时间:{} , wechatMaintainRechargeByStoreId------>request:{}", DateTimeUtils.getNow(), request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidate();
+			if (validResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+			// 分页对象
+			Page page = new Page();
+			page.setPage(request.getPage_no());
+			page.setRows(request.getPage_size());
+			page.setShowTotal(true);
+			response.addData("recharge_list", wechatMaintainRechargeService.getStoreRechargeListPage(page, request))
+					.addData("page_count", page.getPage()).addData("count", page.getTotalResult());
+		} catch (Exception e) {
+			log.error("wechatMaintainRechargeByStoreId系统异常！", e);
+			response.error(ErrorCode.QUERY_ERROR.getValue()).msg("代码异常，请联系开发人员！");
+		}
+		log.info("时间:{} , 返回结果 wechatMaintainRechargeByStoreId------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+
+	/**
+	 * 用户储值卡充值记录
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-07
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WechatMaintainRechargeByUserIdRequest.class)
+	public ProtocolResponse wechatMaintainRechargeByUserId(WechatMaintainRechargeByUserIdRequest request) {
+		log.info("时间:{} , wechatMaintainRechargeByUserId------>request:{}", DateTimeUtils.getNow(), request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidate();
+			if (validResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+			// 分页对象
+			Page page = new Page();
+			page.setPage(request.getPage_no());
+			page.setRows(request.getPage_size());
+			page.setShowTotal(true);
+			response.addData("recharge_list", wechatMaintainRechargeService.getUserRechargeListPage(page, request))
+					.addData("page_count", page.getPage()).addData("count", page.getTotalResult());
+		} catch (Exception e) {
+			log.error("wechatMaintainRechargeByUserId系统异常！", e);
+			response.error(ErrorCode.QUERY_ERROR.getValue()).msg("代码异常，请联系开发人员！");
+		}
+		log.info("时间:{} , 返回结果 wechatMaintainRechargeByUserId------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+}

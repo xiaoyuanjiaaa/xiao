@@ -1,0 +1,98 @@
+package com.fc.protocol.demo.request.store.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * 
+ * 门店储值卡使用范围
+ * @author jiahx
+ * @date 2019/1/2
+ */
+public class UpdateStoreCouponRequest extends ProtocolRequest{
+
+	private static final long serialVersionUID = 1L;
+	@ApiModelProperty(value = "门店储值卡使用范围id", name = "storeCouponId", example = "1")
+	private Integer storeCouponId; // 门店储值卡使用范围id
+	@ApiModelProperty(value = "门店id", name = "storeId", example = "1")
+//	private Integer storeId; // 门店id
+//	@ApiModelProperty(value = "是否支持快捷支付0:是 1:否", name = "isQuickPay", example = "1")
+	private Integer isQuickPay; // 是否支持快捷支付0:是 1:否
+	@ApiModelProperty(value = "是否支持自营商品付款0:是 1:否", name = "isSelfGoods", example = "1")
+	private Integer isSelfGoods; // 是否支持自营商品付款0:是 1:否
+	@ApiModelProperty(value = "是否支持爱车卡付款0:是 1:否", name = "isCards", example = "1")
+	private Integer isCards; // 是否支持爱车卡付款0:是 1:否
+	@ApiModelProperty(value = "是否支持师傅接车0:是 1:否", name = "isMaster", example = "1")
+	private Integer isMaster; // 是否支持师傅接车0:是 1:否
+	@ApiModelProperty(value = "是否支持服务套餐0:是 1:否", name = "isPlan", example = "1")
+	private Integer isPlan; // 是否支持服务套餐0:是 1:否
+//	@ApiModelProperty(value = "修改时间", name = "updateTime")
+//	private Integer updateTime; // 修改时间
+//	@ApiModelProperty(value = "创建时间", name = "createTime")
+//	private Integer createTime; // 创建时间
+	@ApiModelProperty(value = "修改次数，一年后清空次数，修改创建时间", name = "updateNumber")
+	private Integer updateNumber; // 修改次数，一年后清空次数，修改创建时间
+
+	public String paramValidate() {
+		if (StringUtils.isEmpty(storeCouponId)) {
+			return "参数:storeCouponId不能为空";
+		}
+		if (StringUtils.isEmpty(updateNumber)) {
+			return "参数:updateNumber不能为空";
+		}
+		return null;
+	}
+	public Integer getStoreCouponId() {
+		return storeCouponId;
+	}
+	public void setStoreCouponId(Integer storeCouponId) {
+		this.storeCouponId = storeCouponId;
+	}
+	public Integer getIsQuickPay() {
+		return isQuickPay;
+	}
+	public void setIsQuickPay(Integer isQuickPay) {
+		this.isQuickPay = isQuickPay;
+	}
+	public Integer getIsSelfGoods() {
+		return isSelfGoods;
+	}
+	public void setIsSelfGoods(Integer isSelfGoods) {
+		this.isSelfGoods = isSelfGoods;
+	}
+	public Integer getIsCards() {
+		return isCards;
+	}
+	public void setIsCards(Integer isCards) {
+		this.isCards = isCards;
+	}
+	public Integer getIsMaster() {
+		return isMaster;
+	}
+	public void setIsMaster(Integer isMaster) {
+		this.isMaster = isMaster;
+	}
+	public Integer getIsPlan() {
+		return isPlan;
+	}
+	public void setIsPlan(Integer isPlan) {
+		this.isPlan = isPlan;
+	}
+	public Integer getUpdateNumber() {
+		return updateNumber;
+	}
+	public void setUpdateNumber(Integer updateNumber) {
+		this.updateNumber = updateNumber;
+	}
+	@Override
+	public String toString() {
+		return "UpdateStoreCouponRequest [storeCouponId=" + storeCouponId + ", isQuickPay=" + isQuickPay
+				+ ", isSelfGoods=" + isSelfGoods + ", isCards=" + isCards + ", isMaster=" + isMaster + ", isPlan="
+				+ isPlan + ", updateNumber=" + updateNumber + ", getVersion()="
+				+ getVersion() + ", getReqCode()=" + getReqCode() + ", getTraceId()=" + getTraceId() + "]";
+	}
+	
+}

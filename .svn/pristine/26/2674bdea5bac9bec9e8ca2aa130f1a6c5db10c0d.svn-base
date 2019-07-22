@@ -1,0 +1,68 @@
+package com.fc.member.store.user.service.impl;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+
+import com.fc.member.store.user.dao.IStoreWechatDao;
+import com.fc.member.store.user.service.IStoreWechatService;
+import com.fc.member.store.user.entity.StoreWechat;
+/**
+ * <p>Title: StoreWechat</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2019-01-03 18:03:48
+ */
+@Service("storeWechatService")
+public class StoreWechatServiceImp extends ServiceImpl<StoreWechat> implements IStoreWechatService{
+	private static Logger log = LoggerFactory.getLogger(StoreMomeyDetailServiceImp.class);
+	@Autowired
+	private IStoreWechatDao storeWechatDao;
+	
+	@Override
+	protected IMapper<StoreWechat> getDao() {
+		return storeWechatDao;
+	}
+	/**
+	 * 插入数据
+	 * @return
+	 */
+	@Override
+	public int insertSelective(StoreWechat obj) {
+		return storeWechatDao.insertSelective(obj);
+	}
+
+	/***@author zhuj
+	 *@date 2018/12/28
+	 * @param request
+	 * @description 添加门店微养车信息
+	 */
+	@Override
+	public boolean inputStoreWechatInfo(StoreWechat request) throws Exception {
+		log.info("添加门店微养车信息",  request);
+		//传入参数转插入数据库的参数类型
+		create(request);
+		return true;
+	}
+
+	/***@author zhuj
+	 *@date 2018/12/28
+	 * @param request
+	 * @description 更新门店微养车信息
+	 */
+	@Override
+	public boolean changeStoreWechatInfo(StoreWechat request) throws Exception {
+		//先验证是否存在此门店微养车信息，存在则修改
+		log.info("更新门店微养车信息参数值",  request);
+		StoreWechat mstoreWechat = getByPK(request.getStoreWechatId());
+		if(null!=mstoreWechat){
+			update(request);
+		}else{
+			return false;
+		}
+		return true;
+	}
+}

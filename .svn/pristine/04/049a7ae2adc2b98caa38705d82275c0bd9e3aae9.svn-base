@@ -1,0 +1,50 @@
+package com.fc.protocol.demo.request.store.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+import io.swagger.annotations.ApiModelProperty;
+
+public class StoreAddressDeleteRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+
+	@ApiModelProperty(value = "地址id", name = "addressId", example = "1")
+	private Integer addressId; // 地址ID
+	@ApiModelProperty(value = "门店id", name = "storeId", example = "1")
+	private Integer storeId; // 门店id
+
+	public Integer getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(Integer addressId) {
+		this.addressId = addressId;
+	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	@Override
+	public String toString() {
+		return "StoreAddressDeleteRequest [addressId=" + addressId + ", storeId=" + storeId + ", getVersion()="
+				+ getVersion() + ", getReqCode()=" + getReqCode() + ", getTraceId()=" + getTraceId() + "]";
+	}
+
+	public String paramValidate() {
+		if (StringUtils.isEmpty(addressId)) {
+			return "参数:addressId不能为空!";
+		}
+		if (StringUtils.isEmpty(storeId)) {
+			return "参数:storeId不能为空!";
+		}
+
+		return null;
+	}
+}

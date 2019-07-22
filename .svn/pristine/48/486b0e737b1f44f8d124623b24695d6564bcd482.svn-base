@@ -1,0 +1,122 @@
+package com.fc.protocol.demo.request.store.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+import io.swagger.annotations.ApiModelProperty;
+import org.apache.commons.lang.StringUtils;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * 银行卡修改记录请求参数实体类
+ *
+ * @param
+ */
+public class StoreBossInfoRequest extends ProtocolRequest {
+    @ApiModelProperty(value = "门店id", name = "storeId", example = "1")
+    private Integer storeId;
+    @ApiModelProperty(value = "店主名字", name = "store_boss_name", example = "1")
+    private String storeBossName;
+    @ApiModelProperty(value = "店主邮箱", name = "store_boss_email", example = "1")
+    private String storeBossEmail;
+    @ApiModelProperty(value = "店主QQ", name = "store_boss_qq", example = "1")
+    private String storeBossqq;
+    @ApiModelProperty(value = "更新时间", name = "update_time", example = "1")
+    private String updateTime;
+    @ApiModelProperty(value = "创建时间", name = "create_time", example = "1")
+    private String createTime;
+
+
+    /**
+     * 判断传人参数是否为空
+     *
+     * @param
+     */
+    public String paramValidatecheck() {
+        if (StringUtils.isBlank(storeId+"")) {
+            return "参数：storeId不能为空";
+        }
+        if (StringUtils.isBlank(storeBossName+"")) {
+            return "参数：storeBossName不能为空";
+        }
+        if (StringUtils.isBlank(storeBossEmail+"")) {
+            return "参数：storeBossEmail不能为空";
+        }
+        if (StringUtils.isBlank(storeBossqq+"")) {
+            return "参数：storeBossqq不能为空";
+        }
+        return null;
+    }
+    /**
+     * 判断传人参数是否为空
+     *
+     * @param
+     */
+    public String paramValidatecheckid() {
+        if (StringUtils.isBlank(storeId+"")) {
+            return "参数：storeId不能为空";
+        }
+        return null;
+    }
+    public Integer getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Integer storeId) {
+        this.storeId = storeId;
+    }
+
+
+
+    public String getStoreBossName() {
+        return storeBossName;
+    }
+
+    public void setStoreBossName(String storeBossName) {
+        this.storeBossName = storeBossName;
+    }
+
+    public String getStoreBossEmail() {
+        return storeBossEmail;
+    }
+
+    public void setStoreBossEmail(String storeBossEmail) {
+        this.storeBossEmail = storeBossEmail;
+    }
+
+    public String getStoreBossqq() {
+        return storeBossqq;
+    }
+
+    public void setStoreBossqq(String storeBossqq) {
+        this.storeBossqq = storeBossqq;
+    }
+
+    public String getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    @Override
+    public String toString() {
+        return "StoreBossInfoRequest [storeId=" + storeId + ", " +
+                "storeBossName=" + storeBossName + ", " +
+                "storeBossEmail=" + storeBossEmail + ", " +
+                "storeBossqq=" + storeBossqq + ", " +
+                "updateTime=" + updateTime + ", " +
+                "createTime=" + createTime + ", " +
+                "getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode()
+                + ", getTraceId()=" + getTraceId() + "]";
+    }
+}

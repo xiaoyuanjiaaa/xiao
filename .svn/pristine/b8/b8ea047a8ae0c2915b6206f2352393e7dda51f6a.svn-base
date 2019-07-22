@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.pc.user.dao.IPcUserDao">
+	<resultMap id="PcUserMap" type="com.fc.member.pc.user.entity.PcUser">
+        <id property="pcUserId" column="pc_user_id"/>
+        <id property="fcUserId" column="fc_user_id"/>
+        <id property="mobile" column="mobile"/>
+        <id property="name" column="name"/>
+        <id property="createTime" column="create_time"/>
+        <id property="updateTime" column="update_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="PcUserMap" >
+		select * from pc_user where 
+	        pc_user_id = #{pcUserId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.pc.user.entity.PcUser" useGeneratedKeys="true">
+		insert into pc_user(pc_user_id , fc_user_id , mobile , name , create_time , update_time  )
+    	values(#{pcUserId} ,#{fcUserId} ,#{mobile} ,#{name} ,#{createTime} ,#{updateTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.pc.user.entity.PcUser" useGeneratedKeys="true">
+		insert into pc_user
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="pcUserId != null">pc_user_id,</if>
+					<if test="fcUserId != null">fc_user_id,</if>
+					<if test="mobile != null">mobile,</if>
+					<if test="name != null">name,</if>
+					<if test="createTime != null">create_time,</if>
+					<if test="updateTime != null">update_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="pcUserId != null">#{pcUserId},</if>
+					<if test="fcUserId != null">#{fcUserId},</if>
+					<if test="mobile != null">#{mobile},</if>
+					<if test="name != null">#{name},</if>
+					<if test="createTime != null">#{createTime},</if>
+					<if test="updateTime != null">#{updateTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.pc.user.entity.PcUser">
+		update pc_user
+		<set>
+		    	<if test="fcUserId != null">fc_user_id = #{fcUserId},</if>
+		    	<if test="mobile != null">mobile = #{mobile},</if>
+		    	<if test="name != null">name = #{name},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		</set>
+		where 
+	        pc_user_id = #{pcUserId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from pc_user where 
+	        pc_user_id = #{pcUserId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.pc.user.entity.PcUser" resultMap="PcUserMap" >
+		select * from pc_user 
+		<where>
+		       <if test="pcUserId != null">
+					AND pc_user_id = #{pcUserId}
+				</if>
+		       <if test="fcUserId != null">
+					AND fc_user_id = #{fcUserId}
+				</if>
+		       <if test="mobile != null">
+					AND mobile = #{mobile}
+				</if>
+		       <if test="name != null">
+					AND name = #{name}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="PcUserMap" >
+		select * from pc_user  
+		<where>
+		       <if test="condition.pcUserId != null">
+					AND pc_user_id = #{condition.pcUserId}
+				</if>
+		       <if test="condition.fcUserId != null">
+					AND fc_user_id = #{condition.fcUserId}
+				</if>
+		       <if test="condition.mobile != null">
+					AND mobile = #{condition.mobile}
+				</if>
+		       <if test="condition.name != null">
+					AND name = #{condition.name}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

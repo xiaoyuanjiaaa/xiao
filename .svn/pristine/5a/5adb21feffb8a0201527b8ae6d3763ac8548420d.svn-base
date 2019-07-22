@@ -1,0 +1,14 @@
+package com.fc.member.wechatmaintain.user.service;
+
+import com.fc.common.service.IService;
+import com.fc.member.wechatmaintain.user.entity.WechatMaintainConponConsumeinfo;
+/**
+ * <p>Title: WechatMaintainConponConsumeinfo</p>
+ * <p>Description:  Service 接口</p>
+ * @author yangd
+ * @date 2018-12-28 17:13:46
+ */
+public interface IWechatMaintainConponConsumeinfoService extends IService<WechatMaintainConponConsumeinfo>{
+	
+	
+}

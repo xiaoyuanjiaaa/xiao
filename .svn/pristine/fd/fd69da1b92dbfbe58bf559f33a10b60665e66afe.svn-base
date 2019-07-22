@@ -1,0 +1,159 @@
+package com.fc.member.store.user.entity;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+import java.io.Serializable;
+
+/**
+ * <p>Table: StoreBankCard</p>
+ * <p>Description: </p>
+ * @author yangd
+ * @date 2018-12-27 16:31:05
+ */
+public class StoreBankCard  extends ProtocolRequest implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer storeBankCardId; // 门店银行卡id
+	private Integer storeId; // 门店ID
+	private String cardBankName; // 开户银行
+	private String bankCode; // 银行代码
+	private String bankCardNo; // 银行卡号
+	private String bankHoldName; // 银行开户姓名
+	private String depositBank; // 开户支行名称
+	private Integer regionId; // 开户所在地区ID
+	private String cardAddress; // 开户所在地区
+	private String address; // 开户所详细地址
+	private Integer status; // 银行卡审核状态(0:未审核,1:不通过,2:通过)
+	private Integer checkTime; // 审核时间
+	private String remark; // 审核备注
+	private Integer updateTime; // 最新修改时间
+	private Integer createTime; // 创建时间
+
+	public void setStoreBankCardId(Integer storeBankCardId) {
+		this.storeBankCardId = storeBankCardId;
+	}
+	
+	public Integer getStoreBankCardId() {
+		return this.storeBankCardId;
+	}
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+	
+	public Integer getStoreId() {
+		return this.storeId;
+	}
+	public void setCardBankName(String cardBankName) {
+		this.cardBankName = cardBankName;
+	}
+	
+	public String getCardBankName() {
+		return this.cardBankName;
+	}
+	public void setBankCode(String bankCode) {
+		this.bankCode = bankCode;
+	}
+	
+	public String getBankCode() {
+		return this.bankCode;
+	}
+	public void setBankCardNo(String bankCardNo) {
+		this.bankCardNo = bankCardNo;
+	}
+	
+	public String getBankCardNo() {
+		return this.bankCardNo;
+	}
+	public void setBankHoldName(String bankHoldName) {
+		this.bankHoldName = bankHoldName;
+	}
+	
+	public String getBankHoldName() {
+		return this.bankHoldName;
+	}
+	public void setDepositBank(String depositBank) {
+		this.depositBank = depositBank;
+	}
+	
+	public String getDepositBank() {
+		return this.depositBank;
+	}
+	public void setRegionId(Integer regionId) {
+		this.regionId = regionId;
+	}
+	
+	public Integer getRegionId() {
+		return this.regionId;
+	}
+	public void setCardAddress(String cardAddress) {
+		this.cardAddress = cardAddress;
+	}
+	
+	public String getCardAddress() {
+		return this.cardAddress;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+	public String getAddress() {
+		return this.address;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	
+	public Integer getStatus() {
+		return this.status;
+	}
+	public void setCheckTime(Integer checkTime) {
+		this.checkTime = checkTime;
+	}
+	
+	public Integer getCheckTime() {
+		return this.checkTime;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	
+	public String getRemark() {
+		return this.remark;
+	}
+	public void setUpdateTime(Integer updateTime) {
+		this.updateTime = updateTime;
+	}
+	
+	public Integer getUpdateTime() {
+		return this.updateTime;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+
+    @Override
+    public String toString () {
+    	return "StoreBankCard{" + 
+	    	"storeBankCardId=" + storeBankCardId + 
+	    	", storeId=" + storeId + 
+	    	", cardBankName=" + cardBankName + 
+	    	", bankCode=" + bankCode + 
+	    	", bankCardNo=" + bankCardNo + 
+	    	", bankHoldName=" + bankHoldName + 
+	    	", depositBank=" + depositBank + 
+	    	", regionId=" + regionId + 
+	    	", cardAddress=" + cardAddress + 
+	    	", address=" + address + 
+	    	", status=" + status + 
+	    	", checkTime=" + checkTime + 
+	    	", remark=" + remark + 
+	    	", updateTime=" + updateTime + 
+	    	", createTime=" + createTime + 
+	    	"}";
+    }
+}

@@ -1,0 +1,89 @@
+package com.fc.member.pc.user.service.impl;
+
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.plugin.mybatis.PageQuery;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.member.pc.user.dao.IPcUserDao;
+import com.fc.member.pc.user.service.IPcUserService;
+import com.fc.member.pc.user.entity.PcUser;
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * <p>Title: PcUser</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-29 10:11:38
+ */
+@Service("pcUserService")
+public class PcUserServiceImp extends ServiceImpl<PcUser> implements IPcUserService{
+
+	@Autowired
+	private IPcUserDao pcUserDao;
+	
+	@Override
+	protected IMapper<PcUser> getDao() {
+		return pcUserDao;
+	}
+
+	/**
+	 * // 根据pc_user_id查询PC收银车主信息
+	 * @param pc_user_id
+	 * @return
+	 */
+	@Override
+	public PcUser get(Integer pc_user_id, String mobile) {
+		PcUser entity = new PcUser();
+		entity.setPcUserId(pc_user_id);
+		entity.setMobile(mobile);
+		List<PcUser> list = pcUserDao.getRows(entity);
+		if (list.isEmpty()) {
+			return null;
+		}
+		return list.get(0);
+	}
+
+	/**
+	 * // 查询PC收银车主信息List
+	 * @return
+	 */
+	@Override
+	public List<PcUser> getPcUserList(Map<String, Object> map, Page page) {
+		PageQuery pageQuery = new PageQuery();
+		pageQuery.setPage(page);
+		pageQuery.setCondition(map);
+		return pcUserDao.getRowsPage(pageQuery);
+	}
+
+	/**
+	 * 新增PC收银车主信息
+	 */
+	@Override
+	public int insertPcUser(PcUser PcUser) {
+		return pcUserDao.insertSelective(PcUser);
+	}
+
+	/**
+	 * 更新PC收银车主信息
+	 */
+	@Override
+	public int updatePcUser(PcUser obj) {
+		int result = 0;
+		pcUserDao.update(obj);
+		return result = 1;
+	}
+
+	/**
+	 * 删除PC收银车主信息
+	 */
+	@Override
+	public int deletePcUser(Integer pc_user_id) {
+		int result = 0;
+		pcUserDao.deleteByPK(pc_user_id);
+		return result = 1;
+	}
+}

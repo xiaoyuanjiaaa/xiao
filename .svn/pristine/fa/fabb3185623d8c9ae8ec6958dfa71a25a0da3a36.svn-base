@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.store.user.dao.IStoreSettingDao">
+	<resultMap id="StoreSettingMap" type="com.fc.member.store.user.entity.StoreSetting">
+        <id property="storeSettingId" column="store_setting_id"/>
+        <id property="storeId" column="store_id"/>
+        <id property="isForbidJointCard" column="is_forbid_joint_card"/>
+        <id property="isPush" column="is_push"/>
+        <id property="isOpenBell" column="is_open_bell"/>
+        <id property="isSystemVirtualShelves" column="is_system_virtual_shelves"/>
+        <id property="isSstoreVirtualShelves" column="is_sstore_virtual_shelves"/>
+        <id property="virtualShelvesPassTime" column="virtual_shelves_pass_time"/>
+        <id property="isSelfOrder" column="is_self_order"/>
+        <id property="isCreditCardPay" column="is_credit_card_pay"/>
+        <id property="isPickCar" column="is_pick_car"/>
+        <id property="isSstoreCancellation" column="is_sstore_cancellation"/>
+        <id property="isFindcardStatus" column="is_findcard_status"/>
+        <id property="isOpenPc" column="is_open_pc"/>
+        <id property="updateTime" column="update_time"/>
+        <id property="createTime" column="create_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="StoreSettingMap" >
+		select * from store_setting where 
+	        store_setting_id = #{storeSettingId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.store.user.entity.StoreSetting" useGeneratedKeys="true">
+		insert into store_setting(store_setting_id , store_id ,is_forbid_joint_card , is_push , is_open_bell , is_system_virtual_shelves , is_sstore_virtual_shelves , virtual_shelves_pass_time , is_self_order , is_credit_card_pay , is_pick_car , is_sstore_cancellation , is_findcard_status , is_open_pc , update_time , create_time  )
+    	values(#{storeSettingId} ,#{storeId},#{isForbidJointCard} ,#{isPush} ,#{isOpenBell} ,#{isSystemVirtualShelves} ,#{isSstoreVirtualShelves} ,#{virtualShelvesPassTime} ,#{isSelfOrder} ,#{isCreditCardPay} ,#{isPickCar} ,#{isSstoreCancellation} ,#{isFindcardStatus} ,#{isOpenPc} ,#{updateTime} ,#{createTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.store.user.entity.StoreSetting" useGeneratedKeys="true">
+		insert into store_setting
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="storeSettingId != null">store_setting_id,</if>
+					<if test="storeId != null">store_id,</if>
+					<if test="isForbidJointCard != null">is_forbid_joint_card,</if>
+					<if test="isPush != null">is_push,</if>
+					<if test="isOpenBell != null">is_open_bell,</if>
+					<if test="isSystemVirtualShelves != null">is_system_virtual_shelves,</if>
+					<if test="isSstoreVirtualShelves != null">is_sstore_virtual_shelves,</if>
+					<if test="virtualShelvesPassTime != null">virtual_shelves_pass_time,</if>
+					<if test="isSelfOrder != null">is_self_order,</if>
+					<if test="isCreditCardPay != null">is_credit_card_pay,</if>
+					<if test="isPickCar != null">is_pick_car,</if>
+					<if test="isSstoreCancellation != null">is_sstore_cancellation,</if>
+					<if test="isFindcardStatus != null">is_findcard_status,</if>
+					<if test="isOpenPc != null">is_open_pc,</if>
+					<if test="updateTime != null">update_time,</if>
+					<if test="createTime != null">create_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="storeSettingId != null">#{storeSettingId},</if>
+					<if test="storeId != null">#{storeId},</if>
+					<if test="isForbidJointCard != null">#{isForbidJointCard},</if>
+					<if test="isPush != null">#{isPush},</if>
+					<if test="isOpenBell != null">#{isOpenBell},</if>
+					<if test="isSystemVirtualShelves != null">#{isSystemVirtualShelves},</if>
+					<if test="isSstoreVirtualShelves != null">#{isSstoreVirtualShelves},</if>
+					<if test="virtualShelvesPassTime != null">#{virtualShelvesPassTime},</if>
+					<if test="isSelfOrder != null">#{isSelfOrder},</if>
+					<if test="isCreditCardPay != null">#{isCreditCardPay},</if>
+					<if test="isPickCar != null">#{isPickCar},</if>
+					<if test="isSstoreCancellation != null">#{isSstoreCancellation},</if>
+					<if test="isFindcardStatus != null">#{isFindcardStatus},</if>
+					<if test="isOpenPc != null">#{isOpenPc},</if>
+					<if test="updateTime != null">#{updateTime},</if>
+					<if test="createTime != null">#{createTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.store.user.entity.StoreSetting">
+		update store_setting
+		<set>
+		    	<if test="storeId != null">store_id = #{storeId},</if>
+		    	<if test="isForbidJointCard != null">is_forbid_joint_card = #{isForbidJointCard},</if>
+		    	<if test="isPush != null">is_push = #{isPush},</if>
+		    	<if test="isOpenBell != null">is_open_bell = #{isOpenBell},</if>
+		    	<if test="isSystemVirtualShelves != null">is_system_virtual_shelves = #{isSystemVirtualShelves},</if>
+		    	<if test="isSstoreVirtualShelves != null">is_sstore_virtual_shelves = #{isSstoreVirtualShelves},</if>
+		    	<if test="virtualShelvesPassTime != null">virtual_shelves_pass_time = #{virtualShelvesPassTime},</if>
+		    	<if test="isSelfOrder != null">is_self_order = #{isSelfOrder},</if>
+		    	<if test="isCreditCardPay != null">is_credit_card_pay = #{isCreditCardPay},</if>
+		    	<if test="isPickCar != null">is_pick_car = #{isPickCar},</if>
+		    	<if test="isSstoreCancellation != null">is_sstore_cancellation = #{isSstoreCancellation},</if>
+		    	<if test="isFindcardStatus != null">is_findcard_status = #{isFindcardStatus},</if>
+		    	<if test="isOpenPc != null">is_open_pc = #{isOpenPc},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		</set>
+		where 
+	        store_setting_id = #{storeSettingId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from store_setting where 
+	        store_setting_id = #{storeSettingId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.store.user.entity.StoreSetting" resultMap="StoreSettingMap" >
+		select * from store_setting 
+		<where>
+		       <if test="storeSettingId != null">
+					AND store_setting_id = #{storeSettingId}
+				</if>
+		       <if test="storeId != null">
+					AND store_id = #{storeId}
+				</if>
+		       <if test="isForbidJointCard != null">
+					AND is_forbid_joint_card = #{isForbidJointCard}
+				</if>
+		       <if test="isPush != null">
+					AND is_push = #{isPush}
+				</if>
+		       <if test="isOpenBell != null">
+					AND is_open_bell = #{isOpenBell}
+				</if>
+		       <if test="isSystemVirtualShelves != null">
+					AND is_system_virtual_shelves = #{isSystemVirtualShelves}
+				</if>
+		       <if test="isSstoreVirtualShelves != null">
+					AND is_sstore_virtual_shelves = #{isSstoreVirtualShelves}
+				</if>
+		       <if test="virtualShelvesPassTime != null">
+					AND virtual_shelves_pass_time = #{virtualShelvesPassTime}
+				</if>
+		       <if test="isSelfOrder != null">
+					AND is_self_order = #{isSelfOrder}
+				</if>
+		       <if test="isCreditCardPay != null">
+					AND is_credit_card_pay = #{isCreditCardPay}
+				</if>
+		       <if test="isPickCar != null">
+					AND is_pick_car = #{isPickCar}
+				</if>
+		       <if test="isSstoreCancellation != null">
+					AND is_sstore_cancellation = #{isSstoreCancellation}
+				</if>
+		       <if test="isFindcardStatus != null">
+					AND is_findcard_status = #{isFindcardStatus}
+				</if>
+		       <if test="isOpenPc != null">
+					AND is_open_pc = #{isOpenPc}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="StoreSettingMap" >
+		select * from store_setting  
+		<where>
+		       <if test="condition.storeSettingId != null">
+					AND store_setting_id = #{condition.storeSettingId}
+				</if>
+		       <if test="condition.storeId != null">
+					AND store_id = #{condition.storeId}
+				</if>
+		       <if test="condition.isForbidJointCard != null">
+					AND is_forbid_joint_card = #{condition.isForbidJointCard}
+				</if>
+		       <if test="condition.isPush != null">
+					AND is_push = #{condition.isPush}
+				</if>
+		       <if test="condition.isOpenBell != null">
+					AND is_open_bell = #{condition.isOpenBell}
+				</if>
+		       <if test="condition.isSystemVirtualShelves != null">
+					AND is_system_virtual_shelves = #{condition.isSystemVirtualShelves}
+				</if>
+		       <if test="condition.isSstoreVirtualShelves != null">
+					AND is_sstore_virtual_shelves = #{condition.isSstoreVirtualShelves}
+				</if>
+		       <if test="condition.virtualShelvesPassTime != null">
+					AND virtual_shelves_pass_time = #{condition.virtualShelvesPassTime}
+				</if>
+		       <if test="condition.isSelfOrder != null">
+					AND is_self_order = #{condition.isSelfOrder}
+				</if>
+		       <if test="condition.isCreditCardPay != null">
+					AND is_credit_card_pay = #{condition.isCreditCardPay}
+				</if>
+		       <if test="condition.isPickCar != null">
+					AND is_pick_car = #{condition.isPickCar}
+				</if>
+		       <if test="condition.isSstoreCancellation != null">
+					AND is_sstore_cancellation = #{condition.isSstoreCancellation}
+				</if>
+		       <if test="condition.isFindcardStatus != null">
+					AND is_findcard_status = #{condition.isFindcardStatus}
+				</if>
+		       <if test="condition.isOpenPc != null">
+					AND is_open_pc = #{condition.isOpenPc}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

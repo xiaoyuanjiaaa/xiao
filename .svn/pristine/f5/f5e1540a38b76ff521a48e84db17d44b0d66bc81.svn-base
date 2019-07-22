@@ -1,0 +1,103 @@
+package com.fc.member.store.user.entity;
+
+import java.io.Serializable;
+
+/**
+ * <p>Table: StoreCoinDetail</p>
+ * <p>Description: </p>
+ * @author yangd
+ * @date 2018-12-27 16:31:05
+ */
+public class StoreCoinDetail implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer storeCoinDetailId; // 主键ID
+	private Integer storeId; // 门店id
+	private String orderNo; // 订单号
+	private Integer changeCoin; // 本次操作金额
+	private Integer afterCoin; // 操作后余额
+	private Integer changeType; // 操作类型,1为转入,-1,为转出
+	private String source; // 来源类型
+	private Integer changeTime; // 操作发生的时间
+	private String remark; // 操作备注
+
+	public void setStoreCoinDetailId(Integer storeCoinDetailId) {
+		this.storeCoinDetailId = storeCoinDetailId;
+	}
+	
+	public Integer getStoreCoinDetailId() {
+		return this.storeCoinDetailId;
+	}
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+	
+	public Integer getStoreId() {
+		return this.storeId;
+	}
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
+	}
+	
+	public String getOrderNo() {
+		return this.orderNo;
+	}
+	public void setChangeCoin(Integer changeCoin) {
+		this.changeCoin = changeCoin;
+	}
+	
+	public Integer getChangeCoin() {
+		return this.changeCoin;
+	}
+	public void setAfterCoin(Integer afterCoin) {
+		this.afterCoin = afterCoin;
+	}
+	
+	public Integer getAfterCoin() {
+		return this.afterCoin;
+	}
+	public void setChangeType(Integer changeType) {
+		this.changeType = changeType;
+	}
+	
+	public Integer getChangeType() {
+		return this.changeType;
+	}
+	public void setSource(String source) {
+		this.source = source;
+	}
+	
+	public String getSource() {
+		return this.source;
+	}
+	public void setChangeTime(Integer changeTime) {
+		this.changeTime = changeTime;
+	}
+	
+	public Integer getChangeTime() {
+		return this.changeTime;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	
+	public String getRemark() {
+		return this.remark;
+	}
+ 
+    @Override
+    public String toString () {
+    	return "StoreCoinDetail{" + 
+	    	"storeCoinDetailId=" + storeCoinDetailId + 
+	    	", storeId=" + storeId + 
+	    	", orderNo=" + orderNo + 
+	    	", changeCoin=" + changeCoin + 
+	    	", afterCoin=" + afterCoin + 
+	    	", changeType=" + changeType + 
+	    	", source=" + source + 
+	    	", changeTime=" + changeTime + 
+	    	", remark=" + remark + 
+	    	"}";
+    }
+}

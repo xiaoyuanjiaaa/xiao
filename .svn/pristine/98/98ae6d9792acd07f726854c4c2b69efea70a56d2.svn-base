@@ -1,0 +1,63 @@
+package com.fc.protocol.demo.request.store.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+/**
+ * 门店还款记录表查询分页
+ * @author xiaozw
+ * @date 2019/01/12
+ */
+public class SadetailPageRequest extends ProtocolRequest {
+	private static final long serialVersionUID = 1L;
+	/**门店id*/
+	private Integer storeId;
+	/**分页参数*/
+	private Integer PageSize;
+	/**分页参数*/
+	private Integer PageNo;
+
+	public Integer getPageSize() {
+		return PageSize;
+	}
+
+	public void setPageSize(Integer pageSize) {
+		PageSize = pageSize;
+	}
+
+	public Integer getPageNo() {
+		return PageNo;
+	}
+
+	public void setPageNo(Integer pageNo) {
+		PageNo = pageNo;
+	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	public String paramValidate() {
+		if (StringUtils.isEmpty(storeId)) {
+			return "参数:storeId不能为空!";
+		}
+		if (StringUtils.isEmpty(PageSize)) {
+			return "参数:PageSize不能为空!";
+		}
+		if (StringUtils.isEmpty(PageNo)) {
+			return "参数:PageNo不能为空!";
+		}
+		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "SadetailPageRequest [getPageSize()=" + getPageSize() + ", getPageNo()=" + getPageNo()
+				+ ", getStoreId()=" + getStoreId() + "]";
+	}
+}

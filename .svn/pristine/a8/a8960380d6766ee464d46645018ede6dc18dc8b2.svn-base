@@ -1,0 +1,81 @@
+package com.fc.protocol.demo.request.wechatmaintain.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * 微养车 更新用户储值卡余额 参数
+ * @author yangd
+ * @date 2019年1月5日
+ */
+public class WechatMaintainUserCouponEditSaveRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+
+	@ApiModelProperty(value = "储值卡id", name = "wechatMaintainUserCouponId")
+	private Integer wechatMaintainUserCouponId; // 储值卡id
+	@ApiModelProperty(value = "枫车用户id", name = "fcUserId")
+	private Integer fcUserId; // 枫车用户id
+	@ApiModelProperty(value = "门店id", name = "storeId")
+	private Integer storeId; // 门店id
+	@ApiModelProperty(value = "储值卡余额", name = "balance")
+	private Integer balance; // 储值卡余额
+
+	/**
+	 * 验证方法
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-05
+	 * @return
+	 */
+	public String paramValidate() {
+		if (StringUtils.isEmpty(wechatMaintainUserCouponId)) {
+			return "参数:wechatMaintainUserCouponId不能为空";
+		}
+		if (StringUtils.isEmpty(balance)) {
+			return "参数:balance不能为空";
+		}
+		return null;
+	}
+
+	public Integer getWechatMaintainUserCouponId() {
+		return wechatMaintainUserCouponId;
+	}
+
+	public void setWechatMaintainUserCouponId(Integer wechatMaintainUserCouponId) {
+		this.wechatMaintainUserCouponId = wechatMaintainUserCouponId;
+	}
+
+	public Integer getFcUserId() {
+		return fcUserId;
+	}
+
+	public void setFcUserId(Integer fcUserId) {
+		this.fcUserId = fcUserId;
+	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	public Integer getBalance() {
+		return balance;
+	}
+
+	public void setBalance(Integer balance) {
+		this.balance = balance;
+	}
+
+	@Override
+	public String toString() {
+		return "WechatMaintainUserCouponEditSaveRequest [wechatMaintainUserCouponId=" + wechatMaintainUserCouponId
+				+ ", fcUserId=" + fcUserId + ", storeId=" + storeId + ", balance=" + balance + ", getVersion()="
+				+ getVersion() + ", getReqCode()=" + getReqCode() + ", getTraceId()=" + getTraceId() + "]";
+	}
+}

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.shop.user.dao.IShopDepositChangeLogDao">
+	<resultMap id="ShopDepositChangeLogMap" type="com.fc.member.shop.user.entity.ShopDepositChangeLog">
+        <id property="shopDepositChangeLogId" column="shop_deposit_change_log_id"/>
+        <id property="shopId" column="shop_id"/>
+        <id property="shopName" column="shop_name"/>
+        <id property="depositRate" column="deposit_rate"/>
+        <id property="depositCashLimit" column="deposit_cash_limit"/>
+        <id property="operatorId" column="operator_id"/>
+        <id property="operator" column="operator"/>
+        <id property="createTime" column="create_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="ShopDepositChangeLogMap" >
+		select * from shop_deposit_change_log where 
+	        shop_deposit_change_log_id = #{shopDepositChangeLogId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.shop.user.entity.ShopDepositChangeLog" useGeneratedKeys="true" keyProperty="shopDepositChangeLogId">
+		insert into shop_deposit_change_log(shop_deposit_change_log_id , shop_id , shop_name , deposit_rate , deposit_cash_limit , operator_id , operator , create_time  )
+    	values(#{shopDepositChangeLogId} ,#{shopId} ,#{shopName} ,#{depositRate} ,#{depositCashLimit} ,#{operatorId} ,#{operator} ,#{createTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.shop.user.entity.ShopDepositChangeLog" useGeneratedKeys="true" keyProperty="shopDepositChangeLogId">
+		insert into shop_deposit_change_log
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="shopDepositChangeLogId != null">shop_deposit_change_log_id,</if>
+					<if test="shopId != null">shop_id,</if>
+					<if test="shopName != null">shop_name,</if>
+					<if test="depositRate != null">deposit_rate,</if>
+					<if test="depositCashLimit != null">deposit_cash_limit,</if>
+					<if test="operatorId != null">operator_id,</if>
+					<if test="operator != null">operator,</if>
+					<if test="createTime != null">create_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="shopDepositChangeLogId != null">#{shopDepositChangeLogId},</if>
+					<if test="shopId != null">#{shopId},</if>
+					<if test="shopName != null">#{shopName},</if>
+					<if test="depositRate != null">#{depositRate},</if>
+					<if test="depositCashLimit != null">#{depositCashLimit},</if>
+					<if test="operatorId != null">#{operatorId},</if>
+					<if test="operator != null">#{operator},</if>
+					<if test="createTime != null">#{createTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.shop.user.entity.ShopDepositChangeLog">
+		update shop_deposit_change_log
+		<set>
+		    	<if test="shopId != null">shop_id = #{shopId},</if>
+		    	<if test="shopName != null">shop_name = #{shopName},</if>
+		    	<if test="depositRate != null">deposit_rate = #{depositRate},</if>
+		    	<if test="depositCashLimit != null">deposit_cash_limit = #{depositCashLimit},</if>
+		    	<if test="operatorId != null">operator_id = #{operatorId},</if>
+		    	<if test="operator != null">operator = #{operator},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		</set>
+		where 
+	        shop_deposit_change_log_id = #{shopDepositChangeLogId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from shop_deposit_change_log where 
+	        shop_deposit_change_log_id = #{shopDepositChangeLogId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.shop.user.entity.ShopDepositChangeLog" resultMap="ShopDepositChangeLogMap" >
+		select * from shop_deposit_change_log 
+		<where>
+		       <if test="shopDepositChangeLogId != null">
+					AND shop_deposit_change_log_id = #{shopDepositChangeLogId}
+				</if>
+		       <if test="shopId != null">
+					AND shop_id = #{shopId}
+				</if>
+		       <if test="shopName != null">
+					AND shop_name = #{shopName}
+				</if>
+		       <if test="depositRate != null">
+					AND deposit_rate = #{depositRate}
+				</if>
+		       <if test="depositCashLimit != null">
+					AND deposit_cash_limit = #{depositCashLimit}
+				</if>
+		       <if test="operatorId != null">
+					AND operator_id = #{operatorId}
+				</if>
+		       <if test="operator != null">
+					AND operator = #{operator}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="ShopDepositChangeLogMap" >
+		select * from shop_deposit_change_log  
+		<where>
+		       <if test="condition.shopDepositChangeLogId != null">
+					AND shop_deposit_change_log_id = #{condition.shopDepositChangeLogId}
+				</if>
+		       <if test="condition.shopId != null">
+					AND shop_id = #{condition.shopId}
+				</if>
+		       <if test="condition.shopName != null">
+					AND shop_name = #{condition.shopName}
+				</if>
+		       <if test="condition.depositRate != null">
+					AND deposit_rate = #{condition.depositRate}
+				</if>
+		       <if test="condition.depositCashLimit != null">
+					AND deposit_cash_limit = #{condition.depositCashLimit}
+				</if>
+		       <if test="condition.operatorId != null">
+					AND operator_id = #{condition.operatorId}
+				</if>
+		       <if test="condition.operator != null">
+					AND operator = #{condition.operator}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

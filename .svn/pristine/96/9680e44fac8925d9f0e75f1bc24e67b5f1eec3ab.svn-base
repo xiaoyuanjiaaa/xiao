@@ -1,0 +1,32 @@
+package com.fc.member.store.user.service;
+
+import com.fc.common.service.IService;
+import com.fc.member.store.user.entity.StoreBankCard;
+import com.fc.protocol.demo.request.store.user.CreateStoreBankCardRequest;
+
+import java.util.Map;
+
+/**
+ * <p>Title: StoreBankCard</p>
+ * <p>Description:  Service 接口</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:05
+ */
+public interface IStoreBankCardService extends IService<StoreBankCard>{
+
+    /**@param id
+     * @description 获取门店绑定银行卡信息
+     */
+    Map<String, Object> getStoreBankCardInfo(Integer id);
+
+    /**@param request
+     * @description 绑定银行卡并且插入记录
+     */
+    boolean inputStoreBankCardInfo(CreateStoreBankCardRequest request) throws Exception;
+
+
+    /**@param request
+     * @description 修改银行卡并且插入记录
+     */
+    boolean changeStoreBankCardInfo(CreateStoreBankCardRequest request) throws Exception;
+}

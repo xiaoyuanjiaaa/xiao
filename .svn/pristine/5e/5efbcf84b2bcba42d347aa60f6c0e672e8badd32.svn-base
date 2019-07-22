@@ -1,0 +1,175 @@
+package com.fc.member.store.user.entity;
+
+import java.io.Serializable;
+
+/**
+ * <p>Table: StoreAptitude</p>
+ * <p>Description: </p>
+ * @author yangd
+ * @date 2018-12-27 16:31:05
+ */
+public class StoreAptitude implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer storeAptitudeId; // 资质id
+	private String storeId; // 门店id
+	private String fieldArea; // 场地面积
+	private String staffNumber; // 员工人数
+	private String dailyCar; // 日均车辆
+	private String decoration; // 装修情况
+	private String franchiseProjects; // 专营项目
+	private String mergerProject; // 兼并项目
+	private String staffLicenseImgs; // 人员要求图片id，以，隔开
+	private String staffLicense; // 人员要求资质，以，隔开
+	private String equipmentImgs; // 设备的图片id，以，隔开
+	private String equipment; // 选择的设备，以，隔开
+	private String tools; // 选择的工具，以，隔开
+	private String workstationImgs; // 工位图片id，以，隔开
+	private String restAreaImgs; // 休息区图片id，以，隔开
+	private Integer updateTime; // 修改时间
+	private Integer createTime; // 创建时间
+
+	public void setStoreAptitudeId(Integer storeAptitudeId) {
+		this.storeAptitudeId = storeAptitudeId;
+	}
+	
+	public Integer getStoreAptitudeId() {
+		return this.storeAptitudeId;
+	}
+	public void setStoreId(String storeId) {
+		this.storeId = storeId;
+	}
+	
+	public String getStoreId() {
+		return this.storeId;
+	}
+	public void setFieldArea(String fieldArea) {
+		this.fieldArea = fieldArea;
+	}
+	
+	public String getFieldArea() {
+		return this.fieldArea;
+	}
+	public void setStaffNumber(String staffNumber) {
+		this.staffNumber = staffNumber;
+	}
+	
+	public String getStaffNumber() {
+		return this.staffNumber;
+	}
+	public void setDailyCar(String dailyCar) {
+		this.dailyCar = dailyCar;
+	}
+	
+	public String getDailyCar() {
+		return this.dailyCar;
+	}
+	public void setDecoration(String decoration) {
+		this.decoration = decoration;
+	}
+	
+	public String getDecoration() {
+		return this.decoration;
+	}
+	public void setFranchiseProjects(String franchiseProjects) {
+		this.franchiseProjects = franchiseProjects;
+	}
+	
+	public String getFranchiseProjects() {
+		return this.franchiseProjects;
+	}
+	public void setMergerProject(String mergerProject) {
+		this.mergerProject = mergerProject;
+	}
+	
+	public String getMergerProject() {
+		return this.mergerProject;
+	}
+	public void setStaffLicenseImgs(String staffLicenseImgs) {
+		this.staffLicenseImgs = staffLicenseImgs;
+	}
+	
+	public String getStaffLicenseImgs() {
+		return this.staffLicenseImgs;
+	}
+	public void setStaffLicense(String staffLicense) {
+		this.staffLicense = staffLicense;
+	}
+	
+	public String getStaffLicense() {
+		return this.staffLicense;
+	}
+	public void setEquipmentImgs(String equipmentImgs) {
+		this.equipmentImgs = equipmentImgs;
+	}
+	
+	public String getEquipmentImgs() {
+		return this.equipmentImgs;
+	}
+	public void setEquipment(String equipment) {
+		this.equipment = equipment;
+	}
+	
+	public String getEquipment() {
+		return this.equipment;
+	}
+	public void setTools(String tools) {
+		this.tools = tools;
+	}
+	
+	public String getTools() {
+		return this.tools;
+	}
+	public void setWorkstationImgs(String workstationImgs) {
+		this.workstationImgs = workstationImgs;
+	}
+	
+	public String getWorkstationImgs() {
+		return this.workstationImgs;
+	}
+	public void setRestAreaImgs(String restAreaImgs) {
+		this.restAreaImgs = restAreaImgs;
+	}
+	
+	public String getRestAreaImgs() {
+		return this.restAreaImgs;
+	}
+	public void setUpdateTime(Integer updateTime) {
+		this.updateTime = updateTime;
+	}
+	
+	public Integer getUpdateTime() {
+		return this.updateTime;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+
+    @Override
+    public String toString () {
+    	return "StoreAptitude{" + 
+	    	"storeAptitudeId=" + storeAptitudeId + 
+	    	", storeId=" + storeId + 
+	    	", fieldArea=" + fieldArea + 
+	    	", staffNumber=" + staffNumber + 
+	    	", dailyCar=" + dailyCar + 
+	    	", decoration=" + decoration + 
+	    	", franchiseProjects=" + franchiseProjects + 
+	    	", mergerProject=" + mergerProject + 
+	    	", staffLicenseImgs=" + staffLicenseImgs + 
+	    	", staffLicense=" + staffLicense + 
+	    	", equipmentImgs=" + equipmentImgs + 
+	    	", equipment=" + equipment + 
+	    	", tools=" + tools + 
+	    	", workstationImgs=" + workstationImgs + 
+	    	", restAreaImgs=" + restAreaImgs + 
+	    	", updateTime=" + updateTime + 
+	    	", createTime=" + createTime + 
+	    	"}";
+    }
+}

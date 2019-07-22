@@ -1,0 +1,150 @@
+package com.fc.member.wechatmaintain.user.entity;
+
+import java.io.Serializable;
+
+/**
+ * <p>Table: WechatMaintainUser</p>
+ * <p>Description: 微养车用户表</p>
+ * @author yangd
+ * @date 2018-12-28 17:13:47
+ */
+public class WechatMaintainUser implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	private Integer wechatMaintainUserId; // 微养车用户id
+	private Integer fcUserId; // 枫车用户ID
+	private String nickName; // 微信昵称
+	private String openid; // 微信openid
+	private String unionid; // 微信unionid
+	private Integer createTime; // 创建时间
+	private String name; // 姓名
+	private String mobile; // 电话
+	private Integer birthday; // 生日
+	private Integer isCouponOn; // 是否已领取激活了会员卡
+	private Integer couponActiveTime; // 会员卡领取时间
+	private String wechatAvatar; // 微信头像url
+	private String memo; // 客户备注
+	private Integer sex; // 性别 1:女士 2:先生
+
+	public void setWechatMaintainUserId(Integer wechatMaintainUserId) {
+		this.wechatMaintainUserId = wechatMaintainUserId;
+	}
+
+	public Integer getWechatMaintainUserId() {
+		return this.wechatMaintainUserId;
+	}
+
+	public void setFcUserId(Integer fcUserId) {
+		this.fcUserId = fcUserId;
+	}
+
+	public Integer getFcUserId() {
+		return this.fcUserId;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
+	public String getNickName() {
+		return this.nickName;
+	}
+
+	public void setOpenid(String openid) {
+		this.openid = openid;
+	}
+
+	public String getOpenid() {
+		return this.openid;
+	}
+
+	public void setUnionid(String unionid) {
+		this.unionid = unionid;
+	}
+
+	public String getUnionid() {
+		return this.unionid;
+	}
+
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getMobile() {
+		return this.mobile;
+	}
+
+	public void setBirthday(Integer birthday) {
+		this.birthday = birthday;
+	}
+
+	public Integer getBirthday() {
+		return this.birthday;
+	}
+
+	public void setIsCouponOn(Integer isCouponOn) {
+		this.isCouponOn = isCouponOn;
+	}
+
+	public Integer getIsCouponOn() {
+		return this.isCouponOn;
+	}
+
+	public void setCouponActiveTime(Integer couponActiveTime) {
+		this.couponActiveTime = couponActiveTime;
+	}
+
+	public Integer getCouponActiveTime() {
+		return this.couponActiveTime;
+	}
+
+	public void setWechatAvatar(String wechatAvatar) {
+		this.wechatAvatar = wechatAvatar;
+	}
+
+	public String getWechatAvatar() {
+		return this.wechatAvatar;
+	}
+
+	public void setMemo(String memo) {
+		this.memo = memo;
+	}
+
+	public String getMemo() {
+		return this.memo;
+	}
+
+	public void setSex(Integer sex) {
+		this.sex = sex;
+	}
+
+	public Integer getSex() {
+		return this.sex;
+	}
+
+	@Override
+	public String toString() {
+		return "WechatMaintainUser{" + "wechatMaintainUserId=" + wechatMaintainUserId + ", fcUserId=" + fcUserId
+				+ ", nickName=" + nickName + ", openid=" + openid + ", unionid=" + unionid + ", createTime="
+				+ createTime + ", name=" + name + ", mobile=" + mobile + ", birthday=" + birthday + ", isCouponOn="
+				+ isCouponOn + ", couponActiveTime=" + couponActiveTime + ", wechatAvatar=" + wechatAvatar + ", memo="
+				+ memo + ", sex=" + sex + "}";
+	}
+}

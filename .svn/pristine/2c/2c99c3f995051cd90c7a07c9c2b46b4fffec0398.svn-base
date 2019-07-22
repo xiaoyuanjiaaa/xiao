@@ -1,0 +1,32 @@
+package com.fc.member.wechatplatform.user.dao;
+
+import com.fc.common.plugin.mybatis.PageQuery;
+import com.fc.member.wechatplatform.user.entity.WechatPlatformUser;
+import org.apache.ibatis.annotations.Mapper;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.member.wechatplatform.user.entity.WechatPlatformUserFeedback;
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * <p>Title: WechatPlatformUserFeedback</p>
+ * <p>Description:  DAO层</p>
+ * @author yangd
+ * @date 2018-12-28 17:14:42
+ */
+@Mapper
+public interface IWechatPlatformUserFeedbackDao extends IMapper<WechatPlatformUserFeedback>{
+
+    int insertSelective(WechatPlatformUserFeedback obj);
+
+    @Override
+    void update(WechatPlatformUserFeedback obj);
+
+    List<Map> getPlatFormListPage(PageQuery pageQuery);
+
+
+    void deleteByPK(Integer feedback_id);
+
+}

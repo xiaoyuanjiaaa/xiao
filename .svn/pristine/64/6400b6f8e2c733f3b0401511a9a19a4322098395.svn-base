@@ -1,0 +1,14 @@
+package com.fc.member.store.user.service;
+
+import com.fc.common.service.IService;
+import com.fc.member.store.user.entity.StoreCoupon;
+/**
+ * <p>Title: StoreCoupon</p>
+ * <p>Description:  Service 接口</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:06
+ */
+public interface IStoreCouponService extends IService<StoreCoupon>{
+	
+	
+}

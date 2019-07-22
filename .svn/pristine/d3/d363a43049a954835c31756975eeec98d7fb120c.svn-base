@@ -1,0 +1,36 @@
+package com.fc.protocol.demo.request.store.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+/**
+ * 门店还款记录表查询
+ * @author xiaozw
+ * @date 2019/01/11
+ */
+public class SadetailQueryIdRequest extends ProtocolRequest {
+	private static final long serialVersionUID = 1L;
+	/**主键id*/
+	private Integer storeAdvanceDetailId;
+
+	public Integer getStoreAdvanceDetailId() {
+		return storeAdvanceDetailId;
+	}
+
+	public void setStoreAdvanceDetailId(Integer storeAdvanceDetailId) {
+		this.storeAdvanceDetailId = storeAdvanceDetailId;
+	}
+
+	public String paramValidate() {
+		if (StringUtils.isEmpty(storeAdvanceDetailId)) {
+			return "参数:storeAdvanceDetailId不能为空!";
+		}
+		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "SadetailQueryIdRequest [getStoreAdvanceDetailId()=" + getStoreAdvanceDetailId() + "]";
+	}
+}

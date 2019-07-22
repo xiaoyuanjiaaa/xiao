@@ -1,0 +1,88 @@
+package com.fc.protocol.demo.request.wechatmaintain.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * 微养车 会员卡列表参数
+ * @author yangd
+ * @date 2019年1月4日
+ */
+public class WechatMaintainCouponSstoreUserListRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+	@ApiModelProperty(value = "微养车用户id", name = "wechatMaintainUserId")
+	private Integer wechatMaintainUserId; // 微养车用户id
+	@ApiModelProperty(value = "门店id", name = "storeId")
+	private Integer storeId; // 门店id
+	@ApiModelProperty(value = "创建时间", name = "createTime")
+	private Integer createTime; // 创建时间
+	@ApiModelProperty(value = "当前页码", name = "page_no")
+	private Integer page_no = 1;
+	@ApiModelProperty(value = "当前页记录数", name = "page_size")
+	private Integer page_size = 10;
+
+	/**
+	 * 验证方法
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-09
+	 * @return
+	 */
+	public String paramValidate() {
+		if (StringUtils.isEmpty(storeId)) {
+			return "参数storeId不能为空";
+		}
+		return null;
+	}
+
+	public Integer getWechatMaintainUserId() {
+		return wechatMaintainUserId;
+	}
+
+	public void setWechatMaintainUserId(Integer wechatMaintainUserId) {
+		this.wechatMaintainUserId = wechatMaintainUserId;
+	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	public Integer getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+
+	public Integer getPage_no() {
+		return page_no;
+	}
+
+	public void setPage_no(Integer page_no) {
+		this.page_no = page_no;
+	}
+
+	public Integer getPage_size() {
+		return page_size;
+	}
+
+	public void setPage_size(Integer page_size) {
+		this.page_size = page_size;
+	}
+
+	@Override
+	public String toString() {
+		return "WechatMaintainCouponSstoreUserListRequest [wechatMaintainUserId=" + wechatMaintainUserId + ", storeId="
+				+ storeId + ", createTime=" + createTime + ", page_no=" + page_no + ", page_size=" + page_size
+				+ ", getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode() + ", getTraceId()=" + getTraceId()
+				+ "]";
+	}
+}

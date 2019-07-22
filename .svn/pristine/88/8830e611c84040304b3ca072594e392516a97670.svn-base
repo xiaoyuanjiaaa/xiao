@@ -1,0 +1,75 @@
+package com.fc.member.store.user.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.store.user.dao.IStoreCouponDao;
+import com.fc.member.store.user.entity.StoreCoupon;
+import com.fc.member.store.user.service.IStoreCouponService;
+import com.fc.protocol.demo.request.store.user.StoreCouponCreateRequest;
+import com.fc.protocol.demo.request.store.user.StoreCouponQueryRequest;
+import com.fc.protocol.demo.request.store.user.StoreCouponUpdateRequest;
+/**
+ * <p>Title: StoreCoupon</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:06
+ */
+@Service("storeCouponService")
+public class StoreCouponServiceImp extends ServiceImpl<StoreCoupon> implements IStoreCouponService{
+
+	@Autowired
+	private IStoreCouponDao storeCouponDao;
+	
+	@Override
+	protected IMapper<StoreCoupon> getDao() {
+		return storeCouponDao;
+	}
+	@Override
+	public StoreCoupon getQuery(StoreCouponQueryRequest request) throws Exception {
+		StoreCoupon storeCoupon = new StoreCoupon();
+		storeCoupon.setStoreId(request.getStoreId());
+		List<StoreCoupon> storeList =  storeCouponDao.getRows(storeCoupon);
+		if(storeList.size()>0) {
+			StoreCoupon storeCouponTem	 = storeList.get(0);
+			return storeCouponTem;
+		}
+		return null;
+	}
+
+	@Override
+	public int insertStoreCoupon(StoreCouponCreateRequest request) throws Exception {
+		StoreCoupon storeCoupon = new StoreCoupon();
+//		storeCoupon.setStoreCouponId(request.getStoreCouponId());
+		storeCoupon.setStoreId(request.getStoreId());
+		storeCoupon.setIsCards(request.getIsCards());
+		storeCoupon.setIsMaster(request.getIsMaster());
+		storeCoupon.setIsPlan(request.getIsPlan());
+		storeCoupon.setIsQuickPay(request.getIsQuickPay());
+		storeCoupon.setIsSelfGoods(request.getIsSelfGoods());
+		storeCoupon.setUpdateNumber(request.getUpdateNumber());
+		storeCoupon.setUpdateTime(DateTimeUtils.getDateTimeInteger());
+		storeCoupon.setCreateTime(DateTimeUtils.getDateTimeInteger());//获取当前时间
+		return storeCouponDao.insertSelective(storeCoupon);
+	}
+
+	@Override
+	public boolean updateStoreCoupon(StoreCouponUpdateRequest request) throws Exception {
+		StoreCoupon storeCoupon = new StoreCoupon();
+		storeCoupon.setStoreCouponId(request.getStoreCouponId());
+//		storeCoupon.setStoreId(request.getStoreId());
+		storeCoupon.setIsCards(request.getIsCards());
+		storeCoupon.setIsMaster(request.getIsMaster());
+		storeCoupon.setIsPlan(request.getIsPlan());
+		storeCoupon.setIsQuickPay(request.getIsQuickPay());
+		storeCoupon.setIsSelfGoods(request.getIsSelfGoods());
+		storeCoupon.setUpdateNumber(request.getUpdateNumber());
+		storeCoupon.setUpdateTime(DateTimeUtils.getDateTimeInteger());//获取当前修改时间
+		return storeCouponDao.update(storeCoupon);
+	}
+}

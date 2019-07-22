@@ -1,0 +1,48 @@
+package com.fc.protocol.demo.request.wechatmaintain.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * 微养车 门店APP储值卡设置显示充值总额、当前总余额  参数
+ * @author yangd
+ * @date 2019年1月8日
+ */
+public class WmcConsumeinfoStoreTotalAmountBalanceRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+
+	@ApiModelProperty(value = "门店id", name = "storeId")
+	private Integer storeId; // 门店id
+
+	/**
+	 * 验证方法
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-09
+	 * @return
+	 */
+	public String paramValidate() {
+		if (StringUtils.isEmpty(storeId)) {
+			return "参数storeId不能为空";
+		}
+		return null;
+	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	@Override
+	public String toString() {
+		return "WmcConsumeinfoStoreTotalAmountBalanceRequest [storeId=" + storeId + ", getVersion()=" + getVersion()
+				+ ", getReqCode()=" + getReqCode() + ", getTraceId()=" + getTraceId() + "]";
+	}
+
+}

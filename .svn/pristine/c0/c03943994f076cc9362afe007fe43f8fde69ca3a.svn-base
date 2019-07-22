@@ -1,0 +1,75 @@
+package com.fc.common.service.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.plugin.mybatis.PageQuery;
+import com.fc.common.service.IService;
+
+/**
+ * <p>Title: IService</p>
+ * <p>Description: </p>
+ * <p>Company: </p> 
+ * @author ServiceImpl
+ * @date 2016年3月21日
+ */
+public abstract class ServiceImpl<T> implements IService<T> {
+
+	/**
+	 * 返回实例化的dao对象，dao必须是IMapper接口的子类
+	 */
+	protected abstract IMapper<T> getDao();
+
+	@Override
+	public T getByPK(Object key) {
+		return getDao().getByPK(key);
+	}
+
+	@Override
+	public List<T> getRows(T t) {
+		return getDao().getRows(t);
+	}
+
+	@Override
+	public List<T> getRowsPage(PageQuery pageQuery) {
+		return getDao().getRowsPage(pageQuery);
+	}
+
+	@Override
+	public void create(T t) throws Exception {
+		getDao().create(t);
+	}
+
+	@Override
+	public void update(T t) throws Exception {
+		getDao().update(t);
+	}
+
+	@Override
+	public void deleteByPK(Object key) throws Exception {
+		getDao().deleteByPK(key);
+	}
+
+	@Override
+	public List<T> getRowsPage(Page page, Object condition) {
+		PageQuery pageQuery = new PageQuery();
+		pageQuery.setCondition(condition);
+		pageQuery.setPage(page);
+		return getRowsPage(pageQuery);
+	}
+
+	@Override
+	public Map<String, Object> getMapRowsPage(Page page, Object condition) {
+		Map<String, Object> m = new HashMap<String, Object>();
+		List<T> l = getRowsPage(page, condition);
+		m.put("page", page.getPage());
+		m.put("total", page.getTotalPage());
+		m.put("records", page.getTotalResult());
+		m.put("rows", l);
+		return m;
+	}
+
+}

@@ -1,0 +1,46 @@
+package com.fc.protocol.server.demo.persistance.mybatis;
+
+/**
+ * <p>Title: </p>
+ * <p>Description: </p>
+ * <p>Company: </p> 
+ * @author wanghw
+ * @date 2016年3月21日
+ */
+public class PageQuery {
+	/**
+	 * 分页对象
+	 */
+	private Page page;
+	/**
+	 * 查询条件，可以是一个pojo也可以是一个map
+	 */
+	private Object condition;
+
+	public Page getPage() {
+		return page;
+	}
+
+	public void setPage(Page page) {
+		this.page = page;
+	}
+
+	public Object getCondition() {
+		return condition;
+	}
+
+	public void setCondition(Object condition) {
+		this.condition = condition;
+	}
+
+	public PageQuery() {
+
+	}
+
+	public PageQuery(Page page, Object getCondition) {
+		super();
+		this.page = page;
+		this.condition = getCondition;
+	}
+
+}

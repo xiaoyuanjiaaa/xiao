@@ -1,0 +1,23 @@
+package com.fc.protocol.demo.request;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+public class EchoRequest extends ProtocolRequest {
+
+	private int number;
+
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
+	}
+
+	@Override
+	public String toString() {
+		return "EchoRequest [number=" + number + ", getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode()
+				+ ", getTraceId()=" + getTraceId() + "]";
+	}
+
+}

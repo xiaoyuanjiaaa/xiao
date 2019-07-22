@@ -1,0 +1,130 @@
+package com.fc.member.store.user.service.impl;
+
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.store.user.entity.StoreBankCardChange;
+import com.fc.member.store.user.handler.StoreBankCardHandler;
+import com.fc.member.store.user.service.IStoreBankCardChangeService;
+import com.fc.protocol.demo.request.store.user.CreateStoreBankCardRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.member.store.user.dao.IStoreBankCardDao;
+import com.fc.member.store.user.service.IStoreBankCardService;
+import com.fc.member.store.user.entity.StoreBankCard;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * <p>Title: StoreBankCard</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:05
+ */
+@Service("storeBankCardService")
+public class StoreBankCardServiceImp extends ServiceImpl<StoreBankCard> implements IStoreBankCardService{
+	private static Logger log = LoggerFactory.getLogger(StoreBankCardServiceImp.class);
+	private StoreBankCard storeBankCard;
+	@Autowired
+	private IStoreBankCardDao storeBankCardDao;
+	@Autowired
+	private IStoreBankCardChangeService storeBankCardChangeService;
+	@Override
+	protected IMapper<StoreBankCard> getDao() {
+		return storeBankCardDao;
+	}
+
+	/**@author  zhuj
+	 * @param id
+	 * @description 获取门店绑定银行卡信息
+	 * @update_name
+	 * @update_time
+	 */
+	@Override
+	public Map<String, Object> getStoreBankCardInfo(Integer id) {
+		StoreBankCard storeBankCard = getByPK(id);
+		//组装返回数据
+		if(null!=storeBankCard){
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("storeBankCardId", storeBankCard.getStoreBankCardId());
+			map.put("storeId", storeBankCard.getStoreId());
+			map.put("cardBankName", storeBankCard.getCardBankName());
+			map.put("bankCode", storeBankCard.getBankCode());
+			map.put("bankCardNo", storeBankCard.getBankCardNo());
+			map.put("bankHoldName", storeBankCard.getBankHoldName());
+			map.put("depositBank", storeBankCard.getDepositBank());
+			map.put("regionId",storeBankCard.getRegionId());
+			map.put("cardAddress", storeBankCard.getCardAddress());
+			map.put("address", storeBankCard.getAddress());
+			map.put("status", storeBankCard.getStatus());
+			map.put("checkTime", storeBankCard.getCheckTime());
+			map.put("remark", storeBankCard.getRemark());
+			map.put("updateTime", storeBankCard.getUpdateTime());
+			map.put("createTime", storeBankCard.getCreateTime());
+			return map;
+		}
+		return null;
+	}
+
+	/**@author  zhuj
+	 * @param request
+	 * @description 绑定银行卡并且插入记录
+	 * @update_name
+	 * @update_time
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public boolean inputStoreBankCardInfo(CreateStoreBankCardRequest request) throws Exception {
+		//先验证是否已经绑定银行卡，防止重复绑定
+		log.info("绑定银行卡并且插入记录参数值",  request);
+		StoreBankCard mstoreBankCard = getByPK(request.getStoreId());
+		if(null!=mstoreBankCard){
+			return false;
+		}else{
+			StoreBankCard storeBankCard =  StoreBankCard.passValueToStoreBankCard(request);
+			//添加创建时间
+			storeBankCard.setCreateTime(DateTimeUtils.getDateTimeInteger());
+			StoreBankCardChange storeBankCardChange =  StoreBankCardChange.passValueToStoreBankCardChange(request);
+			storeBankCardChange.setCreateTime(DateTimeUtils.getDateTimeInteger());
+			//绑定银行卡信息
+			create(storeBankCard);
+			//插入记录表
+			storeBankCardChangeService.create(storeBankCardChange);
+		}
+		return true;
+	}
+
+	/**@author  zhuj
+	 * @param request
+	 * @description 修改银行卡并且插入记录
+	 * @update_name
+	 * @update_time
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public boolean changeStoreBankCardInfo(CreateStoreBankCardRequest request) throws Exception {
+		//先验证是否已经绑定银行卡
+		log.info("修改银行卡并且插入记录参数值",  request);
+		StoreBankCard mstoreBankCard = getByPK(request.getStoreId());
+		if(null!=mstoreBankCard) {
+			StoreBankCard storeBankCard = StoreBankCard.passValueToStoreBankCard(request);
+			storeBankCard.setStoreBankCardId(mstoreBankCard.getStoreBankCardId());
+			//添加更新时间
+			storeBankCard.setUpdateTime(DateTimeUtils.getDateTimeInteger());
+			StoreBankCardChange storeBankCardChange = StoreBankCardChange.passValueToStoreBankCardChange(request);
+			storeBankCardChange.setCreateTime(DateTimeUtils.getDateTimeInteger());
+			//修改绑定银行卡信息
+			update(storeBankCard);
+			//插入记录表
+			storeBankCardChangeService.create(storeBankCardChange);
+		}else{
+			return false;
+		}
+		return true;
+	}
+}

@@ -1,0 +1,80 @@
+package com.fc.member.store.user.service.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.plugin.mybatis.PageQuery;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.store.user.dao.IStoreCollectDao;
+import com.fc.member.store.user.service.IStoreCollectService;
+import com.fc.protocol.demo.request.store.user.StoreCollectRequest;
+import com.fc.member.store.user.entity.StoreCollect;
+/**
+ * <p>Title: StoreCollect</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:06
+ */
+@Service("storeCollectService")
+public class StoreCollectServiceImp extends ServiceImpl<StoreCollect> implements IStoreCollectService{
+
+	private static Logger log = LoggerFactory.getLogger(StoreCollectServiceImp.class);
+	
+	@Autowired
+	private IStoreCollectDao storeCollectDao;
+	
+	@Override
+	protected IMapper<StoreCollect> getDao() {
+		return storeCollectDao;
+	}
+
+	@Override
+	public List<StoreCollect> getStoreCollectList(Page page, StoreCollectRequest storeCollectRequest) {
+		log.info("分页查询所有收藏商品------->{}",storeCollectRequest);
+		//set对象属性
+		StoreCollect collect = new StoreCollect();
+		collect.setStoreId(storeCollectRequest.getStoreId());
+		log.info("分页查询所有收藏商品------->{}", collect.toString());
+		//设置分页，查询条件
+		PageQuery pageQuery = new PageQuery();
+		pageQuery.setPage(page);
+		pageQuery.setCondition(collect);
+		return storeCollectDao.getRowsPage(pageQuery);
+	}
+
+	@Override
+	public Map<String, Object> insertStoreCollect(StoreCollectRequest request) {
+		log.info("insertStoreCollect----->{}:", request);
+		Map<String, Object> resultMap = new HashMap<>();
+		//将不为空的属性set到对象中
+		StoreCollect storeCollect = new StoreCollect();
+		storeCollect.setStoreId(request.getStoreId());
+		storeCollect.setItemId(request.getItemId());
+		storeCollect.setGoodsPrice(request.getGoodsPrice());
+		storeCollect.setCreateTime(DateTimeUtils.getDateTimeInteger());
+		log.info("StoreCollect---------->" + storeCollect);
+		int result = storeCollectDao.insertSelective(storeCollect);
+		if (result <= 0) {
+			resultMap.put("error", "新增商品收藏失败！");
+			return resultMap;
+		}
+		return resultMap;
+	}
+
+	@Override
+	public int deleteSelective(Integer store_id, Integer item_id) {
+		StoreCollect collect = new StoreCollect();
+		collect.setStoreId(store_id);
+		collect.setItemId(item_id);
+		return  storeCollectDao.deleteSelective(collect);
+	}
+
+}

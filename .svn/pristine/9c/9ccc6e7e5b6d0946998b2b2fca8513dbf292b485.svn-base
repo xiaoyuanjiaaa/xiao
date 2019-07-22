@@ -1,0 +1,15 @@
+package com.fc.member.master.user.service;
+
+import com.fc.common.service.IService;
+import com.fc.member.master.user.entity.MasterUserMapleBeanDetail;
+/**
+ * <p>Title: MasterUserMapleBeanDetail</p>
+ * <p>Description: 枫豆转入转出明细表 Service 接口</p>
+ * @author yangd
+ * @date 2019-01-15 10:09:29
+ */
+public interface IMasterUserMapleBeanDetailService extends IService<MasterUserMapleBeanDetail>{
+	
+	// 插入数据
+	int insertSelective(MasterUserMapleBeanDetail obj);
+}

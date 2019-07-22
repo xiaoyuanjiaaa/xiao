@@ -1,0 +1,95 @@
+package com.fc.protocol.demo.request.store.user;
+
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * 门店关注
+ * @author wangq
+ * @date 2019/1/4
+ */
+public class StoreFollowRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+	
+	@ApiModelProperty(value = "门店关注主键id",name = "storeFollowId" ,example = "1")
+	private Integer storeFollowId;//门店关注主键id
+	@ApiModelProperty(value = "门店id", name = "storeId", example = "1")
+	private Integer storeId;//门店id
+	@ApiModelProperty(value = "店铺关注id", name = "shopId", example = "1")
+	private Integer shopId;//店铺关注id
+	@ApiModelProperty(value = "创建时间", name = "createTime")
+	private Integer createTime;//创建时间
+	
+	
+	public String paramValidateQuery() {
+		if (StringUtils.isEmpty(storeId)) {
+			return "参数:storeId不能为空!";
+		}
+		return null;
+	}
+	
+	public String paramValidateAdd() {
+		if (StringUtils.isEmpty(storeFollowId)) {
+			return "参数:storeFollowId不能为空!";
+		}
+		if (StringUtils.isEmpty(storeId)) {
+			return "参数:storeId不能为空!";
+		}
+		if (StringUtils.isEmpty(shopId)) {
+			return "参数:shopId不能为空!";
+		}
+		if (StringUtils.isEmpty(createTime)) {
+			return "参数:createTime不能为空!";
+		}
+		return null;
+	}
+	
+	public String paramValidateDelete() {
+		if (StringUtils.isEmpty(storeId)) {
+			return "参数:storeId不能为空!";
+		}
+		if (StringUtils.isEmpty(shopId)) {
+			return "参数:shopId不能为空!";
+		}
+		return null;
+	}
+	
+	public Integer getStoreFollowId() {
+		return storeFollowId;
+	}
+	public void setStoreFollowId(Integer storeFollowId) {
+		this.storeFollowId = storeFollowId;
+	}
+	public Integer getStoreId() {
+		return storeId;
+	}
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+	public Integer getShopId() {
+		return shopId;
+	}
+	public void setShopId(Integer shopId) {
+		this.shopId = shopId;
+	}
+	public Integer getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	
+	@Override
+	public String toString() {
+		return "StoreFollowRequest [storeFollowId=" + storeFollowId + ", storeId=" + storeId + ", shopId=" + shopId
+				+ ", createTime=" + createTime + ", getVersion() = "+ getVersion() + ", getReqCode()="+ getReqCode() +
+				", getTraceId() ="+ getTraceId() +"]";
+	}
+
+}

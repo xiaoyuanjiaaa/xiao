@@ -1,0 +1,18 @@
+package com.fc.member.shop.user.dao;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.fc.common.plugin.mybatis.IMapper;
+
+import com.fc.member.shop.user.entity.ShopWithdrawCash;
+/**
+ * <p>Title: ShopWithdrawCash</p>
+ * <p>Description: 店铺提现记录表 DAO层</p>
+ * @author yangd
+ * @date 2019-01-14 11:08:40
+ */
+@Mapper
+public interface IShopWithdrawCashDao extends IMapper<ShopWithdrawCash>{
+	// 插入数据
+	int insertSelective(ShopWithdrawCash obj);
+}

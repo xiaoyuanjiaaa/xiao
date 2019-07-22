@@ -1,0 +1,248 @@
+package com.fc.member.shop.user.entity;
+
+import java.io.Serializable;
+
+
+/**
+ * <p>Table: ShopFinance</p>
+ * <p>Description: 店铺财务明细表</p>
+ * @author yangd
+ * @date 2019-01-14 11:08:39
+ */
+public class ShopFinance implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer shopFinanceId; // 主键ID
+	private Integer shopId; // 店铺id
+	private String shopType; // 店铺类型
+	private Integer operatorId; // 操作人ID
+	private String operator; // 操作人
+	private String operatorType; // 操作类型
+	private Integer amount; // 金额
+	private Integer accounts; // 余额
+	private Integer iid; // 对应的订单ID等
+	private String iidType; // 对应的记录类型
+	private String extension; // 扩展字段
+	private String remark; // 备注
+	private Integer dateline; // 时间
+	private Integer isHandle; // 是否已处理，0未处理，1已处理
+	private Integer type; // 是否兑换枫币 0否 1是
+	private String iidSn; // 来源订单编号
+	private Integer inType; // 入账类型  1：零售订单入账  8：B2B订单入账  9：订货呗订单入账  2：提现  3：扣保证金  4：扣推广费  5：保证金解冻  7：异常（手动处理）  6：订单部分退款（退运费）  10：订单全退款（退运费）  11：订单部分退款（不退运费） 12：订单全退款（不退运费） 13：审核失败  14：退款入账  15：订单部分退款（不退运费：最后一个商品）  17：返利记录
+	private Integer changAccounts; // 账户余额改变
+	private Integer changBalancing; // 待结算改变
+	private Integer changWithdrawals; // 可提现改变
+	private Integer changWithdrawalsing; // 提现中改变
+	private Integer changDeposit; // 保证金改变
+	private Integer changPromotion; // 推广费改变
+	private Integer updateTime; // 修改时间
+	private Integer createTime; // 创建时间
+
+	public void setShopFinanceId(Integer shopFinanceId) {
+		this.shopFinanceId = shopFinanceId;
+	}
+	
+	public Integer getShopFinanceId() {
+		return this.shopFinanceId;
+	}
+	public void setShopId(Integer shopId) {
+		this.shopId = shopId;
+	}
+	
+	public Integer getShopId() {
+		return this.shopId;
+	}
+	public void setShopType(String shopType) {
+		this.shopType = shopType;
+	}
+	
+	public String getShopType() {
+		return this.shopType;
+	}
+	public void setOperatorId(Integer operatorId) {
+		this.operatorId = operatorId;
+	}
+	
+	public Integer getOperatorId() {
+		return this.operatorId;
+	}
+	public void setOperator(String operator) {
+		this.operator = operator;
+	}
+	
+	public String getOperator() {
+		return this.operator;
+	}
+	public void setOperatorType(String operatorType) {
+		this.operatorType = operatorType;
+	}
+	
+	public String getOperatorType() {
+		return this.operatorType;
+	}
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
+	
+	public Integer getAmount() {
+		return this.amount;
+	}
+	public void setAccounts(Integer accounts) {
+		this.accounts = accounts;
+	}
+	
+	public Integer getAccounts() {
+		return this.accounts;
+	}
+	public void setIid(Integer iid) {
+		this.iid = iid;
+	}
+	
+	public Integer getIid() {
+		return this.iid;
+	}
+	public void setIidType(String iidType) {
+		this.iidType = iidType;
+	}
+	
+	public String getIidType() {
+		return this.iidType;
+	}
+	public void setExtension(String extension) {
+		this.extension = extension;
+	}
+	
+	public String getExtension() {
+		return this.extension;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	
+	public String getRemark() {
+		return this.remark;
+	}
+	public void setDateline(Integer dateline) {
+		this.dateline = dateline;
+	}
+	
+	public Integer getDateline() {
+		return this.dateline;
+	}
+	public void setIsHandle(Integer isHandle) {
+		this.isHandle = isHandle;
+	}
+	
+	public Integer getIsHandle() {
+		return this.isHandle;
+	}
+	public void setType(Integer type) {
+		this.type = type;
+	}
+	
+	public Integer getType() {
+		return this.type;
+	}
+	public void setIidSn(String iidSn) {
+		this.iidSn = iidSn;
+	}
+	
+	public String getIidSn() {
+		return this.iidSn;
+	}
+	public void setInType(Integer inType) {
+		this.inType = inType;
+	}
+	
+	public Integer getInType() {
+		return this.inType;
+	}
+	public void setChangAccounts(Integer changAccounts) {
+		this.changAccounts = changAccounts;
+	}
+	
+	public Integer getChangAccounts() {
+		return this.changAccounts;
+	}
+	public void setChangBalancing(Integer changBalancing) {
+		this.changBalancing = changBalancing;
+	}
+	
+	public Integer getChangBalancing() {
+		return this.changBalancing;
+	}
+	public void setChangWithdrawals(Integer changWithdrawals) {
+		this.changWithdrawals = changWithdrawals;
+	}
+	
+	public Integer getChangWithdrawals() {
+		return this.changWithdrawals;
+	}
+	public void setChangWithdrawalsing(Integer changWithdrawalsing) {
+		this.changWithdrawalsing = changWithdrawalsing;
+	}
+	
+	public Integer getChangWithdrawalsing() {
+		return this.changWithdrawalsing;
+	}
+	public void setChangDeposit(Integer changDeposit) {
+		this.changDeposit = changDeposit;
+	}
+	
+	public Integer getChangDeposit() {
+		return this.changDeposit;
+	}
+	public void setChangPromotion(Integer changPromotion) {
+		this.changPromotion = changPromotion;
+	}
+	
+	public Integer getChangPromotion() {
+		return this.changPromotion;
+	}
+	public void setUpdateTime(Integer updateTime) {
+		this.updateTime = updateTime;
+	}
+	
+	public Integer getUpdateTime() {
+		return this.updateTime;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+
+    @Override
+    public String toString () {
+    	return "ShopFinance{" + 
+	    	"shopFinanceId=" + shopFinanceId + 
+	    	", shopId=" + shopId + 
+	    	", shopType=" + shopType + 
+	    	", operatorId=" + operatorId + 
+	    	", operator=" + operator + 
+	    	", operatorType=" + operatorType + 
+	    	", amount=" + amount + 
+	    	", accounts=" + accounts + 
+	    	", iid=" + iid + 
+	    	", iidType=" + iidType + 
+	    	", extension=" + extension + 
+	    	", remark=" + remark + 
+	    	", dateline=" + dateline + 
+	    	", isHandle=" + isHandle + 
+	    	", type=" + type + 
+	    	", iidSn=" + iidSn + 
+	    	", inType=" + inType + 
+	    	", changAccounts=" + changAccounts + 
+	    	", changBalancing=" + changBalancing + 
+	    	", changWithdrawals=" + changWithdrawals + 
+	    	", changWithdrawalsing=" + changWithdrawalsing + 
+	    	", changDeposit=" + changDeposit + 
+	    	", changPromotion=" + changPromotion + 
+	    	", updateTime=" + updateTime + 
+	    	", createTime=" + createTime + 
+	    	"}";
+    }
+}

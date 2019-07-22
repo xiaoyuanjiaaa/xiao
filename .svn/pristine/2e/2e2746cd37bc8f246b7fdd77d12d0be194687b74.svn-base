@@ -1,0 +1,81 @@
+package com.fc.member.store.user.service.impl;
+
+import com.fc.common.plugin.mybatis.Page;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.member.store.user.dao.IStoreMomeyDetailDao;
+import com.fc.member.store.user.service.IStoreMomeyDetailService;
+import com.fc.member.store.user.entity.StoreMomeyDetail;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * <p>Title: StoreMomeyDetail</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:06
+ */
+@Service("storeMomeyDetailService")
+public class StoreMomeyDetailServiceImp extends ServiceImpl<StoreMomeyDetail> implements IStoreMomeyDetailService{
+	private static Logger log = LoggerFactory.getLogger(StoreMomeyDetailServiceImp.class);
+	@Autowired
+	private IStoreMomeyDetailDao storeMomeyDetailDao;
+	
+	@Override
+	protected IMapper<StoreMomeyDetail> getDao() {
+		return storeMomeyDetailDao;
+	}
+
+	/***@author zhuj
+	 *@date 2018/12/28
+	 * @param request
+	 * @description 添加门店金额操作记录
+	 */
+	@Override
+	public boolean inputAmountTradingInfo(StoreMomeyDetail request) throws Exception {
+		log.info("添加门店金额操作记录参数值",  request);
+		//传入参数转插入数据库的参数类型
+		create(request);
+		return true;
+	}
+
+	/***@author zhuj
+	 *@date 2018/12/28
+	 * @param request
+	 * @description 更新门店提现状态
+	 */
+	@Override
+	public boolean changeAmountTradingStatus(StoreMomeyDetail request) throws Exception {
+		//先验证是否存在此记录，存在则修改
+		log.info("绑定银行卡并且插入记录参数值",  request);
+		StoreMomeyDetail mstoreMomeyDetail = getByPK(request.getCardNoId());
+		request.setStoreMomeyDetailId(mstoreMomeyDetail.getStoreMomeyDetailId());
+		if(null!=mstoreMomeyDetail){
+			update(request);
+		}else{
+			return false;
+		}
+		return true;
+	}
+
+	/***@author zhuj
+	 *@date 2018/12/28
+	 * @param request
+	 * @description 获取门店金额交易列表
+	 */
+	@Override
+	public Map<String, Object> getAmountTradingList(Page page,StoreMomeyDetail request) {
+		List<StoreMomeyDetail> storeMomeyDetaillist = getRowsPage(page, request);
+		//组装返回数据
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("storeMomeyDetaillist", storeMomeyDetaillist);
+		map.put("pageCount", page.getTotalPage());
+		return map;
+	}
+}

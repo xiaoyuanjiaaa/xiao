@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.master.user.dao.IMasterAuthInfoDao">
+	<resultMap id="MasterAuthInfoMap" type="com.fc.member.master.user.entity.MasterAuthInfo">
+        <id property="masterAuthInfoId" column="master_auth_info_id"/>
+        <id property="masterMemberId" column="master_member_id"/>
+        <id property="name" column="name"/>
+        <id property="idCard" column="id_card"/>
+        <id property="idcarPhotoId" column="idcar_photo_id"/>
+        <id property="idAuditStatus" column="id_audit_status"/>
+        <id property="authReason" column="auth_reason"/>
+        <id property="sex" column="sex"/>
+        <id property="birthday" column="birthday"/>
+        <id property="realAvatarId" column="real_avatar_id"/>
+        <id property="createTime" column="create_time"/>
+        <id property="updateTime" column="update_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="MasterAuthInfoMap" >
+		select * from master_auth_info where 
+	        master_auth_info_id = #{masterAuthInfoId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.master.user.entity.MasterAuthInfo" useGeneratedKeys="true" keyProperty="masterAuthInfoId">
+		insert into master_auth_info(master_auth_info_id , master_member_id , name , id_card , idcar_photo_id , id_audit_status , auth_reason , sex , birthday , real_avatar_id , create_time , update_time  )
+    	values(#{masterAuthInfoId} ,#{masterMemberId} ,#{name} ,#{idCard} ,#{idcarPhotoId} ,#{idAuditStatus} ,#{authReason} ,#{sex} ,#{birthday} ,#{realAvatarId} ,#{createTime} ,#{updateTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.master.user.entity.MasterAuthInfo" useGeneratedKeys="true" keyProperty="masterAuthInfoId">
+		insert into master_auth_info
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="masterAuthInfoId != null">master_auth_info_id,</if>
+					<if test="masterMemberId != null">master_member_id,</if>
+					<if test="name != null">name,</if>
+					<if test="idCard != null">id_card,</if>
+					<if test="idcarPhotoId != null">idcar_photo_id,</if>
+					<if test="idAuditStatus != null">id_audit_status,</if>
+					<if test="authReason != null">auth_reason,</if>
+					<if test="sex != null">sex,</if>
+					<if test="birthday != null">birthday,</if>
+					<if test="realAvatarId != null">real_avatar_id,</if>
+					<if test="createTime != null">create_time,</if>
+					<if test="updateTime != null">update_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="masterAuthInfoId != null">#{masterAuthInfoId},</if>
+					<if test="masterMemberId != null">#{masterMemberId},</if>
+					<if test="name != null">#{name},</if>
+					<if test="idCard != null">#{idCard},</if>
+					<if test="idcarPhotoId != null">#{idcarPhotoId},</if>
+					<if test="idAuditStatus != null">#{idAuditStatus},</if>
+					<if test="authReason != null">#{authReason},</if>
+					<if test="sex != null">#{sex},</if>
+					<if test="birthday != null">#{birthday},</if>
+					<if test="realAvatarId != null">#{realAvatarId},</if>
+					<if test="createTime != null">#{createTime},</if>
+					<if test="updateTime != null">#{updateTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.master.user.entity.MasterAuthInfo">
+		update master_auth_info
+		<set>
+		    	<if test="masterMemberId != null">master_member_id = #{masterMemberId},</if>
+		    	<if test="name != null">name = #{name},</if>
+		    	<if test="idCard != null">id_card = #{idCard},</if>
+		    	<if test="idcarPhotoId != null">idcar_photo_id = #{idcarPhotoId},</if>
+		    	<if test="idAuditStatus != null">id_audit_status = #{idAuditStatus},</if>
+		    	<if test="authReason != null">auth_reason = #{authReason},</if>
+		    	<if test="sex != null">sex = #{sex},</if>
+		    	<if test="birthday != null">birthday = #{birthday},</if>
+		    	<if test="realAvatarId != null">real_avatar_id = #{realAvatarId},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		</set>
+		where 
+	        master_auth_info_id = #{masterAuthInfoId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from master_auth_info where 
+	        master_auth_info_id = #{masterAuthInfoId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.master.user.entity.MasterAuthInfo" resultMap="MasterAuthInfoMap" >
+		select * from master_auth_info 
+		<where>
+		       <if test="masterAuthInfoId != null">
+					AND master_auth_info_id = #{masterAuthInfoId}
+				</if>
+		       <if test="masterMemberId != null">
+					AND master_member_id = #{masterMemberId}
+				</if>
+		       <if test="name != null">
+					AND name = #{name}
+				</if>
+		       <if test="idCard != null">
+					AND id_card = #{idCard}
+				</if>
+		       <if test="idcarPhotoId != null">
+					AND idcar_photo_id = #{idcarPhotoId}
+				</if>
+		       <if test="idAuditStatus != null">
+					AND id_audit_status = #{idAuditStatus}
+				</if>
+		       <if test="authReason != null">
+					AND auth_reason = #{authReason}
+				</if>
+		       <if test="sex != null">
+					AND sex = #{sex}
+				</if>
+		       <if test="birthday != null">
+					AND birthday = #{birthday}
+				</if>
+		       <if test="realAvatarId != null">
+					AND real_avatar_id = #{realAvatarId}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="MasterAuthInfoMap" >
+		select * from master_auth_info  
+		<where>
+		       <if test="condition.masterAuthInfoId != null">
+					AND master_auth_info_id = #{condition.masterAuthInfoId}
+				</if>
+		       <if test="condition.masterMemberId != null">
+					AND master_member_id = #{condition.masterMemberId}
+				</if>
+		       <if test="condition.name != null">
+					AND name = #{condition.name}
+				</if>
+		       <if test="condition.idCard != null">
+					AND id_card = #{condition.idCard}
+				</if>
+		       <if test="condition.idcarPhotoId != null">
+					AND idcar_photo_id = #{condition.idcarPhotoId}
+				</if>
+		       <if test="condition.idAuditStatus != null">
+					AND id_audit_status = #{condition.idAuditStatus}
+				</if>
+		       <if test="condition.authReason != null">
+					AND auth_reason = #{condition.authReason}
+				</if>
+		       <if test="condition.sex != null">
+					AND sex = #{condition.sex}
+				</if>
+		       <if test="condition.birthday != null">
+					AND birthday = #{condition.birthday}
+				</if>
+		       <if test="condition.realAvatarId != null">
+					AND real_avatar_id = #{condition.realAvatarId}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

@@ -1,0 +1,22 @@
+package com.fc.member.store.user.dao;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.member.store.user.entity.StoreAdvanceDetail;
+
+/**
+ * <p>Title: StoreAdvanceDetail</p>
+ * <p>Description:  DAO层</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:05
+ */
+@Mapper
+public interface IStoreAdvanceDetailDao extends IMapper<StoreAdvanceDetail> {
+
+	/**
+	 * 插入数据
+	 * @param obj
+	 */
+	int insertSelective(StoreAdvanceDetail obj);
+}

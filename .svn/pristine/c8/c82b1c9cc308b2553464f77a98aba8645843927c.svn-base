@@ -1,0 +1,66 @@
+package com.fc.protocol.demo.request.store.user;
+
+import java.math.BigDecimal;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+import io.swagger.annotations.ApiModelProperty;
+
+public class StoreCollectCreateRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+
+	@ApiModelProperty(value = "门店id", name = "storeId", example = "1")
+	private Integer storeId;//门店id
+	@ApiModelProperty(value = "商品id", name = "itemId", example = "1")
+	private Integer itemId;//商品id
+	@ApiModelProperty(value = "收藏时，商品最低价", name = "goodsPrice", example = "1")
+	private BigDecimal goodsPrice;//收藏时，商品最低价
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	public Integer getItemId() {
+		return itemId;
+	}
+
+	public void setItemId(Integer itemId) {
+		this.itemId = itemId;
+	}
+
+	public BigDecimal getGoodsPrice() {
+		return goodsPrice;
+	}
+
+	public void setGoodsPrice(BigDecimal goodsPrice) {
+		this.goodsPrice = goodsPrice;
+	}
+
+	@Override
+	public String toString() {
+		return "StoreCollectCreateRequest [storeId=" + storeId + ", itemId=" + itemId + ", goodsPrice=" + goodsPrice
+				+ ",getVersion()=" + getVersion() + ",getReqCode()=" + getReqCode() + ",getTraceId()=" + getTraceId()
+				+ "]";
+	}
+
+	//新增收藏商品
+	public String paramValidate() {
+		if (StringUtils.isEmpty(storeId)) {
+			return "参数:storeId不能为空！";
+		}
+		if (StringUtils.isEmpty(itemId)) {
+			return "参数:itemId不能为空！";
+		}
+		if (StringUtils.isEmpty(goodsPrice)) {
+			return "参数：goodsPrice不能为空！";
+		}
+		return null;
+	}
+}

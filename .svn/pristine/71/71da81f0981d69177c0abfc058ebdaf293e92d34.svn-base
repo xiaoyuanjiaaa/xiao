@@ -1,0 +1,78 @@
+package com.fc.protocol.demo.request.store.user;
+
+import org.apache.commons.lang.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+/**
+ * 查询用户request
+ * @author	xiaozw
+ * @data	2019-01-08	
+ */
+@SuppressWarnings("serial")
+public class SbiCreateThreeRequest extends ProtocolRequest {
+
+	/**用户id*/
+	private Integer storeId;
+	/**所在地区ID*/
+	private Integer regionId;
+	/**所在地区*/
+	private String regionName;
+	/**详细地址*/
+	private String address;
+
+	public String paramValidate() {
+		if (storeId == null) {
+			return "参数：storeId不能为空";
+		}
+		if (regionId == null) {
+			return "参数：regionId不能为空";
+		}
+		if (StringUtils.isBlank(regionName)) {
+			return "参数：regionName不能为空";
+		}
+		if (StringUtils.isBlank(address)) {
+			return "参数：address不能为空";
+		}
+		return null;
+	}
+
+	public Integer getRegionId() {
+		return regionId;
+	}
+
+	public void setRegionId(Integer regionId) {
+		this.regionId = regionId;
+	}
+
+	public String getRegionName() {
+		return regionName;
+	}
+
+	public void setRegionName(String regionName) {
+		this.regionName = regionName;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	@Override
+	public String toString() {
+		return "CreateBasicInfoTwoRequest [storeId=" + storeId + "regionId()=" + regionId + ", " + "regionName()="
+				+ regionName + "address()=" + address + "getVersion()=" + getVersion() + ", getReqCode()="
+				+ getReqCode() + ", getTraceId()=" + getTraceId() + "]";
+	}
+}

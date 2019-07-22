@@ -1,0 +1,37 @@
+package com.fc.protocol.demo.request.store.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+/**
+ * 查询门店信息
+ * @author	xiaozw
+ * @data	2019年1月9日	
+ */
+@SuppressWarnings("serial")
+public class SbiQueryByStoreIdRequest extends ProtocolRequest {
+	/**门店id*/
+	private Integer storeId;
+
+	public String paramValidate() {
+		if (StringUtils.isEmpty(storeId)) {
+			return "参数:storeId不能为空";
+		}
+		return null;
+	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	@Override
+	public String toString() {
+		return "QueryBasicInfoByStoreIdRequest[getStoreId():" + getStoreId() + "getVersion()=" + getVersion()
+				+ ", getReqCode()=" + getReqCode() + ", getTraceId()=" + getTraceId() + "]";
+	}
+}

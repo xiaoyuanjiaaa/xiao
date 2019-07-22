@@ -1,0 +1,57 @@
+package com.fc.protocol.demo.request.pc.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+import io.swagger.annotations.ApiModelProperty;
+import org.springframework.util.StringUtils;
+
+/**
+ * @Author: linpeng
+ * @Date: 2019/1/4 15:41
+ * @Version 1.0
+ */
+public class PcUserListRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+    @ApiModelProperty(value = "当前页码", name = "page")
+    private Integer page = 1;
+    @ApiModelProperty(value = "当前页记录数", name = "pagesize")
+    private Integer pagesize = 10;
+
+
+    public String paramValidate() {
+        if (StringUtils.isEmpty(page)) {
+            return "参数:page 不能为空";
+        }
+        if (StringUtils.isEmpty(pagesize)) {
+            return "参数:pagesize 不能为空";
+        }
+        return null;
+    }
+
+
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getPagesize() {
+        return pagesize;
+    }
+
+    public void setPagesize(Integer pagesize) {
+        this.pagesize = pagesize;
+    }
+
+
+
+    @Override
+	public String toString() {
+		return "WpServiceCountRequest [getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode()
+                + ", getTraceId()=" + getTraceId() +", page=" + getPage() + ", pagesize=" + getPagesize() + "]";
+	}
+
+}

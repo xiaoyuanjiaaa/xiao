@@ -1,0 +1,50 @@
+package com.fc.protocol.demo.request.store.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+/**
+ * 门店设置request
+ * @author	xiaozw
+ * @data	2019年1月12日	
+ */
+public class StoreSetingSetsvShelvesRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+	/**门店Id的*/
+	private Integer storeId;
+	private Integer isSystemVirtualShelves; // 门店虚拟货架权限, 0:未操作,1:开启,2:关闭
+
+	public String paramValidate() {
+		if (StringUtils.isEmpty(storeId)) {
+			return "参数:storeId不能为空";
+		}
+		if (StringUtils.isEmpty(isSystemVirtualShelves)) {
+			return "参数:isSystemVirtualShelves不能为空";
+		}
+		return null;
+	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	public Integer getIsSystemVirtualShelves() {
+		return isSystemVirtualShelves;
+	}
+
+	public void setIsSystemVirtualShelves(Integer isSystemVirtualShelves) {
+		this.isSystemVirtualShelves = isSystemVirtualShelves;
+	}
+
+	@Override
+	public String toString() {
+		return "storeSetingSetsvShelvesRequest [getStoreId()=" + getStoreId() + ", getIsSystemVirtualShelves()="
+				+ getIsSystemVirtualShelves() + "]";
+	}
+}

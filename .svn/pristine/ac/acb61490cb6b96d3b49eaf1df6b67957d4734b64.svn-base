@@ -1,0 +1,243 @@
+package com.fc.member.wechatplatform.user.handler;
+
+import com.fc.common.exception.ErrorCode;
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.member.wechatplatform.user.entity.WechatPlatformServiceCount;
+import com.fc.member.wechatplatform.user.service.IWechatPlatformServiceCountService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.wechatplatform.user.*;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**微养车找店 - 用户服务统计
+ * @Author: linpeng
+ * @Date: 2019/1/4 15:01
+ * @Version 1.0
+ */
+@Component
+@Handler(module = "wechatplatform")
+public class WechatPlatformServiceCountHandler {
+
+	private static Logger log = LoggerFactory.getLogger(WechatPlatformServiceCountHandler.class);
+
+	@Autowired
+    IWechatPlatformServiceCountService wechatPlatformServiceCountService;
+
+	/** 
+	 * @Description: 查询单条服务统计信息
+	 * @Param: [request] 
+	 * @return: com.fc.protocol.common.message.body.ProtocolResponse 
+	 * @Author: linpeng
+	 * @CreateDate: 2019/1/5
+	 * @Update: linpeng
+	 * @UpdateDate: 2019/1/5
+	 */ 
+    @ReqCodeMapping(requestClazz = WechatPlatformServiceCountGetRequest.class)
+	public ProtocolResponse wechatPlatformServiceCountGet(WechatPlatformServiceCountGetRequest request) {
+		log.info("获取服务统计信息详情------>request:{}", request);
+		ProtocolResponse response=null;
+		try {
+            //校验参数是否为空
+            String validResult = request.paramValidate();
+            if(validResult != null ) {
+               return response = ProtocolResponse.newInstance().error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+            }
+			log.info("查询单条服务统计信息详情，openid:{},service_id:{}",request.getOpenid(),request.getServiceId());
+			WechatPlatformServiceCount wechatPlatformServiceCount  = wechatPlatformServiceCountService.get(request.getOpenid(),request.getServiceId());
+			log.info("查询结果:{}", wechatPlatformServiceCount);
+
+			if ( wechatPlatformServiceCount != null){
+			    response = ProtocolResponse.newInstance().success().addData("wechatPlatformService",wechatPlatformServiceCount);
+			}
+			else {
+			    response = ProtocolResponse.newInstance().error(1011).msg("该服务统计信息不存在");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.info("wechatPlatformServiceCountGet系统异常！",e);
+			return ProtocolResponse.newInstance().error(10199).msg("代码异常，请联系开发人员！");
+		}
+		log.info("获取服务统计信息详情------>response:{}", response);
+		return response;
+	}
+
+	/** 
+	 * @Description: 查询服务统计信息列表
+	 * @Param: [request] 
+	 * @return: com.fc.protocol.common.message.body.ProtocolResponse 
+	 * @Author: linpeng
+	 * @CreateDate: 2019/1/5
+	 * @Update: linpeng
+	 * @UpdateDate: 2019/1/5
+	 */ 
+    @ReqCodeMapping(requestClazz = WechatPlatformServiceCountListRequest.class)
+    public ProtocolResponse wechatPlatformServiceCountList(WechatPlatformServiceCountListRequest request) {
+        log.info("获取服务统计信息列表------>request:{}", request);
+        ProtocolResponse response=null;
+        try {
+            //校验参数是否为空
+            String validResult = request.paramValidate();
+            if(validResult != null ) {
+               return response = ProtocolResponse.newInstance().error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+            }
+            Page page = new Page();
+            page.setPage(request.getPage());
+            page.setRows(request.getPagesize());
+            Map<String, Object> param = new HashMap<>();
+            //param.put("openid",request.getOpenid());
+            //param.put("serviceId",request.getServiceId());
+            //log.info("查询服务统计信息列表，page:{},param:{}",page,param);
+            List<WechatPlatformServiceCount> wechatPlatformServiceCount  = wechatPlatformServiceCountService.getServiceCountList(request,page);
+            log.info("查询结果 -----> count:{},data:{}", page.getTotalResult(),wechatPlatformServiceCount);
+            if ( wechatPlatformServiceCount != null & wechatPlatformServiceCount.size() != 0){
+                response = ProtocolResponse.newInstance().success().addData("wechatPlatformService_list",wechatPlatformServiceCount).addData("count",page.getTotalResult());
+            }
+            else {
+                response = ProtocolResponse.newInstance().error(1012).msg("未查到相关的服务统计信息");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.info("wechatPlatformServiceCountList系统异常！",e);
+            return ProtocolResponse.newInstance().error(10199).msg("代码异常，请联系开发人员！");
+        }
+        log.info("获取服务统计信息列表------>response:{}", response);
+        return response;
+    }
+
+
+    /** 
+     * @Description: 创建服务统计信息
+     * @Param: [request] 
+     * @return: com.fc.protocol.common.message.body.ProtocolResponse 
+     * @Author: linpeng
+     * @CreateDate: 2019/1/5
+     * @Update: linpeng
+     * @UpdateDate: 2019/1/5
+     */ 
+    @ReqCodeMapping(requestClazz = WechatPlatformServiceCountSaveRequest.class)
+	public ProtocolResponse wechatPlatformServiceCountSave(WechatPlatformServiceCountSaveRequest request) {
+		log.info("创建服务统计信息------>request:{}", request);
+		ProtocolResponse response = null;
+		try {
+		    //校验参数是否为空
+            String validResult = request.paramValidate();
+            if(validResult != null ) {
+               return response = ProtocolResponse.newInstance().error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+            }
+			log.info("创建服务统计信息，openid:{},service_id:{},service_title:{}", request.getOpenid(),request.getServiceId(),request.getServiceTitle());
+            Map<String, Object> resultStatus = wechatPlatformServiceCountService.insertPlatformServiceCount(request);
+			if (resultStatus.isEmpty()) {
+                log.info("创建服务统计信息成功");
+                response = ProtocolResponse.newInstance().success().msg("创建服务统计信息成功");
+            }
+            else{
+                return ProtocolResponse.newInstance().error(1013).msg("创建服务统计信息失败");
+            }
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.info("wechatPlatformServiceCountSave系统异常！",e);
+			return ProtocolResponse.newInstance().error(10199).msg("代码异常，请联系开发人员！");
+		}
+		log.info("创建服务统计信息------>response:{}", response);
+		return response;
+	}
+
+	/** 
+	 * @Description: 修改服务统计信息
+	 * @Param: [request] 
+	 * @return: com.fc.protocol.common.message.body.ProtocolResponse 
+	 * @Author: linpeng
+	 * @CreateDate: 2019/1/5
+	 * @Update: linpeng
+	 * @UpdateDate: 2019/1/5
+	 */ 
+    @ReqCodeMapping(requestClazz = WechatPlatformServiceCountUpdateRequest.class)
+    public ProtocolResponse wechatPlatformServiceCountUpdate(WechatPlatformServiceCountUpdateRequest request) {
+        log.info("修改服务统计信息------>request:{}", request);
+        ProtocolResponse response=null;
+        try {
+            //校验参数是否为空
+            String validResult = request.paramValidate();
+            if(validResult != null ) {
+               return response = ProtocolResponse.newInstance().error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+            }
+            log.info("修改服务统计信息，openid:{},service_id:{},service_title:{},open_number:{}", request.getOpenid(),request.getServiceId(),request.getServiceTitle(),request.getOpenNumber());
+            WechatPlatformServiceCount wechatPlatformServiceCount  = wechatPlatformServiceCountService.get(request.getId());
+            //先查询该用户是否存在
+            if (wechatPlatformServiceCount == null) {
+                return ProtocolResponse.newInstance().error(1011).msg("该服务统计信息不存在");
+            }
+            //用户存在，执行后续操作
+            log.info("修改前:{}", wechatPlatformServiceCount);
+
+            Map<String, Object> resultStatus = wechatPlatformServiceCountService.updatePlatformServiceCount(request);
+            if (resultStatus.isEmpty()) {
+                log.info("修改服务统计信息成功");
+                log.info("修改后:{}", wechatPlatformServiceCountService.get(request.getOpenid(),request.getServiceId()));
+                response = ProtocolResponse.newInstance().success().msg("修改服务统计信息成功");
+            }
+            else{
+                return ProtocolResponse.newInstance().error(1014).msg("修改服务统计信息失败");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.info("wechatPlatformServiceCountUpdate系统异常！",e);
+            return ProtocolResponse.newInstance().error(10199).msg("代码异常，请联系开发人员！");
+        }
+        log.info("修改服务统计信息------>response:{}", response);
+        return response;
+    }
+
+    /** 
+     * @Description: 删除微养车找店用户的服务统计信息
+     * @Param: [request] 
+     * @return: com.fc.protocol.common.message.body.ProtocolResponse 
+     * @Author: linpeng
+     * @CreateDate: 2019/1/5
+     * @Update: linpeng
+     * @UpdateDate: 2019/1/5
+     */ 
+    @ReqCodeMapping(requestClazz = WechatPlatformServiceCountDeleteRequest.class)
+    public ProtocolResponse wechatPlatformServiceCountDelete(WechatPlatformServiceCountDeleteRequest request) {
+        log.info("删除服务统计信息------>request:{}", request);
+        ProtocolResponse response = null;
+        try {
+            //校验参数是否为空
+            String validResult = request.paramValidate();
+            if(validResult != null ) {
+               return response = ProtocolResponse.newInstance().error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+            }
+            log.info("删除服务统计信息，openid:{},service_id:{},service_title:{}", request.getOpenid(),request.getServiceId());
+            WechatPlatformServiceCount wechatPlatformServiceCount  = wechatPlatformServiceCountService.get(request.getOpenid(),request.getServiceId());
+            //先查询该用户是否存在
+            if (wechatPlatformServiceCount == null) {
+                return ProtocolResponse.newInstance().error(1011).msg("该服务统计信息不存在");
+            }
+            //用户存在，执行后续操作
+            log.info("需要被删除的信息:{}", wechatPlatformServiceCount);
+            Map<String, Object> resultStatus = wechatPlatformServiceCountService.deletePlatformServiceCount(wechatPlatformServiceCount.getId());
+            if (resultStatus.isEmpty()) {
+                log.info("删除服务统计信息成功");
+                response = ProtocolResponse.newInstance().success().msg("删除服务统计信息成功");
+            }
+            else{
+                return ProtocolResponse.newInstance().error(1014).msg("删除服务统计信息失败");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.info("wechatPlatformServiceCountDelete系统异常！",e);
+            return ProtocolResponse.newInstance().error(10199).msg("代码异常，请联系开发人员！");
+        }
+        log.info("删除服务统计信息------>response:{}", response);
+        return response;
+    }
+}

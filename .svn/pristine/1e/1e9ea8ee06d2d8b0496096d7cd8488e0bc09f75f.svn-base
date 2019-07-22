@@ -1,0 +1,27 @@
+package com.fc.member.store.user.service;
+
+import java.util.List;
+import java.util.Map;
+
+import com.fc.common.service.IService;
+import com.fc.member.store.user.entity.StorePackage;
+import com.fc.protocol.demo.request.store.user.StorePackageRequest;
+/**
+ * <p>Title: StorePackage</p>
+ * <p>Description:  Service 接口</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:06
+ */
+public interface IStorePackageService extends IService<StorePackage>{
+	/**
+	 * 查询门店储值卡套餐列表
+	 * 排序规则：按充值金额升序排列，充值金额相同时按赠送金额升序排列，未编辑状态的充值套餐排在最下。
+	 */
+	 List<Map<String, Object>> getOrderBY(StorePackageRequest request)throws Exception;;
+	 /**
+	  * 查询门店当前上架的套餐数,且后台状态为启用(在store_wechat)
+	  */
+	 List<Map<String,Object>> getStatus(StorePackageRequest request)throws Exception;
+	 
+	 void updateStorePackage(StorePackageRequest request)throws Exception;
+}

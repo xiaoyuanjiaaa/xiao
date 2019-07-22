@@ -1,0 +1,43 @@
+package com.fc.member.store.user.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.member.store.user.entity.StoreFollow;
+
+/**
+ * <p>Title: StoreFollow</p>
+ * <p>Description:  DAO层</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:06
+ */
+@Mapper
+public interface IStoreFollowDao extends IMapper<StoreFollow> {
+
+	/**
+	 * 门店关注列表
+	 * @author wangq
+	 * @see create_time:2019-1-8 
+	 * @param storeFollow
+	 */
+	List<StoreFollow> getByPK(StoreFollow storeFollow);
+
+	/**
+	 * 新增门店关注
+	 *@author wangq
+	 * @see create_time:2019-1-8 
+	 * @param storeFollow
+	 */
+	int insertSelective(StoreFollow storeFollow);
+
+	/**
+	 * 取消门店关注
+	 * @author wangq
+	 * @see create_time:2019-1-8 
+	 * @param storeFollow
+	 */
+	int deleteSelective(StoreFollow storeFollow);
+
+}

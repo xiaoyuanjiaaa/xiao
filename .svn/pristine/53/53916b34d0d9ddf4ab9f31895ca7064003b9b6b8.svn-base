@@ -1,0 +1,85 @@
+package com.fc.member.fc.handler;
+
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.fc.common.exception.ErrorCode;
+import com.fc.member.fc.service.IFcUserService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.fc.UserCreateUserRequest;
+import com.fc.protocol.demo.request.store.user.UserUpdatePhoneMobRequest;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+
+/**
+ * 用户基础操作Handler
+ * @author	xiaozw
+ * @data	2019-1-3
+ */
+@Component
+@Handler(module = "fc")
+public class UserHandler {
+	private static Logger log = LoggerFactory.getLogger(UserHandler.class);
+
+	@Autowired
+	private IFcUserService fcUserService;
+
+	/**
+	 * 新增用户接口
+	 * @author	xiaozw
+	 * @see update_name:xiaozw update_time:2019-1-3
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = UserCreateUserRequest.class)
+	public ProtocolResponse userCreateUser(UserCreateUserRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			log.info("userCreateUser------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			}
+			Map<String, String> resultStatus = fcUserService.insertFcUserAndPublicUser(request);
+			if (!resultStatus.isEmpty()) {
+				return response.error(ErrorCode.REPEAT_DATA.getValue()).msg(resultStatus.get("error"));
+			}
+		} catch (Exception e) {
+			log.info("userCreateUser:", e);
+			e.printStackTrace();
+			return response.error(ErrorCode.CREATE_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+		return response;
+	}
+
+	/**
+	 * 修改电话号码接口
+	 * @author	xiaozw
+	 * @see update_name:xiaozw update_time:2019-1-10
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = UserUpdatePhoneMobRequest.class)
+	public ProtocolResponse userUpdatePhoneMob(UserUpdatePhoneMobRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			log.info("userUpdatePhoneMob------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			}
+			Map<String, String> resultStatus = fcUserService.updatePhoneBob(request.getFcUserId(),
+					request.getPhoneMob());
+			if (!resultStatus.isEmpty()) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(resultStatus.get("error"));
+			}
+		} catch (Exception e) {
+			log.info("userUpdatePhoneMob:", e);
+			e.printStackTrace();
+			return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+		return response;
+	}
+}

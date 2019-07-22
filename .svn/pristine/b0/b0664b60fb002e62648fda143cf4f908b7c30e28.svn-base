@@ -1,0 +1,29 @@
+package com.fc.member.wechatplatform.user.dao;
+
+import com.fc.common.plugin.mybatis.PageQuery;
+import org.apache.ibatis.annotations.Mapper;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.member.wechatplatform.user.entity.WechatPlatformUser;
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * <p>Title: WechatPlatformUser</p>
+ * <p>Description:  DAO层</p>
+ * @author yangd
+ * @date 2018-12-28 17:14:42
+ */
+@Mapper
+public interface IWechatPlatformUserDao extends IMapper<WechatPlatformUser>{
+
+    int insertSelective(WechatPlatformUser obj);
+
+    int updateAllField(WechatPlatformUser obj);
+
+    // 用户管理 服务标签列表,取服务标签访问最多的前三个服务
+    List<Map> getPlatFormListPage(PageQuery pageQuery);
+
+    int UpadtePlatformUser(Map<String, String> param) throws Exception;
+}

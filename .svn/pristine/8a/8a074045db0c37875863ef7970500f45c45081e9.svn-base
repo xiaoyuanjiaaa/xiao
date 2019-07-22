@@ -1,0 +1,18 @@
+package com.fc.member.shop.user.dao;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.fc.common.plugin.mybatis.IMapper;
+
+import com.fc.member.shop.user.entity.ShopBankinfo;
+/**
+ * <p>Title: ShopBankinfo</p>
+ * <p>Description: 店铺银行信息表 DAO层</p>
+ * @author yangd
+ * @date 2019-01-14 11:08:38
+ */
+@Mapper
+public interface IShopBankinfoDao extends IMapper<ShopBankinfo>{
+	// 插入数据
+	int insertSelective(ShopBankinfo obj);
+}

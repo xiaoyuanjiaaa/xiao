@@ -1,0 +1,54 @@
+package com.fc.member.store.user.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.member.store.user.entity.StoreAddress;
+
+/**
+ * <p>Title: StoreAddress</p>
+ * <p>Description:  DAO层</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:04
+ */
+@Mapper
+public interface IStoreAddressDao extends IMapper<StoreAddress> {
+
+	/**
+	 * 收货地址列表
+	 * @author wangq
+	 * @see create_time:2019-1-9
+	 * @param address
+	 */
+	List<StoreAddress> getByPK(StoreAddress address);
+
+	/**
+	 * 新增收货地址
+	 * @author wangq
+	 * @see create_time:2019-1-9
+	 * @param address
+	 */
+	int insertSelective(StoreAddress address);
+
+	/**
+	 * 删除收货地址
+	 * @author wangq
+	 * @see create_time:2019-1-10
+	 * @param addressId
+	 */
+	int deleteByPK(StoreAddress address);
+
+	/**
+	 * 根据store_id修改该store_id下的默认地址
+	 * @author wangq
+	 * @see create_time:2019-1-10
+	 * @param address
+	 * 
+	 */
+	void updateSave(StoreAddress address);
+
+	List<StoreAddress> getAddress(Integer storeId);
+
+}

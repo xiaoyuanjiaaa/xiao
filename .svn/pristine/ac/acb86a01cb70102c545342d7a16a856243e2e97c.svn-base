@@ -1,0 +1,175 @@
+package com.fc.member.store.user.service.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.store.user.dao.IStoreBasicInfoDao;
+import com.fc.member.store.user.entity.PublicUser;
+import com.fc.member.store.user.entity.StoreBasicInfo;
+import com.fc.member.store.user.entity.StoreSetting;
+import com.fc.member.store.user.service.IPublicUserService;
+import com.fc.member.store.user.service.IStoreBasicInfoService;
+import com.fc.member.store.user.service.IStoreSettingService;
+import com.fc.protocol.demo.request.store.user.CreateBasicInfoOneRequest;
+import com.fc.protocol.demo.request.store.user.CreateBasicInfoThreeRequest;
+import com.fc.protocol.demo.request.store.user.CreateBasicInfoTwoRequest;
+import com.fc.protocol.demo.request.store.user.StoreBossInfoRequest;
+
+/**
+ * <p>Title: StoreBasicInfo</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:05
+ */
+@Service("storeBasicInfoService")
+public class StoreBasicInfoServiceImp extends ServiceImpl<StoreBasicInfo> implements IStoreBasicInfoService {
+	private static Logger log = LoggerFactory.getLogger(StoreBasicInfoServiceImp.class);
+	@Autowired
+	private IStoreBasicInfoDao storeBasicInfoDao;
+	@Autowired
+	private IPublicUserService publicUserService;
+	@Autowired
+	private IStoreSettingService storeSettingService;
+
+	@Override
+	protected IMapper<StoreBasicInfo> getDao() {
+		return storeBasicInfoDao;
+	}
+
+	/***@author zhuj
+	 *@date 2018/12/28
+	 * @param id
+	 * @description 获取店主信息
+	 *
+	 */
+	@Override
+	public Map<String, Object> getStoreBossInfo(Integer id) {
+		//先验证信息是否存在
+		StoreBasicInfo storeBasicInfo = getByPK(id);
+		//组装返回数据
+		if (null != storeBasicInfo) {
+			PublicUser publicUser = publicUserService.getByPK(id);
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("storeId", storeBasicInfo.getStoreId());
+			map.put("storeBossName", storeBasicInfo.getBossName());
+			map.put("storeBossEmail", publicUser.getEmail());
+			map.put("storeBossqq", publicUser.getQq());
+			return map;
+		}
+		return null;
+	}
+
+	/***@author zhuj
+	 *@date 2018/12/28
+	 * @param request
+	 * @description 修改店主信息
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public boolean changeStoreBossInfo(StoreBossInfoRequest request) throws Exception {
+		//先验证是否存在店主信息
+		log.info("先验证是否存在店主信息", request);
+		StoreBasicInfo storeBasicInfo = getByPK(request.getStoreId());
+		if (null != storeBasicInfo) {
+			StoreBasicInfo storeBossInfo = new StoreBasicInfo();
+			storeBossInfo.setStoreId(request.getStoreId());
+			storeBossInfo.setUpdateTime(DateTimeUtils.getDateTimeInteger());
+			storeBossInfo.setBossName(request.getStoreBossName());
+			//修改店主信息
+			update(storeBossInfo);
+
+			PublicUser publicUser = new PublicUser();
+			publicUser.setPublicUserId(request.getStoreId());
+			publicUser.setEmail(request.getStoreBossEmail());
+			publicUser.setQq(Integer.parseInt(request.getStoreBossqq()));
+			publicUser.setUpdateTime(DateTimeUtils.getDateTimeInteger());
+			//修改店主信息插入主表
+			publicUserService.update(publicUser);
+		} else {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public StoreBasicInfo getBasicInfo(Integer publicUserId) {
+		log.info("publicUserId---------->:" + publicUserId);
+		StoreBasicInfo storeBasicInfo = null;
+		if (publicUserId == null) {
+			return storeBasicInfo;
+		}
+		StoreBasicInfo sbi = new StoreBasicInfo();
+		sbi.setPublicUserId(publicUserId);
+		List<StoreBasicInfo> storeBasicInfoList = this.getRows(sbi);
+		if (storeBasicInfoList != null && storeBasicInfoList.size() > 0) {
+			storeBasicInfo = storeBasicInfoList.get(0);
+			return storeBasicInfo;
+		}
+		return storeBasicInfo;
+	}
+
+	@Override
+	public void insertBasicInfoOne(CreateBasicInfoOneRequest request) throws Exception {
+		log.info("request---------->:" + request);
+		StoreBasicInfo storeBasicInfo = this.getBasicInfo(request.getPublicUserId());
+		StoreBasicInfo sbi = new StoreBasicInfo();
+		if (storeBasicInfo == null) { //新增
+			sbi.setStoreName(request.getStoreName());
+			sbi.setPublicUserId(request.getPublicUserId());
+			sbi.setBossName(request.getBossName());
+			sbi.setPhoneTel(request.getPhoneTel());
+			sbi.setBusinessLicenseCode(request.getBusinessLicenseCode());
+			sbi.setBusinessLicenseName(request.getBusinessLicenseName());
+			sbi.setCreateTime(DateTimeUtils.getDateTimeInteger());
+			sbi.setStatus(StoreBasicInfo.STATUS_NO_AUDITING);
+			sbi.setIsStop(StoreBasicInfo.STATUS_NO_STOP);
+			sbi.setIsDelete(StoreBasicInfo.STATUS_DELETE);
+			sbi.setUpdateTime(DateTimeUtils.getDateTimeInteger());
+			sbi.setCreateTime(DateTimeUtils.getDateTimeInteger());
+			storeBasicInfoDao.insertSelective(sbi);
+		} else { //修改
+			sbi.setStoreName(request.getStoreName());
+			sbi.setBossName(request.getBossName());
+			sbi.setPhoneTel(request.getPhoneTel());
+			sbi.setBusinessLicenseCode(request.getBusinessLicenseCode());
+			sbi.setBusinessLicenseName(request.getBusinessLicenseName());
+			this.update(sbi);
+		}
+	}
+
+	@Override
+	public void insertBasicInfoTwo(CreateBasicInfoTwoRequest request) throws Exception {
+		log.info("request---------->:" + request);
+		StoreBasicInfo sbi = new StoreBasicInfo();
+		sbi.setStoreId(request.getStoreId());
+		sbi.setBusinessLicenseId(request.getBusinessLicenseId());
+		sbi.setPositivePhotoId(request.getPositivePhotoId());
+		this.update(sbi);
+	}
+
+	@Transactional(readOnly = false)
+	@Override
+	public void insertBasicInfoThree(CreateBasicInfoThreeRequest request) throws Exception {
+		log.info("request---------->:" + request);
+		StoreBasicInfo sbi = new StoreBasicInfo();
+		sbi.setStoreId(request.getStoreId());
+		sbi.setRegionId(request.getRegionId());
+		sbi.setRegionName(request.getRegionName());
+		sbi.setAddress(request.getAddress());
+		storeBasicInfoDao.updateBasicInfo(sbi); //这里应该获取影响数，然后判断下一步是否执行，由于需要在application中的MySQL链接后追加配置，后期处理。
+		StoreSetting storeSetting = new StoreSetting();
+		storeSetting.initialization(request.getStoreId());
+		storeSettingService.create(storeSetting);
+	}
+
+}

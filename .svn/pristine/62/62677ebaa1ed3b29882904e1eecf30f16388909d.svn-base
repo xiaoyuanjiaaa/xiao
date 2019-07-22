@@ -1,0 +1,211 @@
+package com.fc.member.store.user.entity;
+
+import java.io.Serializable;
+
+/**
+ * <p>Table: StoreWechat</p>
+ * <p>Description: </p>
+ * @author yangd
+ * @date 2019-01-03 18:03:48
+ */
+public class StoreWechat implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer storeWechatId; // 门店小程序id
+	private Integer storeId; // sstore_id
+	private String appIndexUrl; // 门店小程序首页图片
+	private String qrCodeUrl; // 二维码url
+	private Integer status; // 状态0=待审核,1=上线,-1=下线
+	private Integer isCouponOn; // 是否开启会员卡业务
+	private Integer isPayWithCouponOn; // 是否支付时使用会员卡折扣
+	private String openid; // 微信openid
+	private String unionid; // 微信unionid
+	private Integer isStoreWriteoffCard; // 是否开启该门店核销爱车卡功能0:闭关 1:开启
+	private String payQrCodeUrl; // 支付二维码url
+	private String cardListQrCodeUrl; // 爱车卡列表二维码url
+	private Integer isStoreWriteoffPlan; // 是否开启该门店核销套餐功能0:闭关 1:开启
+	private String storeMallQrCodeUrl; // 本店商城小程序码url
+	private Integer isSstorePackage; // 是否开启销售储值卡套餐功能0:闭关 1:开启
+	private Integer isSstoreServiceAppoint; // 是否开启服务预约功能0:关闭 1:开启
+	private String storecardQrCodeUrl; // 储值卡充值二维码
+	private String storeAppointmentQrCodeUrl; // 本店服务预约小程序码url
+	private Integer updateTime; // 修改时间
+	private Integer activeTime; // 门店小程序开通时间
+	private Integer applyTime; // 申请时间
+
+	public void setStoreWechatId(Integer storeWechatId) {
+		this.storeWechatId = storeWechatId;
+	}
+	
+	public Integer getStoreWechatId() {
+		return this.storeWechatId;
+	}
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+	
+	public Integer getStoreId() {
+		return this.storeId;
+	}
+	public void setAppIndexUrl(String appIndexUrl) {
+		this.appIndexUrl = appIndexUrl;
+	}
+	
+	public String getAppIndexUrl() {
+		return this.appIndexUrl;
+	}
+	public void setQrCodeUrl(String qrCodeUrl) {
+		this.qrCodeUrl = qrCodeUrl;
+	}
+	
+	public String getQrCodeUrl() {
+		return this.qrCodeUrl;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	
+	public Integer getStatus() {
+		return this.status;
+	}
+	public void setIsCouponOn(Integer isCouponOn) {
+		this.isCouponOn = isCouponOn;
+	}
+	
+	public Integer getIsCouponOn() {
+		return this.isCouponOn;
+	}
+	public void setIsPayWithCouponOn(Integer isPayWithCouponOn) {
+		this.isPayWithCouponOn = isPayWithCouponOn;
+	}
+	
+	public Integer getIsPayWithCouponOn() {
+		return this.isPayWithCouponOn;
+	}
+	public void setOpenid(String openid) {
+		this.openid = openid;
+	}
+	
+	public String getOpenid() {
+		return this.openid;
+	}
+	public void setUnionid(String unionid) {
+		this.unionid = unionid;
+	}
+	
+	public String getUnionid() {
+		return this.unionid;
+	}
+	public void setIsStoreWriteoffCard(Integer isStoreWriteoffCard) {
+		this.isStoreWriteoffCard = isStoreWriteoffCard;
+	}
+	
+	public Integer getIsStoreWriteoffCard() {
+		return this.isStoreWriteoffCard;
+	}
+	public void setPayQrCodeUrl(String payQrCodeUrl) {
+		this.payQrCodeUrl = payQrCodeUrl;
+	}
+	
+	public String getPayQrCodeUrl() {
+		return this.payQrCodeUrl;
+	}
+	public void setCardListQrCodeUrl(String cardListQrCodeUrl) {
+		this.cardListQrCodeUrl = cardListQrCodeUrl;
+	}
+	
+	public String getCardListQrCodeUrl() {
+		return this.cardListQrCodeUrl;
+	}
+	public void setIsStoreWriteoffPlan(Integer isStoreWriteoffPlan) {
+		this.isStoreWriteoffPlan = isStoreWriteoffPlan;
+	}
+	
+	public Integer getIsStoreWriteoffPlan() {
+		return this.isStoreWriteoffPlan;
+	}
+	public void setStoreMallQrCodeUrl(String storeMallQrCodeUrl) {
+		this.storeMallQrCodeUrl = storeMallQrCodeUrl;
+	}
+	
+	public String getStoreMallQrCodeUrl() {
+		return this.storeMallQrCodeUrl;
+	}
+	public void setIsSstorePackage(Integer isSstorePackage) {
+		this.isSstorePackage = isSstorePackage;
+	}
+	
+	public Integer getIsSstorePackage() {
+		return this.isSstorePackage;
+	}
+	public void setIsSstoreServiceAppoint(Integer isSstoreServiceAppoint) {
+		this.isSstoreServiceAppoint = isSstoreServiceAppoint;
+	}
+	
+	public Integer getIsSstoreServiceAppoint() {
+		return this.isSstoreServiceAppoint;
+	}
+	public void setStorecardQrCodeUrl(String storecardQrCodeUrl) {
+		this.storecardQrCodeUrl = storecardQrCodeUrl;
+	}
+	
+	public String getStorecardQrCodeUrl() {
+		return this.storecardQrCodeUrl;
+	}
+	public void setStoreAppointmentQrCodeUrl(String storeAppointmentQrCodeUrl) {
+		this.storeAppointmentQrCodeUrl = storeAppointmentQrCodeUrl;
+	}
+	
+	public String getStoreAppointmentQrCodeUrl() {
+		return this.storeAppointmentQrCodeUrl;
+	}
+	public void setUpdateTime(Integer updateTime) {
+		this.updateTime = updateTime;
+	}
+	
+	public Integer getUpdateTime() {
+		return this.updateTime;
+	}
+	public void setActiveTime(Integer activeTime) {
+		this.activeTime = activeTime;
+	}
+	
+	public Integer getActiveTime() {
+		return this.activeTime;
+	}
+	public void setApplyTime(Integer applyTime) {
+		this.applyTime = applyTime;
+	}
+	
+	public Integer getApplyTime() {
+		return this.applyTime;
+	}
+
+    @Override
+    public String toString () {
+    	return "StoreWechat{" + 
+	    	"storeWechatId=" + storeWechatId + 
+	    	", storeId=" + storeId + 
+	    	", appIndexUrl=" + appIndexUrl + 
+	    	", qrCodeUrl=" + qrCodeUrl + 
+	    	", status=" + status + 
+	    	", isCouponOn=" + isCouponOn + 
+	    	", isPayWithCouponOn=" + isPayWithCouponOn + 
+	    	", openid=" + openid + 
+	    	", unionid=" + unionid + 
+	    	", isStoreWriteoffCard=" + isStoreWriteoffCard + 
+	    	", payQrCodeUrl=" + payQrCodeUrl + 
+	    	", cardListQrCodeUrl=" + cardListQrCodeUrl + 
+	    	", isStoreWriteoffPlan=" + isStoreWriteoffPlan + 
+	    	", storeMallQrCodeUrl=" + storeMallQrCodeUrl + 
+	    	", isSstorePackage=" + isSstorePackage + 
+	    	", isSstoreServiceAppoint=" + isSstoreServiceAppoint + 
+	    	", storecardQrCodeUrl=" + storecardQrCodeUrl + 
+	    	", storeAppointmentQrCodeUrl=" + storeAppointmentQrCodeUrl + 
+	    	", updateTime=" + updateTime + 
+	    	", activeTime=" + activeTime + 
+	    	", applyTime=" + applyTime + 
+	    	"}";
+    }
+}

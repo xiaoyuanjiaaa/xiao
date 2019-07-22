@@ -1,0 +1,88 @@
+package com.fc.member.store.user.handler;
+
+import com.fc.common.exception.ErrorCode;
+import com.fc.member.store.user.service.IStoreBasicInfoService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.store.user.GetStoreBossInfoRequest;
+import com.fc.protocol.demo.request.store.user.StoreBossInfoRequest;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.Map;
+
+
+/**
+ * 店主信息
+ *
+ * @author zhuj
+ * @date 2018/12/28
+ */
+@Component
+@Handler(module = "shop")
+public class StoreBossInfoHandler {
+    private static Logger log = LoggerFactory.getLogger(StoreBossInfoHandler.class);
+    @Autowired
+    private IStoreBasicInfoService storeBasicInfoService;
+
+    /**
+     * author zhuj
+     *
+     * @param request 获取店主信息
+     * @date 2018/12/28
+     */
+    @ReqCodeMapping(requestClazz = GetStoreBossInfoRequest.class)
+    public ProtocolResponse getStoreBossInfo(GetStoreBossInfoRequest request) {
+        log.info("店主信息request", request);
+        ProtocolResponse response = ProtocolResponse.newInstance();
+        //验证参数是否为空
+        String validateResult = request.paramValidatecheckid();
+        if (validateResult != null) {
+            return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+        }
+        try {
+            //获取店主信息
+            Map<String, Object> storeBossInfo = storeBasicInfoService.getStoreBossInfo(request.getStoreId());
+            if (null != storeBossInfo) {
+                response.success().setData(storeBossInfo);
+            } else {
+                response.error(ErrorCode.DATE_NOR_DEFIND.getValue()).msg(ErrorCode.DATE_NOR_DEFIND.getDesc());
+            }
+        } catch (Exception e) {
+            response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    /**
+     * @param request 修改店主信息
+     * @author zhuj
+     * @date 2018/12/28
+     */
+    @ReqCodeMapping(requestClazz = StoreBossInfoRequest.class)
+    public ProtocolResponse changeStoreBossInfo(StoreBossInfoRequest request) {
+        log.info("修改店主信息request", request);
+        ProtocolResponse response = ProtocolResponse.newInstance();
+        //验证参数是否为空
+        String validateResult = request.paramValidatecheck();
+        if (validateResult != null) {
+            return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+        }
+        try {
+            if (storeBasicInfoService.changeStoreBossInfo(request)) {
+                response.success();
+            } else {
+                response.error(ErrorCode.UPDATE_ERROR.getValue()).msg(ErrorCode.UPDATE_ERROR.getDesc());
+            }
+        } catch (Exception e) {
+            response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+}

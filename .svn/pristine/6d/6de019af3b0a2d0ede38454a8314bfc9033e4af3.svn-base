@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.master.pickcar.dao.IMasterPickcarUserDao">
+	<resultMap id="MasterPickcarUserMap" type="com.fc.member.master.pickcar.entity.MasterPickcarUser">
+        <id property="masterPickcarUserId" column="master_pickcar_user_id"/>
+        <id property="storeId" column="store_id"/>
+        <id property="masterPickcarUserCarId" column="master_pickcar_user_car_id"/>
+        <id property="name" column="name"/>
+        <id property="sex" column="sex"/>
+        <id property="mobile" column="mobile"/>
+        <id property="createTime" column="create_time"/>
+        <id property="updateTime" column="update_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="MasterPickcarUserMap" >
+		select * from master_pickcar_user where 
+	        master_pickcar_user_id = #{masterPickcarUserId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.master.pickcar.entity.MasterPickcarUser" useGeneratedKeys="true" keyProperty="masterPickcarUserId">
+		insert into master_pickcar_user(master_pickcar_user_id , store_id , master_pickcar_user_car_id , name , sex , mobile , create_time , update_time  )
+    	values(#{masterPickcarUserId} ,#{storeId} ,#{masterPickcarUserCarId} ,#{name} ,#{sex} ,#{mobile} ,#{createTime} ,#{updateTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.master.pickcar.entity.MasterPickcarUser" useGeneratedKeys="true" keyProperty="masterPickcarUserId">
+		insert into master_pickcar_user
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="masterPickcarUserId != null">master_pickcar_user_id,</if>
+					<if test="storeId != null">store_id,</if>
+					<if test="masterPickcarUserCarId != null">master_pickcar_user_car_id,</if>
+					<if test="name != null">name,</if>
+					<if test="sex != null">sex,</if>
+					<if test="mobile != null">mobile,</if>
+					<if test="createTime != null">create_time,</if>
+					<if test="updateTime != null">update_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="masterPickcarUserId != null">#{masterPickcarUserId},</if>
+					<if test="storeId != null">#{storeId},</if>
+					<if test="masterPickcarUserCarId != null">#{masterPickcarUserCarId},</if>
+					<if test="name != null">#{name},</if>
+					<if test="sex != null">#{sex},</if>
+					<if test="mobile != null">#{mobile},</if>
+					<if test="createTime != null">#{createTime},</if>
+					<if test="updateTime != null">#{updateTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.master.pickcar.entity.MasterPickcarUser">
+		update master_pickcar_user
+		<set>
+		    	<if test="storeId != null">store_id = #{storeId},</if>
+		    	<if test="masterPickcarUserCarId != null">master_pickcar_user_car_id = #{masterPickcarUserCarId},</if>
+		    	<if test="name != null">name = #{name},</if>
+		    	<if test="sex != null">sex = #{sex},</if>
+		    	<if test="mobile != null">mobile = #{mobile},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		</set>
+		where 
+	        master_pickcar_user_id = #{masterPickcarUserId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from master_pickcar_user where 
+	        master_pickcar_user_id = #{masterPickcarUserId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.master.pickcar.entity.MasterPickcarUser" resultMap="MasterPickcarUserMap" >
+		select * from master_pickcar_user 
+		<where>
+		       <if test="masterPickcarUserId != null">
+					AND master_pickcar_user_id = #{masterPickcarUserId}
+				</if>
+		       <if test="storeId != null">
+					AND store_id = #{storeId}
+				</if>
+		       <if test="masterPickcarUserCarId != null">
+					AND master_pickcar_user_car_id = #{masterPickcarUserCarId}
+				</if>
+		       <if test="name != null">
+					AND name = #{name}
+				</if>
+		       <if test="sex != null">
+					AND sex = #{sex}
+				</if>
+		       <if test="mobile != null">
+					AND mobile = #{mobile}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="MasterPickcarUserMap" >
+		select * from master_pickcar_user  
+		<where>
+		       <if test="condition.masterPickcarUserId != null">
+					AND master_pickcar_user_id = #{condition.masterPickcarUserId}
+				</if>
+		       <if test="condition.storeId != null">
+					AND store_id = #{condition.storeId}
+				</if>
+		       <if test="condition.masterPickcarUserCarId != null">
+					AND master_pickcar_user_car_id = #{condition.masterPickcarUserCarId}
+				</if>
+		       <if test="condition.name != null">
+					AND name = #{condition.name}
+				</if>
+		       <if test="condition.sex != null">
+					AND sex = #{condition.sex}
+				</if>
+		       <if test="condition.mobile != null">
+					AND mobile = #{condition.mobile}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

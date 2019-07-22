@@ -1,0 +1,113 @@
+package com.fc.member.shop.user.entity;
+
+import java.io.Serializable;
+
+
+/**
+ * <p>Table: ShopScopinfo</p>
+ * <p>Description: 店铺经营范围表</p>
+ * @author yangd
+ * @date 2019-01-14 11:08:40
+ */
+public class ShopScopinfo implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer shopScopinfoId; // 主键id
+	private Integer shopId; // 店铺id
+	private String businessScope; // 经营范围
+	private String businessBrand; // 经营品牌
+	private String cCertification; // 3C认证(10张)：序列化（file_id）
+	private String qualityReport; // 质量检测(10张)：序列化（file_id）
+	private String otherDocuments; // 报告报关单/进货发票(10张)
+	private String depositFileIds; // 保证金打款凭证
+	private Integer updateTime; // 修改时间
+	private Integer createTime; // 创建时间
+
+	public void setShopScopinfoId(Integer shopScopinfoId) {
+		this.shopScopinfoId = shopScopinfoId;
+	}
+	
+	public Integer getShopScopinfoId() {
+		return this.shopScopinfoId;
+	}
+	public void setShopId(Integer shopId) {
+		this.shopId = shopId;
+	}
+	
+	public Integer getShopId() {
+		return this.shopId;
+	}
+	public void setBusinessScope(String businessScope) {
+		this.businessScope = businessScope;
+	}
+	
+	public String getBusinessScope() {
+		return this.businessScope;
+	}
+	public void setBusinessBrand(String businessBrand) {
+		this.businessBrand = businessBrand;
+	}
+	
+	public String getBusinessBrand() {
+		return this.businessBrand;
+	}
+	public void setCCertification(String cCertification) {
+		this.cCertification = cCertification;
+	}
+	
+	public String getCCertification() {
+		return this.cCertification;
+	}
+	public void setQualityReport(String qualityReport) {
+		this.qualityReport = qualityReport;
+	}
+	
+	public String getQualityReport() {
+		return this.qualityReport;
+	}
+	public void setOtherDocuments(String otherDocuments) {
+		this.otherDocuments = otherDocuments;
+	}
+	
+	public String getOtherDocuments() {
+		return this.otherDocuments;
+	}
+	public void setDepositFileIds(String depositFileIds) {
+		this.depositFileIds = depositFileIds;
+	}
+	
+	public String getDepositFileIds() {
+		return this.depositFileIds;
+	}
+	public void setUpdateTime(Integer updateTime) {
+		this.updateTime = updateTime;
+	}
+	
+	public Integer getUpdateTime() {
+		return this.updateTime;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+
+    @Override
+    public String toString () {
+    	return "ShopScopinfo{" + 
+	    	"shopScopinfoId=" + shopScopinfoId + 
+	    	", shopId=" + shopId + 
+	    	", businessScope=" + businessScope + 
+	    	", businessBrand=" + businessBrand + 
+	    	", cCertification=" + cCertification + 
+	    	", qualityReport=" + qualityReport + 
+	    	", otherDocuments=" + otherDocuments + 
+	    	", depositFileIds=" + depositFileIds + 
+	    	", updateTime=" + updateTime + 
+	    	", createTime=" + createTime + 
+	    	"}";
+    }
+}

@@ -1,0 +1,28 @@
+package com.fc.member.pc.user.dao;
+
+import com.fc.common.plugin.mybatis.PageQuery;
+import org.apache.ibatis.annotations.Mapper;
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.member.pc.user.entity.PcUser;
+
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * <p>Title: PcUser</p>
+ * <p>Description:  DAO层</p>
+ * @author yangd
+ * @date 2018-12-29 10:11:38
+ */
+@Mapper
+public interface IPcUserDao extends IMapper<PcUser>{
+
+    int insertSelective(PcUser obj);
+
+    @Override
+    void update(PcUser obj);
+
+    void deleteByPK(Integer pc_user_id);
+
+}

@@ -1,0 +1,39 @@
+package com.fc.member.wechatmaintain.user.service;
+
+import java.util.List;
+
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.service.IService;
+import com.fc.member.wechatmaintain.user.entity.WechatMaintainUserCoupon;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmuCouponCreateRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmuCouponDetailsStoreUserRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmuCouponTotleBalanceRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmuCouponUpdateRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmuCouponUserListRequest;
+
+/**
+ * <p>Title: WechatMaintainUserCoupon</p>
+ * <p>Description: 微养车用户储值卡 Service 接口</p>
+ * @author yangd
+ * @date 2018-12-28 17:13:48
+ */
+public interface IWechatMaintainUserCouponService extends IService<WechatMaintainUserCoupon> {
+
+	/**插入数据*/
+	int insertSelective(WmuCouponCreateRequest request);
+
+	/**储值卡列表 - 分页*/
+	List<WechatMaintainUserCoupon> getUserCouponList(Page page, WmuCouponUserListRequest request);
+
+	/**我的 - 储值卡列表*/
+	List<WechatMaintainUserCoupon> getUserCouponByUserIdList(WmuCouponUserListRequest request);
+
+	/**更新数据*/
+	boolean updateWechatMaintainUserCoupon(WmuCouponUpdateRequest request) throws Exception;
+
+	/**查询用户所有可用储值卡余额*/
+	WechatMaintainUserCoupon getUserBalanceTotle(WmuCouponTotleBalanceRequest request);
+
+	/**根据 用户ID、门店ID 查询储值卡信息*/
+	WechatMaintainUserCoupon getUserCouponByStoreIdUserId(WmuCouponDetailsStoreUserRequest request);
+}

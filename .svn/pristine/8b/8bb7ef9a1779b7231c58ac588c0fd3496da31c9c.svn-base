@@ -1,0 +1,120 @@
+package com.fc.protocol.demo.request.wechatmaintain.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * 微养车储值卡消费记录总表 参数
+ * @author yangd
+ * @date 2019年1月8日
+ */
+public class WechatMaintainConponConsumeinfoListRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+	//	TODO 门店ID、门店名称、订单号、车主用户名、车主手机、消费种类、消费开始时间、消费结束时间、当前页数、每页记录数
+	@ApiModelProperty(value = "枫车用户id", name = "fcUserId")
+	private Integer fcUserId; // 枫车用户id
+	@ApiModelProperty(value = "订单号", name = "orderNo")
+	private String orderNo; // 订单号
+	@ApiModelProperty(value = "门店id", name = "storeId")
+	private Integer storeId; // 门店id
+	@ApiModelProperty(value = "类型(1=储值卡充值，2=储值卡消费)", name = "recordType")
+	private Integer recordType; // 1=储值卡充值，2=储值卡消费
+	@ApiModelProperty(value = "消费种类：sstore_goods/sstore_card/weapp_order/service_package/debit_recharge/debit", name = "consumptionKind")
+	private String consumptionKind; // 消费种类：sstore_goods/sstore_card/weapp_order/service_package/debit_recharge/debit
+	@ApiModelProperty(value = "消费时间", name = "createTime")
+	private Integer createTime; // 消费时间
+	@ApiModelProperty(value = "当前页码", name = "page_no")
+	private Integer page_no = 1;
+	@ApiModelProperty(value = "当前页记录数", name = "page_size")
+	private Integer page_size = 10;
+
+	/**
+	 * 验证方法
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-09
+	 * @return
+	 */
+	public String paramValidate() {
+		if (StringUtils.isEmpty(storeId)) {
+			return "参数storeId不能为空";
+		}
+		return null;
+	}
+
+	public Integer getFcUserId() {
+		return fcUserId;
+	}
+
+	public void setFcUserId(Integer fcUserId) {
+		this.fcUserId = fcUserId;
+	}
+
+	public String getOrderNo() {
+		return orderNo;
+	}
+
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
+	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	public Integer getRecordType() {
+		return recordType;
+	}
+
+	public void setRecordType(Integer recordType) {
+		this.recordType = recordType;
+	}
+
+	public String getConsumptionKind() {
+		return consumptionKind;
+	}
+
+	public void setConsumptionKind(String consumptionKind) {
+		this.consumptionKind = consumptionKind;
+	}
+
+	public Integer getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+
+	public Integer getPage_no() {
+		return page_no;
+	}
+
+	public void setPage_no(Integer page_no) {
+		this.page_no = page_no;
+	}
+
+	public Integer getPage_size() {
+		return page_size;
+	}
+
+	public void setPage_size(Integer page_size) {
+		this.page_size = page_size;
+	}
+
+	@Override
+	public String toString() {
+		return "WechatMaintainConponConsumeinfoListRequest [fcUserId=" + fcUserId + ", orderNo=" + orderNo
+				+ ", storeId=" + storeId + ", recordType=" + recordType + ", consumptionKind=" + consumptionKind
+				+ ", createTime=" + createTime + ", page_no=" + page_no + ", page_size=" + page_size + ", getVersion()="
+				+ getVersion() + ", getReqCode()=" + getReqCode() + ", getTraceId()=" + getTraceId() + "]";
+	}
+
+}

@@ -1,0 +1,31 @@
+package com.fc.member.store.user.service;
+
+import com.fc.common.service.IService;
+import com.fc.member.store.user.entity.StoreWechat;
+
+/**
+ * <p>Title: StoreWechat</p>
+ * <p>Description:  Service 接口</p>
+ *
+ * @author yangd
+ * @date 2019-01-03 18:03:48
+ */
+public interface IStoreWechatService extends IService<StoreWechat> {
+
+    // 插入数据
+    int insertSelective(StoreWechat obj);
+
+    /***@author zhuj
+     *@date 2018/12/28
+     * @param request
+     * @description 添加门店微养车信息
+     */
+    boolean inputStoreWechatInfo(StoreWechat request) throws Exception;
+
+    /***@author zhuj
+     *@date 2018/12/28
+     * @param request
+     * @description 更新门店微养车信息
+     */
+    boolean changeStoreWechatInfo(StoreWechat request) throws Exception;
+}

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.store.user.dao.IPublicUserLoginsLogDao">
+	<resultMap id="PublicUserLoginsLogMap" type="com.fc.member.store.user.entity.PublicUserLoginsLog">
+        <id property="storeLoginsLogId" column="store_logins_log_id"/>
+        <id property="memberId" column="member_id"/>
+        <id property="loginIp" column="login_ip"/>
+        <id property="loginTime" column="login_time"/>
+        <id property="remark" column="remark"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="PublicUserLoginsLogMap" >
+		select * from public_user_logins_log where 
+	        store_logins_log_id = #{storeLoginsLogId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.store.user.entity.PublicUserLoginsLog" useGeneratedKeys="true">
+		insert into public_user_logins_log(store_logins_log_id , member_id , login_ip , login_time , remark  )
+    	values(#{storeLoginsLogId} ,#{memberId} ,#{loginIp} ,#{loginTime} ,#{remark} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.store.user.entity.PublicUserLoginsLog" useGeneratedKeys="true">
+		insert into public_user_logins_log
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="storeLoginsLogId != null">store_logins_log_id,</if>
+					<if test="memberId != null">member_id,</if>
+					<if test="loginIp != null">login_ip,</if>
+					<if test="loginTime != null">login_time,</if>
+					<if test="remark != null">remark</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="storeLoginsLogId != null">#{storeLoginsLogId},</if>
+					<if test="memberId != null">#{memberId},</if>
+					<if test="loginIp != null">#{loginIp},</if>
+					<if test="loginTime != null">#{loginTime},</if>
+					<if test="remark != null">#{remark}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.store.user.entity.PublicUserLoginsLog">
+		update public_user_logins_log
+		<set>
+		    	<if test="memberId != null">member_id = #{memberId},</if>
+		    	<if test="loginIp != null">login_ip = #{loginIp},</if>
+		    	<if test="loginTime != null">login_time = #{loginTime},</if>
+		    	<if test="remark != null">remark = #{remark},</if>
+		</set>
+		where 
+	        store_logins_log_id = #{storeLoginsLogId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from public_user_logins_log where 
+	        store_logins_log_id = #{storeLoginsLogId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.store.user.entity.PublicUserLoginsLog" resultMap="PublicUserLoginsLogMap" >
+		select * from public_user_logins_log 
+		<where>
+		       <if test="storeLoginsLogId != null">
+					AND store_logins_log_id = #{storeLoginsLogId}
+				</if>
+		       <if test="memberId != null">
+					AND member_id = #{memberId}
+				</if>
+		       <if test="loginIp != null">
+					AND login_ip = #{loginIp}
+				</if>
+		       <if test="loginTime != null">
+					AND login_time = #{loginTime}
+				</if>
+		       <if test="remark != null">
+					AND remark = #{remark}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="PublicUserLoginsLogMap" >
+		select * from public_user_logins_log  
+		<where>
+		       <if test="condition.storeLoginsLogId != null">
+					AND store_logins_log_id = #{condition.storeLoginsLogId}
+				</if>
+		       <if test="condition.memberId != null">
+					AND member_id = #{condition.memberId}
+				</if>
+		       <if test="condition.loginIp != null">
+					AND login_ip = #{condition.loginIp}
+				</if>
+		       <if test="condition.loginTime != null">
+					AND login_time = #{condition.loginTime}
+				</if>
+		       <if test="condition.remark != null">
+					AND remark = #{condition.remark}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

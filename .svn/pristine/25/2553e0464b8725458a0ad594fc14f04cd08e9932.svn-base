@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.wechatplatform.user.dao.IWechatPlatformServiceCountDao">
+	<resultMap id="WechatPlatformServiceCountMap" type="com.fc.member.wechatplatform.user.entity.WechatPlatformServiceCount">
+        <id property="id" column="id"/>
+        <id property="openid" column="openid"/>
+        <id property="serviceId" column="service_id"/>
+        <id property="serviceTitle" column="service_title"/>
+        <id property="openNumber" column="open_number"/>
+        <id property="createTime" column="create_time"/>
+        <id property="recentTime" column="recent_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="WechatPlatformServiceCountMap" >
+		select * from wechat_platform_service_count where 
+	        id = #{id} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.wechatplatform.user.entity.WechatPlatformServiceCount" useGeneratedKeys="true">
+		insert into wechat_platform_service_count(id , openid , service_id , service_title , open_number , create_time , recent_time  )
+    	values(#{id} ,#{openid} ,#{serviceId} ,#{serviceTitle} ,#{openNumber} ,#{createTime} ,#{recentTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.wechatplatform.user.entity.WechatPlatformServiceCount" useGeneratedKeys="true">
+		insert into wechat_platform_service_count
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="id != null">id,</if>
+					<if test="openid != null">openid,</if>
+					<if test="serviceId != null">service_id,</if>
+					<if test="serviceTitle != null">service_title,</if>
+					<if test="openNumber != null">open_number,</if>
+					<if test="createTime != null">create_time,</if>
+					<if test="recentTime != null">recent_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="id != null">#{id},</if>
+					<if test="openid != null">#{openid},</if>
+					<if test="serviceId != null">#{serviceId},</if>
+					<if test="serviceTitle != null">#{serviceTitle},</if>
+					<if test="openNumber != null">#{openNumber},</if>
+					<if test="createTime != null">#{createTime},</if>
+					<if test="recentTime != null">#{recentTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.wechatplatform.user.entity.WechatPlatformServiceCount">
+		update wechat_platform_service_count
+		<set>
+		    	<if test="openid != null">openid = #{openid},</if>
+		    	<if test="serviceId != null">service_id = #{serviceId},</if>
+		    	<if test="serviceTitle != null">service_title = #{serviceTitle},</if>
+		    	<if test="openNumber != null">open_number = #{openNumber},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		    	<if test="recentTime != null">recent_time = #{recentTime},</if>
+		</set>
+		where 
+	        id = #{id} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from wechat_platform_service_count where 
+	        id = #{id} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.wechatplatform.user.entity.WechatPlatformServiceCount" resultMap="WechatPlatformServiceCountMap" >
+		select * from wechat_platform_service_count 
+		<where>
+		       <if test="id != null">
+					AND id = #{id}
+				</if>
+		       <if test="openid != null">
+					AND openid = #{openid}
+				</if>
+		       <if test="serviceId != null">
+					AND service_id = #{serviceId}
+				</if>
+		       <if test="serviceTitle != null">
+					AND service_title = #{serviceTitle}
+				</if>
+		       <if test="openNumber != null">
+					AND open_number = #{openNumber}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		       <if test="recentTime != null">
+					AND recent_time = #{recentTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="WechatPlatformServiceCountMap" >
+		select * from wechat_platform_service_count  
+		<where>
+		       <if test="condition.id != null">
+					AND id = #{condition.id}
+				</if>
+		       <if test="condition.openid != null">
+					AND openid = #{condition.openid}
+				</if>
+		       <if test="condition.serviceId != null">
+					AND service_id = #{condition.serviceId}
+				</if>
+		       <if test="condition.serviceTitle != null">
+					AND service_title = #{condition.serviceTitle}
+				</if>
+		       <if test="condition.openNumber != null">
+					AND open_number = #{condition.openNumber}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		       <if test="condition.recentTime != null">
+					AND recent_time = #{condition.recentTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

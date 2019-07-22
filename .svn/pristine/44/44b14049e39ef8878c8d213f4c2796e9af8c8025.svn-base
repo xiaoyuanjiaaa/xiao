@@ -1,0 +1,18 @@
+package com.fc.protocol.demo.request.store.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+/**
+ * 查询用户request
+ * @author	xiaozw
+ * @data	2019年1月4日	
+ */
+@SuppressWarnings("serial")
+public class CreateBasicInfoOneRequest extends ProtocolRequest {
+	/*	private String ;
+		private String ;
+		private String ;
+		private String ;
+		private String ;
+		private String ;*/
+}

@@ -1,0 +1,38 @@
+package com.fc.member.wechatmaintain.user.service;
+
+import java.util.List;
+
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.service.IService;
+import com.fc.member.wechatmaintain.user.entity.WechatMaintainCouponSstoreUser;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmcsUserCreateRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmcsUserDetailsRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmcsUserListPageRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmcsUserStoreListRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmcsUserUpdateRequest;
+
+/**
+ * <p>Title: WechatMaintainCouponSstoreUser</p>
+ * <p>Description: 微养车用户会员卡 Service 接口</p>
+ * @author yangd
+ * @date 2018-12-28 17:13:47
+ */
+public interface IWechatMaintainCouponSstoreUserService extends IService<WechatMaintainCouponSstoreUser> {
+
+	/**插入数据*/
+	int insertSelective(WmcsUserCreateRequest request);
+
+	/**更新数据*/
+	boolean updateWechatMaintainCouponSstoreUser(WmcsUserUpdateRequest request) throws Exception;
+
+	/**查询用户会员卡列表-分页*/
+	List<WechatMaintainCouponSstoreUser> getWechatMaintainCouponSstoreUserListPage(Page page,
+			WmcsUserListPageRequest request);
+
+	/**查询门店会员用户列表*/
+	List<WechatMaintainCouponSstoreUser> getWechatMaintainCouponSstoreUserByStoreIdList(
+			WmcsUserStoreListRequest request);
+
+	/**查询用户在此门店会员卡详细信息*/
+	WechatMaintainCouponSstoreUser getCouponStoreByUserIdAndStoreId(WmcsUserDetailsRequest request);
+}

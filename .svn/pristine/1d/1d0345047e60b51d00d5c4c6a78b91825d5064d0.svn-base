@@ -1,0 +1,121 @@
+package com.fc.member.store.user.service.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.common.util.MD5Utils;
+import com.fc.common.util.RandomUtils;
+import com.fc.member.store.user.dao.IPublicUserDao;
+import com.fc.member.store.user.entity.PublicUser;
+import com.fc.member.store.user.service.IPublicUserService;
+import com.fc.protocol.demo.request.fc.CreateUserRequest;
+import com.fc.protocol.demo.request.store.user.PublicUserLoginRequest;
+
+/**
+ * <p>Title: PublicUser</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2019-01-02 16:49:49
+ */
+@Service("publicUserService")
+public class PublicUserServiceImp extends ServiceImpl<PublicUser> implements IPublicUserService {
+
+	private static Logger log = LoggerFactory.getLogger(PublicUserServiceImp.class);
+
+	@Autowired
+	private IPublicUserDao publicUserDao;
+
+	@Override
+	protected IMapper<PublicUser> getDao() {
+		return publicUserDao;
+	}
+
+	@Override
+	public int insertSelective(PublicUser obj) {
+		return publicUserDao.insertSelective(obj);
+	}
+
+	@Override
+	public Map<String, String> insertUser(CreateUserRequest request, Integer fcUserId) {
+		log.info("CreateUserRequest---------->:" + request);
+		Map<String, String> resultMap = new HashMap<>();
+		String validateResult = request.paramValidate();
+		if (validateResult != null || fcUserId == null) {
+			resultMap.put("error", validateResult + "fcUserId:" + fcUserId);
+			return resultMap;
+		}
+		//新增一个publicuser对象
+		PublicUser pu = new PublicUser();
+		pu.setPhoneMob(request.getPhoneMob());
+		List<PublicUser> puList = this.getRows(pu);
+		if (puList.size() > 0) {
+			resultMap.put("error", "该电话已存在public_user中");
+			return resultMap;
+		}
+
+		pu.setFcUserId(fcUserId);
+		pu.setPasswordSalt(RandomUtils.getStringRandom(6));
+		String mdPassword = MD5Utils.MD5(MD5Utils.MD5(request.getPassword()) + pu.getPasswordSalt());
+		pu.setUserName("xx" + request.getPhoneMob()); //用户名随机生成，需要询问PHP
+		pu.setPassword(mdPassword);
+		pu.setIsActivation(1); //新增的就是激活用户
+		pu.setUpdateTime(DateTimeUtils.getDateTimeInteger()); //时间该怎么处理，需要询问
+		pu.setCreateTime(DateTimeUtils.getDateTimeInteger()); //时间该怎么处理，需要询问
+		log.info("PublicUser----------->" + pu);
+		publicUserDao.insertSelective(pu);
+		return resultMap;
+	}
+
+	@Override
+	public Map<String, String> updatePasswordByUserId(Integer publicUserId, String password) throws Exception {
+		log.info("updatePassword---------->:" + publicUserId + password);
+		Map<String, String> resultMap = new HashMap<>();
+		if (publicUserId == null || StringUtils.isBlank(password)) {
+			resultMap.put("error", "publicUserId或password参数为空");
+			return resultMap;
+		}
+		PublicUser pu = this.getByPK(publicUserId);
+		if (pu == null) {
+			resultMap.put("error", "publicUserId是" + publicUserId + "不存在");
+			return resultMap;
+		}
+		String mdPassword = MD5Utils.MD5(MD5Utils.MD5(password) + pu.getPasswordSalt());
+		PublicUser tempPublicUser = new PublicUser();
+		tempPublicUser.setPublicUserId(publicUserId);
+		tempPublicUser.setPassword(mdPassword);
+		tempPublicUser.setUpdateTime(DateTimeUtils.getDateTimeInteger());//时间该怎么处理，需要询问
+		int resultStatus = this.updatePassword(tempPublicUser);
+		if (resultStatus <= 0) { //考虑到并发条件下数据库已经不存在该数据
+			resultMap.put("error", "数据更新public_user表异常，请联系开发人员");
+			return resultMap;
+		}
+		return resultMap;
+	}
+
+	@Override
+	public int updatePassword(PublicUser publicUser) throws Exception {
+		return publicUserDao.updatePassword(publicUser);
+	}
+
+	@Override
+	public PublicUser getPublicUser(PublicUserLoginRequest request) {
+		String validateResult = request.paramUserNameValidate();
+		if (validateResult != null) {
+			return null;
+		}
+		PublicUser pu = new PublicUser();
+		pu.setUserName(request.getUserName());
+		return publicUserDao.getPublicUser(pu);
+	}
+
+}

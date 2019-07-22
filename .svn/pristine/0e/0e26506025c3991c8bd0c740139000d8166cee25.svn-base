@@ -1,0 +1,48 @@
+package com.fc.protocol.demo.request.store.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+import io.swagger.annotations.ApiModelProperty;
+import org.apache.commons.lang.StringUtils;
+
+/**@author zhuj
+ *@date 2018/12/28
+ * 银行卡修改记录请求参数实体类
+ *
+ * @param
+ */
+public class GetStoreBossInfoRequest extends ProtocolRequest {
+    @ApiModelProperty(value = "门店id", name = "storeId", example = "1")
+    private Integer storeId;
+
+
+
+    /**
+     * 判断传人参数是否为空
+     *
+     * @param
+     */
+    public String paramValidatecheckid() {
+        if (storeId==null) {
+            return "参数：storeId不能为空";
+        }
+        return null;
+    }
+    public Integer getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Integer storeId) {
+        this.storeId = storeId;
+    }
+
+
+
+
+
+    @Override
+    public String toString() {
+        return "StoreBossInfoRequest [storeId=" + storeId + ", " +
+                "getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode()
+                + ", getTraceId()=" + getTraceId() + "]";
+    }
+}

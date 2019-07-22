@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.store.user.dao.IStoreBorrowDetailDao">
+	<resultMap id="StoreBorrowDetailMap" type="com.fc.member.store.user.entity.StoreBorrowDetail">
+        <id property="storeBorrowDetailId" column="store_borrow_detail_id"/>
+        <id property="storeId" column="store_id"/>
+        <id property="borrowNo" column="borrow_no"/>
+        <id property="orderNo" column="order_no"/>
+        <id property="borrowMoney" column="borrow_money"/>
+        <id property="waitRepayMoney" column="wait_repay_money"/>
+        <id property="purpose" column="purpose"/>
+        <id property="borrowTime" column="borrow_time"/>
+        <id property="remark" column="remark"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="StoreBorrowDetailMap" >
+		select * from store_borrow_detail where 
+	        store_borrow_detail_id = #{storeBorrowDetailId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.store.user.entity.StoreBorrowDetail" useGeneratedKeys="true">
+		insert into store_borrow_detail(store_borrow_detail_id , store_id , borrow_no , order_no , borrow_money , wait_repay_money , purpose , borrow_time , remark  )
+    	values(#{storeBorrowDetailId} ,#{storeId} ,#{borrowNo} ,#{orderNo} ,#{borrowMoney} ,#{waitRepayMoney} ,#{purpose} ,#{borrowTime} ,#{remark} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.store.user.entity.StoreBorrowDetail" useGeneratedKeys="true">
+		insert into store_borrow_detail
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="storeBorrowDetailId != null">store_borrow_detail_id,</if>
+					<if test="storeId != null">store_id,</if>
+					<if test="borrowNo != null">borrow_no,</if>
+					<if test="orderNo != null">order_no,</if>
+					<if test="borrowMoney != null">borrow_money,</if>
+					<if test="waitRepayMoney != null">wait_repay_money,</if>
+					<if test="purpose != null">purpose,</if>
+					<if test="borrowTime != null">borrow_time,</if>
+					<if test="remark != null">remark</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="storeBorrowDetailId != null">#{storeBorrowDetailId},</if>
+					<if test="storeId != null">#{storeId},</if>
+					<if test="borrowNo != null">#{borrowNo},</if>
+					<if test="orderNo != null">#{orderNo},</if>
+					<if test="borrowMoney != null">#{borrowMoney},</if>
+					<if test="waitRepayMoney != null">#{waitRepayMoney},</if>
+					<if test="purpose != null">#{purpose},</if>
+					<if test="borrowTime != null">#{borrowTime},</if>
+					<if test="remark != null">#{remark}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.store.user.entity.StoreBorrowDetail">
+		update store_borrow_detail
+		<set>
+		    	<if test="storeId != null">store_id = #{storeId},</if>
+		    	<if test="borrowNo != null">borrow_no = #{borrowNo},</if>
+		    	<if test="orderNo != null">order_no = #{orderNo},</if>
+		    	<if test="borrowMoney != null">borrow_money = #{borrowMoney},</if>
+		    	<if test="waitRepayMoney != null">wait_repay_money = #{waitRepayMoney},</if>
+		    	<if test="purpose != null">purpose = #{purpose},</if>
+		    	<if test="borrowTime != null">borrow_time = #{borrowTime},</if>
+		    	<if test="remark != null">remark = #{remark},</if>
+		</set>
+		where 
+	        store_borrow_detail_id = #{storeBorrowDetailId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from store_borrow_detail where 
+	        store_borrow_detail_id = #{storeBorrowDetailId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.store.user.entity.StoreBorrowDetail" resultMap="StoreBorrowDetailMap" >
+		select * from store_borrow_detail 
+		<where>
+		       <if test="storeBorrowDetailId != null">
+					AND store_borrow_detail_id = #{storeBorrowDetailId}
+				</if>
+		       <if test="storeId != null">
+					AND store_id = #{storeId}
+				</if>
+		       <if test="borrowNo != null">
+					AND borrow_no = #{borrowNo}
+				</if>
+		       <if test="orderNo != null">
+					AND order_no = #{orderNo}
+				</if>
+		       <if test="borrowMoney != null">
+					AND borrow_money = #{borrowMoney}
+				</if>
+		       <if test="waitRepayMoney != null">
+					AND wait_repay_money = #{waitRepayMoney}
+				</if>
+		       <if test="purpose != null">
+					AND purpose = #{purpose}
+				</if>
+		       <if test="borrowTime != null">
+					AND borrow_time = #{borrowTime}
+				</if>
+		       <if test="remark != null">
+					AND remark = #{remark}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="StoreBorrowDetailMap" >
+		select * from store_borrow_detail  
+		<where>
+		       <if test="condition.storeBorrowDetailId != null">
+					AND store_borrow_detail_id = #{condition.storeBorrowDetailId}
+				</if>
+		       <if test="condition.storeId != null">
+					AND store_id = #{condition.storeId}
+				</if>
+		       <if test="condition.borrowNo != null">
+					AND borrow_no = #{condition.borrowNo}
+				</if>
+		       <if test="condition.orderNo != null">
+					AND order_no = #{condition.orderNo}
+				</if>
+		       <if test="condition.borrowMoney != null">
+					AND borrow_money = #{condition.borrowMoney}
+				</if>
+		       <if test="condition.waitRepayMoney != null">
+					AND wait_repay_money = #{condition.waitRepayMoney}
+				</if>
+		       <if test="condition.purpose != null">
+					AND purpose = #{condition.purpose}
+				</if>
+		       <if test="condition.borrowTime != null">
+					AND borrow_time = #{condition.borrowTime}
+				</if>
+		       <if test="condition.remark != null">
+					AND remark = #{condition.remark}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

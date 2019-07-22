@@ -1,0 +1,165 @@
+package com.fc.member.store.user.handler;
+
+import com.fc.common.exception.ErrorCode;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.store.user.entity.StoreWechat;
+import com.fc.member.store.user.service.IStoreWechatService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.store.user.*;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+
+/**
+ * 门店微养车信息
+ *
+ * @author zhuj
+ * @date 2018/12/28
+ */
+@Component
+@Handler(module = "shop")
+public class StoreWechatHandler {
+    private static Logger log = LoggerFactory.getLogger(StoreWechatHandler.class);
+    @Autowired
+    private IStoreWechatService storeWechatService;
+
+    /**
+     * @param request
+     * @author zhuj
+     * 添加门店微养车信息
+     * @date 2018/12/28
+     */
+    @ReqCodeMapping(requestClazz = CreateStoreWechatRequest.class)
+    public ProtocolResponse createStoreWechatInfo(CreateStoreWechatRequest request) {
+        log.info("添加门店微养车信息request", request);
+        ProtocolResponse response = ProtocolResponse.newInstance();
+        //验证参数是否为空
+        String validateResult = request.paramValidatecheck();
+        if (validateResult != null) {
+            return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+        }
+        StoreWechat storeWechat = new StoreWechat();
+        storeWechat.setOpenid(request.getOpenid());
+        storeWechat.setStoreId(request.getStoreId());
+        storeWechat.setUnionid(request.getUnionid());
+        //设置默认值
+        //开通审核状态 状态0=待审核,1=上线,-1=下线',
+        storeWechat.setStatus(0);
+        //是否开启会员卡业务  0关闭 1开启
+        storeWechat.setIsCouponOn(0);
+        //是否开启该门店核销爱车卡功能 0关闭 1开启
+        storeWechat.setIsStoreWriteoffCard(1);
+        //是否开启该门店核销套餐功能  0关闭 1开启
+        storeWechat.setIsStoreWriteoffPlan(1);
+        //是否开启销售储值卡套餐功能  0关闭 1开启
+        storeWechat.setIsSstorePackage(0);
+        // 是否开启服务预约功能     0关闭 1开启
+        storeWechat.setIsSstoreServiceAppoint(1);
+        storeWechat.setApplyTime(DateTimeUtils.getDateTimeInteger());
+        try {
+            if (storeWechatService.inputStoreWechatInfo(storeWechat)) {
+                response.success();
+            }
+        } catch (Exception e) {
+            response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    /**
+     * @param request
+     * @author zhuj
+     * 更新门店微养车信息
+     * @date 2018/12/28
+     */
+    @ReqCodeMapping(requestClazz = ChangeStoreWechatRequest.class)
+    public ProtocolResponse changeStoreWechatInfo(ChangeStoreWechatRequest request) {
+        log.info("更新门店微养车信息request", request);
+        ProtocolResponse response = ProtocolResponse.newInstance();
+        //验证参数是否为空
+        String validateResult = request.paramValidatecheck();
+        if (validateResult != null) {
+            return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+        }
+        StoreWechat storeWechat = new StoreWechat();
+        storeWechat.setStoreId(request.getStoreId());
+        storeWechat.setStoreWechatId(request.getStoreWechatId());
+        storeWechat.setStatus(request.getStatus());
+        storeWechat.setUnionid(request.getUnionid());
+        storeWechat.setOpenid(request.getOpenid());
+        storeWechat.setAppIndexUrl(request.getAppIndexUrl());
+        storeWechat.setCardListQrCodeUrl(request.getCardListQrCodeUrl());
+        storeWechat.setAppIndexUrl(request.getAppIndexUrl());
+        storeWechat.setIsCouponOn(request.getIsCouponOn());
+        storeWechat.setIsPayWithCouponOn(request.getIsPayWithCouponOn());
+        storeWechat.setIsSstorePackage(request.getIsSstorePackage());
+        storeWechat.setIsSstoreServiceAppoint(request.getIsSstoreServiceAppoint());
+        storeWechat.setUpdateTime(DateTimeUtils.getDateTimeInteger());
+        try {
+            if (storeWechatService.changeStoreWechatInfo(storeWechat)) {
+                response.success();
+            } else {
+                response.error(ErrorCode.UPDATE_ERROR.getValue()).msg(ErrorCode.UPDATE_ERROR.getDesc());
+            }
+        } catch (Exception e) {
+            response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    /**
+     * @param request
+     * @author zhuj
+     * 获取门店微养车信息
+     * @date 2018/12/28
+     */
+    @ReqCodeMapping(requestClazz = GetStoreWechatRequest.class)
+    public ProtocolResponse getStoreWechatInfo(GetStoreWechatRequest request) {
+        log.info("获取门店微养车信息request", request);
+        ProtocolResponse response = ProtocolResponse.newInstance();
+        //验证参数是否为空
+        String validateResult = request.paramValidatecheck();
+        if (validateResult != null) {
+            return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+        }
+        try {
+            StoreWechat storeWechat = storeWechatService.getByPK(request.getStoreWechatId());
+            response.success().addData("store_wechat", storeWechat);
+        } catch (Exception e) {
+            response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    /**
+     * @param request
+     * @author zhuj
+     * 刪除门店微养车信息
+     * @date 2018/12/28
+     */
+    @ReqCodeMapping(requestClazz = GetStoreWechatRequest.class)
+    public ProtocolResponse deleteStoreWechatInfo(GetStoreWechatRequest request) {
+        log.info("刪除门店微养车信息request", request);
+        ProtocolResponse response = ProtocolResponse.newInstance();
+        //验证参数是否为空
+        String validateResult = request.paramValidatecheck();
+        if (validateResult != null) {
+            return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+        }
+        try {
+            storeWechatService.deleteByPK(request.getStoreWechatId());
+            response.success();
+        } catch (Exception e) {
+            response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+            e.printStackTrace();
+        }
+        return response;
+    }
+}

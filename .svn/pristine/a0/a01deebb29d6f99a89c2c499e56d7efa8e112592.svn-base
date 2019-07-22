@@ -1,0 +1,130 @@
+package com.fc.member.wechatmaintain.user.entity;
+
+import java.io.Serializable;
+import java.math.BigDecimal;import java.math.BigDecimal;import java.math.BigDecimal;
+/**
+ * <p>Table: WechatMaintainConponConsumeinfo</p>
+ * <p>Description: </p>
+ * @author yangd
+ * @date 2018-12-28 17:13:46
+ */
+public class WechatMaintainConponConsumeinfo implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer wechatMaintainConponConsumeinfoId; // 充值消费记录id
+	private Integer fcUserId; // 枫车用户id
+	private String orderNo; // 订单号
+	private Integer storeId; // 门店id
+	private Integer wechatStorePackageId; // 门店储值卡套餐id
+	private Integer recordType; // 1=储值卡充值，2=储值卡消费
+	private BigDecimal costFee; // 充值、消费金额
+	private BigDecimal discount; // 赠送金额
+	private BigDecimal balance; // 当前余额
+	private String content; // 消费描述
+	private String consumptionKind; // 消费种类：sstore_goods/sstore_card/weapp_order/service_package/debit_recharge/debit
+	private Integer createTime; // 消费时间
+
+	public void setWechatMaintainConponConsumeinfoId(Integer wechatMaintainConponConsumeinfoId) {
+		this.wechatMaintainConponConsumeinfoId = wechatMaintainConponConsumeinfoId;
+	}
+	
+	public Integer getWechatMaintainConponConsumeinfoId() {
+		return this.wechatMaintainConponConsumeinfoId;
+	}
+	public void setFcUserId(Integer fcUserId) {
+		this.fcUserId = fcUserId;
+	}
+	
+	public Integer getFcUserId() {
+		return this.fcUserId;
+	}
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
+	}
+	
+	public String getOrderNo() {
+		return this.orderNo;
+	}
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+	
+	public Integer getStoreId() {
+		return this.storeId;
+	}
+	public void setWechatStorePackageId(Integer wechatStorePackageId) {
+		this.wechatStorePackageId = wechatStorePackageId;
+	}
+	
+	public Integer getWechatStorePackageId() {
+		return this.wechatStorePackageId;
+	}
+	public void setRecordType(Integer recordType) {
+		this.recordType = recordType;
+	}
+	
+	public Integer getRecordType() {
+		return this.recordType;
+	}
+	public void setCostFee(BigDecimal costFee) {
+		this.costFee = costFee;
+	}
+	
+	public BigDecimal getCostFee() {
+		return this.costFee;
+	}
+	public void setDiscount(BigDecimal discount) {
+		this.discount = discount;
+	}
+	
+	public BigDecimal getDiscount() {
+		return this.discount;
+	}
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
+	}
+	
+	public BigDecimal getBalance() {
+		return this.balance;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	
+	public String getContent() {
+		return this.content;
+	}
+	public void setConsumptionKind(String consumptionKind) {
+		this.consumptionKind = consumptionKind;
+	}
+	
+	public String getConsumptionKind() {
+		return this.consumptionKind;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+
+    @Override
+    public String toString () {
+    	return "WechatMaintainConponConsumeinfo{" + 
+	    	"wechatMaintainConponConsumeinfoId=" + wechatMaintainConponConsumeinfoId + 
+	    	", fcUserId=" + fcUserId + 
+	    	", orderNo=" + orderNo + 
+	    	", storeId=" + storeId + 
+	    	", wechatStorePackageId=" + wechatStorePackageId + 
+	    	", recordType=" + recordType + 
+	    	", costFee=" + costFee + 
+	    	", discount=" + discount + 
+	    	", balance=" + balance + 
+	    	", content=" + content + 
+	    	", consumptionKind=" + consumptionKind + 
+	    	", createTime=" + createTime + 
+	    	"}";
+    }
+}

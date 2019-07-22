@@ -1,0 +1,83 @@
+package com.fc.protocol.demo.request.pc.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * @Author: linpeng
+ * @Date: 2019/1/4 15:41
+ * @Version 1.0
+ */
+public class PcUserRequest extends ProtocolRequest {
+
+    @ApiModelProperty(value = "当前页码", name = "page_no")
+    private Integer page = 1;
+    @ApiModelProperty(value = "当前页记录数", name = "page_size")
+    private Integer pagesize = 10;
+    @ApiModelProperty(value = "pc收银车主ID", name = "pc_user_id")
+	private Integer  pc_user_id;
+    @ApiModelProperty(value = "枫车用户ID", name = "fc_user_id")
+    private Integer  fc_user_id;
+    @ApiModelProperty(value = "手机号码", name = "mobile")
+	private String  mobile;
+    @ApiModelProperty(value = "车主姓名", name = "name")
+    private String name;
+
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getPagesize() {
+        return pagesize;
+    }
+
+    public void setPagesize(int pagesize) {
+        this.pagesize = pagesize;
+    }
+
+    public Integer getPcUserId() {
+        return pc_user_id;
+    }
+
+    public void setPcUserId(Integer pc_user_id) {
+        this.pc_user_id = pc_user_id;
+    }
+
+    public Integer getFcUserId() {
+        return fc_user_id;
+    }
+
+    public void setFcUserId(Integer fc_user_id) {
+        this.fc_user_id = fc_user_id;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+	public String toString() {
+		return "WechatPlatformServiceCountRequest [getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode()
+                + ", getTraceId()=" + getTraceId() +", page=" + getPage() + ", pagesize=" + getPagesize()
+                +", pc_user_id=" + getPcUserId() +", fc_user_id=" + getFcUserId() +", mobile=" + getMobile()
+                +", name=" + getName() + "]";
+	}
+
+}

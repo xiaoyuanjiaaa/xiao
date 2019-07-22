@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.shop.dao.ITestDao" >
+ 	<resultMap id="TestMap" type="com.fc.member.shop.entity.Test">
+        <id property="id" column="id"/>
+        <id property="name" column="name"/>
+        <id property="note" column="note"/>
+	</resultMap>
+    <!--通过id查找-->
+    <select id="findTestById" parameterType="int" resultType="com.fc.member.shop.entity.Test">
+        SELECT * from test where id = #{id}
+    </select>
+    <!--增加-->
+    <insert id="add" parameterType="com.fc.member.shop.entity.Test">
+        INSERT INTO test(name,note) VALUES (#{name},#{note})
+    </insert>
+    <!--删除-->
+    <delete id="deleteById" parameterType="int">
+        DELETE FROM test where id = #{id}
+    </delete>
+    <!--更新-->
+    <update id="updateByID" parameterType="com.fc.member.shop.entity.Test">
+        UPDATE test SET NAME =#{name},note =#{note} where id = #{id}
+    </update>
+    <!--模糊查询-->
+	<select id="getRowsPage" parameterType="com.fc.common.plugin.mybatis.PageQuery" resultMap="TestMap" >
+		select * from test  
+	</select>
+    <select id="getTestListPage" parameterType="com.fc.common.plugin.mybatis.PageQuery" resultType="java.util.Map" >
+		select * from test order by id
+	</select>
+
+</mapper>

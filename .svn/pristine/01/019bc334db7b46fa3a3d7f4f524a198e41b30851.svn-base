@@ -1,0 +1,32 @@
+package com.fc.member.wechatmaintain.user.service;
+
+import java.util.List;
+import java.util.Map;
+
+import com.fc.common.service.IService;
+import com.fc.member.wechatmaintain.user.entity.WechatMaintainUserCoupon;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainUserCouponRequest;
+
+/**
+ * <p>Title: WechatMaintainUserCoupon</p>
+ * <p>Description: 微养车用户储值卡 Service 接口</p>
+ * @author yangd
+ * @date 2018-12-28 17:13:48
+ */
+public interface IWechatMaintainUserCouponService extends IService<WechatMaintainUserCoupon> {
+
+	/**插入数据*/
+	Map<String, Object> insertSelective(WechatMaintainUserCouponRequest request);
+
+	/**储值卡列表 - 分页*/
+	List<WechatMaintainUserCoupon> getUserCouponList(WechatMaintainUserCouponRequest request);
+
+	/**我的 - 储值卡列表*/
+	List<WechatMaintainUserCoupon> getUserCouponByUserIdList(WechatMaintainUserCouponRequest request);
+
+	/**更新数据*/
+	Map<String, Object> updateWechatMaintainUserCoupon(WechatMaintainUserCouponRequest request) throws Exception;
+
+	/**查询用户所有可用储值卡余额*/
+	WechatMaintainUserCoupon getUserBalanceTotle(WechatMaintainUserCouponRequest request);
+}

@@ -1,0 +1,124 @@
+package com.fc.protocol.demo.request.store.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+import org.apache.commons.lang.StringUtils;
+
+public class CreateStoreBankCardRequest extends ProtocolRequest {
+    private Integer storeBankCardId; // 门店银行卡id
+    private Integer storeId; // 门店ID
+    private String cardBankName; // 开户银行
+    private String bankCardNo; // 银行卡号
+    private String bankHoldName; // 银行开户姓名
+    private String depositBank; // 开户支行名称
+    private Integer regionId; // 开户所在地区ID
+    private String cardAddress; // 开户所在地区
+    public Integer getStoreBankCardId() {
+        return storeBankCardId;
+    }
+
+    public void setStoreBankCardId(Integer storeBankCardId) {
+        this.storeBankCardId = storeBankCardId;
+    }
+
+    public Integer getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Integer storeId) {
+        this.storeId = storeId;
+    }
+
+    public String getCardBankName() {
+        return cardBankName;
+    }
+
+    public void setCardBankName(String cardBankName) {
+        this.cardBankName = cardBankName;
+    }
+
+    public String getBankCardNo() {
+        return bankCardNo;
+    }
+
+    public void setBankCardNo(String bankCardNo) {
+        this.bankCardNo = bankCardNo;
+    }
+
+    public String getBankHoldName() {
+        return bankHoldName;
+    }
+
+    public void setBankHoldName(String bankHoldName) {
+        this.bankHoldName = bankHoldName;
+    }
+
+    public String getDepositBank() {
+        return depositBank;
+    }
+
+    public void setDepositBank(String depositBank) {
+        this.depositBank = depositBank;
+    }
+
+    public Integer getRegionId() {
+        return regionId;
+    }
+
+    public void setRegionId(Integer regionId) {
+        this.regionId = regionId;
+    }
+
+    public String getCardAddress() {
+        return cardAddress;
+    }
+
+    public void setCardAddress(String cardAddress) {
+        this.cardAddress = cardAddress;
+    }
+
+    public String paramValidate() {
+        if (StringUtils.isBlank(storeBankCardId+"")) {
+            return "参数：storeBankCardId不能为空";
+        }
+        if (StringUtils.isBlank(storeId+"")) {
+            return "参数：storeId不能为空";
+        }
+        if (StringUtils.isBlank(cardBankName+"")) {
+            return "参数：cardBankName不能为空";
+        }
+        if (StringUtils.isBlank(cardBankName+"")) {
+            return "参数：storeBankCardId不能为空";
+        }
+        if (StringUtils.isBlank(bankCardNo+"")) {
+            return "参数：bankCardNo不能为空";
+        }
+        if (StringUtils.isBlank(bankHoldName+"")) {
+            return "参数：storeBankCardId不能为空";
+        }
+        if (StringUtils.isBlank(depositBank+"")) {
+            return "参数：depositBank不能为空";
+        }
+        if (StringUtils.isBlank(regionId+"")) {
+            return "参数：regionId不能为空";
+        }
+        if (StringUtils.isBlank(cardAddress+"")) {
+            return "参数：cardAddress不能为空";
+        }
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        return "StoreBankCardRequest [storeId=" + storeId + ", " +
+                "storeBankCardId=" + storeBankCardId + ", " +
+                "cardAddress=" + cardAddress + ", " +
+                "regionId=" + regionId + ", " +
+                "depositBank=" + depositBank + ", " +
+                "bankHoldName=" + bankHoldName + ", " +
+                "bankCardNo=" + bankCardNo + ", " +
+                "cardBankName=" + cardBankName + ", " +
+                "getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode()
+                + ", getTraceId()=" + getTraceId() + "]";
+    }
+
+}

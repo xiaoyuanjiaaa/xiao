@@ -1,0 +1,128 @@
+package com.fc.protocol.demo.request.pc.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+import io.swagger.annotations.ApiModelProperty;
+import org.springframework.util.StringUtils;
+
+/**
+ * @Author: linpeng
+ * @Date: 2019/1/4 15:41
+ * @Version 1.0
+ */
+public class PcUserRequest extends ProtocolRequest {
+
+    @ApiModelProperty(value = "当前页码", name = "page")
+    private Integer page = 1;
+    @ApiModelProperty(value = "当前页记录数", name = "pagesize")
+    private Integer pagesize = 10;
+    @ApiModelProperty(value = "pc收银车主ID", name = "pc_user_id")
+	private Integer  pc_user_id;
+    @ApiModelProperty(value = "枫车用户ID", name = "fc_user_id")
+    private Integer  fc_user_id;
+    @ApiModelProperty(value = "手机号码", name = "mobile")
+	private String  mobile;
+    @ApiModelProperty(value = "车主姓名", name = "name")
+    private String name;
+
+    public String paramValidateGet() {
+        if (StringUtils.isEmpty(pc_user_id)) {
+            return "参数:pc_user_id 不能为空";
+        }
+        return null;
+    }
+
+    public String paramValidateList() {
+        if (StringUtils.isEmpty(page)) {
+            return "参数:page 不能为空";
+        }
+        if (StringUtils.isEmpty(pagesize)) {
+            return "参数:pagesize 不能为空";
+        }
+        return null;
+    }
+
+    public String paramValidateSave() {
+        if (StringUtils.isEmpty(fc_user_id)) {
+            return "参数:fc_user_id 不能为空";
+        }
+        if (StringUtils.isEmpty(mobile)) {
+            return "参数:mobile 不能为空";
+        }
+        if (StringUtils.isEmpty(name)) {
+            return "参数:name 不能为空";
+        }
+        return null;
+    }
+
+    public String paramValidateUpdate() {
+        if (StringUtils.isEmpty(pc_user_id)) {
+            return "参数:pc_user_id 不能为空";
+        }
+        return null;
+    }
+
+    public String paramValidateDelete() {
+        if (StringUtils.isEmpty(pc_user_id)) {
+            return "参数:pc_user_id 不能为空";
+        }
+        return null;
+    }
+
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getPagesize() {
+        return pagesize;
+    }
+
+    public void setPagesize(Integer pagesize) {
+        this.pagesize = pagesize;
+    }
+
+    public Integer getPcUserId() {
+        return pc_user_id;
+    }
+
+    public void setPcUserId(Integer pc_user_id) {
+        this.pc_user_id = pc_user_id;
+    }
+
+    public Integer getFcUserId() {
+        return fc_user_id;
+    }
+
+    public void setFcUserId(Integer fc_user_id) {
+        this.fc_user_id = fc_user_id;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+	public String toString() {
+		return "WechatPlatformServiceCountRequest [getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode()
+                + ", getTraceId()=" + getTraceId() +", page=" + getPage() + ", pagesize=" + getPagesize()
+                +", pc_user_id=" + getPcUserId() +", fc_user_id=" + getFcUserId() +", mobile=" + getMobile()
+                +", name=" + getName() + "]";
+	}
+
+}

@@ -1,0 +1,203 @@
+package com.fc.member.shop.user.entity;
+
+import java.io.Serializable;
+
+
+/**
+ * <p>Table: ShopWithdrawCash</p>
+ * <p>Description: 店铺提现记录表</p>
+ * @author yangd
+ * @date 2019-01-14 11:08:40
+ */
+public class ShopWithdrawCash implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer shopWithdrawCashId; // 主键id
+	private Integer shopId; // 店铺id
+	private String shopName; // 店铺名称
+	private String shopType; // 店铺类型
+	private Integer withdrawAmount; // 申请提现金额
+	private Integer waitWithdrawAmount; // 可提现余额
+	private Integer auditTime; // 审核时间
+	private Integer payOptUserId; // 汇款操作人ID
+	private String payOptUserName; // 汇款操作人
+	private Integer payStatus; // 汇款状态 ：默认0，0：未汇款，1：已汇款
+	private Integer payTime; // 汇款时间
+	private Integer status; // 综合状态 100：未审核  102：提现记录有问题，延迟汇款  101：等待汇款  199：未通过审核  200：汇款成功  201：账户有误，取消汇款
+	private Integer applyTime; // 申请时间
+	private String settlementId; // 结算单ID
+	private String withdrawSn; // 提现单号
+	private String bankInfo; // 提现银行卡信息
+	private Integer accountType; // 提现到账类型 1:普通到账 2:快速到账
+	private Integer wdWithdrawAmount; // 微店提现金额
+	private Integer updateTime; // 修改时间
+	private Integer createTime; // 创建时间
+
+	public void setShopWithdrawCashId(Integer shopWithdrawCashId) {
+		this.shopWithdrawCashId = shopWithdrawCashId;
+	}
+	
+	public Integer getShopWithdrawCashId() {
+		return this.shopWithdrawCashId;
+	}
+	public void setShopId(Integer shopId) {
+		this.shopId = shopId;
+	}
+	
+	public Integer getShopId() {
+		return this.shopId;
+	}
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+	
+	public String getShopName() {
+		return this.shopName;
+	}
+	public void setShopType(String shopType) {
+		this.shopType = shopType;
+	}
+	
+	public String getShopType() {
+		return this.shopType;
+	}
+	public void setWithdrawAmount(Integer withdrawAmount) {
+		this.withdrawAmount = withdrawAmount;
+	}
+	
+	public Integer getWithdrawAmount() {
+		return this.withdrawAmount;
+	}
+	public void setWaitWithdrawAmount(Integer waitWithdrawAmount) {
+		this.waitWithdrawAmount = waitWithdrawAmount;
+	}
+	
+	public Integer getWaitWithdrawAmount() {
+		return this.waitWithdrawAmount;
+	}
+	public void setAuditTime(Integer auditTime) {
+		this.auditTime = auditTime;
+	}
+	
+	public Integer getAuditTime() {
+		return this.auditTime;
+	}
+	public void setPayOptUserId(Integer payOptUserId) {
+		this.payOptUserId = payOptUserId;
+	}
+	
+	public Integer getPayOptUserId() {
+		return this.payOptUserId;
+	}
+	public void setPayOptUserName(String payOptUserName) {
+		this.payOptUserName = payOptUserName;
+	}
+	
+	public String getPayOptUserName() {
+		return this.payOptUserName;
+	}
+	public void setPayStatus(Integer payStatus) {
+		this.payStatus = payStatus;
+	}
+	
+	public Integer getPayStatus() {
+		return this.payStatus;
+	}
+	public void setPayTime(Integer payTime) {
+		this.payTime = payTime;
+	}
+	
+	public Integer getPayTime() {
+		return this.payTime;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	
+	public Integer getStatus() {
+		return this.status;
+	}
+	public void setApplyTime(Integer applyTime) {
+		this.applyTime = applyTime;
+	}
+	
+	public Integer getApplyTime() {
+		return this.applyTime;
+	}
+	public void setSettlementId(String settlementId) {
+		this.settlementId = settlementId;
+	}
+	
+	public String getSettlementId() {
+		return this.settlementId;
+	}
+	public void setWithdrawSn(String withdrawSn) {
+		this.withdrawSn = withdrawSn;
+	}
+	
+	public String getWithdrawSn() {
+		return this.withdrawSn;
+	}
+	public void setBankInfo(String bankInfo) {
+		this.bankInfo = bankInfo;
+	}
+	
+	public String getBankInfo() {
+		return this.bankInfo;
+	}
+	public void setAccountType(Integer accountType) {
+		this.accountType = accountType;
+	}
+	
+	public Integer getAccountType() {
+		return this.accountType;
+	}
+	public void setWdWithdrawAmount(Integer wdWithdrawAmount) {
+		this.wdWithdrawAmount = wdWithdrawAmount;
+	}
+	
+	public Integer getWdWithdrawAmount() {
+		return this.wdWithdrawAmount;
+	}
+	public void setUpdateTime(Integer updateTime) {
+		this.updateTime = updateTime;
+	}
+	
+	public Integer getUpdateTime() {
+		return this.updateTime;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+
+    @Override
+    public String toString () {
+    	return "ShopWithdrawCash{" + 
+	    	"shopWithdrawCashId=" + shopWithdrawCashId + 
+	    	", shopId=" + shopId + 
+	    	", shopName=" + shopName + 
+	    	", shopType=" + shopType + 
+	    	", withdrawAmount=" + withdrawAmount + 
+	    	", waitWithdrawAmount=" + waitWithdrawAmount + 
+	    	", auditTime=" + auditTime + 
+	    	", payOptUserId=" + payOptUserId + 
+	    	", payOptUserName=" + payOptUserName + 
+	    	", payStatus=" + payStatus + 
+	    	", payTime=" + payTime + 
+	    	", status=" + status + 
+	    	", applyTime=" + applyTime + 
+	    	", settlementId=" + settlementId + 
+	    	", withdrawSn=" + withdrawSn + 
+	    	", bankInfo=" + bankInfo + 
+	    	", accountType=" + accountType + 
+	    	", wdWithdrawAmount=" + wdWithdrawAmount + 
+	    	", updateTime=" + updateTime + 
+	    	", createTime=" + createTime + 
+	    	"}";
+    }
+}

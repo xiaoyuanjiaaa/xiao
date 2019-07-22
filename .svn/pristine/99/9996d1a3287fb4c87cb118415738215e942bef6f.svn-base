@@ -1,0 +1,198 @@
+package com.fc.member.pc.user.handler;
+
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.member.pc.user.entity.PcUserCar;
+import com.fc.member.pc.user.service.IPcUserCarService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.pc.user.PcUserCarRequest;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**PC收银 - 车辆车辆档案
+ * @Author: linpeng
+ * @Date: 2019/1/4 14:58
+ * @Version 1.0
+ */
+@Component
+@Handler(module = "userCar")
+public class PcUserCarHandler {
+
+    private static Logger log = LoggerFactory.getLogger(PcUserCarHandler.class);
+
+    @Autowired
+    IPcUserCarService pcUserCarService;
+
+    @ReqCodeMapping(requestClazz = PcUserCarRequest.class)
+    public ProtocolResponse pcUserCarGetHandler(PcUserCarRequest request) {
+        log.info("获取PC收银车辆信息------>request:{}", request);
+        ProtocolResponse response=null;
+        try {
+            log.info("查询PC收银车辆信息，pc_user_id:{},car_num:{}",request.getPcUserId(),request.getCarNum());
+            PcUserCar pcUserCar  = pcUserCarService.get(request.getPcUserId(),request.getCarNum());
+            log.info("查询结果:{}", pcUserCar);
+
+            if ( pcUserCar != null){
+                response = ProtocolResponse.newInstance().success().addData("data",pcUserCar);
+            }
+            else {
+                response = ProtocolResponse.newInstance().error(1011).msg("该车辆信息不存在");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.info("操作失败");
+            return ProtocolResponse.newInstance().error(10199).msg("操作失败");
+        }
+        log.info("获取PC收银车辆信息------>response:{}", response);
+        return response;
+    }
+
+    @ReqCodeMapping(requestClazz = PcUserCarRequest.class)
+    public ProtocolResponse pcUserCarListHandler(PcUserCarRequest request) {
+        log.info("获取PC收银车辆信息列表------>request:{}", request);
+        ProtocolResponse response=null;
+        Page page = new Page();
+        page.setPage(request.getPage());
+        page.setRows(request.getPagesize());
+        Map<String, Object> param = new HashMap<>();
+        param.put("pcUserId",request.getPcUserId());
+        param.put("carNum",request.getCarNum());
+        try {
+            log.info("查询PC收银车辆列表，page:{},param:{}",page,param);
+            List<PcUserCar> pcUserCar  = pcUserCarService.getPcUserCarList(param,page);
+            log.info("查询结果 -----> count:{},data:{}", page.getTotalResult(),pcUserCar);
+            if ( pcUserCar != null & pcUserCar.size() != 0){
+                response = ProtocolResponse.newInstance().success().addData("data",pcUserCar).addData("count",page.getTotalResult());
+            }
+            else {
+                response = ProtocolResponse.newInstance().error(1012).msg("未查到相关的PC收银车辆信息列表");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.info("操作失败");
+            return ProtocolResponse.newInstance().error(10199).msg("操作失败");
+        }
+        log.info("获取PC收银车辆信息列表------>response:{}", response);
+        return response;
+    }
+
+
+    @ReqCodeMapping(requestClazz = PcUserCarRequest.class)
+    public ProtocolResponse pcUserCarSaveHandler(PcUserCarRequest request) {
+        log.info("创建PC收银车辆------>request:{}", request);
+        ProtocolResponse response=null;
+        try {
+            log.info("创建PC收银车辆，pc_user_id:{},car_num:{},vehicle_id:{},vehicle_name:{},drive_mileage:{},frame_number:{},engine_number:{},status:{},is_default:{}",
+                    request.getPcUserId(),request.getCarNum(),request.getVehicleId(),request.getVehicleName(),request.getDriveMileage(),request.getFrameNumber(),
+                    request.getEngineNumber(),request.getStatus(),request.getIsDefault());
+            PcUserCar pcUserCar = new PcUserCar();
+            pcUserCar.setPcUserId(request.getPcUserId());
+            pcUserCar.setCarNum(request.getCarNum());
+            pcUserCar.setVehicleId(request.getVehicleId());
+            pcUserCar.setVehicleName(request.getVehicleName());
+            pcUserCar.setDriveMileage(request.getDriveMileage());
+            pcUserCar.setFrameNumber(request.getFrameNumber());
+            pcUserCar.setEngineNumber(request.getEngineNumber());
+            pcUserCar.setStatus(request.getStatus());
+            pcUserCar.setIsDefault(request.getIsDefault());
+            pcUserCar.setCreateTime(2019);
+            int result = pcUserCarService.insertPcUserCar(pcUserCar);
+            if (result != 0) {
+                log.info("创建车辆成功");
+                response = ProtocolResponse.newInstance().success().msg("创建车辆成功").addData("pc_user_car_id",pcUserCarService.get(request.getPcUserId(),request.getCarNum()).getPcUserCarId());
+            }
+            else{
+                return ProtocolResponse.newInstance().error(1013).msg("创建车辆失败");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.info("操作失败");
+            return ProtocolResponse.newInstance().error(10199).msg("操作失败");
+        }
+        log.info("创建PC收银车辆信息------>response:{}", response);
+        return response;
+    }
+
+    @ReqCodeMapping(requestClazz = PcUserCarRequest.class)
+    public ProtocolResponse pcUserCarUpdateHandler(PcUserCarRequest request) {
+        log.info("修改PC收银车辆信息------>request:{}", request);
+        ProtocolResponse response=null;
+        try {
+            log.info("修改PC收银车辆，pc_user_car_id:{},pc_user_id:{},car_num:{},vehicle_id:{},vehicle_name:{},drive_mileage:{},frame_number:{},engine_number:{},status:{},is_default:{}",
+                    request.getPcUserCarId(),request.getPcUserId(),request.getCarNum(),request.getVehicleId(),request.getVehicleName(),request.getDriveMileage(),request.getFrameNumber(),
+                    request.getEngineNumber(),request.getStatus(),request.getIsDefault());
+            //通过pc_user_car_id(主键)查询该用户，
+            PcUserCar pcUserCar = pcUserCarService.getByPK(request.getPcUserCarId());
+            //判断该用户是否存在
+            if (pcUserCar == null) {
+                return ProtocolResponse.newInstance().error(1011).msg("该车辆不存在");
+            }
+            //用户存在，执行后续操作
+            log.info("修改前:{}", pcUserCar);
+            pcUserCar.setPcUserId(request.getPcUserId());
+            pcUserCar.setCarNum(request.getCarNum());
+            pcUserCar.setVehicleId(request.getVehicleId());
+            pcUserCar.setVehicleName(request.getVehicleName());
+            pcUserCar.setDriveMileage(request.getDriveMileage());
+            pcUserCar.setFrameNumber(request.getFrameNumber());
+            pcUserCar.setEngineNumber(request.getEngineNumber());
+            pcUserCar.setStatus(request.getStatus());
+            pcUserCar.setIsDefault(request.getIsDefault());
+            pcUserCar.setUpdateTime(20190103);
+            int result = pcUserCarService.updatePcUserCar(pcUserCar);
+            if (result != 0) {
+                log.info("修改PC收银车辆信息成功");
+                log.info("修改后:{}", pcUserCar);
+                response = ProtocolResponse.newInstance().success().msg("修改车辆信息成功");
+            }
+            else{
+                return ProtocolResponse.newInstance().error(1014).msg("修改车辆信息失败");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.info("操作失败");
+            return ProtocolResponse.newInstance().error(10199).msg("操作失败");
+        }
+        log.info("修改PC收银车辆信息------>response:{}", response);
+        return response;
+    }
+
+    @ReqCodeMapping(requestClazz = PcUserCarRequest.class)
+    public ProtocolResponse pcUserCarDeleteHandler(PcUserCarRequest request) {
+        log.info("删除PC收银车辆信息------>request:{}", request);
+        ProtocolResponse response=null;
+        try {
+            log.info("删除PC收银车辆信息，pc_user_car_id:{},pc_user_id:{},car_num:{}",request.getPcUserCarId(),request.getPcUserId(),request.getCarNum());
+            //PcUserCar pcUserCar  = pcUserCarService.get(request.getPcUserId(),request.getCarNum());
+            PcUserCar pcUserCar  = pcUserCarService.getByPK(request.getPcUserCarId());
+            //先查询该用户是否存在
+            if (pcUserCar == null) {
+                return ProtocolResponse.newInstance().error(1011).msg("该用户不存在");
+            }
+            //用户存在，执行后续操作
+            log.info("需要被删除的信息:{}", pcUserCar);
+            int result = pcUserCarService.deletePcUserCar(pcUserCar.getPcUserCarId());
+            if (result != 0) {
+                log.info("删除PC收银车辆信息成功");
+                response = ProtocolResponse.newInstance().success().msg("删除PC收银车辆信息成功");
+            }
+            else{
+                return ProtocolResponse.newInstance().error(1014).msg("删除PC收银车辆信息失败");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.info("操作失败");
+            return ProtocolResponse.newInstance().error(10199).msg("操作失败");
+        }
+        log.info("删除PC收银车辆信息------>response:{}", response);
+        return response;
+    }
+}

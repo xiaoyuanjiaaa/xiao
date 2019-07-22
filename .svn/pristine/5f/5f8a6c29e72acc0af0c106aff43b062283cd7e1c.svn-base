@@ -1,0 +1,95 @@
+package com.fc.member.master.user.entity;
+
+import java.io.Serializable;
+
+
+/**
+ * <p>Table: MasterStoreWorker</p>
+ * <p>Description: 关联门店表</p>
+ * @author yangd
+ * @date 2019-01-15 10:09:29
+ */
+public class MasterStoreWorker implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer masterStoreWorkerId; // 主键id
+	private Integer yid; // 用户ID
+	private Integer storeId; // 商家ID
+	private String storeName; // 商家名称
+	private Integer regionId; // 商家地区id
+	private Integer status; // 状态(0:审核中 1:审核通过 2:审核不通过 3:已解绑)
+	private Integer createTime; // 创建时间
+	private Integer updateTime; // 修改时间
+
+	public void setMasterStoreWorkerId(Integer masterStoreWorkerId) {
+		this.masterStoreWorkerId = masterStoreWorkerId;
+	}
+	
+	public Integer getMasterStoreWorkerId() {
+		return this.masterStoreWorkerId;
+	}
+	public void setYid(Integer yid) {
+		this.yid = yid;
+	}
+	
+	public Integer getYid() {
+		return this.yid;
+	}
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+	
+	public Integer getStoreId() {
+		return this.storeId;
+	}
+	public void setStoreName(String storeName) {
+		this.storeName = storeName;
+	}
+	
+	public String getStoreName() {
+		return this.storeName;
+	}
+	public void setRegionId(Integer regionId) {
+		this.regionId = regionId;
+	}
+	
+	public Integer getRegionId() {
+		return this.regionId;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	
+	public Integer getStatus() {
+		return this.status;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+	public void setUpdateTime(Integer updateTime) {
+		this.updateTime = updateTime;
+	}
+	
+	public Integer getUpdateTime() {
+		return this.updateTime;
+	}
+
+    @Override
+    public String toString () {
+    	return "MasterStoreWorker{" + 
+	    	"masterStoreWorkerId=" + masterStoreWorkerId + 
+	    	", yid=" + yid + 
+	    	", storeId=" + storeId + 
+	    	", storeName=" + storeName + 
+	    	", regionId=" + regionId + 
+	    	", status=" + status + 
+	    	", createTime=" + createTime + 
+	    	", updateTime=" + updateTime + 
+	    	"}";
+    }
+}

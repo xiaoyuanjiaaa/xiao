@@ -1,0 +1,36 @@
+package com.fc.member.wechatmaintain.user.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.member.wechatmaintain.user.entity.WechatMaintainUserCar;
+
+/**
+ * <p>Title: WechatMaintainUserCar</p>
+ * <p>Description:  DAO层</p>
+ * @author yangd
+ * @date 2018-12-28 17:13:47
+ */
+@Mapper
+public interface IWechatMaintainUserCarDao extends IMapper<WechatMaintainUserCar> {
+
+	/**插入数据*/
+	int insertSelective(WechatMaintainUserCar obj);
+
+	/**用户车辆档案列表*/
+	List<WechatMaintainUserCar> getUserCarListByUserId(WechatMaintainUserCar obj);
+
+	/**更新是否起用状态(删除操作)*/
+	void updateStatus(WechatMaintainUserCar obj) throws Exception;
+
+	/**更新默认车辆*/
+	void updateIsDefault(WechatMaintainUserCar obj) throws Exception;
+
+	/**查询该用户下默认车辆；当查询不到默认车辆时，查询该用户最新车辆信息；并更新为默认车辆*/
+	WechatMaintainUserCar getUserDefaultCar(WechatMaintainUserCar obj);
+
+	/**查询该用户下默认车辆；当查询不到默认车辆时，不设置最新车辆为默认车辆*/
+	WechatMaintainUserCar getUserNewCar(WechatMaintainUserCar obj) throws Exception;
+}

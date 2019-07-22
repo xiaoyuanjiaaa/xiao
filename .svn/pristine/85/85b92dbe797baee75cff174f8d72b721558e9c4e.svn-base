@@ -1,0 +1,60 @@
+package com.fc.member.store.user.service.impl;
+
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.member.store.user.entity.StoreBankCard;
+import com.fc.protocol.demo.request.store.user.StoreBankCardChangeRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.member.store.user.dao.IStoreBankCardChangeDao;
+import com.fc.member.store.user.service.IStoreBankCardChangeService;
+import com.fc.member.store.user.entity.StoreBankCardChange;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * <p>Title: StoreBankCardChange</p>
+ * <p>Description:  Service 层</p>
+ *
+ * @author yangd
+ * @date 2018-12-27 16:31:05
+ */
+@Service("storeBankCardChangeService")
+public class StoreBankCardChangeServiceImp extends ServiceImpl<StoreBankCardChange> implements IStoreBankCardChangeService {
+
+    @Autowired
+    private IStoreBankCardChangeDao storeBankCardChangeDao;
+
+    @Override
+    protected IMapper<StoreBankCardChange> getDao() {
+        return storeBankCardChangeDao;
+    }
+
+    /**
+     * @param request
+     * @author zhuj
+     * @description 获取门店绑定银行卡信息
+     * @update_name
+     * @update_time
+     */
+    @Override
+    public Map<String, Object> getStoreBankCardChangeList(StoreBankCardChangeRequest request) {
+        //设置分页参数
+        Page page = new Page();
+        page.setPage(request.getPage());
+        page.setRows(request.getPagesize());
+        page.setShowTotal(true);
+        //设置查询条件
+        StoreBankCardChange storeBankCardChange = new StoreBankCardChange();
+        storeBankCardChange.setStoreId(request.getStoreId());
+        List<StoreBankCardChange> storeBankCardChangelist = getRowsPage(page, storeBankCardChange);
+        //组装返回数据
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("storeBankCardChangelist", storeBankCardChangelist);
+        map.put("pageCount", page.getTotalPage());
+        return map;
+    }
+}

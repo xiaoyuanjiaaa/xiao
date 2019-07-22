@@ -1,0 +1,154 @@
+package com.fc.protocol.client.demo.controller;
+
+import com.fc.protocol.client.IProtocolClient;
+import com.fc.protocol.client.demo.config.ProtocolClientPool;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.common.utils.IntegerFactory;
+import com.fc.protocol.demo.request.wechatplatform.user.WechatPlatformUserRequest;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@Api(tags = "WechatPlatformUserController", description = "微养车找店用户管理控制器")
+@RestController
+@RequestMapping("/service/platform/user")
+public class WechatPlatformUserController {
+
+	private static Logger log = LoggerFactory.getLogger(WechatPlatformUserController.class);
+
+	@Autowired
+	private ProtocolClientPool protocolClientPool;
+
+
+    @RequestMapping(value = "/get", method = { RequestMethod.POST, RequestMethod.GET })
+    @ApiOperation(value = "用户信息", notes = "获取微养车找店的用户信息")
+    @ResponseBody
+    public Object list(HttpServletRequest request,
+                       @ApiParam(name = "openid", value = "用户openid") @RequestParam(required = true) String openid,
+                       HttpServletResponse response) throws Exception {
+        WechatPlatformUserRequest wechatPlatformUserRequest = new WechatPlatformUserRequest();
+        wechatPlatformUserRequest.setReqCode("wechatPlatformUserGetHandler");
+        wechatPlatformUserRequest.setTraceId("tid_"+IntegerFactory.getInstance().incrementAndGet());
+        wechatPlatformUserRequest.setVersion("1.1");
+        wechatPlatformUserRequest.setOpenid(openid);
+        //EchoRequest echoRequest = RequestUtil.mockEchoRequest(IntegerFactory.getInstance().incrementAndGet());
+        log.info("member-request:{}", wechatPlatformUserRequest);
+        log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+        IProtocolClient memberClient = protocolClientPool.memberClient();
+        log.info("memberClient==null?===>{}", (memberClient == null));
+        ProtocolResponse userResponse = protocolClientPool.memberClient().sendAndReceived(wechatPlatformUserRequest);
+        log.info("member-response:{}", userResponse);
+        return userResponse;
+    }
+
+	@RequestMapping(value = "/list", method = { RequestMethod.POST, RequestMethod.GET })
+	@ApiOperation(value = "用户管理列表", notes = "获取微养车找店的用户管理列表")
+	@ResponseBody
+	public Object list(HttpServletRequest request,
+                       @ApiParam(name = "page", value = "page 当前页码") @RequestParam(required = true, value = "page") Integer page,
+                       @ApiParam(name = "pagesize", value = "pagesize 当前页记录数") @RequestParam(required = true, value = "pagesize") Integer pagesize,
+                       HttpServletResponse response) throws Exception {
+		WechatPlatformUserRequest wechatPlatformUserRequest = new WechatPlatformUserRequest();
+		wechatPlatformUserRequest.setReqCode("wechatPlatformUserListHandler");
+		wechatPlatformUserRequest.setTraceId("tid_"+IntegerFactory.getInstance().incrementAndGet());
+		wechatPlatformUserRequest.setVersion("1.1");
+		wechatPlatformUserRequest.setPage(page);
+		wechatPlatformUserRequest.setPagesize(pagesize);
+		//EchoRequest echoRequest = RequestUtil.mockEchoRequest(IntegerFactory.getInstance().incrementAndGet());
+		log.info("member-request:{}", wechatPlatformUserRequest);
+		log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+		IProtocolClient memberClient = protocolClientPool.memberClient();
+		log.info("memberClient==null?===>{}", (memberClient == null));
+		ProtocolResponse userResponse = protocolClientPool.memberClient().sendAndReceived(wechatPlatformUserRequest);
+		log.info("member-response:{}", userResponse);
+		return userResponse;
+	}
+
+	@RequestMapping(value = "/save", method = { RequestMethod.POST, RequestMethod.GET })
+	@ApiOperation(value = "新建用户", notes = "新建微养车找店的用户")
+	@ResponseBody
+	public Object save(HttpServletRequest request,
+                       @ApiParam(name = "fc_user_id", value = "枫车用户ID") @RequestParam(required = false) Integer fc_user_id,
+					     @ApiParam(name = "openid", value = "openid") @RequestParam(required = true) String openid,
+					     @ApiParam(name = "mobile", value = "用户的手机号码") @RequestParam(required = false) String mobile,
+                       @ApiParam(name = "unionid", value = "小程序unionid") @RequestParam(required = false) String unionid,
+                       @ApiParam(name = "wechat_account", value = "微信号") @RequestParam(required = false) String wechat_account,
+                       @ApiParam(name = "wechat_avatar", value = "微信头像") @RequestParam(required = false) String wechat_avatar,
+					   HttpServletResponse response) throws Exception {
+		WechatPlatformUserRequest wechatPlatformUserRequest = new WechatPlatformUserRequest();
+		wechatPlatformUserRequest.setReqCode("wechatPlatformUserSaveHandler");
+		wechatPlatformUserRequest.setTraceId("tid_"+IntegerFactory.getInstance().incrementAndGet());
+		wechatPlatformUserRequest.setVersion("1.1");
+		wechatPlatformUserRequest.setFc_user_id(fc_user_id);
+		wechatPlatformUserRequest.setOpenid(openid);
+		wechatPlatformUserRequest.setMobile(mobile);
+		wechatPlatformUserRequest.setWechat_account(wechat_account);
+		wechatPlatformUserRequest.setWechat_avatar(wechat_avatar);
+		//EchoRequest echoRequest = RequestUtil.mockEchoRequest(IntegerFactory.getInstance().incrementAndGet());
+		log.info("member-request:{}", wechatPlatformUserRequest);
+		log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+		IProtocolClient memberClient = protocolClientPool.memberClient();
+		log.info("memberClient==null?===>{}", (memberClient == null));
+		ProtocolResponse userResponse = protocolClientPool.memberClient().sendAndReceived(wechatPlatformUserRequest);
+		log.info("member-response:{}", userResponse);
+		return userResponse;
+	}
+
+    @RequestMapping(value = "/update", method = { RequestMethod.POST, RequestMethod.GET })
+    @ApiOperation(value = "修改用户", notes = "修改微养车找店的用户")
+    @ResponseBody
+    public Object update(HttpServletRequest request,
+                         //@ApiParam(name = "platform_user_id", value = "找店用户ID") @RequestParam(required = false) String platform_user_id,
+                         @ApiParam(name = "fc_user_id", value = "枫车用户ID") @RequestParam(required = false) Integer fc_user_id,
+                         @ApiParam(name = "openid", value = "openid") @RequestParam(required = true) String openid,
+                         @ApiParam(name = "mobile", value = "用户的手机号码") @RequestParam(required = false) String mobile,
+                         @ApiParam(name = "unionid", value = "小程序unionid") @RequestParam(required = false) String unionid,
+                         @ApiParam(name = "wechat_account", value = "微信号") @RequestParam(required = false) String wechat_account,
+                         @ApiParam(name = "wechat_avatar", value = "微信头像") @RequestParam(required = false) String wechat_avatar,
+                       HttpServletResponse response) throws Exception {
+        WechatPlatformUserRequest wechatPlatformUserRequest = new WechatPlatformUserRequest();
+        wechatPlatformUserRequest.setReqCode("wechatPlatformUserUpdateHandler");
+        wechatPlatformUserRequest.setTraceId("tid_"+IntegerFactory.getInstance().incrementAndGet());
+        wechatPlatformUserRequest.setVersion("1.1");
+        wechatPlatformUserRequest.setFc_user_id(fc_user_id);
+        wechatPlatformUserRequest.setOpenid(openid);
+        wechatPlatformUserRequest.setMobile(mobile);
+        wechatPlatformUserRequest.setWechat_account(wechat_account);
+        wechatPlatformUserRequest.setWechat_avatar(wechat_avatar);
+        log.info("member-request:{}", wechatPlatformUserRequest);
+        log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+        IProtocolClient memberClient = protocolClientPool.memberClient();
+        log.info("memberClient==null?===>{}", (memberClient == null));
+        ProtocolResponse userResponse = protocolClientPool.memberClient().sendAndReceived(wechatPlatformUserRequest);
+        log.info("member-response:{}", userResponse);
+        return userResponse;
+    }
+
+    @RequestMapping(value = "/delete", method = { RequestMethod.POST, RequestMethod.GET })
+    @ApiOperation(value = "删除用户", notes = "删除微养车找店的用户")
+    @ResponseBody
+    public Object delete(HttpServletRequest request,
+                         @ApiParam(name = "openid", value = "找店用户ID") @RequestParam(required = true) String openid,
+                         HttpServletResponse response) throws Exception {
+        WechatPlatformUserRequest wechatPlatformUserRequest = new WechatPlatformUserRequest();
+        wechatPlatformUserRequest.setReqCode("wechatPlatformUserDeleteHandler");
+        wechatPlatformUserRequest.setTraceId("tid_"+IntegerFactory.getInstance().incrementAndGet());
+        wechatPlatformUserRequest.setVersion("1.1");
+        wechatPlatformUserRequest.setOpenid(openid);
+
+        log.info("member-request:{}", wechatPlatformUserRequest);
+        log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+        IProtocolClient memberClient = protocolClientPool.memberClient();
+        log.info("memberClient==null?===>{}", (memberClient == null));
+        ProtocolResponse userResponse = protocolClientPool.memberClient().sendAndReceived(wechatPlatformUserRequest);
+        log.info("member-response:{}", userResponse);
+        return userResponse;
+    }
+}

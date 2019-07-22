@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.wechatmaintain.user.dao.IWechatMaintainUserCouponDao">
+	<resultMap id="WechatMaintainUserCouponMap" type="com.fc.member.wechatmaintain.user.entity.WechatMaintainUserCoupon">
+        <id property="wechatMaintainUserCouponId" column="wechat_maintain_user_coupon_id"/>
+        <id property="fcUserId" column="fc_user_id"/>
+        <id property="storeId" column="store_id"/>
+        <id property="balance" column="balance"/>
+        <id property="createTime" column="create_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="WechatMaintainUserCouponMap" >
+		select * from wechat_maintain_user_coupon where 
+	        wechat_maintain_user_coupon_id = #{wechatMaintainUserCouponId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainUserCoupon" useGeneratedKeys="true">
+		insert into wechat_maintain_user_coupon(wechat_maintain_user_coupon_id , fc_user_id , store_id , balance , create_time  )
+    	values(#{wechatMaintainUserCouponId} ,#{fcUserId} ,#{storeId} ,#{balance} ,#{createTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainUserCoupon" useGeneratedKeys="true">
+		insert into wechat_maintain_user_coupon
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="wechatMaintainUserCouponId != null">wechat_maintain_user_coupon_id,</if>
+					<if test="fcUserId != null">fc_user_id,</if>
+					<if test="storeId != null">store_id,</if>
+					<if test="balance != null">balance,</if>
+					<if test="createTime != null">create_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="wechatMaintainUserCouponId != null">#{wechatMaintainUserCouponId},</if>
+					<if test="fcUserId != null">#{fcUserId},</if>
+					<if test="storeId != null">#{storeId},</if>
+					<if test="balance != null">#{balance},</if>
+					<if test="createTime != null">#{createTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainUserCoupon">
+		update wechat_maintain_user_coupon
+		<set>
+		    	<if test="fcUserId != null">fc_user_id = #{fcUserId},</if>
+		    	<if test="storeId != null">store_id = #{storeId},</if>
+		    	<if test="balance != null">balance = #{balance},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		</set>
+		where 
+	        wechat_maintain_user_coupon_id = #{wechatMaintainUserCouponId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from wechat_maintain_user_coupon where 
+	        wechat_maintain_user_coupon_id = #{wechatMaintainUserCouponId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainUserCoupon" resultMap="WechatMaintainUserCouponMap" >
+		select * from wechat_maintain_user_coupon 
+		<where>
+		       <if test="wechatMaintainUserCouponId != null">
+					AND wechat_maintain_user_coupon_id = #{wechatMaintainUserCouponId}
+				</if>
+		       <if test="fcUserId != null">
+					AND fc_user_id = #{fcUserId}
+				</if>
+		       <if test="storeId != null">
+					AND store_id = #{storeId}
+				</if>
+		       <if test="balance != null">
+					AND balance = #{balance}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="WechatMaintainUserCouponMap" >
+		select * from wechat_maintain_user_coupon  
+		<where>
+		       <if test="condition.wechatMaintainUserCouponId != null">
+					AND wechat_maintain_user_coupon_id = #{condition.wechatMaintainUserCouponId}
+				</if>
+		       <if test="condition.fcUserId != null">
+					AND fc_user_id = #{condition.fcUserId}
+				</if>
+		       <if test="condition.storeId != null">
+					AND store_id = #{condition.storeId}
+				</if>
+		       <if test="condition.balance != null">
+					AND balance = #{condition.balance}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

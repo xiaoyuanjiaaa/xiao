@@ -1,0 +1,142 @@
+package com.fc.member.store.user.handler;
+
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+
+import com.fc.common.util.DataConverHelper;
+import com.fc.common.util.DataConverHelper.DataConver;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.store.user.entity.StoreAptitude;
+import com.fc.member.store.user.entity.StoreDictionaries;
+import com.fc.member.store.user.service.IStoreAptitudeService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.store.user.StoreAptitudeRequest;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+
+/**
+ * 门店安装资质
+ * @author jiahx
+ * @date 2019/1/4
+ */
+@Component
+@Handler(module = "storeaptitude")
+public class StoreAptitudeHandler {
+
+	private static Logger log = LoggerFactory.getLogger(StoreAptitudeHandler.class);
+
+	@Autowired
+	IStoreAptitudeService storeAptitudeService;
+
+	/**
+	 * 查询门店安装资质
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = StoreAptitudeRequest.class)
+	public ProtocolResponse queryStoreAptitude(StoreAptitudeRequest request) {
+		log.info("StoreAptitudeHandler------>requestQueryStoreAptitude:{}",  request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult =  request.paramValidateQuery();
+			if(validResult != null ) {
+				return response.error(99).msg(validResult);
+			}
+			StoreAptitude storeAptitude = new StoreAptitude();
+			storeAptitude.setStoreId(request.getStoreId());
+			List<Map<String,Object>> storeAptitudeList =  storeAptitudeService.queryStoreAptitude(request);
+			response.addData("data", storeAptitudeList);
+			log.info("查询结果storeCouponList" + storeAptitudeList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		log.info("StoreAptitudeHandler------>responseQueryStoreAptitude:{}", response);
+		return response;
+	}
+	/**
+	 * 新增门店安装资质
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = StoreAptitudeRequest.class)
+	public ProtocolResponse createStoreAptitude(StoreAptitudeRequest request) {
+		log.info("StoreAptitudeHandler------>requestCreateStoreAptitude:{}", request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidateCreate();
+			if(validResult != null ) {
+				return response.error(99).msg(validResult);
+			}
+		int result = storeAptitudeService.insertSelective(request);
+		if(result==1) {
+			response.code(0).msg("新增成功");
+		}else {
+			response.code(0).msg("新增失败！");
+		}
+		log.info("createStoreAptitude=====>"+result);
+		response.code(0).msg("新增成功");
+		} catch (Exception e) {
+			response.error(99).msg("新增失败！");
+			e.printStackTrace();
+		}
+		log.info("StoreAptitudeHandler------>responseCreateStoreAptitude:{}", response);
+		return response;
+	}
+	/**
+	 * 更新门店安装资质
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = StoreAptitudeRequest.class)
+	public ProtocolResponse updateStoreAptitude(StoreAptitudeRequest request) {
+		log.info("StoreAptitudeHandler------>requestUpdateStoreAptitude:{}", request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidateUpdate();
+			if(validResult != null ) {
+				return response.error(99).msg(validResult);
+			}
+			storeAptitudeService.updateStoreAptitude(request);
+			response.code(0).msg("更新成功");
+		} catch (Exception e) {
+			response.error(99).msg("更新失败！");
+			e.printStackTrace();
+		}
+		log.info("StoreAptitudeHandler------>responseUpdateStoreAptitude:{}", response);
+		return response;
+	}
+	/**
+	 * 校验基本信息完善、人员要求、设备要求是否完善
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = StoreAptitudeRequest.class)
+	public ProtocolResponse checkAptitude(StoreAptitudeRequest request) {
+		log.info("StoreAptitudeHandler------>requestCheckAptitude:{}",  request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult =  request.paramValidateQuery();
+			if(validResult != null ) {
+				return response.error(99).msg(validResult);
+			}
+			Map<String,Object> checkResult=  storeAptitudeService.checkAptitude(request);
+			response.addData("data", checkResult);
+			response.code(0).msg("查询成功");
+			log.info("查询结果storeCouponList" + checkResult);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		log.info("StoreAptitudeHandler------>responseCheckAptitude:{}", response);
+		return response;
+	}
+}

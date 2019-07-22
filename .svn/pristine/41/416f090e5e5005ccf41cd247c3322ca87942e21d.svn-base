@@ -1,0 +1,66 @@
+package com.fc.protocol.demo.request.pc.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+import io.swagger.annotations.ApiModelProperty;
+import org.springframework.util.StringUtils;
+
+/**
+ * @Author: linpeng
+ * @Date: 2019/1/4 15:41
+ * @Version 1.0
+ */
+public class PcUserCarGetRequest extends ProtocolRequest {
+
+    @ApiModelProperty(value = "pc收银车辆档案ID", name = "pc_user_car_id")
+	private Integer  pc_user_car_id;
+    @ApiModelProperty(value = "pc收银车主ID", name = "pc_user_id")
+    private Integer  pc_user_id;
+    @ApiModelProperty(value = "车牌", name = "car_num")
+	private String  car_num;
+
+
+    public String paramValidate() {
+        if (StringUtils.isEmpty(pc_user_id)) {
+            return "参数:pc_user_id 不能为空";
+        }
+        if (StringUtils.isEmpty(car_num)) {
+            return "参数:car_num 不能为空";
+        }
+        return null;
+    }
+
+
+    public Integer getPcUserCarId() {
+        return pc_user_car_id;
+    }
+
+    public void setPcUserCarId(Integer pc_user_car_id) {
+        this.pc_user_car_id = pc_user_car_id;
+    }
+
+    public Integer getPcUserId() {
+        return pc_user_id;
+    }
+
+    public void setPcUserId(Integer pc_user_id) {
+        this.pc_user_id = pc_user_id;
+    }
+
+    public String getCarNum() {
+        return car_num;
+    }
+
+    public void setCarNum(String car_num) {
+        this.car_num = car_num;
+    }
+
+
+
+    @Override
+	public String toString() {
+		return "WechatPlatformServiceCountRequest [getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode()
+                + ", getTraceId()=" + getTraceId() +", pc_user_car_id=" + getPcUserCarId() +", pc_user_id=" + getPcUserId()
+                +", car_num=" + getCarNum() + "]";
+	}
+
+}

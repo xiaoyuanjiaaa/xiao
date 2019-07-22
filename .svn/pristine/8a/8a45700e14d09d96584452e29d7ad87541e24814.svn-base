@@ -1,0 +1,94 @@
+package com.fc.member.wechatmaintain.user.entity;
+
+import java.io.Serializable;
+
+/**
+ * <p>Table: WechatMaintainSstoreUserRelation</p>
+ * <p>Description: </p>
+ * @author yangd
+ * @date 2018-12-28 17:13:47
+ */
+public class WechatMaintainSstoreUserRelation implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Long wechatMaintainSstoreUserRelationId; // 主键id
+	private Integer wechatMaintainUserId; // 微养车用户id
+	private Integer fcUserId; // 枫车用户ID
+	private String openid; // 微信openid
+	private Integer storeId; // 门店ID
+	private Integer createTime; // 创建时间
+	private Integer scanTime; // 扫码时间
+	private String source; // 来源(微养车：maintain，微养车找店：platform，门店：store，商家：shop，师傅：master，pc收银：pc，师傅接车用户：masterUser)
+
+	public void setWechatMaintainSstoreUserRelationId(Long wechatMaintainSstoreUserRelationId) {
+		this.wechatMaintainSstoreUserRelationId = wechatMaintainSstoreUserRelationId;
+	}
+	
+	public Long getWechatMaintainSstoreUserRelationId() {
+		return this.wechatMaintainSstoreUserRelationId;
+	}
+	public void setWechatMaintainUserId(Integer wechatMaintainUserId) {
+		this.wechatMaintainUserId = wechatMaintainUserId;
+	}
+	
+	public Integer getWechatMaintainUserId() {
+		return this.wechatMaintainUserId;
+	}
+	public void setFcUserId(Integer fcUserId) {
+		this.fcUserId = fcUserId;
+	}
+	
+	public Integer getFcUserId() {
+		return this.fcUserId;
+	}
+	public void setOpenid(String openid) {
+		this.openid = openid;
+	}
+	
+	public String getOpenid() {
+		return this.openid;
+	}
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+	
+	public Integer getStoreId() {
+		return this.storeId;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+	public void setScanTime(Integer scanTime) {
+		this.scanTime = scanTime;
+	}
+	
+	public Integer getScanTime() {
+		return this.scanTime;
+	}
+	public void setSource(String source) {
+		this.source = source;
+	}
+	
+	public String getSource() {
+		return this.source;
+	}
+
+    @Override
+    public String toString () {
+    	return "WechatMaintainSstoreUserRelation{" + 
+	    	"wechatMaintainSstoreUserRelationId=" + wechatMaintainSstoreUserRelationId + 
+	    	", wechatMaintainUserId=" + wechatMaintainUserId + 
+	    	", fcUserId=" + fcUserId + 
+	    	", openid=" + openid + 
+	    	", storeId=" + storeId + 
+	    	", createTime=" + createTime + 
+	    	", scanTime=" + scanTime + 
+	    	", source=" + source + 
+	    	"}";
+    }
+}

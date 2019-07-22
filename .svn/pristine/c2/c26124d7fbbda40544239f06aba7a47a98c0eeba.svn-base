@@ -1,0 +1,15 @@
+package com.fc.member.master.user.service;
+
+import com.fc.common.service.IService;
+import com.fc.member.master.user.entity.MasterAuthInfo;
+/**
+ * <p>Title: MasterAuthInfo</p>
+ * <p>Description: 实名认证信息表 Service 接口</p>
+ * @author yangd
+ * @date 2019-01-15 10:09:26
+ */
+public interface IMasterAuthInfoService extends IService<MasterAuthInfo>{
+	
+	// 插入数据
+	int insertSelective(MasterAuthInfo obj);
+}

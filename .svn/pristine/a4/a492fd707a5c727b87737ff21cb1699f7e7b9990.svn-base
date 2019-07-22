@@ -1,0 +1,131 @@
+package com.fc.member.master.user.entity;
+
+import java.io.Serializable;
+
+
+/**
+ * <p>Table: MasterAuthInfo</p>
+ * <p>Description: 实名认证信息表</p>
+ * @author yangd
+ * @date 2019-01-15 10:09:26
+ */
+public class MasterAuthInfo implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer masterAuthInfoId; // 主键id
+	private Integer masterMemberId; // 师傅ID
+	private String name; // 真实姓名
+	private String idCard; // 身份证号码
+	private Integer idcarPhotoId; // 身份证图片id
+	private Integer idAuditStatus; // 身份证审核状态(0:未认证 1:已认证 2:审核中 3:不通过)
+	private String authReason; // 认证原因
+	private Integer sex; // 性别 0:女士 1:先生
+	private Integer birthday; // 出生日期
+	private Integer realAvatarId; // 真实头像图片id
+	private Integer createTime; // 创建时间
+	private Integer updateTime; // 修改时间
+
+	public void setMasterAuthInfoId(Integer masterAuthInfoId) {
+		this.masterAuthInfoId = masterAuthInfoId;
+	}
+	
+	public Integer getMasterAuthInfoId() {
+		return this.masterAuthInfoId;
+	}
+	public void setMasterMemberId(Integer masterMemberId) {
+		this.masterMemberId = masterMemberId;
+	}
+	
+	public Integer getMasterMemberId() {
+		return this.masterMemberId;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	public void setIdCard(String idCard) {
+		this.idCard = idCard;
+	}
+	
+	public String getIdCard() {
+		return this.idCard;
+	}
+	public void setIdcarPhotoId(Integer idcarPhotoId) {
+		this.idcarPhotoId = idcarPhotoId;
+	}
+	
+	public Integer getIdcarPhotoId() {
+		return this.idcarPhotoId;
+	}
+	public void setIdAuditStatus(Integer idAuditStatus) {
+		this.idAuditStatus = idAuditStatus;
+	}
+	
+	public Integer getIdAuditStatus() {
+		return this.idAuditStatus;
+	}
+	public void setAuthReason(String authReason) {
+		this.authReason = authReason;
+	}
+	
+	public String getAuthReason() {
+		return this.authReason;
+	}
+	public void setSex(Integer sex) {
+		this.sex = sex;
+	}
+	
+	public Integer getSex() {
+		return this.sex;
+	}
+	public void setBirthday(Integer birthday) {
+		this.birthday = birthday;
+	}
+	
+	public Integer getBirthday() {
+		return this.birthday;
+	}
+	public void setRealAvatarId(Integer realAvatarId) {
+		this.realAvatarId = realAvatarId;
+	}
+	
+	public Integer getRealAvatarId() {
+		return this.realAvatarId;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+	public void setUpdateTime(Integer updateTime) {
+		this.updateTime = updateTime;
+	}
+	
+	public Integer getUpdateTime() {
+		return this.updateTime;
+	}
+
+    @Override
+    public String toString () {
+    	return "MasterAuthInfo{" + 
+	    	"masterAuthInfoId=" + masterAuthInfoId + 
+	    	", masterMemberId=" + masterMemberId + 
+	    	", name=" + name + 
+	    	", idCard=" + idCard + 
+	    	", idcarPhotoId=" + idcarPhotoId + 
+	    	", idAuditStatus=" + idAuditStatus + 
+	    	", authReason=" + authReason + 
+	    	", sex=" + sex + 
+	    	", birthday=" + birthday + 
+	    	", realAvatarId=" + realAvatarId + 
+	    	", createTime=" + createTime + 
+	    	", updateTime=" + updateTime + 
+	    	"}";
+    }
+}

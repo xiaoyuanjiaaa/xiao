@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.shop.user.dao.IShopWithdrawCashDao">
+	<resultMap id="ShopWithdrawCashMap" type="com.fc.member.shop.user.entity.ShopWithdrawCash">
+        <id property="shopWithdrawCashId" column="shop_withdraw_cash_id"/>
+        <id property="shopId" column="shop_id"/>
+        <id property="shopName" column="shop_name"/>
+        <id property="shopType" column="shop_type"/>
+        <id property="withdrawAmount" column="withdraw_amount"/>
+        <id property="waitWithdrawAmount" column="wait_withdraw_amount"/>
+        <id property="auditTime" column="audit_time"/>
+        <id property="payOptUserId" column="pay_opt_user_id"/>
+        <id property="payOptUserName" column="pay_opt_user_name"/>
+        <id property="payStatus" column="pay_status"/>
+        <id property="payTime" column="pay_time"/>
+        <id property="status" column="status"/>
+        <id property="applyTime" column="apply_time"/>
+        <id property="settlementId" column="settlement_id"/>
+        <id property="withdrawSn" column="withdraw_sn"/>
+        <id property="bankInfo" column="bank_info"/>
+        <id property="accountType" column="account_type"/>
+        <id property="wdWithdrawAmount" column="wd_withdraw_amount"/>
+        <id property="updateTime" column="update_time"/>
+        <id property="createTime" column="create_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="ShopWithdrawCashMap" >
+		select * from shop_withdraw_cash where 
+	        shop_withdraw_cash_id = #{shopWithdrawCashId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.shop.user.entity.ShopWithdrawCash" useGeneratedKeys="true" keyProperty="shopWithdrawCashId">
+		insert into shop_withdraw_cash(shop_withdraw_cash_id , shop_id , shop_name , shop_type , withdraw_amount , wait_withdraw_amount , audit_time , pay_opt_user_id , pay_opt_user_name , pay_status , pay_time , status , apply_time , settlement_id , withdraw_sn , bank_info , account_type , wd_withdraw_amount , update_time , create_time  )
+    	values(#{shopWithdrawCashId} ,#{shopId} ,#{shopName} ,#{shopType} ,#{withdrawAmount} ,#{waitWithdrawAmount} ,#{auditTime} ,#{payOptUserId} ,#{payOptUserName} ,#{payStatus} ,#{payTime} ,#{status} ,#{applyTime} ,#{settlementId} ,#{withdrawSn} ,#{bankInfo} ,#{accountType} ,#{wdWithdrawAmount} ,#{updateTime} ,#{createTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.shop.user.entity.ShopWithdrawCash" useGeneratedKeys="true" keyProperty="shopWithdrawCashId">
+		insert into shop_withdraw_cash
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="shopWithdrawCashId != null">shop_withdraw_cash_id,</if>
+					<if test="shopId != null">shop_id,</if>
+					<if test="shopName != null">shop_name,</if>
+					<if test="shopType != null">shop_type,</if>
+					<if test="withdrawAmount != null">withdraw_amount,</if>
+					<if test="waitWithdrawAmount != null">wait_withdraw_amount,</if>
+					<if test="auditTime != null">audit_time,</if>
+					<if test="payOptUserId != null">pay_opt_user_id,</if>
+					<if test="payOptUserName != null">pay_opt_user_name,</if>
+					<if test="payStatus != null">pay_status,</if>
+					<if test="payTime != null">pay_time,</if>
+					<if test="status != null">status,</if>
+					<if test="applyTime != null">apply_time,</if>
+					<if test="settlementId != null">settlement_id,</if>
+					<if test="withdrawSn != null">withdraw_sn,</if>
+					<if test="bankInfo != null">bank_info,</if>
+					<if test="accountType != null">account_type,</if>
+					<if test="wdWithdrawAmount != null">wd_withdraw_amount,</if>
+					<if test="updateTime != null">update_time,</if>
+					<if test="createTime != null">create_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="shopWithdrawCashId != null">#{shopWithdrawCashId},</if>
+					<if test="shopId != null">#{shopId},</if>
+					<if test="shopName != null">#{shopName},</if>
+					<if test="shopType != null">#{shopType},</if>
+					<if test="withdrawAmount != null">#{withdrawAmount},</if>
+					<if test="waitWithdrawAmount != null">#{waitWithdrawAmount},</if>
+					<if test="auditTime != null">#{auditTime},</if>
+					<if test="payOptUserId != null">#{payOptUserId},</if>
+					<if test="payOptUserName != null">#{payOptUserName},</if>
+					<if test="payStatus != null">#{payStatus},</if>
+					<if test="payTime != null">#{payTime},</if>
+					<if test="status != null">#{status},</if>
+					<if test="applyTime != null">#{applyTime},</if>
+					<if test="settlementId != null">#{settlementId},</if>
+					<if test="withdrawSn != null">#{withdrawSn},</if>
+					<if test="bankInfo != null">#{bankInfo},</if>
+					<if test="accountType != null">#{accountType},</if>
+					<if test="wdWithdrawAmount != null">#{wdWithdrawAmount},</if>
+					<if test="updateTime != null">#{updateTime},</if>
+					<if test="createTime != null">#{createTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.shop.user.entity.ShopWithdrawCash">
+		update shop_withdraw_cash
+		<set>
+		    	<if test="shopId != null">shop_id = #{shopId},</if>
+		    	<if test="shopName != null">shop_name = #{shopName},</if>
+		    	<if test="shopType != null">shop_type = #{shopType},</if>
+		    	<if test="withdrawAmount != null">withdraw_amount = #{withdrawAmount},</if>
+		    	<if test="waitWithdrawAmount != null">wait_withdraw_amount = #{waitWithdrawAmount},</if>
+		    	<if test="auditTime != null">audit_time = #{auditTime},</if>
+		    	<if test="payOptUserId != null">pay_opt_user_id = #{payOptUserId},</if>
+		    	<if test="payOptUserName != null">pay_opt_user_name = #{payOptUserName},</if>
+		    	<if test="payStatus != null">pay_status = #{payStatus},</if>
+		    	<if test="payTime != null">pay_time = #{payTime},</if>
+		    	<if test="status != null">status = #{status},</if>
+		    	<if test="applyTime != null">apply_time = #{applyTime},</if>
+		    	<if test="settlementId != null">settlement_id = #{settlementId},</if>
+		    	<if test="withdrawSn != null">withdraw_sn = #{withdrawSn},</if>
+		    	<if test="bankInfo != null">bank_info = #{bankInfo},</if>
+		    	<if test="accountType != null">account_type = #{accountType},</if>
+		    	<if test="wdWithdrawAmount != null">wd_withdraw_amount = #{wdWithdrawAmount},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		</set>
+		where 
+	        shop_withdraw_cash_id = #{shopWithdrawCashId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from shop_withdraw_cash where 
+	        shop_withdraw_cash_id = #{shopWithdrawCashId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.shop.user.entity.ShopWithdrawCash" resultMap="ShopWithdrawCashMap" >
+		select * from shop_withdraw_cash 
+		<where>
+		       <if test="shopWithdrawCashId != null">
+					AND shop_withdraw_cash_id = #{shopWithdrawCashId}
+				</if>
+		       <if test="shopId != null">
+					AND shop_id = #{shopId}
+				</if>
+		       <if test="shopName != null">
+					AND shop_name = #{shopName}
+				</if>
+		       <if test="shopType != null">
+					AND shop_type = #{shopType}
+				</if>
+		       <if test="withdrawAmount != null">
+					AND withdraw_amount = #{withdrawAmount}
+				</if>
+		       <if test="waitWithdrawAmount != null">
+					AND wait_withdraw_amount = #{waitWithdrawAmount}
+				</if>
+		       <if test="auditTime != null">
+					AND audit_time = #{auditTime}
+				</if>
+		       <if test="payOptUserId != null">
+					AND pay_opt_user_id = #{payOptUserId}
+				</if>
+		       <if test="payOptUserName != null">
+					AND pay_opt_user_name = #{payOptUserName}
+				</if>
+		       <if test="payStatus != null">
+					AND pay_status = #{payStatus}
+				</if>
+		       <if test="payTime != null">
+					AND pay_time = #{payTime}
+				</if>
+		       <if test="status != null">
+					AND status = #{status}
+				</if>
+		       <if test="applyTime != null">
+					AND apply_time = #{applyTime}
+				</if>
+		       <if test="settlementId != null">
+					AND settlement_id = #{settlementId}
+				</if>
+		       <if test="withdrawSn != null">
+					AND withdraw_sn = #{withdrawSn}
+				</if>
+		       <if test="bankInfo != null">
+					AND bank_info = #{bankInfo}
+				</if>
+		       <if test="accountType != null">
+					AND account_type = #{accountType}
+				</if>
+		       <if test="wdWithdrawAmount != null">
+					AND wd_withdraw_amount = #{wdWithdrawAmount}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="ShopWithdrawCashMap" >
+		select * from shop_withdraw_cash  
+		<where>
+		       <if test="condition.shopWithdrawCashId != null">
+					AND shop_withdraw_cash_id = #{condition.shopWithdrawCashId}
+				</if>
+		       <if test="condition.shopId != null">
+					AND shop_id = #{condition.shopId}
+				</if>
+		       <if test="condition.shopName != null">
+					AND shop_name = #{condition.shopName}
+				</if>
+		       <if test="condition.shopType != null">
+					AND shop_type = #{condition.shopType}
+				</if>
+		       <if test="condition.withdrawAmount != null">
+					AND withdraw_amount = #{condition.withdrawAmount}
+				</if>
+		       <if test="condition.waitWithdrawAmount != null">
+					AND wait_withdraw_amount = #{condition.waitWithdrawAmount}
+				</if>
+		       <if test="condition.auditTime != null">
+					AND audit_time = #{condition.auditTime}
+				</if>
+		       <if test="condition.payOptUserId != null">
+					AND pay_opt_user_id = #{condition.payOptUserId}
+				</if>
+		       <if test="condition.payOptUserName != null">
+					AND pay_opt_user_name = #{condition.payOptUserName}
+				</if>
+		       <if test="condition.payStatus != null">
+					AND pay_status = #{condition.payStatus}
+				</if>
+		       <if test="condition.payTime != null">
+					AND pay_time = #{condition.payTime}
+				</if>
+		       <if test="condition.status != null">
+					AND status = #{condition.status}
+				</if>
+		       <if test="condition.applyTime != null">
+					AND apply_time = #{condition.applyTime}
+				</if>
+		       <if test="condition.settlementId != null">
+					AND settlement_id = #{condition.settlementId}
+				</if>
+		       <if test="condition.withdrawSn != null">
+					AND withdraw_sn = #{condition.withdrawSn}
+				</if>
+		       <if test="condition.bankInfo != null">
+					AND bank_info = #{condition.bankInfo}
+				</if>
+		       <if test="condition.accountType != null">
+					AND account_type = #{condition.accountType}
+				</if>
+		       <if test="condition.wdWithdrawAmount != null">
+					AND wd_withdraw_amount = #{condition.wdWithdrawAmount}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

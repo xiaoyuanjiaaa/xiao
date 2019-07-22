@@ -1,0 +1,36 @@
+package com.fc.protocol.demo.request.store.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+/**
+ * 查询用户request
+ * @author	xiaozw
+ * @data	2019年1月4日	
+ */
+@SuppressWarnings("serial")
+public class QueryPublicUserByPhoneRequest extends ProtocolRequest {
+
+	/**手机号码**/
+	private String phoneBob;
+
+	public String getPhoneBob() {
+		return phoneBob;
+	}
+
+	public void setPhoneBob(String phoneBob) {
+		this.phoneBob = phoneBob;
+	}
+
+	public String paramValidate() {
+		if (phoneBob == null) {
+			return "参数:phoneBob不能为空";
+		}
+		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "QueryPublicUserByPhoneRequest[getPhoneBob():" + getPhoneBob() + ", getVersion()=" + getVersion()
+				+ ", getReqCode()=" + getReqCode() + ", getTraceId()=" + getTraceId() + "]";
+	}
+}

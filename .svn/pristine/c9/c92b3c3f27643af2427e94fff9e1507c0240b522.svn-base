@@ -1,0 +1,23 @@
+package com.fc.member.store.user.service;
+
+import java.util.List;
+
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.service.IService;
+import com.fc.member.store.user.entity.PublicUserLoginsLog;
+import com.fc.protocol.demo.request.store.user.PullPageRequest;
+
+/**
+ * <p>Title: PublicUserLoginsLog</p>
+ * <p>Description:  Service 接口</p>
+ * @author yangd
+ * @date 2019-01-02 16:49:50
+ */
+public interface IPublicUserLoginsLogService extends IService<PublicUserLoginsLog> {
+
+	// 插入数据
+	boolean insertSelective(PublicUserLoginsLog obj);
+
+	/**查询分页数据*/
+	List<PublicUserLoginsLog> getPullPage(Page page, PullPageRequest request);
+}

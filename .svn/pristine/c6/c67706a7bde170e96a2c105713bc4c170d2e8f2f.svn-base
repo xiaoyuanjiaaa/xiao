@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.wechatplatform.user.dao.IWechatPlatformUserFeedbackDao">
+	<resultMap id="WechatPlatformUserFeedbackMap" type="com.fc.member.wechatplatform.user.entity.WechatPlatformUserFeedback">
+        <id property="feedbackId" column="feedback_id"/>
+        <id property="openid" column="openid"/>
+        <id property="feedbackContent" column="feedback_content"/>
+        <id property="createTime" column="create_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="WechatPlatformUserFeedbackMap" >
+		select * from wechat_platform_user_feedback where 
+	        feedback_id = #{feedbackId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.wechatplatform.user.entity.WechatPlatformUserFeedback" useGeneratedKeys="true">
+		insert into wechat_platform_user_feedback(feedback_id , openid , feedback_content , create_time  )
+    	values(#{feedbackId} ,#{openid} ,#{feedbackContent} ,#{createTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.wechatplatform.user.entity.WechatPlatformUserFeedback" useGeneratedKeys="true">
+		insert into wechat_platform_user_feedback
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="feedbackId != null">feedback_id,</if>
+					<if test="openid != null">openid,</if>
+					<if test="feedbackContent != null">feedback_content,</if>
+					<if test="createTime != null">create_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="feedbackId != null">#{feedbackId},</if>
+					<if test="openid != null">#{openid},</if>
+					<if test="feedbackContent != null">#{feedbackContent},</if>
+					<if test="createTime != null">#{createTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.wechatplatform.user.entity.WechatPlatformUserFeedback">
+		update wechat_platform_user_feedback
+		<set>
+		    	<if test="openid != null">openid = #{openid},</if>
+		    	<if test="feedbackContent != null">feedback_content = #{feedbackContent},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		</set>
+		where 
+	        feedback_id = #{feedbackId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from wechat_platform_user_feedback where 
+	        feedback_id = #{feedbackId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.wechatplatform.user.entity.WechatPlatformUserFeedback" resultMap="WechatPlatformUserFeedbackMap" >
+		select * from wechat_platform_user_feedback 
+		<where>
+		       <if test="feedbackId != null">
+					AND feedback_id = #{feedbackId}
+				</if>
+		       <if test="openid != null">
+					AND openid = #{openid}
+				</if>
+		       <if test="feedbackContent != null">
+					AND feedback_content = #{feedbackContent}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="WechatPlatformUserFeedbackMap" >
+		select * from wechat_platform_user_feedback  
+		<where>
+		       <if test="condition.feedbackId != null">
+					AND feedback_id = #{condition.feedbackId}
+				</if>
+		       <if test="condition.openid != null">
+					AND openid = #{condition.openid}
+				</if>
+		       <if test="condition.feedbackContent != null">
+					AND feedback_content = #{condition.feedbackContent}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

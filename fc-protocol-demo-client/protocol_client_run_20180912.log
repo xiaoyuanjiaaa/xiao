@@ -1,0 +1,470 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v2.0.4.RELEASE)
+
+18:08:16.711 [main] INFO  c.f.p.c.d.ProtocolClientDemoApplication - Starting ProtocolClientDemoApplication on PC201512161252 with PID 10008 (E:\Springboot\workspace\fc-protocol-demo\fc-protocol-demo-client\target\protocol-demo-client.jar started by Administrator in E:\Springboot\workspace\fc-protocol-demo\fc-protocol-demo-client\target)
+18:08:16.715 [main] INFO  c.f.p.c.d.ProtocolClientDemoApplication - No active profile set, falling back to default profiles: default
+18:08:16.790 [main] INFO  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@7006c658: startup date [Wed Sep 12 18:08:16 CST 2018]; root of context hierarchy
+18:08:17.763 [main] INFO  o.s.b.f.s.DefaultListableBeanFactory - Overriding bean definition for bean 'protocolClientPool' with a different definition: replacing [Generic bean: class [com.fc.protocol.client.demo.config.ProtocolClientPool]; scope=singleton; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in URL [jar:file:/E:/Springboot/workspace/fc-protocol-demo/fc-protocol-demo-client/target/protocol-demo-client.jar!/BOOT-INF/classes!/com/fc/protocol/client/demo/config/ProtocolClientPool.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=protocolClientGlobalConfig; factoryMethodName=protocolClientPool; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [com/fc/protocol/client/demo/config/ProtocolClientGlobalConfig.class]]
+18:08:17.771 [main] INFO  o.s.b.f.s.DefaultListableBeanFactory - Overriding bean definition for bean 'finalClientFactory' with a different definition: replacing [Generic bean: class [com.fc.protocol.client.netty.FinalClientFactory]; scope=singleton; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in URL [jar:file:/E:/Springboot/workspace/fc-protocol-demo/fc-protocol-demo-client/target/protocol-demo-client.jar!/BOOT-INF/lib/fc-protocol-client-0.0.1-SNAPSHOT.jar!/com/fc/protocol/client/netty/FinalClientFactory.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=protocolClientAutoConfiguration; factoryMethodName=finalClientFactory; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [com/fc/protocol/client/ProtocolClientAutoConfiguration.class]]
+18:08:17.913 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+18:08:18.862 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+18:08:18.879 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8081"]
+18:08:18.892 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+18:08:18.892 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet Engine: Apache Tomcat/8.5.32
+18:08:18.902 [localhost-startStop-1] INFO  o.a.c.core.AprLifecycleListener - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\ProgramData\Oracle\Java\javapath;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\ProgramData\Oracle\Java\javapath;F:\program\Java\jdk1.8.0_121\bin;F:\program\maven\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;F:\program\svn\bin;C:\Program Files\MySQL\MySQL Server 5.5\bin;F:\program\Git\cmd;F:\program\ant\bin;F:\program\VisualSVN\bin;F:\program\sonar-scanner\bin;C:\OpenSSL-Win32\bin;F:\work\201704-zookeeper\zookeeper-3.4.9\bin;;C:\Program Files (x86)\Lua\5.1;C:\Program Files (x86)\Lua\5.1\clibs;E:\work\201704-elk\node-v6.10.2-win-x64;C:\curl-7.54.0-win64-mingw\bin;E:\kafka\gradle\gradle-4.0\bin;E:\kafka\scala\bin;C:\Windows\system32\config\systemprofile\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\CMake\bin;E:\protobuf\win\protoc-3.6.0-win32\bin;C:\Users\Administrator\.dnx\bin;F:\program\AppServ\Apache24\bin;F:\program\AppServ\php5;E:\docker\Docker Toolbox;.]
+18:08:18.982 [localhost-startStop-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+18:08:18.982 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2194 ms
+18:08:19.011 [localhost-startStop-1] INFO  o.s.b.w.s.ServletRegistrationBean - Servlet dispatcherServlet mapped to [/]
+18:08:19.015 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+18:08:19.571 [main] INFO  c.f.p.c.demo.config.WebAppConfig - 配置日志拦截器
+18:08:19.634 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/api/test/echo],methods=[POST || GET]}" onto public java.lang.Object com.fc.protocol.client.demo.controller.ApiTestController.echo(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.lang.Exception
+18:08:19.639 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/swagger-resources/configuration/security]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.SecurityConfiguration> springfox.documentation.swagger.web.ApiResourceController.securityConfiguration()
+18:08:19.639 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/swagger-resources/configuration/ui]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.UiConfiguration> springfox.documentation.swagger.web.ApiResourceController.uiConfiguration()
+18:08:19.640 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/swagger-resources]}" onto public org.springframework.http.ResponseEntity<java.util.List<springfox.documentation.swagger.web.SwaggerResource>> springfox.documentation.swagger.web.ApiResourceController.swaggerResources()
+18:08:19.643 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+18:08:19.643 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+18:08:19.794 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+18:08:19.845 [main] INFO  o.s.w.s.h.SimpleUrlHandlerMapping - Mapped URL path [/swagger-ui.html] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+18:08:19.845 [main] INFO  o.s.w.s.h.SimpleUrlHandlerMapping - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+18:08:19.937 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@7006c658: startup date [Wed Sep 12 18:08:16 CST 2018]; root of context hierarchy
+18:08:20.396 [main] INFO  o.s.j.e.a.AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+18:08:20.403 [main] INFO  o.s.c.s.DefaultLifecycleProcessor - Starting beans in phase 2147483647
+18:08:20.403 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+18:08:20.421 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+18:08:20.454 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+18:08:20.547 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8081"]
+18:08:20.548 [main] INFO  o.a.tomcat.util.net.NioSelectorPool - Using a shared selector for servlet write/read
+18:08:20.564 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+18:08:20.567 [main] INFO  c.f.p.c.d.ProtocolClientDemoApplication - Started ProtocolClientDemoApplication in 4.371 seconds (JVM running for 5.092)
+18:08:20.569 [main] INFO  c.f.p.c.d.ProtocolClientDemoApplication - 客户端demo应用启动......启动参数：[E:\Springboot\workspace\fc-protocol-demo\fc-protocol-demo-client\src\main\resources]
+18:08:20.569 [main] INFO  c.f.p.c.netty.FinalClientFactory - 读取客户端配置文件信息
+18:08:20.570 [main] INFO  c.f.p.c.netty.FinalClientFactory - 客户端配置文件列表：[E:\Springboot\workspace\fc-protocol-demo\fc-protocol-demo-client\src\main\resources\protocol_client_order.properties, E:\Springboot\workspace\fc-protocol-demo\fc-protocol-demo-client\src\main\resources\protocol_client_pay.properties, E:\Springboot\workspace\fc-protocol-demo\fc-protocol-demo-client\src\main\resources\protocol_client_user.properties]
+18:08:20.571 [main] INFO  c.f.p.c.netty.FinalClientFactory - remoteNodeMap-info:{protocol_client_order=[ProtocolClientInstanceKey [order=0, host=localhost, port=8080, connectionTimeout=10, maxConnectionSize=3], ProtocolClientInstanceKey [order=1, host=localhost, port=8080, connectionTimeout=10, maxConnectionSize=3], ProtocolClientInstanceKey [order=2, host=localhost, port=8080, connectionTimeout=10, maxConnectionSize=3]], protocol_client_user=[ProtocolClientInstanceKey [order=0, host=localhost, port=8080, connectionTimeout=10, maxConnectionSize=3], ProtocolClientInstanceKey [order=1, host=localhost, port=8080, connectionTimeout=10, maxConnectionSize=3], ProtocolClientInstanceKey [order=2, host=localhost, port=8080, connectionTimeout=10, maxConnectionSize=3]], protocol_client_pay=[ProtocolClientInstanceKey [order=0, host=localhost, port=8080, connectionTimeout=10, maxConnectionSize=3], ProtocolClientInstanceKey [order=1, host=localhost, port=8080, connectionTimeout=10, maxConnectionSize=3], ProtocolClientInstanceKey [order=2, host=localhost, port=8080, connectionTimeout=10, maxConnectionSize=3]]}
+18:09:06.521 [http-nio-8081-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+18:09:06.521 [http-nio-8081-exec-1] INFO  o.s.web.servlet.DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization started
+18:09:06.541 [http-nio-8081-exec-1] INFO  o.s.web.servlet.DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization completed in 20 ms
+18:09:06.557 [http-nio-8081-exec-1] INFO  c.f.l.c.i.LoggingTagInterceptor - $start$module:controller|controller:ApiTestController|operate:echo|request_uri:/api/test/echo|request_get_paras:|ip:0:0:0:0:0:0:0:1
+18:09:06.569 [http-nio-8081-exec-1] INFO  c.f.p.c.d.c.ApiTestController - echo-request:EchoRequest [number=1, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_1]
+18:09:06.569 [http-nio-8081-exec-1] INFO  c.f.p.c.d.c.ApiTestController - protocolClientPool==null?===>false
+18:09:06.928 [nioEventLoopGroup-2-1] INFO  c.f.p.c.n.ProtocolClientMessageHandler - channelActive:00e04c8e0b530000-2718-00000000-ff2118f57579814c-fcb69028
+18:09:06.935 [http-nio-8081-exec-1] INFO  c.f.p.client.AbstractClientFactory - 新增 ------> key.hashCode:-1204607054, client.hashCode:1949603894
+18:09:06.936 [http-nio-8081-exec-1] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204607054, client.hashCode:1949603894
+18:09:06.936 [http-nio-8081-exec-1] INFO  c.f.p.c.d.c.ApiTestController - userClient==null?===>false
+18:09:06.938 [nioEventLoopGroup-2-2] INFO  c.f.p.c.n.ProtocolClientMessageHandler - channelActive:00e04c8e0b530000-2718-00000001-c33c6d5575798178-e32a72f5
+18:09:06.939 [http-nio-8081-exec-1] INFO  c.f.p.client.AbstractClientFactory - 新增 ------> key.hashCode:-1204598974, client.hashCode:1339979308
+18:09:06.939 [http-nio-8081-exec-1] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204598974, client.hashCode:1339979308
+18:09:06.985 [http-nio-8081-exec-1] INFO  c.f.p.client.netty.NettyClient - sendAndReceived------>request:EchoRequest [number=1, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_1]
+18:09:07.149 [nioEventLoopGroup-2-2] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000053270000097b2274726163654964223a227469645f31222c22657272636f6465223a302c226572726d7367223a224543484fe6b58be8af95e68890e58a9f222c2264617461223a7b226e756d626572223a317d7d
+18:09:07.150 [nioEventLoopGroup-2-2] INFO  c.f.p.c.n.ProtocolClientMessageHandler - msgType:9
+18:09:07.200 [nioEventLoopGroup-2-2] INFO  c.f.p.c.n.ProtocolClientMessageHandler - response object:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=1}, getTraceId()=tid_1]
+18:09:07.201 [nioEventLoopGroup-2-2] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理前):1
+18:09:07.201 [nioEventLoopGroup-2-2] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理后):0
+18:09:07.201 [http-nio-8081-exec-1] INFO  c.f.p.client.data.ResponseFutureData - 返回realData:com.fc.protocol.client.data.ResponseRealData@4104b14a
+18:09:07.201 [http-nio-8081-exec-1] INFO  c.f.p.c.d.c.ApiTestController - echo-response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=1}, getTraceId()=tid_1]
+18:09:07.234 [http-nio-8081-exec-1] INFO  c.f.l.c.i.LoggingTagInterceptor - Action RunTime:0.677s
+18:09:07.234 [http-nio-8081-exec-1] INFO  c.f.l.c.i.LoggingTagInterceptor - $end$
+18:09:46.940 [http-nio-8081-exec-3] INFO  c.f.l.c.i.LoggingTagInterceptor - $start$module:controller|controller:ApiTestController|operate:echo|request_uri:/api/test/echo|request_get_paras:|ip:0:0:0:0:0:0:0:1
+18:09:46.941 [http-nio-8081-exec-3] INFO  c.f.p.c.d.c.ApiTestController - echo-request:EchoRequest [number=2, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_2]
+18:09:46.941 [http-nio-8081-exec-3] INFO  c.f.p.c.d.c.ApiTestController - protocolClientPool==null?===>false
+18:09:46.941 [http-nio-8081-exec-3] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204607054, client.hashCode:1949603894
+18:09:46.941 [http-nio-8081-exec-3] INFO  c.f.p.c.d.c.ApiTestController - userClient==null?===>false
+18:09:46.941 [http-nio-8081-exec-3] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204598974, client.hashCode:1339979308
+18:09:46.942 [http-nio-8081-exec-3] INFO  c.f.p.client.netty.NettyClient - sendAndReceived------>request:EchoRequest [number=2, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_2]
+18:09:46.946 [nioEventLoopGroup-2-2] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000053270000097b2274726163654964223a227469645f32222c22657272636f6465223a302c226572726d7367223a224543484fe6b58be8af95e68890e58a9f222c2264617461223a7b226e756d626572223a327d7d
+18:09:46.946 [nioEventLoopGroup-2-2] INFO  c.f.p.c.n.ProtocolClientMessageHandler - msgType:9
+18:09:46.946 [nioEventLoopGroup-2-2] INFO  c.f.p.c.n.ProtocolClientMessageHandler - response object:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=2}, getTraceId()=tid_2]
+18:09:46.946 [nioEventLoopGroup-2-2] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理前):1
+18:09:46.946 [nioEventLoopGroup-2-2] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理后):0
+18:09:46.946 [http-nio-8081-exec-3] INFO  c.f.p.client.data.ResponseFutureData - 返回realData:com.fc.protocol.client.data.ResponseRealData@2de1b226
+18:09:46.946 [http-nio-8081-exec-3] INFO  c.f.p.c.d.c.ApiTestController - echo-response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=2}, getTraceId()=tid_2]
+18:09:46.948 [http-nio-8081-exec-3] INFO  c.f.l.c.i.LoggingTagInterceptor - Action RunTime:0.008s
+18:09:46.948 [http-nio-8081-exec-3] INFO  c.f.l.c.i.LoggingTagInterceptor - $end$
+18:10:01.094 [http-nio-8081-exec-5] INFO  c.f.l.c.i.LoggingTagInterceptor - $start$module:controller|controller:ApiTestController|operate:echo|request_uri:/api/test/echo|request_get_paras:|ip:0:0:0:0:0:0:0:1
+18:10:01.095 [http-nio-8081-exec-5] INFO  c.f.p.c.d.c.ApiTestController - echo-request:EchoRequest [number=3, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_3]
+18:10:01.096 [http-nio-8081-exec-5] INFO  c.f.p.c.d.c.ApiTestController - protocolClientPool==null?===>false
+18:10:01.096 [http-nio-8081-exec-5] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204607054, client.hashCode:1949603894
+18:10:01.096 [http-nio-8081-exec-5] INFO  c.f.p.c.d.c.ApiTestController - userClient==null?===>false
+18:10:01.096 [http-nio-8081-exec-5] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204598974, client.hashCode:1339979308
+18:10:01.096 [http-nio-8081-exec-5] INFO  c.f.p.client.netty.NettyClient - sendAndReceived------>request:EchoRequest [number=3, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_3]
+18:10:01.100 [nioEventLoopGroup-2-2] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000053270000097b2274726163654964223a227469645f33222c22657272636f6465223a302c226572726d7367223a224543484fe6b58be8af95e68890e58a9f222c2264617461223a7b226e756d626572223a337d7d
+18:10:01.100 [nioEventLoopGroup-2-2] INFO  c.f.p.c.n.ProtocolClientMessageHandler - msgType:9
+18:10:01.100 [nioEventLoopGroup-2-2] INFO  c.f.p.c.n.ProtocolClientMessageHandler - response object:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=3}, getTraceId()=tid_3]
+18:10:01.100 [nioEventLoopGroup-2-2] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理前):1
+18:10:01.100 [nioEventLoopGroup-2-2] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理后):0
+18:10:01.100 [http-nio-8081-exec-5] INFO  c.f.p.client.data.ResponseFutureData - 返回realData:com.fc.protocol.client.data.ResponseRealData@44bf1e56
+18:10:01.101 [http-nio-8081-exec-5] INFO  c.f.p.c.d.c.ApiTestController - echo-response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=3}, getTraceId()=tid_3]
+18:10:01.102 [http-nio-8081-exec-5] INFO  c.f.l.c.i.LoggingTagInterceptor - Action RunTime:0.008s
+18:10:01.102 [http-nio-8081-exec-5] INFO  c.f.l.c.i.LoggingTagInterceptor - $end$
+18:10:03.189 [http-nio-8081-exec-6] INFO  c.f.l.c.i.LoggingTagInterceptor - $start$module:controller|controller:ApiTestController|operate:echo|request_uri:/api/test/echo|request_get_paras:|ip:0:0:0:0:0:0:0:1
+18:10:03.190 [http-nio-8081-exec-6] INFO  c.f.p.c.d.c.ApiTestController - echo-request:EchoRequest [number=4, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_4]
+18:10:03.190 [http-nio-8081-exec-6] INFO  c.f.p.c.d.c.ApiTestController - protocolClientPool==null?===>false
+18:10:03.194 [http-nio-8081-exec-6] INFO  c.f.p.client.AbstractClientFactory - 新增 ------> key.hashCode:-1204590894, client.hashCode:686657336
+18:10:03.194 [nioEventLoopGroup-2-3] INFO  c.f.p.c.n.ProtocolClientMessageHandler - channelActive:00e04c8e0b530000-2718-00000002-eea19dc1997a5d37-9a618aac
+18:10:03.194 [http-nio-8081-exec-6] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204590894, client.hashCode:686657336
+18:10:03.194 [http-nio-8081-exec-6] INFO  c.f.p.c.d.c.ApiTestController - userClient==null?===>false
+18:10:03.194 [http-nio-8081-exec-6] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204607054, client.hashCode:1949603894
+18:10:03.195 [http-nio-8081-exec-6] INFO  c.f.p.client.netty.NettyClient - sendAndReceived------>request:EchoRequest [number=4, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_4]
+18:10:03.197 [nioEventLoopGroup-2-1] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000053270000097b2274726163654964223a227469645f34222c22657272636f6465223a302c226572726d7367223a224543484fe6b58be8af95e68890e58a9f222c2264617461223a7b226e756d626572223a347d7d
+18:10:03.197 [nioEventLoopGroup-2-1] INFO  c.f.p.c.n.ProtocolClientMessageHandler - msgType:9
+18:10:03.198 [nioEventLoopGroup-2-1] INFO  c.f.p.c.n.ProtocolClientMessageHandler - response object:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=4}, getTraceId()=tid_4]
+18:10:03.198 [nioEventLoopGroup-2-1] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理前):1
+18:10:03.198 [nioEventLoopGroup-2-1] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理后):0
+18:10:03.198 [http-nio-8081-exec-6] INFO  c.f.p.client.data.ResponseFutureData - 返回realData:com.fc.protocol.client.data.ResponseRealData@2cd20efd
+18:10:03.198 [http-nio-8081-exec-6] INFO  c.f.p.c.d.c.ApiTestController - echo-response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=4}, getTraceId()=tid_4]
+18:10:03.199 [http-nio-8081-exec-6] INFO  c.f.l.c.i.LoggingTagInterceptor - Action RunTime:0.01s
+18:10:03.199 [http-nio-8081-exec-6] INFO  c.f.l.c.i.LoggingTagInterceptor - $end$
+18:10:06.085 [http-nio-8081-exec-7] INFO  c.f.l.c.i.LoggingTagInterceptor - $start$module:controller|controller:ApiTestController|operate:echo|request_uri:/api/test/echo|request_get_paras:|ip:0:0:0:0:0:0:0:1
+18:10:06.086 [http-nio-8081-exec-7] INFO  c.f.p.c.d.c.ApiTestController - echo-request:EchoRequest [number=5, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_5]
+18:10:06.086 [http-nio-8081-exec-7] INFO  c.f.p.c.d.c.ApiTestController - protocolClientPool==null?===>false
+18:10:06.086 [http-nio-8081-exec-7] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204607054, client.hashCode:1949603894
+18:10:06.086 [http-nio-8081-exec-7] INFO  c.f.p.c.d.c.ApiTestController - userClient==null?===>false
+18:10:06.086 [http-nio-8081-exec-7] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204598974, client.hashCode:1339979308
+18:10:06.086 [http-nio-8081-exec-7] INFO  c.f.p.client.netty.NettyClient - sendAndReceived------>request:EchoRequest [number=5, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_5]
+18:10:09.086 [http-nio-8081-exec-7] INFO  c.f.p.client.data.ResponseFutureData - 客户端请求超时时间已过，设置错误信息
+18:10:09.086 [http-nio-8081-exec-7] INFO  c.f.p.client.data.ResponseFutureData - 返回realData:com.fc.protocol.client.data.ResponseRealData@619da7d3
+18:10:09.086 [http-nio-8081-exec-7] INFO  c.f.p.c.d.c.ApiTestController - echo-response:ProtocolResponse [errcode=1, errmsg=请求超时, data={}, getTraceId()=null]
+18:10:09.088 [http-nio-8081-exec-7] INFO  c.f.l.c.i.LoggingTagInterceptor - Action RunTime:3.003s
+18:10:09.088 [http-nio-8081-exec-7] INFO  c.f.l.c.i.LoggingTagInterceptor - $end$
+18:10:11.088 [nioEventLoopGroup-2-2] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000053270000097b2274726163654964223a227469645f35222c22657272636f6465223a302c226572726d7367223a224543484fe6b58be8af95e68890e58a9f222c2264617461223a7b226e756d626572223a357d7d
+18:10:11.089 [nioEventLoopGroup-2-2] INFO  c.f.p.c.n.ProtocolClientMessageHandler - msgType:9
+18:10:11.089 [nioEventLoopGroup-2-2] INFO  c.f.p.c.n.ProtocolClientMessageHandler - response object:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=5}, getTraceId()=tid_5]
+18:10:11.089 [nioEventLoopGroup-2-2] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理前):1
+18:10:11.089 [nioEventLoopGroup-2-2] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理后):0
+18:10:32.534 [http-nio-8081-exec-9] INFO  c.f.l.c.i.LoggingTagInterceptor - $start$module:controller|controller:ApiTestController|operate:echo|request_uri:/api/test/echo|request_get_paras:|ip:0:0:0:0:0:0:0:1
+18:10:32.536 [http-nio-8081-exec-9] INFO  c.f.p.c.d.c.ApiTestController - echo-request:EchoRequest [number=6, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_6]
+18:10:32.536 [http-nio-8081-exec-9] INFO  c.f.p.c.d.c.ApiTestController - protocolClientPool==null?===>false
+18:10:32.536 [http-nio-8081-exec-9] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204598974, client.hashCode:1339979308
+18:10:32.536 [http-nio-8081-exec-9] INFO  c.f.p.c.d.c.ApiTestController - userClient==null?===>false
+18:10:32.536 [http-nio-8081-exec-9] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204607054, client.hashCode:1949603894
+18:10:32.536 [http-nio-8081-exec-9] INFO  c.f.p.client.netty.NettyClient - sendAndReceived------>request:EchoRequest [number=6, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_6]
+18:10:32.539 [nioEventLoopGroup-2-1] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000053270000097b2274726163654964223a227469645f36222c22657272636f6465223a302c226572726d7367223a224543484fe6b58be8af95e68890e58a9f222c2264617461223a7b226e756d626572223a367d7d
+18:10:32.539 [nioEventLoopGroup-2-1] INFO  c.f.p.c.n.ProtocolClientMessageHandler - msgType:9
+18:10:32.539 [nioEventLoopGroup-2-1] INFO  c.f.p.c.n.ProtocolClientMessageHandler - response object:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=6}, getTraceId()=tid_6]
+18:10:32.539 [nioEventLoopGroup-2-1] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理前):1
+18:10:32.539 [nioEventLoopGroup-2-1] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理后):0
+18:10:32.539 [http-nio-8081-exec-9] INFO  c.f.p.client.data.ResponseFutureData - 返回realData:com.fc.protocol.client.data.ResponseRealData@ed89b44
+18:10:32.540 [http-nio-8081-exec-9] INFO  c.f.p.c.d.c.ApiTestController - echo-response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=6}, getTraceId()=tid_6]
+18:10:32.541 [http-nio-8081-exec-9] INFO  c.f.l.c.i.LoggingTagInterceptor - Action RunTime:0.007s
+18:10:32.541 [http-nio-8081-exec-9] INFO  c.f.l.c.i.LoggingTagInterceptor - $end$
+18:10:44.559 [http-nio-8081-exec-1] INFO  c.f.l.c.i.LoggingTagInterceptor - $start$module:controller|controller:ApiTestController|operate:echo|request_uri:/api/test/echo|request_get_paras:|ip:0:0:0:0:0:0:0:1
+18:10:44.560 [http-nio-8081-exec-1] INFO  c.f.p.c.d.c.ApiTestController - echo-request:EchoRequest [number=7, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_7]
+18:10:44.560 [http-nio-8081-exec-1] INFO  c.f.p.c.d.c.ApiTestController - protocolClientPool==null?===>false
+18:10:44.561 [http-nio-8081-exec-1] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204598974, client.hashCode:1339979308
+18:10:44.561 [http-nio-8081-exec-1] INFO  c.f.p.c.d.c.ApiTestController - userClient==null?===>false
+18:10:44.561 [http-nio-8081-exec-1] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204598974, client.hashCode:1339979308
+18:10:44.561 [http-nio-8081-exec-1] INFO  c.f.p.client.netty.NettyClient - sendAndReceived------>request:EchoRequest [number=7, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_7]
+18:10:44.568 [nioEventLoopGroup-2-2] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000053270000097b2274726163654964223a227469645f37222c22657272636f6465223a302c226572726d7367223a224543484fe6b58be8af95e68890e58a9f222c2264617461223a7b226e756d626572223a377d7d
+18:10:44.568 [nioEventLoopGroup-2-2] INFO  c.f.p.c.n.ProtocolClientMessageHandler - msgType:9
+18:10:44.568 [nioEventLoopGroup-2-2] INFO  c.f.p.c.n.ProtocolClientMessageHandler - response object:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=7}, getTraceId()=tid_7]
+18:10:44.568 [nioEventLoopGroup-2-2] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理前):1
+18:10:44.568 [nioEventLoopGroup-2-2] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理后):0
+18:10:44.572 [http-nio-8081-exec-1] INFO  c.f.p.client.data.ResponseFutureData - 返回realData:com.fc.protocol.client.data.ResponseRealData@2abc5bd9
+18:10:44.572 [http-nio-8081-exec-1] INFO  c.f.p.c.d.c.ApiTestController - echo-response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=7}, getTraceId()=tid_7]
+18:10:44.574 [http-nio-8081-exec-1] INFO  c.f.l.c.i.LoggingTagInterceptor - Action RunTime:0.015s
+18:10:44.574 [http-nio-8081-exec-1] INFO  c.f.l.c.i.LoggingTagInterceptor - $end$
+18:10:47.574 [http-nio-8081-exec-2] INFO  c.f.l.c.i.LoggingTagInterceptor - $start$module:controller|controller:ApiTestController|operate:echo|request_uri:/api/test/echo|request_get_paras:|ip:0:0:0:0:0:0:0:1
+18:10:47.574 [http-nio-8081-exec-2] INFO  c.f.p.c.d.c.ApiTestController - echo-request:EchoRequest [number=8, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_8]
+18:10:47.574 [http-nio-8081-exec-2] INFO  c.f.p.c.d.c.ApiTestController - protocolClientPool==null?===>false
+18:10:47.574 [http-nio-8081-exec-2] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204607054, client.hashCode:1949603894
+18:10:47.574 [http-nio-8081-exec-2] INFO  c.f.p.c.d.c.ApiTestController - userClient==null?===>false
+18:10:47.574 [http-nio-8081-exec-2] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204607054, client.hashCode:1949603894
+18:10:47.575 [http-nio-8081-exec-2] INFO  c.f.p.client.netty.NettyClient - sendAndReceived------>request:EchoRequest [number=8, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_8]
+18:10:47.577 [nioEventLoopGroup-2-1] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000053270000097b2274726163654964223a227469645f38222c22657272636f6465223a302c226572726d7367223a224543484fe6b58be8af95e68890e58a9f222c2264617461223a7b226e756d626572223a387d7d
+18:10:47.577 [nioEventLoopGroup-2-1] INFO  c.f.p.c.n.ProtocolClientMessageHandler - msgType:9
+18:10:47.577 [nioEventLoopGroup-2-1] INFO  c.f.p.c.n.ProtocolClientMessageHandler - response object:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=8}, getTraceId()=tid_8]
+18:10:47.577 [nioEventLoopGroup-2-1] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理前):1
+18:10:47.577 [nioEventLoopGroup-2-1] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理后):0
+18:10:47.577 [http-nio-8081-exec-2] INFO  c.f.p.client.data.ResponseFutureData - 返回realData:com.fc.protocol.client.data.ResponseRealData@45b3a502
+18:10:47.577 [http-nio-8081-exec-2] INFO  c.f.p.c.d.c.ApiTestController - echo-response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=8}, getTraceId()=tid_8]
+18:10:47.579 [http-nio-8081-exec-2] INFO  c.f.l.c.i.LoggingTagInterceptor - Action RunTime:0.006s
+18:10:47.579 [http-nio-8081-exec-2] INFO  c.f.l.c.i.LoggingTagInterceptor - $end$
+18:10:50.369 [http-nio-8081-exec-3] INFO  c.f.l.c.i.LoggingTagInterceptor - $start$module:controller|controller:ApiTestController|operate:echo|request_uri:/api/test/echo|request_get_paras:|ip:0:0:0:0:0:0:0:1
+18:10:50.370 [http-nio-8081-exec-3] INFO  c.f.p.c.d.c.ApiTestController - echo-request:EchoRequest [number=9, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_9]
+18:10:50.370 [http-nio-8081-exec-3] INFO  c.f.p.c.d.c.ApiTestController - protocolClientPool==null?===>false
+18:10:50.370 [http-nio-8081-exec-3] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204607054, client.hashCode:1949603894
+18:10:50.370 [http-nio-8081-exec-3] INFO  c.f.p.c.d.c.ApiTestController - userClient==null?===>false
+18:10:50.370 [http-nio-8081-exec-3] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204598974, client.hashCode:1339979308
+18:10:50.370 [http-nio-8081-exec-3] INFO  c.f.p.client.netty.NettyClient - sendAndReceived------>request:EchoRequest [number=9, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_9]
+18:10:50.373 [nioEventLoopGroup-2-2] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000053270000097b2274726163654964223a227469645f39222c22657272636f6465223a302c226572726d7367223a224543484fe6b58be8af95e68890e58a9f222c2264617461223a7b226e756d626572223a397d7d
+18:10:50.373 [nioEventLoopGroup-2-2] INFO  c.f.p.c.n.ProtocolClientMessageHandler - msgType:9
+18:10:50.374 [nioEventLoopGroup-2-2] INFO  c.f.p.c.n.ProtocolClientMessageHandler - response object:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=9}, getTraceId()=tid_9]
+18:10:50.374 [nioEventLoopGroup-2-2] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理前):1
+18:10:50.374 [nioEventLoopGroup-2-2] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理后):0
+18:10:50.374 [http-nio-8081-exec-3] INFO  c.f.p.client.data.ResponseFutureData - 返回realData:com.fc.protocol.client.data.ResponseRealData@6cdcb81d
+18:10:50.374 [http-nio-8081-exec-3] INFO  c.f.p.c.d.c.ApiTestController - echo-response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=9}, getTraceId()=tid_9]
+18:10:50.375 [http-nio-8081-exec-3] INFO  c.f.l.c.i.LoggingTagInterceptor - Action RunTime:0.006s
+18:10:50.375 [http-nio-8081-exec-3] INFO  c.f.l.c.i.LoggingTagInterceptor - $end$
+18:10:53.053 [http-nio-8081-exec-4] INFO  c.f.l.c.i.LoggingTagInterceptor - $start$module:controller|controller:ApiTestController|operate:echo|request_uri:/api/test/echo|request_get_paras:|ip:0:0:0:0:0:0:0:1
+18:10:53.054 [http-nio-8081-exec-4] INFO  c.f.p.c.d.c.ApiTestController - echo-request:EchoRequest [number=10, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_10]
+18:10:53.054 [http-nio-8081-exec-4] INFO  c.f.p.c.d.c.ApiTestController - protocolClientPool==null?===>false
+18:10:53.054 [http-nio-8081-exec-4] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204607054, client.hashCode:1949603894
+18:10:53.054 [http-nio-8081-exec-4] INFO  c.f.p.c.d.c.ApiTestController - userClient==null?===>false
+18:10:53.054 [http-nio-8081-exec-4] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204607054, client.hashCode:1949603894
+18:10:53.054 [http-nio-8081-exec-4] INFO  c.f.p.client.netty.NettyClient - sendAndReceived------>request:EchoRequest [number=10, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_10]
+18:10:56.055 [http-nio-8081-exec-4] INFO  c.f.p.client.data.ResponseFutureData - 客户端请求超时时间已过，设置错误信息
+18:10:56.055 [http-nio-8081-exec-4] INFO  c.f.p.client.data.ResponseFutureData - 返回realData:com.fc.protocol.client.data.ResponseRealData@753ebc33
+18:10:56.055 [http-nio-8081-exec-4] INFO  c.f.p.c.d.c.ApiTestController - echo-response:ProtocolResponse [errcode=1, errmsg=请求超时, data={}, getTraceId()=null]
+18:10:56.056 [http-nio-8081-exec-4] INFO  c.f.l.c.i.LoggingTagInterceptor - Action RunTime:3.003s
+18:10:56.056 [http-nio-8081-exec-4] INFO  c.f.l.c.i.LoggingTagInterceptor - $end$
+18:11:03.057 [nioEventLoopGroup-2-1] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000055270000097b2274726163654964223a227469645f3130222c22657272636f6465223a302c226572726d7367223a224543484fe6b58be8af95e68890e58a9f222c2264617461223a7b226e756d626572223a31307d7d
+18:11:03.057 [nioEventLoopGroup-2-1] INFO  c.f.p.c.n.ProtocolClientMessageHandler - msgType:9
+18:11:03.057 [nioEventLoopGroup-2-1] INFO  c.f.p.c.n.ProtocolClientMessageHandler - response object:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=10}, getTraceId()=tid_10]
+18:11:03.057 [nioEventLoopGroup-2-1] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理前):1
+18:11:03.057 [nioEventLoopGroup-2-1] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理后):0
+18:11:15.840 [http-nio-8081-exec-6] INFO  c.f.l.c.i.LoggingTagInterceptor - $start$module:controller|controller:ApiTestController|operate:echo|request_uri:/api/test/echo|request_get_paras:|ip:0:0:0:0:0:0:0:1
+18:11:15.843 [http-nio-8081-exec-6] INFO  c.f.p.c.d.c.ApiTestController - echo-request:EchoRequest [number=11, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_11]
+18:11:15.843 [http-nio-8081-exec-6] INFO  c.f.p.c.d.c.ApiTestController - protocolClientPool==null?===>false
+18:11:15.843 [http-nio-8081-exec-6] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204590894, client.hashCode:686657336
+18:11:15.843 [http-nio-8081-exec-6] INFO  c.f.p.c.d.c.ApiTestController - userClient==null?===>false
+18:11:15.843 [http-nio-8081-exec-6] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204607054, client.hashCode:1949603894
+18:11:15.844 [http-nio-8081-exec-6] INFO  c.f.p.client.netty.NettyClient - sendAndReceived------>request:EchoRequest [number=11, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_11]
+18:11:15.849 [nioEventLoopGroup-2-1] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000055270000097b2274726163654964223a227469645f3131222c22657272636f6465223a302c226572726d7367223a224543484fe6b58be8af95e68890e58a9f222c2264617461223a7b226e756d626572223a31317d7d
+18:11:15.849 [nioEventLoopGroup-2-1] INFO  c.f.p.c.n.ProtocolClientMessageHandler - msgType:9
+18:11:15.849 [nioEventLoopGroup-2-1] INFO  c.f.p.c.n.ProtocolClientMessageHandler - response object:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=11}, getTraceId()=tid_11]
+18:11:15.849 [nioEventLoopGroup-2-1] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理前):1
+18:11:15.849 [nioEventLoopGroup-2-1] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理后):0
+18:11:15.849 [http-nio-8081-exec-6] INFO  c.f.p.client.data.ResponseFutureData - 返回realData:com.fc.protocol.client.data.ResponseRealData@69d08503
+18:11:15.849 [http-nio-8081-exec-6] INFO  c.f.p.c.d.c.ApiTestController - echo-response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=11}, getTraceId()=tid_11]
+18:11:15.851 [http-nio-8081-exec-6] INFO  c.f.l.c.i.LoggingTagInterceptor - Action RunTime:0.011s
+18:11:15.851 [http-nio-8081-exec-6] INFO  c.f.l.c.i.LoggingTagInterceptor - $end$
+18:11:26.196 [http-nio-8081-exec-8] INFO  c.f.l.c.i.LoggingTagInterceptor - $start$module:controller|controller:ApiTestController|operate:echo|request_uri:/api/test/echo|request_get_paras:|ip:0:0:0:0:0:0:0:1
+18:11:26.197 [http-nio-8081-exec-8] INFO  c.f.p.c.d.c.ApiTestController - echo-request:EchoRequest [number=12, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_12]
+18:11:26.197 [http-nio-8081-exec-8] INFO  c.f.p.c.d.c.ApiTestController - protocolClientPool==null?===>false
+18:11:26.197 [http-nio-8081-exec-8] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204598974, client.hashCode:1339979308
+18:11:26.197 [http-nio-8081-exec-8] INFO  c.f.p.c.d.c.ApiTestController - userClient==null?===>false
+18:11:26.197 [http-nio-8081-exec-8] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204607054, client.hashCode:1949603894
+18:11:26.197 [http-nio-8081-exec-8] INFO  c.f.p.client.netty.NettyClient - sendAndReceived------>request:EchoRequest [number=12, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_12]
+18:11:26.200 [nioEventLoopGroup-2-1] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000055270000097b2274726163654964223a227469645f3132222c22657272636f6465223a302c226572726d7367223a224543484fe6b58be8af95e68890e58a9f222c2264617461223a7b226e756d626572223a31327d7d
+18:11:26.200 [nioEventLoopGroup-2-1] INFO  c.f.p.c.n.ProtocolClientMessageHandler - msgType:9
+18:11:26.201 [nioEventLoopGroup-2-1] INFO  c.f.p.c.n.ProtocolClientMessageHandler - response object:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=12}, getTraceId()=tid_12]
+18:11:26.201 [nioEventLoopGroup-2-1] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理前):1
+18:11:26.201 [nioEventLoopGroup-2-1] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理后):0
+18:11:26.201 [http-nio-8081-exec-8] INFO  c.f.p.client.data.ResponseFutureData - 返回realData:com.fc.protocol.client.data.ResponseRealData@631cd955
+18:11:26.201 [http-nio-8081-exec-8] INFO  c.f.p.c.d.c.ApiTestController - echo-response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=12}, getTraceId()=tid_12]
+18:11:26.202 [http-nio-8081-exec-8] INFO  c.f.l.c.i.LoggingTagInterceptor - Action RunTime:0.006s
+18:11:26.202 [http-nio-8081-exec-8] INFO  c.f.l.c.i.LoggingTagInterceptor - $end$
+18:11:57.969 [nioEventLoopGroup-2-1] INFO  c.f.p.c.n.ProtocolClientMessageHandler - channelInactive:00e04c8e0b530000-2718-00000000-ff2118f57579814c-fcb69028
+18:11:57.970 [nioEventLoopGroup-2-2] INFO  c.f.p.c.n.ProtocolClientMessageHandler - channelInactive:00e04c8e0b530000-2718-00000001-c33c6d5575798178-e32a72f5
+18:11:57.969 [nioEventLoopGroup-2-3] INFO  c.f.p.c.n.ProtocolClientMessageHandler - channelInactive:00e04c8e0b530000-2718-00000002-eea19dc1997a5d37-9a618aac
+18:11:57.970 [nioEventLoopGroup-2-1] INFO  c.f.p.c.n.ProtocolClientMessageHandler - channel-bind-url:ProtocolClientInstanceKey [order=0, host=localhost, port=8080, connectionTimeout=10, maxConnectionSize=3]
+18:11:57.971 [nioEventLoopGroup-2-2] INFO  c.f.p.c.n.ProtocolClientMessageHandler - channel-bind-url:ProtocolClientInstanceKey [order=1, host=localhost, port=8080, connectionTimeout=10, maxConnectionSize=3]
+18:11:57.971 [nioEventLoopGroup-2-3] INFO  c.f.p.c.n.ProtocolClientMessageHandler - channel-bind-url:ProtocolClientInstanceKey [order=2, host=localhost, port=8080, connectionTimeout=10, maxConnectionSize=3]
+18:11:57.971 [nioEventLoopGroup-2-1] INFO  c.f.p.c.netty.FinalClientFactory - 关闭连接:ProtocolClientInstanceKey [order=0, host=localhost, port=8080, connectionTimeout=10, maxConnectionSize=3]
+18:11:57.972 [nioEventLoopGroup-2-2] INFO  c.f.p.c.netty.FinalClientFactory - 关闭连接:ProtocolClientInstanceKey [order=1, host=localhost, port=8080, connectionTimeout=10, maxConnectionSize=3]
+18:11:57.972 [nioEventLoopGroup-2-3] INFO  c.f.p.c.netty.FinalClientFactory - 关闭连接:ProtocolClientInstanceKey [order=2, host=localhost, port=8080, connectionTimeout=10, maxConnectionSize=3]
+18:11:57.974 [nioEventLoopGroup-2-3] INFO  c.f.p.client.AbstractClientFactory - 缓存删除连接,client-hashcode:1949603894, domain:localhost00e04c8e0b530000-2718-00000000-ff2118f57579814c-fcb69028, channel-id:{}
+18:11:57.974 [nioEventLoopGroup-2-2] INFO  c.f.p.client.AbstractClientFactory - 缓存删除连接,client-hashcode:686657336, domain:localhost00e04c8e0b530000-2718-00000002-eea19dc1997a5d37-9a618aac, channel-id:{}
+18:11:57.974 [nioEventLoopGroup-2-3] INFO  c.f.p.client.netty.NettyClient - 尝试关闭channel[id]------>00e04c8e0b530000-2718-00000000-ff2118f57579814c-fcb69028
+18:11:57.974 [nioEventLoopGroup-2-1] INFO  c.f.p.client.AbstractClientFactory - 缓存删除连接,client-hashcode:1339979308, domain:localhost00e04c8e0b530000-2718-00000001-c33c6d5575798178-e32a72f5, channel-id:{}
+18:11:57.974 [nioEventLoopGroup-2-2] INFO  c.f.p.client.netty.NettyClient - 尝试关闭channel[id]------>00e04c8e0b530000-2718-00000002-eea19dc1997a5d37-9a618aac
+18:11:57.975 [nioEventLoopGroup-2-1] INFO  c.f.p.client.netty.NettyClient - 尝试关闭channel[id]------>00e04c8e0b530000-2718-00000001-c33c6d5575798178-e32a72f5
+18:13:51.924 [http-nio-8081-exec-1] INFO  c.f.l.c.i.LoggingTagInterceptor - $start$module:controller|controller:ApiTestController|operate:echo|request_uri:/api/test/echo|request_get_paras:|ip:0:0:0:0:0:0:0:1
+18:13:51.925 [http-nio-8081-exec-1] INFO  c.f.p.c.d.c.ApiTestController - echo-request:EchoRequest [number=13, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_13]
+18:13:51.925 [http-nio-8081-exec-1] INFO  c.f.p.c.d.c.ApiTestController - protocolClientPool==null?===>false
+18:13:51.927 [http-nio-8081-exec-1] INFO  c.f.p.client.AbstractClientFactory - 新增 ------> key.hashCode:-1204590894, client.hashCode:1761232048
+18:13:51.927 [nioEventLoopGroup-2-4] INFO  c.f.p.c.n.ProtocolClientMessageHandler - channelActive:00e04c8e0b530000-2718-00000003-2a0b1803377ddab6-d3316fde
+18:13:51.927 [http-nio-8081-exec-1] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204590894, client.hashCode:1761232048
+18:13:51.927 [http-nio-8081-exec-1] INFO  c.f.p.c.d.c.ApiTestController - userClient==null?===>false
+18:13:51.946 [nioEventLoopGroup-2-5] INFO  c.f.p.c.n.ProtocolClientMessageHandler - channelActive:00e04c8e0b530000-2718-00000004-18bf8c03377ddab7-a6793c57
+18:13:51.946 [http-nio-8081-exec-1] INFO  c.f.p.client.AbstractClientFactory - 新增 ------> key.hashCode:-1204607054, client.hashCode:79042922
+18:13:51.946 [http-nio-8081-exec-1] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204607054, client.hashCode:79042922
+18:13:51.946 [http-nio-8081-exec-1] INFO  c.f.p.client.netty.NettyClient - sendAndReceived------>request:EchoRequest [number=13, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_13]
+18:13:52.184 [nioEventLoopGroup-2-5] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000055270000097b2274726163654964223a227469645f3133222c22657272636f6465223a302c226572726d7367223a224543484fe6b58be8af95e68890e58a9f222c2264617461223a7b226e756d626572223a31337d7d
+18:13:52.184 [nioEventLoopGroup-2-5] INFO  c.f.p.c.n.ProtocolClientMessageHandler - msgType:9
+18:13:52.184 [nioEventLoopGroup-2-5] INFO  c.f.p.c.n.ProtocolClientMessageHandler - response object:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=13}, getTraceId()=tid_13]
+18:13:52.184 [nioEventLoopGroup-2-5] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理前):1
+18:13:52.184 [nioEventLoopGroup-2-5] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理后):0
+18:13:52.184 [http-nio-8081-exec-1] INFO  c.f.p.client.data.ResponseFutureData - 返回realData:com.fc.protocol.client.data.ResponseRealData@79a94406
+18:13:52.185 [http-nio-8081-exec-1] INFO  c.f.p.c.d.c.ApiTestController - echo-response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=13}, getTraceId()=tid_13]
+18:13:52.186 [http-nio-8081-exec-1] INFO  c.f.l.c.i.LoggingTagInterceptor - Action RunTime:0.263s
+18:13:52.186 [http-nio-8081-exec-1] INFO  c.f.l.c.i.LoggingTagInterceptor - $end$
+18:14:09.494 [http-nio-8081-exec-3] INFO  c.f.l.c.i.LoggingTagInterceptor - $start$module:controller|controller:ApiTestController|operate:echo|request_uri:/api/test/echo|request_get_paras:|ip:0:0:0:0:0:0:0:1
+18:14:09.495 [http-nio-8081-exec-3] INFO  c.f.p.c.d.c.ApiTestController - echo-request:EchoRequest [number=14, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_14]
+18:14:09.495 [http-nio-8081-exec-3] INFO  c.f.p.c.d.c.ApiTestController - protocolClientPool==null?===>false
+18:14:09.499 [nioEventLoopGroup-2-6] INFO  c.f.p.c.n.ProtocolClientMessageHandler - channelActive:00e04c8e0b530000-2718-00000005-3888f2db0b7e1f57-4c6ef7c4
+18:14:09.499 [http-nio-8081-exec-3] INFO  c.f.p.client.AbstractClientFactory - 新增 ------> key.hashCode:-1204598974, client.hashCode:1576695661
+18:14:09.499 [http-nio-8081-exec-3] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204598974, client.hashCode:1576695661
+18:14:09.499 [http-nio-8081-exec-3] INFO  c.f.p.c.d.c.ApiTestController - userClient==null?===>false
+18:14:09.499 [http-nio-8081-exec-3] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204607054, client.hashCode:79042922
+18:14:09.499 [http-nio-8081-exec-3] INFO  c.f.p.client.netty.NettyClient - sendAndReceived------>request:EchoRequest [number=14, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_14]
+18:14:09.504 [nioEventLoopGroup-2-5] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000055270000097b2274726163654964223a227469645f3134222c22657272636f6465223a302c226572726d7367223a224543484fe6b58be8af95e68890e58a9f222c2264617461223a7b226e756d626572223a31347d7d
+18:14:09.505 [nioEventLoopGroup-2-5] INFO  c.f.p.c.n.ProtocolClientMessageHandler - msgType:9
+18:14:09.505 [nioEventLoopGroup-2-5] INFO  c.f.p.c.n.ProtocolClientMessageHandler - response object:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=14}, getTraceId()=tid_14]
+18:14:09.505 [nioEventLoopGroup-2-5] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理前):1
+18:14:09.505 [nioEventLoopGroup-2-5] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理后):0
+18:14:09.505 [http-nio-8081-exec-3] INFO  c.f.p.client.data.ResponseFutureData - 返回realData:com.fc.protocol.client.data.ResponseRealData@5660bb3
+18:14:09.505 [http-nio-8081-exec-3] INFO  c.f.p.c.d.c.ApiTestController - echo-response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=14}, getTraceId()=tid_14]
+18:14:09.506 [http-nio-8081-exec-3] INFO  c.f.l.c.i.LoggingTagInterceptor - Action RunTime:0.012s
+18:14:09.506 [http-nio-8081-exec-3] INFO  c.f.l.c.i.LoggingTagInterceptor - $end$
+18:14:22.660 [http-nio-8081-exec-5] INFO  c.f.l.c.i.LoggingTagInterceptor - $start$module:controller|controller:ApiTestController|operate:echo|request_uri:/api/test/echo|request_get_paras:|ip:0:0:0:0:0:0:0:1
+18:14:22.661 [http-nio-8081-exec-5] INFO  c.f.p.c.d.c.ApiTestController - echo-request:EchoRequest [number=15, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_15]
+18:14:22.661 [http-nio-8081-exec-5] INFO  c.f.p.c.d.c.ApiTestController - protocolClientPool==null?===>false
+18:14:22.661 [http-nio-8081-exec-5] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204607054, client.hashCode:79042922
+18:14:22.661 [http-nio-8081-exec-5] INFO  c.f.p.c.d.c.ApiTestController - userClient==null?===>false
+18:14:22.661 [http-nio-8081-exec-5] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204607054, client.hashCode:79042922
+18:14:22.662 [http-nio-8081-exec-5] INFO  c.f.p.client.netty.NettyClient - sendAndReceived------>request:EchoRequest [number=15, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_15]
+18:14:25.662 [http-nio-8081-exec-5] INFO  c.f.p.client.data.ResponseFutureData - 客户端请求超时时间已过，设置错误信息
+18:14:25.662 [http-nio-8081-exec-5] INFO  c.f.p.client.data.ResponseFutureData - 返回realData:com.fc.protocol.client.data.ResponseRealData@582146d
+18:14:25.662 [http-nio-8081-exec-5] INFO  c.f.p.c.d.c.ApiTestController - echo-response:ProtocolResponse [errcode=1, errmsg=请求超时, data={}, getTraceId()=null]
+18:14:25.663 [http-nio-8081-exec-5] INFO  c.f.l.c.i.LoggingTagInterceptor - Action RunTime:3.003s
+18:14:25.663 [http-nio-8081-exec-5] INFO  c.f.l.c.i.LoggingTagInterceptor - $end$
+18:14:35.640 [http-nio-8081-exec-7] INFO  c.f.l.c.i.LoggingTagInterceptor - $start$module:controller|controller:ApiTestController|operate:echo|request_uri:/api/test/echo|request_get_paras:|ip:0:0:0:0:0:0:0:1
+18:14:35.641 [http-nio-8081-exec-7] INFO  c.f.p.c.d.c.ApiTestController - echo-request:EchoRequest [number=16, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_16]
+18:14:35.641 [http-nio-8081-exec-7] INFO  c.f.p.c.d.c.ApiTestController - protocolClientPool==null?===>false
+18:14:35.642 [http-nio-8081-exec-7] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204607054, client.hashCode:79042922
+18:14:35.642 [http-nio-8081-exec-7] INFO  c.f.p.c.d.c.ApiTestController - userClient==null?===>false
+18:14:35.642 [http-nio-8081-exec-7] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204598974, client.hashCode:1576695661
+18:14:35.643 [http-nio-8081-exec-7] INFO  c.f.p.client.netty.NettyClient - sendAndReceived------>request:EchoRequest [number=16, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_16]
+18:14:35.648 [nioEventLoopGroup-2-6] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000055270000097b2274726163654964223a227469645f3136222c22657272636f6465223a302c226572726d7367223a224543484fe6b58be8af95e68890e58a9f222c2264617461223a7b226e756d626572223a31367d7d
+18:14:35.648 [nioEventLoopGroup-2-6] INFO  c.f.p.c.n.ProtocolClientMessageHandler - msgType:9
+18:14:35.648 [nioEventLoopGroup-2-6] INFO  c.f.p.c.n.ProtocolClientMessageHandler - response object:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=16}, getTraceId()=tid_16]
+18:14:35.648 [nioEventLoopGroup-2-6] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理前):2
+18:14:35.648 [nioEventLoopGroup-2-6] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理后):1
+18:14:35.648 [http-nio-8081-exec-7] INFO  c.f.p.client.data.ResponseFutureData - 返回realData:com.fc.protocol.client.data.ResponseRealData@1f036187
+18:14:35.648 [http-nio-8081-exec-7] INFO  c.f.p.c.d.c.ApiTestController - echo-response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=16}, getTraceId()=tid_16]
+18:14:35.652 [http-nio-8081-exec-7] INFO  c.f.l.c.i.LoggingTagInterceptor - Action RunTime:0.012s
+18:14:35.652 [http-nio-8081-exec-7] INFO  c.f.l.c.i.LoggingTagInterceptor - $end$
+18:14:37.665 [nioEventLoopGroup-2-5] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000055270000097b2274726163654964223a227469645f3135222c22657272636f6465223a302c226572726d7367223a224543484fe6b58be8af95e68890e58a9f222c2264617461223a7b226e756d626572223a31357d7d
+18:14:37.666 [nioEventLoopGroup-2-5] INFO  c.f.p.c.n.ProtocolClientMessageHandler - msgType:9
+18:14:37.667 [nioEventLoopGroup-2-5] INFO  c.f.p.c.n.ProtocolClientMessageHandler - response object:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=15}, getTraceId()=tid_15]
+18:14:37.667 [nioEventLoopGroup-2-5] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理前):1
+18:14:37.667 [nioEventLoopGroup-2-5] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理后):0
+18:14:42.398 [http-nio-8081-exec-8] INFO  c.f.l.c.i.LoggingTagInterceptor - $start$module:controller|controller:ApiTestController|operate:echo|request_uri:/api/test/echo|request_get_paras:|ip:0:0:0:0:0:0:0:1
+18:14:42.399 [http-nio-8081-exec-8] INFO  c.f.p.c.d.c.ApiTestController - echo-request:EchoRequest [number=17, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_17]
+18:14:42.399 [http-nio-8081-exec-8] INFO  c.f.p.c.d.c.ApiTestController - protocolClientPool==null?===>false
+18:14:42.399 [http-nio-8081-exec-8] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204590894, client.hashCode:1761232048
+18:14:42.399 [http-nio-8081-exec-8] INFO  c.f.p.c.d.c.ApiTestController - userClient==null?===>false
+18:14:42.399 [http-nio-8081-exec-8] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204598974, client.hashCode:1576695661
+18:14:42.399 [http-nio-8081-exec-8] INFO  c.f.p.client.netty.NettyClient - sendAndReceived------>request:EchoRequest [number=17, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_17]
+18:14:42.402 [nioEventLoopGroup-2-6] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000055270000097b2274726163654964223a227469645f3137222c22657272636f6465223a302c226572726d7367223a224543484fe6b58be8af95e68890e58a9f222c2264617461223a7b226e756d626572223a31377d7d
+18:14:42.402 [nioEventLoopGroup-2-6] INFO  c.f.p.c.n.ProtocolClientMessageHandler - msgType:9
+18:14:42.402 [nioEventLoopGroup-2-6] INFO  c.f.p.c.n.ProtocolClientMessageHandler - response object:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=17}, getTraceId()=tid_17]
+18:14:42.402 [nioEventLoopGroup-2-6] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理前):1
+18:14:42.402 [nioEventLoopGroup-2-6] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理后):0
+18:14:42.402 [http-nio-8081-exec-8] INFO  c.f.p.client.data.ResponseFutureData - 返回realData:com.fc.protocol.client.data.ResponseRealData@261e4b52
+18:14:42.402 [http-nio-8081-exec-8] INFO  c.f.p.c.d.c.ApiTestController - echo-response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=17}, getTraceId()=tid_17]
+18:14:42.404 [http-nio-8081-exec-8] INFO  c.f.l.c.i.LoggingTagInterceptor - Action RunTime:0.006s
+18:14:42.404 [http-nio-8081-exec-8] INFO  c.f.l.c.i.LoggingTagInterceptor - $end$
+18:14:55.156 [http-nio-8081-exec-10] INFO  c.f.l.c.i.LoggingTagInterceptor - $start$module:controller|controller:ApiTestController|operate:echo|request_uri:/api/test/echo|request_get_paras:|ip:0:0:0:0:0:0:0:1
+18:14:55.157 [http-nio-8081-exec-10] INFO  c.f.p.c.d.c.ApiTestController - echo-request:EchoRequest [number=18, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_18]
+18:14:55.157 [http-nio-8081-exec-10] INFO  c.f.p.c.d.c.ApiTestController - protocolClientPool==null?===>false
+18:14:55.157 [http-nio-8081-exec-10] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204598974, client.hashCode:1576695661
+18:14:55.157 [http-nio-8081-exec-10] INFO  c.f.p.c.d.c.ApiTestController - userClient==null?===>false
+18:14:55.158 [http-nio-8081-exec-10] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204598974, client.hashCode:1576695661
+18:14:55.158 [http-nio-8081-exec-10] INFO  c.f.p.client.netty.NettyClient - sendAndReceived------>request:EchoRequest [number=18, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_18]
+18:14:55.161 [nioEventLoopGroup-2-6] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000055270000097b2274726163654964223a227469645f3138222c22657272636f6465223a302c226572726d7367223a224543484fe6b58be8af95e68890e58a9f222c2264617461223a7b226e756d626572223a31387d7d
+18:14:55.161 [nioEventLoopGroup-2-6] INFO  c.f.p.c.n.ProtocolClientMessageHandler - msgType:9
+18:14:55.161 [nioEventLoopGroup-2-6] INFO  c.f.p.c.n.ProtocolClientMessageHandler - response object:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=18}, getTraceId()=tid_18]
+18:14:55.161 [nioEventLoopGroup-2-6] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理前):1
+18:14:55.161 [nioEventLoopGroup-2-6] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理后):0
+18:14:55.161 [http-nio-8081-exec-10] INFO  c.f.p.client.data.ResponseFutureData - 返回realData:com.fc.protocol.client.data.ResponseRealData@25979c8b
+18:14:55.161 [http-nio-8081-exec-10] INFO  c.f.p.c.d.c.ApiTestController - echo-response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=18}, getTraceId()=tid_18]
+18:14:55.163 [http-nio-8081-exec-10] INFO  c.f.l.c.i.LoggingTagInterceptor - Action RunTime:0.007s
+18:14:55.163 [http-nio-8081-exec-10] INFO  c.f.l.c.i.LoggingTagInterceptor - $end$
+18:15:01.013 [http-nio-8081-exec-1] INFO  c.f.l.c.i.LoggingTagInterceptor - $start$module:controller|controller:ApiTestController|operate:echo|request_uri:/api/test/echo|request_get_paras:|ip:0:0:0:0:0:0:0:1
+18:15:01.014 [http-nio-8081-exec-1] INFO  c.f.p.c.d.c.ApiTestController - echo-request:EchoRequest [number=19, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_19]
+18:15:01.014 [http-nio-8081-exec-1] INFO  c.f.p.c.d.c.ApiTestController - protocolClientPool==null?===>false
+18:15:01.014 [http-nio-8081-exec-1] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204598974, client.hashCode:1576695661
+18:15:01.014 [http-nio-8081-exec-1] INFO  c.f.p.c.d.c.ApiTestController - userClient==null?===>false
+18:15:01.014 [http-nio-8081-exec-1] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204607054, client.hashCode:79042922
+18:15:01.014 [http-nio-8081-exec-1] INFO  c.f.p.client.netty.NettyClient - sendAndReceived------>request:EchoRequest [number=19, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_19]
+18:15:01.017 [nioEventLoopGroup-2-5] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000055270000097b2274726163654964223a227469645f3139222c22657272636f6465223a302c226572726d7367223a224543484fe6b58be8af95e68890e58a9f222c2264617461223a7b226e756d626572223a31397d7d
+18:15:01.018 [nioEventLoopGroup-2-5] INFO  c.f.p.c.n.ProtocolClientMessageHandler - msgType:9
+18:15:01.018 [nioEventLoopGroup-2-5] INFO  c.f.p.c.n.ProtocolClientMessageHandler - response object:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=19}, getTraceId()=tid_19]
+18:15:01.018 [nioEventLoopGroup-2-5] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理前):1
+18:15:01.018 [nioEventLoopGroup-2-5] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理后):0
+18:15:01.018 [http-nio-8081-exec-1] INFO  c.f.p.client.data.ResponseFutureData - 返回realData:com.fc.protocol.client.data.ResponseRealData@434c5047
+18:15:01.018 [http-nio-8081-exec-1] INFO  c.f.p.c.d.c.ApiTestController - echo-response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=19}, getTraceId()=tid_19]
+18:15:01.019 [http-nio-8081-exec-1] INFO  c.f.l.c.i.LoggingTagInterceptor - Action RunTime:0.006s
+18:15:01.019 [http-nio-8081-exec-1] INFO  c.f.l.c.i.LoggingTagInterceptor - $end$
+18:15:06.997 [http-nio-8081-exec-3] INFO  c.f.l.c.i.LoggingTagInterceptor - $start$module:controller|controller:ApiTestController|operate:echo|request_uri:/api/test/echo|request_get_paras:|ip:0:0:0:0:0:0:0:1
+18:15:07.000 [http-nio-8081-exec-3] INFO  c.f.p.c.d.c.ApiTestController - echo-request:EchoRequest [number=20, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_20]
+18:15:07.000 [http-nio-8081-exec-3] INFO  c.f.p.c.d.c.ApiTestController - protocolClientPool==null?===>false
+18:15:07.000 [http-nio-8081-exec-3] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204598974, client.hashCode:1576695661
+18:15:07.000 [http-nio-8081-exec-3] INFO  c.f.p.c.d.c.ApiTestController - userClient==null?===>false
+18:15:07.000 [http-nio-8081-exec-3] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204598974, client.hashCode:1576695661
+18:15:07.000 [http-nio-8081-exec-3] INFO  c.f.p.client.netty.NettyClient - sendAndReceived------>request:EchoRequest [number=20, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_20]
+18:15:10.002 [http-nio-8081-exec-3] INFO  c.f.p.client.data.ResponseFutureData - 客户端请求超时时间已过，设置错误信息
+18:15:10.002 [http-nio-8081-exec-3] INFO  c.f.p.client.data.ResponseFutureData - 返回realData:com.fc.protocol.client.data.ResponseRealData@cf34752
+18:15:10.002 [http-nio-8081-exec-3] INFO  c.f.p.c.d.c.ApiTestController - echo-response:ProtocolResponse [errcode=1, errmsg=请求超时, data={}, getTraceId()=null]
+18:15:10.003 [http-nio-8081-exec-3] INFO  c.f.l.c.i.LoggingTagInterceptor - Action RunTime:3.006s
+18:15:10.003 [http-nio-8081-exec-3] INFO  c.f.l.c.i.LoggingTagInterceptor - $end$
+18:15:22.447 [http-nio-8081-exec-5] INFO  c.f.l.c.i.LoggingTagInterceptor - $start$module:controller|controller:ApiTestController|operate:echo|request_uri:/api/test/echo|request_get_paras:|ip:0:0:0:0:0:0:0:1
+18:15:22.448 [http-nio-8081-exec-5] INFO  c.f.p.c.d.c.ApiTestController - echo-request:EchoRequest [number=21, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_21]
+18:15:22.448 [http-nio-8081-exec-5] INFO  c.f.p.c.d.c.ApiTestController - protocolClientPool==null?===>false
+18:15:22.448 [http-nio-8081-exec-5] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204607054, client.hashCode:79042922
+18:15:22.448 [http-nio-8081-exec-5] INFO  c.f.p.c.d.c.ApiTestController - userClient==null?===>false
+18:15:22.448 [http-nio-8081-exec-5] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204590894, client.hashCode:1761232048
+18:15:22.448 [http-nio-8081-exec-5] INFO  c.f.p.client.netty.NettyClient - sendAndReceived------>request:EchoRequest [number=21, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_21]
+18:15:22.451 [nioEventLoopGroup-2-4] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000055270000097b2274726163654964223a227469645f3231222c22657272636f6465223a302c226572726d7367223a224543484fe6b58be8af95e68890e58a9f222c2264617461223a7b226e756d626572223a32317d7d
+18:15:22.451 [nioEventLoopGroup-2-4] INFO  c.f.p.c.n.ProtocolClientMessageHandler - msgType:9
+18:15:22.451 [nioEventLoopGroup-2-4] INFO  c.f.p.c.n.ProtocolClientMessageHandler - response object:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=21}, getTraceId()=tid_21]
+18:15:22.451 [nioEventLoopGroup-2-4] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理前):2
+18:15:22.451 [nioEventLoopGroup-2-4] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理后):1
+18:15:22.451 [http-nio-8081-exec-5] INFO  c.f.p.client.data.ResponseFutureData - 返回realData:com.fc.protocol.client.data.ResponseRealData@34cdf4fa
+18:15:22.451 [http-nio-8081-exec-5] INFO  c.f.p.c.d.c.ApiTestController - echo-response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=21}, getTraceId()=tid_21]
+18:15:22.452 [http-nio-8081-exec-5] INFO  c.f.l.c.i.LoggingTagInterceptor - Action RunTime:0.005s
+18:15:22.452 [http-nio-8081-exec-5] INFO  c.f.l.c.i.LoggingTagInterceptor - $end$
+18:15:27.003 [nioEventLoopGroup-2-6] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000055270000097b2274726163654964223a227469645f3230222c22657272636f6465223a302c226572726d7367223a224543484fe6b58be8af95e68890e58a9f222c2264617461223a7b226e756d626572223a32307d7d
+18:15:27.004 [nioEventLoopGroup-2-6] INFO  c.f.p.c.n.ProtocolClientMessageHandler - msgType:9
+18:15:27.004 [nioEventLoopGroup-2-6] INFO  c.f.p.c.n.ProtocolClientMessageHandler - response object:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=20}, getTraceId()=tid_20]
+18:15:27.004 [nioEventLoopGroup-2-6] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理前):1
+18:15:27.004 [nioEventLoopGroup-2-6] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理后):0
+18:15:37.102 [http-nio-8081-exec-6] INFO  c.f.l.c.i.LoggingTagInterceptor - $start$module:controller|controller:ApiTestController|operate:echo|request_uri:/api/test/echo|request_get_paras:|ip:0:0:0:0:0:0:0:1
+18:15:37.103 [http-nio-8081-exec-6] INFO  c.f.p.c.d.c.ApiTestController - echo-request:EchoRequest [number=22, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_22]
+18:15:37.103 [http-nio-8081-exec-6] INFO  c.f.p.c.d.c.ApiTestController - protocolClientPool==null?===>false
+18:15:37.104 [http-nio-8081-exec-6] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204590894, client.hashCode:1761232048
+18:15:37.104 [http-nio-8081-exec-6] INFO  c.f.p.c.d.c.ApiTestController - userClient==null?===>false
+18:15:37.104 [http-nio-8081-exec-6] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204598974, client.hashCode:1576695661
+18:15:37.104 [http-nio-8081-exec-6] INFO  c.f.p.client.netty.NettyClient - sendAndReceived------>request:EchoRequest [number=22, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_22]
+18:15:37.108 [nioEventLoopGroup-2-6] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000055270000097b2274726163654964223a227469645f3232222c22657272636f6465223a302c226572726d7367223a224543484fe6b58be8af95e68890e58a9f222c2264617461223a7b226e756d626572223a32327d7d
+18:15:37.108 [nioEventLoopGroup-2-6] INFO  c.f.p.c.n.ProtocolClientMessageHandler - msgType:9
+18:15:37.108 [nioEventLoopGroup-2-6] INFO  c.f.p.c.n.ProtocolClientMessageHandler - response object:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=22}, getTraceId()=tid_22]
+18:15:37.109 [nioEventLoopGroup-2-6] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理前):1
+18:15:37.109 [nioEventLoopGroup-2-6] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理后):0
+18:15:37.109 [http-nio-8081-exec-6] INFO  c.f.p.client.data.ResponseFutureData - 返回realData:com.fc.protocol.client.data.ResponseRealData@1c2383b9
+18:15:37.109 [http-nio-8081-exec-6] INFO  c.f.p.c.d.c.ApiTestController - echo-response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=22}, getTraceId()=tid_22]
+18:15:37.110 [http-nio-8081-exec-6] INFO  c.f.l.c.i.LoggingTagInterceptor - Action RunTime:0.008s
+18:15:37.110 [http-nio-8081-exec-6] INFO  c.f.l.c.i.LoggingTagInterceptor - $end$
+18:19:02.446 [http-nio-8081-exec-10] INFO  c.f.l.c.i.LoggingTagInterceptor - $start$module:controller|controller:ApiTestController|operate:echo|request_uri:/api/test/echo|request_get_paras:|ip:0:0:0:0:0:0:0:1
+18:19:02.447 [http-nio-8081-exec-10] INFO  c.f.p.c.d.c.ApiTestController - echo-request:EchoRequest [number=23, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_23]
+18:19:02.447 [http-nio-8081-exec-10] INFO  c.f.p.c.d.c.ApiTestController - protocolClientPool==null?===>false
+18:19:02.447 [http-nio-8081-exec-10] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204590894, client.hashCode:1761232048
+18:19:02.447 [http-nio-8081-exec-10] INFO  c.f.p.c.d.c.ApiTestController - userClient==null?===>false
+18:19:02.448 [http-nio-8081-exec-10] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204607054, client.hashCode:79042922
+18:19:02.448 [http-nio-8081-exec-10] INFO  c.f.p.client.netty.NettyClient - sendAndReceived------>request:EchoRequest [number=23, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_23]
+18:19:02.451 [nioEventLoopGroup-2-5] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000055270000097b2274726163654964223a227469645f3233222c22657272636f6465223a302c226572726d7367223a224543484fe6b58be8af95e68890e58a9f222c2264617461223a7b226e756d626572223a32337d7d
+18:19:02.452 [nioEventLoopGroup-2-5] INFO  c.f.p.c.n.ProtocolClientMessageHandler - msgType:9
+18:19:02.452 [nioEventLoopGroup-2-5] INFO  c.f.p.c.n.ProtocolClientMessageHandler - response object:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=23}, getTraceId()=tid_23]
+18:19:02.452 [nioEventLoopGroup-2-5] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理前):1
+18:19:02.452 [nioEventLoopGroup-2-5] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理后):0
+18:19:02.452 [http-nio-8081-exec-10] INFO  c.f.p.client.data.ResponseFutureData - 返回realData:com.fc.protocol.client.data.ResponseRealData@64aa96b0
+18:19:02.452 [http-nio-8081-exec-10] INFO  c.f.p.c.d.c.ApiTestController - echo-response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=23}, getTraceId()=tid_23]
+18:19:02.454 [http-nio-8081-exec-10] INFO  c.f.l.c.i.LoggingTagInterceptor - Action RunTime:0.008s
+18:19:02.454 [http-nio-8081-exec-10] INFO  c.f.l.c.i.LoggingTagInterceptor - $end$
+18:19:12.374 [http-nio-8081-exec-1] INFO  c.f.l.c.i.LoggingTagInterceptor - $start$module:controller|controller:ApiTestController|operate:echo|request_uri:/api/test/echo|request_get_paras:|ip:0:0:0:0:0:0:0:1
+18:19:12.376 [http-nio-8081-exec-1] INFO  c.f.p.c.d.c.ApiTestController - echo-request:EchoRequest [number=24, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_24]
+18:19:12.376 [http-nio-8081-exec-1] INFO  c.f.p.c.d.c.ApiTestController - protocolClientPool==null?===>false
+18:19:12.376 [http-nio-8081-exec-1] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204607054, client.hashCode:79042922
+18:19:12.376 [http-nio-8081-exec-1] INFO  c.f.p.c.d.c.ApiTestController - userClient==null?===>false
+18:19:12.376 [http-nio-8081-exec-1] INFO  c.f.p.client.AbstractClientFactory - 返回 ------> key.hashCode:-1204598974, client.hashCode:1576695661
+18:19:12.376 [http-nio-8081-exec-1] INFO  c.f.p.client.netty.NettyClient - sendAndReceived------>request:EchoRequest [number=24, getVersion()=1.0, getReqCode()=echo, getTraceId()=tid_24]
+18:19:12.379 [nioEventLoopGroup-2-6] INFO  c.f.p.common.utils.PacketLogUtil - packet:00000055270000097b2274726163654964223a227469645f3234222c22657272636f6465223a302c226572726d7367223a224543484fe6b58be8af95e68890e58a9f222c2264617461223a7b226e756d626572223a32347d7d
+18:19:12.379 [nioEventLoopGroup-2-6] INFO  c.f.p.c.n.ProtocolClientMessageHandler - msgType:9
+18:19:12.379 [nioEventLoopGroup-2-6] INFO  c.f.p.c.n.ProtocolClientMessageHandler - response object:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=24}, getTraceId()=tid_24]
+18:19:12.379 [nioEventLoopGroup-2-6] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理前):1
+18:19:12.379 [nioEventLoopGroup-2-6] INFO  c.f.p.c.n.ProtocolClientMessageHandler - NettyClient.dataMap.size(响应处理后):0
+18:19:12.380 [http-nio-8081-exec-1] INFO  c.f.p.client.data.ResponseFutureData - 返回realData:com.fc.protocol.client.data.ResponseRealData@66fe4f4b
+18:19:12.380 [http-nio-8081-exec-1] INFO  c.f.p.c.d.c.ApiTestController - echo-response:ProtocolResponse [errcode=0, errmsg=ECHO测试成功, data={number=24}, getTraceId()=tid_24]
+18:19:12.381 [http-nio-8081-exec-1] INFO  c.f.l.c.i.LoggingTagInterceptor - Action RunTime:0.007s
+18:19:12.381 [http-nio-8081-exec-1] INFO  c.f.l.c.i.LoggingTagInterceptor - $end$
+18:19:37.080 [Thread-3] INFO  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@7006c658: startup date [Wed Sep 12 18:08:16 CST 2018]; root of context hierarchy
+18:19:37.083 [Thread-3] INFO  o.s.c.s.DefaultLifecycleProcessor - Stopping beans in phase 2147483647
+18:19:37.084 [Thread-3] INFO  o.s.j.e.a.AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+18:19:37.085 [Thread-3] INFO  c.f.p.c.netty.FinalClientFactory - 客户端连接池注销

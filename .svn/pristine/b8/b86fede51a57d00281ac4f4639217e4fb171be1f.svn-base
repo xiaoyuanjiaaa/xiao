@@ -1,0 +1,17 @@
+package com.fc.member.store.user.dao;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.member.store.user.entity.StoreDictionaries;
+/**
+ * <p>Title: StoreDictionaries</p>
+ * <p>Description:  DAO层</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:06
+ */
+@Mapper
+public interface IStoreDictionariesDao extends IMapper<StoreDictionaries>{
+	
+    
+}

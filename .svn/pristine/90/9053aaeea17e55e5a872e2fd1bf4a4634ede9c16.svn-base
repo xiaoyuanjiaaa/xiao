@@ -1,0 +1,111 @@
+package com.fc.member.store.user.handler;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.fc.common.exception.ErrorCode;
+import com.fc.member.store.user.entity.StoreCoupon;
+import com.fc.member.store.user.service.IStoreCouponService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.store.user.StoreCouponRequest;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+
+/**
+ * 储值卡使用范围
+ * @author jiahx
+ * @date 2019-1-2
+ */
+@Component
+@Handler(module = "storecoupon")
+public class StoreCouponHandler {
+
+	private static Logger log = LoggerFactory.getLogger(StoreCouponHandler.class);
+
+	@Autowired
+	IStoreCouponService storeCouponService;
+
+	/**
+	 * 查询门店储值卡使用范围
+	 * @author	jiahx
+	 * @see update_name:jiahx update_time:2019-1-7
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = StoreCouponRequest.class)
+	public ProtocolResponse queryStoreCoupon(StoreCouponRequest request) {
+		log.info("StoreCouponHandler------>requestQueryStoreCoupon:{}", request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidateQuery();
+			if(validResult != null ) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+			List<StoreCoupon> storeCouponList =  storeCouponService.getQuery(request);
+			response.addData("store_coupon_list", storeCouponList);
+			log.info("查询结果storeCouponList" + storeCouponList);
+		} catch (Exception e) {
+			response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+			e.printStackTrace();
+		}
+		log.info("StoreCouponHandler------>responseQueryStoreCoupon:{}", response);
+		return response;
+	}
+	/**
+	 * 更新门店套餐使用范围
+	 * @author	jiahx
+	 * @see update_name:jiahx update_time:2019-1-7
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = StoreCouponRequest.class)
+	public ProtocolResponse updateStoreCoupon(StoreCouponRequest request) {
+		log.info("StoreCouponHandler------>requestUpdateStoreCoupon:{}", request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidateUpdate();
+			if(validResult != null ) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+			storeCouponService.updateStoreCoupon(request);
+		} catch (Exception e) {
+			response.error(ErrorCode.UPDATE_ERROR.getValue()).msg(ErrorCode.UPDATE_ERROR.getDesc());
+			e.printStackTrace();
+		}
+		log.info("StoreCouponHandler------>responseUpdateStoreCoupon:{}", response);
+		return response;
+	}
+	@ReqCodeMapping(requestClazz = StoreCouponRequest.class)
+	public ProtocolResponse createStoreCoupon(StoreCouponRequest request) {
+		log.info("StoreCouponHandler------>requestCreateStoreCoupon:{}", request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidateQuery();
+			if(validResult != null ) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+			//新增之前先去查询，纺织意外调用两次
+			List<StoreCoupon> storeCouponList =  storeCouponService.getQuery(request);
+			if(storeCouponList.size()>0) {
+				return response.msg("该门店储值卡范围已经存在不需要再次新增！");
+			}
+			int numResult= storeCouponService.insertStoreCoupon(request);
+			if(numResult==0) {
+				response.code(ErrorCode.CREATE_ERROR.getValue()).msg(ErrorCode.CREATE_ERROR.getDesc());
+			}
+			log.info("createStoreCoupon=====>"+numResult);
+		} catch (Exception e) {
+			response.code(ErrorCode.CREATE_ERROR.getValue()).msg(ErrorCode.CREATE_ERROR.getDesc());
+			e.printStackTrace();
+		}
+		log.info("StoreCouponHandler------>responseCreateStoreCoupon:{}", response);
+		return response;
+	}
+}

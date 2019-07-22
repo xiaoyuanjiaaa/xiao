@@ -1,0 +1,55 @@
+package com.fc.protocol.demo.request.store.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * <p>枫车交易明细: </p>
+ * @author jiahx
+ * @date 2019/1/7 
+ */
+public class QueryStoreCoinDetailRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+	
+	@ApiModelProperty(value = "主键ID", name = "storeCoinDetailId")
+	private Integer storeCoinDetailId; // 主键ID
+//	@ApiModelProperty(value = "门店id", name = "storeId")
+//	private Integer storeId; // 门店id
+//	@ApiModelProperty(value = "订单号", name = "orderNo")
+//	private String orderNo; // 订单号
+//	@ApiModelProperty(value = "本次操作金额", name = "changeCoin")
+//	private Integer changeCoin; // 本次操作金额
+//	@ApiModelProperty(value = "操作后余额", name = "afterCoin")
+//	private Integer afterCoin; // 操作后余额
+//	@ApiModelProperty(value = "操作类型,1为转入,-1,为转出", name = "changeType")
+//	private Integer changeType; // 操作类型,1为转入,-1,为转出
+//	@ApiModelProperty(value = "来源类型", name = "source")
+//	private String source; // 来源类型
+//	@ApiModelProperty(value = "操作发生的时间", name = "changeTime")
+//	private Integer changeTime; // 操作发生的时间
+//	@ApiModelProperty(value = "操作备注", name = "remark")
+//	private String remark; // 操作备注
+    
+	public String paramValidate() {
+		if (StringUtils.isEmpty(storeCoinDetailId)) {
+			return "参数:storeCoinDetailId不能为空";
+		}
+		return null;
+	}
+	public void setStoreCoinDetailId(Integer storeCoinDetailId) {
+		this.storeCoinDetailId = storeCoinDetailId;
+	}
+	
+	public Integer getStoreCoinDetailId() {
+		return this.storeCoinDetailId;
+	}
+	@Override
+	public String toString() {
+		return "QueryStoreCoinDetailRequest [storeCoinDetailId=" + storeCoinDetailId + ", getVersion()=" + getVersion()
+				+ ", getReqCode()=" + getReqCode() + ", getTraceId()=" + getTraceId() + "]";
+	}
+}

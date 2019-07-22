@@ -1,0 +1,122 @@
+package com.fc.member.master.user.entity;
+
+import java.io.Serializable;
+
+
+/**
+ * <p>Table: MasterBankCard</p>
+ * <p>Description: 用户银行帐号表</p>
+ * @author yangd
+ * @date 2019-01-15 10:09:27
+ */
+public class MasterBankCard implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer masterBankCardId; // 主键id
+	private Integer masterMemberId; // 师傅ID
+	private String userName; // 用户名
+	private String bankCode; // 银行代码
+	private String bankName; // 银行名称
+	private String bankAccountName; // 银行开户名
+	private String bankCardNo; // 银行帐号
+	private Integer bankRegionId; // 开户行所在地号
+	private String bankRegionName; // 开户行所在地
+	private Integer createTime; // 创建时间
+	private Integer updateTime; // 修改时间
+
+	public void setMasterBankCardId(Integer masterBankCardId) {
+		this.masterBankCardId = masterBankCardId;
+	}
+	
+	public Integer getMasterBankCardId() {
+		return this.masterBankCardId;
+	}
+	public void setMasterMemberId(Integer masterMemberId) {
+		this.masterMemberId = masterMemberId;
+	}
+	
+	public Integer getMasterMemberId() {
+		return this.masterMemberId;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	
+	public String getUserName() {
+		return this.userName;
+	}
+	public void setBankCode(String bankCode) {
+		this.bankCode = bankCode;
+	}
+	
+	public String getBankCode() {
+		return this.bankCode;
+	}
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
+	
+	public String getBankName() {
+		return this.bankName;
+	}
+	public void setBankAccountName(String bankAccountName) {
+		this.bankAccountName = bankAccountName;
+	}
+	
+	public String getBankAccountName() {
+		return this.bankAccountName;
+	}
+	public void setBankCardNo(String bankCardNo) {
+		this.bankCardNo = bankCardNo;
+	}
+	
+	public String getBankCardNo() {
+		return this.bankCardNo;
+	}
+	public void setBankRegionId(Integer bankRegionId) {
+		this.bankRegionId = bankRegionId;
+	}
+	
+	public Integer getBankRegionId() {
+		return this.bankRegionId;
+	}
+	public void setBankRegionName(String bankRegionName) {
+		this.bankRegionName = bankRegionName;
+	}
+	
+	public String getBankRegionName() {
+		return this.bankRegionName;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+	public void setUpdateTime(Integer updateTime) {
+		this.updateTime = updateTime;
+	}
+	
+	public Integer getUpdateTime() {
+		return this.updateTime;
+	}
+
+    @Override
+    public String toString () {
+    	return "MasterBankCard{" + 
+	    	"masterBankCardId=" + masterBankCardId + 
+	    	", masterMemberId=" + masterMemberId + 
+	    	", userName=" + userName + 
+	    	", bankCode=" + bankCode + 
+	    	", bankName=" + bankName + 
+	    	", bankAccountName=" + bankAccountName + 
+	    	", bankCardNo=" + bankCardNo + 
+	    	", bankRegionId=" + bankRegionId + 
+	    	", bankRegionName=" + bankRegionName + 
+	    	", createTime=" + createTime + 
+	    	", updateTime=" + updateTime + 
+	    	"}";
+    }
+}

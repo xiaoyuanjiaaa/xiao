@@ -1,0 +1,53 @@
+package com.fc.member.store.user.service;
+
+import java.util.List;
+import java.util.Map;
+
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.service.IService;
+import com.fc.member.store.user.entity.StoreAddress;
+import com.fc.protocol.demo.request.store.user.StoreAddressCreateRequest;
+import com.fc.protocol.demo.request.store.user.StoreAddressDeleteRequest;
+import com.fc.protocol.demo.request.store.user.StoreAddressListRequest;
+import com.fc.protocol.demo.request.store.user.StoreAddressUpdateRequest;
+
+/**
+ * <p>Title: StoreAddress</p>
+ * <p>Description:  Service 接口</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:04
+ */
+public interface IStoreAddressService extends IService<StoreAddress> {
+
+	/**
+	 * 收货地址列表
+	 * @param page
+	 * @param addressRequest
+	 * @return
+	 */
+	List<StoreAddress> getStoreAddressList(Page page, StoreAddressListRequest addressRequest);
+
+	/**
+	 * 新增收货地址
+	 * @param createRequest
+	 * @return
+	 */
+	Map<String, Object> insertStoreAddress(StoreAddressCreateRequest createRequest);
+
+	/**
+	 * 删除收货地址
+	 * @param addressId
+	 * @return
+	 * @throws Exception 
+	 */
+	int deleteAddress(StoreAddressDeleteRequest deleteRequest) throws Exception;
+
+	/**
+	 * 修改收货地址
+	 * @param updateRequest
+	 * @return
+	 * @throws Exception 
+	 */
+	void updateStoreAddress(StoreAddressUpdateRequest updateRequest) throws Exception;
+
+}

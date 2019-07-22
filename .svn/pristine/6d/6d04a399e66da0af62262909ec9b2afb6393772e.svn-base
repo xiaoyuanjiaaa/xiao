@@ -1,0 +1,18 @@
+package com.fc.member.master.user.dao;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.fc.common.plugin.mybatis.IMapper;
+
+import com.fc.member.master.user.entity.MasterUserMapleBean;
+/**
+ * <p>Title: MasterUserMapleBean</p>
+ * <p>Description: 师傅枫豆表 DAO层</p>
+ * @author yangd
+ * @date 2019-01-15 10:09:29
+ */
+@Mapper
+public interface IMasterUserMapleBeanDao extends IMapper<MasterUserMapleBean>{
+	// 插入数据
+	int insertSelective(MasterUserMapleBean obj);
+}

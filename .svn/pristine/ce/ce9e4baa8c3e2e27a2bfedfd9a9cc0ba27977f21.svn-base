@@ -1,0 +1,185 @@
+package com.fc.member.wechatmaintain.user.service.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.fc.common.exception.ErrorCode;
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.plugin.mybatis.PageQuery;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.wechatmaintain.user.dao.IWechatMaintainUserCouponDao;
+import com.fc.member.wechatmaintain.user.entity.WechatMaintainUserCoupon;
+import com.fc.member.wechatmaintain.user.service.IWechatMaintainUserCouponService;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainUserCouponBalanceTotleRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainUserCouponByUserIdListRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainUserCouponCreateRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainUserCouponEditSaveRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainUserCouponStoreUserIdDetailsRequest;
+
+/**
+ * <p>Title: WechatMaintainUserCoupon</p>
+ * <p>Description: 微养车用户储值卡表 Service 层</p>
+ * @author yangd
+ * @date 2018-12-28 17:13:48
+ */
+@Service("wechatMaintainUserCouponService")
+public class WechatMaintainUserCouponServiceImp extends ServiceImpl<WechatMaintainUserCoupon>
+		implements IWechatMaintainUserCouponService {
+
+	private static Logger log = LoggerFactory.getLogger(WechatMaintainUserCouponServiceImp.class);
+
+	@Autowired
+	private IWechatMaintainUserCouponDao wechatMaintainUserCouponDao;
+
+	@Override
+	protected IMapper<WechatMaintainUserCoupon> getDao() {
+		return wechatMaintainUserCouponDao;
+	}
+
+	/**
+	 * 插入数据
+	 */
+	@Override
+	public Map<String, Object> insertSelective(WechatMaintainUserCouponCreateRequest request) {
+		log.info("insertSelective---------->:" + request);
+		Map<String, Object> resultMap = new HashMap<>();
+		// 将不为空的属性set到对象中
+		WechatMaintainUserCoupon entity = isNotEmptySetObjectInsert(request);
+		log.info("WechatMaintainUserCoupon---------->:" + entity);
+		int result = wechatMaintainUserCouponDao.insertSelective(entity);
+		if (result <= 0) {
+			resultMap.put("error", ErrorCode.CREATE_ERROR.getDesc());
+			return resultMap;
+		}
+		return resultMap;
+	}
+
+	/**
+	 * 储值卡列表 - 分页
+	 */
+	@Override
+	public List<WechatMaintainUserCoupon> getUserCouponList(Page page,
+			WechatMaintainUserCouponByUserIdListRequest request) {
+		log.info("getUserCouponList---------->:" + request);
+		// 将不为空的属性set到对象中
+		WechatMaintainUserCoupon entity = isNotEmptySetObjectList(request);
+		log.info("WechatMaintainUserCoupon---------->{}", entity.toString());
+		// 设置分页，查询条件
+		PageQuery pageQuery = new PageQuery();
+		pageQuery.setPage(page);
+		pageQuery.setCondition(entity);
+		return wechatMaintainUserCouponDao.getRowsPage(pageQuery);
+	}
+
+	/**
+	 * 我的 - 储值卡列表
+	 */
+	@Override
+	public List<WechatMaintainUserCoupon> getUserCouponByUserIdList(
+			WechatMaintainUserCouponByUserIdListRequest request) {
+		log.info("getUserCouponByUserIdList---------->:" + request);
+		// set 对象属性值
+		WechatMaintainUserCoupon entity = isNotEmptySetObjectList(request);
+		log.info("WechatMaintainUserCoupon---------->{}", entity.toString());
+		return wechatMaintainUserCouponDao.getRows(entity);
+	}
+
+	/**
+	 * 更新数据
+	 */
+	@Override
+	public Map<String, Object> updateWechatMaintainUserCoupon(WechatMaintainUserCouponEditSaveRequest request)
+			throws Exception {
+		log.info("updateWechatMaintainUserCoupon---------->:" + request);
+		Map<String, Object> resultMap = new HashMap<>();
+		// 将不为空的属性set到对象中
+		WechatMaintainUserCoupon entity = isNotEmptySetObjectUpdate(request);
+		log.info("updateWechatMaintainUserCoupon---------->:" + entity);
+		wechatMaintainUserCouponDao.update(entity);
+		return resultMap;
+	}
+
+	/**
+	 * 查询用户所有可用储值卡余额
+	 */
+	@Override
+	public WechatMaintainUserCoupon getUserBalanceTotle(WechatMaintainUserCouponBalanceTotleRequest request) {
+		log.info("getUserBalanceTotle---------->:" + request);
+		// set 对象属性值
+		WechatMaintainUserCoupon entity = new WechatMaintainUserCoupon();
+		entity.setFcUserId(request.getFcUserId());
+		log.info("WechatMaintainUserCoupon---------->{}", entity.toString());
+		return wechatMaintainUserCouponDao.getUserBalanceTotle(entity);
+	}
+
+	/**
+	 * 将不为空的属性set到对象中
+	 * @param entity 实体对象
+	 * @param request 参数对象
+	 * @return
+	 */
+	public static WechatMaintainUserCoupon isNotEmptySetObjectInsert(WechatMaintainUserCouponCreateRequest request) {
+		WechatMaintainUserCoupon entity = new WechatMaintainUserCoupon();
+		entity.setFcUserId(request.getFcUserId());
+		entity.setStoreId(request.getStoreId());
+		entity.setBalance(request.getBalance());
+		entity.setCreateTime(DateTimeUtils.getDateTimeInteger());
+		return entity;
+	}
+
+	/**
+	 * 将不为空的属性set到对象中
+	 * @param entity 实体对象
+	 * @param request 参数对象
+	 * @return
+	 */
+	public static WechatMaintainUserCoupon isNotEmptySetObjectUpdate(WechatMaintainUserCouponEditSaveRequest request) {
+		WechatMaintainUserCoupon entity = new WechatMaintainUserCoupon();
+		entity.setWechatMaintainUserCouponId(request.getWechatMaintainUserCouponId());
+		entity.setFcUserId(request.getFcUserId());
+		entity.setStoreId(request.getStoreId());
+		entity.setBalance(request.getBalance());
+		return entity;
+	}
+
+	/**
+	 * 将不为空的属性set到对象中
+	 * @param entity 实体对象
+	 * @param request 参数对象
+	 * @return
+	 */
+	public static WechatMaintainUserCoupon isNotEmptySetObjectList(
+			WechatMaintainUserCouponByUserIdListRequest request) {
+		log.info("getUserBalanceTotle---------->:" + request);
+		WechatMaintainUserCoupon entity = new WechatMaintainUserCoupon();
+		entity.setFcUserId(request.getFcUserId());
+		entity.setStoreId(request.getStoreId());
+		entity.setCreateTime(request.getCreateTime());
+		return entity;
+	}
+
+	/**
+	 * 根据 用户ID、门店ID 查询储值卡信息
+	 */
+	@Override
+	public WechatMaintainUserCoupon getUserCouponByStoreIdUserId(
+			WechatMaintainUserCouponStoreUserIdDetailsRequest request) {
+		WechatMaintainUserCoupon entity = new WechatMaintainUserCoupon();
+		entity.setFcUserId(request.getFcUserId());
+		entity.setStoreId(request.getStoreId());
+		log.info("WechatMaintainUserCoupon---------->{}", entity.toString());
+		List<WechatMaintainUserCoupon> list = wechatMaintainUserCouponDao.getRows(entity);
+		if (list.isEmpty()) {
+			return null;
+		}
+		return list.get(0);
+	}
+}

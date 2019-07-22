@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.shop.user.dao.IShopScopinfoDao">
+	<resultMap id="ShopScopinfoMap" type="com.fc.member.shop.user.entity.ShopScopinfo">
+        <id property="shopScopinfoId" column="shop_scopinfo_id"/>
+        <id property="shopId" column="shop_id"/>
+        <id property="businessScope" column="business_scope"/>
+        <id property="businessBrand" column="business_brand"/>
+        <id property="cCertification" column="c_certification"/>
+        <id property="qualityReport" column="quality_report"/>
+        <id property="otherDocuments" column="other_documents"/>
+        <id property="depositFileIds" column="deposit_file_ids"/>
+        <id property="updateTime" column="update_time"/>
+        <id property="createTime" column="create_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="ShopScopinfoMap" >
+		select * from shop_scopinfo where 
+	        shop_scopinfo_id = #{shopScopinfoId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.shop.user.entity.ShopScopinfo" useGeneratedKeys="true" keyProperty="shopScopinfoId">
+		insert into shop_scopinfo(shop_scopinfo_id , shop_id , business_scope , business_brand , c_certification , quality_report , other_documents , deposit_file_ids , update_time , create_time  )
+    	values(#{shopScopinfoId} ,#{shopId} ,#{businessScope} ,#{businessBrand} ,#{cCertification} ,#{qualityReport} ,#{otherDocuments} ,#{depositFileIds} ,#{updateTime} ,#{createTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.shop.user.entity.ShopScopinfo" useGeneratedKeys="true" keyProperty="shopScopinfoId">
+		insert into shop_scopinfo
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="shopScopinfoId != null">shop_scopinfo_id,</if>
+					<if test="shopId != null">shop_id,</if>
+					<if test="businessScope != null">business_scope,</if>
+					<if test="businessBrand != null">business_brand,</if>
+					<if test="cCertification != null">c_certification,</if>
+					<if test="qualityReport != null">quality_report,</if>
+					<if test="otherDocuments != null">other_documents,</if>
+					<if test="depositFileIds != null">deposit_file_ids,</if>
+					<if test="updateTime != null">update_time,</if>
+					<if test="createTime != null">create_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="shopScopinfoId != null">#{shopScopinfoId},</if>
+					<if test="shopId != null">#{shopId},</if>
+					<if test="businessScope != null">#{businessScope},</if>
+					<if test="businessBrand != null">#{businessBrand},</if>
+					<if test="cCertification != null">#{cCertification},</if>
+					<if test="qualityReport != null">#{qualityReport},</if>
+					<if test="otherDocuments != null">#{otherDocuments},</if>
+					<if test="depositFileIds != null">#{depositFileIds},</if>
+					<if test="updateTime != null">#{updateTime},</if>
+					<if test="createTime != null">#{createTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.shop.user.entity.ShopScopinfo">
+		update shop_scopinfo
+		<set>
+		    	<if test="shopId != null">shop_id = #{shopId},</if>
+		    	<if test="businessScope != null">business_scope = #{businessScope},</if>
+		    	<if test="businessBrand != null">business_brand = #{businessBrand},</if>
+		    	<if test="cCertification != null">c_certification = #{cCertification},</if>
+		    	<if test="qualityReport != null">quality_report = #{qualityReport},</if>
+		    	<if test="otherDocuments != null">other_documents = #{otherDocuments},</if>
+		    	<if test="depositFileIds != null">deposit_file_ids = #{depositFileIds},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		</set>
+		where 
+	        shop_scopinfo_id = #{shopScopinfoId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from shop_scopinfo where 
+	        shop_scopinfo_id = #{shopScopinfoId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.shop.user.entity.ShopScopinfo" resultMap="ShopScopinfoMap" >
+		select * from shop_scopinfo 
+		<where>
+		       <if test="shopScopinfoId != null">
+					AND shop_scopinfo_id = #{shopScopinfoId}
+				</if>
+		       <if test="shopId != null">
+					AND shop_id = #{shopId}
+				</if>
+		       <if test="businessScope != null">
+					AND business_scope = #{businessScope}
+				</if>
+		       <if test="businessBrand != null">
+					AND business_brand = #{businessBrand}
+				</if>
+		       <if test="cCertification != null">
+					AND c_certification = #{cCertification}
+				</if>
+		       <if test="qualityReport != null">
+					AND quality_report = #{qualityReport}
+				</if>
+		       <if test="otherDocuments != null">
+					AND other_documents = #{otherDocuments}
+				</if>
+		       <if test="depositFileIds != null">
+					AND deposit_file_ids = #{depositFileIds}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="ShopScopinfoMap" >
+		select * from shop_scopinfo  
+		<where>
+		       <if test="condition.shopScopinfoId != null">
+					AND shop_scopinfo_id = #{condition.shopScopinfoId}
+				</if>
+		       <if test="condition.shopId != null">
+					AND shop_id = #{condition.shopId}
+				</if>
+		       <if test="condition.businessScope != null">
+					AND business_scope = #{condition.businessScope}
+				</if>
+		       <if test="condition.businessBrand != null">
+					AND business_brand = #{condition.businessBrand}
+				</if>
+		       <if test="condition.cCertification != null">
+					AND c_certification = #{condition.cCertification}
+				</if>
+		       <if test="condition.qualityReport != null">
+					AND quality_report = #{condition.qualityReport}
+				</if>
+		       <if test="condition.otherDocuments != null">
+					AND other_documents = #{condition.otherDocuments}
+				</if>
+		       <if test="condition.depositFileIds != null">
+					AND deposit_file_ids = #{condition.depositFileIds}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

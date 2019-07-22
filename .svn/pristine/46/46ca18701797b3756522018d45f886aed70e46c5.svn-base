@@ -1,0 +1,158 @@
+package com.fc.member.shop.user.entity;
+
+import java.io.Serializable;
+
+
+/**
+ * <p>Table: ShopDepositinfo</p>
+ * <p>Description: 商家保证金信息表</p>
+ * @author yangd
+ * @date 2019-01-14 11:08:39
+ */
+public class ShopDepositinfo implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer shopDepositinfoId; // 主键id
+	private Integer shopId; // 店铺编号
+	private Integer bondMoney; // 保证金金额
+	private Integer onlineMoney; // 上线金额
+	private String paymentRatio; // 缴纳比例
+	private String paymentSchedule; // 缴纳进度
+	private String changeType; // 变动类型 1:缴纳保证金,2:保证金修改,3:保证金解冻
+	private String deductionBase; // 扣费基数
+	private String updateType; // 修改类型 1:保证金进账,2:违规扣罚
+	private String updateReson; // 修改原因
+	private String picture; // 图片
+	private Integer thawTime; // 解冻时间
+	private Integer changeMoney; // 变动金额
+	private Integer updateTime; // 修改时间
+	private Integer createTime; // 创建时间
+
+	public void setShopDepositinfoId(Integer shopDepositinfoId) {
+		this.shopDepositinfoId = shopDepositinfoId;
+	}
+	
+	public Integer getShopDepositinfoId() {
+		return this.shopDepositinfoId;
+	}
+	public void setShopId(Integer shopId) {
+		this.shopId = shopId;
+	}
+	
+	public Integer getShopId() {
+		return this.shopId;
+	}
+	public void setBondMoney(Integer bondMoney) {
+		this.bondMoney = bondMoney;
+	}
+	
+	public Integer getBondMoney() {
+		return this.bondMoney;
+	}
+	public void setOnlineMoney(Integer onlineMoney) {
+		this.onlineMoney = onlineMoney;
+	}
+	
+	public Integer getOnlineMoney() {
+		return this.onlineMoney;
+	}
+	public void setPaymentRatio(String paymentRatio) {
+		this.paymentRatio = paymentRatio;
+	}
+	
+	public String getPaymentRatio() {
+		return this.paymentRatio;
+	}
+	public void setPaymentSchedule(String paymentSchedule) {
+		this.paymentSchedule = paymentSchedule;
+	}
+	
+	public String getPaymentSchedule() {
+		return this.paymentSchedule;
+	}
+	public void setChangeType(String changeType) {
+		this.changeType = changeType;
+	}
+	
+	public String getChangeType() {
+		return this.changeType;
+	}
+	public void setDeductionBase(String deductionBase) {
+		this.deductionBase = deductionBase;
+	}
+	
+	public String getDeductionBase() {
+		return this.deductionBase;
+	}
+	public void setUpdateType(String updateType) {
+		this.updateType = updateType;
+	}
+	
+	public String getUpdateType() {
+		return this.updateType;
+	}
+	public void setUpdateReson(String updateReson) {
+		this.updateReson = updateReson;
+	}
+	
+	public String getUpdateReson() {
+		return this.updateReson;
+	}
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+	
+	public String getPicture() {
+		return this.picture;
+	}
+	public void setThawTime(Integer thawTime) {
+		this.thawTime = thawTime;
+	}
+	
+	public Integer getThawTime() {
+		return this.thawTime;
+	}
+	public void setChangeMoney(Integer changeMoney) {
+		this.changeMoney = changeMoney;
+	}
+	
+	public Integer getChangeMoney() {
+		return this.changeMoney;
+	}
+	public void setUpdateTime(Integer updateTime) {
+		this.updateTime = updateTime;
+	}
+	
+	public Integer getUpdateTime() {
+		return this.updateTime;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+
+    @Override
+    public String toString () {
+    	return "ShopDepositinfo{" + 
+	    	"shopDepositinfoId=" + shopDepositinfoId + 
+	    	", shopId=" + shopId + 
+	    	", bondMoney=" + bondMoney + 
+	    	", onlineMoney=" + onlineMoney + 
+	    	", paymentRatio=" + paymentRatio + 
+	    	", paymentSchedule=" + paymentSchedule + 
+	    	", changeType=" + changeType + 
+	    	", deductionBase=" + deductionBase + 
+	    	", updateType=" + updateType + 
+	    	", updateReson=" + updateReson + 
+	    	", picture=" + picture + 
+	    	", thawTime=" + thawTime + 
+	    	", changeMoney=" + changeMoney + 
+	    	", updateTime=" + updateTime + 
+	    	", createTime=" + createTime + 
+	    	"}";
+    }
+}

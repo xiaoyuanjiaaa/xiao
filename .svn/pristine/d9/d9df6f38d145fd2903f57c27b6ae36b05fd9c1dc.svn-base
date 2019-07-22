@@ -1,0 +1,15 @@
+package com.fc.member.shop.user.service;
+
+import com.fc.common.service.IService;
+import com.fc.member.shop.user.entity.ShopWithdrawalinfo;
+/**
+ * <p>Title: ShopWithdrawalinfo</p>
+ * <p>Description: 商家提现信息表 Service 接口</p>
+ * @author yangd
+ * @date 2019-01-14 11:08:41
+ */
+public interface IShopWithdrawalinfoService extends IService<ShopWithdrawalinfo>{
+	
+	// 插入数据
+	int insertSelective(ShopWithdrawalinfo obj);
+}

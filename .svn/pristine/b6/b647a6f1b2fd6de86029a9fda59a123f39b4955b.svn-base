@@ -1,0 +1,47 @@
+package com.fc.common.util;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/** 
+ * @ClassName: DataConverHelper 
+ * @Description: TODO
+ * @author wanghw 
+ * @date 2016年6月17日 
+ */
+public class DataConverHelper {
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static <T> List<Map<String, Object>> forList(List<? extends Object> list, DataConver<T> dataConver)
+			throws Exception {
+		if (list == null || list.size() == 0) {
+			return new ArrayList();
+		}
+		List<Map<String, Object>> dataList = new ArrayList<Map<String, Object>>(list.size());
+		for (Object o : list) {
+			Map<String, Object> data = new HashMap<String, Object>();
+			dataConver.conver(data, (T) o);
+			dataList.add(data);
+		}
+		return dataList;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <T> Map<String, Object> forObject(Object o, DataConver<T> dataConver) throws Exception {
+		if (o == null) {
+			return new HashMap<String, Object>();
+		}
+		Map<String, Object> data = new HashMap<String, Object>();
+		dataConver.conver(data, (T) o);
+		return data;
+	}
+
+	public interface DataConver<T> {
+
+		void conver(Map<String, Object> target, T source) throws Exception;
+
+	}
+
+}

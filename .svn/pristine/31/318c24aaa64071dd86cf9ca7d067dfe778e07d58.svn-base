@@ -1,0 +1,26 @@
+package com.fc.member.wechatplatform.user.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.member.wechatplatform.user.dao.IWechatPlatformUserDao;
+import com.fc.member.wechatplatform.user.service.IWechatPlatformUserService;
+import com.fc.member.wechatplatform.user.entity.WechatPlatformUser;
+/**
+ * <p>Title: WechatPlatformUser</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-28 17:14:42
+ */
+@Service("wechatPlatformUserService")
+public class WechatPlatformUserServiceImp extends ServiceImpl<WechatPlatformUser> implements IWechatPlatformUserService{
+
+	@Autowired
+	private IWechatPlatformUserDao wechatPlatformUserDao;
+	
+	@Override
+	protected IMapper<WechatPlatformUser> getDao() {
+		return wechatPlatformUserDao;
+	}
+}

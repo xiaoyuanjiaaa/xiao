@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.store.user.dao.IStoreCouponDao">
+	<resultMap id="StoreCouponMap" type="com.fc.member.store.user.entity.StoreCoupon">
+        <id property="storeCouponId" column="store_coupon_id"/>
+        <id property="storeId" column="store_id"/>
+        <id property="isQuickPay" column="is_quick_pay"/>
+        <id property="isSelfGoods" column="is_self_goods"/>
+        <id property="isCards" column="is_cards"/>
+        <id property="isMaster" column="is_master"/>
+        <id property="isPlan" column="is_plan"/>
+        <id property="updateTime" column="update_time"/>
+        <id property="createTime" column="create_time"/>
+        <id property="updateNumber" column="update_number"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="StoreCouponMap" >
+		select * from store_coupon where 
+	        store_coupon_id = #{storeCouponId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.store.user.entity.StoreCoupon" useGeneratedKeys="true">
+		insert into store_coupon(store_coupon_id , store_id , is_quick_pay , is_self_goods , is_cards , is_master , is_plan , update_time , create_time , update_number  )
+    	values(#{storeCouponId} ,#{storeId} ,#{isQuickPay} ,#{isSelfGoods} ,#{isCards} ,#{isMaster} ,#{isPlan} ,#{updateTime} ,#{createTime} ,#{updateNumber} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.store.user.entity.StoreCoupon" useGeneratedKeys="true">
+		insert into store_coupon
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="storeCouponId != null">store_coupon_id,</if>
+					<if test="storeId != null">store_id,</if>
+					<if test="isQuickPay != null">is_quick_pay,</if>
+					<if test="isSelfGoods != null">is_self_goods,</if>
+					<if test="isCards != null">is_cards,</if>
+					<if test="isMaster != null">is_master,</if>
+					<if test="isPlan != null">is_plan,</if>
+					<if test="updateTime != null">update_time,</if>
+					<if test="createTime != null">create_time,</if>
+					<if test="updateNumber != null">update_number</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="storeCouponId != null">#{storeCouponId},</if>
+					<if test="storeId != null">#{storeId},</if>
+					<if test="isQuickPay != null">#{isQuickPay},</if>
+					<if test="isSelfGoods != null">#{isSelfGoods},</if>
+					<if test="isCards != null">#{isCards},</if>
+					<if test="isMaster != null">#{isMaster},</if>
+					<if test="isPlan != null">#{isPlan},</if>
+					<if test="updateTime != null">#{updateTime},</if>
+					<if test="createTime != null">#{createTime},</if>
+					<if test="updateNumber != null">#{updateNumber}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.store.user.entity.StoreCoupon">
+		update store_coupon
+		<set>
+		    	<if test="storeId != null">store_id = #{storeId},</if>
+		    	<if test="isQuickPay != null">is_quick_pay = #{isQuickPay},</if>
+		    	<if test="isSelfGoods != null">is_self_goods = #{isSelfGoods},</if>
+		    	<if test="isCards != null">is_cards = #{isCards},</if>
+		    	<if test="isMaster != null">is_master = #{isMaster},</if>
+		    	<if test="isPlan != null">is_plan = #{isPlan},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		    	<if test="updateNumber != null">update_number = #{updateNumber},</if>
+		</set>
+		where 
+	        store_coupon_id = #{storeCouponId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from store_coupon where 
+	        store_coupon_id = #{storeCouponId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.store.user.entity.StoreCoupon" resultMap="StoreCouponMap" >
+		select * from store_coupon 
+		<where>
+		       <if test="storeCouponId != null">
+					AND store_coupon_id = #{storeCouponId}
+				</if>
+		       <if test="storeId != null">
+					AND store_id = #{storeId}
+				</if>
+		       <if test="isQuickPay != null">
+					AND is_quick_pay = #{isQuickPay}
+				</if>
+		       <if test="isSelfGoods != null">
+					AND is_self_goods = #{isSelfGoods}
+				</if>
+		       <if test="isCards != null">
+					AND is_cards = #{isCards}
+				</if>
+		       <if test="isMaster != null">
+					AND is_master = #{isMaster}
+				</if>
+		       <if test="isPlan != null">
+					AND is_plan = #{isPlan}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		       <if test="updateNumber != null">
+					AND update_number = #{updateNumber}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="StoreCouponMap" >
+		select * from store_coupon  
+		<where>
+		       <if test="condition.storeCouponId != null">
+					AND store_coupon_id = #{condition.storeCouponId}
+				</if>
+		       <if test="condition.storeId != null">
+					AND store_id = #{condition.storeId}
+				</if>
+		       <if test="condition.isQuickPay != null">
+					AND is_quick_pay = #{condition.isQuickPay}
+				</if>
+		       <if test="condition.isSelfGoods != null">
+					AND is_self_goods = #{condition.isSelfGoods}
+				</if>
+		       <if test="condition.isCards != null">
+					AND is_cards = #{condition.isCards}
+				</if>
+		       <if test="condition.isMaster != null">
+					AND is_master = #{condition.isMaster}
+				</if>
+		       <if test="condition.isPlan != null">
+					AND is_plan = #{condition.isPlan}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		       <if test="condition.updateNumber != null">
+					AND update_number = #{condition.updateNumber}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

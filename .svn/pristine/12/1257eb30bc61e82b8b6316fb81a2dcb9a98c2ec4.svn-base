@@ -1,0 +1,42 @@
+package com.fc.protocol.demo.request.wechatplatform.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+import io.swagger.annotations.ApiModelProperty;
+import org.springframework.util.StringUtils;
+
+/**
+ * @Author: linpeng
+ * @Date: 2019/1/3 18:41
+ * @Version 1.0
+ */
+public class WechatPlatformUserFeedbackGetRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+    @ApiModelProperty(value = "反馈信息id", name = "feedback_id;")
+    private Integer feedback_id;
+
+
+    public String paramValidate() {
+        if (StringUtils.isEmpty(feedback_id)) {
+            return "参数:feedback_id 不能为空";
+        }
+        return null;
+    }
+
+
+    public Integer getFeedbackId() {
+        return feedback_id;
+    }
+
+    public void setFeedbackId(Integer feedback_id) {
+        this.feedback_id = feedback_id;
+    }
+
+
+	@Override
+	public String toString() {
+		return "WechatPlatformUserFeedbackGetRequest [ getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode()
+                + ", getTraceId()=" + getTraceId() + ", feedback_id=" + getFeedbackId()  + "]";
+	}
+
+}

@@ -1,0 +1,90 @@
+package com.fc.member.store.user.service.impl;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.plugin.mybatis.PageQuery;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.store.user.dao.IStoreAdvanceDetailDao;
+import com.fc.member.store.user.dao.IStoreBorrowDetailDao;
+import com.fc.member.store.user.entity.StoreAdvanceDetail;
+import com.fc.member.store.user.entity.StoreBasicInfo;
+import com.fc.member.store.user.entity.StoreBorrowDetail;
+import com.fc.member.store.user.service.IStoreAdvanceDetailService;
+import com.fc.member.store.user.service.IStoreBasicInfoService;
+import com.fc.protocol.demo.request.store.user.SadetailAddRequest;
+import com.fc.protocol.demo.request.store.user.SadetailPageRequest;
+
+/**
+ * <p>Title: StoreAdvanceDetail</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:05
+ */
+@Service("storeAdvanceDetailService")
+public class StoreAdvanceDetailServiceImp extends ServiceImpl<StoreAdvanceDetail>
+		implements IStoreAdvanceDetailService {
+	private static Logger log = LoggerFactory.getLogger(StoreAdvanceDetailServiceImp.class);
+	@Autowired
+	private IStoreAdvanceDetailDao storeAdvanceDetailDao;
+	@Autowired
+	private IStoreBorrowDetailDao storeBorrowDetailDao;
+	@Autowired
+	private IStoreBasicInfoService storeBasicInfoService;
+
+	@Override
+	protected IMapper<StoreAdvanceDetail> getDao() {
+		return storeAdvanceDetailDao;
+	}
+
+	@Override
+	public boolean createSad(SadetailAddRequest request) throws Exception {
+		log.info("-----------》request:{}", request);
+		//验证参数
+		StoreBorrowDetail sbd = storeBorrowDetailDao.getByPK(request.getAdvanceId());
+		StoreBasicInfo sbi = storeBasicInfoService.getByPK(request.getStoreId());
+		log.info("-----------》StoreBorrowDetail:{}", sbd);
+		log.info("-----------》StoreBasicInfo:{}", sbi);
+		if (sbd == null || sbi == null) {
+			return false;
+		}
+		//插入数据
+		StoreAdvanceDetail sad = new StoreAdvanceDetail();
+		sad.setStoreId(request.getStoreId()); // 门店id
+		sad.setAdvanceId(request.getAdvanceId()); // 借款id
+		sad.setBalanceSn(request.getBalanceSn()); // 结算编号
+		sad.setRepaidAmount(request.getRepaidAmount()); // 偿还金额
+		sad.setRepaidType(request.getRepaidType()); // 还款方式
+		sad.setRepaidTime(DateTimeUtils.getDateTimeInteger()); // 还款时间
+		sad.setRemark(request.getRemark()); // 备注
+		if (insertSelective(sad) <= 0) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public int insertSelective(StoreAdvanceDetail obj) {
+		return storeAdvanceDetailDao.insertSelective(obj);
+	}
+
+	@Override
+	public List<StoreAdvanceDetail> getSadListPage(Page page, SadetailPageRequest request) {
+		log.info("getSadListPage---------->:" + request);
+		StoreAdvanceDetail sad = new StoreAdvanceDetail();
+		sad.setStoreId(request.getStoreId());
+		log.info("WechatMaintainCouponSstoreUser---------->{}", sad.toString());
+		// 设置分页，查询条件
+		PageQuery pageQuery = new PageQuery();
+		pageQuery.setPage(page);
+		pageQuery.setCondition(sad);
+		return storeAdvanceDetailDao.getRowsPage(pageQuery);
+	}
+}

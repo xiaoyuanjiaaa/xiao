@@ -1,0 +1,41 @@
+package com.fc.member.wechatmaintain.user.service;
+
+import java.util.List;
+import java.util.Map;
+
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.service.IService;
+import com.fc.member.wechatmaintain.user.entity.WechatMaintainCouponSstoreUser;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainCouponSstoreUserByStoreIdRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainCouponSstoreUserCreateRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainCouponSstoreUserDetailsRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainCouponSstoreUserEditSaveRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainCouponSstoreUserListRequest;
+
+/**
+ * <p>Title: WechatMaintainCouponSstoreUser</p>
+ * <p>Description:  Service 接口</p>
+ * @author yangd
+ * @date 2018-12-28 17:13:47
+ */
+public interface IWechatMaintainCouponSstoreUserService extends IService<WechatMaintainCouponSstoreUser> {
+
+	/**插入数据*/
+	Map<String, Object> insertSelective(WechatMaintainCouponSstoreUserCreateRequest request);
+
+	/**更新数据*/
+	Map<String, Object> updateWechatMaintainCouponSstoreUser(WechatMaintainCouponSstoreUserEditSaveRequest request)
+			throws Exception;
+
+	/**查询用户会员卡列表-分页*/
+	List<WechatMaintainCouponSstoreUser> getWechatMaintainCouponSstoreUserListPage(Page page,
+			WechatMaintainCouponSstoreUserListRequest request);
+
+	/**查询门店会员用户列表*/
+	List<WechatMaintainCouponSstoreUser> getWechatMaintainCouponSstoreUserByStoreIdList(
+			WechatMaintainCouponSstoreUserByStoreIdRequest request);
+
+	/**查询用户在此门店会员卡详细信息*/
+	WechatMaintainCouponSstoreUser getCouponStoreByUserIdAndStoreId(
+			WechatMaintainCouponSstoreUserDetailsRequest request);
+}

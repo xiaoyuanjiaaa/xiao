@@ -1,0 +1,27 @@
+package com.fc.member.wechatmaintain.user.service;
+
+import java.util.List;
+import java.util.Map;
+
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.service.IService;
+import com.fc.member.wechatmaintain.user.entity.WechatMaintainRecharge;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainRechargeRequest;
+
+/**
+ * <p>Title: WechatMaintainRecharge</p>
+ * <p>Description: 微养车用户储值卡充值记录 Service 接口</p>
+ * @author yangd
+ * @date 2018-12-28 17:13:47
+ */
+public interface IWechatMaintainRechargeService extends IService<WechatMaintainRecharge> {
+
+	/**插入数据*/
+	Map<String, Object> insertSelective(WechatMaintainRechargeRequest request);
+
+	/**更新数据*/
+	Map<String, Object> updateWechatMaintainRecharge(WechatMaintainRechargeRequest request) throws Exception;
+
+	/**查询微养车用户储值卡充值记录-分页*/
+	List<WechatMaintainRecharge> getWechatMaintainRechargeListPage(Page page, WechatMaintainRechargeRequest request);
+}

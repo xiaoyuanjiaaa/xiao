@@ -1,0 +1,86 @@
+package com.fc.member.master.user.entity;
+
+import java.io.Serializable;
+
+
+/**
+ * <p>Table: MasterUserMapleBean</p>
+ * <p>Description: 师傅枫豆表</p>
+ * @author yangd
+ * @date 2019-01-15 10:09:29
+ */
+public class MasterUserMapleBean implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer masterUserMapleBeanId; // 主键id
+	private Integer masterMemberId; // 师傅ID
+	private Integer mapleBeanBalance; // 枫豆余额
+	private Integer frozenMapleBean; // 冻结枫豆
+	private Integer status; // 状态(0:无效 1:有效)
+	private Integer createTime; // 创建时间
+	private Integer updateTime; // 更新时间
+
+	public void setMasterUserMapleBeanId(Integer masterUserMapleBeanId) {
+		this.masterUserMapleBeanId = masterUserMapleBeanId;
+	}
+	
+	public Integer getMasterUserMapleBeanId() {
+		return this.masterUserMapleBeanId;
+	}
+	public void setMasterMemberId(Integer masterMemberId) {
+		this.masterMemberId = masterMemberId;
+	}
+	
+	public Integer getMasterMemberId() {
+		return this.masterMemberId;
+	}
+	public void setMapleBeanBalance(Integer mapleBeanBalance) {
+		this.mapleBeanBalance = mapleBeanBalance;
+	}
+	
+	public Integer getMapleBeanBalance() {
+		return this.mapleBeanBalance;
+	}
+	public void setFrozenMapleBean(Integer frozenMapleBean) {
+		this.frozenMapleBean = frozenMapleBean;
+	}
+	
+	public Integer getFrozenMapleBean() {
+		return this.frozenMapleBean;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	
+	public Integer getStatus() {
+		return this.status;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+	public void setUpdateTime(Integer updateTime) {
+		this.updateTime = updateTime;
+	}
+	
+	public Integer getUpdateTime() {
+		return this.updateTime;
+	}
+
+    @Override
+    public String toString () {
+    	return "MasterUserMapleBean{" + 
+	    	"masterUserMapleBeanId=" + masterUserMapleBeanId + 
+	    	", masterMemberId=" + masterMemberId + 
+	    	", mapleBeanBalance=" + mapleBeanBalance + 
+	    	", frozenMapleBean=" + frozenMapleBean + 
+	    	", status=" + status + 
+	    	", createTime=" + createTime + 
+	    	", updateTime=" + updateTime + 
+	    	"}";
+    }
+}

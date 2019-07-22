@@ -1,0 +1,79 @@
+package com.fc.protocol.demo.request.wechatplatform.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+import io.swagger.annotations.ApiModelProperty;
+import org.springframework.util.StringUtils;
+
+/**
+ * @Author: linpeng
+ * @Date: 2019/1/3 18:41
+ * @Version 1.0
+ */
+public class WpServiceCountSaveRequest extends ProtocolRequest {
+
+
+	private static final long serialVersionUID = 1L;
+    @ApiModelProperty(value = "openid", name = "openid")
+    private String  openid;
+    @ApiModelProperty(value = "一级服务分类ID", name = "service_id")
+	private Integer  service_id;
+    @ApiModelProperty(value = "一级服务分类名称", name = "service_title")
+    private String service_title;
+    @ApiModelProperty(value = "打开次数", name = "open_number")
+    private Integer  open_number;
+
+
+    public String paramValidate() {
+        if (StringUtils.isEmpty(openid)) {
+            return "参数:openid 不能为空";
+        }
+        if (StringUtils.isEmpty(service_id)) {
+            return "参数:service_id 不能为空";
+        }
+        if (StringUtils.isEmpty(service_title)) {
+            return "参数:service_title 不能为空";
+        }
+        return null;
+    }
+
+
+    public String getOpenid() {
+        return openid;
+    }
+
+    public void setOpenid(String openid) {
+        this.openid = openid;
+    }
+
+    public Integer getServiceId() {
+        return service_id;
+    }
+
+    public void setServiceId(Integer service_id) {
+        this.service_id = service_id;
+    }
+
+    public String getServiceTitle() {
+        return service_title;
+    }
+
+    public void setServiceTitle(String service_title) {
+        this.service_title = service_title;
+    }
+
+    public Integer getOpenNumber() {
+        return open_number;
+    }
+
+    public void setOpenNumber(Integer open_number) {
+        this.open_number = open_number;
+    }
+
+    @Override
+	public String toString() {
+		return "WpServiceCountSaveRequest [getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode()
+                + ", getTraceId()=" + getTraceId() +", openid=" + getOpenid() +", service_id=" + getServiceId()
+                +", service_title=" + getServiceTitle() +", open_number=" + getOpenNumber()+ "]";
+	}
+
+}

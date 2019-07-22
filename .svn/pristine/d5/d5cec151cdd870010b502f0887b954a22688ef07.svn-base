@@ -1,0 +1,35 @@
+package com.fc.member.master.user.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+
+import com.fc.member.master.user.dao.IMasterBankCardDao;
+import com.fc.member.master.user.service.IMasterBankCardService;
+import com.fc.member.master.user.entity.MasterBankCard;
+/**
+ * <p>Title: MasterBankCard</p>
+ * <p>Description: 用户银行帐号表 Service 层</p>
+ * @author yangd
+ * @date 2019-01-15 10:09:27
+ */
+@Service("masterBankCardService")
+public class MasterBankCardServiceImp extends ServiceImpl<MasterBankCard> implements IMasterBankCardService{
+
+	@Autowired
+	private IMasterBankCardDao masterBankCardDao;
+	
+	@Override
+	protected IMapper<MasterBankCard> getDao() {
+		return masterBankCardDao;
+	}
+	/**
+	 * 插入数据
+	 * @return
+	 */
+	@Override
+	public int insertSelective(MasterBankCard obj) {
+		return masterBankCardDao.insertSelective(obj);
+	}
+}

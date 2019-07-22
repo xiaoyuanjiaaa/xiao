@@ -1,0 +1,50 @@
+package com.fc.protocol.demo.request.store.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+/**
+ * 更新全局电话号码
+ * @author xiaozw
+ * @date 2019/01/10
+ */
+public class UserUpdatePhoneMobRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+
+	private Integer fcUserId;
+	private String phoneMob;
+
+	public Integer getFcUserId() {
+		return fcUserId;
+	}
+
+	public void setFcUserId(Integer fcUserId) {
+		this.fcUserId = fcUserId;
+	}
+
+	public String getPhoneMob() {
+		return phoneMob;
+	}
+
+	public void setPhoneMob(String phoneMob) {
+		this.phoneMob = phoneMob;
+	}
+
+	public String paramValidate() {
+		if (StringUtils.isEmpty(fcUserId)) {
+			return "参数:fcUserId不能为空";
+		}
+		if (StringUtils.isEmpty(phoneMob)) {
+			return "参数:phoneMob不能为空";
+		}
+		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "UpdatePhoneMobRequest [fcUserId=" + fcUserId + ", phoneMob=" + phoneMob + ", getFcUserId()="
+				+ getFcUserId() + ", getPhoneMob()=" + getPhoneMob() + "]";
+	}
+}

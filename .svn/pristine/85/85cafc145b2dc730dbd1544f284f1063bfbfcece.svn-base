@@ -1,0 +1,45 @@
+package com.fc.protocol.demo.request.store.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+import io.swagger.annotations.ApiModelProperty;
+
+
+/**
+ * @param
+ * @author zhuj
+ * @date 2018/12/28
+ * 门店金额交易明细请求参数实体类
+ */
+public class GetAmountTradingDetialRequest extends ProtocolRequest {
+    private static final long serialVersionUID = 1L;
+    @ApiModelProperty(value = "门店金额交易详情页id", name = "storeMoneyDetailId", example = "1")
+    private Integer storeMoneyDetailId; // 主键ID
+
+    public Integer getStoreMomeyDetailId() {
+        return storeMoneyDetailId;
+    }
+
+    public void setStoreMomeyDetailId(Integer storeMomeyDetailId) {
+        this.storeMoneyDetailId = storeMomeyDetailId;
+    }
+
+    /**
+     * @param
+     * @author zhuj
+     * 判断传人参数是否为空
+     * @date 2018/12/28
+     */
+    public String paramValidatecheckid() {
+        if (storeMoneyDetailId == null) {
+            return "参数：storeMoneyDetailId不能为空";
+        }
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        return "StoreMomeyRequest [storeMoneyDetailId=" + storeMoneyDetailId + ", " +
+                "getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode()
+                + ", getTraceId()=" + getTraceId() + "]";
+    }
+}

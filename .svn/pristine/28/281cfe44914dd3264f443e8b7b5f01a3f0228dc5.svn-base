@@ -1,0 +1,15 @@
+package com.fc.member.master.user.service;
+
+import com.fc.common.service.IService;
+import com.fc.member.master.user.entity.MasterMember;
+/**
+ * <p>Title: MasterMember</p>
+ * <p>Description: 师傅用户信息表 Service 接口</p>
+ * @author yangd
+ * @date 2019-01-15 10:09:28
+ */
+public interface IMasterMemberService extends IService<MasterMember>{
+	
+	// 插入数据
+	int insertSelective(MasterMember obj);
+}

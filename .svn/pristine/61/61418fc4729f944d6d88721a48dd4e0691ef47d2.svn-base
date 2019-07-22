@@ -1,0 +1,71 @@
+package com.fc.protocol.demo.request.store.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * @param
+ * @author zhuj
+ * @date 2018/12/28
+ * 门店金额交易明细请求参数实体类
+ */
+public class GetAmountTradingListRequest extends ProtocolRequest {
+	private static final long serialVersionUID = 1L;
+	@ApiModelProperty(value = "门店id", name = "storeId", example = "1")
+	private Integer storeId; // 门店id
+	@ApiModelProperty(value = "页码", name = "page", example = "1")
+	private Integer page; // 页码
+	@ApiModelProperty(value = "没页的数量", name = "pagesize", example = "10")
+	private Integer pagesize; // 没页的数量
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	public Integer getPage() {
+		return page;
+	}
+
+	public void setPage(Integer page) {
+		this.page = page;
+	}
+
+	public Integer getPagesize() {
+		return pagesize;
+	}
+
+	public void setPagesize(Integer pagesize) {
+		this.pagesize = pagesize;
+	}
+
+	/**
+	 * @param
+	 * @author zhuj
+	 * 判断传人参数是否为空
+	 * @date 2018/12/28
+	 */
+	public String paramValidatecheckid() {
+		if (storeId == null) {
+			return "参数：storeId不能为空";
+		}
+		if (page == null) {
+			return "参数：page不能为空";
+		}
+		if (pagesize == null) {
+			return "参数：pagesize不能为空";
+		}
+		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "StoreMomeyRequest [storeId=" + storeId + ", " + "page=" + page + ", " + "pagesize=" + pagesize + ", "
+				+ "getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode() + ", getTraceId()=" + getTraceId()
+				+ "]";
+	}
+}

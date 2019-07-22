@@ -1,0 +1,51 @@
+package com.fc.member.store.user.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.store.user.dao.IStoreSettingDao;
+import com.fc.member.store.user.entity.StoreSetting;
+import com.fc.member.store.user.service.IStoreSettingService;
+
+/**
+ * <p>Title: StoreSetting</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:06
+ */
+@Service("storeSettingService")
+public class StoreSettingServiceImp extends ServiceImpl<StoreSetting> implements IStoreSettingService {
+
+	@Autowired
+	private IStoreSettingDao storeSettingDao;
+
+	@Override
+	protected IMapper<StoreSetting> getDao() {
+		return storeSettingDao;
+	}
+
+	@Override
+	public boolean updateByStoreId(StoreSetting t) throws Exception {
+		return storeSettingDao.updateByStoreId(t);
+	}
+
+	@Override
+	public boolean updateSstoreVirtualShelves(StoreSetting t) throws Exception {
+		//参数验证
+		if (t == null) {
+			return false;
+		}
+		//参数验证
+		if (!(StoreSetting.DEFAULT_TRUE.equals(t.getIsSstoreVirtualShelves())
+				|| StoreSetting.DEFAULT_FALSE.equals(t.getIsSstoreVirtualShelves()))) {
+			return false;
+		}
+		if (StoreSetting.DEFAULT_TRUE.equals(t.getIsSstoreVirtualShelves())) {
+			t.setVirtualShelvesPassTime(DateTimeUtils.getDateTimeInteger());
+		}
+		return this.updateByStoreId(t);
+	}
+}

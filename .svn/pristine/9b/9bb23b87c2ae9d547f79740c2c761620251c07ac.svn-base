@@ -1,0 +1,17 @@
+package com.fc.member.wechatmaintain.user.dao;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.member.wechatmaintain.user.entity.WechatMaintainUserCoupon;
+/**
+ * <p>Title: WechatMaintainUserCoupon</p>
+ * <p>Description:  DAO层</p>
+ * @author yangd
+ * @date 2018-12-28 17:13:48
+ */
+@Mapper
+public interface IWechatMaintainUserCouponDao extends IMapper<WechatMaintainUserCoupon>{
+	
+    
+}

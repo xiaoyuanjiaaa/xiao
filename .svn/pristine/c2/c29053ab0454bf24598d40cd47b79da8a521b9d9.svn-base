@@ -1,0 +1,47 @@
+package com.fc.protocol.client.demo.config;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.fc.protocol.client.IProtocolClient;
+import com.fc.protocol.client.netty.FinalClientFactory;
+
+/**
+ * 协议客户端连接池入口
+ * @author zhanjq
+ *
+ */
+@Component
+public class ProtocolClientPool {
+
+	@Autowired
+	private FinalClientFactory finalClientFactory;
+
+	/**
+	 * 用户服务节点
+	 * @return
+	 */
+	public IProtocolClient userClient() {
+		return finalClientFactory.getClient("protocol_client_user");
+	}
+
+	/**
+	 * 支付服务节点
+	 * @return
+	 */
+	public IProtocolClient payClient() {
+		return finalClientFactory.getClient("protocol_client_pay");
+	}
+
+	/**
+	 * 订单服务节点
+	 * @return
+	 */
+	public IProtocolClient orderClient() {
+		return finalClientFactory.getClient("protocol_client_order");
+	}
+	
+
+	/** 继续配置其他服务节点配置 */
+
+}

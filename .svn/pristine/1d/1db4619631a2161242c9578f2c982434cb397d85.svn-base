@@ -1,0 +1,14 @@
+package com.fc.member.wechatmaintain.user.service;
+
+import com.fc.common.service.IService;
+import com.fc.member.wechatmaintain.user.entity.WechatMaintainCouponSstoreUser;
+/**
+ * <p>Title: WechatMaintainCouponSstoreUser</p>
+ * <p>Description:  Service 接口</p>
+ * @author yangd
+ * @date 2018-12-28 17:13:47
+ */
+public interface IWechatMaintainCouponSstoreUserService extends IService<WechatMaintainCouponSstoreUser>{
+	
+	
+}

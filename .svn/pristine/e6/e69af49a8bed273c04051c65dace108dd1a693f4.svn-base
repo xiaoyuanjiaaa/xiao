@@ -1,0 +1,115 @@
+package com.fc.member.fc.service.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.fc.dao.IFcUserDao;
+import com.fc.member.fc.entity.FcUser;
+import com.fc.member.fc.service.IFcUserService;
+import com.fc.member.store.user.service.IPublicUserService;
+import com.fc.member.store.user.service.IStoreBasicInfoService;
+import com.fc.protocol.demo.request.fc.UserCreateUserRequest;
+
+/**
+ * <p>Title: FcUser</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2019-01-02 16:49:49
+ */
+@Service("fcUserService")
+public class FcUserServiceImp extends ServiceImpl<FcUser> implements IFcUserService {
+
+	private static Logger log = LoggerFactory.getLogger(FcUserServiceImp.class);
+
+	@Autowired
+	private IFcUserDao fcUserDao;
+
+	@Autowired
+	private IPublicUserService publicUserService;
+
+	@Autowired
+	private IStoreBasicInfoService storeBasicInfoService;
+
+	@Override
+	protected IMapper<FcUser> getDao() {
+		return fcUserDao;
+	}
+
+	/**
+	 * 插入数据
+	 * @return
+	 */
+	@Override
+	public int insertSelective(FcUser obj) {
+		return fcUserDao.insertSelective(obj);
+	}
+
+	@Transactional(readOnly = false)
+	@Override
+	public Map<String, String> insertFcUserAndPublicUser(UserCreateUserRequest request) {
+		log.info("CreateUserRequest---------->:" + request);
+		Map<String, String> resultMap = new HashMap<>();
+		FcUser user = new FcUser();
+		user.setPhoneMob(request.getPhoneMob());
+		//判断数据库是否已存在该数据
+		List<FcUser> fcList = this.getRows(user);
+		if (fcList.size() > 0) {
+			resultMap.put("error", "该电话已存在fc_user中");
+			return resultMap;
+		}
+		user.setRegisterSource(request.getRegisterSource());
+		user.setCreateTime(DateTimeUtils.getDateTimeInteger());
+		log.info("FcUser---------->:" + user);
+		this.insertSelective(user);
+		log.info("getFcUserId---------->:" + user.getFcUserId());
+		if (FcUser.REGISTER_SOURCE_STORE.equals(request.getRegisterSource())) {
+			resultMap = publicUserService.insertUser(request, user.getFcUserId());
+		}
+		//...
+		return resultMap;
+	}
+
+	/**
+	 * 必须传fc_user_id字段，且需要验证此字段
+	 * 如果只是传phoneMob字段，A用户可以更改B用户的电话号码
+	 */
+	@Transactional(readOnly = false)
+	@Override
+	public Map<String, String> updatePhoneBob(int fcUserId, String phoneMob) throws Exception {
+		log.info("updatePhoneBob---------->:" + fcUserId + phoneMob);
+		Map<String, String> resultMap = new HashMap<>();
+		if (StringUtils.isEmpty(fcUserId) || StringUtils.isEmpty(phoneMob)) {
+			resultMap.put("error", "参数异常");
+			return resultMap;
+		}
+		FcUser user = this.getByPK(fcUserId);
+		if (user == null) {
+			resultMap.put("error", "fcUserId：" + fcUserId + "数据库没有此数据");
+			return resultMap;
+		}
+		Map<String, String> param = new HashMap<>();
+		param.put("tempPhoneMob", user.getPhoneMob());
+		param.put("phoneMob", phoneMob);
+		//同步到fc_user表
+		FcUser userTemp = new FcUser();
+		userTemp.setFcUserId(fcUserId);
+		userTemp.setPhoneMob(phoneMob);
+		fcUserDao.update(userTemp);
+		//同步到public_user表
+		publicUserService.updatePhoneMob(param);
+		//同步到门店表
+		storeBasicInfoService.updatePhoneMob(param);
+		return resultMap;
+	}
+}

@@ -1,0 +1,90 @@
+package com.fc.member.wechatmaintain.user.entity;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainUserCouponRequest;
+
+/**
+ * <p>Table: WechatMaintainUserCoupon</p>
+ * <p>Description: 微养车用户储值卡表</p>
+ * @author yangd
+ * @date 2018-12-28 17:13:48
+ */
+public class WechatMaintainUserCoupon implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	private Integer wechatMaintainUserCouponId; // 储值卡id
+	private Integer fcUserId; // 枫车用户id
+	private Integer storeId; // 门店id
+	private BigDecimal balance; // 储值卡余额
+	private Integer createTime; // 创建时间
+
+	/**
+	 * 将不为空的属性set到对象中
+	 * @param entity 实体对象
+	 * @param request 参数对象
+	 * @return
+	 */
+	public static WechatMaintainUserCoupon isNotEmptySetObject(WechatMaintainUserCouponRequest request) {
+		WechatMaintainUserCoupon entity = new WechatMaintainUserCoupon();
+		entity.setWechatMaintainUserCouponId(request.getWechatMaintainUserCouponId());
+		entity.setFcUserId(request.getFcUserId());
+		entity.setStoreId(request.getStoreId());
+		entity.setBalance(request.getBalance());
+		if (StringUtils.isEmpty(request.getWechatMaintainUserCouponId())) {
+			entity.setCreateTime((int) (new Date().getTime() / 1000));
+		}
+		return entity;
+	}
+
+	public void setWechatMaintainUserCouponId(Integer wechatMaintainUserCouponId) {
+		this.wechatMaintainUserCouponId = wechatMaintainUserCouponId;
+	}
+
+	public Integer getWechatMaintainUserCouponId() {
+		return this.wechatMaintainUserCouponId;
+	}
+
+	public void setFcUserId(Integer fcUserId) {
+		this.fcUserId = fcUserId;
+	}
+
+	public Integer getFcUserId() {
+		return this.fcUserId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	public Integer getStoreId() {
+		return this.storeId;
+	}
+
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
+	}
+
+	public BigDecimal getBalance() {
+		return this.balance;
+	}
+
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+
+	@Override
+	public String toString() {
+		return "WechatMaintainUserCoupon{" + "wechatMaintainUserCouponId=" + wechatMaintainUserCouponId + ", fcUserId="
+				+ fcUserId + ", storeId=" + storeId + ", balance=" + balance + ", createTime=" + createTime + "}";
+	}
+}

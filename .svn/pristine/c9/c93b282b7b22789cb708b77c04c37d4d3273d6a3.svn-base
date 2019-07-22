@@ -1,0 +1,8 @@
+protocol.node.conn.host=localhost
+protocol.node.conn.port=8081
+protocol.node.conn.conn_quantity=3
+protocol.node.conn.conn_timeout=10
+#protocol.node.conn.host=192.168.6.203
+#protocol.node.conn.port=8080
+#protocol.node.conn.conn_quantity=3
+#protocol.node.conn.conn_timeout=10

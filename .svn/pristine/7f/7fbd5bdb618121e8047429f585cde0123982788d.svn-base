@@ -1,0 +1,116 @@
+package com.fc.member.store.user.service.impl;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.common.util.DataConverHelper;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.common.util.DataConverHelper.DataConver;
+import com.fc.member.store.user.dao.IStorePackageDao;
+import com.fc.member.store.user.entity.StorePackage;
+import com.fc.member.store.user.service.IStorePackageService;
+import com.fc.protocol.demo.request.store.user.StorePackageRequest;
+/**
+ * <p>Title: StorePackage</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:06
+ */
+@Service("storePackageService")
+public class StorePackageServiceImp extends ServiceImpl<StorePackage> implements IStorePackageService{
+
+	@Autowired
+	private IStorePackageDao storePackageDao;
+	
+	@Override
+	protected IMapper<StorePackage> getDao() {
+		return storePackageDao;
+	}
+
+	/**
+	 * 查询门店储值卡套餐列表
+	 * 排序规则：按充值金额升序排列，充值金额相同时按赠送金额升序排列，未编辑状态的充值套餐排在最下。
+	 */
+	@Override
+	public List<Map<String,Object>> getOrderBY(StorePackageRequest request) throws Exception {
+		StorePackage storePackage = new StorePackage();
+		storePackage.setStoreId(request.getStoreId());
+		List<StorePackage> storePackageList =  storePackageDao.getOrderBY(storePackage);
+		if(storePackageList.size()>0) {
+			List<Map<String, Object>> dataList = DataConverHelper.forList(storePackageList,
+					new DataConver<StorePackage>() {
+						@Override
+						public void conver(Map<String, Object> target, StorePackage source)
+								throws Exception {
+							// TODO Auto-generated method stub
+							target.put("Content", source.getContent());
+							target.put("Discount",source.getDiscount());
+							target.put("Account",source.getRealAccount());
+							target.put("Status",source.getStatus());
+							target.put("StoreId",source.getStoreId());
+							target.put("Type",source.getType());
+							target.put("UpdateTime",source.getUpdateTime());
+							String uptime = source.getUpdateTime()==null ? "0":source.getUpdateTime().toString();
+							uptime = 	Integer.valueOf(uptime) > 0 ? DateTimeUtils.getStrFromTimestamp10(
+									Integer.valueOf(uptime), DateTimeUtils.FORMAT_DATE_TIME_24HOURS) : "";
+							target.put("UpdateTime",uptime);								
+						}
+				
+			});
+			return dataList;
+		}
+		return null;
+	}
+	 /**
+	  * 查询门店当前上架的套餐数,且后台状态为启用(在store_wechat)
+	  */
+	@Override
+	public List<Map<String,Object>> getStatus(StorePackageRequest request)throws Exception {
+		StorePackage storePackage = new StorePackage();
+		storePackage.setStoreId(request.getStoreId());
+		storePackage.setStatus(request.getStatus());
+		List<StorePackage> storePackageList =  storePackageDao.getStatus(storePackage);
+		if(storePackageList.size()>0) {
+			List<Map<String, Object>> dataList = DataConverHelper.forList(storePackageList,
+					new DataConver<StorePackage>() {
+						@Override
+						public void conver(Map<String, Object> target, StorePackage source)
+								throws Exception {
+							// TODO Auto-generated method stub
+							target.put("Content", source.getContent());
+							target.put("Discount",source.getDiscount());
+							target.put("Account",source.getRealAccount());
+							target.put("Status",source.getStatus());
+							target.put("StoreId",source.getStoreId());
+							target.put("Type",source.getType());
+							target.put("UpdateTime",source.getUpdateTime());
+							String uptime = source.getUpdateTime()==null ? "0":source.getUpdateTime().toString();
+							uptime = 	Integer.valueOf(uptime) > 0 ? DateTimeUtils.getStrFromTimestamp10(
+									Integer.valueOf(uptime), DateTimeUtils.FORMAT_DATE_TIME_24HOURS) : "";
+							target.put("UpdateTime",uptime);								
+						}
+				
+			});
+			return dataList;
+		}
+		return null;
+	}
+
+	@Override
+	public void updateStorePackage(StorePackageRequest request) throws Exception {
+		StorePackage storePackage = new StorePackage();
+		storePackage.setStorePackageId(request.getStorePackageId());
+		storePackage.setStoreId(request.getStoreId());
+		storePackage.setContent(request.getContent());
+		storePackage.setRealAccount(request.getRealAccount());
+		storePackage.setDiscount(request.getDiscount());
+		storePackage.setStatus(request.getStatus());
+		storePackage.setType(request.getType());
+		storePackage.setUpdateTime(request.getUpdateTime());
+	}
+}

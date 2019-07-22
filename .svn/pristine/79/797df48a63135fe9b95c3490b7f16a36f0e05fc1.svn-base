@@ -1,0 +1,97 @@
+package com.fc.protocol.client.demo.controller;
+
+import com.fc.protocol.client.demo.config.ProtocolClientPool;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.store.user.StoreBossInfoRequest;
+import com.fc.protocol.demo.request.store.user.StoreMoneyRequest;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@Api(tags = "StoreMoneyController", description = "金额交易明细")
+@RestController
+@RequestMapping("/api/StoreMoney")
+public class StoreMoneyController {
+    private static Logger log = LoggerFactory.getLogger(StoreMoneyController.class);
+    @Autowired
+    private ProtocolClientPool protocolClientPool;
+    /**@author zhuj
+     *@date 2018/12/28
+     * 插入金额交易明细记录
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/createAmountTradingInfo", method = { RequestMethod.POST, RequestMethod.GET })
+    @ApiOperation(value = "插入金额交易明细记录", notes = "插入金额交易明细记录  by zhuj")
+    @ResponseBody
+    public Object createAmountTradingInfo(StoreMoneyRequest storeMoneyRequest,
+                                      HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ProtocolResponse echoResponse = protocolClientPool.userClient().sendAndReceived(storeMoneyRequest);
+        log.info("返回请求结果", echoResponse);
+        return echoResponse;
+    }
+    /**@author zhuj
+     *@date 2018/12/28
+     * 获取金额交易明细列表
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/getAmountTradingList", method = { RequestMethod.POST, RequestMethod.GET })
+    @ApiOperation(value = "获取金额交易明细列表", notes = "返回获取金额交易明细列表  by zhuj")
+    @ResponseBody
+    public Object getAmountTradingList(StoreMoneyRequest storeMoneyRequest,
+                                         HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ProtocolResponse echoResponse = protocolClientPool.userClient().sendAndReceived(storeMoneyRequest);
+        log.info("返回请求结果", echoResponse);
+        return echoResponse;
+    }
+
+    /**@author zhuj
+     *@date 2018/12/28
+     * 获取金额交易明细详情
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/getAmountTradingDetial", method = { RequestMethod.POST, RequestMethod.GET })
+    @ApiOperation(value = "获取金额交易明细详情", notes = "获取金额交易明细详情  by zhuj")
+    @ResponseBody
+    public Object getAmountTradingDetial(StoreMoneyRequest storeMoneyRequest,
+                                         HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ProtocolResponse echoResponse = protocolClientPool.userClient().sendAndReceived(storeMoneyRequest);
+        log.info("返回请求结果", echoResponse);
+        return echoResponse;
+    }
+    /**@author zhuj
+     *@date 2018/12/28
+     * 更新门店提现信息状态
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/changeAmountTradingStatus", method = { RequestMethod.POST, RequestMethod.GET })
+    @ApiOperation(value = "更新门店提现信息状态", notes = "更新门店提现信息状态  by zhuj")
+    @ResponseBody
+    public Object changeAmountTradingStatus(StoreMoneyRequest storeMoneyRequest,
+                                         HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ProtocolResponse echoResponse = protocolClientPool.userClient().sendAndReceived(storeMoneyRequest);
+        log.info("返回请求结果", echoResponse);
+        return echoResponse;
+    }
+
+}

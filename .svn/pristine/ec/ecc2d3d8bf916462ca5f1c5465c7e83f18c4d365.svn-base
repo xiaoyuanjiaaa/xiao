@@ -1,0 +1,48 @@
+package com.fc.protocol.demo.request.store.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+/**
+ * 修改密码Request
+ * @author	xiaozw
+ * @data	2019年1月2日	
+ */
+@SuppressWarnings("serial")
+public class PublicUserPasswordRequest extends ProtocolRequest {
+	/**public_user_id*/
+	private Integer publicUserId;
+	/**密码**/
+	private String password;
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Integer getPublicUserId() {
+		return publicUserId;
+	}
+
+	public void setPublicUserId(Integer publicUserId) {
+		this.publicUserId = publicUserId;
+	}
+
+	public String paramValidate() {
+		if (publicUserId == null) {
+			return "参数:publicUserId不能为空";
+		}
+		if (password == null) {
+			return "参数:password不能为空";
+		}
+		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "CreateUserRequest[publicUserId():" + getPublicUserId() + "password():" + getPassword() + "getVersion()="
+				+ getVersion() + ", getReqCode()=" + getReqCode() + ", getTraceId()=" + getTraceId() + "]";
+	}
+}

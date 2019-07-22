@@ -1,0 +1,153 @@
+package com.fc.protocol.client.demo.controller;
+
+import com.fc.protocol.client.IProtocolClient;
+import com.fc.protocol.client.demo.config.ProtocolClientPool;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.common.utils.IntegerFactory;
+import com.fc.protocol.demo.request.pc.user.PcUserRequest;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**PC收银 - 车主
+ * @Author: linpeng
+ * @Date: 2019/1/4 15:00
+ * @Version 1.0
+ */
+
+@Api(tags = "PcUserController", description = "pc收银车主信息控制器")
+@RestController
+@RequestMapping("/service/pc/user")
+public class PcUserController {
+
+    private static Logger log = LoggerFactory.getLogger(PcUserController.class);
+
+    @Autowired
+    private ProtocolClientPool protocolClientPool;
+
+
+    @RequestMapping(value = "/get", method = { RequestMethod.POST, RequestMethod.GET })
+    @ApiOperation(value = "查询pc收银车主信息", notes = "查询pc收银车主信息")
+    @ResponseBody
+    public Object list(HttpServletRequest request,
+                       @ApiParam(name = "pc_user_id", value = "pc收银车主ID") @RequestParam(required = true) Integer pc_user_id,
+                       @ApiParam(name = "mobile", value = "手机号码") @RequestParam(required = true) String mobile,
+                       HttpServletResponse response) throws Exception {
+        PcUserRequest pcUserRequest = new PcUserRequest();
+        pcUserRequest.setReqCode("pcUserGetHandler");
+        pcUserRequest.setTraceId("tid_"+ IntegerFactory.getInstance().incrementAndGet());
+        pcUserRequest.setVersion("1.1");
+        pcUserRequest.setPcUserId(pc_user_id);
+        pcUserRequest.setMobile(mobile);
+        log.info("member-request:{}", pcUserRequest);
+        log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+        IProtocolClient memberClient = protocolClientPool.memberClient();
+        log.info("memberClient==null?===>{}", (memberClient == null));
+        ProtocolResponse userResponse = protocolClientPool.memberClient().sendAndReceived(pcUserRequest);
+        log.info("member-response:{}", userResponse);
+        return userResponse;
+    }
+
+    @RequestMapping(value = "/list", method = { RequestMethod.POST, RequestMethod.GET })
+    @ApiOperation(value = "查询pc收银车主信息列表", notes = "获取pc收银车主信息列表")
+    @ResponseBody
+    public Object list(HttpServletRequest request,
+                        @ApiParam(name = "page", value = "page 当前页码") @RequestParam(required = true, value = "page") Integer page,
+                       @ApiParam(name = "pagesize", value = "pagesize 当前页记录数") @RequestParam(required = true, value = "pagesize") Integer pagesize,
+                       HttpServletResponse response) throws Exception {
+        PcUserRequest pcUserRequest = new PcUserRequest();
+        pcUserRequest.setReqCode("pcUserListHandler");
+        pcUserRequest.setTraceId("tid_"+IntegerFactory.getInstance().incrementAndGet());
+        pcUserRequest.setVersion("1.1");
+        pcUserRequest.setPage(page);
+        pcUserRequest.setPagesize(pagesize);
+        log.info("member-request:{}", pcUserRequest);
+        log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+        IProtocolClient memberClient = protocolClientPool.memberClient();
+        log.info("memberClient==null?===>{}", (memberClient == null));
+        ProtocolResponse userResponse = protocolClientPool.memberClient().sendAndReceived(pcUserRequest);
+        log.info("member-response:{}", userResponse);
+        return userResponse;
+    }
+
+    @RequestMapping(value = "/save", method = { RequestMethod.POST, RequestMethod.GET })
+    @ApiOperation(value = "新建pc收银车主信息", notes = "新建pc收银车主信息")
+    @ResponseBody
+    public Object save(HttpServletRequest request,
+                       @ApiParam(name = "fc_user_id", value = "枫车用户ID") @RequestParam(required = true) Integer fc_user_id,
+                       @ApiParam(name = "mobile", value = "手机号码") @RequestParam(required = true) String mobile,
+                       @ApiParam(name = "name", value = "车主姓名") @RequestParam(required = true) String name,
+                       HttpServletResponse response) throws Exception {
+        PcUserRequest pcUserRequest = new PcUserRequest();
+        pcUserRequest.setReqCode("pcUserSaveHandler");
+        pcUserRequest.setTraceId("tid_"+IntegerFactory.getInstance().incrementAndGet());
+        pcUserRequest.setFcUserId(fc_user_id);
+        pcUserRequest.setMobile(mobile);
+        pcUserRequest.setName(name);
+        log.info("member-request:{}", pcUserRequest);
+        log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+        IProtocolClient memberClient = protocolClientPool.memberClient();
+        log.info("memberClient==null?===>{}", (memberClient == null));
+        ProtocolResponse userResponse = protocolClientPool.memberClient().sendAndReceived(pcUserRequest);
+        log.info("member-response:{}", userResponse);
+        return userResponse;
+    }
+
+    @RequestMapping(value = "/update", method = { RequestMethod.POST, RequestMethod.GET })
+    @ApiOperation(value = "修改pc收银车主信息", notes = "修改pc收银车主信息")
+    @ResponseBody
+    public Object update(HttpServletRequest request,
+                         @ApiParam(name = "pc_user_id", value = "pc收银车主ID") @RequestParam(required = true) Integer pc_user_id,
+                         @ApiParam(name = "fc_user_id", value = "枫车用户ID") @RequestParam(required = true) Integer fc_user_id,
+                         @ApiParam(name = "mobile", value = "手机号码") @RequestParam(required = true) String mobile,
+                         @ApiParam(name = "name", value = "车主姓名") @RequestParam(required = true) String name,
+                         HttpServletResponse response) throws Exception {
+        PcUserRequest pcUserRequest = new PcUserRequest();
+        pcUserRequest.setReqCode("pcUserUpdateHandler");
+        pcUserRequest.setTraceId("tid_"+IntegerFactory.getInstance().incrementAndGet());
+        pcUserRequest.setVersion("1.1");
+        pcUserRequest.setPcUserId(pc_user_id);
+        pcUserRequest.setFcUserId(fc_user_id);
+        pcUserRequest.setMobile(mobile);
+        pcUserRequest.setName(name);
+        log.info("member-request:{}", pcUserRequest);
+        log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+        IProtocolClient memberClient = protocolClientPool.memberClient();
+        log.info("memberClient==null?===>{}", (memberClient == null));
+        ProtocolResponse userResponse = protocolClientPool.memberClient().sendAndReceived(pcUserRequest);
+        log.info("member-response:{}", userResponse);
+        return userResponse;
+    }
+
+    @RequestMapping(value = "/delete", method = { RequestMethod.POST, RequestMethod.GET })
+    @ApiOperation(value = "删除pc收银车主信息", notes = "删除pc收银车主信息")
+    @ResponseBody
+    public Object delete(HttpServletRequest request,
+                         @ApiParam(name = "pc_user_id", value = "pc收银车主ID") @RequestParam(required = true) Integer pc_user_id,
+                         @ApiParam(name = "fc_user_id", value = "枫车用户ID") @RequestParam(required = false) Integer fc_user_id,
+                         @ApiParam(name = "mobile", value = "手机号码") @RequestParam(required = false) String mobile,
+                         @ApiParam(name = "name", value = "车主姓名") @RequestParam(required = false) String name,
+                         HttpServletResponse response) throws Exception {
+        PcUserRequest pcUserRequest = new PcUserRequest();
+        pcUserRequest.setReqCode("pcUserDeleteHandler");
+        pcUserRequest.setTraceId("tid_"+IntegerFactory.getInstance().incrementAndGet());
+        pcUserRequest.setPcUserId(pc_user_id);
+        pcUserRequest.setFcUserId(fc_user_id);
+        pcUserRequest.setMobile(mobile);
+        pcUserRequest.setName(name);
+        log.info("member-request:{}", pcUserRequest);
+        log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+        IProtocolClient memberClient = protocolClientPool.memberClient();
+        log.info("memberClient==null?===>{}", (memberClient == null));
+        ProtocolResponse userResponse = protocolClientPool.memberClient().sendAndReceived(pcUserRequest);
+        log.info("member-response:{}", userResponse);
+        return userResponse;
+    }
+}

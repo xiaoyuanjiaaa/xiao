@@ -1,0 +1,26 @@
+package com.fc.member.store.user.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.member.store.user.dao.IStoreCoinDetailDao;
+import com.fc.member.store.user.service.IStoreCoinDetailService;
+import com.fc.member.store.user.entity.StoreCoinDetail;
+/**
+ * <p>Title: StoreCoinDetail</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:05
+ */
+@Service("storeCoinDetailService")
+public class StoreCoinDetailServiceImp extends ServiceImpl<StoreCoinDetail> implements IStoreCoinDetailService{
+
+	@Autowired
+	private IStoreCoinDetailDao storeCoinDetailDao;
+	
+	@Override
+	protected IMapper<StoreCoinDetail> getDao() {
+		return storeCoinDetailDao;
+	}
+}

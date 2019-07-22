@@ -1,0 +1,244 @@
+package com.fc.member.wechatmaintain.user.handler;
+
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.fc.common.util.DataConverHelper;
+import com.fc.common.util.DataConverHelper.DataConver;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.wechatmaintain.user.entity.WechatMaintainUser;
+import com.fc.member.wechatmaintain.user.service.IWechatMaintainUserService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainUserRequest;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+
+/**
+ * 微养车用户信息
+ * @author yangd
+ * @date 2019年1月2日
+ */
+@Component
+@Handler(module = "wechatMaintainUser")
+public class WechatMaintainUserHandler {
+
+	private static Logger log = LoggerFactory.getLogger(WechatMaintainUserHandler.class);
+
+	@Autowired
+	IWechatMaintainUserService wechatMaintainUserService;
+
+	/**
+	 * 查询微养车用户信息列表
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-05
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WechatMaintainUserRequest.class)
+	public ProtocolResponse wechatMaintainUserList(WechatMaintainUserRequest request) {
+		log.info("时间:{} , wechatMaintainUserList------>request:{}", DateTimeUtils.getNow(), request);
+
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			List<WechatMaintainUser> userList = wechatMaintainUserService.getWechatMaintainUserListPage(request);
+
+			// 循环返回前端规定的json格式
+			List<Map<String, Object>> dataList = DataConverHelper.forList(userList,
+					new DataConver<WechatMaintainUser>() {
+						@Override
+						public void conver(Map<String, Object> target, WechatMaintainUser source) throws Exception {
+							target.put("wechatMaintainUserId", source.getWechatMaintainUserId());
+							target.put("fcUserId", source.getFcUserId());
+							target.put("nickName", source.getNickName());
+							target.put("openid", source.getOpenid());
+							target.put("unionid", source.getUnionid());
+							target.put("mobile", source.getMobile());
+							String birthday = source.getBirthday() == null ? "0" : source.getBirthday().toString();
+							target.put("birthday",
+									Integer.valueOf(birthday) > 0
+											? DateTimeUtils.getStrFromTimestamp10(Integer.valueOf(birthday),
+													DateTimeUtils.FORMAT_DATE)
+											: "");
+							String createTime = source.getCreateTime() == null ? "0"
+									: source.getCreateTime().toString();
+							target.put("createTime",
+									Integer.valueOf(createTime) > 0 ? DateTimeUtils.getStrFromTimestamp10(
+											Integer.valueOf(createTime), DateTimeUtils.FORMAT_DATE_TIME_24HOURS) : "");
+						}
+					});
+			response.addData("data", dataList);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			e.printStackTrace();
+			response.error(99).msg("代码异常，请联系开发人员！");
+		}
+		log.info("时间:{} , 返回结果 wechatMaintainUserList------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+
+	/**
+	 * 查询微养车用户详情
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-05
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WechatMaintainUserRequest.class)
+	public ProtocolResponse wechatMaintainUserInfo(WechatMaintainUserRequest request) {
+		log.info("时间:{} ,  wechatMaintainUserInfo------>request:{}", DateTimeUtils.getNow(), request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			WechatMaintainUser entity = wechatMaintainUserService.getByPK(request.getWechatMaintainUserId());
+
+			// 循环返回前端规定的json格式
+			response.addData("data", entity);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			e.printStackTrace();
+			response.error(99).msg("代码异常，请联系开发人员！");
+		}
+		log.info("时间:{} , 返回结果 wechatMaintainUserInfo------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+
+	/**
+	 * 根据openid查询微养车用户信息
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-05
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WechatMaintainUserRequest.class)
+	public ProtocolResponse wechatMaintainUserByOpenId(WechatMaintainUserRequest request) {
+		log.info("时间:{} ,  wechatMaintainUserByOpenId------>request:{}", DateTimeUtils.getNow(), request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			WechatMaintainUser wechatMaintainUser = wechatMaintainUserService.getByOpenid(request.getOpenid());
+
+			// 循环返回前端规定的json格式
+			response.addData("data", wechatMaintainUser);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			e.printStackTrace();
+			response.error(99).msg("代码异常，请联系开发人员！");
+		}
+		log.info("时间:{} , 返回结果 wechatMaintainUserByOpenId------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+
+	/**
+	 * 根据unionid查询微养车用户信息
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-05
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WechatMaintainUserRequest.class)
+	public ProtocolResponse wechatMaintainUserByUnionId(WechatMaintainUserRequest request) {
+		log.info("时间:{} ,  wechatMaintainUserByUnionId------>request:{}", DateTimeUtils.getNow(), request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			WechatMaintainUser wechatMaintainUser = wechatMaintainUserService.getByUnionId(request.getUnionid());
+
+			// 循环返回前端规定的json格式
+			response.addData("data", wechatMaintainUser);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			e.printStackTrace();
+			response.error(99).msg("代码异常，请联系开发人员！");
+		}
+		log.info("时间:{} , 返回结果 wechatMaintainUserByUnionId------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+
+	/**
+	 * 根据手机号查询用户信息
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-05
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WechatMaintainUserRequest.class)
+	public ProtocolResponse wechatMaintainUserByMobile(WechatMaintainUserRequest request) {
+		log.info("时间:{} ,  wechatMaintainUserByMobile------>request:{}", DateTimeUtils.getNow(), request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			WechatMaintainUser wechatMaintainUser = wechatMaintainUserService.getByMobile(request.getMobile());
+
+			// 循环返回前端规定的json格式
+			response.addData("data", wechatMaintainUser);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			e.printStackTrace();
+			response.error(99).msg("代码异常，请联系开发人员！");
+		}
+		log.info("时间:{} , 返回结果 wechatMaintainUserByMobile------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+
+	/**
+	 * 创建用户信息
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-05
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WechatMaintainUserRequest.class)
+	public ProtocolResponse wechatMaintainUserCreate(WechatMaintainUserRequest request) {
+		log.info("时间:{} ,  wechatMaintainUserCreate------>request:{}", DateTimeUtils.getNow(), request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidateCreate();
+			if (validResult != null) {
+				return response.error(99).msg(validResult);
+			}
+
+			Map<String, Object> resultStatus = wechatMaintainUserService.insertSelective(request);
+			log.info("resultStatus------>{}", resultStatus);
+			if (resultStatus.isEmpty()) {
+				response.msg("创建成功");
+			} else {
+				response.error(99).msg(resultStatus.get("error").toString());
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			e.printStackTrace();
+			response.error(99).msg("代码异常，请联系开发人员！");
+		}
+		log.info("时间:{} , 返回结果 wechatMaintainUserCreate------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+
+	/**
+	 * 修改用户信息、完善用户信息、修改手机号、绑定手机号
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WechatMaintainUserRequest.class)
+	public ProtocolResponse wechatMaintainUserEditSave(WechatMaintainUserRequest request) {
+		log.info("时间:{} , wechatMaintainUserEditSave------>request:{}", DateTimeUtils.getNow(), request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			Map<String, Object> resultStatus = wechatMaintainUserService.updateWechatMaintainUser(request);
+			log.info("resultStatus------>{}", resultStatus);
+			if (resultStatus.isEmpty()) {
+				response.msg("修改成功");
+			} else {
+				response.error(99).msg(resultStatus.get("error").toString());
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			e.printStackTrace();
+			response.error(99).msg("代码异常，请联系开发人员！");
+		}
+		log.info("时间:{} , 返回结果 wechatMaintainUserEditSave------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+
+}

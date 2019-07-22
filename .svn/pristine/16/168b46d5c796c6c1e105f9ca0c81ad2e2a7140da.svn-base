@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.store.user.dao.IStoreCollectDao">
+	<resultMap id="StoreCollectMap" type="com.fc.member.store.user.entity.StoreCollect">
+        <id property="storeCollectId" column="store_collect_id"/>
+        <id property="storeId" column="store_id"/>
+        <id property="itemId" column="item_id"/>
+        <id property="createTime" column="create_time"/>
+        <id property="updateTime" column="update_time"/>
+        <id property="goodsPrice" column="goods_price"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="StoreCollectMap" >
+		select * from store_collect where 
+	        store_collect_id = #{storeCollectId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.store.user.entity.StoreCollect" useGeneratedKeys="true">
+		insert into store_collect(store_collect_id , store_id , item_id , create_time , update_time , goods_price  )
+    	values(#{storeCollectId} ,#{storeId} ,#{itemId} ,#{createTime} ,#{updateTime} ,#{goodsPrice} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.store.user.entity.StoreCollect" useGeneratedKeys="true">
+		insert into store_collect
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="storeCollectId != null">store_collect_id,</if>
+					<if test="storeId != null">store_id,</if>
+					<if test="itemId != null">item_id,</if>
+					<if test="createTime != null">create_time,</if>
+					<if test="updateTime != null">update_time,</if>
+					<if test="goodsPrice != null">goods_price</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="storeCollectId != null">#{storeCollectId},</if>
+					<if test="storeId != null">#{storeId},</if>
+					<if test="itemId != null">#{itemId},</if>
+					<if test="createTime != null">#{createTime},</if>
+					<if test="updateTime != null">#{updateTime},</if>
+					<if test="goodsPrice != null">#{goodsPrice}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.store.user.entity.StoreCollect">
+		update store_collect
+		<set>
+		    	<if test="storeId != null">store_id = #{storeId},</if>
+		    	<if test="itemId != null">item_id = #{itemId},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		    	<if test="goodsPrice != null">goods_price = #{goodsPrice},</if>
+		</set>
+		where 
+	        store_collect_id = #{storeCollectId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from store_collect where 
+	        store_collect_id = #{storeCollectId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.store.user.entity.StoreCollect" resultMap="StoreCollectMap" >
+		select * from store_collect 
+		<where>
+		       <if test="storeCollectId != null">
+					AND store_collect_id = #{storeCollectId}
+				</if>
+		       <if test="storeId != null">
+					AND store_id = #{storeId}
+				</if>
+		       <if test="itemId != null">
+					AND item_id = #{itemId}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		       <if test="goodsPrice != null">
+					AND goods_price = #{goodsPrice}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="StoreCollectMap" >
+		select * from store_collect  
+		<where>
+		       <if test="condition.storeCollectId != null">
+					AND store_collect_id = #{condition.storeCollectId}
+				</if>
+		       <if test="condition.storeId != null">
+					AND store_id = #{condition.storeId}
+				</if>
+		       <if test="condition.itemId != null">
+					AND item_id = #{condition.itemId}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		       <if test="condition.goodsPrice != null">
+					AND goods_price = #{condition.goodsPrice}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

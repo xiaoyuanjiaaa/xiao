@@ -1,0 +1,38 @@
+package com.fc.member.wechatmaintain.user.service;
+
+import java.util.List;
+import java.util.Map;
+
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.service.IService;
+import com.fc.member.wechatmaintain.user.entity.WechatMaintainUser;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainUserCreateRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainUserEditSaveRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WechatMaintainUserListRequest;
+
+/**
+ * <p>Title: WechatMaintainUser</p>
+ * <p>Description: 微养车用户信息 Service 接口</p>
+ * @author yangd
+ * @date 2018-12-28 17:13:47
+ */
+public interface IWechatMaintainUserService extends IService<WechatMaintainUser> {
+
+	/**插入数据*/
+	Map<String, Object> insertSelective(WechatMaintainUserCreateRequest request);
+
+	/**更新数据*/
+	Map<String, Object> updateWechatMaintainUser(WechatMaintainUserEditSaveRequest request) throws Exception;
+
+	/**查询所有用户-分页*/
+	List<WechatMaintainUser> getWechatMaintainUserListPage(Page page, WechatMaintainUserListRequest request);
+
+	/**根据openid查询用户信息*/
+	WechatMaintainUser getByOpenid(String openid);
+
+	/**根据unionid查询用户信息*/
+	WechatMaintainUser getByUnionId(String unionid);
+
+	/**根据手机号查询用户信息*/
+	WechatMaintainUser getByMobile(String mobile);
+}

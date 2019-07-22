@@ -1,0 +1,203 @@
+package com.fc.member.shop.user.entity;
+
+import java.io.Serializable;
+
+
+/**
+ * <p>Table: ShopBusinessinfo</p>
+ * <p>Description: 店铺企业信息表</p>
+ * @author yangd
+ * @date 2019-01-14 11:08:39
+ */
+public class ShopBusinessinfo implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer shopBusinessinfoId; // 主键id
+	private Integer shopId; // 店铺id
+	private String companyName; // 公司名称
+	private String registerId; // 注册号（营业执照号）
+	private String legalRepresentative; // 法定代表人姓名
+	private String identityId; // 法人身份证照号
+	private String legalRepresentImg; // 法人身份证电子版正面
+	private String composingFormImg; // 法人身份证照片电子版反面
+	private String businessLicenseAddr; // 营业执照所在地
+	private String enterpriseForm; // 企业组成形式
+	private String businessType; // 经营类型
+	private Integer businessLicenseType; // 营业执照类型：0：没填写 1:有限责任公司 2：个体工商户 3：个人独资企业 4：合伙企业
+	private Integer registerDate; // 注册日期
+	private Integer shopOrdershopId; // 订货呗id
+	private Integer operationPeriodFrom; // 营业期限（起始）
+	private Integer operationPeriodEnd; // 营业期限（结束）
+	private String businessLicensePicId; // 营业执照图片id
+	private String businessLicenseDeadline; // 营业执照到期日
+	private Integer updateTime; // 修改时间
+	private Integer createTime; // 创建时间
+
+	public void setShopBusinessinfoId(Integer shopBusinessinfoId) {
+		this.shopBusinessinfoId = shopBusinessinfoId;
+	}
+	
+	public Integer getShopBusinessinfoId() {
+		return this.shopBusinessinfoId;
+	}
+	public void setShopId(Integer shopId) {
+		this.shopId = shopId;
+	}
+	
+	public Integer getShopId() {
+		return this.shopId;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+	
+	public String getCompanyName() {
+		return this.companyName;
+	}
+	public void setRegisterId(String registerId) {
+		this.registerId = registerId;
+	}
+	
+	public String getRegisterId() {
+		return this.registerId;
+	}
+	public void setLegalRepresentative(String legalRepresentative) {
+		this.legalRepresentative = legalRepresentative;
+	}
+	
+	public String getLegalRepresentative() {
+		return this.legalRepresentative;
+	}
+	public void setIdentityId(String identityId) {
+		this.identityId = identityId;
+	}
+	
+	public String getIdentityId() {
+		return this.identityId;
+	}
+	public void setLegalRepresentImg(String legalRepresentImg) {
+		this.legalRepresentImg = legalRepresentImg;
+	}
+	
+	public String getLegalRepresentImg() {
+		return this.legalRepresentImg;
+	}
+	public void setComposingFormImg(String composingFormImg) {
+		this.composingFormImg = composingFormImg;
+	}
+	
+	public String getComposingFormImg() {
+		return this.composingFormImg;
+	}
+	public void setBusinessLicenseAddr(String businessLicenseAddr) {
+		this.businessLicenseAddr = businessLicenseAddr;
+	}
+	
+	public String getBusinessLicenseAddr() {
+		return this.businessLicenseAddr;
+	}
+	public void setEnterpriseForm(String enterpriseForm) {
+		this.enterpriseForm = enterpriseForm;
+	}
+	
+	public String getEnterpriseForm() {
+		return this.enterpriseForm;
+	}
+	public void setBusinessType(String businessType) {
+		this.businessType = businessType;
+	}
+	
+	public String getBusinessType() {
+		return this.businessType;
+	}
+	public void setBusinessLicenseType(Integer businessLicenseType) {
+		this.businessLicenseType = businessLicenseType;
+	}
+	
+	public Integer getBusinessLicenseType() {
+		return this.businessLicenseType;
+	}
+	public void setRegisterDate(Integer registerDate) {
+		this.registerDate = registerDate;
+	}
+	
+	public Integer getRegisterDate() {
+		return this.registerDate;
+	}
+	public void setShopOrdershopId(Integer shopOrdershopId) {
+		this.shopOrdershopId = shopOrdershopId;
+	}
+	
+	public Integer getShopOrdershopId() {
+		return this.shopOrdershopId;
+	}
+	public void setOperationPeriodFrom(Integer operationPeriodFrom) {
+		this.operationPeriodFrom = operationPeriodFrom;
+	}
+	
+	public Integer getOperationPeriodFrom() {
+		return this.operationPeriodFrom;
+	}
+	public void setOperationPeriodEnd(Integer operationPeriodEnd) {
+		this.operationPeriodEnd = operationPeriodEnd;
+	}
+	
+	public Integer getOperationPeriodEnd() {
+		return this.operationPeriodEnd;
+	}
+	public void setBusinessLicensePicId(String businessLicensePicId) {
+		this.businessLicensePicId = businessLicensePicId;
+	}
+	
+	public String getBusinessLicensePicId() {
+		return this.businessLicensePicId;
+	}
+	public void setBusinessLicenseDeadline(String businessLicenseDeadline) {
+		this.businessLicenseDeadline = businessLicenseDeadline;
+	}
+	
+	public String getBusinessLicenseDeadline() {
+		return this.businessLicenseDeadline;
+	}
+	public void setUpdateTime(Integer updateTime) {
+		this.updateTime = updateTime;
+	}
+	
+	public Integer getUpdateTime() {
+		return this.updateTime;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+
+    @Override
+    public String toString () {
+    	return "ShopBusinessinfo{" + 
+	    	"shopBusinessinfoId=" + shopBusinessinfoId + 
+	    	", shopId=" + shopId + 
+	    	", companyName=" + companyName + 
+	    	", registerId=" + registerId + 
+	    	", legalRepresentative=" + legalRepresentative + 
+	    	", identityId=" + identityId + 
+	    	", legalRepresentImg=" + legalRepresentImg + 
+	    	", composingFormImg=" + composingFormImg + 
+	    	", businessLicenseAddr=" + businessLicenseAddr + 
+	    	", enterpriseForm=" + enterpriseForm + 
+	    	", businessType=" + businessType + 
+	    	", businessLicenseType=" + businessLicenseType + 
+	    	", registerDate=" + registerDate + 
+	    	", shopOrdershopId=" + shopOrdershopId + 
+	    	", operationPeriodFrom=" + operationPeriodFrom + 
+	    	", operationPeriodEnd=" + operationPeriodEnd + 
+	    	", businessLicensePicId=" + businessLicensePicId + 
+	    	", businessLicenseDeadline=" + businessLicenseDeadline + 
+	    	", updateTime=" + updateTime + 
+	    	", createTime=" + createTime + 
+	    	"}";
+    }
+}

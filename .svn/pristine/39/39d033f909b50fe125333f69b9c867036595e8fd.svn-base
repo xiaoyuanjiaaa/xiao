@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.protocol.server.demo.mapper.WechatRechargeMapper">
+	<resultMap id="WechatRechargeMap" type="com.fc.protocol.server.demo.entity.WechatRecharge">
+        <id property="wechat_recharge_id" column="wechat_recharge_id"/>
+        <id property="wechat_user_id" column="wechat_user_id"/>
+        <id property="wechat_sstore_id" column="wechat_sstore_id"/>
+        <id property="wechat_sstore_package_id" column="wechat_sstore_package_id"/>
+        <id property="real_account" column="real_account"/>
+        <id property="discount" column="discount"/>
+        <id property="creat_time" column="creat_time"/>
+        <id property="status" column="status"/>
+        <id property="order_no" column="order_no"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="WechatRechargeMap" >
+		select * from ssms_wechat_recharge where 
+	        wechat_recharge_id = #{wechat_recharge_id} 
+
+	</select>
+	
+	<insert id="create" parameterType="com.fc.protocol.server.demo.entity.WechatRecharge" >
+		insert into ssms_wechat_recharge(wechat_recharge_id , wechat_user_id , wechat_sstore_id, wechat_sstore_package_id , real_account , discount , creat_time , status , order_no  )
+    	values(#{wechat_recharge_id} ,#{wechat_user_id} ,#{wechat_sstore_id}, #{wechat_sstore_package_id} ,#{real_account} ,#{discount} ,#{creat_time} ,#{status} ,#{order_no} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.protocol.server.demo.entity.WechatRecharge" 
+		useGeneratedKeys="true" keyProperty="wechat_recharge_id">
+		insert into ssms_wechat_recharge
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="wechat_recharge_id != null">wechat_recharge_id,</if>
+			<if test="wechat_user_id != null">wechat_user_id,</if>
+			<if test="wechat_sstore_id != null">wechat_sstore_id,</if>
+			<if test="wechat_sstore_package_id != null">wechat_sstore_package_id,</if>
+			<if test="real_account != null">real_account,</if>
+			<if test="discount != null">discount,</if>
+			<if test="creat_time != null">creat_time,</if>
+			<if test="status != null">status,</if>
+			<if test="order_no != null">order_no,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="wechat_recharge_id != null">#{wechat_recharge_id},</if>
+			<if test="wechat_user_id != null">#{wechat_user_id},</if>
+			<if test="wechat_sstore_id != null">#{wechat_sstore_id},</if>
+			<if test="wechat_sstore_package_id != null">#{wechat_sstore_package_id},</if>
+			<if test="real_account != null">#{real_account},</if>
+			<if test="discount != null">#{discount},</if>
+			<if test="creat_time != null">#{creat_time},</if>
+			<if test="status != null">#{status},</if>
+			<if test="order_no != null">#{order_no},</if>
+		</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.protocol.server.demo.entity.WechatRecharge">
+		update ssms_wechat_recharge
+		<set>
+		    	<if test="wechat_user_id!=null">
+					wechat_user_id = #{wechat_user_id},
+			    </if>
+		    	<if test="wechat_sstore_id!=null">
+					wechat_sstore_id = #{wechat_sstore_id},
+			    </if>
+		    	<if test="wechat_sstore_package_id!=null">
+					wechat_sstore_package_id = #{wechat_sstore_package_id},
+			    </if>
+		    	<if test="real_account!=null">
+					real_account = #{real_account},
+			    </if>
+		    	<if test="discount!=null">
+					discount = #{discount},
+			    </if>
+		    	<if test="creat_time!=null">
+					creat_time = #{creat_time},
+			    </if>
+		    	<if test="status!=null">
+					status = #{status},
+			    </if>
+		    	<if test="order_no!=null">
+					order_no = #{order_no},
+			    </if>
+		</set>
+		where 
+	        wechat_recharge_id = #{wechat_recharge_id} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from ssms_wechat_recharge where 
+	        wechat_recharge_id = #{wechat_recharge_id} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.protocol.server.demo.entity.WechatRecharge" resultMap="WechatRechargeMap" >
+		select * from ssms_wechat_recharge 
+		<where>
+		       <if test="wechat_recharge_id!=null">
+					AND wechat_recharge_id = #{wechat_recharge_id}
+				</if>
+		       <if test="wechat_user_id!=null">
+					AND wechat_user_id = #{wechat_user_id}
+				</if>
+		       <if test="wechat_sstore_id!=null">
+					AND wechat_sstore_id = #{wechat_sstore_id}
+				</if>
+		       <if test="wechat_sstore_package_id!=null">
+					AND wechat_sstore_package_id = #{wechat_sstore_package_id}
+				</if>
+		       <if test="real_account!=null">
+					AND real_account = #{real_account}
+				</if>
+		       <if test="discount!=null">
+					AND discount = #{discount}
+				</if>
+		       <if test="creat_time!=null">
+					AND creat_time = #{creat_time}
+				</if>
+		       <if test="status!=null">
+					AND status = #{status}
+				</if>
+		       <if test="order_no!=null">
+					AND order_no = #{order_no}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="com.fc.protocol.server.demo.persistance.mybatis.PageQuery" resultMap="WechatRechargeMap" >
+		select * from ssms_wechat_recharge  
+		<where>
+		       <if test="condition.wechat_recharge_id!=null">
+					AND wechat_recharge_id = #{condition.wechat_recharge_id}
+				</if>
+		       <if test="condition.wechat_user_id!=null">
+					AND wechat_user_id = #{condition.wechat_user_id}
+				</if>
+		       <if test="condition.wechat_sstore_id!=null">
+					AND wechat_sstore_id = #{condition.wechat_sstore_id}
+				</if>
+		       <if test="condition.wechat_sstore_package_id!=null">
+					AND wechat_sstore_package_id = #{condition.wechat_sstore_package_id}
+				</if>
+		       <if test="condition.real_account!=null">
+					AND real_account = #{condition.real_account}
+				</if>
+		       <if test="condition.discount!=null">
+					AND discount = #{condition.discount}
+				</if>
+		       <if test="condition.creat_time!=null">
+					AND creat_time = #{condition.creat_time}
+				</if>
+		       <if test="condition.status!=null">
+					AND status = #{condition.status}
+				</if>
+		       <if test="condition.order_no!=null">
+					AND order_no = #{condition.order_no}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRechargeListPage" parameterType="com.fc.protocol.server.demo.persistance.mybatis.PageQuery" resultType="java.util.Map" >
+		select * from ssms_wechat_recharge swr 
+		order by swr.creat_time DESC
+	</select>
+	
+	<!-- IMapper通用方法 end -->
+</mapper> 

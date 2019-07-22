@@ -1,0 +1,50 @@
+package com.fc.protocol.demo.request.store.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+import io.swagger.annotations.ApiModelProperty;
+
+public class StoreCollectDeleteRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+
+	@ApiModelProperty(value = "门店id", name = "storeId", example = "1")
+	private Integer storeId;//门店id
+	@ApiModelProperty(value = "商品id", name = "itemId", example = "1")
+	private Integer itemId;//商品id
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	public Integer getItemId() {
+		return itemId;
+	}
+
+	public void setItemId(Integer itemId) {
+		this.itemId = itemId;
+	}
+
+	@Override
+	public String toString() {
+		return "StoreCollectDeleteRequest [storeId=" + storeId + ", itemId=" + itemId + ",getVersion()=" + getVersion()
+				+ ",getReqCode()=" + getReqCode() + ",getTraceId()=" + getTraceId() + "]";
+	}
+
+	//删除收藏商品
+	public String paramValidate() {
+		if (StringUtils.isEmpty(storeId)) {
+			return "参数:storeId不能为空！";
+		}
+		if (StringUtils.isEmpty(itemId)) {
+			return "参数:itemId不能为空！";
+		}
+		return null;
+	}
+}

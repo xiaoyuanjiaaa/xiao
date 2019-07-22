@@ -1,0 +1,15 @@
+package com.fc.member.shop.user.service;
+
+import com.fc.common.service.IService;
+import com.fc.member.shop.user.entity.ShopDepositinfo;
+/**
+ * <p>Title: ShopDepositinfo</p>
+ * <p>Description: 商家保证金信息表 Service 接口</p>
+ * @author yangd
+ * @date 2019-01-14 11:08:39
+ */
+public interface IShopDepositinfoService extends IService<ShopDepositinfo>{
+	
+	// 插入数据
+	int insertSelective(ShopDepositinfo obj);
+}

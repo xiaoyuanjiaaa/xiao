@@ -1,0 +1,47 @@
+package com.fc.member.wechatmaintain.user.service;
+
+import java.util.List;
+import java.util.Map;
+
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.service.IService;
+import com.fc.member.wechatmaintain.user.entity.WechatMaintainConponConsumeinfo;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmcConsumeinfoConsumptionCountAndBalanceRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmcConsumeinfoCreateRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmcConsumeinfoDetailsListRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmcConsumeinfoListPageRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmcConsumeinfoOverviewListPageRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmcConsumeinfoStoreTotalAmountBalanceRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmcConsumeinfoStoreTotalAmountRequest;
+
+/**
+ * <p>Title: WechatMaintainConponConsumeinfo</p>
+ * <p>Description: 微养车用户储值卡充值消费记录表 Service 接口</p>
+ * @author yangd
+ * @date 2018-12-28 17:13:46
+ */
+public interface IWechatMaintainConponConsumeinfoService extends IService<WechatMaintainConponConsumeinfo> {
+
+	/**插入数据*/
+	int insertSelective(WmcConsumeinfoCreateRequest request);
+
+	/**储值卡消费记录总表(运营后台-分页,关联门店、微养车用户表查询)*/
+	List<WechatMaintainConponConsumeinfo> getConponConsumeinfoListPage(Page page,
+			WmcConsumeinfoListPageRequest request);
+
+	/**储值卡总览表(运营后台-分页,关联门店表查询)*/
+	List<WechatMaintainConponConsumeinfo> getConponConsumeinfoOverviewListPage(Page page,
+			WmcConsumeinfoOverviewListPageRequest request);
+
+	/**我的 - 储值卡收支详情(查询储值卡使用记录)*/
+	List<WechatMaintainConponConsumeinfo> getConponConsumeinfoDetailsList(WmcConsumeinfoDetailsListRequest request);
+
+	/**根据store_id查询门店所售储值卡金额*/
+	Map<String, Object> getStoreTotalAmount(WmcConsumeinfoStoreTotalAmountRequest request);
+
+	/**门店APP储值卡设置显示充值总额、当前总余额*/
+	Map<String, Object> getStoreTotalAmountBalance(WmcConsumeinfoStoreTotalAmountBalanceRequest request);
+
+	/**门店APP客户管理(查询储值卡消费次数、余额)*/
+	Map<String, Object> getConsumptionCountAndBalance(WmcConsumeinfoConsumptionCountAndBalanceRequest request);
+}

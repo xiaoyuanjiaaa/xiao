@@ -1,0 +1,152 @@
+package com.fc.protocol.client.demo.controller;
+
+import com.fc.protocol.client.IProtocolClient;
+import com.fc.protocol.client.demo.config.ProtocolClientPool;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.common.utils.IntegerFactory;
+import com.fc.protocol.demo.request.wechatplatform.user.WechatPlatformServiceCountRequest;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * @Author: linpeng
+ * @Date: 2019/1/3 18:41
+ * @Version 1.0
+ */
+@Api(tags = "WechatPlatformServiceCountController", description = "微养车找店用户服务统计控制器")
+@RestController
+@RequestMapping("/service/platform/serviceCount")
+public class WechatPlatformServiceCountController {
+
+	private static Logger log = LoggerFactory.getLogger(WechatPlatformServiceCountController.class);
+
+	@Autowired
+	private ProtocolClientPool protocolClientPool;
+
+
+    @RequestMapping(value = "/get", method = { RequestMethod.POST, RequestMethod.GET })
+    @ApiOperation(value = "查询服务统计信息", notes = "获取某用户的某项服务统计信息")
+    @ResponseBody
+    public Object list(HttpServletRequest request,
+                       @ApiParam(name = "openid", value = "用户openid") @RequestParam(required = true) String openid,
+                       @ApiParam(name = "service_id", value = "一级服务分类ID") @RequestParam(required = true) Integer service_id,
+                       HttpServletResponse response) throws Exception {
+        WechatPlatformServiceCountRequest wechatPlatformServiceCountRequest = new WechatPlatformServiceCountRequest();
+        wechatPlatformServiceCountRequest.setReqCode("wechatPlatformServiceCountGetHandler");
+        wechatPlatformServiceCountRequest.setTraceId("tid_"+IntegerFactory.getInstance().incrementAndGet());
+        wechatPlatformServiceCountRequest.setVersion("1.1");
+        wechatPlatformServiceCountRequest.setOpenid(openid);
+        wechatPlatformServiceCountRequest.setService_id(service_id);
+        log.info("member-request:{}", wechatPlatformServiceCountRequest);
+        log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+        IProtocolClient memberClient = protocolClientPool.memberClient();
+        log.info("memberClient==null?===>{}", (memberClient == null));
+        ProtocolResponse userResponse = protocolClientPool.memberClient().sendAndReceived(wechatPlatformServiceCountRequest);
+        log.info("member-response:{}", userResponse);
+        return userResponse;
+    }
+
+	@RequestMapping(value = "/list", method = { RequestMethod.POST, RequestMethod.GET })
+	@ApiOperation(value = "查询服务统计信息列表", notes = "获取微养车找店的服务统计信息列表")
+	@ResponseBody
+	public Object list(HttpServletRequest request,
+                       @ApiParam(name = "openid", value = "用户openid") @RequestParam(required = false) String openid,
+                       @ApiParam(name = "service_id", value = "一级服务分类ID") @RequestParam(required = false) Integer service_id,
+                       @ApiParam(name = "page", value = "page 当前页码") @RequestParam(required = true, value = "page") Integer page,
+                       @ApiParam(name = "pagesize", value = "pagesize 当前页记录数") @RequestParam(required = true, value = "pagesize") Integer pagesize,
+                       HttpServletResponse response) throws Exception {
+		WechatPlatformServiceCountRequest wechatPlatformServiceCountRequest = new WechatPlatformServiceCountRequest();
+		wechatPlatformServiceCountRequest.setReqCode("wechatPlatformServiceCountListHandler");
+		wechatPlatformServiceCountRequest.setTraceId("tid_"+IntegerFactory.getInstance().incrementAndGet());
+		wechatPlatformServiceCountRequest.setVersion("1.1");
+		wechatPlatformServiceCountRequest.setOpenid(openid);
+		wechatPlatformServiceCountRequest.setService_id(service_id);
+		wechatPlatformServiceCountRequest.setPage(page);
+		wechatPlatformServiceCountRequest.setPagesize(pagesize);
+		log.info("member-request:{}", wechatPlatformServiceCountRequest);
+		log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+		IProtocolClient memberClient = protocolClientPool.memberClient();
+		log.info("memberClient==null?===>{}", (memberClient == null));
+		ProtocolResponse userResponse = protocolClientPool.memberClient().sendAndReceived(wechatPlatformServiceCountRequest);
+		log.info("member-response:{}", userResponse);
+		return userResponse;
+	}
+
+	@RequestMapping(value = "/save", method = { RequestMethod.POST, RequestMethod.GET })
+	@ApiOperation(value = "新建服务统计信息", notes = "新建微养车找店的服务统计信息(某用户的某项服务信息)")
+	@ResponseBody
+	public Object save(HttpServletRequest request,
+                       @ApiParam(name = "openid", value = "用户openid") @RequestParam(required = true) String openid,
+                       @ApiParam(name = "service_id", value = "一级服务分类ID") @RequestParam(required = true) Integer service_id,
+                       @ApiParam(name = "service_title", value = "一级服务分类名称") @RequestParam(required = true) String service_title,
+                       HttpServletResponse response) throws Exception {
+		WechatPlatformServiceCountRequest wechatPlatformServiceCountRequest = new WechatPlatformServiceCountRequest();
+		wechatPlatformServiceCountRequest.setReqCode("wechatPlatformServiceCountSaveHandler");
+		wechatPlatformServiceCountRequest.setTraceId("tid_"+IntegerFactory.getInstance().incrementAndGet());
+		wechatPlatformServiceCountRequest.setOpenid(openid);
+		wechatPlatformServiceCountRequest.setService_id(service_id);
+		wechatPlatformServiceCountRequest.setService_title(service_title);
+		log.info("member-request:{}", wechatPlatformServiceCountRequest);
+		log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+		IProtocolClient memberClient = protocolClientPool.memberClient();
+		log.info("memberClient==null?===>{}", (memberClient == null));
+		ProtocolResponse userResponse = protocolClientPool.memberClient().sendAndReceived(wechatPlatformServiceCountRequest);
+		log.info("member-response:{}", userResponse);
+		return userResponse;
+	}
+
+    @RequestMapping(value = "/update", method = { RequestMethod.POST, RequestMethod.GET })
+    @ApiOperation(value = "修改服务统计信息", notes = "修改微养车找店的服务统计信息(某用户的某项服务信息)")
+    @ResponseBody
+    public Object update(HttpServletRequest request,
+                         @ApiParam(name = "openid", value = "用户openid") @RequestParam(required = true) String openid,
+                         @ApiParam(name = "service_id", value = "一级服务分类ID") @RequestParam(required = true) Integer service_id,
+                         @ApiParam(name = "service_title", value = "一级服务分类名称") @RequestParam(required = false) String service_title,
+                         @ApiParam(name = "open_number", value = "打开次数") @RequestParam(required = false) Integer open_number,
+                       HttpServletResponse response) throws Exception {
+        WechatPlatformServiceCountRequest wechatPlatformServiceCountRequest = new WechatPlatformServiceCountRequest();
+        wechatPlatformServiceCountRequest.setReqCode("wechatPlatformServiceCountUpdateHandler");
+        wechatPlatformServiceCountRequest.setTraceId("tid_"+IntegerFactory.getInstance().incrementAndGet());
+        wechatPlatformServiceCountRequest.setVersion("1.1");
+        wechatPlatformServiceCountRequest.setOpenid(openid);
+        wechatPlatformServiceCountRequest.setService_id(service_id);
+        wechatPlatformServiceCountRequest.setService_title(service_title);
+        wechatPlatformServiceCountRequest.setOpen_number(open_number);
+        log.info("member-request:{}", wechatPlatformServiceCountRequest);
+        log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+        IProtocolClient memberClient = protocolClientPool.memberClient();
+        log.info("memberClient==null?===>{}", (memberClient == null));
+        ProtocolResponse userResponse = protocolClientPool.memberClient().sendAndReceived(wechatPlatformServiceCountRequest);
+        log.info("member-response:{}", userResponse);
+        return userResponse;
+    }
+
+    @RequestMapping(value = "/delete", method = { RequestMethod.POST, RequestMethod.GET })
+    @ApiOperation(value = "删除用户反馈信息", notes = "删除微养车找店的用户反馈信息")
+    @ResponseBody
+    public Object delete(HttpServletRequest request,
+                         @ApiParam(name = "openid", value = "用户openid") @RequestParam(required = true) String openid,
+                         @ApiParam(name = "service_id", value = "一级服务分类ID") @RequestParam(required = true) Integer service_id,
+                         HttpServletResponse response) throws Exception {
+        WechatPlatformServiceCountRequest wechatPlatformServiceCountRequest = new WechatPlatformServiceCountRequest();
+        wechatPlatformServiceCountRequest.setReqCode("wechatPlatformServiceCountDeleteHandler");
+        wechatPlatformServiceCountRequest.setTraceId("tid_"+IntegerFactory.getInstance().incrementAndGet());
+        wechatPlatformServiceCountRequest.setOpenid(openid);
+        wechatPlatformServiceCountRequest.setService_id(service_id);
+        log.info("member-request:{}", wechatPlatformServiceCountRequest);
+        log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+        IProtocolClient memberClient = protocolClientPool.memberClient();
+        log.info("memberClient==null?===>{}", (memberClient == null));
+        ProtocolResponse userResponse = protocolClientPool.memberClient().sendAndReceived(wechatPlatformServiceCountRequest);
+        log.info("member-response:{}", userResponse);
+        return userResponse;
+    }
+}

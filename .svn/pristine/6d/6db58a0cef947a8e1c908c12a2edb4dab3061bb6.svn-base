@@ -1,0 +1,116 @@
+package com.fc.protocol.demo.request.wechatplatform.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+import io.swagger.annotations.ApiModelProperty;
+import org.springframework.util.StringUtils;
+
+/**
+ * @Author: linpeng
+ * @Date: 2019/1/3 18:41
+ * @Version 1.0
+ */
+public class WechatPlatformUserFeedbackRequest extends ProtocolRequest {
+
+    @ApiModelProperty(value = "当前页码", name = "page")
+    private Integer page = 1;
+    @ApiModelProperty(value = "当前页记录数", name = "pagesize")
+    private Integer pagesize = 10;
+    @ApiModelProperty(value = "反馈信息id", name = "feedback_id;")
+    private Integer feedback_id;
+    @ApiModelProperty(value = "openid", name = "openid")
+    private String  openid;
+    @ApiModelProperty(value = "反馈内容", name = "feedback_content")
+    private String  feedback_content;
+
+
+    public String paramValidateGet() {
+        if (StringUtils.isEmpty(feedback_id)) {
+            return "参数:feedback_id 不能为空";
+        }
+        return null;
+    }
+
+    public String paramValidateList() {
+        if (StringUtils.isEmpty(page)) {
+            return "参数:page 不能为空";
+        }
+        if (StringUtils.isEmpty(pagesize)) {
+            return "参数:pagesize 不能为空";
+        }
+        return null;
+    }
+
+    public String paramValidateSave() {
+        if (StringUtils.isEmpty(openid)) {
+            return "参数:openid 不能为空";
+        }
+        if (StringUtils.isEmpty(feedback_content)) {
+            return "参数:feedback_content 不能为空";
+        }
+        return null;
+    }
+
+    public String paramValidateUpdate() {
+        if (StringUtils.isEmpty(feedback_id)) {
+            return "参数:feedback_id 不能为空";
+        }
+        return null;
+    }
+
+    public String paramValidateDelete() {
+        if (StringUtils.isEmpty(feedback_id)) {
+            return "参数:feedback_id 不能为空";
+        }
+        return null;
+    }
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getPagesize() {
+        return pagesize;
+    }
+
+    public void setPagesize(Integer pagesize) {
+        this.pagesize = pagesize;
+    }
+
+    public Integer getFeedback_id() {
+        return feedback_id;
+    }
+
+    public void setFeedback_id(Integer feedback_id) {
+        this.feedback_id = feedback_id;
+    }
+
+    public String getOpenid() {
+        return openid;
+    }
+
+    public void setOpenid(String openid) {
+        this.openid = openid;
+    }
+
+    public String getFeedback_content() {
+        return feedback_content;
+    }
+
+    public void setFeedback_content(String feedback_content) {
+        this.feedback_content = feedback_content;
+    }
+
+
+
+	@Override
+	public String toString() {
+		return "WechatPlatformUserFeedbackRequest [ getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode()
+                + ", getTraceId()=" + getTraceId() + ", page=" + getPage() + ", pagesize=" + getPagesize()
+                + ", feedback_id=" + getFeedback_id()  +", feedback_content=" + getFeedback_content() + "]";
+	}
+
+}

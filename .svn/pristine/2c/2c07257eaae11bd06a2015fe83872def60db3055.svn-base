@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.master.user.dao.IMasterStoreWorkerLogDao">
+	<resultMap id="MasterStoreWorkerLogMap" type="com.fc.member.master.user.entity.MasterStoreWorkerLog">
+        <id property="masterStoreWorkerLogId" column="master_store_worker_log_id"/>
+        <id property="yid" column="yid"/>
+        <id property="storeId" column="store_id"/>
+        <id property="storeName" column="store_name"/>
+        <id property="regionId" column="region_id"/>
+        <id property="status" column="status"/>
+        <id property="createTime" column="create_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="MasterStoreWorkerLogMap" >
+		select * from master_store_worker_log where 
+	        master_store_worker_log_id = #{masterStoreWorkerLogId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.master.user.entity.MasterStoreWorkerLog" useGeneratedKeys="true" keyProperty="masterStoreWorkerLogId">
+		insert into master_store_worker_log(master_store_worker_log_id , yid , store_id , store_name , region_id , status , create_time  )
+    	values(#{masterStoreWorkerLogId} ,#{yid} ,#{storeId} ,#{storeName} ,#{regionId} ,#{status} ,#{createTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.master.user.entity.MasterStoreWorkerLog" useGeneratedKeys="true" keyProperty="masterStoreWorkerLogId">
+		insert into master_store_worker_log
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="masterStoreWorkerLogId != null">master_store_worker_log_id,</if>
+					<if test="yid != null">yid,</if>
+					<if test="storeId != null">store_id,</if>
+					<if test="storeName != null">store_name,</if>
+					<if test="regionId != null">region_id,</if>
+					<if test="status != null">status,</if>
+					<if test="createTime != null">create_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="masterStoreWorkerLogId != null">#{masterStoreWorkerLogId},</if>
+					<if test="yid != null">#{yid},</if>
+					<if test="storeId != null">#{storeId},</if>
+					<if test="storeName != null">#{storeName},</if>
+					<if test="regionId != null">#{regionId},</if>
+					<if test="status != null">#{status},</if>
+					<if test="createTime != null">#{createTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.master.user.entity.MasterStoreWorkerLog">
+		update master_store_worker_log
+		<set>
+		    	<if test="yid != null">yid = #{yid},</if>
+		    	<if test="storeId != null">store_id = #{storeId},</if>
+		    	<if test="storeName != null">store_name = #{storeName},</if>
+		    	<if test="regionId != null">region_id = #{regionId},</if>
+		    	<if test="status != null">status = #{status},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		</set>
+		where 
+	        master_store_worker_log_id = #{masterStoreWorkerLogId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from master_store_worker_log where 
+	        master_store_worker_log_id = #{masterStoreWorkerLogId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.master.user.entity.MasterStoreWorkerLog" resultMap="MasterStoreWorkerLogMap" >
+		select * from master_store_worker_log 
+		<where>
+		       <if test="masterStoreWorkerLogId != null">
+					AND master_store_worker_log_id = #{masterStoreWorkerLogId}
+				</if>
+		       <if test="yid != null">
+					AND yid = #{yid}
+				</if>
+		       <if test="storeId != null">
+					AND store_id = #{storeId}
+				</if>
+		       <if test="storeName != null">
+					AND store_name = #{storeName}
+				</if>
+		       <if test="regionId != null">
+					AND region_id = #{regionId}
+				</if>
+		       <if test="status != null">
+					AND status = #{status}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="MasterStoreWorkerLogMap" >
+		select * from master_store_worker_log  
+		<where>
+		       <if test="condition.masterStoreWorkerLogId != null">
+					AND master_store_worker_log_id = #{condition.masterStoreWorkerLogId}
+				</if>
+		       <if test="condition.yid != null">
+					AND yid = #{condition.yid}
+				</if>
+		       <if test="condition.storeId != null">
+					AND store_id = #{condition.storeId}
+				</if>
+		       <if test="condition.storeName != null">
+					AND store_name = #{condition.storeName}
+				</if>
+		       <if test="condition.regionId != null">
+					AND region_id = #{condition.regionId}
+				</if>
+		       <if test="condition.status != null">
+					AND status = #{condition.status}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

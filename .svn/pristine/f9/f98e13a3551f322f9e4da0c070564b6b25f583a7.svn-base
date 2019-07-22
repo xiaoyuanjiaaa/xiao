@@ -1,0 +1,38 @@
+package com.fc.member.store.user.service;
+
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.service.IService;
+import com.fc.member.store.user.entity.StoreMomeyDetail;
+
+import java.util.Map;
+
+/**
+ * <p>Title: StoreMomeyDetail</p>
+ * <p>Description:  Service 接口</p>
+ *
+ * @author yangd
+ * @date 2018-12-27 16:31:06
+ */
+public interface IStoreMomeyDetailService extends IService<StoreMomeyDetail> {
+
+    /***@author zhuj
+     *@date 2018/12/28
+     * @param request
+     * @description 添加门店金额操作记录
+     */
+    boolean inputAmountTradingInfo(StoreMomeyDetail request) throws Exception;
+
+    /***@author zhuj
+     *@date 2018/12/28
+     * @param request
+     * @description 更新门店提现状态
+     */
+    boolean changeAmountTradingStatus(StoreMomeyDetail request) throws Exception;
+
+    /***@author zhuj
+     *@date 2018/12/28
+     * @param request
+     * @description 获取门店金额交易列表
+     */
+    Map<String, Object> getAmountTradingList(Page page, StoreMomeyDetail request);
+}

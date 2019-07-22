@@ -1,0 +1,148 @@
+package com.fc.protocol.demo.request.wechatplatform.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+import io.swagger.annotations.ApiModelProperty;
+import org.springframework.util.StringUtils;
+
+/**
+ * @Author: linpeng
+ * @Date: 2019/1/3 18:41
+ * @Version 1.0
+ */
+public class WechatPlatformServiceCountRequest extends ProtocolRequest {
+
+    @ApiModelProperty(value = "当前页码", name = "page")
+    private Integer page = 1;
+    @ApiModelProperty(value = "当前页记录数", name = "pagesize")
+    private Integer pagesize = 10;
+    @ApiModelProperty(value = "服务统计信息id", name = "id")
+	private Integer  id;
+    @ApiModelProperty(value = "openid", name = "openid")
+    private String  openid;
+    @ApiModelProperty(value = "一级服务分类ID", name = "service_id")
+	private Integer  service_id;
+    @ApiModelProperty(value = "一级服务分类名称", name = "service_title")
+    private String service_title;
+    @ApiModelProperty(value = "打开次数", name = "open_number")
+    private Integer  open_number;
+
+
+    public String paramValidateGet() {
+        if (StringUtils.isEmpty(openid)) {
+            return "参数:openid 不能为空";
+        }
+        if (StringUtils.isEmpty(service_id)) {
+            return "参数:service_id 不能为空";
+        }
+        return null;
+    }
+
+    public String paramValidateList() {
+        if (StringUtils.isEmpty(page)) {
+            return "参数:page 不能为空";
+        }
+        if (StringUtils.isEmpty(pagesize)) {
+            return "参数:pagesize 不能为空";
+        }
+        return null;
+    }
+
+    public String paramValidateSave() {
+        if (StringUtils.isEmpty(openid)) {
+            return "参数:openid 不能为空";
+        }
+        if (StringUtils.isEmpty(service_id)) {
+            return "参数:service_id 不能为空";
+        }
+        if (StringUtils.isEmpty(service_title)) {
+            return "参数:service_title 不能为空";
+        }
+        return null;
+    }
+
+    public String paramValidateUpdate() {
+        if (StringUtils.isEmpty(openid)) {
+            return "参数:openid 不能为空";
+        }
+        if (StringUtils.isEmpty(service_id)) {
+            return "参数:service_id 不能为空";
+        }
+        return null;
+    }
+
+    public String paramValidateDelete() {
+        if (StringUtils.isEmpty(openid)) {
+            return "参数:openid 不能为空";
+        }
+        if (StringUtils.isEmpty(service_id)) {
+            return "参数:service_id 不能为空";
+        }
+        return null;
+    }
+
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getPagesize() {
+        return pagesize;
+    }
+
+    public void setPagesize(Integer pagesize) {
+        this.pagesize = pagesize;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getOpenid() {
+        return openid;
+    }
+
+    public void setOpenid(String openid) {
+        this.openid = openid;
+    }
+
+    public Integer getService_id() {
+        return service_id;
+    }
+
+    public void setService_id(Integer service_id) {
+        this.service_id = service_id;
+    }
+
+    public String getService_title() {
+        return service_title;
+    }
+
+    public void setService_title(String service_title) {
+        this.service_title = service_title;
+    }
+
+    public Integer getOpen_number() {
+        return open_number;
+    }
+
+    public void setOpen_number(Integer open_number) {
+        this.open_number = open_number;
+    }
+
+    @Override
+	public String toString() {
+		return "WechatPlatformServiceCountRequest [getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode()
+                + ", getTraceId()=" + getTraceId() +", page=" + getPage() + ", pagesize=" + getPagesize()
+                +", id=" + getId() +", openid=" + getOpenid() +", service_id=" + getService_id()
+                +", service_title=" + getService_title() +", open_number=" + getOpen_number()+ "]";
+	}
+
+}

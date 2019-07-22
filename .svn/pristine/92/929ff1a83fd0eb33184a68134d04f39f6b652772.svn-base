@@ -1,0 +1,51 @@
+package com.fc.protocol.demo.request.store.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+/**
+ * 门店设置request
+ * @author	xiaozw
+ * @data	2019年1月12日	
+ */
+public class StoreSetingSetscRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+	/**门店I的*/
+	private Integer storeId;
+	private Integer isSstoreCancellation; // 门店是否开启门店核销，0:不是；1:是
+
+	public String paramValidate() {
+		if (StringUtils.isEmpty(storeId)) {
+			return "参数:storeId不能为空";
+		}
+		if (StringUtils.isEmpty(isSstoreCancellation)) {
+			return "参数:isSstoreCancellation不能为空";
+		}
+		return null;
+	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	public Integer getIsSstoreCancellation() {
+		return isSstoreCancellation;
+	}
+
+	public void setIsSstoreCancellation(Integer isSstoreCancellation) {
+		this.isSstoreCancellation = isSstoreCancellation;
+	}
+
+	@Override
+	public String toString() {
+		return "StoreSetingSetscRequest [getStoreId()=" + getStoreId() + ", getIsSstoreCancellation()="
+				+ getIsSstoreCancellation() + "]";
+	}
+
+}

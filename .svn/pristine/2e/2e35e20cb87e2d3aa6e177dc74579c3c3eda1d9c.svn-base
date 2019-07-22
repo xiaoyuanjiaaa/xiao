@@ -1,0 +1,116 @@
+package com.fc.member.pc.user.service.impl;
+
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.plugin.mybatis.PageQuery;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.protocol.demo.request.pc.user.PcUserListRequest;
+import com.fc.protocol.demo.request.pc.user.PcUserSaveRequest;
+import com.fc.protocol.demo.request.pc.user.PcUserUpdateRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.member.pc.user.dao.IPcUserDao;
+import com.fc.member.pc.user.service.IPcUserService;
+import com.fc.member.pc.user.entity.PcUser;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * <p>Title: PcUser</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-29 10:11:38
+ */
+@Service("pcUserService")
+public class PcUserServiceImp extends ServiceImpl<PcUser> implements IPcUserService{
+
+	@Autowired
+	private IPcUserDao pcUserDao;
+	
+	@Override
+	protected IMapper<PcUser> getDao() {
+		return pcUserDao;
+	}
+
+	/**
+	 * 根据pc_user_id查询PC收银车主信息详情
+	 * @param pc_user_id
+	 * @return
+	 */
+	@Override
+	public PcUser get(Integer pc_user_id) {
+		PcUser entity = new PcUser();
+		entity.setPcUserId(pc_user_id);
+		List<PcUser> list = pcUserDao.getRows(entity);
+		if (list.isEmpty()) {
+			return null;
+		}
+		return list.get(0);
+	}
+
+	/**
+	 * 查询PC收银车主信息List
+	 * @return
+	 */
+	@Override
+	public List<PcUser> getPcUserList(PcUserListRequest request, Page page) {
+        // 将不为空的属性set到对象中
+	    PcUser entity = new PcUser();
+
+		PageQuery pageQuery = new PageQuery();
+		pageQuery.setPage(page);
+		pageQuery.setCondition(entity);
+		return pcUserDao.getRowsPage(pageQuery);
+	}
+
+	/**
+	 * 新增PC收银车主信息
+	 */
+	@Override
+	public Map<String, Object> insertPcUser(PcUserSaveRequest request) {
+		Map<String, Object> resultMap = new HashMap<>();
+		// 将不为空的属性set到对象中
+		PcUser entity = new PcUser();
+		entity.setFcUserId(request.getFcUserId());
+		entity.setMobile(request.getMobile());
+		entity.setName(request.getName());
+		entity.setCreateTime(DateTimeUtils.getDateTimeInteger());
+		int result = pcUserDao.insertSelective(entity);
+		if (result <= 0) {
+			resultMap.put("error", "创建失败");
+			return resultMap;
+		}
+		return resultMap;
+	}
+
+	/**
+	 * 更新PC收银车主信息
+	 */
+	@Override
+	public Map<String, Object> updatePcUser(PcUserUpdateRequest request) {
+		Map<String, Object> resultMap = new HashMap<>();
+        // 将不为空的属性set到对象中
+		PcUser  entity = new PcUser();
+		entity.setPcUserId(request.getPcUserId());
+		entity.setFcUserId(request.getFcUserId());
+		entity.setMobile(request.getMobile());
+		entity.setName(request.getName());
+		entity.setUpdateTime(DateTimeUtils.getDateTimeInteger());
+		int result = 0;
+		pcUserDao.update(entity);
+		return resultMap;
+	}
+
+	/**
+	 * 删除PC收银车主信息
+	 */
+	@Override
+	public Map<String, Object> deletePcUser(Integer pc_user_id) {
+		Map<String, Object> resultMap = new HashMap<>();
+		pcUserDao.deleteByPK(pc_user_id);
+		return resultMap;
+	}
+}

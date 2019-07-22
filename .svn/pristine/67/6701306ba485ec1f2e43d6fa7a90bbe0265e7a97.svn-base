@@ -1,0 +1,29 @@
+package com.fc.member.store.user.service;
+
+import java.util.List;
+import java.util.Map;
+
+import com.fc.common.service.IService;
+import com.fc.member.store.user.entity.StoreAptitude;
+import com.fc.protocol.demo.request.store.user.StoreAptitudeRequest;
+/**
+ * <p>Title: StoreAptitude</p>
+ * <p>Description:  Service 接口</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:05
+ */
+public interface IStoreAptitudeService extends IService<StoreAptitude>{
+	
+	List<Map<String,Object>>queryStoreAptitude(StoreAptitudeRequest request) throws Exception;	
+	
+	int insertSelective(StoreAptitudeRequest request) throws Exception;	
+	
+	void updateStoreAptitude(StoreAptitudeRequest request) throws Exception;	
+	/**
+	 * 校验基本信息完善、人员要求、设备要求是否完善
+	 * @param storeAptitude
+	 * @return
+	 * @throws Exception
+	 */
+	Map<String,Object> checkAptitude(StoreAptitudeRequest request) throws Exception;	
+}

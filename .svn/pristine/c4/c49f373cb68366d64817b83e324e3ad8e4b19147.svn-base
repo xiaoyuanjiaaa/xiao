@@ -1,0 +1,94 @@
+package com.fc.member.wechatplatform.user.service.impl;
+
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.plugin.mybatis.PageQuery;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.member.wechatplatform.user.dao.IWechatPlatformUserDao;
+import com.fc.member.wechatplatform.user.service.IWechatPlatformUserService;
+import com.fc.member.wechatplatform.user.entity.WechatPlatformUser;
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * <p>Title: WechatPlatformUser</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-28 17:14:42
+ */
+@Service("wechatPlatformUserService")
+public class WechatPlatformUserServiceImp extends ServiceImpl<WechatPlatformUser> implements IWechatPlatformUserService{
+
+	@Autowired
+	private IWechatPlatformUserDao wechatPlatformUserDao;
+	
+	@Override
+	protected IMapper<WechatPlatformUser> getDao() {
+		return wechatPlatformUserDao;
+	}
+
+
+    //@Override
+    //public int insertSelective(WechatPlatformUser obj) {
+    //    return wechatPlatformUserDao.insertSelective(obj);
+    //}
+
+    /**
+     * 根据openid查询游客信息
+     * @param openid
+     * @return
+     */
+    @Override
+    public WechatPlatformUser getByOpenid(String openid) {
+        WechatPlatformUser entity = new WechatPlatformUser();
+        entity.setOpenid(openid);
+        List<WechatPlatformUser> list = wechatPlatformUserDao.getRows(entity);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
+
+    /**
+     * 游客信息列表
+     * @return
+     */
+    @Override
+    public List<WechatPlatformUser> getList(Map<String, Object> map, Page page) {
+        PageQuery pageQuery = new PageQuery();
+        pageQuery.setPage(page);
+        pageQuery.setCondition(map);
+        return wechatPlatformUserDao.getRowsPage(pageQuery);
+    }
+
+    /**
+     * 新增游客
+     */
+    @Override
+    public int insertPlatformUser(WechatPlatformUser wechatPlatformUser) {
+        return wechatPlatformUserDao.insertSelective(wechatPlatformUser);
+    }
+
+    /**
+     * 更新用户信息
+     */
+    @Override
+    public int updatePlatformUser(WechatPlatformUser obj) {
+        int result = 0;
+        wechatPlatformUserDao.update(obj);
+        return result = 1;
+    }
+
+    /**
+     * 删除用户信息
+     */
+    @Override
+    public int deletePlatformUser(Integer platformUserId) {
+        int result = 0;
+        wechatPlatformUserDao.deleteByPK(platformUserId);
+        return result = 1;
+    }
+}

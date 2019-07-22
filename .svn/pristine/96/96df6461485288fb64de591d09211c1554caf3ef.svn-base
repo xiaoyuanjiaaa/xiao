@@ -1,0 +1,89 @@
+package com.fc.member.wechatplatform.user.service.impl;
+
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.plugin.mybatis.PageQuery;
+import com.fc.member.wechatplatform.user.entity.WechatPlatformUser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.member.wechatplatform.user.dao.IWechatPlatformUserFeedbackDao;
+import com.fc.member.wechatplatform.user.service.IWechatPlatformUserFeedbackService;
+import com.fc.member.wechatplatform.user.entity.WechatPlatformUserFeedback;
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * <p>Title: WechatPlatformUserFeedback</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-28 17:14:42
+ */
+@Service("wechatPlatformUserFeedbackService")
+public class WechatPlatformUserFeedbackServiceImp extends ServiceImpl<WechatPlatformUserFeedback> implements IWechatPlatformUserFeedbackService{
+
+	@Autowired
+	private IWechatPlatformUserFeedbackDao wechatPlatformUserFeedbackDao;
+
+	@Override
+	protected IMapper<WechatPlatformUserFeedback> getDao() {
+		return wechatPlatformUserFeedbackDao;
+	}
+
+	/**
+	 * 根据feedback_id查询反馈信息
+	 * @param feedback_id
+	 * @return
+	 */
+	@Override
+	public WechatPlatformUserFeedback getByFeedback_id(Integer feedback_id) {
+		WechatPlatformUserFeedback entity = new WechatPlatformUserFeedback();
+		entity.setFeedbackId(feedback_id);
+		List<WechatPlatformUserFeedback> list = wechatPlatformUserFeedbackDao.getRows(entity);
+		if (list.isEmpty()) {
+			return null;
+		}
+		return list.get(0);
+	}
+
+	/**
+	 * 反馈信息列表
+	 * @return
+	 */
+	@Override
+	public List<WechatPlatformUserFeedback> getFeedbackList(Map<String, Object> map, Page page) {
+		PageQuery pageQuery = new PageQuery();
+		pageQuery.setPage(page);
+		pageQuery.setCondition(map);
+		return wechatPlatformUserFeedbackDao.getRowsPage(pageQuery);
+	}
+
+	/**
+	 * 新增游客
+	 */
+	@Override
+	public int insertPlatformUserFeedback(WechatPlatformUserFeedback wechatPlatformUserFeedback) {
+		return wechatPlatformUserFeedbackDao.insertSelective(wechatPlatformUserFeedback);
+	}
+
+	/**
+	 * 更新用户信息
+	 */
+	@Override
+	public int updatePlatformUserFeedback(WechatPlatformUserFeedback obj) {
+		int result = 0;
+		wechatPlatformUserFeedbackDao.update(obj);
+		return result = 1;
+	}
+
+	/**
+	 * 删除用户信息
+	 */
+	@Override
+	public int deletePlatformUserFeedback(Integer feedback_id) {
+		int result = 0;
+		wechatPlatformUserFeedbackDao.deleteByPK(feedback_id);
+		return result = 1;
+	}
+}

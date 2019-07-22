@@ -1,0 +1,94 @@
+package com.fc.member.store.user.entity;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+/**
+ * <p>Table: StoreAdvanceDetail</p>
+ * <p>Description: </p>
+ * @author yangd
+ * @date 2018-12-27 16:31:05
+ */
+public class StoreAdvanceDetail implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer storeAdvanceDetailId; // 日志id
+	private Integer storeId; // 门店id
+	private Integer advanceId; // 借款id
+	private String balanceSn; // 结算编号
+	private BigDecimal repaidAmount; // 偿还金额
+	private Integer repaidType; // 还款方式
+	private Integer repaidTime; // 还款时间
+	private String remark; // 备注
+
+	public void setStoreAdvanceDetailId(Integer storeAdvanceDetailId) {
+		this.storeAdvanceDetailId = storeAdvanceDetailId;
+	}
+	
+	public Integer getStoreAdvanceDetailId() {
+		return this.storeAdvanceDetailId;
+	}
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+	
+	public Integer getStoreId() {
+		return this.storeId;
+	}
+	public void setAdvanceId(Integer advanceId) {
+		this.advanceId = advanceId;
+	}
+	
+	public Integer getAdvanceId() {
+		return this.advanceId;
+	}
+	public void setBalanceSn(String balanceSn) {
+		this.balanceSn = balanceSn;
+	}
+	
+	public String getBalanceSn() {
+		return this.balanceSn;
+	}
+	public void setRepaidAmount(BigDecimal repaidAmount) {
+		this.repaidAmount = repaidAmount;
+	}
+	
+	public BigDecimal getRepaidAmount() {
+		return this.repaidAmount;
+	}
+	public void setRepaidType(Integer repaidType) {
+		this.repaidType = repaidType;
+	}
+	
+	public Integer getRepaidType() {
+		return this.repaidType;
+	}
+	public void setRepaidTime(Integer repaidTime) {
+		this.repaidTime = repaidTime;
+	}
+	
+	public Integer getRepaidTime() {
+		return this.repaidTime;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	
+	public String getRemark() {
+		return this.remark;
+	}
+
+    @Override
+    public String toString () {
+    	return "StoreAdvanceDetail{" + 
+	    	"storeAdvanceDetailId=" + storeAdvanceDetailId + 
+	    	", storeId=" + storeId + 
+	    	", advanceId=" + advanceId + 
+	    	", balanceSn=" + balanceSn + 
+	    	", repaidAmount=" + repaidAmount + 
+	    	", repaidType=" + repaidType + 
+	    	", repaidTime=" + repaidTime + 
+	    	", remark=" + remark + 
+	    	"}";
+    }
+}

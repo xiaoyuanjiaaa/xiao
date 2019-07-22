@@ -1,0 +1,84 @@
+package com.fc.protocol.demo.request.wechatmaintain.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * 微养车 用户充值创建储值卡 参数
+ * @author yangd
+ * @date 2019年1月5日
+ */
+public class WechatMaintainUserCouponCreateRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+
+	@ApiModelProperty(value = "枫车用户id", name = "fcUserId")
+	private Integer fcUserId; // 枫车用户id
+	@ApiModelProperty(value = "门店id", name = "storeId")
+	private Integer storeId; // 门店id
+	@ApiModelProperty(value = "储值卡余额", name = "balance")
+	private Integer balance; // 储值卡余额
+	@ApiModelProperty(value = "创建时间", name = "createTime")
+	private Integer createTime; // 创建时间
+
+	/**
+	 * 验证方法
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-05
+	 * @return
+	 */
+	public String paramValidate() {
+		if (StringUtils.isEmpty(fcUserId)) {
+			return "参数:fcUserId不能为空";
+		}
+		if (StringUtils.isEmpty(storeId)) {
+			return "参数:storeId不能为空";
+		}
+		if (StringUtils.isEmpty(balance)) {
+			return "参数:balance不能为空";
+		}
+		return null;
+	}
+
+	public Integer getFcUserId() {
+		return fcUserId;
+	}
+
+	public void setFcUserId(Integer fcUserId) {
+		this.fcUserId = fcUserId;
+	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	public Integer getBalance() {
+		return balance;
+	}
+
+	public void setBalance(Integer balance) {
+		this.balance = balance;
+	}
+
+	public Integer getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+
+	@Override
+	public String toString() {
+		return "WechatMaintainUserCouponCreateRequest [fcUserId=" + fcUserId + ", storeId=" + storeId + ", balance="
+				+ balance + ", createTime=" + createTime + ", getVersion()=" + getVersion() + ", getReqCode()="
+				+ getReqCode() + ", getTraceId()=" + getTraceId() + "]";
+	}
+}

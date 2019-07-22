@@ -1,0 +1,15 @@
+package com.fc.member.master.user.service;
+
+import com.fc.common.service.IService;
+import com.fc.member.master.user.entity.MasterUserBalanceDetail;
+/**
+ * <p>Title: MasterUserBalanceDetail</p>
+ * <p>Description: 余额转入转出明细表 Service 接口</p>
+ * @author yangd
+ * @date 2019-01-15 10:09:29
+ */
+public interface IMasterUserBalanceDetailService extends IService<MasterUserBalanceDetail>{
+	
+	// 插入数据
+	int insertSelective(MasterUserBalanceDetail obj);
+}

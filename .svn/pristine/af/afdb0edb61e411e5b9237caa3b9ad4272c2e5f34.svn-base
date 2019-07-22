@@ -1,0 +1,282 @@
+package com.fc.member.wechatmaintain.user.handler;
+
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.fc.common.exception.ErrorCode;
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.wechatmaintain.user.entity.WechatMaintainUserCar;
+import com.fc.member.wechatmaintain.user.service.IWechatMaintainUserCarService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmuCarCreateRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmuCarDefaultRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmuCarDeleteRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmuCarDetailsRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmuCarListRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmuCarSwitchingDefaultCarRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmuCarUpdateRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmuCarUserListRequest;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+
+/**
+ * 微养车 车主车辆档案
+ * @author yangd
+ * @date 2019年1月3日
+ */
+@Component
+@Handler(module = "wechatmaintain")
+public class WechatMaintainUserCarHandler {
+
+	private static Logger log = LoggerFactory.getLogger(WechatMaintainUserCarHandler.class);
+
+	@Autowired
+	IWechatMaintainUserCarService wechatMaintainUserCarService;
+
+	/**
+	 * 微养车 - 查询车辆档案列表
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-05
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WmuCarListRequest.class)
+	public ProtocolResponse wmuCarList(WmuCarListRequest request) {
+		log.info("时间:{} , wechatMaintainUserCarList------>request:{}", DateTimeUtils.getNow(), request);
+
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			// 分页对象
+			Page page = new Page();
+			page.setPage(request.getPage_no());
+			page.setRows(request.getPage_size());
+			page.setShowTotal(true);
+			List<WechatMaintainUserCar> userCarList = wechatMaintainUserCarService
+					.getWechatMaintainUserCarListPage(page, request);
+			response.addData("car_list", userCarList).addData("page_count", page.getTotalPage()).addData("count",
+					page.getTotalResult());
+		} catch (Exception e) {
+			log.error("wmuCarList系统异常！", e);
+			response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+		}
+		log.info("时间:{} , 返回结果 wmuCarList------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+
+	/**
+	 * 微养车 - 我的爱车档案列表
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-05
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WmuCarUserListRequest.class)
+	public ProtocolResponse wmuCarUserList(WmuCarUserListRequest request) {
+		log.info("时间:{} , wmuCarUserList------>request:{}", DateTimeUtils.getNow(), request);
+
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidate();
+			if (validResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+			List<WechatMaintainUserCar> userCarList = wechatMaintainUserCarService.getUserCarListByUserId(request);
+			response.addData("user_car_list", userCarList);
+		} catch (Exception e) {
+			log.error("wmuCarUserList系统异常！", e);
+			response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+		}
+		log.info("时间:{} , 返回结果 wmuCarUserList------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+
+	/**
+	 * 微养车 - 查询爱车档案详情
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-05
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WmuCarDetailsRequest.class)
+	public ProtocolResponse wmuCarDetails(WmuCarDetailsRequest request) {
+		log.info("时间:{} , wmuCarDetails------>request:{}", DateTimeUtils.getNow(), request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidate();
+			if (validResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+			WechatMaintainUserCar entity = wechatMaintainUserCarService.getByPK(request.getWechatMaintainUserCarId());
+			response.addData("user_car", entity);
+		} catch (Exception e) {
+			log.error("wmuCarDetails系统异常！", e);
+			response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+		}
+		log.info("时间:{} , 返回结果 wmuCarDetails------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+
+	/**
+	 * 微养车 - 创建车档案信息
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-05
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WmuCarCreateRequest.class)
+	public ProtocolResponse wmuCarCreate(WmuCarCreateRequest request) {
+		log.info("时间:{} ,  wmuCarCreate------>request:{}", DateTimeUtils.getNow(), request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidate();
+			if (validResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+
+			int resultStatus = wechatMaintainUserCarService.insertSelective(request);
+			log.info("resultStatus------>{}", resultStatus);
+			if (resultStatus > 0) {
+				response.msg("添加成功");
+			} else {
+				response.error(ErrorCode.CREATE_ERROR.getValue()).msg(ErrorCode.CREATE_ERROR.getDesc());
+			}
+		} catch (Exception e) {
+			log.error("wmuCarCreate系统异常！", e);
+			response.error(ErrorCode.CREATE_ERROR.getValue()).msg(ErrorCode.CREATE_ERROR.getDesc());
+		}
+		log.info("时间:{} , 返回结果 wmuCarCreate------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+
+	/**
+	 * 微养车 - 修改用户车档案信息
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-05
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WmuCarUpdateRequest.class)
+	public ProtocolResponse wmuCarUpdate(WmuCarUpdateRequest request) {
+		log.info("时间:{} ,  wmuCarUpdate------>request:{}", DateTimeUtils.getNow(), request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidate();
+			if (validResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+			boolean resultStatus = wechatMaintainUserCarService.updateWechatMaintainUserCar(request);
+			log.info("resultStatus------>{}", resultStatus);
+			if (resultStatus) {
+				response.msg("更新成功");
+			} else {
+				response.error(ErrorCode.UPDATE_ERROR.getValue()).msg(ErrorCode.UPDATE_ERROR.getDesc());
+			}
+		} catch (Exception e) {
+			log.error("wmuCarUpdate系统异常！", e);
+			response.error(ErrorCode.UPDATE_ERROR.getValue()).msg(ErrorCode.UPDATE_ERROR.getDesc());
+		}
+		log.info("时间:{} , 返回结果 wmuCarUpdate------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+
+	/**
+	 * 切换默认爱车档案
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-05
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WmuCarSwitchingDefaultCarRequest.class)
+	public ProtocolResponse wmuCarSwitchingDefaultCar(WmuCarSwitchingDefaultCarRequest request) {
+		log.info("时间:{} ,  wmuCarSwitchingDefaultCar------>request:{}", DateTimeUtils.getNow(), request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidate();
+			if (validResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+
+			Map<String, Object> resultStatus = wechatMaintainUserCarService.switchingUserDefaultCar(request);
+			if (resultStatus.isEmpty()) {
+				response.msg("切换成功");
+			} else {
+				response.error(ErrorCode.UPDATE_ERROR.getValue()).msg(resultStatus.get("error").toString());
+			}
+		} catch (Exception e) {
+			log.error("wmuCarSwitchingDefaultCar系统异常！", e);
+			response.error(ErrorCode.UPDATE_ERROR.getValue()).msg(ErrorCode.UPDATE_ERROR.getDesc());
+		}
+		log.info("时间:{} , 返回结果 wmuCarSwitchingDefaultCar------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+
+	/**
+	 * 删除爱车档案
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-05
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WmuCarDeleteRequest.class)
+	public ProtocolResponse wmuCarDelete(WmuCarDeleteRequest request) {
+		log.info("时间:{} ,  wmuCarDelete------>request:{}", DateTimeUtils.getNow(), request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidate();
+			if (validResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+			int resultStatus = wechatMaintainUserCarService.updateStatus(request);
+			log.info("resultStatus------>{}", resultStatus);
+			if (resultStatus > 0) {
+				response.msg("删除成功");
+			} else {
+				response.error(ErrorCode.DELETE_ERROR.getValue()).msg(ErrorCode.DELETE_ERROR.getDesc());
+			}
+		} catch (Exception e) {
+			log.error("wmuCarDelete系统异常！", e);
+			response.error(ErrorCode.DELETE_ERROR.getValue()).msg(ErrorCode.DELETE_ERROR.getDesc());
+		}
+		log.info("时间:{} , 返回结果 wmuCarDelete------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+
+	/**
+	 * 查询用户默认爱车档案
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-05
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = WmuCarDefaultRequest.class)
+	public ProtocolResponse wmuCarDefault(WmuCarDefaultRequest request) {
+		log.info("时间:{} ,  wmuCarDefault------>request:{}", DateTimeUtils.getNow(), request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidate();
+			if (validResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+			WechatMaintainUserCar entity = wechatMaintainUserCarService.getUserDefaultCar(request);
+			response.addData("user_car", entity);
+		} catch (Exception e) {
+			log.error("wmuCarDefault系统异常！", e);
+			response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+		}
+		log.info("时间:{} , 返回结果 wmuCarDefault------>response:{}", DateTimeUtils.getNow(), response);
+		return response;
+	}
+}

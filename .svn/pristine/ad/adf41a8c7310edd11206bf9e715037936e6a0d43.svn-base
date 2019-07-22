@@ -1,0 +1,143 @@
+package com.fc.member.store.user.handler;
+
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.fc.common.exception.ErrorCode;
+import com.fc.member.store.user.entity.StoreAptitude;
+import com.fc.member.store.user.service.IStoreAptitudeService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.store.user.StoreAptitudeRequest;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+
+/**
+ * 门店安装资质
+ * @author jiahx
+ * @date 2019-1-4
+ */
+@Component
+@Handler(module = "storeaptitude")
+public class StoreAptitudeHandler {
+
+	private static Logger log = LoggerFactory.getLogger(StoreAptitudeHandler.class);
+
+	@Autowired
+	IStoreAptitudeService storeAptitudeService;
+
+	/**
+	 * 查询门店安装资质
+	 * @author	jiahx
+	 * @see update_name:jiahx update_time:2019-1-7
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = StoreAptitudeRequest.class)
+	public ProtocolResponse queryStoreAptitude(StoreAptitudeRequest request) {
+		log.info("StoreAptitudeHandler------>requestQueryStoreAptitude:{}",  request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult =  request.paramValidateQuery();
+			if(validResult != null ) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+			StoreAptitude storeAptitude = new StoreAptitude();
+			storeAptitude.setStoreId(request.getStoreId());
+			List<StoreAptitude> storeAptitudeList =  storeAptitudeService.queryStoreAptitude(request);
+			response.addData("store_aptitude_List", storeAptitudeList);
+			log.info("查询结果storeAptitudeList" + storeAptitudeList);
+		} catch (Exception e) {
+			response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+			e.printStackTrace();
+		}
+		log.info("StoreAptitudeHandler------>responseQueryStoreAptitude:{}", response);
+		return response;
+	}
+	/**
+	 * 新增门店安装资质
+	 * @author	jiahx
+	 * @see update_name:jiahx update_time:2019-1-7
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = StoreAptitudeRequest.class)
+	public ProtocolResponse createStoreAptitude(StoreAptitudeRequest request) {
+		log.info("StoreAptitudeHandler------>requestCreateStoreAptitude:{}", request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidateCreate();
+			if(validResult != null ) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+		int result = storeAptitudeService.insertSelective(request);
+		if(result==0) {
+			return	response.code(ErrorCode.CREATE_ERROR.getValue()).msg(ErrorCode.CREATE_ERROR.getDesc());
+		}
+		log.info("createStoreAptitude=====>"+result);
+		} catch (Exception e) {
+			response.error(ErrorCode.CREATE_ERROR.getValue()).msg(ErrorCode.CREATE_ERROR.getDesc());
+			e.printStackTrace();
+		}
+		log.info("StoreAptitudeHandler------>responseCreateStoreAptitude:{}", response);
+		return response;
+	}
+	/**
+	 * 更新门店安装资质
+	 * @author	jiahx
+	 * @see update_name:jiahx update_time:2019-1-7
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = StoreAptitudeRequest.class)
+	public ProtocolResponse updateStoreAptitude(StoreAptitudeRequest request) {
+		log.info("StoreAptitudeHandler------>requestUpdateStoreAptitude:{}", request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult = request.paramValidateUpdate();
+			if(validResult != null ) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+			storeAptitudeService.updateStoreAptitude(request);
+		} catch (Exception e) {
+			response.error(ErrorCode.UPDATE_ERROR.getValue()).msg(ErrorCode.UPDATE_ERROR.getDesc());
+			e.printStackTrace();
+		}
+		log.info("StoreAptitudeHandler------>responseUpdateStoreAptitude:{}", response);
+		return response;
+	}
+	/**
+	 * 校验基本信息完善、人员要求、设备要求是否完善
+	 * @author	jiahx
+	 * @see update_name:jiahx update_time:2019-1-7
+	 * @param request
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = StoreAptitudeRequest.class)
+	public ProtocolResponse checkStoreAptitude(StoreAptitudeRequest request) {
+		log.info("StoreAptitudeHandler------>requestCheckAptitude:{}",  request);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//校验参数是否为空
+			String validResult =  request.paramValidateQuery();
+			if(validResult != null ) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validResult);
+			}
+			Map<String,Object> checkResult=  storeAptitudeService.checkAptitude(request);
+			response.addData("check_result", checkResult);
+			log.info("查询结果checkResult" + checkResult);
+		} catch (Exception e) {
+			response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+			e.printStackTrace();
+		}
+		log.info("StoreAptitudeHandler------>responseCheckAptitude:{}", response);
+		return response;
+	}
+}

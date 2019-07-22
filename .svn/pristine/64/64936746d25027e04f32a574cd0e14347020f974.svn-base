@@ -1,0 +1,81 @@
+package com.fc.protocol.demo.request.store.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+import io.swagger.annotations.ApiModelProperty;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**@author zhuj
+ *@date 2018/12/28
+ * 银行卡修改记录请求参数实体类
+ *
+ * @param
+ */
+public class StoreBankCardChangeRequest extends ProtocolRequest {
+    @ApiModelProperty(value = "门店id", name = "storeId", example = "1")
+    private Integer storeId; // 门店ID
+    @ApiModelProperty(value = "页码", name = "page", example = "1")
+    private Integer page; // 页码
+    @ApiModelProperty(value = "没页的数量", name = "pagesize", example = "10")
+    private Integer pagesize; // 没页的数量
+
+    public Integer getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Integer storeId) {
+        this.storeId = storeId;
+    }
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getPagesize() {
+        return pagesize;
+    }
+
+    public void setPagesize(Integer pagesize) {
+        this.pagesize = pagesize;
+    }
+    /**
+     * 判断传人参数是否为空
+     *
+     * @param
+     */
+    public  Map<String, Object> passtoObject() {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("storeId",storeId);
+        return map;
+    }
+    /**
+     * 判断传人参数是否为空
+     *
+     * @param
+     */
+    public String paramValidatecheck() {
+        if (storeId==null) {
+            return "参数：storeId不能为空";
+        }
+        if (page==null) {
+            return "参数：page不能为空";
+        }
+        if (pagesize==null) {
+            return "参数：pagesize不能为空";
+        }
+        return null;
+    }
+    @Override
+    public String toString() {
+        return "StoreBankCardChangeRequest [storeId=" + storeId + ", " +
+                "page=" + page + ", " +
+                "pagesize=" + pagesize + ", " +
+                "getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode()
+                + ", getTraceId()=" + getTraceId() + "]";
+    }
+}

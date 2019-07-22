@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.wechatmaintain.user.dao.IWechatMaintainUserDao">
+	<resultMap id="WechatMaintainUserMap" type="com.fc.member.wechatmaintain.user.entity.WechatMaintainUser">
+        <id property="wechatMaintainUserId" column="wechat_maintain_user_id"/>
+        <id property="fcUserId" column="fc_user_id"/>
+        <id property="nickName" column="nick_name"/>
+        <id property="openid" column="openid"/>
+        <id property="unionid" column="unionid"/>
+        <id property="createTime" column="create_time"/>
+        <id property="name" column="name"/>
+        <id property="mobile" column="mobile"/>
+        <id property="birthday" column="birthday"/>
+        <id property="isCouponOn" column="is_coupon_on"/>
+        <id property="couponActiveTime" column="coupon_active_time"/>
+        <id property="wechatAvatar" column="wechat_avatar"/>
+        <id property="memo" column="memo"/>
+        <id property="sex" column="sex"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="WechatMaintainUserMap" >
+		select * from wechat_maintain_user where 
+	        wechat_maintain_user_id = #{wechatMaintainUserId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainUser" useGeneratedKeys="true" keyProperty="wechatMaintainUserId">
+		insert into wechat_maintain_user(wechat_maintain_user_id , fc_user_id , nick_name , openid , unionid , create_time , name , mobile , birthday , is_coupon_on , coupon_active_time , wechat_avatar , memo , sex  )
+    	values(#{wechatMaintainUserId} ,#{fcUserId} ,#{nickName} ,#{openid} ,#{unionid} ,#{createTime} ,#{name} ,#{mobile} ,#{birthday} ,#{isCouponOn} ,#{couponActiveTime} ,#{wechatAvatar} ,#{memo} ,#{sex} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainUser" useGeneratedKeys="true" keyProperty="wechatMaintainUserId">
+		insert into wechat_maintain_user
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="wechatMaintainUserId != null">wechat_maintain_user_id,</if>
+					<if test="fcUserId != null">fc_user_id,</if>
+					<if test="nickName != null">nick_name,</if>
+					<if test="openid != null">openid,</if>
+					<if test="unionid != null">unionid,</if>
+					<if test="createTime != null">create_time,</if>
+					<if test="name != null">name,</if>
+					<if test="mobile != null">mobile,</if>
+					<if test="birthday != null">birthday,</if>
+					<if test="isCouponOn != null">is_coupon_on,</if>
+					<if test="couponActiveTime != null">coupon_active_time,</if>
+					<if test="wechatAvatar != null">wechat_avatar,</if>
+					<if test="memo != null">memo,</if>
+					<if test="sex != null">sex</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="wechatMaintainUserId != null">#{wechatMaintainUserId},</if>
+					<if test="fcUserId != null">#{fcUserId},</if>
+					<if test="nickName != null">#{nickName},</if>
+					<if test="openid != null">#{openid},</if>
+					<if test="unionid != null">#{unionid},</if>
+					<if test="createTime != null">#{createTime},</if>
+					<if test="name != null">#{name},</if>
+					<if test="mobile != null">#{mobile},</if>
+					<if test="birthday != null">#{birthday},</if>
+					<if test="isCouponOn != null">#{isCouponOn},</if>
+					<if test="couponActiveTime != null">#{couponActiveTime},</if>
+					<if test="wechatAvatar != null">#{wechatAvatar},</if>
+					<if test="memo != null">#{memo},</if>
+					<if test="sex != null">#{sex}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainUser">
+		update wechat_maintain_user
+		<set>
+		    	<if test="fcUserId != null">fc_user_id = #{fcUserId},</if>
+		    	<if test="nickName != null">nick_name = #{nickName},</if>
+		    	<if test="openid != null">openid = #{openid},</if>
+		    	<if test="unionid != null">unionid = #{unionid},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		    	<if test="name != null">name = #{name},</if>
+		    	<if test="mobile != null">mobile = #{mobile},</if>
+		    	<if test="birthday != null">birthday = #{birthday},</if>
+		    	<if test="isCouponOn != null">is_coupon_on = #{isCouponOn},</if>
+		    	<if test="couponActiveTime != null">coupon_active_time = #{couponActiveTime},</if>
+		    	<if test="wechatAvatar != null">wechat_avatar = #{wechatAvatar},</if>
+		    	<if test="memo != null">memo = #{memo},</if>
+		    	<if test="sex != null">sex = #{sex},</if>
+		</set>
+		where 
+	        wechat_maintain_user_id = #{wechatMaintainUserId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from wechat_maintain_user where 
+	        wechat_maintain_user_id = #{wechatMaintainUserId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainUser" resultMap="WechatMaintainUserMap" >
+		select * from wechat_maintain_user 
+		<where>
+		       <if test="wechatMaintainUserId != null">
+					AND wechat_maintain_user_id = #{wechatMaintainUserId}
+				</if>
+		       <if test="fcUserId != null">
+					AND fc_user_id = #{fcUserId}
+				</if>
+		       <if test="nickName != null">
+					AND nick_name = #{nickName}
+				</if>
+		       <if test="openid != null">
+					AND openid = #{openid}
+				</if>
+		       <if test="unionid != null">
+					AND unionid = #{unionid}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		       <if test="name != null">
+					AND name = #{name}
+				</if>
+		       <if test="mobile != null">
+					AND mobile = #{mobile}
+				</if>
+		       <if test="birthday != null">
+					AND birthday = #{birthday}
+				</if>
+		       <if test="isCouponOn != null">
+					AND is_coupon_on = #{isCouponOn}
+				</if>
+		       <if test="couponActiveTime != null">
+					AND coupon_active_time = #{couponActiveTime}
+				</if>
+		       <if test="wechatAvatar != null">
+					AND wechat_avatar = #{wechatAvatar}
+				</if>
+		       <if test="memo != null">
+					AND memo = #{memo}
+				</if>
+		       <if test="sex != null">
+					AND sex = #{sex}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="WechatMaintainUserMap" >
+		select * from wechat_maintain_user  
+		<where>
+		       <if test="condition.wechatMaintainUserId != null">
+					AND wechat_maintain_user_id = #{condition.wechatMaintainUserId}
+				</if>
+		       <if test="condition.fcUserId != null">
+					AND fc_user_id = #{condition.fcUserId}
+				</if>
+		       <if test="condition.nickName != null">
+					AND nick_name = #{condition.nickName}
+				</if>
+		       <if test="condition.openid != null">
+					AND openid = #{condition.openid}
+				</if>
+		       <if test="condition.unionid != null">
+					AND unionid = #{condition.unionid}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		       <if test="condition.name != null">
+					AND name = #{condition.name}
+				</if>
+		       <if test="condition.mobile != null">
+					AND mobile = #{condition.mobile}
+				</if>
+		       <if test="condition.birthday != null">
+					AND birthday = #{condition.birthday}
+				</if>
+		       <if test="condition.isCouponOn != null">
+					AND is_coupon_on = #{condition.isCouponOn}
+				</if>
+		       <if test="condition.couponActiveTime != null">
+					AND coupon_active_time = #{condition.couponActiveTime}
+				</if>
+		       <if test="condition.wechatAvatar != null">
+					AND wechat_avatar = #{condition.wechatAvatar}
+				</if>
+		       <if test="condition.memo != null">
+					AND memo = #{condition.memo}
+				</if>
+		       <if test="condition.sex != null">
+					AND sex = #{condition.sex}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

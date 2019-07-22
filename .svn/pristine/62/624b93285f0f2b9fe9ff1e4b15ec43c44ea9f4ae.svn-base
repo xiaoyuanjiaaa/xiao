@@ -1,0 +1,112 @@
+package com.fc.member.wechatplatform.user.entity;
+
+import java.io.Serializable;
+
+/**
+ * <p>Table: WechatPlatformUser</p>
+ * <p>Description: </p>
+ * @author yangd
+ * @date 2018-12-28 17:14:42
+ */
+public class WechatPlatformUser implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer platformUserId; // 自增id
+	private Integer fcUserId; // 枫车用户ID
+	private String mobile; // 手机号码
+	private String openid; // 游客openid
+	private Integer createTime; // 创建时间
+	private Integer recentTime; // 最近使用时间
+	private Integer openNumber; // 打开次数
+	private String unionid; // 小程序unionid
+	private String wechatAccount; // 微信号
+	private String wechatAvatar; // 微信头像url
+
+	public void setPlatformUserId(Integer platformUserId) {
+		this.platformUserId = platformUserId;
+	}
+	
+	public Integer getPlatformUserId() {
+		return this.platformUserId;
+	}
+	public void setFcUserId(Integer fcUserId) {
+		this.fcUserId = fcUserId;
+	}
+	
+	public Integer getFcUserId() {
+		return this.fcUserId;
+	}
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+	
+	public String getMobile() {
+		return this.mobile;
+	}
+	public void setOpenid(String openid) {
+		this.openid = openid;
+	}
+	
+	public String getOpenid() {
+		return this.openid;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+	public void setRecentTime(Integer recentTime) {
+		this.recentTime = recentTime;
+	}
+	
+	public Integer getRecentTime() {
+		return this.recentTime;
+	}
+	public void setOpenNumber(Integer openNumber) {
+		this.openNumber = openNumber;
+	}
+	
+	public Integer getOpenNumber() {
+		return this.openNumber;
+	}
+	public void setUnionid(String unionid) {
+		this.unionid = unionid;
+	}
+	
+	public String getUnionid() {
+		return this.unionid;
+	}
+	public void setWechatAccount(String wechatAccount) {
+		this.wechatAccount = wechatAccount;
+	}
+	
+	public String getWechatAccount() {
+		return this.wechatAccount;
+	}
+	public void setWechatAvatar(String wechatAvatar) {
+		this.wechatAvatar = wechatAvatar;
+	}
+	
+	public String getWechatAvatar() {
+		return this.wechatAvatar;
+	}
+
+    @Override
+    public String toString () {
+    	return "WechatPlatformUser{" + 
+	    	"platformUserId=" + platformUserId + 
+	    	", fcUserId=" + fcUserId + 
+	    	", mobile=" + mobile + 
+	    	", openid=" + openid + 
+	    	", createTime=" + createTime + 
+	    	", recentTime=" + recentTime + 
+	    	", openNumber=" + openNumber + 
+	    	", unionid=" + unionid + 
+	    	", wechatAccount=" + wechatAccount + 
+	    	", wechatAvatar=" + wechatAvatar + 
+	    	"}";
+    }
+}

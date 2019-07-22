@@ -1,0 +1,140 @@
+package com.fc.protocol.demo.request.wechatmaintain.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * 微养车 用户储值卡充值记录 参数
+ * @author yangd
+ * @date 2019年1月7日
+ */
+public class WmRechargeListPageRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+	@ApiModelProperty(value = "枫车用户id", name = "fcUserId")
+	private Integer fcUserId; // 枫车用户id
+	@ApiModelProperty(value = "门店id", name = "storeId")
+	private Integer storeId; // 门店id
+	@ApiModelProperty(value = "门店储值卡套餐id", name = "wechatSstorePackageId")
+	private Integer wechatSstorePackageId; // 门店储值卡套餐id
+	@ApiModelProperty(value = "充值金额", name = "realAccount")
+	private Integer realAccount; // 充值金额
+	@ApiModelProperty(value = "赠送金额", name = "discount")
+	private Integer discount; // 赠送金额
+	@ApiModelProperty(value = "充值时间", name = "createTime")
+	private Integer createTime; // 充值时间
+	@ApiModelProperty(value = "状态(0=充值中，1=充值成功，2=充值失败)", name = "status")
+	private Integer status; // 0=充值中，1=充值成功，2=充值失败
+	@ApiModelProperty(value = "充值订单号", name = "orderNo")
+	private String orderNo; // 充值订单号
+	@ApiModelProperty(value = "当前页码", name = "page_no")
+	private Integer page_no = 1;
+	@ApiModelProperty(value = "当前页记录数", name = "page_size")
+	private Integer page_size = 10;
+
+	/**
+	 * 验证方法
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-09
+	 * @return
+	 */
+	public String paramValidate() {
+		if (StringUtils.isEmpty(storeId)) {
+			return "参数storeId不能为空";
+		}
+		return null;
+	}
+
+	public Integer getFcUserId() {
+		return fcUserId;
+	}
+
+	public void setFcUserId(Integer fcUserId) {
+		this.fcUserId = fcUserId;
+	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	public Integer getWechatSstorePackageId() {
+		return wechatSstorePackageId;
+	}
+
+	public void setWechatSstorePackageId(Integer wechatSstorePackageId) {
+		this.wechatSstorePackageId = wechatSstorePackageId;
+	}
+
+	public Integer getRealAccount() {
+		return realAccount;
+	}
+
+	public void setRealAccount(Integer realAccount) {
+		this.realAccount = realAccount;
+	}
+
+	public Integer getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Integer discount) {
+		this.discount = discount;
+	}
+
+	public Integer getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public String getOrderNo() {
+		return orderNo;
+	}
+
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
+	}
+
+	public Integer getPage_no() {
+		return page_no;
+	}
+
+	public void setPage_no(Integer page_no) {
+		this.page_no = page_no;
+	}
+
+	public Integer getPage_size() {
+		return page_size;
+	}
+
+	public void setPage_size(Integer page_size) {
+		this.page_size = page_size;
+	}
+
+	@Override
+	public String toString() {
+		return "WmRechargeListPageRequest [fcUserId=" + fcUserId + ", storeId=" + storeId + ", wechatSstorePackageId="
+				+ wechatSstorePackageId + ", realAccount=" + realAccount + ", discount=" + discount + ", createTime="
+				+ createTime + ", status=" + status + ", orderNo=" + orderNo + ", page_no=" + page_no + ", page_size="
+				+ page_size + ", getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode() + ", getTraceId()="
+				+ getTraceId() + "]";
+	}
+
+}

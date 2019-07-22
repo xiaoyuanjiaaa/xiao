@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.wechatmaintain.user.dao.IWechatMaintainConponConsumeinfoDao">
+	<resultMap id="WechatMaintainConponConsumeinfoMap" type="com.fc.member.wechatmaintain.user.entity.WechatMaintainConponConsumeinfo">
+        <id property="wechatMaintainConponConsumeinfoId" column="wechat_maintain_conpon_consumeinfo_id"/>
+        <id property="fcUserId" column="fc_user_id"/>
+        <id property="orderNo" column="order_no"/>
+        <id property="storeId" column="store_id"/>
+        <id property="wechatStorePackageId" column="wechat_store_package_id"/>
+        <id property="recordType" column="record_type"/>
+        <id property="costFee" column="cost_fee"/>
+        <id property="discount" column="discount"/>
+        <id property="balance" column="balance"/>
+        <id property="content" column="content"/>
+        <id property="consumptionKind" column="consumption_kind"/>
+        <id property="createTime" column="create_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="WechatMaintainConponConsumeinfoMap" >
+		select * from wechat_maintain_conpon_consumeinfo where 
+	        wechat_maintain_conpon_consumeinfo_id = #{wechatMaintainConponConsumeinfoId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainConponConsumeinfo" useGeneratedKeys="true" keyProperty="wechatMaintainConponConsumeinfoId">
+		insert into wechat_maintain_conpon_consumeinfo(wechat_maintain_conpon_consumeinfo_id , fc_user_id , order_no , store_id , wechat_store_package_id , record_type , cost_fee , discount , balance , content , consumption_kind , create_time  )
+    	values(#{wechatMaintainConponConsumeinfoId} ,#{fcUserId} ,#{orderNo} ,#{storeId} ,#{wechatStorePackageId} ,#{recordType} ,#{costFee} ,#{discount} ,#{balance} ,#{content} ,#{consumptionKind} ,#{createTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainConponConsumeinfo" useGeneratedKeys="true" keyProperty="wechatMaintainConponConsumeinfoId">
+		insert into wechat_maintain_conpon_consumeinfo
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="wechatMaintainConponConsumeinfoId != null">wechat_maintain_conpon_consumeinfo_id,</if>
+					<if test="fcUserId != null">fc_user_id,</if>
+					<if test="orderNo != null">order_no,</if>
+					<if test="storeId != null">store_id,</if>
+					<if test="wechatStorePackageId != null">wechat_store_package_id,</if>
+					<if test="recordType != null">record_type,</if>
+					<if test="costFee != null">cost_fee,</if>
+					<if test="discount != null">discount,</if>
+					<if test="balance != null">balance,</if>
+					<if test="content != null">content,</if>
+					<if test="consumptionKind != null">consumption_kind,</if>
+					<if test="createTime != null">create_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="wechatMaintainConponConsumeinfoId != null">#{wechatMaintainConponConsumeinfoId},</if>
+					<if test="fcUserId != null">#{fcUserId},</if>
+					<if test="orderNo != null">#{orderNo},</if>
+					<if test="storeId != null">#{storeId},</if>
+					<if test="wechatStorePackageId != null">#{wechatStorePackageId},</if>
+					<if test="recordType != null">#{recordType},</if>
+					<if test="costFee != null">#{costFee},</if>
+					<if test="discount != null">#{discount},</if>
+					<if test="balance != null">#{balance},</if>
+					<if test="content != null">#{content},</if>
+					<if test="consumptionKind != null">#{consumptionKind},</if>
+					<if test="createTime != null">#{createTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainConponConsumeinfo">
+		update wechat_maintain_conpon_consumeinfo
+		<set>
+		    	<if test="fcUserId != null">fc_user_id = #{fcUserId},</if>
+		    	<if test="orderNo != null">order_no = #{orderNo},</if>
+		    	<if test="storeId != null">store_id = #{storeId},</if>
+		    	<if test="wechatStorePackageId != null">wechat_store_package_id = #{wechatStorePackageId},</if>
+		    	<if test="recordType != null">record_type = #{recordType},</if>
+		    	<if test="costFee != null">cost_fee = #{costFee},</if>
+		    	<if test="discount != null">discount = #{discount},</if>
+		    	<if test="balance != null">balance = #{balance},</if>
+		    	<if test="content != null">content = #{content},</if>
+		    	<if test="consumptionKind != null">consumption_kind = #{consumptionKind},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		</set>
+		where 
+	        wechat_maintain_conpon_consumeinfo_id = #{wechatMaintainConponConsumeinfoId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from wechat_maintain_conpon_consumeinfo where 
+	        wechat_maintain_conpon_consumeinfo_id = #{wechatMaintainConponConsumeinfoId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainConponConsumeinfo" resultMap="WechatMaintainConponConsumeinfoMap" >
+		select * from wechat_maintain_conpon_consumeinfo 
+		<where>
+		       <if test="wechatMaintainConponConsumeinfoId != null">
+					AND wechat_maintain_conpon_consumeinfo_id = #{wechatMaintainConponConsumeinfoId}
+				</if>
+		       <if test="fcUserId != null">
+					AND fc_user_id = #{fcUserId}
+				</if>
+		       <if test="orderNo != null">
+					AND order_no = #{orderNo}
+				</if>
+		       <if test="storeId != null">
+					AND store_id = #{storeId}
+				</if>
+		       <if test="wechatStorePackageId != null">
+					AND wechat_store_package_id = #{wechatStorePackageId}
+				</if>
+		       <if test="recordType != null">
+					AND record_type = #{recordType}
+				</if>
+		       <if test="costFee != null">
+					AND cost_fee = #{costFee}
+				</if>
+		       <if test="discount != null">
+					AND discount = #{discount}
+				</if>
+		       <if test="balance != null">
+					AND balance = #{balance}
+				</if>
+		       <if test="content != null">
+					AND content = #{content}
+				</if>
+		       <if test="consumptionKind != null">
+					AND consumption_kind = #{consumptionKind}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="WechatMaintainConponConsumeinfoMap" >
+		select * from wechat_maintain_conpon_consumeinfo  
+		<where>
+		       <if test="condition.wechatMaintainConponConsumeinfoId != null">
+					AND wechat_maintain_conpon_consumeinfo_id = #{condition.wechatMaintainConponConsumeinfoId}
+				</if>
+		       <if test="condition.fcUserId != null">
+					AND fc_user_id = #{condition.fcUserId}
+				</if>
+		       <if test="condition.orderNo != null">
+					AND order_no = #{condition.orderNo}
+				</if>
+		       <if test="condition.storeId != null">
+					AND store_id = #{condition.storeId}
+				</if>
+		       <if test="condition.wechatStorePackageId != null">
+					AND wechat_store_package_id = #{condition.wechatStorePackageId}
+				</if>
+		       <if test="condition.recordType != null">
+					AND record_type = #{condition.recordType}
+				</if>
+		       <if test="condition.costFee != null">
+					AND cost_fee = #{condition.costFee}
+				</if>
+		       <if test="condition.discount != null">
+					AND discount = #{condition.discount}
+				</if>
+		       <if test="condition.balance != null">
+					AND balance = #{condition.balance}
+				</if>
+		       <if test="condition.content != null">
+					AND content = #{condition.content}
+				</if>
+		       <if test="condition.consumptionKind != null">
+					AND consumption_kind = #{condition.consumptionKind}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

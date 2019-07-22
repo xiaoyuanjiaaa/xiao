@@ -1,0 +1,134 @@
+package com.fc.member.store.user.service.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.plugin.mybatis.PageQuery;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.store.user.dao.IStoreAddressDao;
+import com.fc.member.store.user.entity.StoreAddress;
+import com.fc.member.store.user.service.IStoreAddressService;
+import com.fc.protocol.demo.request.store.user.StoreAddressCreateRequest;
+import com.fc.protocol.demo.request.store.user.StoreAddressDeleteRequest;
+import com.fc.protocol.demo.request.store.user.StoreAddressListRequest;
+import com.fc.protocol.demo.request.store.user.StoreAddressUpdateRequest;
+
+/**
+ * <p>Title: StoreAddress</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:04
+ */
+@Service("storeAddressService")
+public class StoreAddressServiceImp extends ServiceImpl<StoreAddress> implements IStoreAddressService {
+
+	private static Logger log = LoggerFactory.getLogger(StoreAddressServiceImp.class);
+
+	@Autowired
+	private IStoreAddressDao storeAddressDao;
+
+	@Override
+	protected IMapper<StoreAddress> getDao() {
+		return storeAddressDao;
+	}
+
+	@Override
+	public List<StoreAddress> getStoreAddressList(Page page, StoreAddressListRequest addressRequest) {
+		log.info("分页查询所有的收货地址-----------》request:{}", addressRequest);
+		//set对象属性
+		StoreAddress address = new StoreAddress();
+		address.setStoreId(addressRequest.getStoreId());
+		log.info("分页查询所有的收货地址-----------》response:{}", address.toString());
+		//设置分页，查询条件
+		PageQuery pageQuery = new PageQuery();
+		pageQuery.setPage(page);
+		pageQuery.setCondition(address);
+		return storeAddressDao.getRowsPage(pageQuery);
+	}
+
+	@Override
+	public Map<String, Object> insertStoreAddress(StoreAddressCreateRequest createRequest) {
+		log.info("新增收货地址------》insertStoreAddress：request{}", createRequest);
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		//将不为空的属性set到对象中
+		StoreAddress address = new StoreAddress();
+		address.setStoreId(createRequest.getStoreId());
+		address.setConsignee(createRequest.getConsignee());
+		address.setPhoneMob(createRequest.getPhoneMob());
+		address.setRegionId(createRequest.getRegionId());
+		address.setRegionName(createRequest.getRegionName());
+		address.setAddress(createRequest.getAddress());
+		address.setZipcode(createRequest.getZipcode());
+		int defaultAddress = createRequest.getDefaultAddress();
+		address.setDefaultAddress(defaultAddress);
+		if (defaultAddress == 1) {
+			StoreAddress storeAddress = new StoreAddress();
+			storeAddress.setStoreId(address.getStoreId());
+			storeAddress.setDefaultAddress(address.getDefaultAddress());
+			List<StoreAddress> list = storeAddressDao.getRows(storeAddress);
+			if (list.size() > 0) {
+				StoreAddress sAddress = list.get(0);
+				storeAddressDao.updateSave(sAddress);
+			}
+		}
+		address.setAddressType(createRequest.getAddressType());
+		address.setIsDeleted(createRequest.getIsDeleted());
+		address.setCreateTime(DateTimeUtils.getDateTimeInteger());
+		address.setUpdateTime(DateTimeUtils.getDateTimeInteger());
+		log.info("新增收货地址------》insertStoreAddress：response{}", address);
+		int result = storeAddressDao.insertSelective(address);
+		if (result <= 0) {
+			resultMap.put("error", "新增收货地址失败！");
+			return resultMap;
+		}
+		return resultMap;
+	}
+
+	@Override
+	public int deleteAddress(StoreAddressDeleteRequest deleteRequest) throws Exception {
+		StoreAddress address = new StoreAddress();
+		address.setAddressId(deleteRequest.getAddressId());
+		StoreAddress storeAddress = storeAddressDao.getByPK(deleteRequest.getAddressId());
+		if (storeAddress.getDefaultAddress() == 1) {
+			List<StoreAddress> list = storeAddressDao.getAddress(storeAddress.getStoreId());
+			StoreAddress sAddress = list.get(0);
+			sAddress.setDefaultAddress(1);
+			storeAddressDao.update(sAddress);
+		}
+		return storeAddressDao.deleteByPK(address);
+	}
+
+	@Override
+	public void updateStoreAddress(StoreAddressUpdateRequest updateRequest) throws Exception {
+		log.info("updateStoreAddress----------->request:{}", updateRequest);
+		//判断修改的地址是否为默认地址
+		StoreAddress address = new StoreAddress();
+		address.setAddressId(updateRequest.getAddressId());
+		address.setStoreId(updateRequest.getStoreId());
+		address.setConsignee(updateRequest.getConsignee());
+		address.setPhoneMob(updateRequest.getPhoneMob());
+		address.setRegionId(updateRequest.getRegionId());
+		address.setRegionName(updateRequest.getRegionName());
+		address.setAddress(updateRequest.getAddress());
+		address.setUpdateTime(DateTimeUtils.getDateTimeInteger());
+		int result = updateRequest.getDefaultAddress();
+		if (result == 0) {
+			address.setDefaultAddress(result);
+		} else {
+			//将表中其他地址id的default_address的值全部设为0
+			address.setDefaultAddress(result);
+			storeAddressDao.updateSave(address);
+		}
+
+		storeAddressDao.update(address);
+	}
+}

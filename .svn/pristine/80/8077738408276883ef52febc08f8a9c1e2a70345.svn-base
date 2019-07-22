@@ -1,0 +1,60 @@
+package com.fc.protocol.demo.request.wechatmaintain.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * 微养车 根据 用户ID、门店ID 查询储值卡信息 参数
+ * @author yangd
+ * @date 2019年1月5日
+ */
+public class WmuCouponDetailsStoreUserRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+
+	@ApiModelProperty(value = "枫车用户id", name = "fcUserId")
+	private Integer fcUserId; // 枫车用户id
+	@ApiModelProperty(value = "门店id", name = "storeId")
+	private Integer storeId; // 门店id
+
+	/**
+	 * 验证方法
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-05
+	 * @return
+	 */
+	public String paramValidate() {
+		if (StringUtils.isEmpty(fcUserId)) {
+			return "参数fcUserId不能为空";
+		}
+		if (StringUtils.isEmpty(storeId)) {
+			return "参数storeId不能为空";
+		}
+		return null;
+	}
+
+	public Integer getFcUserId() {
+		return fcUserId;
+	}
+
+	public void setFcUserId(Integer fcUserId) {
+		this.fcUserId = fcUserId;
+	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	@Override
+	public String toString() {
+		return "WmuCouponDetailsStoreUserRequest [fcUserId=" + fcUserId + ", storeId=" + storeId + ", getVersion()="
+				+ getVersion() + ", getReqCode()=" + getReqCode() + ", getTraceId()=" + getTraceId() + "]";
+	}
+}

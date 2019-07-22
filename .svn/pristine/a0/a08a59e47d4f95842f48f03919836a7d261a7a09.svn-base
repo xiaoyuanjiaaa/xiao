@@ -1,0 +1,14 @@
+package com.fc.member.wechatplatform.user.service;
+
+import com.fc.common.service.IService;
+import com.fc.member.wechatplatform.user.entity.WechatPlatformServiceCount;
+/**
+ * <p>Title: WechatPlatformServiceCount</p>
+ * <p>Description:  Service 接口</p>
+ * @author yangd
+ * @date 2018-12-28 17:14:41
+ */
+public interface IWechatPlatformServiceCountService extends IService<WechatPlatformServiceCount>{
+	
+	
+}

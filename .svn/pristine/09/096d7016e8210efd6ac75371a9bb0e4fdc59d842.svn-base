@@ -1,0 +1,185 @@
+package com.fc.member.wechatmaintain.user.service.impl;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.plugin.mybatis.PageQuery;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.wechatmaintain.user.dao.IWechatMaintainUserDao;
+import com.fc.member.wechatmaintain.user.entity.WechatMaintainUser;
+import com.fc.member.wechatmaintain.user.service.IWechatMaintainUserService;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmUserCreateRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmUserListRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmUserUpdateRequest;
+
+/**
+ * <p>Title: WechatMaintainUser</p>
+ * <p>Description: 微养车用户信息 Service 层</p>
+ * @author yangd
+ * @date 2018-12-28 17:13:47
+ */
+@Service("wechatMaintainUserService")
+public class WechatMaintainUserServiceImp extends ServiceImpl<WechatMaintainUser>
+		implements IWechatMaintainUserService {
+
+	private static Logger log = LoggerFactory.getLogger(WechatMaintainUserServiceImp.class);
+
+	@Autowired
+	private IWechatMaintainUserDao wechatMaintainUserDao;
+
+	@Override
+	protected IMapper<WechatMaintainUser> getDao() {
+		return wechatMaintainUserDao;
+	}
+
+	/**
+	 * 查询所有用户-分页
+	 */
+	@Override
+	public List<WechatMaintainUser> getWechatMaintainUserListPage(Page page, WmUserListRequest request) {
+		log.info("getWechatMaintainUserListPage---------->:" + request);
+		// set 对象属性值
+		WechatMaintainUser entity = isNotEmptySetObjectList(request);
+		log.info("WechatMaintainUser---------->{}", entity.toString());
+		// 设置分页，查询条件
+		PageQuery pageQuery = new PageQuery();
+		pageQuery.setPage(page);
+		pageQuery.setCondition(entity);
+		return wechatMaintainUserDao.getRowsPage(pageQuery);
+	}
+
+	/**
+	 * 插入数据
+	 */
+	@Override
+	public int insertSelective(WmUserCreateRequest request) {
+		log.info("insertSelective---------->:" + request);
+		// 将不为空的属性set到对象中
+		WechatMaintainUser entity = isNotEmptySetObjectInsert(request);
+		log.info("WechatMaintainUser---------->:" + entity);
+		return wechatMaintainUserDao.insertSelective(entity);
+	}
+
+	/**
+	 * 根据openid查询用户信息
+	 */
+	@Override
+	public WechatMaintainUser getByOpenid(String openid) {
+		WechatMaintainUser entity = new WechatMaintainUser();
+		entity.setOpenid(openid);
+		List<WechatMaintainUser> list = wechatMaintainUserDao.getRows(entity);
+		if (list.isEmpty()) {
+			return null;
+		}
+		return list.get(0);
+	}
+
+	/**
+	 * 根据unionid查询用户信息
+	 */
+	@Override
+	public WechatMaintainUser getByUnionId(String unionid) {
+		WechatMaintainUser entity = new WechatMaintainUser();
+		entity.setUnionid(unionid);
+		List<WechatMaintainUser> list = wechatMaintainUserDao.getRows(entity);
+		if (list.isEmpty()) {
+			return null;
+		}
+		return list.get(0);
+	}
+
+	/**
+	 * 根据手机号查询用户信息
+	 */
+	@Override
+	public WechatMaintainUser getByMobile(String mobile) {
+		WechatMaintainUser entity = new WechatMaintainUser();
+		entity.setMobile(mobile);
+		List<WechatMaintainUser> list = wechatMaintainUserDao.getRows(entity);
+		if (list.isEmpty()) {
+			return null;
+		}
+		return list.get(0);
+	}
+
+	/**
+	 * 更新数据
+	 */
+	@Override
+	public boolean updateWechatMaintainUser(WmUserUpdateRequest request) throws Exception {
+		log.info("updateWechatMaintainUser---------->:" + request);
+		// 将不为空的属性set到对象中
+		WechatMaintainUser entity = isNotEmptySetObjectInsert(request);
+		log.info("WechatMaintainUser---------->:" + entity);
+		return wechatMaintainUserDao.update(entity);
+	}
+
+	/**
+	 * 将不为空的属性set到对象中
+	 * @param entity 实体对象
+	 * @param request 参数对象
+	 * @return
+	 */
+	public static WechatMaintainUser isNotEmptySetObjectList(WmUserListRequest request) {
+		WechatMaintainUser entity = new WechatMaintainUser();
+		entity.setFcUserId(request.getFcUserId());
+		entity.setNickName(request.getNickName());
+		entity.setCreateTime(request.getCreateTime());
+		entity.setName(request.getName());
+		entity.setMobile(request.getMobile());
+		return entity;
+	}
+
+	/**
+	 * 将不为空的属性set到对象中
+	 * @param entity 实体对象
+	 * @param request 参数对象
+	 * @return
+	 */
+	public static WechatMaintainUser isNotEmptySetObjectInsert(WmUserCreateRequest request) {
+		WechatMaintainUser entity = new WechatMaintainUser();
+		entity.setFcUserId(request.getFcUserId());
+		entity.setNickName(request.getNickName());
+		entity.setOpenid(request.getOpenid());
+		entity.setUnionid(request.getUnionid());
+		entity.setCreateTime(DateTimeUtils.getDateTimeInteger());
+		entity.setName(request.getName());
+		entity.setMobile(request.getMobile());
+		entity.setBirthday(request.getBirthday());
+		entity.setIsCouponOn(request.getIsCouponOn());
+		entity.setCouponActiveTime(request.getCouponActiveTime());
+		entity.setWechatAvatar(request.getWechatAvatar());
+		entity.setMemo(request.getMemo());
+		entity.setSex(request.getSex());
+		return entity;
+	}
+
+	/**
+	 * 将不为空的属性set到对象中
+	 * @param entity 实体对象
+	 * @param request 参数对象
+	 * @return
+	 */
+	public static WechatMaintainUser isNotEmptySetObjectInsert(WmUserUpdateRequest request) {
+		WechatMaintainUser entity = new WechatMaintainUser();
+		entity.setWechatMaintainUserId(request.getWechatMaintainUserId());
+		entity.setFcUserId(request.getFcUserId());
+		entity.setNickName(request.getNickName());
+		entity.setName(request.getName());
+		entity.setMobile(request.getMobile());
+		entity.setBirthday(request.getBirthday());
+		entity.setIsCouponOn(request.getIsCouponOn());
+		entity.setCouponActiveTime(request.getCouponActiveTime());
+		entity.setWechatAvatar(request.getWechatAvatar());
+		entity.setMemo(request.getMemo());
+		entity.setSex(request.getSex());
+		return entity;
+	}
+}

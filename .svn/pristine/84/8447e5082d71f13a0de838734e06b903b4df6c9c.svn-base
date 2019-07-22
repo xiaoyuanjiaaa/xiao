@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.shop.user.dao.IShopDepositCashLogDao">
+	<resultMap id="ShopDepositCashLogMap" type="com.fc.member.shop.user.entity.ShopDepositCashLog">
+        <id property="shopDepositCashLogId" column="shop_deposit_cash_log_id"/>
+        <id property="type" column="type"/>
+        <id property="orderId" column="order_id"/>
+        <id property="orderSn" column="order_sn"/>
+        <id property="orderType" column="order_type"/>
+        <id property="orderAmount" column="order_amount"/>
+        <id property="depositRate" column="deposit_rate"/>
+        <id property="depositAmount" column="deposit_amount"/>
+        <id property="depositBalance" column="deposit_balance"/>
+        <id property="operatorId" column="operator_id"/>
+        <id property="operator" column="operator"/>
+        <id property="isSystem" column="is_system"/>
+        <id property="shopId" column="shop_id"/>
+        <id property="shopName" column="shop_name"/>
+        <id property="depositFileIds" column="deposit_file_ids"/>
+        <id property="remark" column="remark"/>
+        <id property="createTime" column="create_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="ShopDepositCashLogMap" >
+		select * from shop_deposit_cash_log where 
+	        shop_deposit_cash_log_id = #{shopDepositCashLogId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.shop.user.entity.ShopDepositCashLog" useGeneratedKeys="true" keyProperty="shopDepositCashLogId">
+		insert into shop_deposit_cash_log(shop_deposit_cash_log_id , type , order_id , order_sn , order_type , order_amount , deposit_rate , deposit_amount , deposit_balance , operator_id , operator , is_system , shop_id , shop_name , deposit_file_ids , remark , create_time  )
+    	values(#{shopDepositCashLogId} ,#{type} ,#{orderId} ,#{orderSn} ,#{orderType} ,#{orderAmount} ,#{depositRate} ,#{depositAmount} ,#{depositBalance} ,#{operatorId} ,#{operator} ,#{isSystem} ,#{shopId} ,#{shopName} ,#{depositFileIds} ,#{remark} ,#{createTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.shop.user.entity.ShopDepositCashLog" useGeneratedKeys="true" keyProperty="shopDepositCashLogId">
+		insert into shop_deposit_cash_log
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="shopDepositCashLogId != null">shop_deposit_cash_log_id,</if>
+					<if test="type != null">type,</if>
+					<if test="orderId != null">order_id,</if>
+					<if test="orderSn != null">order_sn,</if>
+					<if test="orderType != null">order_type,</if>
+					<if test="orderAmount != null">order_amount,</if>
+					<if test="depositRate != null">deposit_rate,</if>
+					<if test="depositAmount != null">deposit_amount,</if>
+					<if test="depositBalance != null">deposit_balance,</if>
+					<if test="operatorId != null">operator_id,</if>
+					<if test="operator != null">operator,</if>
+					<if test="isSystem != null">is_system,</if>
+					<if test="shopId != null">shop_id,</if>
+					<if test="shopName != null">shop_name,</if>
+					<if test="depositFileIds != null">deposit_file_ids,</if>
+					<if test="remark != null">remark,</if>
+					<if test="createTime != null">create_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="shopDepositCashLogId != null">#{shopDepositCashLogId},</if>
+					<if test="type != null">#{type},</if>
+					<if test="orderId != null">#{orderId},</if>
+					<if test="orderSn != null">#{orderSn},</if>
+					<if test="orderType != null">#{orderType},</if>
+					<if test="orderAmount != null">#{orderAmount},</if>
+					<if test="depositRate != null">#{depositRate},</if>
+					<if test="depositAmount != null">#{depositAmount},</if>
+					<if test="depositBalance != null">#{depositBalance},</if>
+					<if test="operatorId != null">#{operatorId},</if>
+					<if test="operator != null">#{operator},</if>
+					<if test="isSystem != null">#{isSystem},</if>
+					<if test="shopId != null">#{shopId},</if>
+					<if test="shopName != null">#{shopName},</if>
+					<if test="depositFileIds != null">#{depositFileIds},</if>
+					<if test="remark != null">#{remark},</if>
+					<if test="createTime != null">#{createTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.shop.user.entity.ShopDepositCashLog">
+		update shop_deposit_cash_log
+		<set>
+		    	<if test="type != null">type = #{type},</if>
+		    	<if test="orderId != null">order_id = #{orderId},</if>
+		    	<if test="orderSn != null">order_sn = #{orderSn},</if>
+		    	<if test="orderType != null">order_type = #{orderType},</if>
+		    	<if test="orderAmount != null">order_amount = #{orderAmount},</if>
+		    	<if test="depositRate != null">deposit_rate = #{depositRate},</if>
+		    	<if test="depositAmount != null">deposit_amount = #{depositAmount},</if>
+		    	<if test="depositBalance != null">deposit_balance = #{depositBalance},</if>
+		    	<if test="operatorId != null">operator_id = #{operatorId},</if>
+		    	<if test="operator != null">operator = #{operator},</if>
+		    	<if test="isSystem != null">is_system = #{isSystem},</if>
+		    	<if test="shopId != null">shop_id = #{shopId},</if>
+		    	<if test="shopName != null">shop_name = #{shopName},</if>
+		    	<if test="depositFileIds != null">deposit_file_ids = #{depositFileIds},</if>
+		    	<if test="remark != null">remark = #{remark},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		</set>
+		where 
+	        shop_deposit_cash_log_id = #{shopDepositCashLogId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from shop_deposit_cash_log where 
+	        shop_deposit_cash_log_id = #{shopDepositCashLogId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.shop.user.entity.ShopDepositCashLog" resultMap="ShopDepositCashLogMap" >
+		select * from shop_deposit_cash_log 
+		<where>
+		       <if test="shopDepositCashLogId != null">
+					AND shop_deposit_cash_log_id = #{shopDepositCashLogId}
+				</if>
+		       <if test="type != null">
+					AND type = #{type}
+				</if>
+		       <if test="orderId != null">
+					AND order_id = #{orderId}
+				</if>
+		       <if test="orderSn != null">
+					AND order_sn = #{orderSn}
+				</if>
+		       <if test="orderType != null">
+					AND order_type = #{orderType}
+				</if>
+		       <if test="orderAmount != null">
+					AND order_amount = #{orderAmount}
+				</if>
+		       <if test="depositRate != null">
+					AND deposit_rate = #{depositRate}
+				</if>
+		       <if test="depositAmount != null">
+					AND deposit_amount = #{depositAmount}
+				</if>
+		       <if test="depositBalance != null">
+					AND deposit_balance = #{depositBalance}
+				</if>
+		       <if test="operatorId != null">
+					AND operator_id = #{operatorId}
+				</if>
+		       <if test="operator != null">
+					AND operator = #{operator}
+				</if>
+		       <if test="isSystem != null">
+					AND is_system = #{isSystem}
+				</if>
+		       <if test="shopId != null">
+					AND shop_id = #{shopId}
+				</if>
+		       <if test="shopName != null">
+					AND shop_name = #{shopName}
+				</if>
+		       <if test="depositFileIds != null">
+					AND deposit_file_ids = #{depositFileIds}
+				</if>
+		       <if test="remark != null">
+					AND remark = #{remark}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="ShopDepositCashLogMap" >
+		select * from shop_deposit_cash_log  
+		<where>
+		       <if test="condition.shopDepositCashLogId != null">
+					AND shop_deposit_cash_log_id = #{condition.shopDepositCashLogId}
+				</if>
+		       <if test="condition.type != null">
+					AND type = #{condition.type}
+				</if>
+		       <if test="condition.orderId != null">
+					AND order_id = #{condition.orderId}
+				</if>
+		       <if test="condition.orderSn != null">
+					AND order_sn = #{condition.orderSn}
+				</if>
+		       <if test="condition.orderType != null">
+					AND order_type = #{condition.orderType}
+				</if>
+		       <if test="condition.orderAmount != null">
+					AND order_amount = #{condition.orderAmount}
+				</if>
+		       <if test="condition.depositRate != null">
+					AND deposit_rate = #{condition.depositRate}
+				</if>
+		       <if test="condition.depositAmount != null">
+					AND deposit_amount = #{condition.depositAmount}
+				</if>
+		       <if test="condition.depositBalance != null">
+					AND deposit_balance = #{condition.depositBalance}
+				</if>
+		       <if test="condition.operatorId != null">
+					AND operator_id = #{condition.operatorId}
+				</if>
+		       <if test="condition.operator != null">
+					AND operator = #{condition.operator}
+				</if>
+		       <if test="condition.isSystem != null">
+					AND is_system = #{condition.isSystem}
+				</if>
+		       <if test="condition.shopId != null">
+					AND shop_id = #{condition.shopId}
+				</if>
+		       <if test="condition.shopName != null">
+					AND shop_name = #{condition.shopName}
+				</if>
+		       <if test="condition.depositFileIds != null">
+					AND deposit_file_ids = #{condition.depositFileIds}
+				</if>
+		       <if test="condition.remark != null">
+					AND remark = #{condition.remark}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

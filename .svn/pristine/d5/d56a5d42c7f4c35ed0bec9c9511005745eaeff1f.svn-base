@@ -1,0 +1,23 @@
+package com.fc.protocol.server.demo.mapper;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.fc.protocol.server.demo.entity.WechatRecharge;
+import com.fc.protocol.server.demo.persistance.mybatis.IMapper;
+import com.fc.protocol.server.demo.persistance.mybatis.PageQuery;
+
+/**
+ * 储值卡充值 DAO
+ * @author yangd
+ * @date 2018年10月19日
+ */
+@Mapper
+public interface WechatRechargeMapper extends IMapper<WechatRecharge> {
+
+	/**后台》小程序》储值卡》充值记录总表》列表**/
+	public List<Map<String, Object>> getRechargeListPage(PageQuery pageQuery);
+
+}

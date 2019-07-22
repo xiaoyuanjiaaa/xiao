@@ -1,0 +1,65 @@
+package com.fc.protocol.demo.request.store.user;
+
+import org.apache.commons.lang.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+/**
+ * 查询用户request
+ * @author	xiaozw
+ * @data	2019-01-08	
+ */
+@SuppressWarnings("serial")
+public class SbiCreateTwoRequest extends ProtocolRequest {
+
+	/**用户id*/
+	private Integer storeId;
+	/**营业执照id*/
+	private String businessLicenseId;
+	/**门店正面照片*/
+	private String positivePhotoId;
+
+	public String paramValidate() {
+		if (storeId == null) {
+			return "参数：storeId不能为空";
+		}
+		if (StringUtils.isBlank(businessLicenseId)) {
+			return "参数：businessLicenseId不能为空";
+		}
+		if (StringUtils.isBlank(positivePhotoId)) {
+			return "参数：positivePhotoId不能为空";
+		}
+		return null;
+	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	public String getBusinessLicenseId() {
+		return businessLicenseId;
+	}
+
+	public void setBusinessLicenseId(String businessLicenseId) {
+		this.businessLicenseId = businessLicenseId;
+	}
+
+	public String getPositivePhotoId() {
+		return positivePhotoId;
+	}
+
+	public void setPositivePhotoId(String positivePhotoId) {
+		this.positivePhotoId = positivePhotoId;
+	}
+
+	@Override
+	public String toString() {
+		return "CreateBasicInfoTwoRequest [storeId=" + storeId + "businessLicenseId=" + businessLicenseId + ", "
+				+ "positivePhotoId=" + positivePhotoId + "getVersion()=" + getVersion() + ", getReqCode()="
+				+ getReqCode() + ", getTraceId()=" + getTraceId() + "]";
+	}
+}

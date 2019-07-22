@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.wechatmaintain.user.dao.IWechatMaintainUserCarDao">
+	<resultMap id="WechatMaintainUserCarMap" type="com.fc.member.wechatmaintain.user.entity.WechatMaintainUserCar">
+        <id property="wechatMaintainUserCarId" column="wechat_maintain_user_car_id"/>
+        <id property="wechatMaintainUserId" column="wechat_maintain_user_id"/>
+        <id property="fcUserId" column="fc_user_id"/>
+        <id property="carNo" column="car_no"/>
+        <id property="vehicleId" column="vehicle_id"/>
+        <id property="modelId" column="model_id"/>
+        <id property="driveMileage" column="drive_mileage"/>
+        <id property="modelName" column="model_name"/>
+        <id property="frameNumber" column="frame_number"/>
+        <id property="engineNumber" column="engine_number"/>
+        <id property="status" column="status"/>
+        <id property="isDefault" column="is_default"/>
+        <id property="createTime" column="create_time"/>
+        <id property="updateTime" column="update_time"/>
+        <id property="driveMileageTime" column="drive_mileage_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="WechatMaintainUserCarMap" >
+		select * from wechat_maintain_user_car where 
+	        wechat_maintain_user_car_id = #{wechatMaintainUserCarId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainUserCar" useGeneratedKeys="true" keyProperty="wechatMaintainUserCarId">
+		insert into wechat_maintain_user_car(wechat_maintain_user_car_id , wechat_maintain_user_id , fc_user_id , car_no , vehicle_id , model_id , drive_mileage , model_name , frame_number , engine_number , status , is_default , create_time , update_time , drive_mileage_time  )
+    	values(#{wechatMaintainUserCarId} ,#{wechatMaintainUserId} ,#{fcUserId} ,#{carNo} ,#{vehicleId} ,#{modelId} ,#{driveMileage} ,#{modelName} ,#{frameNumber} ,#{engineNumber} ,#{status} ,#{isDefault} ,#{createTime} ,#{updateTime} ,#{driveMileageTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainUserCar" useGeneratedKeys="true" keyProperty="wechatMaintainUserCarId">
+		insert into wechat_maintain_user_car
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="wechatMaintainUserCarId != null">wechat_maintain_user_car_id,</if>
+					<if test="wechatMaintainUserId != null">wechat_maintain_user_id,</if>
+					<if test="fcUserId != null">fc_user_id,</if>
+					<if test="carNo != null">car_no,</if>
+					<if test="vehicleId != null">vehicle_id,</if>
+					<if test="modelId != null">model_id,</if>
+					<if test="driveMileage != null">drive_mileage,</if>
+					<if test="modelName != null">model_name,</if>
+					<if test="frameNumber != null">frame_number,</if>
+					<if test="engineNumber != null">engine_number,</if>
+					<if test="status != null">status,</if>
+					<if test="isDefault != null">is_default,</if>
+					<if test="createTime != null">create_time,</if>
+					<if test="updateTime != null">update_time,</if>
+					<if test="driveMileageTime != null">drive_mileage_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="wechatMaintainUserCarId != null">#{wechatMaintainUserCarId},</if>
+					<if test="wechatMaintainUserId != null">#{wechatMaintainUserId},</if>
+					<if test="fcUserId != null">#{fcUserId},</if>
+					<if test="carNo != null">#{carNo},</if>
+					<if test="vehicleId != null">#{vehicleId},</if>
+					<if test="modelId != null">#{modelId},</if>
+					<if test="driveMileage != null">#{driveMileage},</if>
+					<if test="modelName != null">#{modelName},</if>
+					<if test="frameNumber != null">#{frameNumber},</if>
+					<if test="engineNumber != null">#{engineNumber},</if>
+					<if test="status != null">#{status},</if>
+					<if test="isDefault != null">#{isDefault},</if>
+					<if test="createTime != null">#{createTime},</if>
+					<if test="updateTime != null">#{updateTime},</if>
+					<if test="driveMileageTime != null">#{driveMileageTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainUserCar">
+		update wechat_maintain_user_car
+		<set>
+		    	<if test="wechatMaintainUserId != null">wechat_maintain_user_id = #{wechatMaintainUserId},</if>
+		    	<if test="fcUserId != null">fc_user_id = #{fcUserId},</if>
+		    	<if test="carNo != null">car_no = #{carNo},</if>
+		    	<if test="vehicleId != null">vehicle_id = #{vehicleId},</if>
+		    	<if test="modelId != null">model_id = #{modelId},</if>
+		    	<if test="driveMileage != null">drive_mileage = #{driveMileage},</if>
+		    	<if test="modelName != null">model_name = #{modelName},</if>
+		    	<if test="frameNumber != null">frame_number = #{frameNumber},</if>
+		    	<if test="engineNumber != null">engine_number = #{engineNumber},</if>
+		    	<if test="status != null">status = #{status},</if>
+		    	<if test="isDefault != null">is_default = #{isDefault},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		    	<if test="driveMileageTime != null">drive_mileage_time = #{driveMileageTime},</if>
+		</set>
+		where 
+	        wechat_maintain_user_car_id = #{wechatMaintainUserCarId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from wechat_maintain_user_car where 
+	        wechat_maintain_user_car_id = #{wechatMaintainUserCarId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainUserCar" resultMap="WechatMaintainUserCarMap" >
+		select * from wechat_maintain_user_car 
+		<where>
+		       <if test="wechatMaintainUserCarId != null">
+					AND wechat_maintain_user_car_id = #{wechatMaintainUserCarId}
+				</if>
+		       <if test="wechatMaintainUserId != null">
+					AND wechat_maintain_user_id = #{wechatMaintainUserId}
+				</if>
+		       <if test="fcUserId != null">
+					AND fc_user_id = #{fcUserId}
+				</if>
+		       <if test="carNo != null">
+					AND car_no = #{carNo}
+				</if>
+		       <if test="vehicleId != null">
+					AND vehicle_id = #{vehicleId}
+				</if>
+		       <if test="modelId != null">
+					AND model_id = #{modelId}
+				</if>
+		       <if test="driveMileage != null">
+					AND drive_mileage = #{driveMileage}
+				</if>
+		       <if test="modelName != null">
+					AND model_name = #{modelName}
+				</if>
+		       <if test="frameNumber != null">
+					AND frame_number = #{frameNumber}
+				</if>
+		       <if test="engineNumber != null">
+					AND engine_number = #{engineNumber}
+				</if>
+		       <if test="status != null">
+					AND status = #{status}
+				</if>
+		       <if test="isDefault != null">
+					AND is_default = #{isDefault}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		       <if test="driveMileageTime != null">
+					AND drive_mileage_time = #{driveMileageTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="WechatMaintainUserCarMap" >
+		select * from wechat_maintain_user_car  
+		<where>
+		       <if test="condition.wechatMaintainUserCarId != null">
+					AND wechat_maintain_user_car_id = #{condition.wechatMaintainUserCarId}
+				</if>
+		       <if test="condition.wechatMaintainUserId != null">
+					AND wechat_maintain_user_id = #{condition.wechatMaintainUserId}
+				</if>
+		       <if test="condition.fcUserId != null">
+					AND fc_user_id = #{condition.fcUserId}
+				</if>
+		       <if test="condition.carNo != null">
+					AND car_no = #{condition.carNo}
+				</if>
+		       <if test="condition.vehicleId != null">
+					AND vehicle_id = #{condition.vehicleId}
+				</if>
+		       <if test="condition.modelId != null">
+					AND model_id = #{condition.modelId}
+				</if>
+		       <if test="condition.driveMileage != null">
+					AND drive_mileage = #{condition.driveMileage}
+				</if>
+		       <if test="condition.modelName != null">
+					AND model_name = #{condition.modelName}
+				</if>
+		       <if test="condition.frameNumber != null">
+					AND frame_number = #{condition.frameNumber}
+				</if>
+		       <if test="condition.engineNumber != null">
+					AND engine_number = #{condition.engineNumber}
+				</if>
+		       <if test="condition.status != null">
+					AND status = #{condition.status}
+				</if>
+		       <if test="condition.isDefault != null">
+					AND is_default = #{condition.isDefault}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		       <if test="condition.driveMileageTime != null">
+					AND drive_mileage_time = #{condition.driveMileageTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+	
+	<!-- 用户车辆档案列表 -->
+	<select id="getUserCarListByUserId" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainUserCar" resultMap="WechatMaintainUserCarMap" >
+		select * from wechat_maintain_user_car where wechat_maintain_user_id = #{wechatMaintainUserId} and status = 1 order by is_default desc, create_time desc
+	</select>
+	<!-- 更新是否起用状态(删除操作) -->
+	<update id="updateStatus" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainUserCar" >
+		UPDATE wechat_maintain_user_car SET status = #{status}, update_time = #{updateTime} WHERE wechat_maintain_user_car_id = #{wechatMaintainUserCarId}
+	</update>
+	<!-- 更新默认车辆 -->
+	<update id="updateIsDefault" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainUserCar">
+		UPDATE wechat_maintain_user_car SET is_default = #{isDefault}, update_time = #{updateTime} where wechat_maintain_user_car_id = #{wechatMaintainUserCarId}
+	</update>
+	<!-- 查询该用户下默认车辆 -->
+	<select id="getUserDefaultCar" parameterType="com.fc.member.wechatmaintain.user.entity.WechatMaintainUserCar" resultMap="WechatMaintainUserCarMap" >
+		select * from wechat_maintain_user_car  where wechat_maintain_user_id = #{wechatMaintainUserId} and is_default = 1 and status = 1
+	</select>
+	
+</mapper> 

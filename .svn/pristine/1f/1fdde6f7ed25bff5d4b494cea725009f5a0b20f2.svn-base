@@ -1,0 +1,107 @@
+package com.fc.protocol.demo.request.wechatplatform.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+import io.swagger.annotations.ApiModelProperty;
+import org.springframework.util.StringUtils;
+
+/**
+ * @Author: linpeng
+ * @Date: 2019/1/3 18:41
+ * @Version 1.0
+ */
+public class WpUserSaveRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+    @ApiModelProperty(value = "枫车用户ID", name = "page_no")
+    private Integer  fc_user_id;
+    @ApiModelProperty(value = "openid", name = "openid")
+    private String  openid;
+    @ApiModelProperty(value = "手机号码", name = "mobile")
+	private String  mobile;
+    @ApiModelProperty(value = "打开次数", name = "open_number")
+    private int  open_number;
+    @ApiModelProperty(value = "unionid", name = "unionid")
+    private String  unionid;
+    @ApiModelProperty(value = "微信号", name = "wechat_account")
+    private String wechat_account;
+    @ApiModelProperty(value = "微信头像", name = "wechat_avatar")
+    private String wechat_avatar;
+
+
+
+    public String paramValidate() {
+        if (StringUtils.isEmpty(openid)) {
+            return "参数:openid 不能为空";
+        }
+        return null;
+    }
+
+
+    public String getWechatAvatar() {
+        return wechat_avatar;
+    }
+
+    public void setWechatAvatar(String wechat_avatar) {
+        this.wechat_avatar = wechat_avatar;
+    }
+
+    public String getWechatAccount() {
+        return wechat_account;
+    }
+
+    public void setWechatAccount(String wechat_account) {
+        this.wechat_account = wechat_account;
+    }
+
+    public String getUnionid() {
+        return unionid;
+    }
+
+    public void setUnionid(String unionid) {
+        this.unionid = unionid;
+    }
+
+    public int getOpenNumber() {
+        return open_number;
+    }
+
+    public void setOpenNumber(int open_number) {
+        this.open_number = open_number;
+    }
+
+	public String getOpenid() {
+		return openid;
+	}
+
+	public void setOpenid(String openid) {
+		this.openid = openid;
+	}
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+
+
+    public Integer getFcUserId() {
+        return fc_user_id;
+    }
+
+    public void setFcUserId(Integer fc_user_id) {
+        this.fc_user_id = fc_user_id;
+    }
+
+
+
+	@Override
+	public String toString() {
+		return "WpUserSaveRequest [getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode()
+                + ", getTraceId()=" + getTraceId() + ", fcUserId=" + getFcUserId() + ", openid=" + getOpenid()
+                + ", mobile=" + getMobile() + ", openNumber=" + getOpenNumber() + ", unionid=" + getUnionid()
+                + ", wechatAccount=" + getWechatAccount() + ", wechatAvatar=" + getWechatAvatar()+ "]";
+	}
+
+}

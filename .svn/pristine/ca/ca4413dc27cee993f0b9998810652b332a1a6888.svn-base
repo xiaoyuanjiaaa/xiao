@@ -1,0 +1,35 @@
+package com.fc.protocol.demo.request.store.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+/**
+ * 查询用户request
+ * @author	xiaozw
+ * @data	2019年1月4日	
+ */
+@SuppressWarnings("serial")
+public class PublicUserByUserNameRequest extends ProtocolRequest {
+	/**用户名*/
+	private String userName;
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String paramValidate() {
+		if (userName == null) {
+			return "参数:userName不能为空";
+		}
+		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "PublicUserByUserNameRequest[getUserName():" + getUserName() + ", getVersion()=" + getVersion()
+				+ ", getReqCode()=" + getReqCode() + ", getTraceId()=" + getTraceId() + "]";
+	}
+}

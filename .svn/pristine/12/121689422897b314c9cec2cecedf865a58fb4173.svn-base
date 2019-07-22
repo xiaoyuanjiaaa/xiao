@@ -1,0 +1,294 @@
+package com.fc.protocol.client.demo.controller.member.wechatmaintain;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fc.protocol.client.IProtocolClient;
+import com.fc.protocol.client.demo.config.ProtocolClientPool;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.common.utils.IntegerFactory;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmsUserRelationCreateRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmsUserRelationGetRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmsUserRelationListRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmsUserRelationUpdateRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmUserByMobileRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmUserByOpenIdRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmUserByUnionIdRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmUserCreateRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmUserDetailsRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmUserListRequest;
+import com.fc.protocol.demo.request.wechatmaintain.user.WmUserUpdateRequest;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(tags = "WechatMaintainUserController", description = "微养车用户控制器")
+@RestController
+@RequestMapping("/api/wechatMaintainUser")
+public class WechatMaintainUserController {
+
+	private static Logger log = LoggerFactory.getLogger(WechatMaintainUserController.class);
+
+	@Autowired
+	private ProtocolClientPool protocolClientPool;
+
+	/**
+	 * 查询微养车用户列表
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/wmUserList", method = { RequestMethod.POST, RequestMethod.GET })
+	@ApiOperation(value = "查询微养车用户列表", notes = "查询微养车用户列表")
+	@ResponseBody
+	public Object wmUserList(HttpServletRequest request, HttpServletResponse response, WmUserListRequest userRequest)
+			throws Exception {
+		userRequest.setReqCode("wmUserList");
+		log.info("wmUserList-request:{}", userRequest);
+		log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+		IProtocolClient userClient = protocolClientPool.userClient();
+		log.info("userClient==null?===>{}", (userClient == null));
+		ProtocolResponse echoResponse = protocolClientPool.userClient().sendAndReceived(userRequest);
+		log.info("wmUserList-response:{}", echoResponse);
+		return echoResponse;
+	}
+
+	/**
+	 * 查询微养车用户详情
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/wmUserDetails", method = { RequestMethod.POST, RequestMethod.GET })
+	@ApiOperation(value = "查询微养车用户详情", notes = "查询微养车用户详情")
+	@ResponseBody
+	public Object wmUserDetails(HttpServletRequest request, HttpServletResponse response,
+			WmUserDetailsRequest userRequest) throws Exception {
+		userRequest.setReqCode("wmUserDetails");
+		log.info("wmUserDetails-request:{}", userRequest);
+		log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+		IProtocolClient userClient = protocolClientPool.userClient();
+		log.info("userClient==null?===>{}", (userClient == null));
+		ProtocolResponse echoResponse = protocolClientPool.userClient().sendAndReceived(userRequest);
+		log.info("wmUserDetails-response:{}", echoResponse);
+		return echoResponse;
+	}
+
+	/**
+	 * 根据openid查询微养车用户信息
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/wmUserByOpenId", method = { RequestMethod.POST, RequestMethod.GET })
+	@ApiOperation(value = "根据openid查询微养车用户信息", notes = "根据openid查询微养车用户信息")
+	@ResponseBody
+	public Object wmUserByOpenId(HttpServletRequest request, HttpServletResponse response,
+			WmUserByOpenIdRequest userRequest) throws Exception {
+		userRequest.setReqCode("wmUserByOpenId");
+		log.info("wmUserByOpenId-request:{}", userRequest);
+		log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+		IProtocolClient userClient = protocolClientPool.userClient();
+		log.info("userClient==null?===>{}", (userClient == null));
+		ProtocolResponse echoResponse = protocolClientPool.userClient().sendAndReceived(userRequest);
+		log.info("wmUserByOpenId-response:{}", echoResponse);
+		return echoResponse;
+	}
+
+	/**
+	 * 根据unionid查询微养车用户信息
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/wmUserByUnionId", method = { RequestMethod.POST, RequestMethod.GET })
+	@ApiOperation(value = "根据unionid查询微养车用户信息", notes = "根据unionid查询微养车用户信息")
+	@ResponseBody
+	public Object wmUserByUnionId(HttpServletRequest request, HttpServletResponse response,
+			WmUserByUnionIdRequest userRequest) throws Exception {
+		userRequest.setReqCode("wmUserByUnionId");
+		log.info("wmUserByUnionId-request:{}", userRequest);
+		log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+		IProtocolClient userClient = protocolClientPool.userClient();
+		log.info("userClient==null?===>{}", (userClient == null));
+		ProtocolResponse echoResponse = protocolClientPool.userClient().sendAndReceived(userRequest);
+		log.info("wmUserByUnionId-response:{}", echoResponse);
+		return echoResponse;
+	}
+
+	/**
+	 * 根据手机号查询用户信息
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/wmUserByMobile", method = { RequestMethod.POST, RequestMethod.GET })
+	@ApiOperation(value = "根据手机号查询用户信息", notes = "根据手机号查询用户信息")
+	@ResponseBody
+	public Object wmUserByMobile(HttpServletRequest request, HttpServletResponse response,
+			WmUserByMobileRequest userRequest) throws Exception {
+		userRequest.setReqCode("wmUserByMobile");
+		log.info("wmUserByMobile-request:{}", userRequest);
+		log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+		IProtocolClient userClient = protocolClientPool.userClient();
+		log.info("userClient==null?===>{}", (userClient == null));
+		ProtocolResponse echoResponse = protocolClientPool.userClient().sendAndReceived(userRequest);
+		log.info("wmUserByMobile-response:{}", echoResponse);
+		return echoResponse;
+	}
+
+	/**
+	 * 创建用户信息
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/wmUserCreate", method = { RequestMethod.POST, RequestMethod.GET })
+	@ApiOperation(value = "创建微养车用户信息", notes = "创建微养车用户信息")
+	@ResponseBody
+	public Object wmUserCreate(HttpServletRequest request, HttpServletResponse response,
+			WmUserCreateRequest userRequest) throws Exception {
+		userRequest.setReqCode("wmUserCreate");
+		log.info("wmUserCreate-request:{}", userRequest);
+		log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+		IProtocolClient userClient = protocolClientPool.userClient();
+		log.info("userClient==null?===>{}", (userClient == null));
+		ProtocolResponse echoResponse = protocolClientPool.userClient().sendAndReceived(userRequest);
+		log.info("wmUserCreate-response:{}", echoResponse);
+		return echoResponse;
+	}
+
+	/**
+	 * 修改用户信息、完善用户信息、修改手机号、绑定手机号
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/wmUserUpdate", method = { RequestMethod.POST, RequestMethod.GET })
+	@ApiOperation(value = "修改用户信息、完善用户信息、修改手机号、绑定手机号", notes = "修改用户信息、完善用户信息、修改手机号、绑定手机号")
+	@ResponseBody
+	public Object wmUserUpdate(HttpServletRequest request, HttpServletResponse response,
+			WmUserUpdateRequest userRequest) throws Exception {
+		userRequest.setReqCode("wmUserUpdate");
+		log.info("wmUserUpdate-request:{}", userRequest);
+		log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+		IProtocolClient userClient = protocolClientPool.userClient();
+		log.info("userClient==null?===>{}", (userClient == null));
+		ProtocolResponse echoResponse = protocolClientPool.userClient().sendAndReceived(userRequest);
+		log.info("wmUserUpdate-response:{}", echoResponse);
+		return echoResponse;
+	}
+
+	/**O
+	 * 创建微养车用户门店扫码记录
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/wechatMaintainSstoreUserRelationCreate", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ApiOperation(value = "创建记录", notes = "创建微养车用户门店扫码记录")
+	@ResponseBody
+	public Object wechatMaintainSstoreUserRelationCreate(HttpServletRequest request, HttpServletResponse response,
+			WmsUserRelationCreateRequest userRequest) throws Exception {
+		userRequest.setReqCode("wechatMaintainSstoreUserRelationCreate");
+		userRequest.setTraceId("tid_" + IntegerFactory.getInstance().incrementAndGet());
+		userRequest.setVersion("1.1");
+		log.info("wechatMaintainSstoreUserRelationCreate-request:{}", userRequest);
+		log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+		IProtocolClient memberClient = protocolClientPool.memberClient();
+		log.info("memberClient==null?===>{}", (memberClient == null));
+		ProtocolResponse echoResponse = protocolClientPool.memberClient().sendAndReceived(userRequest);
+		log.info("wechatMaintainSstoreUserRelationCreate-response:{}", echoResponse);
+		return echoResponse;
+	}
+
+	/**
+	 * 修改微养车用户门店扫码记录
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/wechatMaintainSstoreUserRelationUpdate", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ApiOperation(value = "修改记录", notes = "修改微养车用户门店扫码记录")
+	@ResponseBody
+	public Object wechatMaintainSstoreUserRelationUpdate(HttpServletRequest request, HttpServletResponse response,
+			WmsUserRelationUpdateRequest userRequest) throws Exception {
+		userRequest.setReqCode("wechatMaintainSstoreUserRelationUpdate");
+		userRequest.setTraceId("tid_" + IntegerFactory.getInstance().incrementAndGet());
+		userRequest.setVersion("1.1");
+		log.info("wechatMaintainSstoreUserRelationUpdate-request:{}", userRequest);
+		log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+		IProtocolClient memberClient = protocolClientPool.memberClient();
+		log.info("memberClient==null?===>{}", (memberClient == null));
+		ProtocolResponse echoResponse = protocolClientPool.memberClient().sendAndReceived(userRequest);
+		log.info("wechatMaintainSstoreUserRelationUpdate-response:{}", echoResponse);
+		return echoResponse;
+	}
+
+	/**
+	 * 查询微养车用户门店扫码记录详情
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/wechatMaintainSstoreUserRelationGet", method = { RequestMethod.POST, RequestMethod.GET })
+	@ApiOperation(value = "查询记录详情", notes = "查询微养车用户门店扫码记录详情")
+	@ResponseBody
+	public Object wechatMaintainSstoreUserRelationGet(HttpServletRequest request, HttpServletResponse response,
+			WmsUserRelationGetRequest userRequest) throws Exception {
+		userRequest.setReqCode("wechatMaintainSstoreUserRelationGet");
+		userRequest.setTraceId("tid_" + IntegerFactory.getInstance().incrementAndGet());
+		userRequest.setVersion("1.1");
+		log.info("wechatMaintainSstoreUserRelationGet-request:{}", userRequest);
+		log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+		IProtocolClient memberClient = protocolClientPool.memberClient();
+		log.info("memberClient==null?===>{}", (memberClient == null));
+		ProtocolResponse echoResponse = protocolClientPool.memberClient().sendAndReceived(userRequest);
+		log.info("wechatMaintainSstoreUserRelationGet-response:{}", echoResponse);
+		return echoResponse;
+	}
+
+	/**
+	 * 查询微养车用户门店扫码记录列表
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/wechatMaintainSstoreUserRelationList", method = { RequestMethod.POST, RequestMethod.GET })
+	@ApiOperation(value = "查询记录列表", notes = "查询微养车用户门店扫码记录列表")
+	@ResponseBody
+	public Object wechatMaintainSstoreUserRelationList(HttpServletRequest request, HttpServletResponse response,
+			WmsUserRelationListRequest userRequest) throws Exception {
+		userRequest.setReqCode("wechatMaintainSstoreUserRelationList");
+		userRequest.setTraceId("tid_" + IntegerFactory.getInstance().incrementAndGet());
+		userRequest.setVersion("1.1");
+		log.info("wechatMaintainSstoreUserRelationList-request:{}", userRequest);
+		log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+		IProtocolClient memberClient = protocolClientPool.memberClient();
+		log.info("memberClient==null?===>{}", (memberClient == null));
+		ProtocolResponse echoResponse = protocolClientPool.memberClient().sendAndReceived(userRequest);
+		log.info("wechatMaintainSstoreUserRelationList-response:{}", echoResponse);
+		return echoResponse;
+	}
+}

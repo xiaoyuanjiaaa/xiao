@@ -1,0 +1,124 @@
+package com.fc.protocol.demo.request.wechatplatform.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * @Author: linpeng
+ * @Date: 2019/1/3 18:41
+ * @Version 1.0
+ */
+public class WechatPlatformUserRequest extends ProtocolRequest {
+
+    @ApiModelProperty(value = "当前页码", name = "page_no")
+    private Integer page = 1;
+    @ApiModelProperty(value = "当前页记录数", name = "page_size")
+    private Integer pagesize = 10;
+
+	private String  platform_user_id;
+
+    private Integer  fc_user_id;
+
+    private String  openid;
+
+	private String  mobile;
+
+    private int  open_number;
+
+    private String  unionid;
+
+    private String wechat_account;
+
+    private String wechat_avatar;
+
+
+    public String getWechat_avatar() {
+        return wechat_avatar;
+    }
+
+    public void setWechat_avatar(String wechat_avatar) {
+        this.wechat_avatar = wechat_avatar;
+    }
+
+    public String getWechat_account() {
+        return wechat_account;
+    }
+
+    public void setWechat_account(String wechat_account) {
+        this.wechat_account = wechat_account;
+    }
+
+    public String getUnionid() {
+        return unionid;
+    }
+
+    public void setUnionid(String unionid) {
+        this.unionid = unionid;
+    }
+
+    public int getOpen_number() {
+        return open_number;
+    }
+
+    public void setOpen_number(int open_number) {
+        this.open_number = open_number;
+    }
+
+	public String getOpenid() {
+		return openid;
+	}
+
+	public void setOpenid(String openid) {
+		this.openid = openid;
+	}
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+    public String getPlatform_user_id() {
+        return platform_user_id;
+    }
+
+    public void setPlatform_user_id(String platform_user_id) {
+        this.platform_user_id = platform_user_id;
+    }
+
+    public Integer getFc_user_id() {
+        return fc_user_id;
+    }
+
+    public void setFc_user_id(Integer fc_user_id) {
+        this.fc_user_id = fc_user_id;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getPagesize() {
+        return pagesize;
+    }
+
+    public void setPagesize(int pagesize) {
+        this.pagesize = pagesize;
+    }
+
+	@Override
+	public String toString() {
+		return "WechatPlatformUserRequest [getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode()
+                + ", getTraceId()=" + getTraceId() + ", page=" + getPage() + ", pagesize=" + getPagesize()
+                + ", platform_user_id=" + getPlatform_user_id() + ", fe_user_id=" + getFc_user_id()
+                + ", openid=" + getOpenid() + ", mobile=" + getMobile() + ", open_number=" + getOpen_number()
+                + ", unionid=" + getUnionid() + ", wechat_account=" + getWechat_account()
+                + ", wechat_avatar=" + getWechat_avatar()+ "]";
+	}
+
+}

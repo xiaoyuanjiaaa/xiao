@@ -1,0 +1,26 @@
+package com.fc.member.wechatmaintain.user.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.member.wechatmaintain.user.dao.IWechatMaintainCouponSstoreUserDao;
+import com.fc.member.wechatmaintain.user.service.IWechatMaintainCouponSstoreUserService;
+import com.fc.member.wechatmaintain.user.entity.WechatMaintainCouponSstoreUser;
+/**
+ * <p>Title: WechatMaintainCouponSstoreUser</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-28 17:13:47
+ */
+@Service("wechatMaintainCouponSstoreUserService")
+public class WechatMaintainCouponSstoreUserServiceImp extends ServiceImpl<WechatMaintainCouponSstoreUser> implements IWechatMaintainCouponSstoreUserService{
+
+	@Autowired
+	private IWechatMaintainCouponSstoreUserDao wechatMaintainCouponSstoreUserDao;
+	
+	@Override
+	protected IMapper<WechatMaintainCouponSstoreUser> getDao() {
+		return wechatMaintainCouponSstoreUserDao;
+	}
+}

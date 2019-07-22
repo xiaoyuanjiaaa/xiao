@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.shop.user.dao.IShopInfoDao">
+	<resultMap id="ShopInfoMap" type="com.fc.member.shop.user.entity.ShopInfo">
+        <id property="shopId" column="shop_id"/>
+        <id property="shopType" column="shop_type"/>
+        <id property="publicUserId" column="public_user_id"/>
+        <id property="shopName" column="shop_name"/>
+        <id property="regionId" column="region_id"/>
+        <id property="regionName" column="region_name"/>
+        <id property="address" column="address"/>
+        <id property="contactName" column="contact_name"/>
+        <id property="contactTel" column="contact_tel"/>
+        <id property="orderContactName" column="order_contact_name"/>
+        <id property="orderContactPhone" column="order_contact_phone"/>
+        <id property="contactQq" column="contact_qq"/>
+        <id property="companyTel" column="company_tel"/>
+        <id property="companyEmail" column="company_email"/>
+        <id property="shopCreditPoints" column="shop_credit_points"/>
+        <id property="shopLevel" column="shop_level"/>
+        <id property="shopStatus" column="shop_status"/>
+        <id property="effectiveTime" column="effective_time"/>
+        <id property="saleType" column="sale_type"/>
+        <id property="shopBuildTime" column="shop_build_time"/>
+        <id property="shopExamineTime" column="shop_examine_time"/>
+        <id property="shopCloseTime" column="shop_close_time"/>
+        <id property="shopNotice" column="shop_notice"/>
+        <id property="updateTime" column="update_time"/>
+        <id property="createTime" column="create_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="ShopInfoMap" >
+		select * from shop_info where 
+	        shop_id = #{shopId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.shop.user.entity.ShopInfo" useGeneratedKeys="true" keyProperty="shopId">
+		insert into shop_info(shop_id , shop_type , public_user_id , shop_name , region_id , region_name , address , contact_name , contact_tel , order_contact_name , order_contact_phone , contact_qq , company_tel , company_email , shop_credit_points , shop_level , shop_status , effective_time , sale_type , shop_build_time , shop_examine_time , shop_close_time , shop_notice , update_time , create_time  )
+    	values(#{shopId} ,#{shopType} ,#{publicUserId} ,#{shopName} ,#{regionId} ,#{regionName} ,#{address} ,#{contactName} ,#{contactTel} ,#{orderContactName} ,#{orderContactPhone} ,#{contactQq} ,#{companyTel} ,#{companyEmail} ,#{shopCreditPoints} ,#{shopLevel} ,#{shopStatus} ,#{effectiveTime} ,#{saleType} ,#{shopBuildTime} ,#{shopExamineTime} ,#{shopCloseTime} ,#{shopNotice} ,#{updateTime} ,#{createTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.shop.user.entity.ShopInfo" useGeneratedKeys="true" keyProperty="shopId">
+		insert into shop_info
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="shopId != null">shop_id,</if>
+					<if test="shopType != null">shop_type,</if>
+					<if test="publicUserId != null">public_user_id,</if>
+					<if test="shopName != null">shop_name,</if>
+					<if test="regionId != null">region_id,</if>
+					<if test="regionName != null">region_name,</if>
+					<if test="address != null">address,</if>
+					<if test="contactName != null">contact_name,</if>
+					<if test="contactTel != null">contact_tel,</if>
+					<if test="orderContactName != null">order_contact_name,</if>
+					<if test="orderContactPhone != null">order_contact_phone,</if>
+					<if test="contactQq != null">contact_qq,</if>
+					<if test="companyTel != null">company_tel,</if>
+					<if test="companyEmail != null">company_email,</if>
+					<if test="shopCreditPoints != null">shop_credit_points,</if>
+					<if test="shopLevel != null">shop_level,</if>
+					<if test="shopStatus != null">shop_status,</if>
+					<if test="effectiveTime != null">effective_time,</if>
+					<if test="saleType != null">sale_type,</if>
+					<if test="shopBuildTime != null">shop_build_time,</if>
+					<if test="shopExamineTime != null">shop_examine_time,</if>
+					<if test="shopCloseTime != null">shop_close_time,</if>
+					<if test="shopNotice != null">shop_notice,</if>
+					<if test="updateTime != null">update_time,</if>
+					<if test="createTime != null">create_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="shopId != null">#{shopId},</if>
+					<if test="shopType != null">#{shopType},</if>
+					<if test="publicUserId != null">#{publicUserId},</if>
+					<if test="shopName != null">#{shopName},</if>
+					<if test="regionId != null">#{regionId},</if>
+					<if test="regionName != null">#{regionName},</if>
+					<if test="address != null">#{address},</if>
+					<if test="contactName != null">#{contactName},</if>
+					<if test="contactTel != null">#{contactTel},</if>
+					<if test="orderContactName != null">#{orderContactName},</if>
+					<if test="orderContactPhone != null">#{orderContactPhone},</if>
+					<if test="contactQq != null">#{contactQq},</if>
+					<if test="companyTel != null">#{companyTel},</if>
+					<if test="companyEmail != null">#{companyEmail},</if>
+					<if test="shopCreditPoints != null">#{shopCreditPoints},</if>
+					<if test="shopLevel != null">#{shopLevel},</if>
+					<if test="shopStatus != null">#{shopStatus},</if>
+					<if test="effectiveTime != null">#{effectiveTime},</if>
+					<if test="saleType != null">#{saleType},</if>
+					<if test="shopBuildTime != null">#{shopBuildTime},</if>
+					<if test="shopExamineTime != null">#{shopExamineTime},</if>
+					<if test="shopCloseTime != null">#{shopCloseTime},</if>
+					<if test="shopNotice != null">#{shopNotice},</if>
+					<if test="updateTime != null">#{updateTime},</if>
+					<if test="createTime != null">#{createTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.shop.user.entity.ShopInfo">
+		update shop_info
+		<set>
+		    	<if test="shopType != null">shop_type = #{shopType},</if>
+		    	<if test="publicUserId != null">public_user_id = #{publicUserId},</if>
+		    	<if test="shopName != null">shop_name = #{shopName},</if>
+		    	<if test="regionId != null">region_id = #{regionId},</if>
+		    	<if test="regionName != null">region_name = #{regionName},</if>
+		    	<if test="address != null">address = #{address},</if>
+		    	<if test="contactName != null">contact_name = #{contactName},</if>
+		    	<if test="contactTel != null">contact_tel = #{contactTel},</if>
+		    	<if test="orderContactName != null">order_contact_name = #{orderContactName},</if>
+		    	<if test="orderContactPhone != null">order_contact_phone = #{orderContactPhone},</if>
+		    	<if test="contactQq != null">contact_qq = #{contactQq},</if>
+		    	<if test="companyTel != null">company_tel = #{companyTel},</if>
+		    	<if test="companyEmail != null">company_email = #{companyEmail},</if>
+		    	<if test="shopCreditPoints != null">shop_credit_points = #{shopCreditPoints},</if>
+		    	<if test="shopLevel != null">shop_level = #{shopLevel},</if>
+		    	<if test="shopStatus != null">shop_status = #{shopStatus},</if>
+		    	<if test="effectiveTime != null">effective_time = #{effectiveTime},</if>
+		    	<if test="saleType != null">sale_type = #{saleType},</if>
+		    	<if test="shopBuildTime != null">shop_build_time = #{shopBuildTime},</if>
+		    	<if test="shopExamineTime != null">shop_examine_time = #{shopExamineTime},</if>
+		    	<if test="shopCloseTime != null">shop_close_time = #{shopCloseTime},</if>
+		    	<if test="shopNotice != null">shop_notice = #{shopNotice},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		    	<if test="createTime != null">create_time = #{createTime},</if>
+		</set>
+		where 
+	        shop_id = #{shopId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from shop_info where 
+	        shop_id = #{shopId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.shop.user.entity.ShopInfo" resultMap="ShopInfoMap" >
+		select * from shop_info 
+		<where>
+		       <if test="shopId != null">
+					AND shop_id = #{shopId}
+				</if>
+		       <if test="shopType != null">
+					AND shop_type = #{shopType}
+				</if>
+		       <if test="publicUserId != null">
+					AND public_user_id = #{publicUserId}
+				</if>
+		       <if test="shopName != null">
+					AND shop_name = #{shopName}
+				</if>
+		       <if test="regionId != null">
+					AND region_id = #{regionId}
+				</if>
+		       <if test="regionName != null">
+					AND region_name = #{regionName}
+				</if>
+		       <if test="address != null">
+					AND address = #{address}
+				</if>
+		       <if test="contactName != null">
+					AND contact_name = #{contactName}
+				</if>
+		       <if test="contactTel != null">
+					AND contact_tel = #{contactTel}
+				</if>
+		       <if test="orderContactName != null">
+					AND order_contact_name = #{orderContactName}
+				</if>
+		       <if test="orderContactPhone != null">
+					AND order_contact_phone = #{orderContactPhone}
+				</if>
+		       <if test="contactQq != null">
+					AND contact_qq = #{contactQq}
+				</if>
+		       <if test="companyTel != null">
+					AND company_tel = #{companyTel}
+				</if>
+		       <if test="companyEmail != null">
+					AND company_email = #{companyEmail}
+				</if>
+		       <if test="shopCreditPoints != null">
+					AND shop_credit_points = #{shopCreditPoints}
+				</if>
+		       <if test="shopLevel != null">
+					AND shop_level = #{shopLevel}
+				</if>
+		       <if test="shopStatus != null">
+					AND shop_status = #{shopStatus}
+				</if>
+		       <if test="effectiveTime != null">
+					AND effective_time = #{effectiveTime}
+				</if>
+		       <if test="saleType != null">
+					AND sale_type = #{saleType}
+				</if>
+		       <if test="shopBuildTime != null">
+					AND shop_build_time = #{shopBuildTime}
+				</if>
+		       <if test="shopExamineTime != null">
+					AND shop_examine_time = #{shopExamineTime}
+				</if>
+		       <if test="shopCloseTime != null">
+					AND shop_close_time = #{shopCloseTime}
+				</if>
+		       <if test="shopNotice != null">
+					AND shop_notice = #{shopNotice}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		       <if test="createTime != null">
+					AND create_time = #{createTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="ShopInfoMap" >
+		select * from shop_info  
+		<where>
+		       <if test="condition.shopId != null">
+					AND shop_id = #{condition.shopId}
+				</if>
+		       <if test="condition.shopType != null">
+					AND shop_type = #{condition.shopType}
+				</if>
+		       <if test="condition.publicUserId != null">
+					AND public_user_id = #{condition.publicUserId}
+				</if>
+		       <if test="condition.shopName != null">
+					AND shop_name = #{condition.shopName}
+				</if>
+		       <if test="condition.regionId != null">
+					AND region_id = #{condition.regionId}
+				</if>
+		       <if test="condition.regionName != null">
+					AND region_name = #{condition.regionName}
+				</if>
+		       <if test="condition.address != null">
+					AND address = #{condition.address}
+				</if>
+		       <if test="condition.contactName != null">
+					AND contact_name = #{condition.contactName}
+				</if>
+		       <if test="condition.contactTel != null">
+					AND contact_tel = #{condition.contactTel}
+				</if>
+		       <if test="condition.orderContactName != null">
+					AND order_contact_name = #{condition.orderContactName}
+				</if>
+		       <if test="condition.orderContactPhone != null">
+					AND order_contact_phone = #{condition.orderContactPhone}
+				</if>
+		       <if test="condition.contactQq != null">
+					AND contact_qq = #{condition.contactQq}
+				</if>
+		       <if test="condition.companyTel != null">
+					AND company_tel = #{condition.companyTel}
+				</if>
+		       <if test="condition.companyEmail != null">
+					AND company_email = #{condition.companyEmail}
+				</if>
+		       <if test="condition.shopCreditPoints != null">
+					AND shop_credit_points = #{condition.shopCreditPoints}
+				</if>
+		       <if test="condition.shopLevel != null">
+					AND shop_level = #{condition.shopLevel}
+				</if>
+		       <if test="condition.shopStatus != null">
+					AND shop_status = #{condition.shopStatus}
+				</if>
+		       <if test="condition.effectiveTime != null">
+					AND effective_time = #{condition.effectiveTime}
+				</if>
+		       <if test="condition.saleType != null">
+					AND sale_type = #{condition.saleType}
+				</if>
+		       <if test="condition.shopBuildTime != null">
+					AND shop_build_time = #{condition.shopBuildTime}
+				</if>
+		       <if test="condition.shopExamineTime != null">
+					AND shop_examine_time = #{condition.shopExamineTime}
+				</if>
+		       <if test="condition.shopCloseTime != null">
+					AND shop_close_time = #{condition.shopCloseTime}
+				</if>
+		       <if test="condition.shopNotice != null">
+					AND shop_notice = #{condition.shopNotice}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		       <if test="condition.createTime != null">
+					AND create_time = #{condition.createTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

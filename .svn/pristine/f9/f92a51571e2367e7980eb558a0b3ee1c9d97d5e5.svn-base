@@ -1,0 +1,27 @@
+package com.fc.member.store.user.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.member.store.user.entity.StorePackage;
+/**
+ * <p>Title: StorePackage</p>
+ * <p>Description:  DAO层</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:06
+ */
+@Mapper
+public interface IStorePackageDao extends IMapper<StorePackage>{
+	/**
+	 * 查询门店储值卡套餐列表
+	 * 排序规则：按充值金额升序排列，充值金额相同时按赠送金额升序排列，未编辑状态的充值套餐排在最下。
+	 */
+	 List<StorePackage> getOrderBY(StorePackage storePackage);
+	 /**
+	  * 查询门店当前上架的套餐数,且后台状态为启用(在store_wechat)
+	  */
+	 List<StorePackage> getStatus(StorePackage storePackage);
+	 
+}

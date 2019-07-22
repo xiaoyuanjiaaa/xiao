@@ -1,0 +1,248 @@
+package com.fc.member.shop.user.entity;
+
+import java.io.Serializable;
+
+
+/**
+ * <p>Table: ShopInfo</p>
+ * <p>Description: 店铺基本信息表</p>
+ * @author yangd
+ * @date 2019-01-14 11:08:40
+ */
+public class ShopInfo implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer shopId; // 店铺id
+	private Integer shopType; // 店铺类型 0：旗舰店， 1：专卖店，2：专营店
+	private Integer publicUserId; // 用户id
+	private String shopName; // 店铺名称
+	private Integer regionId; // 所在地ID
+	private String regionName; // 地区名称
+	private String address; // 店铺详细地址
+	private String contactName; // 商家联系人
+	private String contactTel; // 商家联系电话
+	private String orderContactName; // 订货呗联系人
+	private String orderContactPhone; // 订货呗联系电话
+	private String contactQq; // 联系人qq
+	private String companyTel; // 公司固话
+	private String companyEmail; // 公司邮箱
+	private Integer shopCreditPoints; // 店铺信用积分
+	private Integer shopLevel; // 店铺等级
+	private String shopStatus; // 店铺状态 0：关闭，1：开启，2：待审核，3：待驳回
+	private Integer effectiveTime; // 有效期
+	private Integer saleType; // 销售类型 0：零售，1：批发
+	private Integer shopBuildTime; // 店铺创建时间
+	private Integer shopExamineTime; // 店铺审核时间
+	private Integer shopCloseTime; // 店铺关闭时间
+	private String shopNotice; // 店铺公告
+	private Integer updateTime; // 修改时间
+	private Integer createTime; // 创建时间
+
+	public void setShopId(Integer shopId) {
+		this.shopId = shopId;
+	}
+	
+	public Integer getShopId() {
+		return this.shopId;
+	}
+	public void setShopType(Integer shopType) {
+		this.shopType = shopType;
+	}
+	
+	public Integer getShopType() {
+		return this.shopType;
+	}
+	public void setPublicUserId(Integer publicUserId) {
+		this.publicUserId = publicUserId;
+	}
+	
+	public Integer getPublicUserId() {
+		return this.publicUserId;
+	}
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+	
+	public String getShopName() {
+		return this.shopName;
+	}
+	public void setRegionId(Integer regionId) {
+		this.regionId = regionId;
+	}
+	
+	public Integer getRegionId() {
+		return this.regionId;
+	}
+	public void setRegionName(String regionName) {
+		this.regionName = regionName;
+	}
+	
+	public String getRegionName() {
+		return this.regionName;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+	public String getAddress() {
+		return this.address;
+	}
+	public void setContactName(String contactName) {
+		this.contactName = contactName;
+	}
+	
+	public String getContactName() {
+		return this.contactName;
+	}
+	public void setContactTel(String contactTel) {
+		this.contactTel = contactTel;
+	}
+	
+	public String getContactTel() {
+		return this.contactTel;
+	}
+	public void setOrderContactName(String orderContactName) {
+		this.orderContactName = orderContactName;
+	}
+	
+	public String getOrderContactName() {
+		return this.orderContactName;
+	}
+	public void setOrderContactPhone(String orderContactPhone) {
+		this.orderContactPhone = orderContactPhone;
+	}
+	
+	public String getOrderContactPhone() {
+		return this.orderContactPhone;
+	}
+	public void setContactQq(String contactQq) {
+		this.contactQq = contactQq;
+	}
+	
+	public String getContactQq() {
+		return this.contactQq;
+	}
+	public void setCompanyTel(String companyTel) {
+		this.companyTel = companyTel;
+	}
+	
+	public String getCompanyTel() {
+		return this.companyTel;
+	}
+	public void setCompanyEmail(String companyEmail) {
+		this.companyEmail = companyEmail;
+	}
+	
+	public String getCompanyEmail() {
+		return this.companyEmail;
+	}
+	public void setShopCreditPoints(Integer shopCreditPoints) {
+		this.shopCreditPoints = shopCreditPoints;
+	}
+	
+	public Integer getShopCreditPoints() {
+		return this.shopCreditPoints;
+	}
+	public void setShopLevel(Integer shopLevel) {
+		this.shopLevel = shopLevel;
+	}
+	
+	public Integer getShopLevel() {
+		return this.shopLevel;
+	}
+	public void setShopStatus(String shopStatus) {
+		this.shopStatus = shopStatus;
+	}
+	
+	public String getShopStatus() {
+		return this.shopStatus;
+	}
+	public void setEffectiveTime(Integer effectiveTime) {
+		this.effectiveTime = effectiveTime;
+	}
+	
+	public Integer getEffectiveTime() {
+		return this.effectiveTime;
+	}
+	public void setSaleType(Integer saleType) {
+		this.saleType = saleType;
+	}
+	
+	public Integer getSaleType() {
+		return this.saleType;
+	}
+	public void setShopBuildTime(Integer shopBuildTime) {
+		this.shopBuildTime = shopBuildTime;
+	}
+	
+	public Integer getShopBuildTime() {
+		return this.shopBuildTime;
+	}
+	public void setShopExamineTime(Integer shopExamineTime) {
+		this.shopExamineTime = shopExamineTime;
+	}
+	
+	public Integer getShopExamineTime() {
+		return this.shopExamineTime;
+	}
+	public void setShopCloseTime(Integer shopCloseTime) {
+		this.shopCloseTime = shopCloseTime;
+	}
+	
+	public Integer getShopCloseTime() {
+		return this.shopCloseTime;
+	}
+	public void setShopNotice(String shopNotice) {
+		this.shopNotice = shopNotice;
+	}
+	
+	public String getShopNotice() {
+		return this.shopNotice;
+	}
+	public void setUpdateTime(Integer updateTime) {
+		this.updateTime = updateTime;
+	}
+	
+	public Integer getUpdateTime() {
+		return this.updateTime;
+	}
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+
+    @Override
+    public String toString () {
+    	return "ShopInfo{" + 
+	    	"shopId=" + shopId + 
+	    	", shopType=" + shopType + 
+	    	", publicUserId=" + publicUserId + 
+	    	", shopName=" + shopName + 
+	    	", regionId=" + regionId + 
+	    	", regionName=" + regionName + 
+	    	", address=" + address + 
+	    	", contactName=" + contactName + 
+	    	", contactTel=" + contactTel + 
+	    	", orderContactName=" + orderContactName + 
+	    	", orderContactPhone=" + orderContactPhone + 
+	    	", contactQq=" + contactQq + 
+	    	", companyTel=" + companyTel + 
+	    	", companyEmail=" + companyEmail + 
+	    	", shopCreditPoints=" + shopCreditPoints + 
+	    	", shopLevel=" + shopLevel + 
+	    	", shopStatus=" + shopStatus + 
+	    	", effectiveTime=" + effectiveTime + 
+	    	", saleType=" + saleType + 
+	    	", shopBuildTime=" + shopBuildTime + 
+	    	", shopExamineTime=" + shopExamineTime + 
+	    	", shopCloseTime=" + shopCloseTime + 
+	    	", shopNotice=" + shopNotice + 
+	    	", updateTime=" + updateTime + 
+	    	", createTime=" + createTime + 
+	    	"}";
+    }
+}

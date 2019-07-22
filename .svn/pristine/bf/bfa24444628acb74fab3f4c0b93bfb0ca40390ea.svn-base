@@ -1,0 +1,67 @@
+package com.fc.member.wechatmaintain.user.entity;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+
+/**
+ * <p>Table: WechatMaintainUserCoupon</p>
+ * <p>Description: 微养车用户储值卡表</p>
+ * @author yangd
+ * @date 2018-12-28 17:13:48
+ */
+public class WechatMaintainUserCoupon implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	private Integer wechatMaintainUserCouponId; // 储值卡id
+	private Integer fcUserId; // 枫车用户id
+	private Integer storeId; // 门店id
+	private BigDecimal balance; // 储值卡余额
+	private Integer createTime; // 创建时间
+
+	public void setWechatMaintainUserCouponId(Integer wechatMaintainUserCouponId) {
+		this.wechatMaintainUserCouponId = wechatMaintainUserCouponId;
+	}
+
+	public Integer getWechatMaintainUserCouponId() {
+		return this.wechatMaintainUserCouponId;
+	}
+
+	public void setFcUserId(Integer fcUserId) {
+		this.fcUserId = fcUserId;
+	}
+
+	public Integer getFcUserId() {
+		return this.fcUserId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	public Integer getStoreId() {
+		return this.storeId;
+	}
+
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
+	}
+
+	public BigDecimal getBalance() {
+		return this.balance;
+	}
+
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+
+	public Integer getCreateTime() {
+		return this.createTime;
+	}
+
+	@Override
+	public String toString() {
+		return "WechatMaintainUserCoupon{" + "wechatMaintainUserCouponId=" + wechatMaintainUserCouponId + ", fcUserId="
+				+ fcUserId + ", storeId=" + storeId + ", balance=" + balance + ", createTime=" + createTime + "}";
+	}
+}

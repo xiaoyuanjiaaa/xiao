@@ -1,0 +1,159 @@
+package com.fc.member.store.user.handler;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.fc.common.exception.ErrorCode;
+import com.fc.member.store.user.entity.StoreBasicInfo;
+import com.fc.member.store.user.service.IStoreBasicInfoService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.store.user.CreateBasicInfoOneRequest;
+import com.fc.protocol.demo.request.store.user.CreateBasicInfoThreeRequest;
+import com.fc.protocol.demo.request.store.user.CreateBasicInfoTwoRequest;
+import com.fc.protocol.demo.request.store.user.QueryBasicInfoByStoreIdRequest;
+import com.fc.protocol.demo.request.store.user.QueryBasicInfoRequest;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+
+/**
+ * 门店基本信息
+ * @author xiaozw
+ * @date 2019-01-08
+ */
+@Component
+@Handler(module = "store")
+public class StoreBasicInfoHandler {
+
+	private static Logger log = LoggerFactory.getLogger(StoreBasicInfoHandler.class);
+
+	@Autowired
+	private IStoreBasicInfoService storeBasicInfoService;
+
+	/**
+	 * 根据publicUserId查询门店基本信息接口
+	 * @author	xiaozw
+	 * @see update_name:xiaozw update_time:2019-01-08 17:03
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = QueryBasicInfoRequest.class)
+	public ProtocolResponse queryBasicInfo(QueryBasicInfoRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance();
+		try {
+			log.info("queryBasicInfo------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			}
+			StoreBasicInfo storeBasicInfo = storeBasicInfoService.getBasicInfo(request.getPublicUserId());
+			if (storeBasicInfo == null) {
+				return response.error(ErrorCode.DATE_NOR_DEFIND.getValue()).msg("门店不存在");
+			}
+			return response.success().addData("store_basic_info", storeBasicInfo);
+		} catch (Exception e) {
+			log.info("queryBasicInfo系统异常！:", e);
+			e.printStackTrace();
+			return response.error(ErrorCode.QUERY_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+	}
+
+	/**
+	 * 新增门店第一个接口
+	 * @author	xiaozw
+	 * @see update_name:xiaozw update_time:2019-01-08 17:08
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = CreateBasicInfoOneRequest.class)
+	public ProtocolResponse createBasicInfoOne(CreateBasicInfoOneRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			log.info("createBasicInfoOne------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			}
+			storeBasicInfoService.insertBasicInfoOne(request);
+			return response;
+		} catch (Exception e) {
+			log.info("createBasicInfoOne系统异常！:", e);
+			e.printStackTrace();
+			return response.error(ErrorCode.CREATE_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+	}
+
+	/**
+	 * 新增门店第二个接口
+	 * @author	xiaozw
+	 * @see update_name:xiaozw update_time:2019-01-08 20:29
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = CreateBasicInfoTwoRequest.class)
+	public ProtocolResponse createBasicInfoTwo(CreateBasicInfoTwoRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			log.info("createBasicInfoTwo------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			}
+			storeBasicInfoService.insertBasicInfoTwo(request);
+			return response;
+		} catch (Exception e) {
+			log.info("createBasicInfoTwo系统异常！:", e);
+			e.printStackTrace();
+			return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+	}
+
+	/**
+	 * 新增门店第三个接口
+	 * @author	xiaozw
+	 * @see update_name:xiaozw update_time:2019-01-08 20:58
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = CreateBasicInfoThreeRequest.class)
+	public ProtocolResponse createBasicInfoThree(CreateBasicInfoThreeRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			log.info("createBasicInfoTwo------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			}
+			storeBasicInfoService.insertBasicInfoThree(request);
+			return response;
+		} catch (Exception e) {
+			log.info("createBasicInfoThree系统异常！:", e);
+			e.printStackTrace();
+			return response.error(ErrorCode.UPDATE_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+	}
+
+	/**
+	 * 根据门店id查询门店信息
+	 * @author	xiaozw
+	 * @see update_name:xiaozw update_time:2019-01-09 01:09
+	 * @param request
+	 */
+	@ReqCodeMapping(requestClazz = QueryBasicInfoByStoreIdRequest.class)
+	public ProtocolResponse queryBasicInfoByStoreId(QueryBasicInfoByStoreIdRequest request) {
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			log.info("createBasicInfoTwo------>request:{}" + request);
+			String validateResult = request.paramValidate();
+			if (validateResult != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateResult);
+			}
+			StoreBasicInfo storeBasicInfo = storeBasicInfoService.getByPK(request.getStoreId());
+			if (storeBasicInfo == null) {
+				return response.error(ErrorCode.DATE_NOR_DEFIND.getValue()).msg(ErrorCode.DATE_NOR_DEFIND.getDesc());
+			}
+			return response.addData("store_basic_info", storeBasicInfo);
+		} catch (Exception e) {
+			log.info("createBasicInfoThree系统异常！:", e);
+			e.printStackTrace();
+			return response.error(ErrorCode.QUERY_ERROR.getValue()).msg("代码异常，请联系开发人员");
+		}
+	}
+}

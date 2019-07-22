@@ -1,0 +1,50 @@
+package com.fc.protocol.demo.request.store.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+/**
+ * 门店设置request
+ * @author	xiaozw
+ * @data	2019年1月12日	
+ */
+public class StoreSetingSetfcsRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+	/**门店I的*/
+	private Integer storeId;
+	private Integer isFindcardStatus; // 微养车找店状态，0：禁用，1：启用
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+	public Integer getIsFindcardStatus() {
+		return isFindcardStatus;
+	}
+
+	public void setIsFindcardStatus(Integer isFindcardStatus) {
+		this.isFindcardStatus = isFindcardStatus;
+	}
+
+	public String paramValidate() {
+		if (StringUtils.isEmpty(storeId)) {
+			return "参数:storeId不能为空";
+		}
+		if (StringUtils.isEmpty(isFindcardStatus)) {
+			return "参数:isFindcardStatus不能为空";
+		}
+		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "StoreSetingSetfcsRequest [getStoreId()=" + getStoreId() + ", getIsFindcardStatus()="
+				+ getIsFindcardStatus() + "]";
+	}
+}

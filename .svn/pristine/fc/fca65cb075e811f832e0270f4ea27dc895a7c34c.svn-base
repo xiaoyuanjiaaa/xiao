@@ -1,0 +1,155 @@
+package com.fc.member.store.user.handler;
+
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.fc.common.exception.ErrorCode;
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.member.store.user.entity.StoreAddress;
+import com.fc.member.store.user.service.IStoreAddressService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.store.user.StoreAddressCreateRequest;
+import com.fc.protocol.demo.request.store.user.StoreAddressDeleteRequest;
+import com.fc.protocol.demo.request.store.user.StoreAddressListRequest;
+import com.fc.protocol.demo.request.store.user.StoreAddressUpdateRequest;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+
+/**
+ * 收货地址
+ * @author wangq
+ * @date 2019/1/9
+ */
+@Component
+@Handler(module = "store")
+public class StoreAddressHandler {
+
+	private static Logger log = LoggerFactory.getLogger(StoreAddressHandler.class);
+
+	@Autowired
+	IStoreAddressService storeAddressService;
+
+	/**
+	 * 收货地址列表
+	 * @author	wangq
+	 * @see create_time ： 2019-1-9
+	 * @param addressRequest
+	 */
+	@ReqCodeMapping(requestClazz = StoreAddressListRequest.class)
+	public ProtocolResponse storeAddressList(StoreAddressListRequest addressRequest) {
+		log.info("查看收货地址列表：---------》 storeAddressList：{}", addressRequest);
+		ProtocolResponse response = ProtocolResponse.newInstance();
+		try {
+			//检验参数是否为空
+			String validate = addressRequest.paramValidate();
+			if (validate != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validate);
+			}
+			//获取分页对象分页
+			Page page = new Page();
+			page.setSidx("default_address");
+			page.setSord("desc");
+			page.setPage(addressRequest.getPage_no());
+			page.setRows(addressRequest.getPage_size());
+			page.setShowTotal(true);
+			//排序规则
+			List<StoreAddress> addressesList = storeAddressService.getStoreAddressList(page, addressRequest);
+			response.success().addData("sotre_address_list", addressesList).addData("count", page.getTotalResult());
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			e.printStackTrace();
+			response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+		}
+		return response;
+	}
+
+	/**
+	 * 新增收货地址
+	 * @author	wangq
+	 * @see create_time ： 2019-1-10
+	 * @param createRequest
+	 */
+	@ReqCodeMapping(requestClazz = StoreAddressCreateRequest.class)
+	public ProtocolResponse storeAddressCreate(StoreAddressCreateRequest createRequest) {
+		log.info("新增收货地址--------》storeAddressCreate：request{}", createRequest);
+		ProtocolResponse response = ProtocolResponse.newInstance();
+		try {
+			//验证参数是否为空
+			String validate = createRequest.paramValidate();
+			if (validate != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validate);
+			}
+			Map<String, Object> resultStatus = storeAddressService.insertStoreAddress(createRequest);
+			if (resultStatus.isEmpty()) {
+				response.success().msg("新增收货地址成功！");
+			} else {
+				response.error(ErrorCode.CREATE_ERROR.getValue()).msg(resultStatus.get("error").toString());
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			e.printStackTrace();
+			response.error(ErrorCode.CREATE_ERROR.getValue()).msg(ErrorCode.CREATE_ERROR.getDesc());
+		}
+		log.info("新增收货地址--------》storeAddressCreate：response{}", response);
+		return response;
+	}
+
+	/**
+	 * 删除收货地址
+	 * @author	wangq
+	 * @see create_time ： 2019-1-10 update_time ：2019/1/11
+	 * @param deleteRequest
+	 */
+	@ReqCodeMapping(requestClazz = StoreAddressDeleteRequest.class)
+	public ProtocolResponse storeAddressDelete(StoreAddressDeleteRequest deleteRequest) {
+		log.info("删除收货地址---------》storeAddressDelete:request{}", deleteRequest);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//检验参数是否为空
+			String validate = deleteRequest.paramValidate();
+			if (validate != null) {
+				return ProtocolResponse.newInstance().error(ErrorCode.PARAM_DATA.getValue()).msg(validate);
+			}
+			//得到不为空的结果后执行下一步操作
+			storeAddressService.deleteAddress(deleteRequest);
+			return response;
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			e.printStackTrace();
+			log.info("删除收货地址---------》response{}", response);
+			response = ProtocolResponse.newInstance().error(ErrorCode.ILLEGAL_DATA.getValue()).msg("代码异常，请联系开发人员!");
+		}
+		log.info("删除收货地址---------》storeAddressDelete:response{}", response);
+		return response;
+	}
+
+	/**
+	 * 编辑收货地址
+	 * @author	wangq
+	 * @see create_time ： 2019-1-10
+	 * @param updateRequest
+	 */
+	@ReqCodeMapping(requestClazz = StoreAddressUpdateRequest.class)
+	public ProtocolResponse storeAddressUpdate(StoreAddressUpdateRequest updateRequest) {
+		log.info("编辑收货地址---》storeAddressUpdate：request{}", updateRequest);
+		ProtocolResponse response = ProtocolResponse.newInstance();
+		try {
+			String validate = updateRequest.paramValidate();
+			if (validate != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validate);
+			}
+			storeAddressService.updateStoreAddress(updateRequest);
+		} catch (Exception e) {
+			response.error(ErrorCode.UPDATE_ERROR.getValue()).msg(ErrorCode.UPDATE_ERROR.getDesc());
+			log.error("storeAddressUpdate系统异常", e);
+		}
+		log.info("编辑收货地址---》storeAddressUpdate：response{}", response);
+		return response;
+
+	}
+}

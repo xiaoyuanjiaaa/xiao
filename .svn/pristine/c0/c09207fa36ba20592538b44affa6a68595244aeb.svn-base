@@ -1,0 +1,47 @@
+package com.fc.member.store.user.service;
+
+import java.util.Map;
+
+import com.fc.common.service.IService;
+import com.fc.member.store.user.entity.PublicUser;
+import com.fc.protocol.demo.request.fc.UserCreateUserRequest;
+import com.fc.protocol.demo.request.store.user.PublicUserByPhoneRequest;
+import com.fc.protocol.demo.request.store.user.PublicUserByUserNameRequest;
+import com.fc.protocol.demo.request.store.user.PublicUserUpdatecpRequest;
+
+/**
+ * <p>Title: PublicUser</p>
+ * <p>Description:  Service 接口</p>
+ * @author yangd
+ * @date 2019-01-02 16:49:49
+ */
+public interface IPublicUserService extends IService<PublicUser> {
+
+	/**
+	 * 插入数据
+	 * @param obj
+	 */
+	int insertSelective(PublicUser obj);
+
+	/**插入public_user数据*/
+	Map<String, String> insertUser(UserCreateUserRequest request, Integer fcUserId);
+
+	/**根据id更改密码*/
+	Map<String, String> updatePasswordByUserId(Integer publicUserId, String password) throws Exception;
+
+	/**修改密码**/
+	int updatePassword(PublicUser publicUser) throws Exception;
+
+	/**根据用户名查询用户**/
+	PublicUser getPublicUserByUserName(PublicUserByUserNameRequest request);
+
+	/**根据手机号查询用户**/
+	PublicUser getPublicUserByPhone(PublicUserByPhoneRequest request);
+
+	/**根据手机号查询用户**/
+	Map<String, String> UpdateByCashPassword(PublicUserUpdatecpRequest request) throws Exception;
+
+	/**修改手机号码*/
+	void updatePhoneMob(Map<String, String> param);
+
+}

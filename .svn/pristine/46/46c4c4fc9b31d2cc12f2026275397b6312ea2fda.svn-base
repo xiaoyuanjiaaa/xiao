@@ -1,0 +1,59 @@
+package com.fc.protocol.client.demo.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fc.protocol.client.IProtocolClient;
+import com.fc.protocol.client.demo.config.ProtocolClientPool;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.store.user.StoreDictionariesRequest;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+/**
+ * 字典表
+ * @author jiahx
+ * @date 2019-1-7
+ */
+@Api(tags = "StoreDictionariesController", description = "字典表")
+@RestController
+@RequestMapping("/store/dictionaries")
+public class StoreDictionariesController {
+
+	private static Logger log = LoggerFactory.getLogger(StoreDictionariesController.class);
+
+	@Autowired
+	private ProtocolClientPool protocolClientPool;
+
+	/**
+	 * 查询字典表
+	 * @author	jiahx
+	 * @see update_name:jiahx update_time:2019-1-7
+	 * @param request
+	 * @param response
+	 * @param storeDictionariesRequest
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/querystoredictionaries", method = { RequestMethod.POST, RequestMethod.GET })
+	@ApiOperation(value = "通过Key查询字典表", notes = "通过Key查询字典表")
+	@ResponseBody
+	public Object queryStoreDictionaries(HttpServletRequest request, HttpServletResponse response,StoreDictionariesRequest storeDictionariesRequest) throws Exception {
+		log.info("echo-request:{}", storeDictionariesRequest);
+		log.info("protocolClientPool==null?===>{}", (protocolClientPool == null));
+		IProtocolClient userClient = protocolClientPool.userClient();
+		log.info("userClient==null?===>{}", (userClient == null));
+		ProtocolResponse echoResponse = protocolClientPool.userClient().sendAndReceived(storeDictionariesRequest);
+		log.info("echo-response:{}", echoResponse);
+		return echoResponse;
+	}
+}

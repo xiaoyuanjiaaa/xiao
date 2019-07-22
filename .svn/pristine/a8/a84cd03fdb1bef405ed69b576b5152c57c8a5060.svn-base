@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.store.user.dao.IStoreWechatDao">
+	<resultMap id="StoreWechatMap" type="com.fc.member.store.user.entity.StoreWechat">
+        <id property="storeWechatId" column="store_wechat_id"/>
+        <id property="storeId" column="store_id"/>
+        <id property="appIndexUrl" column="app_index_url"/>
+        <id property="qrCodeUrl" column="qr_code_url"/>
+        <id property="status" column="status"/>
+        <id property="isCouponOn" column="is_coupon_on"/>
+        <id property="isPayWithCouponOn" column="is_pay_with_coupon_on"/>
+        <id property="openid" column="openid"/>
+        <id property="unionid" column="unionid"/>
+        <id property="isStoreWriteoffCard" column="is_store_writeoff_card"/>
+        <id property="payQrCodeUrl" column="pay_qr_code_url"/>
+        <id property="cardListQrCodeUrl" column="card_list_qr_code_url"/>
+        <id property="isStoreWriteoffPlan" column="is_store_writeoff_plan"/>
+        <id property="storeMallQrCodeUrl" column="store_mall_qr_code_url"/>
+        <id property="isSstorePackage" column="is_sstore_package"/>
+        <id property="isSstoreServiceAppoint" column="is_sstore_service_appoint"/>
+        <id property="storecardQrCodeUrl" column="storecard_qr_code_url"/>
+        <id property="storeAppointmentQrCodeUrl" column="store_appointment_qr_code_url"/>
+        <id property="updateTime" column="update_time"/>
+        <id property="activeTime" column="active_time"/>
+        <id property="applyTime" column="apply_time"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="StoreWechatMap" >
+		select * from store_wechat where 
+	        store_wechat_id = #{storeWechatId} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.store.user.entity.StoreWechat" useGeneratedKeys="true">
+		insert into store_wechat(store_wechat_id , store_id , app_index_url , qr_code_url , status , is_coupon_on , is_pay_with_coupon_on , openid , unionid , is_store_writeoff_card , pay_qr_code_url , card_list_qr_code_url , is_store_writeoff_plan , store_mall_qr_code_url , is_sstore_package , is_sstore_service_appoint , storecard_qr_code_url , store_appointment_qr_code_url , update_time , active_time , apply_time  )
+    	values(#{storeWechatId} ,#{storeId} ,#{appIndexUrl} ,#{qrCodeUrl} ,#{status} ,#{isCouponOn} ,#{isPayWithCouponOn} ,#{openid} ,#{unionid} ,#{isStoreWriteoffCard} ,#{payQrCodeUrl} ,#{cardListQrCodeUrl} ,#{isStoreWriteoffPlan} ,#{storeMallQrCodeUrl} ,#{isSstorePackage} ,#{isSstoreServiceAppoint} ,#{storecardQrCodeUrl} ,#{storeAppointmentQrCodeUrl} ,#{updateTime} ,#{activeTime} ,#{applyTime} )
+	</insert> 
+	
+	<insert id="insertSelective" parameterType="com.fc.member.store.user.entity.StoreWechat" useGeneratedKeys="true">
+		insert into store_wechat
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="storeWechatId != null">store_wechat_id,</if>
+					<if test="storeId != null">store_id,</if>
+					<if test="appIndexUrl != null">app_index_url,</if>
+					<if test="qrCodeUrl != null">qr_code_url,</if>
+					<if test="status != null">status,</if>
+					<if test="isCouponOn != null">is_coupon_on,</if>
+					<if test="isPayWithCouponOn != null">is_pay_with_coupon_on,</if>
+					<if test="openid != null">openid,</if>
+					<if test="unionid != null">unionid,</if>
+					<if test="isStoreWriteoffCard != null">is_store_writeoff_card,</if>
+					<if test="payQrCodeUrl != null">pay_qr_code_url,</if>
+					<if test="cardListQrCodeUrl != null">card_list_qr_code_url,</if>
+					<if test="isStoreWriteoffPlan != null">is_store_writeoff_plan,</if>
+					<if test="storeMallQrCodeUrl != null">store_mall_qr_code_url,</if>
+					<if test="isSstorePackage != null">is_sstore_package,</if>
+					<if test="isSstoreServiceAppoint != null">is_sstore_service_appoint,</if>
+					<if test="storecardQrCodeUrl != null">storecard_qr_code_url,</if>
+					<if test="storeAppointmentQrCodeUrl != null">store_appointment_qr_code_url,</if>
+					<if test="updateTime != null">update_time,</if>
+					<if test="activeTime != null">active_time,</if>
+					<if test="applyTime != null">apply_time</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="storeWechatId != null">#{storeWechatId},</if>
+					<if test="storeId != null">#{storeId},</if>
+					<if test="appIndexUrl != null">#{appIndexUrl},</if>
+					<if test="qrCodeUrl != null">#{qrCodeUrl},</if>
+					<if test="status != null">#{status},</if>
+					<if test="isCouponOn != null">#{isCouponOn},</if>
+					<if test="isPayWithCouponOn != null">#{isPayWithCouponOn},</if>
+					<if test="openid != null">#{openid},</if>
+					<if test="unionid != null">#{unionid},</if>
+					<if test="isStoreWriteoffCard != null">#{isStoreWriteoffCard},</if>
+					<if test="payQrCodeUrl != null">#{payQrCodeUrl},</if>
+					<if test="cardListQrCodeUrl != null">#{cardListQrCodeUrl},</if>
+					<if test="isStoreWriteoffPlan != null">#{isStoreWriteoffPlan},</if>
+					<if test="storeMallQrCodeUrl != null">#{storeMallQrCodeUrl},</if>
+					<if test="isSstorePackage != null">#{isSstorePackage},</if>
+					<if test="isSstoreServiceAppoint != null">#{isSstoreServiceAppoint},</if>
+					<if test="storecardQrCodeUrl != null">#{storecardQrCodeUrl},</if>
+					<if test="storeAppointmentQrCodeUrl != null">#{storeAppointmentQrCodeUrl},</if>
+					<if test="updateTime != null">#{updateTime},</if>
+					<if test="activeTime != null">#{activeTime},</if>
+					<if test="applyTime != null">#{applyTime}</if>
+			</trim>
+	</insert> 
+	
+	<update id="update" parameterType="com.fc.member.store.user.entity.StoreWechat">
+		update store_wechat
+		<set>
+		    	<if test="storeId != null">store_id = #{storeId},</if>
+		    	<if test="appIndexUrl != null">app_index_url = #{appIndexUrl},</if>
+		    	<if test="qrCodeUrl != null">qr_code_url = #{qrCodeUrl},</if>
+		    	<if test="status != null">status = #{status},</if>
+		    	<if test="isCouponOn != null">is_coupon_on = #{isCouponOn},</if>
+		    	<if test="isPayWithCouponOn != null">is_pay_with_coupon_on = #{isPayWithCouponOn},</if>
+		    	<if test="openid != null">openid = #{openid},</if>
+		    	<if test="unionid != null">unionid = #{unionid},</if>
+		    	<if test="isStoreWriteoffCard != null">is_store_writeoff_card = #{isStoreWriteoffCard},</if>
+		    	<if test="payQrCodeUrl != null">pay_qr_code_url = #{payQrCodeUrl},</if>
+		    	<if test="cardListQrCodeUrl != null">card_list_qr_code_url = #{cardListQrCodeUrl},</if>
+		    	<if test="isStoreWriteoffPlan != null">is_store_writeoff_plan = #{isStoreWriteoffPlan},</if>
+		    	<if test="storeMallQrCodeUrl != null">store_mall_qr_code_url = #{storeMallQrCodeUrl},</if>
+		    	<if test="isSstorePackage != null">is_sstore_package = #{isSstorePackage},</if>
+		    	<if test="isSstoreServiceAppoint != null">is_sstore_service_appoint = #{isSstoreServiceAppoint},</if>
+		    	<if test="storecardQrCodeUrl != null">storecard_qr_code_url = #{storecardQrCodeUrl},</if>
+		    	<if test="storeAppointmentQrCodeUrl != null">store_appointment_qr_code_url = #{storeAppointmentQrCodeUrl},</if>
+		    	<if test="updateTime != null">update_time = #{updateTime},</if>
+		    	<if test="activeTime != null">active_time = #{activeTime},</if>
+		    	<if test="applyTime != null">apply_time = #{applyTime},</if>
+		</set>
+		where 
+	        store_wechat_id = #{storeWechatId} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from store_wechat where 
+	        store_wechat_id = #{storeWechatId} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.store.user.entity.StoreWechat" resultMap="StoreWechatMap" >
+		select * from store_wechat 
+		<where>
+		       <if test="storeWechatId != null">
+					AND store_wechat_id = #{storeWechatId}
+				</if>
+		       <if test="storeId != null">
+					AND store_id = #{storeId}
+				</if>
+		       <if test="appIndexUrl != null">
+					AND app_index_url = #{appIndexUrl}
+				</if>
+		       <if test="qrCodeUrl != null">
+					AND qr_code_url = #{qrCodeUrl}
+				</if>
+		       <if test="status != null">
+					AND status = #{status}
+				</if>
+		       <if test="isCouponOn != null">
+					AND is_coupon_on = #{isCouponOn}
+				</if>
+		       <if test="isPayWithCouponOn != null">
+					AND is_pay_with_coupon_on = #{isPayWithCouponOn}
+				</if>
+		       <if test="openid != null">
+					AND openid = #{openid}
+				</if>
+		       <if test="unionid != null">
+					AND unionid = #{unionid}
+				</if>
+		       <if test="isStoreWriteoffCard != null">
+					AND is_store_writeoff_card = #{isStoreWriteoffCard}
+				</if>
+		       <if test="payQrCodeUrl != null">
+					AND pay_qr_code_url = #{payQrCodeUrl}
+				</if>
+		       <if test="cardListQrCodeUrl != null">
+					AND card_list_qr_code_url = #{cardListQrCodeUrl}
+				</if>
+		       <if test="isStoreWriteoffPlan != null">
+					AND is_store_writeoff_plan = #{isStoreWriteoffPlan}
+				</if>
+		       <if test="storeMallQrCodeUrl != null">
+					AND store_mall_qr_code_url = #{storeMallQrCodeUrl}
+				</if>
+		       <if test="isSstorePackage != null">
+					AND is_sstore_package = #{isSstorePackage}
+				</if>
+		       <if test="isSstoreServiceAppoint != null">
+					AND is_sstore_service_appoint = #{isSstoreServiceAppoint}
+				</if>
+		       <if test="storecardQrCodeUrl != null">
+					AND storecard_qr_code_url = #{storecardQrCodeUrl}
+				</if>
+		       <if test="storeAppointmentQrCodeUrl != null">
+					AND store_appointment_qr_code_url = #{storeAppointmentQrCodeUrl}
+				</if>
+		       <if test="updateTime != null">
+					AND update_time = #{updateTime}
+				</if>
+		       <if test="activeTime != null">
+					AND active_time = #{activeTime}
+				</if>
+		       <if test="applyTime != null">
+					AND apply_time = #{applyTime}
+				</if>
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="StoreWechatMap" >
+		select * from store_wechat  
+		<where>
+		       <if test="condition.storeWechatId != null">
+					AND store_wechat_id = #{condition.storeWechatId}
+				</if>
+		       <if test="condition.storeId != null">
+					AND store_id = #{condition.storeId}
+				</if>
+		       <if test="condition.appIndexUrl != null">
+					AND app_index_url = #{condition.appIndexUrl}
+				</if>
+		       <if test="condition.qrCodeUrl != null">
+					AND qr_code_url = #{condition.qrCodeUrl}
+				</if>
+		       <if test="condition.status != null">
+					AND status = #{condition.status}
+				</if>
+		       <if test="condition.isCouponOn != null">
+					AND is_coupon_on = #{condition.isCouponOn}
+				</if>
+		       <if test="condition.isPayWithCouponOn != null">
+					AND is_pay_with_coupon_on = #{condition.isPayWithCouponOn}
+				</if>
+		       <if test="condition.openid != null">
+					AND openid = #{condition.openid}
+				</if>
+		       <if test="condition.unionid != null">
+					AND unionid = #{condition.unionid}
+				</if>
+		       <if test="condition.isStoreWriteoffCard != null">
+					AND is_store_writeoff_card = #{condition.isStoreWriteoffCard}
+				</if>
+		       <if test="condition.payQrCodeUrl != null">
+					AND pay_qr_code_url = #{condition.payQrCodeUrl}
+				</if>
+		       <if test="condition.cardListQrCodeUrl != null">
+					AND card_list_qr_code_url = #{condition.cardListQrCodeUrl}
+				</if>
+		       <if test="condition.isStoreWriteoffPlan != null">
+					AND is_store_writeoff_plan = #{condition.isStoreWriteoffPlan}
+				</if>
+		       <if test="condition.storeMallQrCodeUrl != null">
+					AND store_mall_qr_code_url = #{condition.storeMallQrCodeUrl}
+				</if>
+		       <if test="condition.isSstorePackage != null">
+					AND is_sstore_package = #{condition.isSstorePackage}
+				</if>
+		       <if test="condition.isSstoreServiceAppoint != null">
+					AND is_sstore_service_appoint = #{condition.isSstoreServiceAppoint}
+				</if>
+		       <if test="condition.storecardQrCodeUrl != null">
+					AND storecard_qr_code_url = #{condition.storecardQrCodeUrl}
+				</if>
+		       <if test="condition.storeAppointmentQrCodeUrl != null">
+					AND store_appointment_qr_code_url = #{condition.storeAppointmentQrCodeUrl}
+				</if>
+		       <if test="condition.updateTime != null">
+					AND update_time = #{condition.updateTime}
+				</if>
+		       <if test="condition.activeTime != null">
+					AND active_time = #{condition.activeTime}
+				</if>
+		       <if test="condition.applyTime != null">
+					AND apply_time = #{condition.applyTime}
+				</if>
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

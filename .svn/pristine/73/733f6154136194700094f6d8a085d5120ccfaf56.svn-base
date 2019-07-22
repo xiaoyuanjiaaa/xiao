@@ -1,0 +1,132 @@
+package com.fc.member.store.user.handler;
+
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.fc.common.exception.ErrorCode;
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.member.store.user.entity.StoreFollow;
+import com.fc.member.store.user.service.IStoreFollowService;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.store.user.StoreFollowCreateRequest;
+import com.fc.protocol.demo.request.store.user.StoreFollowDeleteRequest;
+import com.fc.protocol.demo.request.store.user.StoreFollowListRequest;
+import com.fc.protocol.server.handler.Handler;
+import com.fc.protocol.server.handler.ReqCodeMapping;
+
+/**
+ * 门店关注
+ * @author wangq
+ * @date	2019/1/8
+ */
+@Component
+@Handler(module = "store")
+public class StoreFollowHandler {
+
+	private static Logger log = LoggerFactory.getLogger(StoreFollowHandler.class);
+
+	@Autowired
+	IStoreFollowService storeFollowService;
+
+	/**
+	 *  门店关注列表
+	 * @author	wangq
+	 * @see update_name:wangq update_time:2019-1-8
+	 * @param followRequest
+	 */
+	@ReqCodeMapping(requestClazz = StoreFollowListRequest.class)
+	public ProtocolResponse storeFollowList(StoreFollowListRequest followRequest) {
+		log.info("查看门店关注列表-----> storeFollowList:request{}", followRequest);
+		ProtocolResponse response = ProtocolResponse.newInstance();
+		try {
+			//检验参数是否为空
+			String paramQuery = followRequest.paramValidate();
+			if (paramQuery != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(paramQuery);
+			}
+			//分页对象
+			Page page = new Page();
+			page.setPage(followRequest.getPage_no());
+			page.setRows(followRequest.getPage_size());
+			page.setShowTotal(true);
+			//排序规则，按关注时间降序
+			List<StoreFollow> storeFollowsList = storeFollowService.getStoreFollowList(page, followRequest);
+			response.success().addData("store_follow_list", storeFollowsList).addData("count", page.getTotalResult());
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			e.printStackTrace();
+			response.error(ErrorCode.QUERY_ERROR.getValue()).msg(ErrorCode.QUERY_ERROR.getDesc());
+		}
+		log.info("查看门店关注列表-----> storeFollowList:response{}", response);
+		return response;
+	}
+
+	/**
+	 * 添加门店关注
+	 * @author	wangq
+	 * @see update_name:wangq update_time:2019-1-8
+	 * @param followRequest
+	 */
+	@ReqCodeMapping(requestClazz = StoreFollowCreateRequest.class)
+	public ProtocolResponse storeFollowCreate(StoreFollowCreateRequest followRequest) {
+		log.info("新增门店关注请求参数：--------》storeFollowCreate:request:{}", followRequest);
+		ProtocolResponse response = ProtocolResponse.newInstance();
+		try {
+			//检验参数是否为空
+			String validateAdd = followRequest.paramValidate();
+			if (validateAdd != null) {
+				return response.error(ErrorCode.PARAM_DATA.getValue()).msg(validateAdd);
+			}
+			Map<String, Object> resultStatus = storeFollowService.insertStoreFollow(followRequest);
+			if (resultStatus.isEmpty()) {
+				response.success().msg("门店关注成功！");
+			} else {
+				response.error(ErrorCode.CREATE_ERROR.getValue()).msg(resultStatus.get("error").toString());
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			e.printStackTrace();
+			response.error(ErrorCode.CREATE_ERROR.getValue()).msg(ErrorCode.CREATE_ERROR.getDesc());
+		}
+		log.info("新增门店关注请求参数：--------》storeFollowCreate:response{}", response);
+		return response;
+
+	}
+
+	/**
+	 * 取消门店关注
+	 * @author	wangq
+	 * @see update_name:wangq update_time:2019-1-7
+	 * @param deleteRequest
+	 * @return
+	 */
+	@ReqCodeMapping(requestClazz = StoreFollowDeleteRequest.class)
+	public ProtocolResponse storeFollowDelete(StoreFollowDeleteRequest deleteRequest) {
+		log.info("取消门店关注------->storeFollowDelete:request{}", deleteRequest);
+		ProtocolResponse response = ProtocolResponse.newInstance().success();
+		try {
+			//检验参数是否空
+			String paramValidate = deleteRequest.paramValidate();
+			if (paramValidate != null) {
+				return ProtocolResponse.newInstance().error(ErrorCode.PARAM_DATA.getValue()).msg(paramValidate);
+			}
+			//不为空执行下一步操做
+			log.info("需要取消的门店信息：{}", deleteRequest.getStoreId(), deleteRequest.getShopId());
+			storeFollowService.deleteSelective(deleteRequest.getStoreId(), deleteRequest.getShopId());
+			return response;
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			e.printStackTrace();
+			log.info("取消门店关注----------》response:{}", response);
+			response = ProtocolResponse.newInstance().error(ErrorCode.ILLEGAL_DATA.getValue()).msg("代码异常，请联系开发人员!");
+		}
+		log.info("取消门店关注返回结果--------》storeFollowDelete:response{}", response);
+		return response;
+	}
+
+}

@@ -1,0 +1,26 @@
+package com.fc.member.store.user.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.member.store.user.dao.IStoreFollowDao;
+import com.fc.member.store.user.service.IStoreFollowService;
+import com.fc.member.store.user.entity.StoreFollow;
+/**
+ * <p>Title: StoreFollow</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:06
+ */
+@Service("storeFollowService")
+public class StoreFollowServiceImp extends ServiceImpl<StoreFollow> implements IStoreFollowService{
+
+	@Autowired
+	private IStoreFollowDao storeFollowDao;
+	
+	@Override
+	protected IMapper<StoreFollow> getDao() {
+		return storeFollowDao;
+	}
+}

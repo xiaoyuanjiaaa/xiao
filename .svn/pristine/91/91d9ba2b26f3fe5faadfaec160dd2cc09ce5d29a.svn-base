@@ -1,0 +1,15 @@
+package com.fc.member.master.user.service;
+
+import com.fc.common.service.IService;
+import com.fc.member.master.user.entity.MasterStoreWorker;
+/**
+ * <p>Title: MasterStoreWorker</p>
+ * <p>Description: 关联门店表 Service 接口</p>
+ * @author yangd
+ * @date 2019-01-15 10:09:29
+ */
+public interface IMasterStoreWorkerService extends IService<MasterStoreWorker>{
+	
+	// 插入数据
+	int insertSelective(MasterStoreWorker obj);
+}

@@ -1,0 +1,18 @@
+package com.fc.member.master.user.dao;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.fc.common.plugin.mybatis.IMapper;
+
+import com.fc.member.master.user.entity.MasterUserSelfCert;
+/**
+ * <p>Title: MasterUserSelfCert</p>
+ * <p>Description: 师傅自传证书表 DAO层</p>
+ * @author yangd
+ * @date 2019-01-15 10:09:30
+ */
+@Mapper
+public interface IMasterUserSelfCertDao extends IMapper<MasterUserSelfCert>{
+	// 插入数据
+	int insertSelective(MasterUserSelfCert obj);
+}

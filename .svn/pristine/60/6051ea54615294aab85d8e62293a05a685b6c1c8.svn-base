@@ -1,0 +1,230 @@
+package com.fc.protocol.demo.request.store.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+import io.swagger.annotations.ApiModelProperty;
+import org.apache.commons.lang.StringUtils;
+/**@author zhuj
+ *@date 2018/12/28
+ * 银行卡信息请求参数实体类
+ *
+ * @param
+ */
+public class CreateStoreBankCardRequest extends ProtocolRequest {
+    @ApiModelProperty(value = " 门店银行卡id", name = "storeBankCardId", example = "1")
+    private Integer storeBankCardId; // 门店银行卡id
+    @ApiModelProperty(value = "门店ID", name = "storeId", example = "1")
+    private Integer storeId; // 门店ID
+    @ApiModelProperty(value = "开户银行", name = "cardBankName", example = "1")
+    private String cardBankName; // 开户银行
+    @ApiModelProperty(value = "银行卡号", name = "bankCardNo", example = "1")
+    private String bankCardNo; // 银行卡号
+    @ApiModelProperty(value = "银行开户姓名", name = "bankHoldName", example = "1")
+    private String bankHoldName; // 银行开户姓名
+    @ApiModelProperty(value = "开户支行名称", name = "depositBank", example = "1")
+    private String depositBank; // 开户支行名称
+    @ApiModelProperty(value = "开户所在地区ID", name = "regionId", example = "1")
+    private Integer regionId; // 开户所在地区ID
+    @ApiModelProperty(value = "开户所在地区", name = "cardAddress", example = "1")
+    private String cardAddress; // 开户所在地区
+    @ApiModelProperty(value = "审核时间", name = "checkTime", example = "1")
+    private Integer checkTime; // 审核时间
+    @ApiModelProperty(value = "审核备注", name = "remark", example = "1")
+    private String remark; // 审核备注
+    private Integer updateTime; // 最新修改时间
+    private Integer createTime; // 创建时间
+    @ApiModelProperty(value = "开户所详细地址", name = "address", example = "1")
+    private String address; // 开户所详细地址
+    @ApiModelProperty(value = "银行代码", name = "bankCode", example = "1")
+    private String bankCode; // 银行代码
+    @ApiModelProperty(value = "银行卡审核状态", name = "status", example = "1")
+    private Integer status; // 银行卡审核状态(0:未审核,1:不通过,2:通过)
+    public Integer getCheckTime() {
+        return checkTime;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getBankCode() {
+        return bankCode;
+    }
+
+    public void setBankCode(String bankCode) {
+        this.bankCode = bankCode;
+    }
+
+    public void setCheckTime(Integer checkTime) {
+        this.checkTime = checkTime;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public Integer getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Integer updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Integer getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Integer createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+
+    public Integer getStoreBankCardId() {
+        return storeBankCardId;
+    }
+
+    public void setStoreBankCardId(Integer storeBankCardId) {
+        this.storeBankCardId = storeBankCardId;
+    }
+
+    public Integer getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Integer storeId) {
+        this.storeId = storeId;
+    }
+
+    public String getCardBankName() {
+        return cardBankName;
+    }
+
+    public void setCardBankName(String cardBankName) {
+        this.cardBankName = cardBankName;
+    }
+
+    public String getBankCardNo() {
+        return bankCardNo;
+    }
+
+    public void setBankCardNo(String bankCardNo) {
+        this.bankCardNo = bankCardNo;
+    }
+
+    public String getBankHoldName() {
+        return bankHoldName;
+    }
+
+    public void setBankHoldName(String bankHoldName) {
+        this.bankHoldName = bankHoldName;
+    }
+
+    public String getDepositBank() {
+        return depositBank;
+    }
+
+    public void setDepositBank(String depositBank) {
+        this.depositBank = depositBank;
+    }
+
+    public Integer getRegionId() {
+        return regionId;
+    }
+
+    public void setRegionId(Integer regionId) {
+        this.regionId = regionId;
+    }
+
+    public String getCardAddress() {
+        return cardAddress;
+    }
+
+    public void setCardAddress(String cardAddress) {
+        this.cardAddress = cardAddress;
+    }
+
+    /**
+     * 判断传人参数是否为空
+     *
+     * @param
+     */
+    public String paramValidatecheck() {
+        if (storeId == null) {
+            return "参数：storeId不能为空";
+        }
+        return null;
+    }
+    /**
+     * 判断传人参数是否为空
+     *
+     * @param
+     */
+    public String paramValidate() {
+        if (storeBankCardId==null) {
+            return "参数：storeBankCardId不能为空";
+        }
+        if (storeId==null) {
+            return "参数：storeId不能为空";
+        }
+        if (StringUtils.isBlank(cardBankName)) {
+            return "参数：cardBankName不能为空";
+        }
+        if (StringUtils.isBlank(cardBankName)) {
+            return "参数：storeBankCardId不能为空";
+        }
+        if (StringUtils.isBlank(bankCardNo)) {
+            return "参数：bankCardNo不能为空";
+        }
+        if (StringUtils.isBlank(bankHoldName)) {
+            return "参数：storeBankCardId不能为空";
+        }
+        if (StringUtils.isBlank(depositBank)) {
+            return "参数：depositBank不能为空";
+        }
+        if (regionId==null) {
+            return "参数：regionId不能为空";
+        }
+        if (StringUtils.isBlank(cardAddress)) {
+            return "参数：cardAddress不能为空";
+        }
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        return "StoreBankCardRequest [storeId=" + storeId + ", " +
+                "storeBankCardId=" + storeBankCardId + ", " +
+                "cardAddress=" + cardAddress + ", " +
+                "regionId=" + regionId + ", " +
+                "depositBank=" + depositBank + ", " +
+                "bankHoldName=" + bankHoldName + ", " +
+                "bankCardNo=" + bankCardNo + ", " +
+                "cardBankName=" + cardBankName + ", " +
+                "checkTime=" + checkTime + ", " +
+                "remark=" + remark + ", " +
+                "updateTime=" + updateTime + ", " +
+                "createTime=" + createTime + ", " +
+                "address=" + address + ", " +
+                "bankCode=" + bankCode + ", " +
+                "status=" + status + ", " +
+                "getVersion()=" + getVersion() + ", getReqCode()=" + getReqCode()
+                + ", getTraceId()=" + getTraceId() + "]";
+    }
+
+}

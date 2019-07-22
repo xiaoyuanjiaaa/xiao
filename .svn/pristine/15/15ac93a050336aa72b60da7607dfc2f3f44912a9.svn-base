@@ -1,0 +1,43 @@
+package com.fc.protocol.demo.request.wechatmaintain.user;
+
+import org.springframework.util.StringUtils;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+
+/**
+ * 微养车用户会员卡 参数
+ * @author yangd
+ * @date 2019年1月4日
+ */
+public class WmsUserRelationGetRequest extends ProtocolRequest {
+
+	private static final long serialVersionUID = 1L;
+	private Long wechatMaintainSstoreUserRelationId; // 主键id
+
+	/**
+	 * 验证方法
+	 * @author yangd
+	 * @see update_name:yangd update_time:2019-01-09
+	 * @return
+	 */
+	public String paramValidate() {
+		if (StringUtils.isEmpty(wechatMaintainSstoreUserRelationId)) {
+			return "参数 wechatMaintainSstoreUserRelationId 不能为空";
+		}
+		return null;
+	}
+
+	public Long getWechatMaintainSstoreUserRelationId() {
+		return wechatMaintainSstoreUserRelationId;
+	}
+
+	public void setWechatMaintainSstoreUserRelationId(Long wechatMaintainSstoreUserRelationId) {
+		this.wechatMaintainSstoreUserRelationId = wechatMaintainSstoreUserRelationId;
+	}
+
+	@Override
+	public String toString() {
+		return "WechatMaintainCouponSstoreUserRequest [wechatMaintainCouponSstoreUserId="
+				+ ", wechatMaintainSstoreUserRelationId=" + wechatMaintainSstoreUserRelationId + "]";
+	}
+}

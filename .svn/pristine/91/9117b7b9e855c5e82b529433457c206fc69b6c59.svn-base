@@ -1,0 +1,28 @@
+package com.fc.member.store.user.service;
+
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.service.IService;
+import com.fc.member.store.user.entity.StoreBorrowDetail;
+
+import java.util.Map;
+
+/**
+ * <p>Title: StoreBorrowDetail</p>
+ * <p>Description:  Service 接口</p>
+ * @author yangd
+ * @date 2018-12-27 16:31:05
+ */
+public interface IStoreBorrowDetailService extends IService<StoreBorrowDetail>{
+    /***@author zhuj
+     *@date 2018/12/28
+     * @param request
+     * @description 添加门店借款记录
+     */
+    boolean inputStoreBorrowInfo(StoreBorrowDetail request) throws Exception;
+    /***@author zhuj
+     *@date 2018/12/28
+     * @param request
+     * @description 获取门店借款记录列表
+     */
+    Map<String, Object> getStoreBorrowList(Page page, StoreBorrowDetail request);
+}

@@ -1,0 +1,51 @@
+package com.fc.protocol.demo.request.store.user;
+
+import com.fc.protocol.common.message.body.ProtocolRequest;
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * @param
+ * @author zhuj
+ * @date 2018/12/28
+ * 门店借款记录请求参数实体类
+ */
+public class GetStoreBorrowInfoRequest extends ProtocolRequest {
+    private static final long serialVersionUID = 1L;
+    @ApiModelProperty(value = "门店借款记录id", name = "storeBorrowDetailId", example = "1")
+    private Integer storeBorrowDetailId; // 门店借款记录id
+
+
+    /**
+     * 判断传人参数是否为空
+     *
+     * @param
+     */
+    public String paramValidatecheck() {
+        if (storeBorrowDetailId == null) {
+            return "参数：storeBorrowDetailId不能为空";
+        }
+        return null;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public Integer getStoreBorrowDetailId() {
+        return storeBorrowDetailId;
+    }
+
+    public void setStoreBorrowDetailId(Integer storeBorrowDetailId) {
+        this.storeBorrowDetailId = storeBorrowDetailId;
+    }
+
+
+    @Override
+    public String toString() {
+        return "GetStoreBorrowInfoRequest{" + "storeBorrowDetailId=" + storeBorrowDetailId
+                + "getVersion()=" + getVersion()
+                + ", getReqCode()=" + getReqCode()
+                + ", getTraceId()=" + getTraceId()
+                 + "}";
+    }
+}

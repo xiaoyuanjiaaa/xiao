@@ -1,0 +1,82 @@
+package com.fc.protocol.client.demo.controller;
+
+import com.fc.protocol.client.demo.config.ProtocolClientPool;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.demo.request.store.user.CreateStoreBorrowInfoRequest;
+import com.fc.protocol.demo.request.store.user.GetStoreBorrowInfoRequest;
+import com.fc.protocol.demo.request.store.user.GetStoreBorrowListRequest;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@Api(tags = "StoreBorrowDetailController", description = "门店借款记录")
+@RestController
+@RequestMapping("/api/StoreBorrowDetail")
+public class StoreBorrowDetailController {
+    private static Logger log = LoggerFactory.getLogger(StoreBorrowDetailController.class);
+    @Autowired
+    private ProtocolClientPool protocolClientPool;
+    /**@author zhuj
+     *@date 2018/12/28
+     * 添加门店借款记录
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/createStoreBorrowInfo", method = { RequestMethod.POST, RequestMethod.GET })
+    @ApiOperation(value = "添加门店借款记录", notes = "添加门店借款记录  by zhuj")
+    @ResponseBody
+    public Object createStoreBorrowInfo(CreateStoreBorrowInfoRequest storeBorrowRequest,
+                                      HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ProtocolResponse echoResponse = protocolClientPool.userClient().sendAndReceived(storeBorrowRequest);
+        log.info("返回请求结果", echoResponse);
+        return echoResponse;
+    }
+    /**@author zhuj
+     *@date 2018/12/28
+     * 获取门店借款记录详情
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/getStoreBorrowInfo", method = { RequestMethod.POST, RequestMethod.GET })
+    @ApiOperation(value = "获取门店借款记录详情", notes = "获取门店借款记录详情  by zhuj")
+    @ResponseBody
+    public Object getStoreBorrowInfo(GetStoreBorrowInfoRequest storeBorrowInfoRequest,
+                                         HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ProtocolResponse echoResponse = protocolClientPool.userClient().sendAndReceived(storeBorrowInfoRequest);
+        log.info("返回请求结果", echoResponse);
+        return echoResponse;
+    }
+
+    /**@author zhuj
+     *@date 2018/12/28
+     * 获取门店借款记录列表
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/getStoreBorrowList", method = { RequestMethod.POST, RequestMethod.GET })
+    @ApiOperation(value = "获取门店借款记录列表", notes = "获取门店借款记录列表  by zhuj")
+    @ResponseBody
+    public Object getStoreBorrowList(GetStoreBorrowListRequest getStoreBorrowListRequest,
+                                         HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ProtocolResponse echoResponse = protocolClientPool.userClient().sendAndReceived(getStoreBorrowListRequest);
+        log.info("返回请求结果", echoResponse);
+        return echoResponse;
+    }
+
+
+}

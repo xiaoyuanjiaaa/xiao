@@ -1,0 +1,141 @@
+package com.fc.member.wechatplatform.user.service.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.fc.protocol.demo.request.wechatplatform.user.WpServiceCountSaveRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.fc.common.plugin.mybatis.IMapper;
+import com.fc.common.plugin.mybatis.Page;
+import com.fc.common.plugin.mybatis.PageQuery;
+import com.fc.common.service.impl.ServiceImpl;
+import com.fc.common.util.DateTimeUtils;
+import com.fc.member.wechatplatform.user.dao.IWechatPlatformServiceCountDao;
+import com.fc.member.wechatplatform.user.entity.WechatPlatformServiceCount;
+import com.fc.member.wechatplatform.user.service.IWechatPlatformServiceCountService;
+import com.fc.protocol.demo.request.wechatplatform.user.WpServiceCountListRequest;
+import com.fc.protocol.demo.request.wechatplatform.user.WpServiceCountUpdateRequest;
+
+/**
+ * <p>Title: WechatPlatformServiceCount</p>
+ * <p>Description:  Service 层</p>
+ * @author yangd
+ * @date 2018-12-28 17:14:41
+ */
+@Service("wechatPlatformServiceCountService")
+public class WechatPlatformServiceCountServiceImp extends ServiceImpl<WechatPlatformServiceCount>
+		implements IWechatPlatformServiceCountService {
+
+	@Autowired
+	private IWechatPlatformServiceCountDao wechatPlatformServiceCountDao;
+
+	@Override
+	protected IMapper<WechatPlatformServiceCount> getDao() {
+		return wechatPlatformServiceCountDao;
+	}
+
+	/**
+	 * 根据openid和service_id查询服务统计信息详情
+	 * @param openid,service_id
+	 * @return
+	 */
+	@Override
+	public WechatPlatformServiceCount get(String openid, Integer service_id) {
+		WechatPlatformServiceCount entity = new WechatPlatformServiceCount();
+		entity.setOpenid(openid);
+		entity.setServiceId(service_id);
+		List<WechatPlatformServiceCount> list = wechatPlatformServiceCountDao.getRows(entity);
+		if (list.isEmpty()) {
+			return null;
+		}
+		return list.get(0);
+	}
+
+	/**
+	 * 根据id查询服务统计信息
+	 * @param id
+	 * @return
+	 */
+	@Override
+	public WechatPlatformServiceCount get(Integer id) {
+		WechatPlatformServiceCount entity = new WechatPlatformServiceCount();
+		entity.setId(id);
+		List<WechatPlatformServiceCount> list = wechatPlatformServiceCountDao.getRows(entity);
+		if (list.isEmpty()) {
+			return null;
+		}
+		return list.get(0);
+	}
+
+	/**
+	 * 服务统计信息列表
+	 * @return
+	 */
+	@Override
+	public List<WechatPlatformServiceCount> getServiceCountList(WpServiceCountListRequest request,
+																Page page) {
+		// 将不为空的属性set到对象中
+		WechatPlatformServiceCount entity = new WechatPlatformServiceCount();
+		entity.setOpenid(request.getOpenid());
+		entity.setServiceId(request.getServiceId());
+		// 设置分页，查询条件
+		PageQuery pageQuery = new PageQuery();
+		pageQuery.setPage(page);
+		pageQuery.setCondition(entity);
+		return wechatPlatformServiceCountDao.getRowsPage(pageQuery);
+	}
+
+	/**
+	 * 新增服务统计
+	 */
+	@Override
+	public Map<String, Object> insertPlatformServiceCount(WpServiceCountSaveRequest request) {
+		Map<String, Object> resultMap = new HashMap<>();
+		// 将不为空的属性set到对象中
+		WechatPlatformServiceCount entity = new WechatPlatformServiceCount();
+		entity.setOpenid(request.getOpenid());
+		entity.setServiceId(request.getServiceId());
+		entity.setServiceTitle(request.getServiceTitle());
+		entity.setCreateTime(DateTimeUtils.getDateTimeInteger());
+		// 创建服务统计信息
+		int result = wechatPlatformServiceCountDao.insertSelective(entity);
+		if (result <= 0) {
+			resultMap.put("error", "创建失败");
+			return resultMap;
+		}
+		return resultMap;
+	}
+
+	/**
+	 * 更新服务统计信息
+	 */
+	@Override
+	public Map<String, Object> updatePlatformServiceCount(WpServiceCountUpdateRequest request) throws Exception{
+		Map<String, Object> resultMap = new HashMap<>();
+		// 将不为空的属性set到对象中
+		WechatPlatformServiceCount entity = new WechatPlatformServiceCount();
+		entity.setId(request.getId());
+		entity.setOpenid(request.getOpenid());
+		entity.setServiceId(request.getServiceId());
+		entity.setServiceTitle(request.getServiceTitle());
+		entity.setOpenNumber(request.getOpenNumber());
+		entity.setRecentTime(DateTimeUtils.getDateTimeInteger());
+		// 更新服务统计信息
+		wechatPlatformServiceCountDao.update(entity);
+		return resultMap;
+	}
+
+	/**
+	 * 删除服务统计信息
+	 */
+	@Override
+	public Map<String, Object> deletePlatformServiceCount(Integer id) throws Exception{
+		Map<String, Object> resultMap = new HashMap<>();
+		//删除服务统计信息
+		wechatPlatformServiceCountDao.deleteByPK(id);
+		return resultMap;
+	}
+}

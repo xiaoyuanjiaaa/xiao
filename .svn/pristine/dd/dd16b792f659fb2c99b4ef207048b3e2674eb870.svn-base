@@ -1,0 +1,60 @@
+package com.fc.protocol.client.demo.controller;
+
+import com.fc.protocol.client.demo.config.ProtocolClientPool;
+import com.fc.protocol.client.demo.utils.StoreBankCardRequestUtil;
+import com.fc.protocol.common.message.body.ProtocolResponse;
+import com.fc.protocol.common.utils.IntegerFactory;
+import com.fc.protocol.demo.request.store.user.CreateStoreBankCardRequest;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@Api(tags = "StoreBankCardController", description = "银行卡信息")
+@RestController
+@RequestMapping("/api/setIStoreBankCardInfo")
+public class StoreBankCardController {
+    private static Logger log = LoggerFactory.getLogger(StoreBankCardController.class);
+    @Autowired
+    private ProtocolClientPool protocolClientPool;
+    /**
+     * 保存银行卡信息
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/setIStoreBankCardInfo", method = { RequestMethod.POST, RequestMethod.GET })
+    @ApiOperation(value = "setIStoreBankCardInfo", notes = "setIStoreBankCardInfo")
+    @ResponseBody
+    public Object setStoreBankCardInfo(@ApiParam(name = "sstore_id", value = "门店id")
+                                            @RequestParam(required = true, value = "sstore_id") String sstore_id,
+                                        @ApiParam(name = "bank_hold_name", value = "持卡人姓名")
+                                            @RequestParam(required = true, value = "bank_hold_name") String bank_hold_name,
+                                        @ApiParam(name = "bank_card_no", value = "卡号")
+                                            @RequestParam(required = true, value = "bank_card_no") String bank_card_no,
+                                        @ApiParam(name = "card_bank_name", value = "开户银行")
+                                            @RequestParam(required = true, value = "card_bank_name") String card_bank_name,
+                                        @ApiParam(name = "bank_branch", value = "开户支行")
+                                            @RequestParam(required = true, value = "bank_branch") String bank_branch,
+                                        @ApiParam(name = "card_address", value = "银行所在地")
+                                            @RequestParam(required = true, value = "card_address") String card_address,
+                                        @ApiParam(name = "store_bank_card_id", value = "银行id")
+                                            @RequestParam(required = true, value = "store_bank_card_id") String store_bank_card_id,
+                                        @ApiParam(name = "region_id", value = "银行所在地的二级id")
+                                            @RequestParam(required = true, value = "region_id") String region_id,int number,
+            HttpServletRequest request, HttpServletResponse response) throws Exception {
+        CreateStoreBankCardRequest storeBankCardRequest = StoreBankCardRequestUtil.mockStoreBankCardRequest(request.getParameter("sstore_id"),
+                request.getParameter("bank_hold_name"),request.getParameter("bank_card_no"),request.getParameter("card_bank_name"),request.getParameter("bank_branch"),request.getParameter("card_address"),request.getParameter("store_bank_card_id"),request.getParameter("region_id"),IntegerFactory.getInstance().incrementAndGet());
+        log.info("StoreBankCardController传人参数", storeBankCardRequest);
+        ProtocolResponse echoResponse = protocolClientPool.userClient().sendAndReceived(storeBankCardRequest);
+        log.info("返回请求结果", echoResponse);
+        return echoResponse;
+    }
+}
