@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.information.dao.IStoreFinanceDao">
+	<resultMap id="StoreFinanceMap" type="com.fc.information.entity.StoreFinance">
+        <id property="id" column="id"/>
+        <id property="storeId" column="store_id"/>
+        <id property="storeType" column="store_type"/>
+        <id property="optUserId" column="opt_user_id"/>
+        <id property="optUserName" column="opt_user_name"/>
+        <id property="optType" column="opt_type"/>
+        <id property="amount" column="amount"/>
+        <id property="accounts" column="accounts"/>
+        <id property="iid" column="iid"/>
+        <id property="iidType" column="iid_type"/>
+        <id property="extension" column="extension"/>
+        <id property="remark" column="remark"/>
+        <id property="dateline" column="dateline"/>
+        <id property="isHandle" column="is_handle"/>
+        <id property="type" column="type"/>
+        <id property="iidSn" column="iid_sn"/>
+        <id property="inType" column="in_type"/>
+        <id property="changAccounts" column="chang_accounts"/>
+        <id property="changBalancing" column="chang_balancing"/>
+        <id property="changWithdrawals" column="chang_withdrawals"/>
+        <id property="changWithdrawalsing" column="chang_withdrawalsing"/>
+        <id property="changDeposit" column="chang_deposit"/>
+        <id property="changPromotion" column="chang_promotion"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="StoreFinanceMap" >
+		select * from store_finance where 
+	        id = #{id} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.information.entity.StoreFinance" useGeneratedKeys="true" keyProperty="id">
+		insert into store_finance(id , store_id , store_type , opt_user_id , opt_user_name , opt_type , amount , accounts , iid , iid_type , extension , remark , dateline , is_handle , type , iid_sn , in_type , chang_accounts , chang_balancing , chang_withdrawals , chang_withdrawalsing , chang_deposit , chang_promotion  )
+    	values(#{id} ,#{storeId} ,#{storeType} ,#{optUserId} ,#{optUserName} ,#{optType} ,#{amount} ,#{accounts} ,#{iid} ,#{iidType} ,#{extension} ,#{remark} ,#{dateline} ,#{isHandle} ,#{type} ,#{iidSn} ,#{inType} ,#{changAccounts} ,#{changBalancing} ,#{changWithdrawals} ,#{changWithdrawalsing} ,#{changDeposit} ,#{changPromotion} )
+	</insert>
+	
+	<insert id="insertSelective" parameterType="com.fc.information.entity.StoreFinance" useGeneratedKeys="true" keyProperty="id">
+		insert into store_finance
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="id != null and id != ''">
+						id,
+					</if>
+					<if test="storeId != null and storeId != ''">
+						store_id,
+					</if>
+					<if test="storeType != null and storeType != ''">
+						store_type,
+					</if>
+					<if test="optUserId != null and optUserId != ''">
+						opt_user_id,
+					</if>
+					<if test="optUserName != null and optUserName != ''">
+						opt_user_name,
+					</if>
+					<if test="optType != null and optType != ''">
+						opt_type,
+					</if>
+					<if test="amount != null and amount != ''">
+						amount,
+					</if>
+					<if test="accounts != null and accounts != ''">
+						accounts,
+					</if>
+					<if test="iid != null and iid != ''">
+						iid,
+					</if>
+					<if test="iidType != null and iidType != ''">
+						iid_type,
+					</if>
+					<if test="extension != null and extension != ''">
+						extension,
+					</if>
+					<if test="remark != null and remark != ''">
+						remark,
+					</if>
+					<if test="dateline != null and dateline != ''">
+						dateline,
+					</if>
+					<if test="isHandle != null and isHandle != ''">
+						is_handle,
+					</if>
+					<if test="type != null and type != ''">
+						type,
+					</if>
+					<if test="iidSn != null and iidSn != ''">
+						iid_sn,
+					</if>
+					<if test="inType != null and inType != ''">
+						in_type,
+					</if>
+					<if test="changAccounts != null and changAccounts != ''">
+						chang_accounts,
+					</if>
+					<if test="changBalancing != null and changBalancing != ''">
+						chang_balancing,
+					</if>
+					<if test="changWithdrawals != null and changWithdrawals != ''">
+						chang_withdrawals,
+					</if>
+					<if test="changWithdrawalsing != null and changWithdrawalsing != ''">
+						chang_withdrawalsing,
+					</if>
+					<if test="changDeposit != null and changDeposit != ''">
+						chang_deposit,
+					</if>
+					<if test="changPromotion != null and changPromotion != ''">
+						chang_promotion
+					</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="id != null and id != ''">
+						#{id},
+					</if>
+					<if test="storeId != null and storeId != ''">
+						#{storeId},
+					</if>
+					<if test="storeType != null and storeType != ''">
+						#{storeType},
+					</if>
+					<if test="optUserId != null and optUserId != ''">
+						#{optUserId},
+					</if>
+					<if test="optUserName != null and optUserName != ''">
+						#{optUserName},
+					</if>
+					<if test="optType != null and optType != ''">
+						#{optType},
+					</if>
+					<if test="amount != null and amount != ''">
+						#{amount},
+					</if>
+					<if test="accounts != null and accounts != ''">
+						#{accounts},
+					</if>
+					<if test="iid != null and iid != ''">
+						#{iid},
+					</if>
+					<if test="iidType != null and iidType != ''">
+						#{iidType},
+					</if>
+					<if test="extension != null and extension != ''">
+						#{extension},
+					</if>
+					<if test="remark != null and remark != ''">
+						#{remark},
+					</if>
+					<if test="dateline != null and dateline != ''">
+						#{dateline},
+					</if>
+					<if test="isHandle != null and isHandle != ''">
+						#{isHandle},
+					</if>
+					<if test="type != null and type != ''">
+						#{type},
+					</if>
+					<if test="iidSn != null and iidSn != ''">
+						#{iidSn},
+					</if>
+					<if test="inType != null and inType != ''">
+						#{inType},
+					</if>
+					<if test="changAccounts != null and changAccounts != ''">
+						#{changAccounts},
+					</if>
+					<if test="changBalancing != null and changBalancing != ''">
+						#{changBalancing},
+					</if>
+					<if test="changWithdrawals != null and changWithdrawals != ''">
+						#{changWithdrawals},
+					</if>
+					<if test="changWithdrawalsing != null and changWithdrawalsing != ''">
+						#{changWithdrawalsing},
+					</if>
+					<if test="changDeposit != null and changDeposit != ''">
+						#{changDeposit},
+					</if>
+					<if test="changPromotion != null and changPromotion != ''">
+						#{changPromotion}
+					</if>
+			</trim>
+	</insert>
+	
+	<update id="update" parameterType="com.fc.information.entity.StoreFinance">
+		update store_finance
+		<set>
+		    	<if test="storeId != null and storeId != ''">
+		    		store_id = #{storeId},
+		    	</if>
+		    	<if test="storeType != null and storeType != ''">
+		    		store_type = #{storeType},
+		    	</if>
+		    	<if test="optUserId != null and optUserId != ''">
+		    		opt_user_id = #{optUserId},
+		    	</if>
+		    	<if test="optUserName != null and optUserName != ''">
+		    		opt_user_name = #{optUserName},
+		    	</if>
+		    	<if test="optType != null and optType != ''">
+		    		opt_type = #{optType},
+		    	</if>
+		    	<if test="amount != null and amount != ''">
+		    		amount = #{amount},
+		    	</if>
+		    	<if test="accounts != null and accounts != ''">
+		    		accounts = #{accounts},
+		    	</if>
+		    	<if test="iid != null and iid != ''">
+		    		iid = #{iid},
+		    	</if>
+		    	<if test="iidType != null and iidType != ''">
+		    		iid_type = #{iidType},
+		    	</if>
+		    	<if test="extension != null and extension != ''">
+		    		extension = #{extension},
+		    	</if>
+		    	<if test="remark != null and remark != ''">
+		    		remark = #{remark},
+		    	</if>
+		    	<if test="dateline != null and dateline != ''">
+		    		dateline = #{dateline},
+		    	</if>
+		    	<if test="isHandle != null and isHandle != ''">
+		    		is_handle = #{isHandle},
+		    	</if>
+		    	<if test="type != null and type != ''">
+		    		type = #{type},
+		    	</if>
+		    	<if test="iidSn != null and iidSn != ''">
+		    		iid_sn = #{iidSn},
+		    	</if>
+		    	<if test="inType != null and inType != ''">
+		    		in_type = #{inType},
+		    	</if>
+		    	<if test="changAccounts != null and changAccounts != ''">
+		    		chang_accounts = #{changAccounts},
+		    	</if>
+		    	<if test="changBalancing != null and changBalancing != ''">
+		    		chang_balancing = #{changBalancing},
+		    	</if>
+		    	<if test="changWithdrawals != null and changWithdrawals != ''">
+		    		chang_withdrawals = #{changWithdrawals},
+		    	</if>
+		    	<if test="changWithdrawalsing != null and changWithdrawalsing != ''">
+		    		chang_withdrawalsing = #{changWithdrawalsing},
+		    	</if>
+		    	<if test="changDeposit != null and changDeposit != ''">
+		    		chang_deposit = #{changDeposit},
+		    	</if>
+		    	<if test="changPromotion != null and changPromotion != ''">
+		    		chang_promotion = #{changPromotion},
+		    	</if>
+		</set>
+		where 
+	        id = #{id} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from store_finance where 
+	        id = #{id} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.information.entity.StoreFinance" resultMap="StoreFinanceMap" >
+		select * from store_finance 
+		<where>
+		       <if test="id != null and id != ''">
+					AND id = #{id}
+			   </if>
+		       <if test="storeId != null and storeId != ''">
+					AND store_id = #{storeId}
+			   </if>
+		       <if test="storeType != null and storeType != ''">
+					AND store_type = #{storeType}
+			   </if>
+		       <if test="optUserId != null and optUserId != ''">
+					AND opt_user_id = #{optUserId}
+			   </if>
+		       <if test="optUserName != null and optUserName != ''">
+					AND opt_user_name = #{optUserName}
+			   </if>
+		       <if test="optType != null and optType != ''">
+					AND opt_type = #{optType}
+			   </if>
+		       <if test="amount != null and amount != ''">
+					AND amount = #{amount}
+			   </if>
+		       <if test="accounts != null and accounts != ''">
+					AND accounts = #{accounts}
+			   </if>
+		       <if test="iid != null and iid != ''">
+					AND iid = #{iid}
+			   </if>
+		       <if test="iidType != null and iidType != ''">
+					AND iid_type = #{iidType}
+			   </if>
+		       <if test="extension != null and extension != ''">
+					AND extension = #{extension}
+			   </if>
+		       <if test="remark != null and remark != ''">
+					AND remark = #{remark}
+			   </if>
+		       <if test="dateline != null and dateline != ''">
+					AND dateline = #{dateline}
+			   </if>
+		       <if test="isHandle != null and isHandle != ''">
+					AND is_handle = #{isHandle}
+			   </if>
+		       <if test="type != null and type != ''">
+					AND type = #{type}
+			   </if>
+		       <if test="iidSn != null and iidSn != ''">
+					AND iid_sn = #{iidSn}
+			   </if>
+		       <if test="inType != null and inType != ''">
+					AND in_type = #{inType}
+			   </if>
+		       <if test="changAccounts != null and changAccounts != ''">
+					AND chang_accounts = #{changAccounts}
+			   </if>
+		       <if test="changBalancing != null and changBalancing != ''">
+					AND chang_balancing = #{changBalancing}
+			   </if>
+		       <if test="changWithdrawals != null and changWithdrawals != ''">
+					AND chang_withdrawals = #{changWithdrawals}
+			   </if>
+		       <if test="changWithdrawalsing != null and changWithdrawalsing != ''">
+					AND chang_withdrawalsing = #{changWithdrawalsing}
+			   </if>
+		       <if test="changDeposit != null and changDeposit != ''">
+					AND chang_deposit = #{changDeposit}
+			   </if>
+		       <if test="changPromotion != null and changPromotion != ''">
+					AND chang_promotion = #{changPromotion}
+			   </if>
+		</where>
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="StoreFinanceMap" >
+		select * from store_finance  
+		<where>
+		       <if test="condition.id != null and condition.id != ''">
+					AND id = #{condition.id}
+			   </if>
+		       <if test="condition.storeId != null and condition.storeId != ''">
+					AND store_id = #{condition.storeId}
+			   </if>
+		       <if test="condition.storeType != null and condition.storeType != ''">
+					AND store_type = #{condition.storeType}
+			   </if>
+		       <if test="condition.optUserId != null and condition.optUserId != ''">
+					AND opt_user_id = #{condition.optUserId}
+			   </if>
+		       <if test="condition.optUserName != null and condition.optUserName != ''">
+					AND opt_user_name = #{condition.optUserName}
+			   </if>
+		       <if test="condition.optType != null and condition.optType != ''">
+					AND opt_type = #{condition.optType}
+			   </if>
+		       <if test="condition.amount != null and condition.amount != ''">
+					AND amount = #{condition.amount}
+			   </if>
+		       <if test="condition.accounts != null and condition.accounts != ''">
+					AND accounts = #{condition.accounts}
+			   </if>
+		       <if test="condition.iid != null and condition.iid != ''">
+					AND iid = #{condition.iid}
+			   </if>
+		       <if test="condition.iidType != null and condition.iidType != ''">
+					AND iid_type = #{condition.iidType}
+			   </if>
+		       <if test="condition.extension != null and condition.extension != ''">
+					AND extension = #{condition.extension}
+			   </if>
+		       <if test="condition.remark != null and condition.remark != ''">
+					AND remark = #{condition.remark}
+			   </if>
+		       <if test="condition.dateline != null and condition.dateline != ''">
+					AND dateline = #{condition.dateline}
+			   </if>
+		       <if test="condition.isHandle != null and condition.isHandle != ''">
+					AND is_handle = #{condition.isHandle}
+			   </if>
+		       <if test="condition.type != null and condition.type != ''">
+					AND type = #{condition.type}
+			   </if>
+		       <if test="condition.iidSn != null and condition.iidSn != ''">
+					AND iid_sn = #{condition.iidSn}
+			   </if>
+		       <if test="condition.inType != null and condition.inType != ''">
+					AND in_type = #{condition.inType}
+			   </if>
+		       <if test="condition.changAccounts != null and condition.changAccounts != ''">
+					AND chang_accounts = #{condition.changAccounts}
+			   </if>
+		       <if test="condition.changBalancing != null and condition.changBalancing != ''">
+					AND chang_balancing = #{condition.changBalancing}
+			   </if>
+		       <if test="condition.changWithdrawals != null and condition.changWithdrawals != ''">
+					AND chang_withdrawals = #{condition.changWithdrawals}
+			   </if>
+		       <if test="condition.changWithdrawalsing != null and condition.changWithdrawalsing != ''">
+					AND chang_withdrawalsing = #{condition.changWithdrawalsing}
+			   </if>
+		       <if test="condition.changDeposit != null and condition.changDeposit != ''">
+					AND chang_deposit = #{condition.changDeposit}
+			   </if>
+		       <if test="condition.changPromotion != null and condition.changPromotion != ''">
+					AND chang_promotion = #{condition.changPromotion}
+			   </if>
+		</where>
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper>

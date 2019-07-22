@@ -1,0 +1,106 @@
+<#assign className = table.className>   
+<#assign classNameLower = className?uncap_first> 
+<#macro mapperEl value>${r"#{"}${value}}</#macro>
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="${basepackage}.dao.I${className}Dao">
+	<resultMap id="${className}Map" type="${basepackage}.entity.${className}">
+		<#list table.columns as column>
+        <id property="${column.javaName}" column="${column.sqlName}"/>
+		</#list>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="${className}Map" >
+		select * from ${table.sqlName} where 
+		<#list table.compositeIdColumns as column>
+	        ${column.sqlName} = <@mapperEl column.javaName/> <#if column_has_next>and</#if>
+	    </#list>
+	</select>
+	
+	<insert id="create" parameterType="${basepackage}.entity.${className}" useGeneratedKeys="true" keyProperty="<#list table.compositeIdColumns as column>${column.javaName}</#list>">
+		insert into ${table.sqlName}(<#list table.columns as column>${column.sqlName} <#if column_has_next>,</#if> </#list>)
+    	values(<#list table.columns as column><@mapperEl column.javaName/> <#if column_has_next>,</#if></#list>)
+	</insert>
+	
+	<insert id="insertSelective" parameterType="${basepackage}.entity.${className}" useGeneratedKeys="true" keyProperty="<#list table.compositeIdColumns as column>${column.javaName}</#list>">
+		insert into ${table.sqlName}
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				<#list table.columns as column>
+					<if test="${column.javaName} != null and ${column.javaName} != ''">
+						${column.sqlName}<#if column_has_next>,</#if>
+					</if>
+				</#list>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+				<#list table.columns as column>
+					<if test="${column.javaName} != null and ${column.javaName} != ''">
+						<@mapperEl column.javaName/><#if column_has_next>,</#if>
+					</if>
+	    		</#list>
+			</trim>
+	</insert>
+	
+	<update id="update" parameterType="${basepackage}.entity.${className}">
+		update ${table.sqlName}
+		<set>
+		    <#list table.notPkColumns as column>
+		    	<if test="${column.javaName} != null and ${column.javaName} != ''">
+		    		${column.sqlName} = <@mapperEl column.javaName/>,
+		    	</if>
+	        </#list>
+		</set>
+		where 
+        <#list table.compositeIdColumns as column>
+	        ${column.sqlName} = <@mapperEl column.javaName/> <#if column_has_next>and</#if>
+	    </#list>
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from ${table.sqlName} where 
+        <#list table.compositeIdColumns as column>
+	        ${column.sqlName} = <@mapperEl column.javaName/> <#if column_has_next>,</#if>
+	    </#list>
+	</delete>
+	
+	<select id="getRows" parameterType="${basepackage}.entity.${className}" resultMap="${className}Map" >
+		select * from ${table.sqlName} 
+		<where>
+			 <#list table.columns as column>
+		       <#if column.isDateTimeColumn>
+		       <if test="${column.javaName}_begin != null and ${column.javaName}_begin != ''">
+					AND ${column.sqlName} >= <@mapperEl column.sqlName+"Begin"/>
+			   </if>
+			   <if test="${column.javaName}_end != null and ${column.javaName}_end != ''">
+					AND ${column.sqlName} &lt;= <@mapperEl column.sqlName+"End"/>
+			   </if>
+		       <#else>
+		       <if test="${column.javaName} != null and ${column.javaName} != ''">
+					AND ${column.sqlName} = <@mapperEl column.javaName/>
+			   </if>
+	       </#if>
+	       </#list>
+		</where>
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="${className}Map" >
+		select * from ${table.sqlName}  
+		<where>
+			<#list table.columns as column>
+		       <#if column.isDateTimeColumn>
+		       <if test="condition.${column.javaName}_begin != null and condition.${column.javaName}_begin != ''">
+					AND ${column.sqlName} >= <@mapperEl column.javaName+"_begin"/>
+			   </if>
+			   <if test="condition.${column.javaName}_end != null and condition.${column.javaName}_end != ''">
+					AND ${column.sqlName} &lt;= condition.<@mapperEl column.javaName+"_end"/>
+			   </if>
+		       <#else>
+		       <if test="condition.${column.javaName} != null and condition.${column.javaName} != ''">
+					AND ${column.sqlName} = <@mapperEl "condition." + column.javaName/>
+			   </if>
+	       </#if>
+	       </#list>
+		</where>
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper>

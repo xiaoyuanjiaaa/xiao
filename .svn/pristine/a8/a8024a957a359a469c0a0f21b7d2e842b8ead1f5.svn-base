@@ -1,0 +1,88 @@
+package com.generator;
+
+import cn.org.rapid_framework.generator.Generator;
+import cn.org.rapid_framework.generator.GeneratorFacade;
+import cn.org.rapid_framework.generator.util.FreemarkerHelper;
+
+public class DBGeneratorMain {
+
+	/**
+	 * 代码生成器入口
+	 * 数据库配置：generator.properties
+	 * 模板路径(可修改)：项目下的fc-template文件夹中
+	 * 生成路径(可修改)：项目下的output文件夹中
+	 * fc-template 模板包路径可以修改，按实际开发为准
+	 */
+	public static void main(String[] args) throws Exception {
+		Generator ge = new Generator();
+
+		System.out.println("当前工作目录:" + System.getProperty("user.dir"));
+		ge.addTemplateRootDir(System.getProperty("user.dir") + "\\fc-template"); // 模板路径,项目下的fc-template文件夹中
+		// com.fc.member.shop
+		/*
+		 * 文件生成路径 建议跟配置文件里导入的包名一致，这样有利过复制到项目中
+		 * generator.properties
+		 * <!-- 类导入包名 配置 -->
+		 * <entry key="basepackage">com.fc.member.store.user</entry>
+		 * TODO 注意修改生成文件路径
+		 */
+		ge.setOutRootDir(System.getProperty("user.dir")
+				+ "\\output\\fc\\src\\main\\java\\com\\fc\\member\\wechatmaintain\\user"); // 生成路径,项目下的output文件夹中；也可以写绝对路径 如: D:\\outFile
+		//ge.setOutRootDir("D:\\out");
+		GeneratorFacade g = new GeneratorFacade();
+		g.setGenerator(ge);
+
+		g.deleteOutRootDir();// 删除生成器的输出目录
+
+		//		g.generateByTable("table_name", "template"); // 单个表
+
+		/* fc_user */
+		// 师傅端表
+		String[] master = new String[] { "master_auth_info", "master_bank_card", "master_bank_card_change_log",
+				"master_member", "master_pickcar_user", "master_pickcar_user_car", "master_store_worker",
+				"master_store_worker_log", "master_user_balance", "master_user_balance_detail",
+				"master_user_maple_bean", "master_user_maple_bean_detail", "master_user_self_cert" };
+
+		// 商家端表 com\\fc\\member\\shop\\user
+		String[] shop = new String[] { "shop_bankinfo", "shop_businessinfo", "shop_deposit_cash_log",
+				"shop_deposit_change_log", "shop_depositinfo", "shop_finance", "shop_info", "shop_ordershop",
+				"shop_scopinfo", "shop_withdraw_cash", "shop_withdraw_cash_log", "shop_withdrawalinfo" };
+
+		// 门店端表 com\\fc\\member\\store\\user
+		String[] store = new String[] { "store_address", "store_advance_detail", "store_aptitude", "store_bank_card",
+				"store_bank_card_change", "store_basic_info", "store_borrow_detail", "store_boss", "store_coin_detail",
+				"store_collect", "store_coupon", "store_dictionaries", "store_follow", "store_momey_detail",
+				"store_package", "store_setting", "public_user", "public_user_logins_log" };
+
+		// 微养车端表 com\\fc\\member\\wechatmaintain\\user
+		String[] wechatmaintain = new String[] { "wechat_maintain_conpon_consumeinfo",
+				"wechat_maintain_coupon_sstore_user", "wechat_maintain_recharge",
+				"wechat_maintain_sstore_user_relation", "wechat_maintain_user", "wechat_maintain_user_car",
+				"wechat_maintain_user_coupon" };
+
+		// 微养车找店端表 com\\fc\\member\\wechatplatform\\user
+		String[] wechatplatform = new String[] { "wechat_platform_service_count", "wechat_platform_user",
+				"wechat_platform_user_feedback" };
+
+		// PC车主端表
+		String[] pc = new String[] { "pc_user", "pc_user_car" };
+
+		// 枫车用户表 com\\fc\\member\\fc\\user
+		String[] fc = new String[] { "fc_user", "public_user", "public_user_logins_log" };
+
+		String[] store_public = new String[] { "public_user", "public_user_logins_log" };
+
+		String[] test = new String[] { "master_pickcar_user", "master_pickcar_user_car" };
+
+		/*
+		 * 通过数据库表生成文件,template为模板的根目录
+		 * 多个表以数组的形式传入
+		 * new String[] { "table_name1", "table_name2" }
+		 */
+		System.out.println("生成表：" + wechatmaintain);
+		g.generateByTable(wechatmaintain); // 单个表
+		//g.generateBySql("select * from pos_user as user");
+		FreemarkerHelper f;
+
+	}
+}

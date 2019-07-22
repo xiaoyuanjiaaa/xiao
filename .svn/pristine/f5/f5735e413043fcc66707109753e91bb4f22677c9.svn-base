@@ -1,0 +1,89 @@
+<#assign className = table.className>   
+<#assign classNameLower = className?uncap_first> 
+<#macro mapperEl value>${r"#{"}${value}}</#macro>
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="${basepackage}.dao.I${className}Dao">
+	<resultMap id="${className}Map" type="${basepackage}.model.${className}">
+		<#list table.columns as column>
+        <id property="${column.sqlName}" column="${column.sqlName}"/>
+		</#list>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="${className}Map" >
+		select * from ${table.sqlName} where 
+		<#list table.compositeIdColumns as column>
+	        ${column.sqlName} = <@mapperEl column.sqlName/> <#if column_has_next>and</#if>
+	    </#list>
+
+	</select>
+	
+	<insert id="create" parameterType="${basepackage}.model.${className}" >
+		insert into ${table.sqlName}(<#list table.columns as column>${column.sqlName} <#if column_has_next>,</#if> </#list>)
+    	values(<#list table.columns as column><@mapperEl column.sqlName/> <#if column_has_next>,</#if></#list>)
+	</insert> 
+	
+	<update id="update" parameterType="${basepackage}.model.${className}">
+		update ${table.sqlName}
+		<set>
+		    <#list table.notPkColumns as column>
+		    	<if test="${column.sqlName}!=null">
+					${column.sqlName} = <@mapperEl column.sqlName/>,
+			    </if>
+	        </#list>
+		</set>
+		where 
+        <#list table.compositeIdColumns as column>
+	        ${column.sqlName} = <@mapperEl column.sqlName/> <#if column_has_next>and</#if>
+	    </#list>
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from ${table.sqlName} where 
+        <#list table.compositeIdColumns as column>
+	        ${column.sqlName} = <@mapperEl column.sqlName/> <#if column_has_next>,</#if>
+	    </#list>
+	</delete>
+	
+	<select id="getRows" parameterType="${basepackage}.model.${className}" resultMap="${className}Map" >
+		select * from ${table.sqlName} 
+		<where>
+			 <#list table.columns as column>
+		       <#if column.isDateTimeColumn>
+		       <if test="${column.sqlName}_begin!=null">
+					AND ${column.sqlName} >= <@mapperEl column.sqlName+"Begin"/>
+			   </if>
+			   <if test="${column.sqlName}_end!=null">
+					AND ${column.sqlName} &lt;= <@mapperEl column.sqlName+"End"/>
+			   </if>
+		       <#else>
+		       <if test="${column.sqlName}!=null">
+					AND ${column.sqlName} = <@mapperEl column.sqlName/>
+				</if>
+	       </#if>
+	       </#list>		
+		</where> 
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="${className}Map" >
+		select * from ${table.sqlName}  
+		<where>
+			<#list table.columns as column>
+		       <#if column.isDateTimeColumn>
+		       <if test="condition.${column.sqlName}_begin!=null">
+					AND ${column.sqlName} >= <@mapperEl column.sqlName+"_begin"/>
+			   </if>
+			   <if test="condition.${column.sqlName}_end!=null">
+					AND ${column.sqlName} &lt;= condition.<@mapperEl column.sqlName+"_end"/>
+			   </if>
+		       <#else>
+		       <if test="condition.${column.sqlName}!=null">
+					AND ${column.sqlName} = <@mapperEl "condition." + column.sqlName/>
+				</if>
+	       </#if>
+	       </#list>		
+		</where> 
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper> 

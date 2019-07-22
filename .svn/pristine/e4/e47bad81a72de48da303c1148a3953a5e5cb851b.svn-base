@@ -1,0 +1,68 @@
+<#assign className = table.className>   
+<#assign classNameLower = className?uncap_first> 
+package ${basepackage}.model;
+
+import java.io.Serializable;
+/**
+ * <p>Title: ${className}</p>
+ * <p>Description: </p>
+ * <p>Company: </p> 
+ * @author ${author}
+ * @date 
+ */
+public class ${className} implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	<#list table.columns as column>
+	private ${column.javaType} ${column.sqlName};
+	</#list>
+
+	
+	<#list table.columns as column>
+	<#if column.isDateTimeColumn>
+	//----时间处理----
+	
+	//设置时间
+	public String get${column.sqlName?cap_first}String() {
+		return DateTimeUtils.getStringFromTime(get${column.sqlName?cap_first}(), DateTimeUtils.FORMAT_DATE_TIME);
+	}
+	public void set${column.sqlName?cap_first}String(String value) {
+		set${column.sqlName?cap_first}(DateTimeUtils.getTimeFromString(value, DateTimeUtils.FORMAT_DATE_TIME));
+	}
+	//用于时间搜索的开始日期
+	private String {column.sqlName}_begin;
+	
+	public void set${column.sqlName?cap_first}_end(String {column.sqlName}_begin){
+		this.${column.sqlName}_end={column.sqlName}_begin;
+	}
+	
+	public String get${column.sqlName?cap_first}_begin() {
+		return this.${column.sqlName}_begin;
+	}
+	
+	//用于时间搜索的结束日期
+    private String {column.sqlName}_end;
+	
+	public void set${column.sqlName?cap_first}_end(String {column.sqlName}_end){
+		this.${column.sqlName}_end={column.sqlName}_end
+	}
+	
+	public String get${column.sqlName?cap_first}_end() {
+		return this.${column.sqlName}_end;
+	}
+	//时间处理结束
+	
+	</#if>	
+	public void set${column.sqlName?cap_first}(${column.javaType} ${column.sqlName}) {
+		this.${column.sqlName} = ${column.sqlName};
+	}
+	
+	public ${column.javaType} get${column.sqlName?cap_first}() {
+		return this.${column.sqlName};
+	}
+    </#list>
+    
+}

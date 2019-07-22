@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fc.member.store.user.dao.IStoreLicenseDao">
+	<resultMap id="StoreLicenseMap" type="com.fc.member.store.user.entity.StoreLicense">
+        <id property="id" column="id"/>
+        <id property="sname" column="sname"/>
+        <id property="code" column="code"/>
+        <id property="useType" column="use_type"/>
+        <id property="carpart" column="carpart"/>
+        <id property="taskTime" column="task_time"/>
+        <id property="sfee" column="sfee"/>
+        <id property="prizeFee" column="prize_fee"/>
+        <id property="sScore" column="s_score"/>
+        <id property="sLogo" column="s_logo"/>
+        <id property="priceUnit" column="price_unit"/>
+        <id property="description" column="description"/>
+        <id property="sortOrder" column="sort_order"/>
+        <id property="requireEquipment" column="require_equipment"/>
+        <id property="requireTools" column="require_tools"/>
+        <id property="requireStaff" column="require_staff"/>
+        <id property="sstoreSubsidy" column="sstore_subsidy"/>
+        <id property="techSubsidy" column="tech_subsidy"/>
+        <id property="isShow" column="is_show"/>
+        <id property="valuationWay" column="valuation_way"/>
+        <id property="limitNum" column="limit_num"/>
+        <id property="balancePrice" column="balance_price"/>
+        <id property="cateId" column="cate_id"/>
+        <id property="serviceChargeWayId" column="service_charge_way_id"/>
+        <id property="imagesId" column="images_id"/>
+        <id property="materialParams" column="material_params"/>
+        <id property="serviceImgs" column="service_imgs"/>
+        <id property="installStandardUrl" column="install_standard_url"/>
+        <id property="serviceFlowUrl" column="service_flow_url"/>
+        <id property="serviceNote" column="service_note"/>
+        <id property="serviceFlow" column="service_flow"/>
+        <id property="installStandard" column="install_standard"/>
+	</resultMap>
+	
+	<!-- IMapper通用方法 start -->
+	<select id="getByPK" parameterType="Integer" resultMap="StoreLicenseMap" >
+		select * from store_license where 
+	        id = #{id} 
+	</select>
+	
+	<insert id="create" parameterType="com.fc.member.store.user.entity.StoreLicense" useGeneratedKeys="true" keyProperty="id">
+		insert into store_license(id , sname , code , use_type , carpart , task_time , sfee , prize_fee , s_score , s_logo , price_unit , description , sort_order , require_equipment , require_tools , require_staff , sstore_subsidy , tech_subsidy , is_show , valuation_way , limit_num , balance_price , cate_id , service_charge_way_id , images_id , material_params , service_imgs , install_standard_url , service_flow_url , service_note , service_flow , install_standard  )
+    	values(#{id} ,#{sname} ,#{code} ,#{useType} ,#{carpart} ,#{taskTime} ,#{sfee} ,#{prizeFee} ,#{sScore} ,#{sLogo} ,#{priceUnit} ,#{description} ,#{sortOrder} ,#{requireEquipment} ,#{requireTools} ,#{requireStaff} ,#{sstoreSubsidy} ,#{techSubsidy} ,#{isShow} ,#{valuationWay} ,#{limitNum} ,#{balancePrice} ,#{cateId} ,#{serviceChargeWayId} ,#{imagesId} ,#{materialParams} ,#{serviceImgs} ,#{installStandardUrl} ,#{serviceFlowUrl} ,#{serviceNote} ,#{serviceFlow} ,#{installStandard} )
+	</insert>
+	
+	<insert id="insertSelective" parameterType="com.fc.member.store.user.entity.StoreLicense" useGeneratedKeys="true" keyProperty="id">
+		insert into store_license
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="id != null and id != ''">
+						id,
+					</if>
+					<if test="sname != null and sname != ''">
+						sname,
+					</if>
+					<if test="code != null and code != ''">
+						code,
+					</if>
+					<if test="useType != null and useType != ''">
+						use_type,
+					</if>
+					<if test="carpart != null and carpart != ''">
+						carpart,
+					</if>
+					<if test="taskTime != null and taskTime != ''">
+						task_time,
+					</if>
+					<if test="sfee != null and sfee != ''">
+						sfee,
+					</if>
+					<if test="prizeFee != null and prizeFee != ''">
+						prize_fee,
+					</if>
+					<if test="sScore != null and sScore != ''">
+						s_score,
+					</if>
+					<if test="sLogo != null and sLogo != ''">
+						s_logo,
+					</if>
+					<if test="priceUnit != null and priceUnit != ''">
+						price_unit,
+					</if>
+					<if test="description != null and description != ''">
+						description,
+					</if>
+					<if test="sortOrder != null and sortOrder != ''">
+						sort_order,
+					</if>
+					<if test="requireEquipment != null and requireEquipment != ''">
+						require_equipment,
+					</if>
+					<if test="requireTools != null and requireTools != ''">
+						require_tools,
+					</if>
+					<if test="requireStaff != null and requireStaff != ''">
+						require_staff,
+					</if>
+					<if test="sstoreSubsidy != null and sstoreSubsidy != ''">
+						sstore_subsidy,
+					</if>
+					<if test="techSubsidy != null and techSubsidy != ''">
+						tech_subsidy,
+					</if>
+					<if test="isShow != null and isShow != ''">
+						is_show,
+					</if>
+					<if test="valuationWay != null and valuationWay != ''">
+						valuation_way,
+					</if>
+					<if test="limitNum != null and limitNum != ''">
+						limit_num,
+					</if>
+					<if test="balancePrice != null and balancePrice != ''">
+						balance_price,
+					</if>
+					<if test="cateId != null and cateId != ''">
+						cate_id,
+					</if>
+					<if test="serviceChargeWayId != null and serviceChargeWayId != ''">
+						service_charge_way_id,
+					</if>
+					<if test="imagesId != null and imagesId != ''">
+						images_id,
+					</if>
+					<if test="materialParams != null and materialParams != ''">
+						material_params,
+					</if>
+					<if test="serviceImgs != null and serviceImgs != ''">
+						service_imgs,
+					</if>
+					<if test="installStandardUrl != null and installStandardUrl != ''">
+						install_standard_url,
+					</if>
+					<if test="serviceFlowUrl != null and serviceFlowUrl != ''">
+						service_flow_url,
+					</if>
+					<if test="serviceNote != null and serviceNote != ''">
+						service_note,
+					</if>
+					<if test="serviceFlow != null and serviceFlow != ''">
+						service_flow,
+					</if>
+					<if test="installStandard != null and installStandard != ''">
+						install_standard
+					</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="id != null and id != ''">
+						#{id},
+					</if>
+					<if test="sname != null and sname != ''">
+						#{sname},
+					</if>
+					<if test="code != null and code != ''">
+						#{code},
+					</if>
+					<if test="useType != null and useType != ''">
+						#{useType},
+					</if>
+					<if test="carpart != null and carpart != ''">
+						#{carpart},
+					</if>
+					<if test="taskTime != null and taskTime != ''">
+						#{taskTime},
+					</if>
+					<if test="sfee != null and sfee != ''">
+						#{sfee},
+					</if>
+					<if test="prizeFee != null and prizeFee != ''">
+						#{prizeFee},
+					</if>
+					<if test="sScore != null and sScore != ''">
+						#{sScore},
+					</if>
+					<if test="sLogo != null and sLogo != ''">
+						#{sLogo},
+					</if>
+					<if test="priceUnit != null and priceUnit != ''">
+						#{priceUnit},
+					</if>
+					<if test="description != null and description != ''">
+						#{description},
+					</if>
+					<if test="sortOrder != null and sortOrder != ''">
+						#{sortOrder},
+					</if>
+					<if test="requireEquipment != null and requireEquipment != ''">
+						#{requireEquipment},
+					</if>
+					<if test="requireTools != null and requireTools != ''">
+						#{requireTools},
+					</if>
+					<if test="requireStaff != null and requireStaff != ''">
+						#{requireStaff},
+					</if>
+					<if test="sstoreSubsidy != null and sstoreSubsidy != ''">
+						#{sstoreSubsidy},
+					</if>
+					<if test="techSubsidy != null and techSubsidy != ''">
+						#{techSubsidy},
+					</if>
+					<if test="isShow != null and isShow != ''">
+						#{isShow},
+					</if>
+					<if test="valuationWay != null and valuationWay != ''">
+						#{valuationWay},
+					</if>
+					<if test="limitNum != null and limitNum != ''">
+						#{limitNum},
+					</if>
+					<if test="balancePrice != null and balancePrice != ''">
+						#{balancePrice},
+					</if>
+					<if test="cateId != null and cateId != ''">
+						#{cateId},
+					</if>
+					<if test="serviceChargeWayId != null and serviceChargeWayId != ''">
+						#{serviceChargeWayId},
+					</if>
+					<if test="imagesId != null and imagesId != ''">
+						#{imagesId},
+					</if>
+					<if test="materialParams != null and materialParams != ''">
+						#{materialParams},
+					</if>
+					<if test="serviceImgs != null and serviceImgs != ''">
+						#{serviceImgs},
+					</if>
+					<if test="installStandardUrl != null and installStandardUrl != ''">
+						#{installStandardUrl},
+					</if>
+					<if test="serviceFlowUrl != null and serviceFlowUrl != ''">
+						#{serviceFlowUrl},
+					</if>
+					<if test="serviceNote != null and serviceNote != ''">
+						#{serviceNote},
+					</if>
+					<if test="serviceFlow != null and serviceFlow != ''">
+						#{serviceFlow},
+					</if>
+					<if test="installStandard != null and installStandard != ''">
+						#{installStandard}
+					</if>
+			</trim>
+	</insert>
+	
+	<update id="update" parameterType="com.fc.member.store.user.entity.StoreLicense">
+		update store_license
+		<set>
+		    	<if test="sname != null and sname != ''">
+		    		sname = #{sname},
+		    	</if>
+		    	<if test="code != null and code != ''">
+		    		code = #{code},
+		    	</if>
+		    	<if test="useType != null and useType != ''">
+		    		use_type = #{useType},
+		    	</if>
+		    	<if test="carpart != null and carpart != ''">
+		    		carpart = #{carpart},
+		    	</if>
+		    	<if test="taskTime != null and taskTime != ''">
+		    		task_time = #{taskTime},
+		    	</if>
+		    	<if test="sfee != null and sfee != ''">
+		    		sfee = #{sfee},
+		    	</if>
+		    	<if test="prizeFee != null and prizeFee != ''">
+		    		prize_fee = #{prizeFee},
+		    	</if>
+		    	<if test="sScore != null and sScore != ''">
+		    		s_score = #{sScore},
+		    	</if>
+		    	<if test="sLogo != null and sLogo != ''">
+		    		s_logo = #{sLogo},
+		    	</if>
+		    	<if test="priceUnit != null and priceUnit != ''">
+		    		price_unit = #{priceUnit},
+		    	</if>
+		    	<if test="description != null and description != ''">
+		    		description = #{description},
+		    	</if>
+		    	<if test="sortOrder != null and sortOrder != ''">
+		    		sort_order = #{sortOrder},
+		    	</if>
+		    	<if test="requireEquipment != null and requireEquipment != ''">
+		    		require_equipment = #{requireEquipment},
+		    	</if>
+		    	<if test="requireTools != null and requireTools != ''">
+		    		require_tools = #{requireTools},
+		    	</if>
+		    	<if test="requireStaff != null and requireStaff != ''">
+		    		require_staff = #{requireStaff},
+		    	</if>
+		    	<if test="sstoreSubsidy != null and sstoreSubsidy != ''">
+		    		sstore_subsidy = #{sstoreSubsidy},
+		    	</if>
+		    	<if test="techSubsidy != null and techSubsidy != ''">
+		    		tech_subsidy = #{techSubsidy},
+		    	</if>
+		    	<if test="isShow != null and isShow != ''">
+		    		is_show = #{isShow},
+		    	</if>
+		    	<if test="valuationWay != null and valuationWay != ''">
+		    		valuation_way = #{valuationWay},
+		    	</if>
+		    	<if test="limitNum != null and limitNum != ''">
+		    		limit_num = #{limitNum},
+		    	</if>
+		    	<if test="balancePrice != null and balancePrice != ''">
+		    		balance_price = #{balancePrice},
+		    	</if>
+		    	<if test="cateId != null and cateId != ''">
+		    		cate_id = #{cateId},
+		    	</if>
+		    	<if test="serviceChargeWayId != null and serviceChargeWayId != ''">
+		    		service_charge_way_id = #{serviceChargeWayId},
+		    	</if>
+		    	<if test="imagesId != null and imagesId != ''">
+		    		images_id = #{imagesId},
+		    	</if>
+		    	<if test="materialParams != null and materialParams != ''">
+		    		material_params = #{materialParams},
+		    	</if>
+		    	<if test="serviceImgs != null and serviceImgs != ''">
+		    		service_imgs = #{serviceImgs},
+		    	</if>
+		    	<if test="installStandardUrl != null and installStandardUrl != ''">
+		    		install_standard_url = #{installStandardUrl},
+		    	</if>
+		    	<if test="serviceFlowUrl != null and serviceFlowUrl != ''">
+		    		service_flow_url = #{serviceFlowUrl},
+		    	</if>
+		    	<if test="serviceNote != null and serviceNote != ''">
+		    		service_note = #{serviceNote},
+		    	</if>
+		    	<if test="serviceFlow != null and serviceFlow != ''">
+		    		service_flow = #{serviceFlow},
+		    	</if>
+		    	<if test="installStandard != null and installStandard != ''">
+		    		install_standard = #{installStandard},
+		    	</if>
+		</set>
+		where 
+	        id = #{id} 
+	</update>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		delete from store_license where 
+	        id = #{id} 
+	</delete>
+	
+	<select id="getRows" parameterType="com.fc.member.store.user.entity.StoreLicense" resultMap="StoreLicenseMap" >
+		select * from store_license 
+		<where>
+		       <if test="id != null and id != ''">
+					AND id = #{id}
+			   </if>
+		       <if test="sname != null and sname != ''">
+					AND sname = #{sname}
+			   </if>
+		       <if test="code != null and code != ''">
+					AND code = #{code}
+			   </if>
+		       <if test="useType != null and useType != ''">
+					AND use_type = #{useType}
+			   </if>
+		       <if test="carpart != null and carpart != ''">
+					AND carpart = #{carpart}
+			   </if>
+		       <if test="taskTime != null and taskTime != ''">
+					AND task_time = #{taskTime}
+			   </if>
+		       <if test="sfee != null and sfee != ''">
+					AND sfee = #{sfee}
+			   </if>
+		       <if test="prizeFee != null and prizeFee != ''">
+					AND prize_fee = #{prizeFee}
+			   </if>
+		       <if test="sScore != null and sScore != ''">
+					AND s_score = #{sScore}
+			   </if>
+		       <if test="sLogo != null and sLogo != ''">
+					AND s_logo = #{sLogo}
+			   </if>
+		       <if test="priceUnit != null and priceUnit != ''">
+					AND price_unit = #{priceUnit}
+			   </if>
+		       <if test="description != null and description != ''">
+					AND description = #{description}
+			   </if>
+		       <if test="sortOrder != null and sortOrder != ''">
+					AND sort_order = #{sortOrder}
+			   </if>
+		       <if test="requireEquipment != null and requireEquipment != ''">
+					AND require_equipment = #{requireEquipment}
+			   </if>
+		       <if test="requireTools != null and requireTools != ''">
+					AND require_tools = #{requireTools}
+			   </if>
+		       <if test="requireStaff != null and requireStaff != ''">
+					AND require_staff = #{requireStaff}
+			   </if>
+		       <if test="sstoreSubsidy != null and sstoreSubsidy != ''">
+					AND sstore_subsidy = #{sstoreSubsidy}
+			   </if>
+		       <if test="techSubsidy != null and techSubsidy != ''">
+					AND tech_subsidy = #{techSubsidy}
+			   </if>
+		       <if test="isShow != null and isShow != ''">
+					AND is_show = #{isShow}
+			   </if>
+		       <if test="valuationWay != null and valuationWay != ''">
+					AND valuation_way = #{valuationWay}
+			   </if>
+		       <if test="limitNum != null and limitNum != ''">
+					AND limit_num = #{limitNum}
+			   </if>
+		       <if test="balancePrice != null and balancePrice != ''">
+					AND balance_price = #{balancePrice}
+			   </if>
+		       <if test="cateId != null and cateId != ''">
+					AND cate_id = #{cateId}
+			   </if>
+		       <if test="serviceChargeWayId != null and serviceChargeWayId != ''">
+					AND service_charge_way_id = #{serviceChargeWayId}
+			   </if>
+		       <if test="imagesId != null and imagesId != ''">
+					AND images_id = #{imagesId}
+			   </if>
+		       <if test="materialParams != null and materialParams != ''">
+					AND material_params = #{materialParams}
+			   </if>
+		       <if test="serviceImgs != null and serviceImgs != ''">
+					AND service_imgs = #{serviceImgs}
+			   </if>
+		       <if test="installStandardUrl != null and installStandardUrl != ''">
+					AND install_standard_url = #{installStandardUrl}
+			   </if>
+		       <if test="serviceFlowUrl != null and serviceFlowUrl != ''">
+					AND service_flow_url = #{serviceFlowUrl}
+			   </if>
+		       <if test="serviceNote != null and serviceNote != ''">
+					AND service_note = #{serviceNote}
+			   </if>
+		       <if test="serviceFlow != null and serviceFlow != ''">
+					AND service_flow = #{serviceFlow}
+			   </if>
+		       <if test="installStandard != null and installStandard != ''">
+					AND install_standard = #{installStandard}
+			   </if>
+		</where>
+	</select>
+	
+	<select id="getRowsPage" parameterType="PageQuery" resultMap="StoreLicenseMap" >
+		select * from store_license  
+		<where>
+		       <if test="condition.id != null and condition.id != ''">
+					AND id = #{condition.id}
+			   </if>
+		       <if test="condition.sname != null and condition.sname != ''">
+					AND sname = #{condition.sname}
+			   </if>
+		       <if test="condition.code != null and condition.code != ''">
+					AND code = #{condition.code}
+			   </if>
+		       <if test="condition.useType != null and condition.useType != ''">
+					AND use_type = #{condition.useType}
+			   </if>
+		       <if test="condition.carpart != null and condition.carpart != ''">
+					AND carpart = #{condition.carpart}
+			   </if>
+		       <if test="condition.taskTime != null and condition.taskTime != ''">
+					AND task_time = #{condition.taskTime}
+			   </if>
+		       <if test="condition.sfee != null and condition.sfee != ''">
+					AND sfee = #{condition.sfee}
+			   </if>
+		       <if test="condition.prizeFee != null and condition.prizeFee != ''">
+					AND prize_fee = #{condition.prizeFee}
+			   </if>
+		       <if test="condition.sScore != null and condition.sScore != ''">
+					AND s_score = #{condition.sScore}
+			   </if>
+		       <if test="condition.sLogo != null and condition.sLogo != ''">
+					AND s_logo = #{condition.sLogo}
+			   </if>
+		       <if test="condition.priceUnit != null and condition.priceUnit != ''">
+					AND price_unit = #{condition.priceUnit}
+			   </if>
+		       <if test="condition.description != null and condition.description != ''">
+					AND description = #{condition.description}
+			   </if>
+		       <if test="condition.sortOrder != null and condition.sortOrder != ''">
+					AND sort_order = #{condition.sortOrder}
+			   </if>
+		       <if test="condition.requireEquipment != null and condition.requireEquipment != ''">
+					AND require_equipment = #{condition.requireEquipment}
+			   </if>
+		       <if test="condition.requireTools != null and condition.requireTools != ''">
+					AND require_tools = #{condition.requireTools}
+			   </if>
+		       <if test="condition.requireStaff != null and condition.requireStaff != ''">
+					AND require_staff = #{condition.requireStaff}
+			   </if>
+		       <if test="condition.sstoreSubsidy != null and condition.sstoreSubsidy != ''">
+					AND sstore_subsidy = #{condition.sstoreSubsidy}
+			   </if>
+		       <if test="condition.techSubsidy != null and condition.techSubsidy != ''">
+					AND tech_subsidy = #{condition.techSubsidy}
+			   </if>
+		       <if test="condition.isShow != null and condition.isShow != ''">
+					AND is_show = #{condition.isShow}
+			   </if>
+		       <if test="condition.valuationWay != null and condition.valuationWay != ''">
+					AND valuation_way = #{condition.valuationWay}
+			   </if>
+		       <if test="condition.limitNum != null and condition.limitNum != ''">
+					AND limit_num = #{condition.limitNum}
+			   </if>
+		       <if test="condition.balancePrice != null and condition.balancePrice != ''">
+					AND balance_price = #{condition.balancePrice}
+			   </if>
+		       <if test="condition.cateId != null and condition.cateId != ''">
+					AND cate_id = #{condition.cateId}
+			   </if>
+		       <if test="condition.serviceChargeWayId != null and condition.serviceChargeWayId != ''">
+					AND service_charge_way_id = #{condition.serviceChargeWayId}
+			   </if>
+		       <if test="condition.imagesId != null and condition.imagesId != ''">
+					AND images_id = #{condition.imagesId}
+			   </if>
+		       <if test="condition.materialParams != null and condition.materialParams != ''">
+					AND material_params = #{condition.materialParams}
+			   </if>
+		       <if test="condition.serviceImgs != null and condition.serviceImgs != ''">
+					AND service_imgs = #{condition.serviceImgs}
+			   </if>
+		       <if test="condition.installStandardUrl != null and condition.installStandardUrl != ''">
+					AND install_standard_url = #{condition.installStandardUrl}
+			   </if>
+		       <if test="condition.serviceFlowUrl != null and condition.serviceFlowUrl != ''">
+					AND service_flow_url = #{condition.serviceFlowUrl}
+			   </if>
+		       <if test="condition.serviceNote != null and condition.serviceNote != ''">
+					AND service_note = #{condition.serviceNote}
+			   </if>
+		       <if test="condition.serviceFlow != null and condition.serviceFlow != ''">
+					AND service_flow = #{condition.serviceFlow}
+			   </if>
+		       <if test="condition.installStandard != null and condition.installStandard != ''">
+					AND install_standard = #{condition.installStandard}
+			   </if>
+		</where>
+	</select>
+	<!-- IMapper通用方法 end -->
+</mapper>

@@ -1,0 +1,13 @@
+    @ApiOperation(value = "${methodRemark}")  
+	@RequestMapping(value="${methodPath}",method={RequestMethod.POST,RequestMethod.GET})
+	 public ModelAndView ${methodName}(
+	         <#list paramList as param>
+	         <#if (param_index+1<paramList?size)>@ApiParam(required = true, name = "${param.name}", value = "${param.remark}") @RequestParam(value = "${param.name}")  String ${param.name},
+	         <#else>@ApiParam(required = true, name = "${param.name}", value = "${param.remark}") @RequestParam(value = "${param.name}")  String ${param.name}
+	         </#if>
+	         </#list>
+	 ) throws Exception{
+		 
+		 ModelAndView mav = new ModelAndView("${methodPath}.json");
+		 return mav;
+	}

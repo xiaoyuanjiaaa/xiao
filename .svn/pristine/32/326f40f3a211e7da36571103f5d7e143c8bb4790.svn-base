@@ -1,0 +1,9 @@
+#jdbc_url=jdbc:mysql://192.168.1.206:3306/db_logistic?useUnicode=true&amp;characterEncoding=UTF-8
+jdbc_driver=com.mysql.jdbc.Driver
+#jdbc_username=develop
+#jdbc_password=fengche.develop
+gg_isOverride=true;
+jdbc_url=jdbc:mysql://localhost:3306/db_ssms?useUnicode=true&amp;characterEncoding=UTF-8
+jdbc_driver=com.mysql.jdbc.Driver
+jdbc_username=root
+jdbc_password=
